@@ -3,6 +3,9 @@ import { Space_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/lib/constants";
 import { MainLayout } from "@/components/layout/main-layout";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
@@ -68,7 +71,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceMono.variable} ${inter.variable}`}>
       <body className="antialiased">
-        <MainLayout>{children}</MainLayout>
+        <AnalyticsProvider>
+          <MainLayout>{children}</MainLayout>
+        </AnalyticsProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

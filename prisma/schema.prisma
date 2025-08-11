@@ -294,10 +294,18 @@ model PageView {
     referer   String?
     country   String?
     city      String?
+    device    String? // "desktop", "mobile", "tablet"
+    browser   String?
+    os        String?
 
     // Session Data
     sessionId String
     userId    String?
+
+    // Performance Metrics
+    loadTime    Int? // Page load time in milliseconds
+    timeOnPage  Int? // Time spent on page in seconds
+    scrollDepth Int? // Maximum scroll depth percentage
 
     // Metadata
     createdAt DateTime @default(now())
@@ -307,7 +315,206 @@ model PageView {
     @@index([userId])
     @@index([createdAt])
     @@index([country])
+    @@index([device])
     @@map("page_views")
+}
+
+// User Sessions
+model UserSession {
+    id        String  @id @default(cuid())
+    sessionId String  @unique
+    userId    String?
+
+    // Session Info
+    startTime DateTime  @default(now())
+    endTime   DateTime?
+    duration  Int? // Session duration in seconds
+    pageViews Int       @default(0)
+    isActive  Boolean   @default(true)
+
+    // Device/Browser Info
+    userAgent String?
+    device    String? // "desktop", "mobile", "tablet"
+    browser   String?
+    os        String?
+
+    // Location
+    country String?
+    city    String?
+
+    // Entry/Exit
+    entryPage String?
+    exitPage  String?
+    referer   String?
+
+    // Conversion Tracking
+    hasConverted    Boolean @default(false)
+    conversionType  String? // "contact", "project_inquiry", "newsletter", etc.
+    conversionValue Int? // Value in cents
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([sessionId])
+    @@index([userId])
+    @@index([startTime])
+    @@index([hasConverted])
+    @@index([device])
+    @@index([country])
+    @@map("user_sessions")
+}
+
+// Conversion Events
+model ConversionEvent {
+    id        String  @id @default(cuid())
+    sessionId String
+    userId    String?
+
+    // Event Details
+    type     String // "contact_form", "project_inquiry", "newsletter_signup", "consultation_booking"
+    value    Int? // Value in cents
+    metadata Json? // Additional event data
+
+    // Page Context
+    page    String
+    referer String?
+
+    createdAt DateTime @default(now())
+
+    @@index([sessionId])
+    @@index([type])
+    @@index([createdAt])
+    @@map("conversion_events")
+}
+
+// A/B Test Experiments
+model ABTestExperiment {
+    id          String  @id @default(cuid())
+    name        String  @unique
+    description String?
+
+    // Test Configuration
+    isActive     Boolean @default(false)
+    trafficSplit Int     @default(50) // Percentage of traffic for variant B
+
+    // Test Pages/Components
+    targetPages String[] // Pages where test runs
+    component   String? // Component being tested
+
+    // Variants
+    controlVersion Json // Control version configuration
+    variantVersion Json // Variant version configuration
+
+    // Goals
+    primaryGoal   String // "conversion_rate", "time_on_page", "click_through_rate"
+    successMetric String // How to measure success
+
+    // Results
+    controlConversions Int @default(0)
+    variantConversions Int @default(0)
+    controlViews       Int @default(0)
+    variantViews       Int @default(0)
+
+    // Statistical Significance
+    confidenceLevel Float? // 0.95 for 95% confidence
+    pValue          Float?
+    isSignificant   Boolean @default(false)
+    winner          String? // "control", "variant", or null
+
+    // Dates
+    startDate DateTime?
+    endDate   DateTime?
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+
+    // Relations
+    assignments ABTestAssignment[]
+
+    @@index([name])
+    @@index([isActive])
+    @@index([startDate])
+    @@map("ab_test_experiments")
+}
+
+// A/B Test User Assignments
+model ABTestAssignment {
+    id           String  @id @default(cuid())
+    experimentId String
+    sessionId    String
+    userId       String?
+
+    // Assignment
+    variant    String // "control" or "variant"
+    assignedAt DateTime @default(now())
+
+    // Tracking
+    hasConverted Boolean   @default(false)
+    convertedAt  DateTime?
+
+    // Relations
+    experiment ABTestExperiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+
+    @@unique([experimentId, sessionId])
+    @@index([experimentId])
+    @@index([sessionId])
+    @@index([variant])
+    @@map("ab_test_assignments")
+}
+
+// Performance Metrics
+model PerformanceMetric {
+    id        String @id @default(cuid())
+    sessionId String
+    page      String
+
+    // Core Web Vitals
+    lcp  Float? // Largest Contentful Paint
+    fid  Float? // First Input Delay
+    cls  Float? // Cumulative Layout Shift
+    fcp  Float? // First Contentful Paint
+    ttfb Float? // Time to First Byte
+
+    // Additional Metrics
+    domContentLoaded Float? // DOM Content Loaded time
+    loadComplete     Float? // Full page load time
+
+    // Connection Info
+    connectionType String? // "4g", "3g", "wifi", etc.
+    effectiveType  String? // "slow-2g", "2g", "3g", "4g"
+
+    createdAt DateTime @default(now())
+
+    @@index([sessionId])
+    @@index([page])
+    @@index([createdAt])
+    @@map("performance_metrics")
+}
+
+// User Consent for Privacy Compliance
+model UserConsent {
+    id        String  @id @default(cuid())
+    sessionId String  @unique
+    userId    String?
+
+    // Consent Types
+    analytics  Boolean @default(false)
+    marketing  Boolean @default(false)
+    functional Boolean @default(true)
+    necessary  Boolean @default(true)
+
+    // Metadata
+    consentDate DateTime @default(now())
+    ipAddress   String?
+    userAgent   String?
+
+    // Updates
+    lastUpdated DateTime @updatedAt
+    version     String   @default("1.0") // Consent policy version
+
+    @@index([sessionId])
+    @@index([userId])
+    @@index([consentDate])
+    @@map("user_consent")
 }
 
 // Testimonials
