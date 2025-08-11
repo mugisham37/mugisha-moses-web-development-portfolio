@@ -24,6 +24,8 @@ model User {
     blogPosts    BlogPost[]
     testimonials Testimonial[]
 
+    @@index([email])
+    @@index([role])
     @@map("users")
 }
 
@@ -63,6 +65,12 @@ model Project {
     categories ProjectCategory[]
     analytics  ProjectAnalytics[]
 
+    @@index([slug])
+    @@index([status])
+    @@index([featured])
+    @@index([authorId])
+    @@index([publishedAt])
+    @@index([createdAt])
     @@map("projects")
 }
 
@@ -128,6 +136,12 @@ model BlogPost {
     tags       BlogTag[]
     analytics  BlogAnalytics[]
 
+    @@index([slug])
+    @@index([status])
+    @@index([featured])
+    @@index([authorId])
+    @@index([publishedAt])
+    @@index([createdAt])
     @@map("blog_posts")
 }
 
@@ -201,6 +215,12 @@ model GitHubRepository {
     // Relations
     contributions GitHubContribution[]
 
+    @@index([githubId])
+    @@index([name])
+    @@index([language])
+    @@index([starCount])
+    @@index([lastSyncAt])
+    @@index([isPrivate])
     @@map("github_repositories")
 }
 
@@ -235,6 +255,11 @@ model PageView {
     // Metadata
     createdAt DateTime @default(now())
 
+    @@index([path])
+    @@index([sessionId])
+    @@index([userId])
+    @@index([createdAt])
+    @@index([country])
     @@map("page_views")
 }
 
@@ -289,6 +314,11 @@ model ContactSubmission {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
+    @@index([email])
+    @@index([type])
+    @@index([status])
+    @@index([createdAt])
+    @@index([responded])
     @@map("contact_submissions")
 }
 
