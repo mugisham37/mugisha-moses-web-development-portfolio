@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/lib/constants";
+import { MainLayout } from "@/components/layout/main-layout";
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
@@ -66,8 +67,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${spaceMono.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-black text-white antialiased">
-        {children}
+      <body className="antialiased">
+        <MainLayout>{children}</MainLayout>
       </body>
     </html>
   );
