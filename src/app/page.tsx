@@ -10,10 +10,40 @@ import { Typography } from "@/components/ui/typography";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { HeroSection } from "@/components/sections/hero-section";
+import { StructuredData } from "@/components/seo/structured-data";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export default function Home() {
+  const homePageStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Home",
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+    mainEntity: {
+      "@type": "Person",
+      name: SITE_CONFIG.author.name,
+      jobTitle: "Full-Stack Developer",
+      url: SITE_CONFIG.url,
+      sameAs: [SITE_CONFIG.author.github, SITE_CONFIG.author.linkedin],
+    },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_CONFIG.url,
+        },
+      ],
+    },
+  };
+
   return (
     <main className="min-h-screen">
+      <StructuredData data={homePageStructuredData} />
+
       {/* Hero Section */}
       <HeroSection />
 

@@ -8,43 +8,107 @@ import { ProcessWorkflow } from "@/components/services/process-workflow";
 import { ServiceGuarantees } from "@/components/services/service-guarantees";
 import { ServiceTestimonials } from "@/components/services/service-testimonials";
 import { ServiceCTA } from "@/components/services/service-cta";
+import { generateMetadata as generateSEOMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { StructuredData } from "@/components/seo/structured-data";
 
-export const metadata: Metadata = {
-  title: "SERVICES | ELITE DEVELOPMENT SOLUTIONS",
+export const metadata: Metadata = generateSEOMetadata({
+  title: "Services",
   description:
     "Professional web development, mobile apps, and technical consulting services. Transform your ideas into powerful digital solutions with brutalist precision.",
-  openGraph: {
-    title: "SERVICES | ELITE DEVELOPMENT SOLUTIONS",
-    description:
-      "Professional web development, mobile apps, and technical consulting services. Transform your ideas into powerful digital solutions with brutalist precision.",
-    type: "website",
-  },
-};
+  keywords: [
+    "services",
+    "web development",
+    "mobile apps",
+    "consulting",
+    "full-stack development",
+    "react",
+    "next.js",
+    "typescript",
+    "professional development",
+  ],
+  url: "/services",
+  type: "website",
+});
 
 export default function ServicesPage() {
+  const breadcrumbs = [{ name: "Services", url: "/services", current: true }];
+
+  const servicesStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Professional Development Services",
+    description:
+      "Professional web development, mobile apps, and technical consulting services",
+    url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/services`,
+    provider: {
+      "@type": "Person",
+      name: process.env.NEXT_PUBLIC_AUTHOR_NAME || "Developer",
+      url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+    },
+    serviceType: "Web Development",
+    areaServed: "Worldwide",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Development Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Web Development",
+            description: "Custom web applications using modern technologies",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Full-Stack Development",
+            description: "End-to-end application development",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Technical Consulting",
+            description:
+              "Expert technical guidance and architecture consulting",
+          },
+        },
+      ],
+    },
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
+      <StructuredData data={servicesStructuredData} />
+
       {/* Hero Section */}
       <Section className="pt-32 pb-16">
         <Container>
-          <div className="text-center">
-            <Typography
-              variant="display"
-              className="mb-6 text-6xl font-bold tracking-tighter md:text-8xl"
-            >
-              ELITE
-              <br />
-              <span className="text-brutalist-yellow">SERVICES</span>
-            </Typography>
-            <Typography
-              variant="h2"
-              className="mx-auto mb-8 max-w-4xl font-mono text-xl tracking-wider uppercase md:text-2xl"
-            >
-              TRANSFORM IDEAS INTO DIGITAL DOMINANCE
-              <br />
-              WITH BRUTALIST PRECISION
-            </Typography>
-            <div className="bg-brutalist-yellow mx-auto h-1 w-32"></div>
+          <div className="space-y-6">
+            <Breadcrumbs items={breadcrumbs} />
+            <div className="text-center">
+              <Typography
+                variant="display"
+                className="mb-6 text-6xl font-bold tracking-tighter md:text-8xl"
+              >
+                ELITE
+                <br />
+                <span className="text-brutalist-yellow">SERVICES</span>
+              </Typography>
+              <Typography
+                variant="h2"
+                className="mx-auto mb-8 max-w-4xl font-mono text-xl tracking-wider uppercase md:text-2xl"
+              >
+                TRANSFORM IDEAS INTO DIGITAL DOMINANCE
+                <br />
+                WITH BRUTALIST PRECISION
+              </Typography>
+              <div className="bg-brutalist-yellow mx-auto h-1 w-32"></div>
+            </div>
           </div>
         </Container>
       </Section>

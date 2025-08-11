@@ -11,6 +11,12 @@ import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import {
+  generateMetadata as generateSEOMetadata,
+  generateProjectJsonLd,
+} from "@/lib/seo";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { StructuredData } from "@/components/seo/structured-data";
 
 interface ProjectPageProps {
   params: {
@@ -29,22 +35,23 @@ export async function generateMetadata({
     };
   }
 
-  return {
-    title: `${project.title} | Projects`,
+  return generateSEOMetadata({
+    title: project.title,
     description: project.description,
-    openGraph: {
-      title: project.title,
-      description: project.description,
-      type: "article",
-      images: project.thumbnail ? [{ url: project.thumbnail }] : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: project.title,
-      description: project.description,
-      images: project.thumbnail ? [project.thumbnail] : [],
-    },
-  };
+    keywords: [
+      ...project.technologies,
+      "project",
+      "portfolio",
+      "web development",
+    ],
+    image: project.thumbnail,
+    url: `/projects/${project.slug}`,
+    type: "article",
+    publishedTime: project.createdAt.toISOString(),
+    modifiedTime: project.updatedAt.toISOString(),
+    section: "Projects",
+    tags: project.technologies,
+  });
 }
 
 async function ProjectPageContent({ params }: ProjectPageProps) {
@@ -72,27 +79,40 @@ async function ProjectPageContent({ params }: ProjectPageProps) {
     });
   }
 
-  return (
-    <Container>
-      <Section className="space-y-8">
-        {/* Back button */}
-        <div>
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/projects" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              BACK TO PROJECTS
-            </Link>
-          </Button>
-        </div>
+  const breadcrumbs = [
+    { name: "Projects", url: "/projects" },
+    { name: project.title, url: `/projects/${project.slug}`, current: true },
+  ];
 
-        {/* Project detail */}
-        <ProjectDetail
-          project={project}
-          relatedProjects={relatedProjects}
-          onViewIncrement={handleViewIncrement}
-        />
-      </Section>
-    </Container>
+  const projectJsonLd = generateProjectJsonLd(project);
+
+  return (
+    <>
+      <StructuredData data={projectJsonLd} />
+      <Container>
+        <Section className="space-y-8">
+          {/* Breadcrumbs */}
+          <Breadcrumbs items={breadcrumbs} />
+
+          {/* Back button */}
+          <div>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/projects" className="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                BACK TO PROJECTS
+              </Link>
+            </Button>
+          </div>
+
+          {/* Project detail */}
+          <ProjectDetail
+            project={project}
+            relatedProjects={relatedProjects}
+            onViewIncrement={handleViewIncrement}
+          />
+        </Section>
+      </Container>
+    </>
   );
 }
 

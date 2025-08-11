@@ -6,18 +6,28 @@ import { BlogFilters } from "@/components/blog/blog-filters";
 import { NewsletterSignup } from "@/components/blog/newsletter-signup";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { generateMetadata as generateSEOMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { StructuredData } from "@/components/seo/structured-data";
 
-export const metadata: Metadata = {
-  title: "Blog | Developer Portfolio",
+export const metadata: Metadata = generateSEOMetadata({
+  title: "Blog",
   description:
-    "Latest insights on web development, technology, and software engineering",
-  openGraph: {
-    title: "Blog | Developer Portfolio",
-    description:
-      "Latest insights on web development, technology, and software engineering",
-    type: "website",
-  },
-};
+    "Latest insights on web development, technology, and software engineering. Explore tutorials, best practices, and industry trends.",
+  keywords: [
+    "blog",
+    "web development",
+    "technology",
+    "software engineering",
+    "tutorials",
+    "programming",
+    "javascript",
+    "react",
+    "next.js",
+  ],
+  url: "/blog",
+  type: "website",
+});
 
 interface BlogPageProps {
   searchParams: {
@@ -29,18 +39,43 @@ interface BlogPageProps {
 }
 
 export default function BlogPage({ searchParams }: BlogPageProps) {
+  const breadcrumbs = [{ name: "Blog", url: "/blog", current: true }];
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Developer Blog",
+    description:
+      "Latest insights on web development, technology, and software engineering",
+    url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/blog`,
+    author: {
+      "@type": "Person",
+      name: process.env.NEXT_PUBLIC_AUTHOR_NAME || "Developer",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: process.env.NEXT_PUBLIC_SITE_NAME || "Developer Portfolio",
+    },
+  };
+
   return (
     <main>
+      <StructuredData data={structuredData} />
+
       {/* Hero Section */}
       <Section className="py-20">
         <Container>
-          <div className="text-center">
-            <h1 className="mb-6 font-mono text-6xl font-bold tracking-wider text-white uppercase">
-              BLOG
-            </h1>
-            <p className="mx-auto max-w-2xl font-mono text-xl text-gray-400">
-              INSIGHTS ON WEB DEVELOPMENT, TECHNOLOGY, AND SOFTWARE ENGINEERING
-            </p>
+          <div className="space-y-6">
+            <Breadcrumbs items={breadcrumbs} />
+            <div className="text-center">
+              <h1 className="mb-6 font-mono text-6xl font-bold tracking-wider text-white uppercase">
+                BLOG
+              </h1>
+              <p className="mx-auto max-w-2xl font-mono text-xl text-gray-400">
+                INSIGHTS ON WEB DEVELOPMENT, TECHNOLOGY, AND SOFTWARE
+                ENGINEERING
+              </p>
+            </div>
           </div>
         </Container>
       </Section>

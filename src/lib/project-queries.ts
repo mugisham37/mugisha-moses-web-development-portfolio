@@ -22,6 +22,29 @@ export interface ProjectQueryOptions {
   includeAnalytics?: boolean;
 }
 
+// Get all projects (for sitemap generation)
+export async function getAllProjects() {
+  try {
+    const projects = await db.project.findMany({
+      where: {
+        status: { not: "DRAFT" },
+      },
+      select: {
+        slug: true,
+        updatedAt: true,
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+    });
+
+    return projects;
+  } catch (error) {
+    console.error("Error fetching all projects:", error);
+    return [];
+  }
+}
+
 // Get projects with filtering, sorting, and pagination
 export async function getProjects(options: ProjectQueryOptions = {}) {
   const {

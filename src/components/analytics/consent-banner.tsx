@@ -15,7 +15,11 @@ interface ConsentBannerProps {
   }) => void;
 }
 
-export function ConsentBanner({ onAcceptAll, onAcceptNecessary, onCustomize }: ConsentBannerProps) {
+export function ConsentBanner({
+  onAcceptAll,
+  onAcceptNecessary,
+  onCustomize,
+}: ConsentBannerProps) {
   const [showDetails, setShowDetails] = useState(false);
   const [customConsent, setCustomConsent] = useState({
     necessary: true,
@@ -31,7 +35,8 @@ export function ConsentBanner({ onAcceptAll, onAcceptNecessary, onCustomize }: C
   if (showDetails) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-        <div className="w-full max-w-2xl border-4 border-white bg-black p-6"></div>      <div className="mb-6 flex items-center justify-between">
+        <div className="w-full max-w-2xl border-4 border-white bg-black p-6">
+          <div className="mb-6 flex items-center justify-between">
             <h2 className="font-mono text-xl font-bold text-white uppercase">
               PRIVACY PREFERENCES
             </h2>
@@ -51,11 +56,14 @@ export function ConsentBanner({ onAcceptAll, onAcceptNecessary, onCustomize }: C
                     NECESSARY COOKIES
                   </h3>
                   <p className="mt-2 font-mono text-sm text-gray-400">
-                    Essential for basic website functionality. Cannot be disabled.
+                    Essential for basic website functionality. Cannot be
+                    disabled.
                   </p>
                 </div>
                 <div className="ml-4">
-                  <div className="font-mono text-sm text-green-400">ALWAYS ON</div>
+                  <div className="font-mono text-sm text-green-400">
+                    ALWAYS ON
+                  </div>
                 </div>
               </div>
 
@@ -71,7 +79,10 @@ export function ConsentBanner({ onAcceptAll, onAcceptNecessary, onCustomize }: C
                 <div className="ml-4">
                   <button
                     onClick={() =>
-                      setCustomConsent(prev => ({ ...prev, analytics: !prev.analytics }))
+                      setCustomConsent((prev) => ({
+                        ...prev,
+                        analytics: !prev.analytics,
+                      }))
                     }
                     className={`border-2 px-4 py-2 font-mono text-sm uppercase transition-colors ${
                       customConsent.analytics
@@ -90,13 +101,17 @@ export function ConsentBanner({ onAcceptAll, onAcceptNecessary, onCustomize }: C
                     MARKETING COOKIES
                   </h3>
                   <p className="mt-2 font-mono text-sm text-gray-400">
-                    Used to track visitors across websites for marketing purposes.
+                    Used to track visitors across websites for marketing
+                    purposes.
                   </p>
                 </div>
                 <div className="ml-4">
                   <button
                     onClick={() =>
-                      setCustomConsent(prev => ({ ...prev, marketing: !prev.marketing }))
+                      setCustomConsent((prev) => ({
+                        ...prev,
+                        marketing: !prev.marketing,
+                      }))
                     }
                     className={`border-2 px-4 py-2 font-mono text-sm uppercase transition-colors ${
                       customConsent.marketing
@@ -121,7 +136,10 @@ export function ConsentBanner({ onAcceptAll, onAcceptNecessary, onCustomize }: C
                 <div className="ml-4">
                   <button
                     onClick={() =>
-                      setCustomConsent(prev => ({ ...prev, functional: !prev.functional }))
+                      setCustomConsent((prev) => ({
+                        ...prev,
+                        functional: !prev.functional,
+                      }))
                     }
                     className={`border-2 px-4 py-2 font-mono text-sm uppercase transition-colors ${
                       customConsent.functional
@@ -154,7 +172,7 @@ export function ConsentBanner({ onAcceptAll, onAcceptNecessary, onCustomize }: C
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t-4 border-white bg-black p-6">
+    <div className="fixed right-0 bottom-0 left-0 z-50 border-t-4 border-white bg-black p-6">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex-1">
@@ -162,16 +180,14 @@ export function ConsentBanner({ onAcceptAll, onAcceptNecessary, onCustomize }: C
               PRIVACY NOTICE
             </h2>
             <p className="font-mono text-sm text-gray-400">
-              We use cookies and similar technologies to enhance your experience, analyze traffic, 
-              and improve our services. Choose your preferences below.
+              We use cookies and similar technologies to enhance your
+              experience, analyze traffic, and improve our services. Choose your
+              preferences below.
             </p>
           </div>
-          
+
           <div className="flex flex-col gap-2 sm:flex-row lg:ml-6">
-            <Button
-              onClick={onAcceptAll}
-              className="whitespace-nowrap"
-            >
+            <Button onClick={onAcceptAll} className="whitespace-nowrap">
               ACCEPT ALL
             </Button>
             <Button

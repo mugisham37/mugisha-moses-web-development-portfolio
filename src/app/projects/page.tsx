@@ -10,18 +10,27 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Typography } from "@/components/ui/typography";
 import { ProjectCardSkeleton } from "@/components/features/project-card";
+import { generateMetadata as generateSEOMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { StructuredData } from "@/components/seo/structured-data";
 
-export const metadata: Metadata = {
-  title: "Projects | Brutalist Developer Portfolio",
+export const metadata: Metadata = generateSEOMetadata({
+  title: "Projects",
   description:
     "Explore my latest work and technical achievements in full-stack development, showcasing brutalist design principles and cutting-edge technologies.",
-  openGraph: {
-    title: "Projects | Brutalist Developer Portfolio",
-    description:
-      "Explore my latest work and technical achievements in full-stack development, showcasing brutalist design principles and cutting-edge technologies.",
-    type: "website",
-  },
-};
+  keywords: [
+    "projects",
+    "portfolio",
+    "web development",
+    "full-stack",
+    "react",
+    "next.js",
+    "typescript",
+    "brutalist design",
+  ],
+  url: "/projects",
+  type: "website",
+});
 
 interface ProjectsPageProps {
   searchParams: {
@@ -115,20 +124,42 @@ function ProjectsLoading() {
 }
 
 export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
+  const breadcrumbs = [{ name: "Projects", url: "/projects", current: true }];
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Projects",
+    description:
+      "Explore my latest work and technical achievements in full-stack development",
+    url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/projects`,
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Developer Projects",
+      description:
+        "A collection of web development projects showcasing technical expertise",
+    },
+  };
+
   return (
     <main className="min-h-screen bg-black pt-20">
+      <StructuredData data={structuredData} />
+
       {/* Page Header */}
       <Container>
         <Section className="py-12">
-          <div className="space-y-4">
-            <Typography variant="display" className="text-white">
-              PROJECTS
-            </Typography>
-            <Typography variant="h6" className="max-w-3xl text-gray-300">
-              Explore my latest work and technical achievements in full-stack
-              development, showcasing brutalist design principles and
-              cutting-edge technologies.
-            </Typography>
+          <div className="space-y-6">
+            <Breadcrumbs items={breadcrumbs} />
+            <div className="space-y-4">
+              <Typography variant="display" className="text-white">
+                PROJECTS
+              </Typography>
+              <Typography variant="h6" className="max-w-3xl text-gray-300">
+                Explore my latest work and technical achievements in full-stack
+                development, showcasing brutalist design principles and
+                cutting-edge technologies.
+              </Typography>
+            </div>
           </div>
         </Section>
       </Container>

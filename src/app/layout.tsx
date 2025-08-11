@@ -6,6 +6,12 @@ import { MainLayout } from "@/components/layout/main-layout";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
+import { StructuredData } from "@/components/seo/structured-data";
+import {
+  generatePersonJsonLd,
+  generateWebsiteJsonLd,
+  generateOrganizationJsonLd,
+} from "@/lib/seo";
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
@@ -68,9 +74,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const globalStructuredData = [
+    generatePersonJsonLd(),
+    generateWebsiteJsonLd(),
+    generateOrganizationJsonLd(),
+  ];
+
   return (
     <html lang="en" className={`${spaceMono.variable} ${inter.variable}`}>
+      <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Blog RSS Feed"
+          href="/blog/rss.xml"
+        />
+      </head>
       <body className="antialiased">
+        <StructuredData data={globalStructuredData} />
         <AnalyticsProvider>
           <MainLayout>{children}</MainLayout>
         </AnalyticsProvider>

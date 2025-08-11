@@ -9,6 +9,12 @@ import { RelatedPosts } from "@/components/blog/related-posts";
 import { BlogPostTracker } from "@/components/blog/blog-post-tracker";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import {
+  generateMetadata as generateSEOMetadata,
+  generateBlogPostJsonLd,
+} from "@/lib/seo";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { StructuredData } from "@/components/seo/structured-data";
 
 interface BlogPostPageProps {
   params: {
@@ -83,27 +89,26 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return generateSEOMetadata({
     title: post.metaTitle || post.title,
     description:
       post.metaDescription || post.excerpt || post.content.substring(0, 160),
-    openGraph: {
-      title: post.metaTitle || post.title,
-      description:
-        post.metaDescription || post.excerpt || post.content.substring(0, 160),
-      type: "article",
-      publishedTime: post.publishedAt?.toISOString(),
-      authors: [post.author.name || "Anonymous"],
-      images: post.ogImage ? [post.ogImage] : undefined,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.metaTitle || post.title,
-      description:
-        post.metaDescription || post.excerpt || post.content.substring(0, 160),
-      images: post.ogImage ? [post.ogImage] : undefined,
-    },
-  };
+    keywords: [
+      ...post.tags.map((tag) => tag.name),
+      ...post.categories.map((cat) => cat.name),
+      "blog",
+      "tutorial",
+      "web development",
+    ],
+    image: post.ogImage,
+    url: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.publishedAt?.toISOString(),
+    modifiedTime: post.updatedAt.toISOString(),
+    author: post.author.name || "Anonymous",
+    section: post.categories[0]?.name || "Blog",
+    tags: post.tags.map((tag) => tag.name),
+  });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -118,15 +123,34 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     post.categories.map((c) => c.id)
   );
 
+  const breadcrumbs = [
+    { name: "Blog", url: "/blog" },
+    { name: post.title, url: `/blog/${post.slug}`, current: true },
+  ];
+
+  const blogPostJsonLd = generateBlogPostJsonLd({
+    ...post,
+    categories: post.categories.map((cat) => ({
+      name: cat.name,
+      slug: cat.slug,
+    })),
+    tags: post.tags.map((tag) => ({ name: tag.name, slug: tag.slug })),
+  });
+
   return (
     <main>
+      <StructuredData data={blogPostJsonLd} />
+
       {/* Analytics Tracker */}
       <BlogPostTracker postId={post.id} />
 
       {/* Post Header */}
       <Section className="py-20">
         <Container>
-          <BlogPostHeader post={post} />
+          <div className="space-y-6">
+            <Breadcrumbs items={breadcrumbs} />
+            <BlogPostHeader post={post} />
+          </div>
         </Container>
       </Section>
 

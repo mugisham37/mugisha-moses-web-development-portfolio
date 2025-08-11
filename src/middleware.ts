@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
-import { auth } from "@/lib/auth"
-import { Role } from "@prisma/client"
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { auth } from "@/lib/auth";
+import { Role } from "@prisma/client";
+import { shouldRedirect } from "@/lib/canonical";
 
 // Define protected routes and their required roles
 const protectedRoutes: Record<string, Role[]> = {
@@ -10,7 +11,7 @@ const protectedRoutes: Record<string, Role[]> = {
   "/api/admin": [Role.ADMIN],
   "/api/projects": [Role.ADMIN], // For creating/updating projects
   "/api/blog": [Role.ADMIN], // For creating/updating blog posts
-}
+};
 
 // Public routes that don't require authentication
 const publicRoutes = [
@@ -24,64 +25,75 @@ const publicRoutes = [
   "/api/auth",
   "/api/contact",
   "/api/github",
-]
+];
 
 // API routes that need rate limiting
 const rateLimitedRoutes = [
   "/api/auth/register",
   "/api/contact",
   "/api/newsletter",
-]
+];
 
 function isPublicRoute(pathname: string): boolean {
-  return publicRoutes.some(route => {
-    if (route === pathname) return true
+  return publicRoutes.some((route) => {
+    if (route === pathname) return true;
     if (route.endsWith("*")) {
-      return pathname.startsWith(route.slice(0, -1))
+      return pathname.startsWith(route.slice(0, -1));
     }
-    if (pathname.startsWith(route + "/")) return true
-    return false
-  })
+    if (pathname.startsWith(route + "/")) return true;
+    return false;
+  });
 }
 
 function getRequiredRoles(pathname: string): Role[] | null {
   for (const [route, roles] of Object.entries(protectedRoutes)) {
     if (pathname.startsWith(route)) {
-      return roles
+      return roles;
     }
   }
-  return null
+  return null;
 }
 
 function isRateLimitedRoute(pathname: string): boolean {
-  return rateLimitedRoutes.some(route => pathname.startsWith(route))
+  return rateLimitedRoutes.some((route) => pathname.startsWith(route));
 }
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname } = request.nextUrl;
 
   // Skip middleware for static files and Next.js internals
   if (
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/static/") ||
     pathname.includes(".") ||
-    pathname === "/favicon.ico"
+    pathname === "/favicon.ico" ||
+    pathname === "/sitemap.xml" ||
+    pathname === "/robots.txt"
   ) {
-    return NextResponse.next()
+    return NextResponse.next();
+  }
+
+  // Handle SEO redirects
+  const redirectCheck = shouldRedirect(pathname);
+  if (redirectCheck.redirect && redirectCheck.destination) {
+    return NextResponse.redirect(
+      new URL(redirectCheck.destination, request.url),
+      301
+    );
   }
 
   // Add security headers
-  const response = NextResponse.next()
-  
+  const response = NextResponse.next();
+
   // Security headers
-  response.headers.set("X-Frame-Options", "DENY")
-  response.headers.set("X-Content-Type-Options", "nosniff")
-  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
-  response.headers.set("X-XSS-Protection", "1; mode=block")
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("X-XSS-Protection", "1; mode=block");
   response.headers.set(
     "Content-Security-Policy",
     "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:;"
-  )
+  );
 
   // Rate limiting for specific routes
   if (isRateLimitedRoute(pathname)) {
@@ -91,11 +103,11 @@ export async function middleware(request: NextRequest) {
 
   // Check if route is public
   if (isPublicRoute(pathname)) {
-    return response
+    return response;
   }
 
   // Get session for protected routes
-  const session = await auth()
+  const session = await auth();
 
   // Check if user is authenticated
   if (!session?.user) {
@@ -103,30 +115,30 @@ export async function middleware(request: NextRequest) {
       return NextResponse.json(
         { error: "Authentication required" },
         { status: 401 }
-      )
+      );
     }
-    
+
     // Redirect to sign in page
-    const signInUrl = new URL("/auth/signin", request.url)
-    signInUrl.searchParams.set("callbackUrl", pathname)
-    return NextResponse.redirect(signInUrl)
+    const signInUrl = new URL("/auth/signin", request.url);
+    signInUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(signInUrl);
   }
 
   // Check role-based access
-  const requiredRoles = getRequiredRoles(pathname)
+  const requiredRoles = getRequiredRoles(pathname);
   if (requiredRoles && !requiredRoles.includes(session.user.role)) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json(
         { error: "Insufficient permissions" },
         { status: 403 }
-      )
+      );
     }
-    
+
     // Redirect to unauthorized page
-    return NextResponse.redirect(new URL("/unauthorized", request.url))
+    return NextResponse.redirect(new URL("/unauthorized", request.url));
   }
 
-  return response
+  return response;
 }
 
 export const config = {
@@ -140,4 +152,4 @@ export const config = {
      */
     "/((?!_next/static|_next/image|favicon.ico|public/).*)",
   ],
-}
+};
