@@ -26,12 +26,44 @@
   --shadow-brutalist-yellow: 4px 4px 0px 0px #ffff00;
 }
 
-/* Light mode overrides (if needed) */
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #000000;
-    --foreground: #ffffff;
-  }
+/* Light mode theme */
+.light {
+  --background: #ffffff;
+  --foreground: #000000;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #000000;
+  --secondary-foreground: #ffffff;
+  --accent: #ffff00;
+  --accent-foreground: #000000;
+  --muted: #f0f0f0;
+  --muted-foreground: #1a1a1a;
+  --border: #000000;
+  --input: #f8f8f8;
+  --ring: #ffff00;
+  --shadow-brutalist: 4px 4px 0px 0px #000000;
+  --shadow-brutalist-lg: 8px 8px 0px 0px #000000;
+  --shadow-brutalist-yellow: 4px 4px 0px 0px #ffff00;
+}
+
+/* Dark mode theme (default) */
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: #000000;
+  --accent: #ffff00;
+  --accent-foreground: #000000;
+  --muted: #1a1a1a;
+  --muted-foreground: #f8f8f8;
+  --border: #ffffff;
+  --input: #1a1a1a;
+  --ring: #ffff00;
+  --shadow-brutalist: 4px 4px 0px 0px #ffffff;
+  --shadow-brutalist-lg: 8px 8px 0px 0px #ffffff;
+  --shadow-brutalist-yellow: 4px 4px 0px 0px #ffff00;
 }
 
 /* Base styles */
