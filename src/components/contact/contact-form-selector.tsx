@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
@@ -46,10 +47,34 @@ export function ContactFormSelector({
   className,
   defaultForm,
 }: ContactFormSelectorProps) {
+  const searchParams = useSearchParams();
   const [selectedForm, setSelectedForm] = useState<FormType>(
     defaultForm || null
   );
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [serviceContext, setServiceContext] = useState<{
+    service?: string;
+    tier?: string;
+    type?: string;
+  }>({});
+
+  // Handle URL parameters for service-specific inquiries
+  useEffect(() => {
+    const service = searchParams.get("service");
+    const tier = searchParams.get("tier");
+    const type = searchParams.get("type");
+
+    setServiceContext({ service, tier, type });
+
+    // Auto-select form based on URL parameters
+    if (type === "consultation") {
+      setSelectedForm("consultation");
+    } else if (service) {
+      setSelectedForm("project");
+    } else if (type) {
+      setSelectedForm("general");
+    }
+  }, [searchParams]);
 
   const handleFormSuccess = (data: any) => {
     setIsSubmitted(true);
@@ -238,6 +263,7 @@ export function ContactFormSelector({
           <ContactForm
             onSuccess={handleFormSuccess}
             onError={handleFormError}
+            serviceContext={serviceContext}
           />
         )}
 
@@ -245,6 +271,7 @@ export function ContactFormSelector({
           <ProjectInquiryForm
             onSuccess={handleFormSuccess}
             onError={handleFormError}
+            serviceContext={serviceContext}
           />
         )}
 
@@ -252,6 +279,7 @@ export function ContactFormSelector({
           <ConsultationBookingForm
             onSuccess={handleFormSuccess}
             onError={handleFormError}
+            serviceContext={serviceContext}
           />
         )}
       </AnimationWrapper>

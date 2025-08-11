@@ -16,6 +16,11 @@ interface ContactFormProps {
   className?: string;
   onSuccess?: (data: GeneralContactFormData) => void;
   onError?: (error: string) => void;
+  serviceContext?: {
+    service?: string;
+    tier?: string;
+    type?: string;
+  };
 }
 
 interface FormErrors {
@@ -26,13 +31,28 @@ export function ContactForm({
   className,
   onSuccess,
   onError,
+  serviceContext,
 }: ContactFormProps) {
-  const [formData, setFormData] = useState<GeneralContactFormData>({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-    type: "GENERAL",
+  const [formData, setFormData] = useState<GeneralContactFormData>(() => {
+    // Pre-fill form based on service context
+    let subject = "";
+    let message = "";
+
+    if (serviceContext?.service) {
+      const serviceName = serviceContext.service
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (l) => l.toUpperCase());
+      subject = `Inquiry about ${serviceName}`;
+      message = `Hi! I'm interested in your ${serviceName} service${serviceContext.tier ? ` (${serviceContext.tier} tier)` : ""}. I'd like to learn more about how you can help with my project.\n\n`;
+    }
+
+    return {
+      name: "",
+      email: "",
+      subject,
+      message,
+      type: "GENERAL",
+    };
   });
 
   const [errors, setErrors] = useState<FormErrors>({});

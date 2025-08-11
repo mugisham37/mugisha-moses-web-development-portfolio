@@ -332,9 +332,10 @@ model Testimonial {
     updatedAt DateTime @updatedAt
 
     // Relations
-    authorId  String?
-    author    User?   @relation(fields: [authorId], references: [id])
-    projectId String?
+    authorId           String?
+    author             User?                @relation(fields: [authorId], references: [id])
+    projectId          String?
+    ServiceTestimonial ServiceTestimonial[]
 
     @@map("testimonials")
 }
@@ -414,4 +415,113 @@ model NewsletterSubscriber {
     @@index([email])
     @@index([isActive])
     @@map("newsletter_subscribers")
+}
+
+// Services System
+model Service {
+    id          String  @id @default(cuid())
+    name        String
+    slug        String  @unique
+    description String
+    content     String?
+
+    // Pricing
+    priceFrom Int? // Price in cents
+    priceTo   Int? // Price in cents
+    priceType ServicePriceType @default(PROJECT)
+
+    // Features
+    features   String[]
+    highlights String[]
+
+    // Process
+    processSteps Json? // Array of process steps with descriptions
+
+    // Delivery
+    deliveryTime String? // e.g., "2-4 weeks"
+    deliverables String[]
+
+    // Display
+    featured Boolean @default(false)
+    popular  Boolean @default(false)
+    order    Int     @default(0)
+
+    // SEO
+    metaTitle       String?
+    metaDescription String?
+    ogImage         String?
+
+    // Status
+    active Boolean @default(true)
+
+    // Metadata
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // Relations
+    faqs         ServiceFAQ[]
+    testimonials ServiceTestimonial[]
+    analytics    ServiceAnalytics[]
+
+    @@index([slug])
+    @@index([featured])
+    @@index([popular])
+    @@index([active])
+    @@index([order])
+    @@map("services")
+}
+
+// Service FAQs
+model ServiceFAQ {
+    id        String @id @default(cuid())
+    serviceId String
+    question  String
+    answer    String
+    order     Int    @default(0)
+
+    // Relations
+    service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+    @@index([serviceId])
+    @@index([order])
+    @@map("service_faqs")
+}
+
+// Service Testimonials (linking existing testimonials to services)
+model ServiceTestimonial {
+    id            String @id @default(cuid())
+    serviceId     String
+    testimonialId String
+
+    // Relations
+    service     Service     @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+    testimonial Testimonial @relation(fields: [testimonialId], references: [id], onDelete: Cascade)
+
+    @@unique([serviceId, testimonialId])
+    @@map("service_testimonials")
+}
+
+// Service Analytics
+model ServiceAnalytics {
+    id        String   @id @default(cuid())
+    serviceId String
+    event     String // "view", "inquiry", "booking", "conversion", etc.
+    metadata  Json?
+    createdAt DateTime @default(now())
+
+    // Relations
+    service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+    @@index([serviceId])
+    @@index([event])
+    @@index([createdAt])
+    @@map("service_analytics")
+}
+
+// Service Price Types
+enum ServicePriceType {
+    HOURLY
+    PROJECT
+    MONTHLY
+    CUSTOM
 }
