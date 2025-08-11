@@ -67,3 +67,63 @@ export interface GitHubRepository {
   pushedAt?: Date;
   lastSyncAt: Date;
 }
+
+// Extended project types for showcase system
+export interface ProjectCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  color: string;
+  _count?: {
+    projects: number;
+  };
+}
+
+export interface ProjectWithRelations extends Project {
+  categories: ProjectCategory[];
+  author: {
+    id: string;
+    name: string | null;
+    email: string;
+  };
+  analytics?: ProjectAnalytics[];
+}
+
+export interface ProjectAnalytics {
+  id: string;
+  projectId: string;
+  event: string;
+  metadata?: any;
+  createdAt: Date;
+}
+
+export interface ProjectFilters {
+  technologies?: string[];
+  categories?: string[];
+  status?: Project["status"][];
+  search?: string;
+  featured?: boolean;
+}
+
+export interface ProjectSortOptions {
+  field: "createdAt" | "updatedAt" | "viewCount" | "likeCount" | "title";
+  direction: "asc" | "desc";
+}
+
+export interface ProjectGridProps {
+  projects: ProjectWithRelations[];
+  loading?: boolean;
+  viewMode?: "grid" | "masonry" | "list";
+  showFilters?: boolean;
+  showSearch?: boolean;
+  showSort?: boolean;
+}
+
+export interface ProjectCardProps {
+  project: ProjectWithRelations;
+  variant?: "default" | "compact" | "featured";
+  showMetrics?: boolean;
+  showCategories?: boolean;
+  interactive?: boolean;
+}
