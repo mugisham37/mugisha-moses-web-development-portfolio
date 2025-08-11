@@ -1,87 +1,105 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
+import { UTApi } from "uploadthing/server";
 
-const f = createUploadthing();
+const utapi = new UTApi();
 
-// FileRouter for your app, can contain multiple FileRoutes
-export const ourFileRouter = {
-  // Define as many FileRoutes as you like, each with a unique routeSlug
-  imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 10 } })
-    // Set permissions and file types for this FileRoute
-    .middleware(async ({ req }) => {
-      // This code runs on your server before upload
-      const session = await auth();
-
-      // If you throw, the user will not be able to upload
-      if (!session?.user || session.user.role !== "ADMIN") {
-        throw new UploadThingError("Unauthorized");
-      }
-
-      // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId: session.user.id };
-    })
-    .onUploadComplete(async ({ metadata, file }) => {
-      // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
-      console.log("file url", file.url);
-
-      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.userId, url: file.url };
-    }),
-
-  documentUploader: f({
-    pdf: { maxFileSize: "16MB", maxFileCount: 5 },
-    text: { maxFileSize: "1MB", maxFileCount: 5 },
-  })
-    .middleware(async ({ req }) => {
-      const session = await auth();
-
-      if (!session?.user || session.user.role !== "ADMIN") {
-        throw new UploadThingError("Unauthorized");
-      }
-
-      return { userId: session.user.id };
-    })
-    .onUploadComplete(async ({ metadata, file }) => {
-      console.log("Document upload complete for userId:", metadata.userId);
-      console.log("file url", file.url);
-
-      return { uploadedBy: metadata.userId, url: file.url };
-    }),
-} satisfies FileRouter;
-
-export type OurFileRouter = typeof ourFileRouter;
-
-// Fallback upload handler for direct file uploads
 export async function POST(request: NextRequest) {
   try {
+    // Check authentication
     const session = await auth();
-
     if (!session?.user || session.user.role !== "ADMIN") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const formData = await request.formData();
     const file = formData.get("file") as File;
+    const originalName = formData.get("originalName") as string;
+    const compressed = formData.get("compressed") === "true";
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // For now, we'll return a placeholder URL
-    // In a real implementation, you would upload to your storage service
-    const mockUrl = `https://placeholder.com/${file.name}`;
+    // Validate file type
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+      "image/avif",
+      "image/gif",
+    ];
 
+    if (!allowedTypes.includes(file.type)) {
+      return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
+    }
+
+    // Validate file size (10MB max)
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      return NextResponse.json({ error: "File too large" }, { status: 400 });
+    }
+
+    // Upload to UploadThing
+    const response = await utapi.uploadFiles([file]);
+
+    if (!response[0] || response[0].error) {
+      throw new Error(response[0]?.error?.message || "Upload failed");
+    }
+
+    const uploadedFile = response[0].data;
+
+    // Return the uploaded file URL
     return NextResponse.json({
-      url: mockUrl,
-      name: file.name,
-      size: file.size,
+      url: uploadedFile.url,
+      key: uploadedFile.key,
+      name: uploadedFile.name,
+      size: uploadedFile.size,
+      originalName: originalName || file.name,
+      compressed,
       type: file.type,
     });
   } catch (error) {
-    console.error("Upload failed:", error);
-    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+    console.error("Upload error:", error);
+    return NextResponse.json(
+      {
+        error: error instanceof Error ? error.message : "Upload failed",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    // Check authentication
+    const session = await auth();
+    if (!session?.user || session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const key = searchParams.get("key");
+
+    if (!key) {
+      return NextResponse.json(
+        { error: "No file key provided" },
+        { status: 400 }
+      );
+    }
+
+    // Delete from UploadThing
+    await utapi.deleteFiles([key]);
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return NextResponse.json(
+      {
+        error: error instanceof Error ? error.message : "Delete failed",
+      },
+      { status: 500 }
+    );
   }
 }

@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
+import { ImageGallery } from "@/components/ui/image-gallery";
+import { ResponsiveImage } from "@/components/ui/responsive-image";
 import {
   ExternalLink,
   Github,
@@ -31,176 +32,14 @@ interface ProjectDetailProps {
   className?: string;
 }
 
-interface ImageGalleryProps {
-  images: string[];
-  title: string;
-  className?: string;
-}
-
-function ImageGallery({ images, title, className }: ImageGalleryProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showLightbox, setShowLightbox] = useState(false);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
-
-  // Auto-play functionality
-  useEffect(() => {
-    if (!isAutoPlaying || images.length <= 1) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, images.length]);
-
-  const nextImage = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  const goToImage = (index: number) => {
-    setCurrentIndex(index);
-  };
-
-  if (images.length === 0) return null;
-
-  return (
-    <div className={cn("space-y-4", className)}>
-      {/* Main Image */}
-      <div className="relative aspect-video overflow-hidden border border-white bg-gray-900">
-        <Image
-          src={images[currentIndex]}
-          alt={`${title} - Image ${currentIndex + 1}`}
-          fill
-          className="cursor-pointer object-cover"
-          onClick={() => setShowLightbox(true)}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-        />
-
-        {/* Navigation arrows */}
-        {images.length > 1 && (
-          <>
-            <button
-              onClick={prevImage}
-              className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/80 p-2 text-white transition-colors hover:bg-black"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/80 p-2 text-white transition-colors hover:bg-black"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </>
-        )}
-
-        {/* Image counter and controls */}
-        <div className="absolute right-4 bottom-4 left-4 flex items-center justify-between">
-          <div className="bg-black/80 px-3 py-1 font-mono text-sm text-white">
-            {currentIndex + 1} / {images.length}
-          </div>
-          {images.length > 1 && (
-            <button
-              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className="bg-black/80 p-2 text-white transition-colors hover:bg-black"
-            >
-              {isAutoPlaying ? (
-                <Pause className="h-4 w-4" />
-              ) : (
-                <Play className="h-4 w-4" />
-              )}
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Thumbnail strip */}
-      {images.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto pb-2">
-          {images.map((image, index) => (
-            <button
-              key={index}
-              onClick={() => goToImage(index)}
-              className={cn(
-                "relative h-16 w-24 flex-shrink-0 overflow-hidden border-2 transition-colors",
-                currentIndex === index
-                  ? "border-accent"
-                  : "border-gray-600 hover:border-white"
-              )}
-            >
-              <Image
-                src={image}
-                alt={`${title} - Thumbnail ${index + 1}`}
-                fill
-                className="object-cover"
-                sizes="96px"
-              />
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {showLightbox && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
-            onClick={() => setShowLightbox(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              className="relative max-h-full max-w-7xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={images[currentIndex]}
-                alt={`${title} - Image ${currentIndex + 1}`}
-                width={1200}
-                height={800}
-                className="max-h-[90vh] w-auto object-contain"
-              />
-
-              {/* Close button */}
-              <button
-                onClick={() => setShowLightbox(false)}
-                className="absolute -top-12 right-0 bg-white p-2 text-black transition-colors hover:bg-gray-200"
-              >
-                <X className="h-5 w-5" />
-              </button>
-
-              {/* Navigation in lightbox */}
-              {images.length > 1 && (
-                <>
-                  <button
-                    onClick={prevImage}
-                    className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/20 p-3 text-white transition-colors hover:bg-white/30"
-                  >
-                    <ChevronLeft className="h-6 w-6" />
-                  </button>
-                  <button
-                    onClick={nextImage}
-                    className="absolute top-1/2 right-4 -translate-y-1/2 bg-white/20 p-3 text-white transition-colors hover:bg-white/30"
-                  >
-                    <ChevronRight className="h-6 w-6" />
-                  </button>
-                </>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
+// Convert project images to gallery format
+const convertToGalleryImages = (images: string[], title: string) => {
+  return images.map((image, index) => ({
+    src: image,
+    alt: `${title} - Image ${index + 1}`,
+    caption: `Project screenshot ${index + 1}`,
+  }));
+};
 
 export function ProjectDetail({
   project,
@@ -397,7 +236,22 @@ export function ProjectDetail({
           <Typography variant="h4" className="mb-6 text-white">
             PROJECT GALLERY
           </Typography>
-          <ImageGallery images={project.images} title={project.title} />
+          <ImageGallery
+            images={convertToGalleryImages(project.images, project.title)}
+            title={project.title}
+            showThumbnails={true}
+            showControls={true}
+            enableKeyboard={true}
+            enableSwipe={true}
+            onImageChange={(index) => {
+              // Track gallery interaction
+              trackClick("gallery_navigation", {
+                projectTitle: project.title,
+                projectSlug: project.slug,
+                imageIndex: index,
+              });
+            }}
+          />
         </motion.div>
       )}
 
@@ -482,12 +336,14 @@ export function ProjectDetail({
                 <Card hover="lift" className="h-full overflow-hidden bg-black">
                   {relatedProject.thumbnail && (
                     <div className="relative aspect-video overflow-hidden">
-                      <Image
+                      <ResponsiveImage
                         src={relatedProject.thumbnail}
-                        alt={relatedProject.title}
+                        alt={`${relatedProject.title} - Related project thumbnail`}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        aspectRatio="video"
+                        className="transition-transform duration-300 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        quality={75}
                       />
                     </div>
                   )}
