@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { MainHeader } from "./header";
 import { MainFooter } from "./footer";
 import { ScrollProgress } from "./scroll-progress";
@@ -11,6 +11,8 @@ import {
   PerformanceMonitor,
 } from "@/components/animations/animation-utils";
 import { PageTransition } from "@/components/animations/page-transitions";
+import { OfflineNotification } from "@/components/error/offline-notification";
+import { initializeOfflineSupport } from "@/lib/offline-detection";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -29,6 +31,11 @@ export function MainLayout({
   enablePageTransitions = true,
   className = "",
 }: MainLayoutProps) {
+  useEffect(() => {
+    // Initialize offline support and service worker
+    initializeOfflineSupport();
+  }, []);
+
   return (
     <AnimationPreferencesProvider>
       <OptimizedMotionConfig>
@@ -54,6 +61,9 @@ export function MainLayout({
 
             {/* Footer */}
             {showFooter && <MainFooter />}
+
+            {/* Offline Notification */}
+            <OfflineNotification />
           </div>
         </PerformanceMonitor>
       </OptimizedMotionConfig>

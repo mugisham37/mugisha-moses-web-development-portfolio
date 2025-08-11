@@ -30,12 +30,7 @@ export function generateOptimizedImageUrl(
   src: string,
   options: ImageOptimizationOptions = {}
 ): string {
-  const {
-    quality = 85,
-    width,
-    height,
-    format = "auto",
-  } = options;
+  const { quality = 85, width, height, format = "auto" } = options;
 
   // If it's an external URL, return as-is (Next.js will handle optimization)
   if (src.startsWith("http")) {
@@ -44,7 +39,7 @@ export function generateOptimizedImageUrl(
 
   // For local images, we can add query parameters for optimization hints
   const params = new URLSearchParams();
-  
+
   if (quality !== 85) params.set("q", quality.toString());
   if (width) params.set("w", width.toString());
   if (height) params.set("h", height.toString());
@@ -61,13 +56,13 @@ export function generateResponsiveSizes(config: {
   mobile?: string;
   tablet?: string;
   desktop?: string;
-  default?: string;
+  defaultSize?: string;
 }): string {
   const {
     mobile = "100vw",
-    tablet = "50vw", 
+    tablet = "50vw",
     desktop = "33vw",
-    default = "100vw",
+    defaultSize = "100vw",
   } = config;
 
   return `(max-width: 640px) ${mobile}, (max-width: 1024px) ${tablet}, ${desktop}`;
@@ -139,12 +134,14 @@ export function detectOptimalFormat(
   hasAlpha: boolean = false
 ): "webp" | "avif" | "jpeg" | "png" {
   // Check for AVIF support (modern browsers)
-  const supportsAVIF = userAgent?.includes("Chrome/") && 
+  const supportsAVIF =
+    userAgent?.includes("Chrome/") &&
     parseInt(userAgent.split("Chrome/")[1]) >= 85;
 
   // Check for WebP support (most modern browsers)
-  const supportsWebP = userAgent?.includes("Chrome/") || 
-    userAgent?.includes("Firefox/") || 
+  const supportsWebP =
+    userAgent?.includes("Chrome/") ||
+    userAgent?.includes("Firefox/") ||
     userAgent?.includes("Safari/");
 
   if (supportsAVIF && !hasAlpha) return "avif";
@@ -239,19 +236,19 @@ export function compressImage(
 export function extractImageMetadata(file: File): Promise<ImageMetadata> {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    
+
     img.onload = () => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-      
+
       canvas.width = img.width;
       canvas.height = img.height;
       ctx?.drawImage(img, 0, 0);
-      
+
       // Check for alpha channel
       const imageData = ctx?.getImageData(0, 0, img.width, img.height);
       let hasAlpha = false;
-      
+
       if (imageData) {
         for (let i = 3; i < imageData.data.length; i += 4) {
           if (imageData.data[i] < 255) {
@@ -287,7 +284,7 @@ export const ImageOptimizationPresets = {
     format: "webp" as const,
     fit: "cover" as const,
   },
-  
+
   card: {
     quality: 80,
     width: 600,
@@ -295,7 +292,7 @@ export const ImageOptimizationPresets = {
     format: "webp" as const,
     fit: "cover" as const,
   },
-  
+
   hero: {
     quality: 90,
     width: 1920,
@@ -304,7 +301,7 @@ export const ImageOptimizationPresets = {
     fit: "cover" as const,
     progressive: true,
   },
-  
+
   gallery: {
     quality: 85,
     width: 1200,
@@ -312,7 +309,7 @@ export const ImageOptimizationPresets = {
     format: "webp" as const,
     fit: "contain" as const,
   },
-  
+
   avatar: {
     quality: 75,
     width: 150,
