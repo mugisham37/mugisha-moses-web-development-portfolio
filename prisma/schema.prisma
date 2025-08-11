@@ -1,0 +1,328 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+// User Management
+model User {
+    id        String   @id @default(cuid())
+    email     String   @unique
+    name      String?
+    role      Role     @default(USER)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // Relations
+    projects     Project[]
+    blogPosts    BlogPost[]
+    testimonials Testimonial[]
+
+    @@map("users")
+}
+
+// Project Management
+model Project {
+    id          String  @id @default(cuid())
+    title       String
+    slug        String  @unique
+    description String
+    content     String?
+
+    // Technical Details
+    technologies String[]
+    githubUrl    String?
+    liveUrl      String?
+    status       ProjectStatus @default(ACTIVE)
+    featured     Boolean       @default(false)
+
+    // Media
+    thumbnail String?
+    images    String[]
+    videoUrl  String?
+
+    // Metrics
+    viewCount Int @default(0)
+    likeCount Int @default(0)
+
+    // Metadata
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    publishedAt DateTime?
+
+    // Relations
+    authorId String
+    author   User   @relation(fields: [authorId], references: [id])
+
+    categories ProjectCategory[]
+    analytics  ProjectAnalytics[]
+
+    @@map("projects")
+}
+
+// Project Categories
+model ProjectCategory {
+    id          String  @id @default(cuid())
+    name        String  @unique
+    slug        String  @unique
+    description String?
+    color       String  @default("#FFFF00")
+
+    // Relations
+    projects Project[]
+
+    @@map("project_categories")
+}
+
+// Project Analytics
+model ProjectAnalytics {
+    id        String   @id @default(cuid())
+    projectId String
+    event     String // "view", "like", "share", etc.
+    metadata  Json?
+    createdAt DateTime @default(now())
+
+    // Relations
+    project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+    @@map("project_analytics")
+}
+
+// Blog System
+model BlogPost {
+    id      String  @id @default(cuid())
+    title   String
+    slug    String  @unique
+    excerpt String?
+    content String
+
+    // SEO
+    metaTitle       String?
+    metaDescription String?
+    ogImage         String?
+
+    // Publishing
+    status      PostStatus @default(DRAFT)
+    featured    Boolean    @default(false)
+    publishedAt DateTime?
+
+    // Engagement
+    viewCount   Int @default(0)
+    readingTime Int @default(0)
+
+    // Metadata
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // Relations
+    authorId String
+    author   User   @relation(fields: [authorId], references: [id])
+
+    categories BlogCategory[]
+    tags       BlogTag[]
+    analytics  BlogAnalytics[]
+
+    @@map("blog_posts")
+}
+
+// Blog Categories
+model BlogCategory {
+    id          String  @id @default(cuid())
+    name        String  @unique
+    slug        String  @unique
+    description String?
+    color       String  @default("#FFFF00")
+
+    // Relations
+    posts BlogPost[]
+
+    @@map("blog_categories")
+}
+
+// Blog Tags
+model BlogTag {
+    id   String @id @default(cuid())
+    name String @unique
+    slug String @unique
+
+    // Relations
+    posts BlogPost[]
+
+    @@map("blog_tags")
+}
+
+// Blog Analytics
+model BlogAnalytics {
+    id        String   @id @default(cuid())
+    postId    String
+    event     String // "view", "share", "time_spent", etc.
+    metadata  Json?
+    createdAt DateTime @default(now())
+
+    // Relations
+    post BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+    @@map("blog_analytics")
+}
+
+// GitHub Integration
+model GitHubRepository {
+    id          String  @id @default(cuid())
+    githubId    Int     @unique
+    name        String
+    fullName    String
+    description String?
+
+    // Repository Data
+    language     String?
+    starCount    Int     @default(0)
+    forkCount    Int     @default(0)
+    watcherCount Int     @default(0)
+
+    // URLs
+    htmlUrl  String
+    cloneUrl String
+
+    // Metadata
+    isPrivate  Boolean   @default(false)
+    isFork     Boolean   @default(false)
+    isArchived Boolean   @default(false)
+    createdAt  DateTime
+    updatedAt  DateTime
+    pushedAt   DateTime?
+    lastSyncAt DateTime  @default(now())
+
+    // Relations
+    contributions GitHubContribution[]
+
+    @@map("github_repositories")
+}
+
+// GitHub Contributions
+model GitHubContribution {
+    id           String   @id @default(cuid())
+    repositoryId String
+    date         DateTime
+    count        Int      @default(0)
+    level        Int      @default(0) // 0-4 contribution level
+
+    // Relations
+    repository GitHubRepository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+    @@unique([repositoryId, date])
+    @@map("github_contributions")
+}
+
+// Analytics System
+model PageView {
+    id        String  @id @default(cuid())
+    path      String
+    userAgent String?
+    referer   String?
+    country   String?
+    city      String?
+
+    // Session Data
+    sessionId String
+    userId    String?
+
+    // Metadata
+    createdAt DateTime @default(now())
+
+    @@map("page_views")
+}
+
+// Testimonials
+model Testimonial {
+    id      String  @id @default(cuid())
+    name    String
+    role    String
+    company String?
+
+    // Content
+    content   String
+    rating    Int     @default(5)
+    videoUrl  String?
+    avatarUrl String?
+
+    // Display
+    featured Boolean @default(false)
+    approved Boolean @default(false)
+
+    // Metadata
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // Relations
+    authorId  String?
+    author    User?   @relation(fields: [authorId], references: [id])
+    projectId String?
+
+    @@map("testimonials")
+}
+
+// Contact Management
+model ContactSubmission {
+    id      String      @id @default(cuid())
+    name    String
+    email   String
+    subject String?
+    message String
+    type    ContactType @default(GENERAL)
+
+    // Project Details (for project inquiries)
+    projectType String?
+    budget      String?
+    timeline    String?
+
+    // Status
+    status    ContactStatus @default(NEW)
+    responded Boolean       @default(false)
+
+    // Metadata
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("contact_submissions")
+}
+
+// Enums
+enum Role {
+    USER
+    ADMIN
+}
+
+enum ProjectStatus {
+    DRAFT
+    ACTIVE
+    ARCHIVED
+    FEATURED
+}
+
+enum PostStatus {
+    DRAFT
+    PUBLISHED
+    SCHEDULED
+    ARCHIVED
+}
+
+enum ContactType {
+    GENERAL
+    PROJECT_INQUIRY
+    CONSULTATION
+    COLLABORATION
+    SUPPORT
+}
+
+enum ContactStatus {
+    NEW
+    IN_PROGRESS
+    RESPONDED
+    CLOSED
+}
