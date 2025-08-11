@@ -34,8 +34,10 @@
     "@prisma/client": "^6.13.0",
     "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.3.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/three": "^0.179.0",
     "@uploadthing/react": "^7.3.2",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
@@ -48,7 +50,8 @@
     "resend": "^6.0.1",
     "tailwind-merge": "^3.3.1",
     "three": "^0.179.1",
-    "uploadthing": "^7.7.3"
+    "uploadthing": "^7.7.3",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.0",
@@ -57,6 +60,7 @@
     "@storybook/addon-docs": "^9.1.1",
     "@storybook/addon-onboarding": "^9.1.1",
     "@storybook/addon-vitest": "^9.1.1",
+    "@storybook/nextjs-vite": "^9.1.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
@@ -64,6 +68,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "eslint-plugin-storybook": "^9.1.1",
@@ -71,16 +77,13 @@
     "jest-environment-jsdom": "^30.0.5",
     "jest-environment-node": "^30.0.5",
     "jest-mock-extended": "^4.0.0",
+    "playwright": "^1.54.2",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "storybook": "^9.1.1",
     "tailwindcss": "^4",
     "tsx": "^4.20.3",
     "typescript": "^5",
-    "@storybook/nextjs-vite": "^9.1.1",
-    "vitest": "^3.2.4",
-    "@vitest/browser": "^3.2.4",
-    "playwright": "^1.54.2",
-    "@vitest/coverage-v8": "^3.2.4"
+    "vitest": "^3.2.4"
   }
 }
