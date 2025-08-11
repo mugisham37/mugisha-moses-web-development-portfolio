@@ -23,16 +23,19 @@ import {
   Edit,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import readingTime from "reading-time";
 
 interface RichTextEditorProps {
   content: string;
   onChange: (content: string) => void;
+  onReadingTimeChange?: (minutes: number) => void;
   placeholder?: string;
 }
 
 export function RichTextEditor({
   content,
   onChange,
+  onReadingTimeChange,
   placeholder = "Start writing...",
 }: RichTextEditorProps) {
   const [isPreview, setIsPreview] = useState(false);
@@ -49,7 +52,14 @@ export function RichTextEditor({
   }, [content]);
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onChange(e.target.value);
+    const newContent = e.target.value;
+    onChange(newContent);
+
+    // Calculate reading time
+    if (onReadingTimeChange) {
+      const stats = readingTime(newContent);
+      onReadingTimeChange(stats.minutes);
+    }
   };
 
   const insertMarkdown = (before: string, after: string = "") => {
@@ -347,6 +357,9 @@ export function RichTextEditor({
             {content.split(/\s+/).filter((word) => word.length > 0).length}
           </span>
           <span>LINES: {content.split("\n").length}</span>
+          <span>
+            READING TIME: {Math.ceil(readingTime(content).minutes)} MIN
+          </span>
         </div>
         <div>MARKDOWN EDITOR</div>
       </div>

@@ -403,3 +403,15 @@ enum ContactStatus {
     RESPONDED
     CLOSED
 }
+
+// Newsletter Subscribers
+model NewsletterSubscriber {
+    id           String   @id @default(cuid())
+    email        String   @unique
+    isActive     Boolean  @default(true)
+    subscribedAt DateTime @default(now())
+
+    @@index([email])
+    @@index([isActive])
+    @@map("newsletter_subscribers")
+}

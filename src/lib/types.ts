@@ -47,6 +47,46 @@ export interface BlogPost {
   updatedAt: Date;
 }
 
+// Extended blog types
+export interface BlogCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  color: string;
+  _count?: {
+    posts: number;
+  };
+}
+
+export interface BlogTag {
+  id: string;
+  name: string;
+  slug: string;
+  _count?: {
+    posts: number;
+  };
+}
+
+export interface BlogPostWithRelations extends BlogPost {
+  author: {
+    id: string;
+    name: string | null;
+    email: string;
+  };
+  categories: BlogCategory[];
+  tags: BlogTag[];
+  analytics?: BlogAnalytics[];
+}
+
+export interface BlogAnalytics {
+  id: string;
+  postId: string;
+  event: string;
+  metadata?: any;
+  createdAt: Date;
+}
+
 export interface GitHubRepository {
   id: string;
   githubId: number;
