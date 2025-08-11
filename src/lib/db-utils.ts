@@ -1,16 +1,16 @@
 import { db } from "./db";
-import type { 
-  Project, 
-  BlogPost, 
-  User, 
-  ProjectCategory, 
-  BlogCategory, 
-  BlogTag, 
-  Testimonial, 
-  GitHubRepository, 
+import type {
+  Project,
+  BlogPost,
+  User,
+  ProjectCategory,
+  BlogCategory,
+  BlogTag,
+  Testimonial,
+  GitHubRepository,
   ContactSubmission,
   PageView,
-  Prisma
+  Prisma,
 } from "@prisma/client";
 
 // Type definitions for complex queries
@@ -40,7 +40,13 @@ export class ProjectQueries {
     offset?: number;
     includeRelations?: boolean;
   }) {
-    const { status, featured, limit, offset, includeRelations = true } = options || {};
+    const {
+      status,
+      featured,
+      limit,
+      offset,
+      includeRelations = true,
+    } = options || {};
 
     return db.project.findMany({
       where: {
@@ -48,19 +54,18 @@ export class ProjectQueries {
         ...(featured !== undefined && { featured }),
         publishedAt: { not: null },
       },
-      include: includeRelations ? {
-        author: true,
-        categories: true,
-        analytics: {
-          select: { event: true, metadata: true, createdAt: true },
-          orderBy: { createdAt: "desc" },
-          take: 10,
-        },
-      } : undefined,
-      orderBy: [
-        { featured: "desc" },
-        { publishedAt: "desc" },
-      ],
+      include: includeRelations
+        ? {
+            author: true,
+            categories: true,
+            analytics: {
+              select: { event: true, metadata: true, createdAt: true },
+              orderBy: { createdAt: "desc" },
+              take: 10,
+            },
+          }
+        : undefined,
+      orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
       ...(limit && { take: limit }),
       ...(offset && { skip: offset }),
     });
@@ -139,7 +144,8 @@ export class BlogQueries {
     limit?: number;
     offset?: number;
   }) {
-    const { status, featured, categorySlug, tagSlug, limit, offset } = options || {};
+    const { status, featured, categorySlug, tagSlug, limit, offset } =
+      options || {};
 
     return db.blogPost.findMany({
       where: {
@@ -163,10 +169,7 @@ export class BlogQueries {
           take: 5,
         },
       },
-      orderBy: [
-        { featured: "desc" },
-        { publishedAt: "desc" },
-      ],
+      orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
       ...(limit && { take: limit }),
       ...(offset && { skip: offset }),
     });
@@ -251,7 +254,9 @@ export class BlogQueries {
 
 // GitHub Queries
 export class GitHubQueries {
-  static async getAllRepositories(): Promise<GitHubRepositoryWithContributions[]> {
+  static async getAllRepositories(): Promise<
+    GitHubRepositoryWithContributions[]
+  > {
     return db.gitHubRepository.findMany({
       include: {
         contributions: {
@@ -271,7 +276,10 @@ export class GitHubQueries {
     });
   }
 
-  static async updateRepository(githubId: number, data: Partial<GitHubRepository>) {
+  static async updateRepository(
+    githubId: number,
+    data: Partial<GitHubRepository>
+  ) {
     return db.gitHubRepository.upsert({
       where: { githubId },
       update: {
@@ -330,9 +338,10 @@ export class AnalyticsQueries {
     return db.pageView.findMany({
       where: {
         ...(path && { path }),
-        ...(startDate && endDate && {
-          createdAt: { gte: startDate, lte: endDate },
-        }),
+        ...(startDate &&
+          endDate && {
+            createdAt: { gte: startDate, lte: endDate },
+          }),
       },
       orderBy: { createdAt: "desc" },
       ...(limit && { take: limit }),
@@ -362,7 +371,7 @@ export class AnalyticsQueries {
       }),
       db.pageView.groupBy({
         by: ["country"],
-        where: { 
+        where: {
           createdAt: { gte: startDate },
           country: { not: null },
         },
@@ -413,11 +422,191 @@ export class TestimonialQueries {
       ...(offset && { skip: offset }),
     });
   }
+
+  static async getById(id: string) {
+    return db.testimonial.findUnique({
+      where: { id },
+      include: { author: true },
+    });
+  }
+
+  static async getByRating(rating: number, limit = 10) {
+    return db.testimonial.findMany({
+      where: {
+        rating,
+        approved: true,
+      },
+      include: { author: true },
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    });
+  }
+
+  static async getWithVideo(limit = 10) {
+    return db.testimonial.findMany({
+      where: {
+        videoUrl: { not: null },
+        approved: true,
+      },
+      include: { author: true },
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    });
+  }
+
+  static async getByCompany(company: string) {
+    return db.testimonial.findMany({
+      where: {
+        company: { contains: company, mode: "insensitive" },
+        approved: true,
+      },
+      include: { author: true },
+      orderBy: { createdAt: "desc" },
+    });
+  }
+
+  static async getRecent(days = 30, limit = 10) {
+    const dateThreshold = new Date();
+    dateThreshold.setDate(dateThreshold.getDate() - days);
+
+    return db.testimonial.findMany({
+      where: {
+        createdAt: { gte: dateThreshold },
+        approved: true,
+      },
+      include: { author: true },
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    });
+  }
+
+  static async getStats() {
+    const [
+      total,
+      approved,
+      featured,
+      video,
+      averageRating,
+      ratingDistribution,
+      companies,
+    ] = await Promise.all([
+      db.testimonial.count(),
+      db.testimonial.count({ where: { approved: true } }),
+      db.testimonial.count({ where: { featured: true, approved: true } }),
+      db.testimonial.count({
+        where: { videoUrl: { not: null }, approved: true },
+      }),
+      db.testimonial.aggregate({
+        where: { approved: true },
+        _avg: { rating: true },
+      }),
+      db.testimonial.groupBy({
+        by: ["rating"],
+        where: { approved: true },
+        _count: { rating: true },
+        orderBy: { rating: "desc" },
+      }),
+      db.testimonial.findMany({
+        where: {
+          approved: true,
+          company: { not: null },
+        },
+        select: { company: true },
+        distinct: ["company"],
+      }),
+    ]);
+
+    return {
+      total,
+      approved,
+      featured,
+      video,
+      averageRating: averageRating._avg.rating || 0,
+      companies: companies.length,
+      ratingDistribution: ratingDistribution.map((item) => ({
+        rating: item.rating,
+        count: item._count.rating,
+        percentage: approved > 0 ? (item._count.rating / approved) * 100 : 0,
+      })),
+      fiveStarPercentage:
+        approved > 0
+          ? ((ratingDistribution.find((r) => r.rating === 5)?._count.rating ||
+              0) /
+              approved) *
+            100
+          : 0,
+    };
+  }
+
+  static async create(data: {
+    name: string;
+    email: string;
+    role: string;
+    company?: string;
+    content: string;
+    rating: number;
+    videoUrl?: string;
+    avatarUrl?: string;
+    authorId?: string;
+    approved?: boolean;
+    featured?: boolean;
+  }) {
+    return db.testimonial.create({
+      data,
+      include: { author: true },
+    });
+  }
+
+  static async update(
+    id: string,
+    data: Partial<{
+      name: string;
+      role: string;
+      company: string;
+      content: string;
+      rating: number;
+      videoUrl: string;
+      avatarUrl: string;
+      approved: boolean;
+      featured: boolean;
+    }>
+  ) {
+    return db.testimonial.update({
+      where: { id },
+      data,
+      include: { author: true },
+    });
+  }
+
+  static async delete(id: string) {
+    return db.testimonial.delete({
+      where: { id },
+    });
+  }
+
+  static async search(query: string, limit = 10) {
+    return db.testimonial.findMany({
+      where: {
+        approved: true,
+        OR: [
+          { name: { contains: query, mode: "insensitive" } },
+          { company: { contains: query, mode: "insensitive" } },
+          { content: { contains: query, mode: "insensitive" } },
+          { role: { contains: query, mode: "insensitive" } },
+        ],
+      },
+      include: { author: true },
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    });
+  }
 }
 
 // Contact Queries
 export class ContactQueries {
-  static async create(data: Omit<ContactSubmission, "id" | "createdAt" | "updatedAt">) {
+  static async create(
+    data: Omit<ContactSubmission, "id" | "createdAt" | "updatedAt">
+  ) {
     return db.contactSubmission.create({ data });
   }
 

@@ -314,6 +314,7 @@ model PageView {
 model Testimonial {
     id      String  @id @default(cuid())
     name    String
+    email   String? // Store email for verification
     role    String
     company String?
 
@@ -322,6 +323,14 @@ model Testimonial {
     rating    Int     @default(5)
     videoUrl  String?
     avatarUrl String?
+
+    // LinkedIn Integration
+    linkedinProfile          String? // LinkedIn profile URL
+    linkedinRecommendationId String? // Original LinkedIn recommendation ID
+    linkedinVerified         Boolean @default(false) // Whether LinkedIn connection is verified
+
+    // Source tracking
+    source String @default("direct") // "direct", "linkedin", "import", etc.
 
     // Display
     featured Boolean @default(false)
@@ -337,6 +346,10 @@ model Testimonial {
     projectId          String?
     ServiceTestimonial ServiceTestimonial[]
 
+    @@index([email])
+    @@index([linkedinProfile])
+    @@index([source])
+    @@index([linkedinVerified])
     @@map("testimonials")
 }
 

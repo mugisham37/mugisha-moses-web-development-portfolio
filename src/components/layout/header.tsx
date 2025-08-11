@@ -20,6 +20,7 @@ const navigationItems: NavigationItem[] = [
   { label: "PROJECTS", href: "/projects" },
   { label: "BLOG", href: "/blog" },
   { label: "SERVICES", href: "/services" },
+  { label: "TESTIMONIALS", href: "/testimonials" },
   { label: "CONTACT", href: "/contact" },
 ];
 
