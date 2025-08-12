@@ -14,35 +14,38 @@ An elite Next.js 14 developer portfolio that combines brutalist design aesthetic
 - **Email System**: Transactional emails with Resend
 - **File Uploads**: Media management with UploadThing
 - **Analytics**: Performance monitoring with Vercel Analytics
-- **Testing**: Jest and React Testing Library setup
+- **Performance**: Optimized for speed and SEO
 - **Code Quality**: ESLint, Prettier, and TypeScript strict mode
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - PostgreSQL database (local or Neon)
 - Git
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd brutalist-portfolio
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
-   
+
    Fill in your environment variables in `.env.local`:
    - `DATABASE_URL`: PostgreSQL connection string
    - `NEXTAUTH_SECRET`: Random secret for NextAuth.js
@@ -50,6 +53,7 @@ An elite Next.js 14 developer portfolio that combines brutalist design aesthetic
    - Other service API keys as needed
 
 4. **Set up the database**
+
    ```bash
    npm run db:generate
    npm run db:push
@@ -57,6 +61,7 @@ An elite Next.js 14 developer portfolio that combines brutalist design aesthetic
    ```
 
 5. **Start the development server**
+
    ```bash
    npm run dev
    ```
@@ -90,15 +95,18 @@ prisma/
 The brutalist design system is built around these core principles:
 
 ### Colors
+
 - **Primary**: Black (#000000) and White (#FFFFFF)
 - **Accent**: Electric Yellow (#FFFF00)
 - **Supporting**: Charcoal grays and off-whites
 
 ### Typography
+
 - **Headings**: Space Mono (monospace, uppercase, bold)
 - **Body**: Inter (sans-serif, optimized for readability)
 
 ### Components
+
 - **Borders**: 4px solid borders throughout
 - **Shadows**: Sharp, offset shadows (no blur)
 - **Animations**: Mechanical, weighty transitions
@@ -127,10 +135,10 @@ npm run db:studio       # Open Prisma Studio
 npm run db:seed         # Seed database with sample data
 npm run db:reset        # Reset database
 
-# Testing
-npm run test            # Run tests
-npm run test:watch      # Run tests in watch mode
-npm run test:coverage   # Run tests with coverage
+# Development
+npm run dev             # Start development server
+npm run build           # Build for production
+npm run start           # Start production server
 
 # Utilities
 npm run clean           # Clean build artifacts
@@ -151,7 +159,9 @@ The application uses PostgreSQL with Prisma ORM. Key models include:
 ## 🔧 Configuration
 
 ### Tailwind CSS
+
 Custom brutalist design system configured in `tailwind.config.ts` with:
+
 - Custom color palette
 - Typography scale
 - Animation keyframes
@@ -159,7 +169,9 @@ Custom brutalist design system configured in `tailwind.config.ts` with:
 - Responsive breakpoints
 
 ### Environment Variables
+
 Required environment variables are documented in `.env.example`. Key configurations:
+
 - Database connection
 - Authentication secrets
 - Third-party API keys
@@ -168,30 +180,27 @@ Required environment variables are documented in `.env.example`. Key configurati
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 1. Connect your GitHub repository to Vercel
 2. Configure environment variables in Vercel dashboard
 3. Deploy automatically on push to main branch
 
 ### Manual Deployment
+
 1. Build the application: `npm run build`
 2. Set up PostgreSQL database
 3. Configure environment variables
 4. Deploy to your hosting platform
 
-## 🧪 Testing
+## 🚀 Performance
 
-The project includes comprehensive testing setup:
+The project is optimized for performance and SEO:
 
-- **Unit Tests**: Jest + React Testing Library
-- **Integration Tests**: API routes and database operations
-- **E2E Tests**: Playwright (configuration ready)
-- **Coverage**: 70% threshold for all metrics
-
-Run tests with:
-```bash
-npm run test
-npm run test:coverage
-```
+- **Server Components**: Efficient rendering with Next.js App Router
+- **Image Optimization**: Automatic WebP conversion and responsive images
+- **Code Splitting**: Automatic bundle optimization
+- **Caching**: Redis-based caching for improved performance
+- **Analytics**: Real-time performance monitoring
 
 ## 📝 Contributing
 

@@ -9,10 +9,11 @@ The project uses **Neon PostgreSQL** as the primary database with **Prisma ORM**
 ## Database Architecture
 
 ### Technology Stack
+
 - **Database**: Neon PostgreSQL (Serverless PostgreSQL)
 - **ORM**: Prisma v6.13.0
 - **Connection Pooling**: Neon's built-in connection pooling + Prisma client optimization
-- **Testing**: Jest with custom database utilities and mock data generators
+- **Development**: Full TypeScript support with Prisma client generation
 
 ### Schema Overview
 
@@ -70,7 +71,7 @@ npm run db:studio
 The database connection is managed through `src/lib/db.ts`:
 
 ```typescript
-import { db, checkDatabaseConnection, disconnectDatabase } from '@/lib/db';
+import { db, checkDatabaseConnection, disconnectDatabase } from "@/lib/db";
 
 // Check database health
 const isHealthy = await checkDatabaseConnection();
@@ -84,27 +85,27 @@ await disconnectDatabase();
 Comprehensive query utilities are available in `src/lib/db-utils.ts`:
 
 ```typescript
-import { 
-  ProjectQueries, 
-  BlogQueries, 
-  GitHubQueries, 
+import {
+  ProjectQueries,
+  BlogQueries,
+  GitHubQueries,
   AnalyticsQueries,
   TestimonialQueries,
   ContactQueries,
-  DatabaseUtils 
-} from '@/lib/db-utils';
+  DatabaseUtils,
+} from "@/lib/db-utils";
 
 // Get featured projects with relations
 const featuredProjects = await ProjectQueries.getFeatured(6);
 
 // Search blog posts
-const searchResults = await BlogQueries.search('React');
+const searchResults = await BlogQueries.search("React");
 
 // Record page view
 await AnalyticsQueries.recordPageView({
-  path: '/projects',
-  sessionId: 'session-123',
-  country: 'US'
+  path: "/projects",
+  sessionId: "session-123",
+  country: "US",
 });
 
 // Get database statistics
@@ -140,17 +141,17 @@ npm run db:test:setup
 The project includes comprehensive testing utilities:
 
 ```typescript
-import { 
-  TestDatabaseUtils, 
-  TestSeeder, 
+import {
+  TestDatabaseUtils,
+  TestSeeder,
   MockDataGenerators,
-  setupTestDatabase 
-} from '@/lib/test-utils/db-test-utils';
+  setupTestDatabase,
+} from "@/lib/test-utils/db-test-utils";
 
 // In your test file
 setupTestDatabase();
 
-describe('Your Test Suite', () => {
+describe("Your Test Suite", () => {
   let testSeeder: TestSeeder;
 
   beforeEach(async () => {
@@ -158,9 +159,9 @@ describe('Your Test Suite', () => {
     testSeeder = new TestSeeder(testDb);
   });
 
-  it('should create and query data', async () => {
+  it("should create and query data", async () => {
     // Seed test data
-    const user = await testSeeder.seedUser({ role: 'ADMIN' });
+    const user = await testSeeder.seedUser({ role: "ADMIN" });
     const project = await testSeeder.seedProject({ authorId: user.id });
 
     // Test your queries
@@ -175,15 +176,15 @@ describe('Your Test Suite', () => {
 Generate realistic test data:
 
 ```typescript
-import { MockDataGenerators } from '@/lib/test-utils/db-test-utils';
+import { MockDataGenerators } from "@/lib/test-utils/db-test-utils";
 
 // Generate single items
-const user = MockDataGenerators.generateUser({ role: 'ADMIN' });
+const user = MockDataGenerators.generateUser({ role: "ADMIN" });
 const project = MockDataGenerators.generateProject({ featured: true });
 
 // Generate multiple items
 const users = MockDataGenerators.generateUsers(5);
-const projects = MockDataGenerators.generateProjects(10, { status: 'ACTIVE' });
+const projects = MockDataGenerators.generateProjects(10, { status: "ACTIVE" });
 ```
 
 ## Performance Optimization
@@ -217,6 +218,7 @@ Neon provides built-in connection pooling, and the Prisma client is configured w
 ### Core Entities
 
 #### User
+
 ```prisma
 model User {
   id        String   @id @default(cuid())
@@ -225,7 +227,7 @@ model User {
   role      Role     @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
   // Relations
   projects     Project[]
   blogPosts    BlogPost[]
@@ -234,6 +236,7 @@ model User {
 ```
 
 #### Project
+
 ```prisma
 model Project {
   id          String        @id @default(cuid())
@@ -246,7 +249,7 @@ model Project {
   liveUrl     String?
   status      ProjectStatus @default(ACTIVE)
   featured    Boolean       @default(false)
-  
+
   // Relations
   authorId   String
   author     User                @relation(fields: [authorId], references: [id])
@@ -258,6 +261,7 @@ model Project {
 ### Analytics Models
 
 #### PageView
+
 ```prisma
 model PageView {
   id        String   @id @default(cuid())
@@ -307,15 +311,15 @@ await DatabaseUtils.cleanup();
 ```typescript
 // Role-based queries
 const adminUsers = await db.user.findMany({
-  where: { role: 'ADMIN' }
+  where: { role: "ADMIN" },
 });
 
 // Secure user data access
 const userProjects = await db.project.findMany({
-  where: { 
+  where: {
     authorId: userId,
-    publishedAt: { not: null }
-  }
+    publishedAt: { not: null },
+  },
 });
 ```
 

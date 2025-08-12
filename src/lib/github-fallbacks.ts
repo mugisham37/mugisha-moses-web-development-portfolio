@@ -118,7 +118,8 @@ const fallbackData = {
       id: 2,
       name: "react-components-library",
       full_name: "developer/react-components-library",
-      description: "Reusable React components with TypeScript and Storybook",
+      description:
+        "Reusable React components with TypeScript and modern tooling",
       html_url: "https://github.com/developer/react-components-library",
       clone_url: "https://github.com/developer/react-components-library.git",
       language: "TypeScript",
