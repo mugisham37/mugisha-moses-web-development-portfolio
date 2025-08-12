@@ -9,10 +9,12 @@ const nextConfig: NextConfig = {
       "@react-three/fiber",
       "@react-three/drei",
     ],
-    serverComponentsExternalPackages: ["@prisma/client"],
     optimizeCss: true,
     webVitalsAttribution: ["CLS", "LCP", "FCP", "FID", "TTFB"],
   },
+
+  // External packages for server components
+  serverExternalPackages: ["@prisma/client"],
 
   // Compiler optimizations
   compiler: {

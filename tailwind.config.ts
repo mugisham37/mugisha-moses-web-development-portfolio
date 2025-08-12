@@ -134,9 +134,78 @@ const config: Config = {
       backdropBlur: {
         xs: "2px",
       },
+      // Mobile-specific utilities
+      screens: {
+        xs: "475px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+        // Touch device queries
+        touch: { raw: "(hover: none) and (pointer: coarse)" },
+        "no-touch": { raw: "(hover: hover) and (pointer: fine)" },
+        // Orientation queries
+        portrait: { raw: "(orientation: portrait)" },
+        landscape: { raw: "(orientation: landscape)" },
+      },
+      // Touch target sizes
+      minHeight: {
+        touch: "44px",
+        "touch-lg": "48px",
+        "touch-xl": "56px",
+      },
+      minWidth: {
+        touch: "44px",
+        "touch-lg": "48px",
+        "touch-xl": "56px",
+      },
+      // Safe area utilities
+      padding: {
+        "safe-top": "env(safe-area-inset-top)",
+        "safe-bottom": "env(safe-area-inset-bottom)",
+        "safe-left": "env(safe-area-inset-left)",
+        "safe-right": "env(safe-area-inset-right)",
+      },
+      margin: {
+        "safe-top": "env(safe-area-inset-top)",
+        "safe-bottom": "env(safe-area-inset-bottom)",
+        "safe-left": "env(safe-area-inset-left)",
+        "safe-right": "env(safe-area-inset-right)",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    // Custom plugin for mobile utilities
+    function ({ addUtilities, theme }) {
+      const newUtilities = {
+        ".touch-manipulation": {
+          "touch-action": "manipulation",
+          "-webkit-touch-callout": "none",
+          "-webkit-user-select": "none",
+          "user-select": "none",
+        },
+        ".prevent-zoom": {
+          "font-size": "16px",
+        },
+        ".hardware-acceleration": {
+          transform: "translateZ(0)",
+          "will-change": "transform",
+        },
+        ".mobile-scroll": {
+          "-webkit-overflow-scrolling": "touch",
+          "overscroll-behavior": "none",
+        },
+        ".safe-area-inset": {
+          "padding-top": "env(safe-area-inset-top)",
+          "padding-bottom": "env(safe-area-inset-bottom)",
+          "padding-left": "env(safe-area-inset-left)",
+          "padding-right": "env(safe-area-inset-right)",
+        },
+      };
+      addUtilities(newUtilities);
+    },
+  ],
 } satisfies Config;
 
 export default config;

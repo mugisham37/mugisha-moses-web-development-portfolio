@@ -2,6 +2,7 @@
  * Performance optimization utilities for production deployment
  */
 
+import React from "react";
 import { unstable_cache } from "next/cache";
 import { db } from "./db";
 import { CACHE_DURATIONS, CACHE_TAGS } from "./cache";
@@ -12,10 +13,12 @@ export function createLazyComponent<T extends React.ComponentType<any>>(
   fallback?: React.ComponentType
 ) {
   const LazyComponent = React.lazy(importFn);
-  
+
   return function LazyWrapper(props: React.ComponentProps<T>) {
     return (
-      <React.Suspense fallback={fallback ? React.createElement(fallback) : null}>
+      <React.Suspense
+        fallback={fallback ? React.createElement(fallback) : null}
+      >
         <LazyComponent {...props} />
       </React.Suspense>
     );
@@ -48,13 +51,13 @@ export class QueryOptimizer {
     queries: Record<keyof T, () => Promise<any>>
   ): Promise<T> {
     const entries = Object.entries(queries);
-    const promises = entries.map(([key, queryFn]) => 
-      queryFn().then(result => [key, result])
+    const promises = entries.map(([key, queryFn]) =>
+      queryFn().then((result) => [key, result])
     );
-    
+
     const results = await Promise.allSettled(promises);
     const data = {} as T;
-    
+
     results.forEach((result, index) => {
       const [key] = entries[index];
       if (result.status === "fulfilled") {
@@ -64,25 +67,27 @@ export class QueryOptimizer {
         data[key as keyof T] = null;
       }
     });
-    
+
     return data;
   }
 
   // Optimized project queries with proper indexing
-  static async getOptimizedProjects(filters: {
-    featured?: boolean;
-    status?: string;
-    limit?: number;
-    offset?: number;
-  } = {}) {
+  static async getOptimizedProjects(
+    filters: {
+      featured?: boolean;
+      status?: string;
+      limit?: number;
+      offset?: number;
+    } = {}
+  ) {
     const { featured, status, limit = 10, offset = 0 } = filters;
-    
+
     return unstable_cache(
       async () => {
         const where: any = {};
         if (featured !== undefined) where.featured = featured;
         if (status) where.status = status;
-        
+
         const [projects, total] = await Promise.all([
           db.project.findMany({
             where,
@@ -110,7 +115,7 @@ export class QueryOptimizer {
           }),
           db.project.count({ where }),
         ]);
-        
+
         return { projects, total };
       },
       [`projects-${JSON.stringify(filters)}`],
@@ -122,19 +127,21 @@ export class QueryOptimizer {
   }
 
   // Optimized blog queries
-  static async getOptimizedBlogPosts(filters: {
-    featured?: boolean;
-    status?: string;
-    limit?: number;
-    offset?: number;
-  } = {}) {
+  static async getOptimizedBlogPosts(
+    filters: {
+      featured?: boolean;
+      status?: string;
+      limit?: number;
+      offset?: number;
+    } = {}
+  ) {
     const { featured, status = "PUBLISHED", limit = 10, offset = 0 } = filters;
-    
+
     return unstable_cache(
       async () => {
         const where: any = { status };
         if (featured !== undefined) where.featured = featured;
-        
+
         const [posts, total] = await Promise.all([
           db.blogPost.findMany({
             where,
@@ -155,16 +162,13 @@ export class QueryOptimizer {
                 },
               },
             },
-            orderBy: [
-              { featured: "desc" },
-              { publishedAt: "desc" },
-            ],
+            orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
             take: limit,
             skip: offset,
           }),
           db.blogPost.count({ where }),
         ]);
-        
+
         return { posts, total };
       },
       [`blog-posts-${JSON.stringify(filters)}`],
@@ -206,14 +210,16 @@ export class ImageOptimizer {
       priority,
       sizes,
       placeholder: "blur" as const,
-      blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+      blurDataURL:
+        "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
     };
   }
 
-  static generateSrcSet(src: string, widths: number[] = [640, 750, 828, 1080, 1200, 1920]) {
-    return widths
-      .map(width => `${src}?w=${width}&q=75 ${width}w`)
-      .join(", ");
+  static generateSrcSet(
+    src: string,
+    widths: number[] = [640, 750, 828, 1080, 1200, 1920]
+  ) {
+    return widths.map((width) => `${src}?w=${width}&q=75 ${width}w`).join(", ");
   }
 }
 
@@ -226,20 +232,37 @@ export class BundleOptimizer {
       import("@react-three/fiber"),
       import("@react-three/drei"),
     ]);
-    
+
     return { THREE, Canvas, OrbitControls };
   }
 
   static async loadFramerMotion() {
-    const { motion, AnimatePresence, useAnimation } = await import("framer-motion");
+    const { motion, AnimatePresence, useAnimation } = await import(
+      "framer-motion"
+    );
     return { motion, AnimatePresence, useAnimation };
   }
 
   static async loadChartLibrary() {
-    const { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } = 
-      await import("recharts");
-    
-    return { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip };
+    const {
+      ResponsiveContainer,
+      LineChart,
+      Line,
+      XAxis,
+      YAxis,
+      CartesianGrid,
+      Tooltip,
+    } = await import("recharts");
+
+    return {
+      ResponsiveContainer,
+      LineChart,
+      Line,
+      XAxis,
+      YAxis,
+      CartesianGrid,
+      Tooltip,
+    };
   }
 
   // Preload critical resources
@@ -265,7 +288,7 @@ export class BundleOptimizer {
         "https://vercel.live",
       ];
 
-      dnsPrefetchLinks.forEach(href => {
+      dnsPrefetchLinks.forEach((href) => {
         const link = document.createElement("link");
         link.rel = "dns-prefetch";
         link.href = href;
@@ -282,25 +305,30 @@ export class PerformanceOptimizer {
     Component: T,
     displayName: string
   ): T {
-    const MeasuredComponent = React.forwardRef<any, React.ComponentProps<T>>((props, ref) => {
-      const renderStart = React.useRef<number>();
-      
-      React.useLayoutEffect(() => {
-        renderStart.current = performance.now();
-      });
-      
-      React.useEffect(() => {
-        if (renderStart.current) {
-          const renderTime = performance.now() - renderStart.current;
-          if (renderTime > 16) { // More than one frame at 60fps
-            console.warn(`Slow render detected for ${displayName}: ${renderTime.toFixed(2)}ms`);
+    const MeasuredComponent = React.forwardRef<any, React.ComponentProps<T>>(
+      (props, ref) => {
+        const renderStart = React.useRef<number>();
+
+        React.useLayoutEffect(() => {
+          renderStart.current = performance.now();
+        });
+
+        React.useEffect(() => {
+          if (renderStart.current) {
+            const renderTime = performance.now() - renderStart.current;
+            if (renderTime > 16) {
+              // More than one frame at 60fps
+              console.warn(
+                `Slow render detected for ${displayName}: ${renderTime.toFixed(2)}ms`
+              );
+            }
           }
-        }
-      });
-      
-      return React.createElement(Component, { ...props, ref });
-    });
-    
+        });
+
+        return React.createElement(Component, { ...props, ref });
+      }
+    );
+
     MeasuredComponent.displayName = `Measured(${displayName})`;
     return MeasuredComponent as T;
   }
@@ -308,7 +336,7 @@ export class PerformanceOptimizer {
   // Optimize scroll performance
   static useOptimizedScroll(callback: () => void, deps: React.DependencyList) {
     const ticking = React.useRef(false);
-    
+
     const optimizedCallback = React.useCallback(() => {
       if (!ticking.current) {
         requestAnimationFrame(() => {
@@ -318,7 +346,7 @@ export class PerformanceOptimizer {
         ticking.current = true;
       }
     }, deps);
-    
+
     React.useEffect(() => {
       window.addEventListener("scroll", optimizedCallback, { passive: true });
       return () => window.removeEventListener("scroll", optimizedCallback);
@@ -331,23 +359,26 @@ export class PerformanceOptimizer {
     options: IntersectionObserverInit = {}
   ) {
     const [isIntersecting, setIsIntersecting] = React.useState(false);
-    
+
     React.useEffect(() => {
       if (!ref.current) return;
-      
-      const observer = new IntersectionObserver(([entry]) => {
-        setIsIntersecting(entry.isIntersecting);
-      }, {
-        threshold: 0.1,
-        rootMargin: "50px",
-        ...options,
-      });
-      
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsIntersecting(entry.isIntersecting);
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "50px",
+          ...options,
+        }
+      );
+
       observer.observe(ref.current);
-      
+
       return () => observer.disconnect();
     }, [ref, options]);
-    
+
     return isIntersecting;
   }
 }
@@ -356,18 +387,24 @@ export class PerformanceOptimizer {
 if (typeof window !== "undefined") {
   // Preload critical resources on page load
   BundleOptimizer.preloadCriticalResources();
-  
+
   // Report performance metrics
   window.addEventListener("load", () => {
     setTimeout(() => {
-      const navigation = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
+      const navigation = performance.getEntriesByType(
+        "navigation"
+      )[0] as PerformanceNavigationTiming;
       const paint = performance.getEntriesByType("paint");
-      
+
       console.log("Performance Metrics:", {
-        domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
+        domContentLoaded:
+          navigation.domContentLoadedEventEnd -
+          navigation.domContentLoadedEventStart,
         loadComplete: navigation.loadEventEnd - navigation.loadEventStart,
-        firstPaint: paint.find(p => p.name === "first-paint")?.startTime,
-        firstContentfulPaint: paint.find(p => p.name === "first-contentful-paint")?.startTime,
+        firstPaint: paint.find((p) => p.name === "first-paint")?.startTime,
+        firstContentfulPaint: paint.find(
+          (p) => p.name === "first-contentful-paint"
+        )?.startTime,
       });
     }, 0);
   });

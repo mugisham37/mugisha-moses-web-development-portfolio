@@ -1,0 +1,255 @@
+/**
+ * Mobile optimization utilities for brutalist portfolio
+ * Handles viewport, touch targets, and mobile-specific features
+ */
+
+/**
+ * Viewport configuration for optimal mobile experience
+ */
+export const MOBILE_VIEWPORT_CONFIG = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
+} as const;
+
+/**
+ * Touch target size constants following WCAG guidelines
+ */
+export const TOUCH_TARGET_SIZES = {
+  minimum: 44, // WCAG minimum touch target size in pixels
+  recommended: 48, // Recommended size for better UX
+  large: 56, // Large touch targets for primary actions
+} as const;
+
+/**
+ * Mobile breakpoints matching Tailwind CSS defaults
+ */
+export const MOBILE_BREAKPOINTS = {
+  mobile: 640,
+  tablet: 768,
+  desktop: 1024,
+  large: 1280,
+  xl: 1536,
+} as const;
+
+/**
+ * Check if the current device is mobile based on user agent
+ */
+export function isMobileDevice(): boolean {
+  if (typeof window === "undefined") return false;
+
+  const userAgent = navigator.userAgent;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    userAgent
+  );
+}
+
+/**
+ * Check if the current device supports touch
+ */
+export function isTouchDevice(): boolean {
+  if (typeof window === "undefined") return false;
+
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    // @ts-ignore - legacy support
+    navigator.msMaxTouchPoints > 0
+  );
+}
+
+/**
+ * Get the current screen size category
+ */
+export function getScreenSize(): "mobile" | "tablet" | "desktop" {
+  if (typeof window === "undefined") return "desktop";
+
+  const width = window.innerWidth;
+
+  if (width < MOBILE_BREAKPOINTS.tablet) return "mobile";
+  if (width < MOBILE_BREAKPOINTS.desktop) return "tablet";
+  return "desktop";
+}
+
+/**
+ * Check if the device is in portrait orientation
+ */
+export function isPortraitOrientation(): boolean {
+  if (typeof window === "undefined") return true;
+
+  return window.innerHeight > window.innerWidth;
+}
+
+/**
+ * Prevent zoom on double tap for iOS devices
+ */
+export function preventIOSZoom(element: HTMLElement): () => void {
+  let lastTouchEnd = 0;
+
+  const preventZoom = (event: TouchEvent) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  };
+
+  element.addEventListener("touchend", preventZoom, { passive: false });
+
+  return () => {
+    element.removeEventListener("touchend", preventZoom);
+  };
+}
+
+/**
+ * Add safe area padding for devices with notches
+ */
+export function getSafeAreaPadding(): {
+  paddingTop: string;
+  paddingBottom: string;
+  paddingLeft: string;
+  paddingRight: string;
+} {
+  return {
+    paddingTop: "env(safe-area-inset-top)",
+    paddingBottom: "env(safe-area-inset-bottom)",
+    paddingLeft: "env(safe-area-inset-left)",
+    paddingRight: "env(safe-area-inset-right)",
+  };
+}
+
+/**
+ * Optimize touch target size for accessibility
+ */
+export function optimizeTouchTarget(
+  size: "minimum" | "recommended" | "large" = "recommended"
+): {
+  minWidth: string;
+  minHeight: string;
+  padding: string;
+} {
+  const targetSize = TOUCH_TARGET_SIZES[size];
+
+  return {
+    minWidth: `${targetSize}px`,
+    minHeight: `${targetSize}px`,
+    padding: "8px",
+  };
+}
+
+/**
+ * Handle mobile-specific scroll behavior
+ */
+export function handleMobileScroll(
+  options: {
+    preventBounce?: boolean;
+    preventOverscroll?: boolean;
+  } = {}
+): void {
+  if (typeof document === "undefined") return;
+
+  const { preventBounce = true, preventOverscroll = true } = options;
+
+  if (preventBounce) {
+    // Prevent bounce scrolling on iOS
+    document.body.style.overscrollBehavior = "none";
+  }
+
+  if (preventOverscroll) {
+    // Prevent overscroll effects
+    document.documentElement.style.overscrollBehavior = "none";
+  }
+}
+
+/**
+ * Add mobile-specific CSS classes based on device detection
+ */
+export function getMobileClasses(): string {
+  if (typeof window === "undefined") return "";
+
+  const classes: string[] = [];
+
+  if (isMobileDevice()) classes.push("is-mobile");
+  if (isTouchDevice()) classes.push("is-touch");
+  if (isPortraitOrientation()) classes.push("is-portrait");
+
+  const screenSize = getScreenSize();
+  classes.push(`is-${screenSize}`);
+
+  return classes.join(" ");
+}
+
+/**
+ * Optimize animations for mobile performance
+ */
+export function getMobileAnimationConfig(): {
+  reducedMotion: boolean;
+  duration: number;
+  easing: string;
+} {
+  if (typeof window === "undefined") {
+    return {
+      reducedMotion: false,
+      duration: 300,
+      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+    };
+  }
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  const isMobile = isMobileDevice();
+
+  return {
+    reducedMotion: prefersReducedMotion,
+    duration: prefersReducedMotion ? 0 : isMobile ? 200 : 300,
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+  };
+}
+
+/**
+ * Handle mobile keyboard visibility
+ */
+export function handleMobileKeyboard(): {
+  onKeyboardShow: (callback: () => void) => void;
+  onKeyboardHide: (callback: () => void) => void;
+} {
+  let initialViewportHeight = 0;
+
+  if (typeof window !== "undefined") {
+    initialViewportHeight = window.visualViewport?.height || window.innerHeight;
+  }
+
+  return {
+    onKeyboardShow: (callback: () => void) => {
+      if (typeof window === "undefined") return;
+
+      const handleResize = () => {
+        const currentHeight =
+          window.visualViewport?.height || window.innerHeight;
+        if (currentHeight < initialViewportHeight * 0.75) {
+          callback();
+        }
+      };
+
+      window.visualViewport?.addEventListener("resize", handleResize);
+      window.addEventListener("resize", handleResize);
+    },
+    onKeyboardHide: (callback: () => void) => {
+      if (typeof window === "undefined") return;
+
+      const handleResize = () => {
+        const currentHeight =
+          window.visualViewport?.height || window.innerHeight;
+        if (currentHeight >= initialViewportHeight * 0.9) {
+          callback();
+        }
+      };
+
+      window.visualViewport?.addEventListener("resize", handleResize);
+      window.addEventListener("resize", handleResize);
+    },
+  };
+}

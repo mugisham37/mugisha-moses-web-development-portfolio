@@ -17,6 +17,9 @@ import { OptimizedImage } from "./optimized-image";
 import { Button } from "./button";
 import { Typography } from "./typography";
 import { cn } from "@/lib/utils";
+import { useTouchGestures } from "@/hooks/use-touch-gestures";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { TouchTarget } from "@/components/mobile/touch-target";
 
 interface GalleryImage {
   src: string;

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG } from "@/lib/constants";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface NavigationItem {
   label: string;
@@ -32,6 +33,7 @@ export function MainHeader({ className = "" }: MainHeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const isMobile = useIsMobile();
 
   // Handle scroll behavior
   useEffect(() => {
@@ -80,6 +82,11 @@ export function MainHeader({ className = "" }: MainHeaderProps) {
     }
     return pathname.startsWith(href);
   };
+
+  // Hide desktop header on mobile devices
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <>

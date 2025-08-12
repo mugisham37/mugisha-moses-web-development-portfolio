@@ -68,6 +68,20 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   metadataBase: new URL(SITE_CONFIG.url),
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+    viewportFit: "cover",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-title": SITE_CONFIG.name,
+    "format-detection": "telephone=no",
+  },
 };
 
 export default function RootLayout({
