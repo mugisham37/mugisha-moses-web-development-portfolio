@@ -9,13 +9,13 @@ const updateProjectSchema = z.object({
   description: z.string().min(1, "Description is required"),
   content: z.string().optional(),
   technologies: z.array(z.string()),
-  githubUrl: z.string().url().optional().or(z.literal("")),
-  liveUrl: z.string().url().optional().or(z.literal("")),
+  githubUrl: z.string().optional().or(z.literal("")),
+  liveUrl: z.string().optional().or(z.literal("")),
   status: z.enum(["DRAFT", "ACTIVE", "ARCHIVED", "FEATURED"]),
   featured: z.boolean(),
   thumbnail: z.string().optional(),
   images: z.array(z.string()),
-  videoUrl: z.string().url().optional().or(z.literal("")),
+  videoUrl: z.string().optional().or(z.literal("")),
   publishedAt: z.string().optional().nullable(),
   categoryIds: z.array(z.string()),
 });
@@ -148,7 +148,7 @@ export async function PUT(
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Validation error", details: error.errors },
+        { error: "Validation error", details: error.issues },
         { status: 400 }
       );
     }
@@ -161,7 +161,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {

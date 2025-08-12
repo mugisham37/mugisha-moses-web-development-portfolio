@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const posts = await db.blogPost.findMany({
       where: {
@@ -14,7 +14,13 @@ export async function GET(request: NextRequest) {
         author: {
           select: { name: true, email: true },
         },
-        categories: true,
+        categories: {
+          include: {
+            category: {
+              select: { name: true },
+            },
+          },
+        },
       },
       orderBy: { publishedAt: "desc" },
       take: 20,
@@ -45,7 +51,7 @@ export async function GET(request: NextRequest) {
       <pubDate>${post.publishedAt?.toUTCString()}</pubDate>
       <author>${post.author.email} (${post.author.name})</author>
       ${post.categories
-        .map((category) => `<category>${category.name}</category>`)
+        .map((category) => `<category>${category.category.name}</category>`)
         .join("")}
     </item>`
       )

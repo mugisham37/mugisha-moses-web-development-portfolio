@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { TestimonialQueries } from "@/lib/db-utils";
 import { db } from "@/lib/db";
 import { z } from "zod";
@@ -14,8 +13,8 @@ const testimonialSubmissionSchema = z.object({
   content: z.string().min(50, "Content must be at least 50 characters"),
   rating: z.number().min(1).max(5),
   projectType: z.string().optional(),
-  videoUrl: z.string().url().optional().or(z.literal("")),
-  linkedinProfile: z.string().url().optional().or(z.literal("")),
+  videoUrl: z.string().optional().or(z.literal("")),
+  linkedinProfile: z.string().optional().or(z.literal("")),
   allowPublic: z.boolean().default(true),
   allowMarketing: z.boolean().default(false),
   source: z.string().optional(),
@@ -100,7 +99,7 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           error: "Validation failed",
-          details: error.errors,
+          details: error.issues,
         },
         { status: 400 }
       );
@@ -120,7 +119,7 @@ export async function POST(request: NextRequest) {
 // PUT /api/testimonials - Update testimonial (admin only)
 export async function PUT(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session?.user || session.user.role !== "ADMIN") {
       return NextResponse.json(
@@ -166,7 +165,7 @@ export async function PUT(request: NextRequest) {
 // DELETE /api/testimonials - Delete testimonial (admin only)
 export async function DELETE(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session?.user || session.user.role !== "ADMIN") {
       return NextResponse.json(

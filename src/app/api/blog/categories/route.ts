@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const categories = await db.blogCategory.findMany({
       include: {
@@ -9,9 +9,11 @@ export async function GET(request: NextRequest) {
           select: {
             posts: {
               where: {
-                status: "PUBLISHED",
-                publishedAt: {
-                  lte: new Date(),
+                post: {
+                  status: "PUBLISHED",
+                  publishedAt: {
+                    lte: new Date(),
+                  },
                 },
               },
             },

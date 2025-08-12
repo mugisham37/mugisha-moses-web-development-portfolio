@@ -5,13 +5,10 @@ import { headers } from "next/headers";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { sessionId, path, metadata, timestamp, referer } = body;
+    const { sessionId, path, timestamp, referer } = body;
 
-    const headersList = headers();
+    const headersList = await headers();
     const userAgent = headersList.get("user-agent") || "";
-    const forwardedFor = headersList.get("x-forwarded-for") || "";
-    const realIp = headersList.get("x-real-ip") || "";
-    const ip = forwardedFor.split(",")[0] || realIp || "unknown";
 
     // Parse user agent for device info
     const getDeviceInfo = (ua: string) => {

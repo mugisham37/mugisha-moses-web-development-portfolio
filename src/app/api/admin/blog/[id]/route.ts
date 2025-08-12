@@ -89,7 +89,7 @@ export async function PUT(
       }
     }
 
-    const updateData: any = { ...validatedData };
+    const updateData: Record<string, unknown> = { ...validatedData };
 
     // Handle publishedAt conversion
     if (validatedData.publishedAt !== undefined) {
@@ -144,7 +144,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {

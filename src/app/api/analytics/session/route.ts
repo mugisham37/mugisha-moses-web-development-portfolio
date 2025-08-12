@@ -7,11 +7,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { sessionId, action, page, referer } = body;
 
-    const headersList = headers();
+    const headersList = await headers();
     const userAgent = headersList.get("user-agent") || "";
-    const forwardedFor = headersList.get("x-forwarded-for") || "";
-    const realIp = headersList.get("x-real-ip") || "";
-    const ip = forwardedFor.split(",")[0] || realIp || "unknown";
 
     // Parse user agent for device/browser info
     const getDeviceInfo = (ua: string) => {

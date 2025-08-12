@@ -1,404 +1,228 @@
 import { db } from "./db";
-import { ProjectStatus, Prisma } from "@prisma/client";
+import { ProjectStatus } from "@prisma/client";
 
-export interface ProjectFilters {
+export interface ProjectSearchFilters {
   technologies?: string[];
   categories?: string[];
   status?: ProjectStatus[];
-  search?: string;
   featured?: boolean;
 }
 
-export interface ProjectSortOptions {
-  field: "createdAt" | "updatedAt" | "viewCount" | "likeCount" | "title";
-  direction: "asc" | "desc";
-}
-
-export interface ProjectQueryOptions {
-  filters?: ProjectFilters;
-  sort?: ProjectSortOptions;
-  limit?: number;
-  offset?: number;
-  includeAnalytics?: boolean;
-}
-
-// Get all projects (for sitemap generation)
-export async function getAllProjects() {
-  try {
-    const projects = await db.project.findMany({
-      where: {
-        status: { not: "DRAFT" },
-      },
-      select: {
-        slug: true,
-        updatedAt: true,
-      },
-      orderBy: {
-        updatedAt: "desc",
-      },
-    });
-
-    return projects;
-  } catch (error) {
-    console.error("Error fetching all projects:", error);
-    return [];
-  }
-}
-
-// Get projects with filtering, sorting, and pagination
-export async function getProjects(options: ProjectQueryOptions = {}) {
-  const {
-    filters = {},
-    sort = { field: "createdAt", direction: "desc" },
-    limit,
-    offset = 0,
-    includeAnalytics = false,
-  } = options;
-
-  const where: Prisma.ProjectWhereInput = {
-    AND: [
-      // Status filter
-      filters.status?.length
-        ? { status: { in: filters.status } }
-        : { status: { not: "DRAFT" } },
-
-      // Featured filter
-      filters.featured !== undefined ? { featured: filters.featured } : {},
-
-      // Technology filter
-      filters.technologies?.length
-        ? {
-            technologies: {
-              hasSome: filters.technologies,
-            },
-          }
-        : {},
-
-      // Category filter
-      filters.categories?.length
-        ? {
-            categories: {
-              some: {
-                slug: { in: filters.categories },
-              },
-            },
-          }
-        : {},
-
-      // Search filter
-      filters.search
-        ? {
-            OR: [
-              { title: { contains: filters.search, mode: "insensitive" } },
-              {
-                description: { contains: filters.search, mode: "insensitive" },
-              },
-              { content: { contains: filters.search, mode: "insensitive" } },
-              { technologies: { hasSome: [filters.search] } },
-            ],
-          }
-        : {},
-    ],
-  };
-
-  const orderBy: Prisma.ProjectOrderByWithRelationInput = {
-    [sort.field]: sort.direction,
-  };
-
-  const include: Prisma.ProjectInclude = {
-    categories: true,
+export interface ProjectSearchResult {
+  projects: Array<{
+    id: string;
+    title: string;
+    slug: string;
+    description: string;
+    technologies: string[];
+    githubUrl: string | null;
+    liveUrl: string | null;
+    status: ProjectStatus;
+    featured: boolean;
+    thumbnail: string | null;
+    viewCount: number;
+    likeCount: number;
+    createdAt: Date;
+    updatedAt: Date;
+    publishedAt: Date | null;
     author: {
-      select: {
-        id: true,
-        name: true,
-        email: true,
-      },
-    },
-    ...(includeAnalytics && {
-      analytics: {
-        orderBy: { createdAt: "desc" },
-        take: 10,
-      },
-    }),
-  };
-
-  const [projects, totalCount] = await Promise.all([
-    db.project.findMany({
-      where,
-      include,
-      orderBy,
-      take: limit,
-      skip: offset,
-    }),
-    db.project.count({ where }),
-  ]);
-
-  // Transform projects to handle null values
-  const transformedProjects = projects.map(project => ({
-    ...project,
-    content: project.content || undefined,
-    githubUrl: project.githubUrl || undefined,
-    liveUrl: project.liveUrl || undefined,
-    thumbnail: project.thumbnail || undefined,
-    videoUrl: project.videoUrl || undefined,
-    publishedAt: project.publishedAt || undefined,
-    categories: project.categories.map(cat => ({
-      ...cat,
-      description: cat.description || undefined,
-    })),
-  }));
-
-  return {
-    projects: transformedProjects,
-    totalCount,
-    hasMore: limit ? offset + limit < totalCount : false,
-  };
+      id: string;
+      name: string | null;
+      email: string;
+    };
+    categories: Array<{
+      id: string;
+      name: string;
+      slug: string;
+      color: string;
+    }>;
+  }>;
+  totalCount: number;
+  hasMore: boolean;
 }
 
-// Get a single project by slug
-export async function getProjectBySlug(slug: string) {
-  const project = await db.project.findUnique({
-    where: { slug },
-    include: {
-      categories: true,
-      author: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        },
-      },
-      analytics: {
-        orderBy: { createdAt: "desc" },
-        take: 50,
-      },
-    },
-  });
-
-  if (!project) return null;
-
-  return {
-    ...project,
-    content: project.content || undefined,
-    githubUrl: project.githubUrl || undefined,
-    liveUrl: project.liveUrl || undefined,
-    thumbnail: project.thumbnail || undefined,
-    videoUrl: project.videoUrl || undefined,
-    publishedAt: project.publishedAt || undefined,
-    categories: project.categories.map(cat => ({
-      ...cat,
-      description: cat.description || undefined,
-    })),
-  };
-}
-
-// Get featured projects
-export async function getFeaturedProjects(limit = 6) {
-  const projects = await db.project.findMany({
-    where: {
-      featured: true,
-      status: { not: "DRAFT" },
-    },
-    include: {
-      categories: true,
-      author: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-    take: limit,
-  });
-
-  return projects.map(project => ({
-    ...project,
-    content: project.content || undefined,
-    githubUrl: project.githubUrl || undefined,
-    liveUrl: project.liveUrl || undefined,
-    thumbnail: project.thumbnail || undefined,
-    videoUrl: project.videoUrl || undefined,
-    publishedAt: project.publishedAt || undefined,
-    categories: project.categories.map(cat => ({
-      ...cat,
-      description: cat.description || undefined,
-    })),
-  }));
-}
-
-// Get related projects based on technologies and categories
-export async function getRelatedProjects(
-  projectId: string,
-  technologies: string[],
-  categoryIds: string[],
-  limit = 4
-) {
-  const projects = await db.project.findMany({
-    where: {
-      AND: [
-        { id: { not: projectId } },
-        { status: { not: "DRAFT" } },
-        {
-          OR: [
-            { technologies: { hasSome: technologies } },
-            { categories: { some: { id: { in: categoryIds } } } },
-          ],
-        },
-      ],
-    },
-    include: {
-      categories: true,
-      author: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        },
-      },
-    },
-    orderBy: { viewCount: "desc" },
-    take: limit,
-  });
-
-  return projects.map(project => ({
-    ...project,
-    content: project.content || undefined,
-    githubUrl: project.githubUrl || undefined,
-    liveUrl: project.liveUrl || undefined,
-    thumbnail: project.thumbnail || undefined,
-    videoUrl: project.videoUrl || undefined,
-    publishedAt: project.publishedAt || undefined,
-    categories: project.categories.map(cat => ({
-      ...cat,
-      description: cat.description || undefined,
-    })),
-  }));
-}
-
-// Get all unique technologies used in projects
-export async function getProjectTechnologies() {
-  const projects = await db.project.findMany({
-    where: { status: { not: "DRAFT" } },
-    select: { technologies: true },
-  });
-
-  const allTechnologies = projects.flatMap((project) => project.technologies);
-  const uniqueTechnologies = [...new Set(allTechnologies)].sort();
-
-  return uniqueTechnologies;
-}
-
-// Get all project categories
-export async function getProjectCategories() {
-  const categories = await db.projectCategory.findMany({
-    include: {
-      _count: {
-        select: {
-          projects: {
-            where: { status: { not: "DRAFT" } },
-          },
-        },
-      },
-    },
-    orderBy: { name: "asc" },
-  });
-
-  return categories.map(cat => ({
-    ...cat,
-    description: cat.description || undefined,
-  }));
-}
-
-// Increment project view count
-export async function incrementProjectViews(
-  projectId: string,
-  metadata?: Record<string, unknown>
-) {
-  await Promise.all([
-    // Update view count
-    db.project.update({
-      where: { id: projectId },
-      data: { viewCount: { increment: 1 } },
-    }),
-    // Track analytics event
-    db.projectAnalytics.create({
-      data: {
-        projectId,
-        event: "view",
-        metadata: JSON.parse(JSON.stringify(metadata || {})),
-      },
-    }),
-  ]);
-}
-
-// Track project interaction
 export async function trackProjectInteraction(
   projectId: string,
   event: string,
-  metadata?: Record<string, unknown>
-) {
+  metadata: Record<string, unknown> = {}
+): Promise<void> {
   await db.projectAnalytics.create({
     data: {
       projectId,
       event,
-      metadata: JSON.parse(JSON.stringify(metadata || {})),
+      metadata,
     },
   });
+
+  // Update project view count if it's a view event
+  if (event === "view") {
+    await db.project.update({
+      where: { id: projectId },
+      data: {
+        viewCount: {
+          increment: 1,
+        },
+      },
+    });
+  }
+
+  // Update project like count if it's a like event
+  if (event === "like") {
+    await db.project.update({
+      where: { id: projectId },
+      data: {
+        likeCount: {
+          increment: 1,
+        },
+      },
+    });
+  }
 }
 
-// Get project analytics summary
-export async function getProjectAnalytics(projectId: string, days = 30) {
-  const since = new Date();
-  since.setDate(since.getDate() - days);
+export async function getProjectAnalytics(
+  projectId: string,
+  days: number = 30
+): Promise<{
+  totalViews: number;
+  totalLikes: number;
+  recentEvents: Array<{
+    event: string;
+    metadata: unknown;
+    createdAt: Date;
+  }>;
+  eventCounts: Record<string, number>;
+}> {
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - days);
 
-  const analytics = await db.projectAnalytics.findMany({
-    where: {
-      projectId,
-      createdAt: { gte: since },
-    },
-    orderBy: { createdAt: "desc" },
+  const [project, analytics] = await Promise.all([
+    db.project.findUnique({
+      where: { id: projectId },
+      select: {
+        viewCount: true,
+        likeCount: true,
+      },
+    }),
+    db.projectAnalytics.findMany({
+      where: {
+        projectId,
+        createdAt: {
+          gte: startDate,
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 100,
+    }),
+  ]);
+
+  if (!project) {
+    throw new Error("Project not found");
+  }
+
+  // Count events by type
+  const eventCounts: Record<string, number> = {};
+  analytics.forEach((analytic) => {
+    eventCounts[analytic.event] = (eventCounts[analytic.event] || 0) + 1;
   });
 
-  // Group by event type
-  const eventCounts = analytics.reduce(
-    (acc, item) => {
-      acc[item.event] = (acc[item.event] || 0) + 1;
-      return acc;
-    },
-    {} as Record<string, number>
-  );
-
-  // Group by day
-  const dailyViews = analytics
-    .filter((item) => item.event === "view")
-    .reduce(
-      (acc, item) => {
-        const date = item.createdAt.toISOString().split("T")[0];
-        acc[date] = (acc[date] || 0) + 1;
-        return acc;
-      },
-      {} as Record<string, number>
-    );
-
   return {
-    totalEvents: analytics.length,
+    totalViews: project.viewCount,
+    totalLikes: project.likeCount,
+    recentEvents: analytics.map((a) => ({
+      event: a.event,
+      metadata: a.metadata,
+      createdAt: a.createdAt,
+    })),
     eventCounts,
-    dailyViews,
-    recentEvents: analytics.slice(0, 10),
   };
 }
 
-// Search projects with full-text search capabilities
 export async function searchProjects(
   query: string,
-  filters: Omit<ProjectFilters, "search"> = {},
-  limit = 20
-) {
-  return getProjects({
-    filters: { ...filters, search: query },
-    sort: { field: "viewCount", direction: "desc" },
-    limit,
-  });
+  filters: ProjectSearchFilters = {},
+  limit: number = 10
+): Promise<ProjectSearchResult> {
+  const where: {
+    status?: { in: ProjectStatus[] } | ProjectStatus;
+    featured?: boolean;
+    OR?: Array<{
+      title?: { contains: string; mode: "insensitive" };
+      description?: { contains: string; mode: "insensitive" };
+      technologies?: { hasSome: string[] };
+    }>;
+    technologies?: { hasSome: string[] };
+    categories?: { some: { slug: { in: string[] } } };
+  } = {};
+
+  // Add search query
+  if (query.trim()) {
+    where.OR = [
+      { title: { contains: query, mode: "insensitive" } },
+      { description: { contains: query, mode: "insensitive" } },
+      { technologies: { hasSome: [query] } },
+    ];
+  }
+
+  // Add filters
+  if (filters.status && filters.status.length > 0) {
+    where.status = { in: filters.status };
+  }
+
+  if (filters.featured !== undefined) {
+    where.featured = filters.featured;
+  }
+
+  if (filters.technologies && filters.technologies.length > 0) {
+    where.technologies = { hasSome: filters.technologies };
+  }
+
+  if (filters.categories && filters.categories.length > 0) {
+    where.categories = {
+      some: {
+        slug: { in: filters.categories },
+      },
+    };
+  }
+
+  // Get projects with pagination
+  const [projects, totalCount] = await Promise.all([
+    db.project.findMany({
+      where,
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        categories: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+            color: true,
+          },
+        },
+      },
+      orderBy: [
+        { featured: "desc" },
+        { publishedAt: "desc" },
+        { createdAt: "desc" },
+      ],
+      take: limit + 1, // Take one extra to check if there are more
+    }),
+    db.project.count({ where }),
+  ]);
+
+  const hasMore = projects.length > limit;
+  const resultProjects = hasMore ? projects.slice(0, limit) : projects;
+
+  return {
+    projects: resultProjects,
+    totalCount,
+    hasMore,
+  };
 }

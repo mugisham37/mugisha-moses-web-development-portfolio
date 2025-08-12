@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { sessionId, type, value, metadata, timestamp, page } = body;
 
-    const headersList = headers();
+    const headersList = await headers();
     const referer = headersList.get("referer") || "";
 
     // Record conversion event

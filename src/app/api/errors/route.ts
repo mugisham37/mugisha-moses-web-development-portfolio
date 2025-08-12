@@ -31,7 +31,7 @@ interface PerformanceMetric {
   value: number;
   unit: string;
   timestamp: string;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
 }
 
 export async function POST(request: NextRequest) {
@@ -66,7 +66,7 @@ async function handleSingleErrorLogging(
 
   // Create error log entry
   const errorLog = {
-    id: `error_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    id: `error_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
     message: body.message,
     stack: body.stack,
     digest: body.digest,
@@ -76,7 +76,10 @@ async function handleSingleErrorLogging(
     critical: body.critical || false,
     userId: body.userId,
     componentStack: body.componentStack,
-    ip: request.ip || "unknown",
+    ip:
+      request.headers.get("x-forwarded-for")?.split(",")[0] ||
+      request.headers.get("x-real-ip") ||
+      "unknown",
     headers: {
       "user-agent": request.headers.get("user-agent"),
       referer: request.headers.get("referer"),
@@ -111,7 +114,7 @@ async function handleBatchErrorLogging(
     }
 
     const errorLog = {
-      id: `error_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      id: `error_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
       message: errorData.message,
       stack: errorData.stack,
       digest: errorData.digest,
@@ -122,7 +125,10 @@ async function handleBatchErrorLogging(
       userId: errorData.userId,
       componentStack: errorData.componentStack,
       sessionId: body.session.id,
-      ip: request.ip || "unknown",
+      ip:
+        request.headers.get("x-forwarded-for")?.split(",")[0] ||
+        request.headers.get("x-real-ip") ||
+        "unknown",
       headers: {
         "user-agent": request.headers.get("user-agent"),
         referer: request.headers.get("referer"),
@@ -138,7 +144,7 @@ async function handleBatchErrorLogging(
   if (body.performance) {
     for (const metric of body.performance) {
       const processedMetric = {
-        id: `metric_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        id: `metric_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
         ...metric,
         sessionId: body.session.id,
         timestamp: new Date(metric.timestamp),
@@ -161,7 +167,7 @@ async function handleBatchErrorLogging(
   );
 }
 
-async function processErrorLog(errorLog: any) {
+async function processErrorLog(errorLog: Record<string, unknown>) {
   // Log to console for development
   if (process.env.NODE_ENV === "development") {
     console.error("Client Error Logged:", errorLog);
@@ -184,12 +190,18 @@ async function processErrorLog(errorLog: any) {
   await checkErrorPatterns(errorLog);
 }
 
-async function processPerformanceMetric(metric: any) {
+async function processPerformanceMetric(metric: Record<string, unknown>) {
   // Log performance issues
   if (
-    (metric.name === "LCP" && metric.value > 2500) ||
-    (metric.name === "FID" && metric.value > 100) ||
-    (metric.name === "CLS" && metric.value > 0.1)
+    (metric.name === "LCP" &&
+      typeof metric.value === "number" &&
+      metric.value > 2500) ||
+    (metric.name === "FID" &&
+      typeof metric.value === "number" &&
+      metric.value > 100) ||
+    (metric.name === "CLS" &&
+      typeof metric.value === "number" &&
+      metric.value > 0.1)
   ) {
     console.warn("Performance issue detected:", metric);
 
@@ -201,7 +213,7 @@ async function processPerformanceMetric(metric: any) {
   await storePerformanceMetric(metric);
 }
 
-async function storeErrorInDatabase(errorLog: any) {
+async function storeErrorInDatabase(errorLog: Record<string, unknown>) {
   // In a real application, store in your database
   // Example with Prisma:
   /*
@@ -223,12 +235,12 @@ async function storeErrorInDatabase(errorLog: any) {
   console.log("Error stored in database:", errorLog.id);
 }
 
-async function storePerformanceMetric(metric: any) {
+async function storePerformanceMetric(metric: Record<string, unknown>) {
   // Store performance metrics in database
   console.log("Performance metric stored:", metric.id);
 }
 
-async function checkErrorPatterns(errorLog: any) {
+async function checkErrorPatterns(errorLog: Record<string, unknown>) {
   // Implement error pattern detection
   // For example, if the same error occurs multiple times in a short period
   // This would typically query your database for recent similar errors
@@ -240,13 +252,18 @@ async function checkErrorPatterns(errorLog: any) {
   }
 }
 
-async function getSimilarErrorsCount(errorLog: any): Promise<number> {
+async function getSimilarErrorsCount(
+  _errorLog: Record<string, unknown>
+): Promise<number> {
   // In a real implementation, query your database
   // For now, return a random number for demonstration
   return Math.floor(Math.random() * 10);
 }
 
-async function sendErrorPatternAlert(errorLog: any, count: number) {
+async function sendErrorPatternAlert(
+  errorLog: Record<string, unknown>,
+  count: number
+) {
   console.warn(
     `Error pattern detected: ${errorLog.message} occurred ${count} times`
   );
@@ -277,7 +294,7 @@ async function sendErrorPatternAlert(errorLog: any, count: number) {
   }
 }
 
-async function sendPerformanceAlert(metric: any) {
+async function sendPerformanceAlert(metric: Record<string, unknown>) {
   console.warn("Performance alert:", metric);
 
   // Send performance alert
@@ -315,7 +332,7 @@ async function sendPerformanceAlert(metric: any) {
 }
 
 // Simulate external error monitoring service
-async function simulateExternalErrorService(errorLog: any) {
+async function simulateExternalErrorService(errorLog: Record<string, unknown>) {
   // In production, replace this with actual service calls
   // Examples:
 
@@ -339,7 +356,7 @@ async function simulateExternalErrorService(errorLog: any) {
 }
 
 // Send critical error alerts
-async function sendCriticalErrorAlert(errorLog: any) {
+async function sendCriticalErrorAlert(errorLog: Record<string, unknown>) {
   // In production, you would send alerts via:
   // - Email to development team
   // - Slack/Discord webhook
@@ -374,7 +391,10 @@ async function sendCriticalErrorAlert(errorLog: any) {
                 },
                 {
                   title: "Stack",
-                  value: errorLog.stack?.substring(0, 500) + "...",
+                  value:
+                    (typeof errorLog.stack === "string"
+                      ? errorLog.stack.substring(0, 500)
+                      : "No stack trace") + "...",
                   short: false,
                 },
               ],

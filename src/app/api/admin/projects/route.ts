@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { ProjectStatus } from "@prisma/client";
 import { z } from "zod";
 
 const createProjectSchema = z.object({
@@ -9,13 +10,13 @@ const createProjectSchema = z.object({
   description: z.string().min(1, "Description is required"),
   content: z.string().optional(),
   technologies: z.array(z.string()),
-  githubUrl: z.string().url().optional().or(z.literal("")),
-  liveUrl: z.string().url().optional().or(z.literal("")),
+  githubUrl: z.string().optional().or(z.literal("")),
+  liveUrl: z.string().optional().or(z.literal("")),
   status: z.enum(["DRAFT", "ACTIVE", "ARCHIVED", "FEATURED"]),
   featured: z.boolean(),
   thumbnail: z.string().optional(),
   images: z.array(z.string()),
-  videoUrl: z.string().url().optional().or(z.literal("")),
+  videoUrl: z.string().optional().or(z.literal("")),
   publishedAt: z.string().optional().nullable(),
   categoryIds: z.array(z.string()),
 });
@@ -34,10 +35,13 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get("status");
     const search = searchParams.get("search");
 
-    const where: any = {};
+    const where: {
+      status?: ProjectStatus;
+      OR?: Array<{ [key: string]: { contains: string; mode: "insensitive" } }>;
+    } = {};
 
     if (status && status !== "all") {
-      where.status = status.toUpperCase();
+      where.status = status.toUpperCase() as ProjectStatus;
     }
 
     if (search) {
@@ -143,7 +147,7 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Validation error", details: error.errors },
+        { error: "Validation error", details: error.issues },
         { status: 400 }
       );
     }

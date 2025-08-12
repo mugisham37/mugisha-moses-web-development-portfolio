@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { PostStatus } from "@prisma/client";
 import { z } from "zod";
 
 const createBlogPostSchema = z.object({
@@ -33,10 +34,13 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get("status");
     const search = searchParams.get("search");
 
-    const where: any = {};
+    const where: {
+      status?: PostStatus;
+      OR?: Array<{ [key: string]: { contains: string; mode: "insensitive" } }>;
+    } = {};
 
     if (status && status !== "all") {
-      where.status = status.toUpperCase();
+      where.status = status.toUpperCase() as PostStatus;
     }
 
     if (search) {

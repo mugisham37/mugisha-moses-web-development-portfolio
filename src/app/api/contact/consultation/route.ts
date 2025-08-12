@@ -31,12 +31,13 @@ export async function POST(request: NextRequest) {
     let validatedData;
     try {
       validatedData = consultationBookingSchema.parse(body);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const zodError = error as { issues?: Array<{ message: string }> };
       return NextResponse.json(
         {
           success: false,
           error: "Validation failed",
-          details: error.errors?.map((e: any) => e.message) || [
+          details: zodError.issues?.map((e) => e.message) || [
             "Invalid form data",
           ],
         },
@@ -82,8 +83,7 @@ ${validatedData.message}
     };
 
     // Send admin notification
-    const submissionWithType = { ...consultation, type: "CONSULTATION" };
-    sendAdminNotification(submissionWithType).catch((error) => {
+    sendAdminNotification(consultation).catch((error) => {
       console.error(
         "Failed to send admin notification for consultation:",
         error

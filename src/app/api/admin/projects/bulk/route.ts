@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { ProjectStatus } from "@prisma/client";
 import { z } from "zod";
 
 const bulkActionSchema = z.object({
@@ -26,24 +27,28 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { action, projectIds } = bulkActionSchema.parse(body);
 
-    let updateData: any = {};
+    let updateData: {
+      status?: ProjectStatus;
+      publishedAt?: Date | null;
+      featured?: boolean;
+    } = {};
     let deleteProjects = false;
 
     switch (action) {
       case "publish":
         updateData = {
-          status: "ACTIVE",
+          status: ProjectStatus.ACTIVE,
           publishedAt: new Date(),
         };
         break;
       case "draft":
         updateData = {
-          status: "DRAFT",
+          status: ProjectStatus.DRAFT,
           publishedAt: null,
         };
         break;
       case "archive":
-        updateData = { status: "ARCHIVED" };
+        updateData = { status: ProjectStatus.ARCHIVED };
         break;
       case "feature":
         updateData = { featured: true };
@@ -84,7 +89,7 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Validation error", details: error.errors },
+        { error: "Validation error", details: error.issues },
         { status: 400 }
       );
     }

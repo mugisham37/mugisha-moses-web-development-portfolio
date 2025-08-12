@@ -7,7 +7,7 @@ import { z } from "zod";
 
 const analyticsEventSchema = z.object({
   event: z.string().min(1).max(50),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 const analyticsQuerySchema = z.object({
@@ -27,7 +27,7 @@ export async function POST(
 
     if (!validatedBody.success) {
       return NextResponse.json(
-        { error: "Invalid request body", details: validatedBody.error.errors },
+        { error: "Invalid request body", details: validatedBody.error.issues },
         { status: 400 }
       );
     }
@@ -84,7 +84,7 @@ export async function GET(
       return NextResponse.json(
         {
           error: "Invalid query parameters",
-          details: validatedParams.error.errors,
+          details: validatedParams.error.issues,
         },
         { status: 400 }
       );

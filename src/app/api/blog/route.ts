@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,7 +12,7 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get("search");
     const featured = searchParams.get("featured") === "true";
 
-    const where: any = {
+    const where: Prisma.BlogPostWhereInput = {
       status: "PUBLISHED",
       publishedAt: {
         lte: new Date(),
@@ -21,7 +22,9 @@ export async function GET(request: NextRequest) {
     if (category) {
       where.categories = {
         some: {
-          slug: category,
+          category: {
+            slug: category,
+          },
         },
       };
     }
@@ -29,7 +32,9 @@ export async function GET(request: NextRequest) {
     if (tag) {
       where.tags = {
         some: {
-          slug: tag,
+          tag: {
+            slug: tag,
+          },
         },
       };
     }

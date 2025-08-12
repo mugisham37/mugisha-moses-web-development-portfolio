@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { ContactType, ContactStatus } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   try {
@@ -23,14 +24,18 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // Build where clause
-    const where: any = {};
+    const where: {
+      status?: ContactStatus;
+      type?: ContactType;
+      OR?: Array<{ [key: string]: { contains: string; mode: "insensitive" } }>;
+    } = {};
 
     if (status && status !== "all") {
-      where.status = status;
+      where.status = status as ContactStatus;
     }
 
     if (type && type !== "all") {
-      where.type = type;
+      where.type = type as ContactType;
     }
 
     if (search) {
@@ -104,10 +109,13 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const updateData: any = {};
+    const updateData: {
+      status?: ContactStatus;
+      responded?: boolean;
+    } = {};
 
     if (status) {
-      updateData.status = status;
+      updateData.status = status as ContactStatus;
     }
 
     if (typeof responded === "boolean") {

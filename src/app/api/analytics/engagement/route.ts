@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { sessionId, page, event, timeOnPage, scrollDepth, timestamp } = body;
+    const { sessionId, page, event, timeOnPage, scrollDepth } = body;
 
     // Update page view with engagement metrics
     if (event === "page_hidden" && timeOnPage) {

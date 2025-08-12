@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { sessionId, event, data, timestamp, page, postId, metadata } = body;
 
-    const headersList = headers();
+    const headersList = await headers();
     const userAgent = headersList.get("user-agent") || "";
     const referer = headersList.get("referer") || "";
 

@@ -34,12 +34,13 @@ export async function POST(request: NextRequest) {
       } else {
         validatedData = generalContactSchema.parse(body);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const zodError = error as { issues?: Array<{ message: string }> };
       return NextResponse.json(
         {
           success: false,
           error: "Validation failed",
-          details: error.errors?.map((e: any) => e.message) || [
+          details: zodError.issues?.map((e) => e.message) || [
             "Invalid form data",
           ],
         },
@@ -85,24 +86,27 @@ export async function POST(request: NextRequest) {
         message: validatedData.message,
         type: validatedData.type,
         projectType:
-          "projectType" in validatedData ? validatedData.projectType : null,
-        budget: "budget" in validatedData ? validatedData.budget : null,
-        timeline: "timeline" in validatedData ? validatedData.timeline : null,
+          "projectType" in validatedData
+            ? (validatedData.projectType as string)
+            : null,
+        budget:
+          "budget" in validatedData ? (validatedData.budget as string) : null,
+        timeline:
+          "timeline" in validatedData
+            ? (validatedData.timeline as string)
+            : null,
         status: "NEW",
         responded: false,
       },
     });
 
-    // Send emails asynchronously
-    const submissionWithType = { ...submission, type: validatedData.type };
-
     // Send admin notification
-    sendAdminNotification(submissionWithType).catch((error) => {
+    sendAdminNotification(submission).catch((error) => {
       console.error("Failed to send admin notification:", error);
     });
 
     // Send auto-response
-    sendAutoResponse(submissionWithType).catch((error) => {
+    sendAutoResponse(submission).catch((error) => {
       console.error("Failed to send auto-response:", error);
     });
 

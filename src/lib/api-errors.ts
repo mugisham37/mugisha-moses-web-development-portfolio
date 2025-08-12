@@ -1,346 +1,148 @@
 import { NextResponse } from "next/server";
+import { ZodError } from "zod";
 
-// API Error Types
-export interface APIError {
-  code: string;
-  message: string;
-  details?: Record<string, unknown>;
-  timestamp: Date;
-  requestId: string;
-}
-
-export interface ErrorResponse {
-  success: false;
-  error: APIError;
-  statusCode: number;
-}
-
-export interface SuccessResponse<T = unknown> {
-  success: true;
-  data: T;
-  statusCode: number;
-}
-
-export type APIResponse<T = unknown> = SuccessResponse<T> | ErrorResponse;
-
-// Error Classes
-export class APIErrorBase extends Error {
-  public readonly statusCode: number;
-  public readonly code: string;
-  public readonly details?: Record<string, unknown>;
-
-  constructor(
-    message: string,
-    statusCode: number,
-    code: string,
-    details?: Record<string, unknown>
-  ) {
-    super(message);
-    this.name = this.constructor.name;
-    this.statusCode = statusCode;
-    this.code = code;
-    this.details = details;
-  }
-}
-
-export class ValidationError extends APIErrorBase {
-  constructor(message: string, details?: Record<string, unknown>) {
-    super(message, 400, "VALIDATION_ERROR", details);
-  }
-}
-
-export class AuthenticationError extends APIErrorBase {
-  constructor(message: string = "Authentication required") {
-    super(message, 401, "AUTHENTICATION_ERROR");
-  }
-}
-
-export class AuthorizationError extends APIErrorBase {
-  constructor(message: string = "Insufficient permissions") {
-    super(message, 403, "AUTHORIZATION_ERROR");
-  }
-}
-
-export class NotFoundError extends APIErrorBase {
-  constructor(resource: string = "Resource") {
-    super(`${resource} not found`, 404, "NOT_FOUND");
-  }
-}
-
-export class ConflictError extends APIErrorBase {
+export class ValidationError extends Error {
   constructor(message: string) {
-    super(message, 409, "CONFLICT_ERROR");
+    super(message);
+    this.name = "ValidationError";
   }
 }
 
-export class RateLimitError extends APIErrorBase {
+export class AuthenticationError extends Error {
+  constructor(message: string = "Authentication required") {
+    super(message);
+    this.name = "AuthenticationError";
+  }
+}
+
+export class AuthorizationError extends Error {
+  constructor(message: string = "Insufficient permissions") {
+    super(message);
+    this.name = "AuthorizationError";
+  }
+}
+
+export class NotFoundError extends Error {
+  constructor(message: string = "Resource not found") {
+    super(message);
+    this.name = "NotFoundError";
+  }
+}
+
+export class RateLimitError extends Error {
   constructor(message: string = "Rate limit exceeded") {
-    super(message, 429, "RATE_LIMIT_ERROR");
+    super(message);
+    this.name = "RateLimitError";
   }
 }
 
-export class InternalServerError extends APIErrorBase {
-  constructor(message: string = "Internal server error") {
-    super(message, 500, "INTERNAL_SERVER_ERROR");
-  }
-}
+export function handleAPIError(error: unknown): NextResponse {
+  console.error("API Error:", error);
 
-export class ServiceUnavailableError extends APIErrorBase {
-  constructor(message: string = "Service temporarily unavailable") {
-    super(message, 503, "SERVICE_UNAVAILABLE");
-  }
-}
-
-export class GitHubAPIError extends APIErrorBase {
-  constructor(message: string, statusCode: number = 502) {
-    super(message, statusCode, "GITHUB_API_ERROR");
-  }
-}
-
-export class DatabaseError extends APIErrorBase {
-  constructor(message: string = "Database operation failed") {
-    super(message, 500, "DATABASE_ERROR");
-  }
-}
-
-// Error Handler Function
-export function handleAPIError(error: unknown): NextResponse<ErrorResponse> {
-  const requestId = generateRequestId();
-  const timestamp = new Date();
-
-  // Log error for monitoring
-  console.error("API Error:", {
-    error,
-    requestId,
-    timestamp,
-    stack: error instanceof Error ? error.stack : undefined,
-  });
-
-  // Handle known API errors
-  if (error instanceof APIErrorBase) {
-    const apiError: APIError = {
-      code: error.code,
-      message: error.message,
-      details: error.details,
-      timestamp,
-      requestId,
-    };
-
+  if (error instanceof ValidationError) {
     return NextResponse.json(
       {
         success: false,
-        error: apiError,
-        statusCode: error.statusCode,
+        error: "Validation Error",
+        message: error.message,
       },
-      { status: error.statusCode }
+      { status: 400 }
     );
   }
 
-  // Handle Prisma errors
-  if (error && typeof error === "object" && "code" in error) {
-    const prismaError = error as { code: string; meta?: Record<string, unknown> };
-
-    switch (prismaError.code) {
-      case "P2002":
-        return NextResponse.json(
-          {
-            success: false,
-            error: {
-              code: "UNIQUE_CONSTRAINT_ERROR",
-              message: "A record with this information already exists",
-              timestamp,
-              requestId,
-            },
-            statusCode: 409,
-          },
-          { status: 409 }
-        );
-
-      case "P2025":
-        return NextResponse.json(
-          {
-            success: false,
-            error: {
-              code: "RECORD_NOT_FOUND",
-              message: "The requested record was not found",
-              timestamp,
-              requestId,
-            },
-            statusCode: 404,
-          },
-          { status: 404 }
-        );
-
-      default:
-        return NextResponse.json(
-          {
-            success: false,
-            error: {
-              code: "DATABASE_ERROR",
-              message: "Database operation failed",
-              timestamp,
-              requestId,
-            },
-            statusCode: 500,
-          },
-          { status: 500 }
-        );
-    }
+  if (error instanceof ZodError) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Validation Error",
+        details: error.issues.map((issue) => ({
+          field: issue.path.join("."),
+          message: issue.message,
+        })),
+      },
+      { status: 400 }
+    );
   }
 
-  // Handle generic errors
-  const message =
-    error instanceof Error ? error.message : "An unexpected error occurred";
+  if (error instanceof AuthenticationError) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Authentication Error",
+        message: error.message,
+      },
+      { status: 401 }
+    );
+  }
 
+  if (error instanceof AuthorizationError) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Authorization Error",
+        message: error.message,
+      },
+      { status: 403 }
+    );
+  }
+
+  if (error instanceof NotFoundError) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Not Found",
+        message: error.message,
+      },
+      { status: 404 }
+    );
+  }
+
+  if (error instanceof RateLimitError) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Rate Limit Exceeded",
+        message: error.message,
+      },
+      { status: 429 }
+    );
+  }
+
+  // Generic server error
   return NextResponse.json(
     {
       success: false,
-      error: {
-        code: "INTERNAL_SERVER_ERROR",
-        message:
-          process.env.NODE_ENV === "development"
-            ? message
-            : "Internal server error",
-        timestamp,
-        requestId,
-      },
-      statusCode: 500,
+      error: "Internal Server Error",
+      message: "An unexpected error occurred",
     },
     { status: 500 }
   );
 }
 
-// Success Response Helper
 export function createSuccessResponse<T>(
   data: T,
-  statusCode: number = 200
-): NextResponse<SuccessResponse<T>> {
+  status: number = 200
+): NextResponse {
   return NextResponse.json(
     {
       success: true,
       data,
-      statusCode,
     },
-    { status: statusCode }
+    { status }
   );
 }
 
-// Request ID Generator
-function generateRequestId(): string {
-  return `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-}
-
-// Error Logging Service
-export async function logError(
-  error: Error,
-  context: {
-    userId?: string;
-    requestId?: string;
-    url?: string;
-    userAgent?: string;
-    additionalData?: Record<string, unknown>;
-  }
-) {
-  const errorLog = {
-    message: error.message,
-    stack: error.stack,
-    name: error.name,
-    timestamp: new Date().toISOString(),
-    ...context,
-  };
-
-  // In development, just log to console
-  if (process.env.NODE_ENV === "development") {
-    console.error("Error logged:", errorLog);
-    return;
-  }
-
-  // In production, you would send this to your error monitoring service
-  // Examples: Sentry, LogRocket, DataDog, etc.
-  try {
-    // Example implementation - replace with your actual error service
-    await fetch(process.env.ERROR_LOGGING_ENDPOINT || "/api/errors", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.ERROR_LOGGING_TOKEN}`,
-      },
-      body: JSON.stringify(errorLog),
-    });
-  } catch (loggingError) {
-    console.error("Failed to log error to external service:", loggingError);
-  }
-}
-
-// Async Error Handler Wrapper
-export function withErrorHandling<T extends unknown[], R>(
-  handler: (...args: T) => Promise<R>
-) {
-  return async (...args: T): Promise<R | NextResponse<ErrorResponse>> => {
-    try {
-      return await handler(...args);
-    } catch (error) {
-      return handleAPIError(error);
-    }
-  };
-}
-
-// Validation Helper
-export function validateRequired(
-  data: Record<string, unknown>,
-  requiredFields: string[]
-): void {
-  const missingFields = requiredFields.filter(
-    (field) =>
-      data[field] === undefined || data[field] === null || data[field] === ""
+export function createErrorResponse(
+  message: string,
+  status: number = 400,
+  details?: unknown
+): NextResponse {
+  return NextResponse.json(
+    {
+      success: false,
+      error: message,
+      ...(details ? { details } : {}),
+    },
+    { status }
   );
-
-  if (missingFields.length > 0) {
-    throw new ValidationError(
-      `Missing required fields: ${missingFields.join(", ")}`,
-      { missingFields }
-    );
-  }
 }
-
-// Email Validation
-export function validateEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-// URL Validation
-export function validateURL(url: string): boolean {
-  try {
-    new URL(url);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-// Re-export types from other modules for centralized access
-export type {
-  FormErrors,
-  ValidationResult,
-  ContactFormData,
-  ProjectInquiryData,
-  ConsultationBookingData,
-  NewsletterData,
-  BlogCommentData,
-  TestimonialSubmissionData,
-} from "@/lib/form-validation";
-
-export type {
-  GitHubRepository,
-  ContributionData,
-  ContributionWeek,
-  ContributionDay,
-  GitHubUserStats,
-} from "@/lib/github-fallbacks";
-
-export type {
-  ErrorContext,
-  ErrorReport,
-  PerformanceMetric,
-} from "@/lib/error-monitoring";

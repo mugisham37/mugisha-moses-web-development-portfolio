@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
 // GET /api/testimonials/stats - Get testimonial statistics
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const [
       totalCount,

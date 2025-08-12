@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchProjects } from "@/lib/project-queries";
+import { ProjectStatus } from "@prisma/client";
 import { z } from "zod";
 
 const searchSchema = z.object({
@@ -29,7 +30,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(
         {
           error: "Invalid search parameters",
-          details: validatedParams.error.errors,
+          details: validatedParams.error.issues,
         },
         { status: 400 }
       );
@@ -42,7 +43,7 @@ export async function GET(request: NextRequest) {
     const filters = {
       technologies: technologies?.split(",").filter(Boolean),
       categories: categories?.split(",").filter(Boolean),
-      status: status?.split(",").filter(Boolean) as any,
+      status: status?.split(",").filter(Boolean) as ProjectStatus[],
       featured:
         featured === "true" ? true : featured === "false" ? false : undefined,
     };
@@ -79,7 +80,7 @@ export async function POST(request: NextRequest) {
 
     if (!validatedBody.success) {
       return NextResponse.json(
-        { error: "Invalid request body", details: validatedBody.error.errors },
+        { error: "Invalid request body", details: validatedBody.error.issues },
         { status: 400 }
       );
     }
@@ -91,7 +92,7 @@ export async function POST(request: NextRequest) {
     const filters = {
       technologies: technologies?.split(",").filter(Boolean),
       categories: categories?.split(",").filter(Boolean),
-      status: status?.split(",").filter(Boolean) as any,
+      status: status?.split(",").filter(Boolean) as ProjectStatus[],
       featured:
         featured === "true" ? true : featured === "false" ? false : undefined,
     };

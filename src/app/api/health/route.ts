@@ -98,7 +98,7 @@ export async function HEAD() {
     // Quick database ping
     await db.$queryRaw`SELECT 1`;
     return new NextResponse(null, { status: 200 });
-  } catch (error) {
+  } catch {
     return new NextResponse(null, { status: 503 });
   }
 }

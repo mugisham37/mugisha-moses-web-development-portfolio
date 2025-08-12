@@ -14,7 +14,7 @@ const analyticsEventSchema = z.object({
     "faq_expand",
     "cta_click",
   ]),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
   sessionId: z.string().optional(),
   userAgent: z.string().optional(),
   referer: z.string().optional(),
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           error: "Invalid request data",
-          details: error.errors,
+          details: error.issues,
         },
         { status: 400 }
       );
@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
 
 // Generate a simple session ID
 function generateSessionId(): string {
-  return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  return `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
 }
 
 // GET endpoint for retrieving service analytics (admin only)
@@ -103,7 +103,6 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const serviceId = searchParams.get("serviceId");
-    const event = searchParams.get("event");
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
 
