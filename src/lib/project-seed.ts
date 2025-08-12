@@ -249,7 +249,7 @@ export async function seedProjects() {
 
     // Create projects
     const createdProjects = await Promise.all(
-      sampleProjects.map(async (project, index) => {
+      sampleProjects.map(async (project) => {
         // Assign categories based on project type
         const categoryAssignments = [];
 

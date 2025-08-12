@@ -62,17 +62,21 @@ const CACHE_DURATION = {
 };
 
 // In-memory cache (in production, use Redis or similar)
-const cache = new Map<
-  string,
-  { data: any; timestamp: number; expires: number }
->();
+const cache = new Map<string, CacheItem>();
+
+// Cache item interface
+interface CacheItem<T = unknown> {
+  data: T;
+  timestamp: number;
+  expires: number;
+}
 
 // Cache helpers
 function getCacheKey(type: string, identifier: string): string {
   return `github:${type}:${identifier}`;
 }
 
-function setCache(key: string, data: any, duration: number): void {
+function setCache<T>(key: string, data: T, duration: number): void {
   const timestamp = Date.now();
   cache.set(key, {
     data,
@@ -82,7 +86,7 @@ function setCache(key: string, data: any, duration: number): void {
 }
 
 function getCache<T>(key: string): T | null {
-  const cached = cache.get(key);
+  const cached = cache.get(key) as CacheItem<T> | undefined;
   if (!cached) return null;
 
   if (Date.now() > cached.expires) {
@@ -90,7 +94,7 @@ function getCache<T>(key: string): T | null {
     return null;
   }
 
-  return cached.data as T;
+  return cached.data;
 }
 
 // Fallback data for when GitHub API is unavailable
@@ -208,28 +212,28 @@ export class GitHubService {
 
       const response = await this.octokit.repos.listForUser({
         username: this.username,
-        type: "public",
+        type: "all",
         sort: "updated",
         per_page: 100,
       });
 
-      const repositories = response.data.map((repo) => ({
+      const repositories: GitHubRepository[] = response.data.map((repo) => ({
         id: repo.id,
         name: repo.name,
         full_name: repo.full_name,
         description: repo.description,
         html_url: repo.html_url,
-        clone_url: repo.clone_url,
-        language: repo.language,
-        stargazers_count: repo.stargazers_count,
-        forks_count: repo.forks_count,
-        watchers_count: repo.watchers_count,
-        created_at: repo.created_at,
-        updated_at: repo.updated_at,
-        pushed_at: repo.pushed_at,
+        clone_url: repo.clone_url || "",
+        language: repo.language || null,
+        stargazers_count: repo.stargazers_count || 0,
+        forks_count: repo.forks_count || 0,
+        watchers_count: repo.watchers_count || 0,
+        created_at: repo.created_at || new Date().toISOString(),
+        updated_at: repo.updated_at || new Date().toISOString(),
+        pushed_at: repo.pushed_at || null,
         private: repo.private,
         fork: repo.fork,
-        archived: repo.archived,
+        archived: repo.archived || false,
       }));
 
       setCache(cacheKey, repositories, CACHE_DURATION.repositories);
@@ -238,7 +242,9 @@ export class GitHubService {
       console.warn("GitHub API error, using fallback data:", error);
 
       // Return cached data if available, even if expired
-      const expiredCache = cache.get(cacheKey);
+      const expiredCache = cache.get(cacheKey) as
+        | CacheItem<GitHubRepository[]>
+        | undefined;
       if (expiredCache) {
         return expiredCache.data;
       }
@@ -273,7 +279,9 @@ export class GitHubService {
       );
 
       // Return cached data if available, even if expired
-      const expiredCache = cache.get(cacheKey);
+      const expiredCache = cache.get(cacheKey) as
+        | CacheItem<ContributionData>
+        | undefined;
       if (expiredCache) {
         return expiredCache.data;
       }
@@ -299,7 +307,7 @@ export class GitHubService {
         this.octokit.users.getByUsername({ username: this.username }),
         this.octokit.repos.listForUser({
           username: this.username,
-          type: "public",
+          type: "all",
           per_page: 100,
         }),
       ]);
@@ -308,10 +316,13 @@ export class GitHubService {
       const repos = reposResponse.data;
 
       const totalStars = repos.reduce(
-        (sum, repo) => sum + repo.stargazers_count,
+        (sum, repo) => sum + (repo.stargazers_count || 0),
         0
       );
-      const totalForks = repos.reduce((sum, repo) => sum + repo.forks_count, 0);
+      const totalForks = repos.reduce(
+        (sum, repo) => sum + (repo.forks_count || 0),
+        0
+      );
 
       const languageCounts: { [key: string]: number } = {};
       repos.forEach((repo) => {
@@ -336,7 +347,9 @@ export class GitHubService {
       console.warn("GitHub user stats API error, using fallback data:", error);
 
       // Return cached data if available, even if expired
-      const expiredCache = cache.get(cacheKey);
+      const expiredCache = cache.get(cacheKey) as
+        | CacheItem<GitHubUserStats>
+        | undefined;
       if (expiredCache) {
         return expiredCache.data;
       }
@@ -407,7 +420,6 @@ export class GitHubService {
 function generateFallbackContributionWeeks(): ContributionWeek[] {
   const weeks: ContributionWeek[] = [];
   const now = new Date();
-  const oneYear = 365 * 24 * 60 * 60 * 1000;
   const oneWeek = 7 * 24 * 60 * 60 * 1000;
 
   for (let i = 52; i >= 0; i--) {
@@ -438,7 +450,6 @@ function generateFallbackContributionWeeks(): ContributionWeek[] {
 function generateFallbackContributionCalendar(): ContributionDay[] {
   const calendar: ContributionDay[] = [];
   const now = new Date();
-  const oneYear = 365 * 24 * 60 * 60 * 1000;
 
   for (let i = 365; i >= 0; i--) {
     const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);

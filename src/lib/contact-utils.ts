@@ -1,6 +1,8 @@
 import { ContactSubmission } from "@prisma/client";
 
-// Spam protection utilities
+import { ContactFormData, ContactSubmissionResult } from "./types";
+
+// Spam detection utilities
 export function isSpamContent(content: string): boolean {
   const spamKeywords = [
     "viagra",
@@ -81,11 +83,7 @@ export function isRateLimited(
 }
 
 // Contact submission processing
-export function processContactSubmission(data: any): {
-  isValid: boolean;
-  isSpam: boolean;
-  errors: string[];
-} {
+export function processContactSubmission(data: ContactFormData): ContactSubmissionResult {
   const errors: string[] = [];
   let isSpam = false;
 
@@ -134,9 +132,9 @@ export function prepareEmailTemplateData(
     case "PROJECT_INQUIRY":
       return {
         ...baseData,
-        projectType: submission.projectType,
-        budget: submission.budget,
-        timeline: submission.timeline,
+        projectType: submission.projectType ?? undefined,
+        budget: submission.budget ?? undefined,
+        timeline: submission.timeline ?? undefined,
         isProjectInquiry: true,
       };
 

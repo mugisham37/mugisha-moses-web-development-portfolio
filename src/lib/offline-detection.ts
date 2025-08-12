@@ -83,11 +83,24 @@ export function useNetworkQuality() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    // Network Information API interface
+    interface NetworkInformation extends EventTarget {
+      effectiveType?: string;
+      downlink?: number;
+      addEventListener(type: string, listener: EventListener): void;
+      removeEventListener(type: string, listener: EventListener): void;
+    }
+
+    interface NavigatorWithConnection extends Navigator {
+      connection?: NetworkInformation;
+      mozConnection?: NetworkInformation;
+      webkitConnection?: NetworkInformation;
+    }
+
     // Check if Network Information API is available
+    const nav = navigator as NavigatorWithConnection;
     const connection =
-      (navigator as any).connection ||
-      (navigator as any).mozConnection ||
-      (navigator as any).webkitConnection;
+      nav.connection || nav.mozConnection || nav.webkitConnection;
 
     if (connection) {
       const updateConnectionInfo = () => {
@@ -100,7 +113,9 @@ export function useNetworkQuality() {
             setNetworkQuality("slow");
             break;
           case "3g":
-            setNetworkQuality(connection.downlink > 1.5 ? "fast" : "slow");
+            setNetworkQuality(
+              (connection.downlink || 0) > 1.5 ? "fast" : "slow"
+            );
             break;
           case "4g":
           default:
@@ -144,6 +159,13 @@ export function useNetworkQuality() {
   return { networkQuality, connectionType };
 }
 
+// Storage item interface
+interface StorageItem {
+  data: unknown;
+  timestamp: number;
+  size: number;
+}
+
 // Offline storage utilities
 export class OfflineStorage {
   private static readonly STORAGE_KEY = "brutalist_portfolio_offline";
@@ -160,7 +182,7 @@ export class OfflineStorage {
 
       // Check storage size
       const totalSize = Object.values(storage).reduce(
-        (sum, item: any) => sum + item.size,
+        (sum, item) => sum + item.size,
         0
       );
 
@@ -215,7 +237,7 @@ export class OfflineStorage {
     }
   }
 
-  private static getStorage(): Record<string, any> {
+  private static getStorage(): Record<string, StorageItem> {
     try {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       return stored ? JSON.parse(stored) : {};
@@ -227,13 +249,11 @@ export class OfflineStorage {
   private static cleanup(): void {
     try {
       const storage = this.getStorage();
-      const items = Object.entries(storage).map(
-        ([key, value]: [string, any]) => ({
-          key,
-          timestamp: value.timestamp,
-          size: value.size,
-        })
-      );
+      const items = Object.entries(storage).map(([key, value]) => ({
+        key,
+        timestamp: value.timestamp,
+        size: value.size,
+      }));
 
       // Sort by timestamp (oldest first) and remove oldest items
       items.sort((a, b) => a.timestamp - b.timestamp);
@@ -329,13 +349,16 @@ export function registerServiceWorker(): void {
       });
 
       // Handle service worker messages
-      navigator.serviceWorker.addEventListener("message", (event) => {
-        console.log("Message from Service Worker:", event.data);
+      navigator.serviceWorker.addEventListener(
+        "message",
+        (event: MessageEvent) => {
+          console.log("Message from Service Worker:", event.data);
 
-        if (event.data.type === "CACHE_UPDATED") {
-          window.dispatchEvent(new CustomEvent("app:cache-updated"));
+          if (event.data?.type === "CACHE_UPDATED") {
+            window.dispatchEvent(new CustomEvent("app:cache-updated"));
+          }
         }
-      });
+      );
 
       // Check for waiting service worker
       if (registration.waiting) {

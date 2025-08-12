@@ -1,15 +1,11 @@
 "use client";
 
 import { useCallback } from "react";
-
-interface AnalyticsEvent {
-  event: string;
-  metadata?: Record<string, any>;
-}
+import { AnalyticsMetadata } from "@/lib/types/analytics";
 
 export function useProjectAnalytics(projectId: string) {
   const trackEvent = useCallback(
-    async (event: string, metadata?: Record<string, any>) => {
+    async (event: string, metadata?: AnalyticsMetadata) => {
       try {
         const response = await fetch(`/api/projects/${projectId}/analytics`, {
           method: "POST",
@@ -38,7 +34,7 @@ export function useProjectAnalytics(projectId: string) {
   );
 
   const trackView = useCallback(
-    (metadata?: Record<string, any>) => {
+    (metadata?: AnalyticsMetadata) => {
       return trackEvent("view", {
         ...metadata,
         timestamp: new Date().toISOString(),
@@ -49,7 +45,7 @@ export function useProjectAnalytics(projectId: string) {
   );
 
   const trackClick = useCallback(
-    (element: string, metadata?: Record<string, any>) => {
+    (element: string, metadata?: AnalyticsMetadata) => {
       return trackEvent("click", {
         element,
         ...metadata,
@@ -61,7 +57,7 @@ export function useProjectAnalytics(projectId: string) {
   );
 
   const trackShare = useCallback(
-    (platform: string, metadata?: Record<string, any>) => {
+    (platform: string, metadata?: AnalyticsMetadata) => {
       return trackEvent("share", {
         platform,
         ...metadata,
@@ -73,7 +69,7 @@ export function useProjectAnalytics(projectId: string) {
   );
 
   const trackDownload = useCallback(
-    (resource: string, metadata?: Record<string, any>) => {
+    (resource: string, metadata?: AnalyticsMetadata) => {
       return trackEvent("download", {
         resource,
         ...metadata,
@@ -85,7 +81,7 @@ export function useProjectAnalytics(projectId: string) {
   );
 
   const trackTimeSpent = useCallback(
-    (duration: number, metadata?: Record<string, any>) => {
+    (duration: number, metadata?: AnalyticsMetadata) => {
       return trackEvent("time_spent", {
         duration,
         ...metadata,
@@ -97,7 +93,7 @@ export function useProjectAnalytics(projectId: string) {
   );
 
   const trackScroll = useCallback(
-    (percentage: number, metadata?: Record<string, any>) => {
+    (percentage: number, metadata?: AnalyticsMetadata) => {
       return trackEvent("scroll", {
         percentage,
         ...metadata,

@@ -1,28 +1,18 @@
 "use client";
 
 import { useCallback } from "react";
-
-interface AnalyticsEvent {
-  serviceId: string;
-  event:
-    | "view"
-    | "inquiry"
-    | "booking"
-    | "conversion"
-    | "feature_click"
-    | "pricing_view"
-    | "faq_expand"
-    | "cta_click";
-  metadata?: Record<string, any>;
-}
+import {
+  AnalyticsMetadata,
+  ServiceAnalyticsEvent,
+} from "@/lib/types/analytics";
 
 export function useServiceAnalytics() {
-  const trackEvent = useCallback(async (event: AnalyticsEvent) => {
+  const trackEvent = useCallback(async (event: ServiceAnalyticsEvent) => {
     try {
       // Get session ID from localStorage or generate new one
       let sessionId = localStorage.getItem("analytics_session_id");
       if (!sessionId) {
-        sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        sessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
         localStorage.setItem("analytics_session_id", sessionId);
       }
 
@@ -56,35 +46,35 @@ export function useServiceAnalytics() {
 
   // Convenience methods for common events
   const trackServiceView = useCallback(
-    (serviceId: string, metadata?: Record<string, any>) => {
+    (serviceId: string, metadata?: AnalyticsMetadata) => {
       trackEvent({ serviceId, event: "view", metadata });
     },
     [trackEvent]
   );
 
   const trackServiceInquiry = useCallback(
-    (serviceId: string, metadata?: Record<string, any>) => {
+    (serviceId: string, metadata?: AnalyticsMetadata) => {
       trackEvent({ serviceId, event: "inquiry", metadata });
     },
     [trackEvent]
   );
 
   const trackServiceBooking = useCallback(
-    (serviceId: string, metadata?: Record<string, any>) => {
+    (serviceId: string, metadata?: AnalyticsMetadata) => {
       trackEvent({ serviceId, event: "booking", metadata });
     },
     [trackEvent]
   );
 
   const trackServiceConversion = useCallback(
-    (serviceId: string, metadata?: Record<string, any>) => {
+    (serviceId: string, metadata?: AnalyticsMetadata) => {
       trackEvent({ serviceId, event: "conversion", metadata });
     },
     [trackEvent]
   );
 
   const trackFeatureClick = useCallback(
-    (serviceId: string, feature: string, metadata?: Record<string, any>) => {
+    (serviceId: string, feature: string, metadata?: AnalyticsMetadata) => {
       trackEvent({
         serviceId,
         event: "feature_click",
@@ -95,7 +85,7 @@ export function useServiceAnalytics() {
   );
 
   const trackPricingView = useCallback(
-    (serviceId: string, tier?: string, metadata?: Record<string, any>) => {
+    (serviceId: string, tier?: string, metadata?: AnalyticsMetadata) => {
       trackEvent({
         serviceId,
         event: "pricing_view",
@@ -106,7 +96,7 @@ export function useServiceAnalytics() {
   );
 
   const trackFAQExpand = useCallback(
-    (serviceId: string, question: string, metadata?: Record<string, any>) => {
+    (serviceId: string, question: string, metadata?: AnalyticsMetadata) => {
       trackEvent({
         serviceId,
         event: "faq_expand",
@@ -117,7 +107,7 @@ export function useServiceAnalytics() {
   );
 
   const trackCTAClick = useCallback(
-    (serviceId: string, ctaType: string, metadata?: Record<string, any>) => {
+    (serviceId: string, ctaType: string, metadata?: AnalyticsMetadata) => {
       trackEvent({
         serviceId,
         event: "cta_click",

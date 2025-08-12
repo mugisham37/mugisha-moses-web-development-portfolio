@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { ContactSubmission } from "@prisma/client";
+import { ContactFormData } from "./types";
 import {
   prepareEmailTemplateData,
   generateAutoResponseMessage,
@@ -17,7 +18,7 @@ const EMAIL_CONFIG = {
 // Email templates
 export const emailTemplates = {
   // Admin notification template
-  adminNotification: (data: any) => ({
+  adminNotification: (data: ContactFormData & { isProjectInquiry?: boolean; isConsultation?: boolean }) => ({
     subject: `New ${data.isProjectInquiry ? "Project Inquiry" : data.isConsultation ? "Consultation Request" : "Contact"} from ${data.name}`,
     html: `
       <!DOCTYPE html>
@@ -186,7 +187,7 @@ Submitted on ${data.submissionDate} at ${data.submissionTime}
   }),
 
   // Auto-response template
-  autoResponse: (data: any, responseMessage: string) => ({
+  autoResponse: (data: ContactFormData & { submissionDate?: string; submissionTime?: string }, responseMessage: string) => ({
     subject: `Thank you for contacting me, ${data.name}!`,
     html: `
       <!DOCTYPE html>

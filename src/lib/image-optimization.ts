@@ -58,12 +58,7 @@ export function generateResponsiveSizes(config: {
   desktop?: string;
   defaultSize?: string;
 }): string {
-  const {
-    mobile = "100vw",
-    tablet = "50vw",
-    desktop = "33vw",
-    defaultSize = "100vw",
-  } = config;
+  const { mobile = "100vw", tablet = "50vw", desktop = "33vw" } = config;
 
   return `(max-width: 640px) ${mobile}, (max-width: 1024px) ${tablet}, ${desktop}`;
 }
@@ -78,8 +73,6 @@ export function calculateOptimalDimensions(
   maxHeight: number,
   fit: "cover" | "contain" = "contain"
 ): { width: number; height: number } {
-  const aspectRatio = originalWidth / originalHeight;
-
   if (fit === "contain") {
     // Fit within bounds while maintaining aspect ratio
     const widthRatio = maxWidth / originalWidth;

@@ -278,7 +278,7 @@ export function generateAccessibleSizes(
   const entries = Object.entries(breakpoints).sort(([, a], [, b]) => a - b);
 
   return entries
-    .map(([name, width], index) => {
+    .map(([, width], index) => {
       if (index === entries.length - 1) {
         return "100vw"; // Default for largest breakpoint
       }
@@ -289,7 +289,7 @@ export function generateAccessibleSizes(
 
 // Helper functions
 function generateId(): string {
-  return Math.random().toString(36).substr(2, 9);
+  return Math.random().toString(36).substring(2, 11);
 }
 
 function hexToLuminance(hex: string): number {

@@ -256,7 +256,10 @@ export async function getProjectCategories() {
 }
 
 // Increment project view count
-export async function incrementProjectViews(projectId: string, metadata?: any) {
+export async function incrementProjectViews(
+  projectId: string,
+  metadata?: Record<string, unknown>
+) {
   await Promise.all([
     // Update view count
     db.project.update({
@@ -268,7 +271,7 @@ export async function incrementProjectViews(projectId: string, metadata?: any) {
       data: {
         projectId,
         event: "view",
-        metadata: metadata || {},
+        metadata: JSON.parse(JSON.stringify(metadata || {})),
       },
     }),
   ]);
@@ -278,13 +281,13 @@ export async function incrementProjectViews(projectId: string, metadata?: any) {
 export async function trackProjectInteraction(
   projectId: string,
   event: string,
-  metadata?: any
+  metadata?: Record<string, unknown>
 ) {
   await db.projectAnalytics.create({
     data: {
       projectId,
       event,
-      metadata: metadata || {},
+      metadata: JSON.parse(JSON.stringify(metadata || {})),
     },
   });
 }

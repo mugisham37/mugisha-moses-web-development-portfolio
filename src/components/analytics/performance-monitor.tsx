@@ -1,6 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type {
+  PerformanceMetrics,
+  ConnectionInfo,
+  PerformanceEntry,
+  ExtendedNavigator,
+} from "@/types/analytics";
 
 interface PerformanceMonitorProps {
   sessionId: string;
@@ -11,13 +17,7 @@ export function PerformanceMonitor({
   sessionId,
   hasConsent,
 }: PerformanceMonitorProps) {
-  const metricsRef = useRef<{
-    lcp?: number;
-    fid?: number;
-    cls?: number;
-    fcp?: number;
-    ttfb?: number;
-  }>({});
+  const metricsRef = useRef<PerformanceMetrics>({});
 
   useEffect(() => {
     if (!hasConsent) return;
@@ -29,7 +29,7 @@ export function PerformanceMonitor({
         try {
           const lcpObserver = new PerformanceObserver((list) => {
             const entries = list.getEntries();
-            const lastEntry = entries[entries.length - 1] as any;
+            const lastEntry = entries[entries.length - 1] as PerformanceEntry;
             if (lastEntry) {
               metricsRef.current.lcp = lastEntry.startTime;
             }
@@ -39,7 +39,7 @@ export function PerformanceMonitor({
           // First Input Delay (FID)
           const fidObserver = new PerformanceObserver((list) => {
             const entries = list.getEntries();
-            entries.forEach((entry: any) => {
+            entries.forEach((entry: PerformanceEntry) => {
               if (entry.processingStart && entry.startTime) {
                 metricsRef.current.fid =
                   entry.processingStart - entry.startTime;
@@ -52,8 +52,8 @@ export function PerformanceMonitor({
           let clsValue = 0;
           const clsObserver = new PerformanceObserver((list) => {
             const entries = list.getEntries();
-            entries.forEach((entry: any) => {
-              if (!entry.hadRecentInput) {
+            entries.forEach((entry: PerformanceEntry) => {
+              if (!entry.hadRecentInput && entry.value !== undefined) {
                 clsValue += entry.value;
                 metricsRef.current.cls = clsValue;
               }
@@ -64,7 +64,7 @@ export function PerformanceMonitor({
           // First Contentful Paint (FCP)
           const fcpObserver = new PerformanceObserver((list) => {
             const entries = list.getEntries();
-            entries.forEach((entry: any) => {
+            entries.forEach((entry: PerformanceEntry) => {
               if (entry.name === "first-contentful-paint") {
                 metricsRef.current.fcp = entry.startTime;
               }
@@ -89,11 +89,12 @@ export function PerformanceMonitor({
     };
 
     // Track connection information
-    const getConnectionInfo = () => {
+    const getConnectionInfo = (): ConnectionInfo | null => {
+      const extendedNavigator = navigator as ExtendedNavigator;
       const connection =
-        (navigator as any).connection ||
-        (navigator as any).mozConnection ||
-        (navigator as any).webkitConnection;
+        extendedNavigator.connection ||
+        extendedNavigator.mozConnection ||
+        extendedNavigator.webkitConnection;
       if (connection) {
         return {
           effectiveType: connection.effectiveType,
@@ -190,8 +191,7 @@ export function PerformanceMonitor({
     let scrollTimeout: NodeJS.Timeout;
 
     const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const documentHeight =
         document.documentElement.scrollHeight - window.innerHeight;
       const scrollDepth = Math.round((scrollTop / documentHeight) * 100);

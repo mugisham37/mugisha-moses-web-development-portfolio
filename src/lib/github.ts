@@ -1,6 +1,4 @@
 import { Octokit } from "@octokit/rest";
-import { db } from "./db";
-import { GitHubRepository, GitHubContribution } from "@prisma/client";
 
 // Initialize Octokit client with authentication
 export const octokit = new Octokit({
@@ -58,7 +56,7 @@ export interface GitHubActivityData {
     name: string;
     url: string;
   };
-  payload: any;
+  payload: Record<string, unknown>;
   created_at: string;
 }
 
@@ -105,31 +103,52 @@ export class GitHubAPIError extends Error {
   }
 }
 
-export function handleGitHubError(error: any): GitHubAPIError {
-  if (
-    error.status === 403 &&
-    error.response?.headers?.["x-ratelimit-remaining"] === "0"
-  ) {
-    const resetTime = new Date(
-      parseInt(error.response.headers["x-ratelimit-reset"]) * 1000
-    );
+interface GitHubError {
+  status?: number;
+  message?: string;
+  response?: {
+    headers?: {
+      "x-ratelimit-remaining"?: string;
+      "x-ratelimit-reset"?: string;
+    };
+  };
+}
+
+function isGitHubError(error: unknown): error is GitHubError {
+  return typeof error === "object" && error !== null;
+}
+
+export function handleGitHubError(error: unknown): GitHubAPIError {
+  if (isGitHubError(error)) {
+    if (
+      error.status === 403 &&
+      error.response?.headers?.["x-ratelimit-remaining"] === "0"
+    ) {
+      const resetTime = new Date(
+        parseInt(error.response.headers["x-ratelimit-reset"] || "0") * 1000
+      );
+      return new GitHubAPIError(
+        `GitHub API rate limit exceeded. Resets at ${resetTime.toISOString()}`,
+        403,
+        true
+      );
+    }
+
+    if (error.status === 404) {
+      return new GitHubAPIError("GitHub resource not found", 404);
+    }
+
+    if (error.status === 401) {
+      return new GitHubAPIError("GitHub API authentication failed", 401);
+    }
+
     return new GitHubAPIError(
-      `GitHub API rate limit exceeded. Resets at ${resetTime.toISOString()}`,
-      403,
-      true
+      error.message || "Unknown GitHub API error",
+      error.status
     );
-  }
-
-  if (error.status === 404) {
-    return new GitHubAPIError("GitHub resource not found", 404);
-  }
-
-  if (error.status === 401) {
-    return new GitHubAPIError("GitHub API authentication failed", 401);
   }
 
   return new GitHubAPIError(
-    error.message || "Unknown GitHub API error",
-    error.status
+    error instanceof Error ? error.message : "Unknown GitHub API error"
   );
 }

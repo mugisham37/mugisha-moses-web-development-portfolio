@@ -6,26 +6,42 @@ import type {
   ProjectCategory,
   BlogCategory,
   BlogTag,
-  Testimonial,
   GitHubRepository,
   ContactSubmission,
-  PageView,
-  Prisma,
+  ContactType,
+  ContactStatus,
 } from "@prisma/client";
 
 // Type definitions for complex queries
 export type ProjectWithRelations = Project & {
   author: User;
   categories: ProjectCategory[];
-  analytics: { event: string; metadata: any; createdAt: Date }[];
+  analytics: { event: string; metadata: unknown; createdAt: Date }[];
 };
 
 export type BlogPostWithRelations = BlogPost & {
   author: User;
   categories: BlogCategory[];
   tags: BlogTag[];
-  analytics: { event: string; metadata: any; createdAt: Date }[];
+  analytics: { event: string; metadata: unknown; createdAt: Date }[];
 };
+
+// Utility function to transform raw blog post to expected format
+function transformBlogPost(rawPost: unknown): BlogPostWithRelations {
+  const post = rawPost as BlogPost & {
+    author: User;
+    categories: { category: BlogCategory }[];
+    tags: { tag: BlogTag }[];
+    analytics?: { event: string; metadata: unknown; createdAt: Date }[];
+  };
+  
+  return {
+    ...post,
+    categories: post.categories.map(c => c.category),
+    tags: post.tags.map(t => t.tag),
+    analytics: post.analytics || [],
+  };
+}
 
 export type GitHubRepositoryWithContributions = GitHubRepository & {
   contributions: { date: Date; count: number; level: number }[];
@@ -50,7 +66,7 @@ export class ProjectQueries {
 
     return db.project.findMany({
       where: {
-        ...(status && { status: status as any }),
+        ...(status && { status: status as Project['status'] }),
         ...(featured !== undefined && { featured }),
         publishedAt: { not: null },
       },
@@ -147,22 +163,42 @@ export class BlogQueries {
     const { status, featured, categorySlug, tagSlug, limit, offset } =
       options || {};
 
-    return db.blogPost.findMany({
+    const posts = await db.blogPost.findMany({
       where: {
-        ...(status && { status: status as any }),
+        ...(status && { status: status as BlogPost['status'] }),
         ...(featured !== undefined && { featured }),
         ...(categorySlug && {
-          categories: { some: { slug: categorySlug } },
+          categories: { 
+            some: { 
+              category: { 
+                slug: categorySlug 
+              } 
+            } 
+          },
         }),
         ...(tagSlug && {
-          tags: { some: { slug: tagSlug } },
+          tags: { 
+            some: { 
+              tag: { 
+                slug: tagSlug 
+              } 
+            } 
+          },
         }),
         publishedAt: { not: null },
       },
       include: {
         author: true,
-        categories: true,
-        tags: true,
+        categories: {
+          include: {
+            category: true,
+          },
+        },
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
         analytics: {
           select: { event: true, metadata: true, createdAt: true },
           orderBy: { createdAt: "desc" },
@@ -173,33 +209,53 @@ export class BlogQueries {
       ...(limit && { take: limit }),
       ...(offset && { skip: offset }),
     });
+
+    return posts.map(transformBlogPost);
   }
 
   static async getBySlug(slug: string): Promise<BlogPostWithRelations | null> {
-    return db.blogPost.findUnique({
+    const post = await db.blogPost.findUnique({
       where: { slug },
       include: {
         author: true,
-        categories: true,
-        tags: true,
+        categories: {
+          include: {
+            category: true,
+          },
+        },
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
         analytics: {
           select: { event: true, metadata: true, createdAt: true },
           orderBy: { createdAt: "desc" },
         },
       },
     });
+
+    return post ? transformBlogPost(post) : null;
   }
 
   static async getFeatured(limit = 3): Promise<BlogPostWithRelations[]> {
-    return db.blogPost.findMany({
+    const posts = await db.blogPost.findMany({
       where: {
         featured: true,
         publishedAt: { not: null },
       },
       include: {
         author: true,
-        categories: true,
-        tags: true,
+        categories: {
+          include: {
+            category: true,
+          },
+        },
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
         analytics: {
           select: { event: true, metadata: true, createdAt: true },
           orderBy: { createdAt: "desc" },
@@ -209,6 +265,8 @@ export class BlogQueries {
       orderBy: { publishedAt: "desc" },
       take: limit,
     });
+
+    return posts.map(transformBlogPost);
   }
 
   static async incrementViewCount(id: string) {
@@ -228,7 +286,7 @@ export class BlogQueries {
   }
 
   static async search(query: string, limit = 10) {
-    return db.blogPost.findMany({
+    const posts = await db.blogPost.findMany({
       where: {
         AND: [
           { publishedAt: { not: null } },
@@ -243,12 +301,22 @@ export class BlogQueries {
       },
       include: {
         author: true,
-        categories: true,
-        tags: true,
+        categories: {
+          include: {
+            category: true,
+          },
+        },
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
       },
       orderBy: { publishedAt: "desc" },
       take: limit,
     });
+
+    return posts.map(transformBlogPost);
   }
 }
 
@@ -278,7 +346,14 @@ export class GitHubQueries {
 
   static async updateRepository(
     githubId: number,
-    data: Partial<GitHubRepository>
+    data: Partial<Omit<GitHubRepository, 'id' | 'githubId' | 'lastSyncAt'>> & {
+      name: string;
+      fullName: string;
+      htmlUrl: string;
+      cloneUrl: string;
+      createdAt: Date;
+      updatedAt: Date;
+    }
   ) {
     return db.gitHubRepository.upsert({
       where: { githubId },
@@ -288,9 +363,23 @@ export class GitHubQueries {
       },
       create: {
         githubId,
-        ...data,
+        name: data.name,
+        fullName: data.fullName,
+        htmlUrl: data.htmlUrl,
+        cloneUrl: data.cloneUrl,
+        createdAt: data.createdAt,
+        updatedAt: data.updatedAt,
+        description: data.description || null,
+        language: data.language || null,
+        starCount: data.starCount || 0,
+        forkCount: data.forkCount || 0,
+        watcherCount: data.watcherCount || 0,
+        isPrivate: data.isPrivate || false,
+        isFork: data.isFork || false,
+        isArchived: data.isArchived || false,
+        pushedAt: data.pushedAt || null,
         lastSyncAt: new Date(),
-      } as any,
+      },
     });
   }
 
@@ -621,8 +710,8 @@ export class ContactQueries {
 
     return db.contactSubmission.findMany({
       where: {
-        ...(status && { status: status as any }),
-        ...(type && { type: type as any }),
+        ...(status && { status: status as ContactStatus }),
+        ...(type && { type: type as ContactType }),
         ...(responded !== undefined && { responded }),
       },
       orderBy: { createdAt: "desc" },

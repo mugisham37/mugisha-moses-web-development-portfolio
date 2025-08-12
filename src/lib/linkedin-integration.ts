@@ -55,6 +55,7 @@ export class LinkedInIntegration {
       // });
 
       // For now, return mock data
+      console.log(`Fetching recommendations for profile: ${profileId}`);
       return this.getMockRecommendations();
     } catch (error) {
       console.error("Error fetching LinkedIn recommendations:", error);
@@ -78,6 +79,7 @@ export class LinkedInIntegration {
       // This would involve searching connections by email or name
 
       // For now, return mock verification
+      console.log(`Verifying connection for email: ${clientEmail}`);
       return Math.random() > 0.5; // 50% chance for demo purposes
     } catch (error) {
       console.error("Error verifying LinkedIn connection:", error);

@@ -2,11 +2,12 @@
 
 import { useEffect } from "react";
 import { useAnalytics } from "./analytics-provider";
+import type { ConversionMetadata } from "@/types/analytics";
 
 interface ConversionTrackerProps {
   step: string;
   value?: number;
-  metadata?: Record<string, any>;
+  metadata?: ConversionMetadata;
   children: React.ReactNode;
 }
 

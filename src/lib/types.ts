@@ -177,6 +177,11 @@ export interface ContactFormData {
   message: string;
   company?: string;
   phone?: string;
+  projectType?: string;
+  budget?: string;
+  timeline?: string;
+  submissionDate?: string;
+  submissionTime?: string;
 }
 
 export interface ContactSubmissionResult {

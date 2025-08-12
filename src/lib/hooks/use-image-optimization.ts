@@ -4,7 +4,6 @@ import { useState, useCallback, useRef } from "react";
 import {
   compressImage,
   extractImageMetadata,
-  ImageOptimizationOptions,
   ImageMetadata,
 } from "@/lib/image-optimization";
 
@@ -65,7 +64,7 @@ export function useImageOptimization(
             // Extract metadata
             const metadata = await extractImageMetadata(file);
 
-            let optimizedFile: OptimizedFile = {
+            const optimizedFile: OptimizedFile = {
               original: file,
               metadata,
               compressionRatio: 0,
@@ -73,11 +72,14 @@ export function useImageOptimization(
 
             // Compress if enabled and it's an image
             if (enableCompression && file.type.startsWith("image/")) {
-              const compressionOptions: ImageOptimizationOptions = {
+              const compressionOptions = {
                 quality,
-                width: maxWidth,
-                height: maxHeight,
-                format: format === "auto" ? undefined : format,
+                maxWidth,
+                maxHeight,
+                format:
+                  format === "auto"
+                    ? undefined
+                    : (format as "webp" | "jpeg" | "png"),
               };
 
               const compressed = await compressImage(file, compressionOptions);

@@ -241,7 +241,7 @@ export function validateForm<T>(
     if (error instanceof z.ZodError) {
       const formErrors: FormErrors = {};
 
-      error.errors.forEach((err) => {
+      error.issues.forEach((err: z.ZodIssue) => {
         const field = err.path.join(".");
         if (!formErrors[field]) {
           formErrors[field] = [];

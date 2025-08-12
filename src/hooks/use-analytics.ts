@@ -2,12 +2,7 @@
 
 import { useEffect } from "react";
 import { useAnalytics as useAnalyticsProvider } from "@/components/analytics/analytics-provider";
-
-interface AnalyticsEvent {
-  event: string;
-  postId?: string;
-  metadata?: Record<string, any>;
-}
+import type { AnalyticsEvent, AnalyticsMetadata } from "@/types/analytics";
 
 export function useAnalytics() {
   const {

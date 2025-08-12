@@ -42,7 +42,7 @@ export interface SystemHealthMetrics {
 class PerformanceMonitor {
   private static instance: PerformanceMonitor;
   private metrics: PerformanceMetric[] = [];
-  private alertThresholds = new Map<string, number>();
+
   private isMonitoring = false;
 
   static getInstance(): PerformanceMonitor {
@@ -153,10 +153,7 @@ class PerformanceMonitor {
 
   // Get performance summary
   getPerformanceSummary(timeRange: number = 3600000): {
-    metrics: Record<
-      PerformanceMetricType,
-      { avg: number; p95: number; count: number }
-    >;
+    metrics: Record<string, { avg: number; p95: number; count: number }>;
     alerts: Array<{ type: string; message: string; timestamp: Date }>;
   } {
     const cutoff = new Date(Date.now() - timeRange);
@@ -199,7 +196,7 @@ class PerformanceMonitor {
       }
     }
 
-    return { metrics: metrics as any, alerts };
+    return { metrics, alerts };
   }
 
   // Check performance thresholds and trigger alerts
@@ -333,7 +330,7 @@ class PerformanceMonitor {
         ? "needs-improvement"
         : "good";
 
-    return { lcp, fid, cls, overall } as any;
+    return { lcp, fid, cls, overall };
   }
 }
 
@@ -370,7 +367,7 @@ export function measureExecutionTime<T>(
 }
 
 // Middleware for API performance monitoring
-export function withPerformanceMonitoring<T extends any[], R>(
+export function withPerformanceMonitoring<T extends unknown[], R>(
   fn: (...args: T) => Promise<R>,
   name: string
 ) {

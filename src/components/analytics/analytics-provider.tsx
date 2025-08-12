@@ -1,28 +1,33 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { ConsentBanner } from "./consent-banner";
 import { PerformanceMonitor } from "./performance-monitor";
 import { ABTestProvider } from "./ab-test-provider";
+import type {
+  AnalyticsMetadata,
+  ConsentTypes,
+  SessionData,
+  ConsentData,
+} from "@/types/analytics";
 
 interface AnalyticsContextType {
   sessionId: string;
   hasConsent: boolean;
-  consentTypes: {
-    necessary: boolean;
-    analytics: boolean;
-    marketing: boolean;
-    functional: boolean;
-  };
-  updateConsent: (
-    consent: Partial<AnalyticsContextType["consentTypes"]>
-  ) => void;
-  trackEvent: (event: string, data?: Record<string, any>) => void;
-  trackPageView: (path: string, metadata?: Record<string, any>) => void;
+  consentTypes: ConsentTypes;
+  updateConsent: (consent: Partial<ConsentTypes>) => void;
+  trackEvent: (event: string, data?: AnalyticsMetadata) => void;
+  trackPageView: (path: string, metadata?: AnalyticsMetadata) => void;
   trackConversion: (
     type: string,
     value?: number,
-    metadata?: Record<string, any>
+    metadata?: AnalyticsMetadata
   ) => void;
 }
 
@@ -44,56 +49,16 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
   const [sessionId, setSessionId] = useState<string>("");
   const [hasConsent, setHasConsent] = useState<boolean>(false);
   const [showConsentBanner, setShowConsentBanner] = useState<boolean>(false);
-  const [consentTypes, setConsentTypes] = useState({
+  const [consentTypes, setConsentTypes] = useState<ConsentTypes>({
     necessary: true,
     analytics: false,
     marketing: false,
     functional: true,
   });
 
-  useEffect(() => {
-    // Generate or retrieve session ID
-    const generateSessionId = () => {
-      const stored = localStorage.getItem("analytics_session_id");
-      if (stored) {
-        const session = JSON.parse(stored);
-        const now = Date.now();
-        // Session expires after 30 minutes of inactivity
-        if (now - session.lastActivity < 30 * 60 * 1000) {
-          session.lastActivity = now;
-          localStorage.setItem("analytics_session_id", JSON.stringify(session));
-          return session.id;
-        }
-      }
+  const initializeSession = useCallback(async () => {
+    if (!sessionId) return;
 
-      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      const sessionData = {
-        id: newSessionId,
-        created: Date.now(),
-        lastActivity: Date.now(),
-      };
-      localStorage.setItem("analytics_session_id", JSON.stringify(sessionData));
-      return newSessionId;
-    };
-
-    setSessionId(generateSessionId());
-
-    // Check for existing consent
-    const storedConsent = localStorage.getItem("analytics_consent");
-    if (storedConsent) {
-      const consent = JSON.parse(storedConsent);
-      setConsentTypes(consent.types);
-      setHasConsent(consent.types.analytics || consent.types.marketing);
-    } else {
-      // Show consent banner for new users
-      setShowConsentBanner(true);
-    }
-
-    // Initialize session tracking
-    initializeSession();
-  }, []);
-
-  const initializeSession = async () => {
     try {
       await fetch("/api/analytics/session", {
         method: "POST",
@@ -108,16 +73,61 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     } catch (error) {
       console.error("Failed to initialize session:", error);
     }
-  };
+  }, [sessionId]);
 
-  const updateConsent = (newConsent: Partial<typeof consentTypes>) => {
+  useEffect(() => {
+    // Generate or retrieve session ID
+    const generateSessionId = () => {
+      const stored = localStorage.getItem("analytics_session_id");
+      if (stored) {
+        const session: SessionData = JSON.parse(stored);
+        const now = Date.now();
+        // Session expires after 30 minutes of inactivity
+        if (now - session.lastActivity < 30 * 60 * 1000) {
+          session.lastActivity = now;
+          localStorage.setItem("analytics_session_id", JSON.stringify(session));
+          return session.id;
+        }
+      }
+
+      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+      const sessionData: SessionData = {
+        id: newSessionId,
+        created: Date.now(),
+        lastActivity: Date.now(),
+      };
+      localStorage.setItem("analytics_session_id", JSON.stringify(sessionData));
+      return newSessionId;
+    };
+
+    setSessionId(generateSessionId());
+
+    // Check for existing consent
+    const storedConsent = localStorage.getItem("analytics_consent");
+    if (storedConsent) {
+      const consent: ConsentData = JSON.parse(storedConsent);
+      setConsentTypes(consent.types);
+      setHasConsent(consent.types.analytics || consent.types.marketing);
+    } else {
+      // Show consent banner for new users
+      setShowConsentBanner(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (sessionId) {
+      initializeSession();
+    }
+  }, [sessionId, initializeSession]);
+
+  const updateConsent = (newConsent: Partial<ConsentTypes>) => {
     const updatedConsent = { ...consentTypes, ...newConsent };
     setConsentTypes(updatedConsent);
     setHasConsent(updatedConsent.analytics || updatedConsent.marketing);
     setShowConsentBanner(false);
 
     // Store consent
-    const consentData = {
+    const consentData: ConsentData = {
       types: updatedConsent,
       timestamp: Date.now(),
       version: "1.0",
@@ -135,7 +145,7 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     }).catch(console.error);
   };
 
-  const trackEvent = async (event: string, data?: Record<string, any>) => {
+  const trackEvent = async (event: string, data?: AnalyticsMetadata) => {
     if (!consentTypes.analytics && !consentTypes.necessary) return;
 
     try {
@@ -155,10 +165,7 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     }
   };
 
-  const trackPageView = async (
-    path: string,
-    metadata?: Record<string, any>
-  ) => {
+  const trackPageView = async (path: string, metadata?: AnalyticsMetadata) => {
     // Page views are considered necessary for basic functionality
     try {
       await fetch("/api/analytics/pageview", {
@@ -180,7 +187,7 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
   const trackConversion = async (
     type: string,
     value?: number,
-    metadata?: Record<string, any>
+    metadata?: AnalyticsMetadata
   ) => {
     if (!consentTypes.analytics) return;
 

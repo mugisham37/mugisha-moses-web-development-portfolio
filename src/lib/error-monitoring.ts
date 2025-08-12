@@ -8,7 +8,7 @@ export interface ErrorContext {
   timestamp?: string;
   buildVersion?: string;
   environment?: string;
-  additionalData?: Record<string, any>;
+  additionalData?: Record<string, unknown>;
 }
 
 export interface ErrorReport {
@@ -29,7 +29,7 @@ export interface PerformanceMetric {
   value: number;
   unit: string;
   timestamp: string;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
 }
 
 class ErrorMonitoringService {
@@ -128,10 +128,11 @@ class ErrorMonitoringService {
       try {
         const fidObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
-          entries.forEach((entry: any) => {
+          entries.forEach((entry: PerformanceEntry) => {
+            const fidEntry = entry as PerformanceEventTiming;
             this.capturePerformanceMetric({
               name: "FID",
-              value: entry.processingStart - entry.startTime,
+              value: fidEntry.processingStart - fidEntry.startTime,
               unit: "ms",
               timestamp: new Date().toISOString(),
             });
@@ -148,9 +149,13 @@ class ErrorMonitoringService {
         let clsValue = 0;
         const clsObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
-          entries.forEach((entry: any) => {
-            if (!entry.hadRecentInput) {
-              clsValue += entry.value;
+          entries.forEach((entry: PerformanceEntry) => {
+            const layoutShiftEntry = entry as PerformanceEntry & {
+              hadRecentInput?: boolean;
+              value?: number;
+            };
+            if (!layoutShiftEntry.hadRecentInput && layoutShiftEntry.value) {
+              clsValue += layoutShiftEntry.value;
             }
           });
 
@@ -175,8 +180,9 @@ class ErrorMonitoringService {
     // Monitor slow resources
     const resourceObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: any) => {
-        const duration = entry.responseEnd - entry.startTime;
+      entries.forEach((entry: PerformanceEntry) => {
+        const resourceEntry = entry as PerformanceResourceTiming;
+        const duration = resourceEntry.responseEnd - resourceEntry.startTime;
 
         // Report slow resources (>2 seconds)
         if (duration > 2000) {
@@ -187,8 +193,8 @@ class ErrorMonitoringService {
             timestamp: new Date().toISOString(),
             context: {
               name: entry.name,
-              type: entry.initiatorType,
-              size: entry.transferSize,
+              type: resourceEntry.initiatorType,
+              size: resourceEntry.transferSize,
             },
           });
         }
@@ -207,11 +213,11 @@ class ErrorMonitoringService {
 
     window.addEventListener("load", () => {
       setTimeout(() => {
-        const navigation = performance.getEntriesByType("navigation")[0] as any;
+        const navigation = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
 
         if (navigation) {
           // Time to Interactive approximation
-          const tti = navigation.domInteractive - navigation.navigationStart;
+          const tti = navigation.domInteractive - navigation.startTime;
           this.capturePerformanceMetric({
             name: "TTI",
             value: tti,
@@ -220,7 +226,7 @@ class ErrorMonitoringService {
           });
 
           // First Contentful Paint
-          const fcp = navigation.responseStart - navigation.navigationStart;
+          const fcp = navigation.responseStart - navigation.startTime;
           this.capturePerformanceMetric({
             name: "FCP",
             value: fcp,
@@ -300,7 +306,7 @@ class ErrorMonitoringService {
     }
   }
 
-  public captureUserAction(action: string, data?: Record<string, any>): void {
+  public captureUserAction(action: string, data?: Record<string, unknown>): void {
     this.captureError(
       new Error(`User Action: ${action}`),
       {
@@ -431,6 +437,13 @@ export function useErrorMonitoring() {
 // Export for React import
 import React from "react";
 
+// React error info type
+interface ReactErrorInfo {
+  componentStack: string;
+  errorBoundary?: React.Component;
+  errorBoundaryStack?: string;
+}
+
 // Higher-order component for error monitoring
 export function withErrorMonitoring<P extends object>(
   Component: React.ComponentType<P>,
@@ -439,7 +452,7 @@ export function withErrorMonitoring<P extends object>(
   return function MonitoredComponent(props: P) {
     const { captureError } = useErrorMonitoring();
 
-    const handleError = (error: Error, errorInfo: any) => {
+    const handleError = (error: Error, errorInfo: ReactErrorInfo) => {
       captureError(error, {
         additionalData: {
           component: componentName || Component.name,
@@ -460,12 +473,12 @@ export function withErrorMonitoring<P extends object>(
 // Simple error boundary for the HOC
 class SimpleErrorBoundary extends React.Component<
   {
-    children: React.ReactNode;
-    onError: (error: Error, errorInfo: any) => void;
+    children?: React.ReactNode;
+    onError: (error: Error, errorInfo: ReactErrorInfo) => void;
   },
   { hasError: boolean }
 > {
-  constructor(props: any) {
+  constructor(props: { children?: React.ReactNode; onError: (error: Error, errorInfo: ReactErrorInfo) => void }) {
     super(props);
     this.state = { hasError: false };
   }
@@ -474,7 +487,7 @@ class SimpleErrorBoundary extends React.Component<
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: ReactErrorInfo) {
     this.props.onError(error, errorInfo);
   }
 
