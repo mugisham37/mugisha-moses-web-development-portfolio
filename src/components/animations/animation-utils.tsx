@@ -194,7 +194,7 @@ export function useIntersectionObserver(
 // Debounced animation trigger
 export function useDebouncedAnimation(delay: number = 100) {
   const [shouldAnimate, setShouldAnimate] = useState(false);
-  const timeoutRef = React.useRef<NodeJS.Timeout>();
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   const trigger = React.useCallback(() => {
     if (timeoutRef.current) {

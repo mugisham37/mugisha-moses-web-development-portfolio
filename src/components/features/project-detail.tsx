@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { ImageGallery } from "@/components/ui/image-gallery";
 import { ResponsiveImage } from "@/components/ui/responsive-image";
@@ -12,11 +12,6 @@ import {
   Heart,
   Calendar,
   User,
-  ChevronLeft,
-  ChevronRight,
-  X,
-  Play,
-  Pause,
 } from "lucide-react";
 import { ProjectWithRelations } from "@/lib/types";
 import { useProjectAnalytics } from "@/lib/hooks/use-project-analytics";

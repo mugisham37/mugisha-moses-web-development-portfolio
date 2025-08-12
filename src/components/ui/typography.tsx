@@ -17,6 +17,10 @@ const typographyVariants = cva("", {
       small: "font-sans text-sm leading-relaxed",
       caption: "font-mono text-xs uppercase tracking-wider",
       code: "font-mono text-sm bg-brutalist-charcoal-100 px-2 py-1 border border-white",
+      // Additional variants for compatibility
+      sm: "font-sans text-sm leading-relaxed",
+      xs: "font-sans text-xs leading-relaxed",
+      xl: "font-mono font-bold uppercase tracking-tight text-5xl leading-tight",
     },
     weight: {
       normal: "font-normal",
@@ -80,9 +84,13 @@ function getDefaultElement(variant: TypographyProps["variant"]): React.ElementTy
       return "h6";
     case "caption":
     case "small":
+    case "sm":
+    case "xs":
       return "small";
     case "code":
       return "code";
+    case "xl":
+      return "h2";
     default:
       return "p";
   }

@@ -51,7 +51,7 @@ export function ContactFormSelector({
   const [selectedForm, setSelectedForm] = useState<FormType>(
     defaultForm || null
   );
-  const [serviceContext, setServiceContext] = useState<{
+  const [, setServiceContext] = useState<{
     service?: string;
     tier?: string;
     type?: string;

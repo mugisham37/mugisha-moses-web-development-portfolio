@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -9,8 +9,42 @@ import {
   useMotionValue,
   useVelocity,
   useAnimationFrame,
+  MotionValue,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
+
+// Custom hook for layer transforms
+function useLayerTransforms(
+  scrollYProgress: MotionValue<number>,
+  layers: Array<{ speed: number }>
+) {
+  const transforms = layers.map((layer) => {
+    const y = useTransform(scrollYProgress, [0, 1], [0, layer.speed * -100]);
+    return useSpring(y, { stiffness: 100, damping: 30 });
+  });
+  return transforms;
+}
+
+// Custom hook for shape transforms
+function useShapeTransforms(
+  scrollYProgress: MotionValue<number>,
+  shapes: Array<{ speed: number }>
+) {
+  const transforms = shapes.map((shape) => {
+    const y = useTransform(scrollYProgress, [0, 1], [0, shape.speed * -200]);
+    const rotate = useTransform(
+      scrollYProgress,
+      [0, 1],
+      [0, shape.speed * 360]
+    );
+
+    const springY = useSpring(y, { stiffness: 100, damping: 30 });
+    const springRotate = useSpring(rotate, { stiffness: 100, damping: 30 });
+
+    return { y: springY, rotate: springRotate };
+  });
+  return transforms;
+}
 
 interface ParallaxContainerProps {
   children: React.ReactNode;
@@ -30,7 +64,7 @@ export function ParallaxContainer({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: offset as any,
+    offset: offset,
   });
 
   const y = useTransform(
@@ -82,15 +116,11 @@ export function BackgroundParallax({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"] as any,
+    offset: ["start end", "end start"],
   });
 
-  // Pre-calculate transforms for all layers
-  const layerTransforms = layers.map((layer) => {
-    const y = useTransform(scrollYProgress, [0, 1], [0, layer.speed * -100]);
-    const springY = useSpring(y, { stiffness: 100, damping: 30 });
-    return springY;
-  });
+  // Use custom hook for layer transforms
+  const layerTransforms = useLayerTransforms(scrollYProgress, layers);
 
   return (
     <div
@@ -134,7 +164,7 @@ export function ParallaxText({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"] as any,
+    offset: ["start end", "end start"],
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, speed * -100]);
@@ -365,23 +395,11 @@ export function BrutalistParallaxBackground({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"] as any,
+    offset: ["start end", "end start"],
   });
 
-  // Pre-calculate transforms for all shapes
-  const shapeTransforms = shapes.map((shape) => {
-    const y = useTransform(scrollYProgress, [0, 1], [0, shape.speed * -200]);
-    const rotate = useTransform(
-      scrollYProgress,
-      [0, 1],
-      [0, shape.speed * 360]
-    );
-
-    const springY = useSpring(y, { stiffness: 100, damping: 30 });
-    const springRotate = useSpring(rotate, { stiffness: 100, damping: 30 });
-
-    return { y: springY, rotate: springRotate };
-  });
+  // Use custom hook for shape transforms
+  const shapeTransforms = useShapeTransforms(scrollYProgress, shapes);
 
   return (
     <div
@@ -427,7 +445,7 @@ export function ParallaxSection({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"] as any,
+    offset: ["start end", "end start"],
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, speed * -100]);

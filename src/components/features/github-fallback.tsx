@@ -1,14 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import { useOnlineStatus } from "@/lib/offline-detection";
+import type {
+  GitHubRepository,
+  ContributionData,
+  GitHubUserStats,
+} from "@/lib/github-fallbacks";
 
 interface GitHubFallbackProps {
   children: React.ReactNode;
-  fallbackData?: any;
+  fallbackData?: unknown;
   errorMessage?: string;
   showRetry?: boolean;
   onRetry?: () => void;
@@ -106,7 +111,11 @@ export function GitHubFallback({
 }
 
 interface GitHubFallbackContentProps {
-  data: any;
+  data: {
+    repositories?: GitHubRepository[];
+    contributions?: ContributionData;
+    userStats?: GitHubUserStats;
+  };
 }
 
 function GitHubFallbackContent({ data }: GitHubFallbackContentProps) {
@@ -125,7 +134,7 @@ function GitHubFallbackContent({ data }: GitHubFallbackContentProps) {
   return <GitHubPlaceholderContent />;
 }
 
-function RepositoriesFallback({ repositories }: { repositories: any[] }) {
+function RepositoriesFallback({ repositories }: { repositories: GitHubRepository[] }) {
   return (
     <div className="space-y-4">
       <Typography variant="h3" className="text-muted-foreground">
@@ -159,7 +168,7 @@ function RepositoriesFallback({ repositories }: { repositories: any[] }) {
   );
 }
 
-function ContributionsFallback({ contributions }: { contributions: any }) {
+function ContributionsFallback({ contributions }: { contributions: ContributionData }) {
   return (
     <div className="space-y-4">
       <Typography variant="h3" className="text-muted-foreground">
@@ -205,7 +214,7 @@ function ContributionsFallback({ contributions }: { contributions: any }) {
   );
 }
 
-function UserStatsFallback({ stats }: { stats: any }) {
+function UserStatsFallback({ stats }: { stats: GitHubUserStats }) {
   return (
     <div className="space-y-4">
       <Typography variant="h3" className="text-muted-foreground">
@@ -308,7 +317,7 @@ export function useGitHubWithFallback<T>(
   const [error, setError] = useState<string | null>(null);
   const { isOnline } = useOnlineStatus();
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (!isOnline) {
       // Try to get cached data
       const cached = localStorage.getItem(cacheKey);
@@ -354,11 +363,11 @@ export function useGitHubWithFallback<T>(
     } finally {
       setLoading(false);
     }
-  };
+  }, [isOnline, cacheKey, fallbackData, fetchFunction]);
 
   useEffect(() => {
     fetchData();
-  }, [isOnline]);
+  }, [isOnline, fetchData]);
 
   return {
     data,

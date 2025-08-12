@@ -66,7 +66,6 @@ export function ConsultationBookingForm({
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [availableSlots, setAvailableSlots] = useState<any[]>([]);
 
   // Get minimum date (tomorrow)
   const getMinDate = () => {
@@ -115,7 +114,8 @@ export function ConsultationBookingForm({
       const result = await response.json();
 
       if (result.success) {
-        setAvailableSlots(result.availableSlots);
+        // Available slots would be processed here
+        console.log("Available slots:", result.availableSlots);
       }
     } catch (error) {
       console.error("Failed to fetch available slots:", error);
@@ -127,11 +127,14 @@ export function ConsultationBookingForm({
       consultationBookingSchema.parse(formData);
       setErrors({});
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       const newErrors: FormErrors = {};
-      error.errors?.forEach((err: any) => {
-        newErrors[err.path[0]] = err.message;
-      });
+      if (error && typeof error === 'object' && 'errors' in error) {
+        const validationError = error as { errors?: Array<{ path: string[]; message: string }> };
+        validationError.errors?.forEach((err: { path: string[]; message: string }) => {
+          newErrors[err.path[0]] = err.message;
+        });
+      }
       setErrors(newErrors);
       return false;
     }
@@ -179,10 +182,10 @@ export function ConsultationBookingForm({
       } else {
         throw new Error(result.error || "Booking failed");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Consultation booking error:", error);
       const errorMessage =
-        error.message || "Failed to book consultation. Please try again.";
+        error instanceof Error ? error.message : "Failed to book consultation. Please try again.";
       setErrors({ submit: errorMessage });
       onError?.(errorMessage);
     } finally {
@@ -199,7 +202,7 @@ export function ConsultationBookingForm({
               CONSULTATION BOOKED!
             </Typography>
             <Typography variant="body" className="mb-4">
-              Thank you for booking a consultation. I'll confirm your preferred
+              Thank you for booking a consultation. I&apos;ll confirm your preferred
               time slot and send you a calendar invite within 24 hours.
             </Typography>
             <div className="mb-6 rounded-none border-2 border-black bg-black/20 p-4">

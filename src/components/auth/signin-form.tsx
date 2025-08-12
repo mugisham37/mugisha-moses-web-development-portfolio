@@ -72,7 +72,7 @@ export function SignInForm({ callbackUrl, error }: SignInFormProps) {
     setIsLoading(true);
     try {
       await signIn(provider, { callbackUrl: callbackUrl || "/dashboard" });
-    } catch (_error) {
+    } catch {
       setFormError("OAuth sign in failed");
       setIsLoading(false);
     }

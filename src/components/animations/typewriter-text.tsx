@@ -184,7 +184,7 @@ export function StaggeredTypewriter({
   wordClassName = "",
   onComplete,
 }: StaggeredTypewriterProps) {
-  const [_completedWords, setCompletedWords] = useState(0);
+  const [, setCompletedWords] = useState(0);
 
   const handleWordComplete = useCallback(() => {
     setCompletedWords((prev) => {

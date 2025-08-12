@@ -53,7 +53,7 @@ export function ProjectSearch({
 
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   // Load recent searches from localStorage
   useEffect(() => {
@@ -95,7 +95,7 @@ export function ProjectSearch({
     setLoading(true);
     try {
       const result = await searchProjects(searchQuery, {}, 8);
-      setResults(result);
+      setResults(result as SearchResult);
     } catch (error) {
       console.error("Search failed:", error);
       setResults({ projects: [], totalCount: 0, hasMore: false });
@@ -293,6 +293,7 @@ export function ProjectSearch({
                       <div className="flex items-start gap-3">
                         {project.thumbnail && (
                           <div className="h-12 w-12 flex-shrink-0 overflow-hidden bg-gray-800">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={project.thumbnail}
                               alt={project.title}

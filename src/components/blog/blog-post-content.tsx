@@ -12,11 +12,6 @@ interface BlogPostContentProps {
   };
 }
 
-interface CodeBlockProps {
-  children: string;
-  className?: string;
-}
-
 // Code block and inline code components are now handled by the enhanced markdown processing
 
 export function BlogPostContent({ post }: BlogPostContentProps) {
@@ -148,7 +143,8 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
     // Handle code blocks after content is rendered
     const codeBlocks = document.querySelectorAll(".code-block");
     codeBlocks.forEach((block) => {
-      const language = block.getAttribute("data-language") || "text";
+      // Get language for syntax highlighting (currently unused)
+      // const language = block.getAttribute("data-language") || "text";
       const code = block.textContent || "";
 
       // Create a container for the syntax highlighter

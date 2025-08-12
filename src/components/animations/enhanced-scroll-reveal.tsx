@@ -8,6 +8,7 @@ import {
   useTransform,
   useSpring,
   Variants,
+  Transition,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -31,11 +32,9 @@ const getEnhancedVariants = (
   distance: number,
   brutalistEffect: boolean = false
 ): Variants => {
-  const baseTransition = {
+  const baseTransition: Transition = {
     duration: 0.8,
-    ease: brutalistEffect
-      ? ([0.4, 0, 0.2, 1] as [number, number, number, number])
-      : ([0.25, 0.46, 0.45, 0.94] as [number, number, number, number]),
+    ease: brutalistEffect ? [0.4, 0, 0.2, 1] : [0.25, 0.46, 0.45, 0.94],
   };
 
   const brutalistTransform = brutalistEffect ? { rotateX: 5, rotateY: 2 } : {};
@@ -53,7 +52,7 @@ const getEnhancedVariants = (
           y: 0,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition as any,
+          transition: baseTransition,
         },
       };
     case "down":
@@ -68,7 +67,7 @@ const getEnhancedVariants = (
           y: 0,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition as any,
+          transition: baseTransition,
         },
       };
     case "left":
@@ -83,7 +82,7 @@ const getEnhancedVariants = (
           x: 0,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition as any,
+          transition: baseTransition,
         },
       };
     case "right":
@@ -98,7 +97,7 @@ const getEnhancedVariants = (
           x: 0,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition as any,
+          transition: baseTransition,
         },
       };
     case "scale":
@@ -113,7 +112,7 @@ const getEnhancedVariants = (
           scale: 1,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition as any,
+          transition: baseTransition,
         },
       };
     case "rotate":
@@ -127,14 +126,14 @@ const getEnhancedVariants = (
           opacity: 1,
           rotate: 0,
           scale: 1,
-          transition: baseTransition as any,
+          transition: baseTransition,
         },
       };
     case "fade":
     default:
       return {
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: baseTransition as any },
+        visible: { opacity: 1, transition: baseTransition },
       };
   }
 };
@@ -163,14 +162,14 @@ export function EnhancedScrollReveal({
   const variants = getEnhancedVariants(direction, distance, brutalistEffect);
 
   // Override duration and delay in variants
-  const customVariants = {
+  const customVariants: Variants = {
     ...variants,
     visible: {
       ...variants.visible,
       transition: {
-        ...variants.visible.transition,
         duration,
         delay,
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };

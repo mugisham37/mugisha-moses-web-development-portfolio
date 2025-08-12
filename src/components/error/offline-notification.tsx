@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 
 export function OfflineNotification() {
-  const { showNotification, notificationType, isOnline, hideNotification } =
+  const { showNotification, notificationType, hideNotification } =
     useOfflineNotification();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -134,17 +134,35 @@ export function ConnectionStatus() {
 
 // Network quality indicator
 export function NetworkQualityIndicator() {
-  const [networkQuality, setNetworkQuality] = useState<
-    "fast" | "slow" | "offline"
-  >("fast");
   const [showIndicator, setShowIndicator] = useState(false);
 
   useEffect(() => {
     // Check if Network Information API is available
+    interface ExtendedNavigator extends Navigator {
+      connection?: {
+        effectiveType: string;
+        downlink: number;
+        addEventListener: (type: string, listener: () => void) => void;
+        removeEventListener: (type: string, listener: () => void) => void;
+      };
+      mozConnection?: {
+        effectiveType: string;
+        downlink: number;
+        addEventListener: (type: string, listener: () => void) => void;
+        removeEventListener: (type: string, listener: () => void) => void;
+      };
+      webkitConnection?: {
+        effectiveType: string;
+        downlink: number;
+        addEventListener: (type: string, listener: () => void) => void;
+        removeEventListener: (type: string, listener: () => void) => void;
+      };
+    }
+
     const connection =
-      (navigator as any).connection ||
-      (navigator as any).mozConnection ||
-      (navigator as any).webkitConnection;
+      (navigator as ExtendedNavigator).connection ||
+      (navigator as ExtendedNavigator).mozConnection ||
+      (navigator as ExtendedNavigator).webkitConnection;
 
     if (connection) {
       const updateConnectionInfo = () => {
@@ -164,7 +182,6 @@ export function NetworkQualityIndicator() {
             break;
         }
 
-        setNetworkQuality(quality);
         setShowIndicator(quality === "slow");
       };
 

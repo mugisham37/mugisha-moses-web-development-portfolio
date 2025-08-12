@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useInView, Variants } from "framer-motion";
+import { motion, useInView, Variants, Transition } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface ScrollRevealProps {
@@ -20,7 +20,7 @@ const getVariants = (
   direction: ScrollRevealProps["direction"],
   distance: number
 ): Variants => {
-  const baseTransition = {
+  const baseTransition: Transition = {
     duration: 0.8,
     ease: [0.25, 0.46, 0.45, 0.94] as const,
   };
@@ -29,33 +29,33 @@ const getVariants = (
     case "up":
       return {
         hidden: { opacity: 0, y: distance },
-        visible: { opacity: 1, y: 0, transition: baseTransition as any },
+        visible: { opacity: 1, y: 0, transition: baseTransition },
       };
     case "down":
       return {
         hidden: { opacity: 0, y: -distance },
-        visible: { opacity: 1, y: 0, transition: baseTransition as any },
+        visible: { opacity: 1, y: 0, transition: baseTransition },
       };
     case "left":
       return {
         hidden: { opacity: 0, x: distance },
-        visible: { opacity: 1, x: 0, transition: baseTransition as any },
+        visible: { opacity: 1, x: 0, transition: baseTransition },
       };
     case "right":
       return {
         hidden: { opacity: 0, x: -distance },
-        visible: { opacity: 1, x: 0, transition: baseTransition as any },
+        visible: { opacity: 1, x: 0, transition: baseTransition },
       };
     case "scale":
       return {
         hidden: { opacity: 0, scale: 0.8 },
-        visible: { opacity: 1, scale: 1, transition: baseTransition as any },
+        visible: { opacity: 1, scale: 1, transition: baseTransition },
       };
     case "fade":
     default:
       return {
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: baseTransition as any },
+        visible: { opacity: 1, transition: baseTransition },
       };
   }
 };
@@ -81,14 +81,14 @@ export function ScrollReveal({
   const variants = getVariants(direction, distance);
 
   // Override duration in variants
-  const customVariants = {
+  const customVariants: Variants = {
     ...variants,
     visible: {
       ...variants.visible,
       transition: {
-        ...variants.visible.transition,
         duration,
         delay,
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };
@@ -250,7 +250,7 @@ export function CountUpOnScroll({
 }: CountUpOnScrollProps) {
   const [count, setCount] = React.useState(start);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" as any });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   React.useEffect(() => {
     if (!isInView) return;

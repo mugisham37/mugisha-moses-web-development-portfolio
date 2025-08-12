@@ -10,7 +10,7 @@ interface Props {
   children: ReactNode;
   fallback?: React.ComponentType<AppErrorFallbackProps>;
   level?: "page" | "component" | "critical";
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
 }
 
 interface State {
@@ -70,7 +70,7 @@ export class AppErrorBoundary extends Component<Props, State> {
     // Capture error with monitoring service
     errorMonitoring.captureError(
       error,
-      context,
+      context as import("@/lib/error-monitoring").ErrorContext,
       this.props.level === "critical" ? "error" : "warning"
     );
 
@@ -91,7 +91,7 @@ export class AppErrorBoundary extends Component<Props, State> {
     error: Error,
     errorInfo: ErrorInfo,
     errorId: string,
-    context: Record<string, any>
+    context: Record<string, unknown>
   ) => {
     try {
       await fetch("/api/errors", {
@@ -329,7 +329,7 @@ function PageErrorFallback({
             PAGE ERROR
           </Typography>
           <Typography variant="body" className="text-muted-foreground mb-4">
-            This page encountered an error and couldn't load properly.
+            This page encountered an error and couldn&apos;t load properly.
           </Typography>
         </div>
 
@@ -401,7 +401,7 @@ function ComponentErrorFallback({
             COMPONENT ERROR
           </Typography>
           <Typography variant="caption" className="mb-3 text-yellow-200">
-            This component encountered an error and couldn't render properly.
+            This component encountered an error and couldn&apos;t render properly.
           </Typography>
 
           {process.env.NODE_ENV === "development" && (

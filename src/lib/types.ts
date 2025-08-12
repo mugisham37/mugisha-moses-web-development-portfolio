@@ -1,4 +1,6 @@
 // Global type definitions
+import type { JsonValue } from "@prisma/client/runtime/library";
+
 export interface User {
   id: string;
   email: string;
@@ -114,7 +116,7 @@ export interface ProjectCategory {
   id: string;
   name: string;
   slug: string;
-  description?: string;
+  description?: string | null;
   color: string;
   _count?: {
     projects: number;
@@ -135,7 +137,7 @@ export interface ProjectAnalytics {
   id: string;
   projectId: string;
   event: string;
-  metadata?: Record<string, unknown>;
+  metadata?: JsonValue;
   createdAt: Date;
 }
 

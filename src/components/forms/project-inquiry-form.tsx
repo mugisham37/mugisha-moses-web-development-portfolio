@@ -63,11 +63,14 @@ export function ProjectInquiryForm({
       projectInquirySchema.parse(formData);
       setErrors({});
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       const newErrors: FormErrors = {};
-      error.errors?.forEach((err: any) => {
-        newErrors[err.path[0]] = err.message;
-      });
+      if (error && typeof error === 'object' && 'errors' in error) {
+        const validationError = error as { errors?: Array<{ path: string[]; message: string }> };
+        validationError.errors?.forEach((err: { path: string[]; message: string }) => {
+          newErrors[err.path[0]] = err.message;
+        });
+      }
       setErrors(newErrors);
       return false;
     }
@@ -115,10 +118,10 @@ export function ProjectInquiryForm({
       } else {
         throw new Error(result.error || "Submission failed");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Project inquiry submission error:", error);
       const errorMessage =
-        error.message || "Failed to send inquiry. Please try again.";
+        error instanceof Error ? error.message : "Failed to send inquiry. Please try again.";
       setErrors({ submit: errorMessage });
       onError?.(errorMessage);
     } finally {
@@ -135,7 +138,7 @@ export function ProjectInquiryForm({
               PROJECT INQUIRY RECEIVED!
             </Typography>
             <Typography variant="body" className="mb-4">
-              Thank you for your detailed project inquiry. I'll review your
+              Thank you for your detailed project inquiry. I&apos;ll review your
               requirements and get back to you within 24 hours with:
             </Typography>
             <ul className="mx-auto mb-6 max-w-md space-y-2 text-left">

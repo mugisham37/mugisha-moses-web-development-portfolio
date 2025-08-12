@@ -318,3 +318,29 @@ export function validateURL(url: string): boolean {
     return false;
   }
 }
+
+// Re-export types from other modules for centralized access
+export type {
+  FormErrors,
+  ValidationResult,
+  ContactFormData,
+  ProjectInquiryData,
+  ConsultationBookingData,
+  NewsletterData,
+  BlogCommentData,
+  TestimonialSubmissionData,
+} from "@/lib/form-validation";
+
+export type {
+  GitHubRepository,
+  ContributionData,
+  ContributionWeek,
+  ContributionDay,
+  GitHubUserStats,
+} from "@/lib/github-fallbacks";
+
+export type {
+  ErrorContext,
+  ErrorReport,
+  PerformanceMetric,
+} from "@/lib/error-monitoring";

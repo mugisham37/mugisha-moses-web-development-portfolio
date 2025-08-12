@@ -76,11 +76,14 @@ export function ContactForm({
       generalContactSchema.parse(formData);
       setErrors({});
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       const newErrors: FormErrors = {};
-      error.errors?.forEach((err: any) => {
-        newErrors[err.path[0]] = err.message;
-      });
+      if (error && typeof error === 'object' && 'errors' in error) {
+        const validationError = error as { errors?: Array<{ path: string[]; message: string }> };
+        validationError.errors?.forEach((err: { path: string[]; message: string }) => {
+          newErrors[err.path[0]] = err.message;
+        });
+      }
       setErrors(newErrors);
       return false;
     }
@@ -124,10 +127,10 @@ export function ContactForm({
       } else {
         throw new Error(result.error || "Submission failed");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Contact form submission error:", error);
       const errorMessage =
-        error.message || "Failed to send message. Please try again.";
+        error instanceof Error ? error.message : "Failed to send message. Please try again.";
       setErrors({ submit: errorMessage });
       onError?.(errorMessage);
     } finally {
@@ -144,7 +147,7 @@ export function ContactForm({
               MESSAGE SENT!
             </Typography>
             <Typography variant="body" className="mb-6">
-              Thank you for reaching out. I'll get back to you within 24 hours.
+              Thank you for reaching out. I&apos;ll get back to you within 24 hours.
             </Typography>
             <div className="mx-auto h-1 w-16 bg-black"></div>
           </CardContent>
@@ -159,7 +162,7 @@ export function ContactForm({
         <CardHeader>
           <CardTitle>GET IN TOUCH</CardTitle>
           <Typography variant="body" className="text-brutalist-off-white-100">
-            Ready to start your next project? Let's discuss your ideas.
+            Ready to start your next project? Let&apos;s discuss your ideas.
           </Typography>
         </CardHeader>
 
