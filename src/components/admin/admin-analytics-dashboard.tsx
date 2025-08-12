@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   TrendingUp,
   TrendingDown,
@@ -12,8 +12,6 @@ import {
   Monitor,
   Smartphone,
   Tablet,
-  Globe,
-  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,11 +22,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  LineChart,
-  Line,
 } from "recharts";
 
 interface AnalyticsData {
@@ -96,11 +89,7 @@ export function AdminAnalyticsDashboard() {
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState("7d");
 
-  useEffect(() => {
-    loadAnalytics();
-  }, [timeRange]);
-
-  const loadAnalytics = async () => {
+  const loadAnalytics = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(`/api/admin/analytics?range=${timeRange}`);
@@ -113,7 +102,11 @@ export function AdminAnalyticsDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [timeRange]);
+
+  useEffect(() => {
+    loadAnalytics();
+  }, [loadAnalytics]);
 
   const formatNumber = (num: number) => {
     if (num >= 1000000) {
@@ -170,7 +163,7 @@ export function AdminAnalyticsDashboard() {
           {["24h", "7d", "30d", "90d"].map((range) => (
             <Button
               key={range}
-              variant={timeRange === range ? "default" : "ghost"}
+              variant={timeRange === range ? "primary" : "ghost"}
               size="sm"
               onClick={() => setTimeRange(range)}
               className="font-mono uppercase"

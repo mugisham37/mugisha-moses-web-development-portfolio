@@ -420,8 +420,8 @@ export function LinkedInIntegrationAdmin({
           </p>
           <p>2. Add your domain to the authorized redirect URLs</p>
           <p>
-            3. Request access to the "Sign In with LinkedIn" and "Profile API"
-            products
+            3. Request access to the &quot;Sign In with LinkedIn&quot; and
+            &quot;Profile API&quot; products
           </p>
           <p>
             4. Copy your Client ID and Client Secret to your environment

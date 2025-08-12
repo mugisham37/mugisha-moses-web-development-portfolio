@@ -1,7 +1,19 @@
 import { db } from "./db";
-import { BlogPost, BlogCategory, BlogTag } from "./types";
+import { BlogPost, BlogCategory, BlogTag, BlogAnalytics } from "./types";
 
-export async function getAllBlogPosts(): Promise<BlogPost[]> {
+// Extended blog post type for queries
+export interface BlogPostWithRelations extends Omit<BlogPost, 'categories' | 'tags'> {
+  author: {
+    id: string;
+    name: string | null;
+    email: string;
+  };
+  categories: BlogCategory[];
+  tags: BlogTag[];
+  analytics?: BlogAnalytics[];
+}
+
+export async function getAllBlogPosts(): Promise<BlogPostWithRelations[]> {
   try {
     const posts = await db.blogPost.findMany({
       where: {
@@ -20,7 +32,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
           },
         },
         analytics: {
-          select: { event: true, metadata: true, createdAt: true },
+          select: { id: true, postId: true, event: true, metadata: true, createdAt: true },
           take: 5,
           orderBy: { createdAt: "desc" },
         },
@@ -32,8 +44,19 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 
     return posts.map((post) => ({
       ...post,
-      categories: post.categories.map((cat) => cat.category),
+      excerpt: post.excerpt || undefined,
+      publishedAt: post.publishedAt || undefined,
+      author: {
+        id: post.author.id,
+        name: post.author.name,
+        email: post.author.email,
+      },
+      categories: post.categories.map((cat) => ({
+        ...cat.category,
+        description: cat.category.description || undefined,
+      })),
       tags: post.tags.map((tag) => tag.tag),
+      analytics: post.analytics as BlogAnalytics[],
     }));
   } catch (error) {
     console.error("Error fetching blog posts:", error);
@@ -43,7 +66,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 
 export async function getBlogPostBySlug(
   slug: string
-): Promise<BlogPost | null> {
+): Promise<BlogPostWithRelations | null> {
   try {
     const post = await db.blogPost.findUnique({
       where: { slug },
@@ -60,7 +83,7 @@ export async function getBlogPostBySlug(
           },
         },
         analytics: {
-          select: { event: true, metadata: true, createdAt: true },
+          select: { id: true, postId: true, event: true, metadata: true, createdAt: true },
           orderBy: { createdAt: "desc" },
         },
       },
@@ -70,8 +93,19 @@ export async function getBlogPostBySlug(
 
     return {
       ...post,
-      categories: post.categories.map((cat) => cat.category),
+      excerpt: post.excerpt || undefined,
+      publishedAt: post.publishedAt || undefined,
+      author: {
+        id: post.author.id,
+        name: post.author.name,
+        email: post.author.email,
+      },
+      categories: post.categories.map((cat) => ({
+        ...cat.category,
+        description: cat.category.description || undefined,
+      })),
       tags: post.tags.map((tag) => tag.tag),
+      analytics: post.analytics as BlogAnalytics[],
     };
   } catch (error) {
     console.error("Error fetching blog post:", error);

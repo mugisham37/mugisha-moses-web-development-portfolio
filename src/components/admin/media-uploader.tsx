@@ -2,7 +2,8 @@
 
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { Upload, X, Image, File, Loader2 } from "lucide-react";
+import { Upload, X, File, Loader2 } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 interface MediaUploaderProps {
@@ -227,9 +228,11 @@ export function MediaUploader({
                   {/* Preview */}
                   <div className="flex-shrink-0">
                     {isImage(file.file) ? (
-                      <img
+                      <Image
                         src={file.preview}
                         alt={file.file.name}
+                        width={64}
+                        height={64}
                         className="h-16 w-16 border border-white object-cover"
                       />
                     ) : (

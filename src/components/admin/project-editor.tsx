@@ -2,17 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Save,
-  Eye,
-  Upload,
-  X,
-  Plus,
-  Link as LinkIcon,
-  Calendar,
-  Tag,
-  Image as ImageIcon,
-} from "lucide-react";
+import { Save, Eye, X, Plus } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -43,10 +34,11 @@ interface ProjectFormData {
 
 export function ProjectEditor({ project }: ProjectEditorProps) {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<
+    Array<{ id: string; name: string }>
+  >([]);
 
   const [formData, setFormData] = useState<ProjectFormData>({
     title: project?.title || "",
@@ -96,7 +88,10 @@ export function ProjectEditor({ project }: ProjectEditorProps) {
     }
   };
 
-  const handleInputChange = (field: keyof ProjectFormData, value: any) => {
+  const handleInputChange = (
+    field: keyof ProjectFormData,
+    value: string | boolean | string[]
+  ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -219,9 +214,11 @@ export function ProjectEditor({ project }: ProjectEditorProps) {
         <div className="border-4 border-white p-6">
           <div className="space-y-6">
             {formData.thumbnail && (
-              <img
+              <Image
                 src={formData.thumbnail}
                 alt={formData.title}
+                width={800}
+                height={256}
                 className="h-64 w-full border-2 border-white object-cover"
               />
             )}
@@ -330,9 +327,11 @@ export function ProjectEditor({ project }: ProjectEditorProps) {
                   />
                   {formData.thumbnail && (
                     <div className="mt-2 flex items-center gap-2">
-                      <img
+                      <Image
                         src={formData.thumbnail}
                         alt="Thumbnail"
+                        width={64}
+                        height={64}
                         className="h-16 w-16 border-2 border-white object-cover"
                       />
                       <Button
@@ -357,9 +356,11 @@ export function ProjectEditor({ project }: ProjectEditorProps) {
                     <div className="mt-2 grid grid-cols-4 gap-2">
                       {formData.images.map((url, index) => (
                         <div key={index} className="relative">
-                          <img
+                          <Image
                             src={url}
                             alt={`Project image ${index + 1}`}
+                            width={80}
+                            height={80}
                             className="h-20 w-20 border-2 border-white object-cover"
                           />
                           <Button
@@ -483,7 +484,7 @@ export function ProjectEditor({ project }: ProjectEditorProps) {
                     onChange={(e) => setNewTechnology(e.target.value)}
                     placeholder="Add technology..."
                     className="font-mono"
-                    onKeyPress={(e) =>
+                    onKeyDown={(e) =>
                       e.key === "Enter" && handleAddTechnology()
                     }
                   />

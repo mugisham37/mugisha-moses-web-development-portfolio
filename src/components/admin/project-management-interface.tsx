@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Plus, Search, Edit, Trash2, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Image from "next/image";
 import { ProjectWithRelations } from "@/lib/types";
 import { formatDistanceToNow } from "date-fns";
 
@@ -167,9 +168,11 @@ export function ProjectManagementInterface({
                     <td className="p-4">
                       <div className="flex items-center gap-3">
                         {project.thumbnail && (
-                          <img
+                          <Image
                             src={project.thumbnail}
                             alt={project.title}
+                            width={48}
+                            height={48}
                             className="h-12 w-12 border-2 border-white object-cover"
                           />
                         )}

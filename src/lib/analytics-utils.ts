@@ -7,7 +7,7 @@ export interface AnalyticsDateRange {
 
 export function getDateRange(range: string): AnalyticsDateRange {
   const now = new Date();
-  let startDate = new Date();
+  const startDate = new Date();
 
   switch (range) {
     case "1h":
@@ -61,7 +61,7 @@ export async function getPageViewStats(dateRange: AnalyticsDateRange) {
           sessionId: true,
         },
       })
-      .then((result) => result.length),
+      .then((result: Array<{ sessionId: string; _count: { sessionId: number } }>) => result.length),
 
     // Top pages
     db.pageView.groupBy({
@@ -91,7 +91,11 @@ export async function getPageViewStats(dateRange: AnalyticsDateRange) {
   return {
     totalViews,
     uniqueVisitors,
-    topPages: topPages.map((page) => ({
+    topPages: topPages.map((page: {
+      path: string;
+      _count: { path: number };
+      _avg: { timeOnPage: number | null; scrollDepth: number | null };
+    }) => ({
       path: page.path,
       views: page._count.path,
       avgTimeOnPage: Math.round(page._avg.timeOnPage || 0),
@@ -122,17 +126,17 @@ export async function getSessionStats(dateRange: AnalyticsDateRange) {
   const totalSessions = sessions.length;
   const avgDuration =
     sessions
-      .filter((s) => s.duration !== null)
-      .reduce((sum, s) => sum + (s.duration || 0), 0) / totalSessions;
+      .filter((s: { duration: number | null }) => s.duration !== null)
+      .reduce((sum: number, s: { duration: number | null }) => sum + (s.duration || 0), 0) / totalSessions;
 
   const bounceRate =
-    (sessions.filter((s) => s.pageViews <= 1).length / totalSessions) * 100;
+    (sessions.filter((s: { pageViews: number }) => s.pageViews <= 1).length / totalSessions) * 100;
   const conversionRate =
-    (sessions.filter((s) => s.hasConverted).length / totalSessions) * 100;
+    (sessions.filter((s: { hasConverted: boolean }) => s.hasConverted).length / totalSessions) * 100;
 
   // Device breakdown
   const deviceStats = sessions.reduce(
-    (acc, session) => {
+    (acc: Record<string, number>, session: { device: string | null }) => {
       const device = session.device || "unknown";
       acc[device] = (acc[device] || 0) + 1;
       return acc;
@@ -142,7 +146,7 @@ export async function getSessionStats(dateRange: AnalyticsDateRange) {
 
   // Browser breakdown
   const browserStats = sessions.reduce(
-    (acc, session) => {
+    (acc: Record<string, number>, session: { browser: string | null }) => {
       const browser = session.browser || "unknown";
       acc[browser] = (acc[browser] || 0) + 1;
       return acc;
@@ -152,7 +156,7 @@ export async function getSessionStats(dateRange: AnalyticsDateRange) {
 
   // Geographic breakdown
   const geoStats = sessions.reduce(
-    (acc, session) => {
+    (acc: Record<string, number>, session: { country: string | null }) => {
       const country = session.country || "unknown";
       acc[country] = (acc[country] || 0) + 1;
       return acc;
@@ -189,7 +193,8 @@ export async function getConversionStats(dateRange: AnalyticsDateRange) {
 
   // Group by conversion type
   const conversionsByType = conversions.reduce(
-    (acc, conversion) => {
+    (acc: Record<string, { count: number; totalValue: number; pages: Record<string, number> }>, 
+     conversion: { type: string; value: number | null; page: string }) => {
       const type = conversion.type;
       if (!acc[type]) {
         acc[type] = {
@@ -235,7 +240,7 @@ export async function getConversionStats(dateRange: AnalyticsDateRange) {
 
   return {
     totalConversions: conversions.length,
-    totalValue: conversions.reduce((sum, c) => sum + (c.value || 0), 0),
+    totalValue: conversions.reduce((sum: number, c: { value: number | null }) => sum + (c.value || 0), 0),
     conversionsByType,
     funnelData,
   };
@@ -273,15 +278,15 @@ export async function getPerformanceStats(dateRange: AnalyticsDateRange) {
   }
 
   const avgLCP =
-    metrics.reduce((sum, m) => sum + (m.lcp || 0), 0) / metrics.length;
+    metrics.reduce((sum: number, m: { lcp: number | null }) => sum + (m.lcp || 0), 0) / metrics.length;
   const avgFID =
-    metrics.reduce((sum, m) => sum + (m.fid || 0), 0) / metrics.length;
+    metrics.reduce((sum: number, m: { fid: number | null }) => sum + (m.fid || 0), 0) / metrics.length;
   const avgCLS =
-    metrics.reduce((sum, m) => sum + (m.cls || 0), 0) / metrics.length;
+    metrics.reduce((sum: number, m: { cls: number | null }) => sum + (m.cls || 0), 0) / metrics.length;
   const avgFCP =
-    metrics.reduce((sum, m) => sum + (m.fcp || 0), 0) / metrics.length;
+    metrics.reduce((sum: number, m: { fcp: number | null }) => sum + (m.fcp || 0), 0) / metrics.length;
   const avgTTFB =
-    metrics.reduce((sum, m) => sum + (m.ttfb || 0), 0) / metrics.length;
+    metrics.reduce((sum: number, m: { ttfb: number | null }) => sum + (m.ttfb || 0), 0) / metrics.length;
 
   // Performance by page
   const pagePerformance = Object.entries(

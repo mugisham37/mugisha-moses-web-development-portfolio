@@ -179,8 +179,8 @@ model BlogPost {
     authorId String
     author   User   @relation(fields: [authorId], references: [id])
 
-    categories BlogCategory[]
-    tags       BlogTag[]
+    categories BlogPostCategory[]
+    tags       BlogPostTag[]
     analytics  BlogAnalytics[]
 
     @@index([slug])
@@ -201,7 +201,7 @@ model BlogCategory {
     color       String  @default("#FFFF00")
 
     // Relations
-    posts BlogPost[]
+    posts BlogPostCategory[]
 
     @@map("blog_categories")
 }
@@ -213,9 +213,37 @@ model BlogTag {
     slug String @unique
 
     // Relations
-    posts BlogPost[]
+    posts BlogPostTag[]
 
     @@map("blog_tags")
+}
+
+// Blog Post Categories (Join Table)
+model BlogPostCategory {
+    id         String @id @default(cuid())
+    postId     String
+    categoryId String
+
+    // Relations
+    post     BlogPost     @relation(fields: [postId], references: [id], onDelete: Cascade)
+    category BlogCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+    @@unique([postId, categoryId])
+    @@map("blog_post_categories")
+}
+
+// Blog Post Tags (Join Table)
+model BlogPostTag {
+    id     String @id @default(cuid())
+    postId String
+    tagId  String
+
+    // Relations
+    post BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+    tag  BlogTag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+    @@unique([postId, tagId])
+    @@map("blog_post_tags")
 }
 
 // Blog Analytics

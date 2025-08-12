@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from "react";
 import {
   Bold,
   Italic,
-  Underline,
   Link,
   List,
   ListOrdered,
@@ -14,11 +13,6 @@ import {
   Heading1,
   Heading2,
   Heading3,
-  AlignLeft,
-  AlignCenter,
-  AlignRight,
-  Undo,
-  Redo,
   Eye,
   Edit,
 } from "lucide-react";
@@ -39,8 +33,6 @@ export function RichTextEditor({
   placeholder = "Start writing...",
 }: RichTextEditorProps) {
   const [isPreview, setIsPreview] = useState(false);
-  const [selectedText, setSelectedText] = useState("");
-  const editorRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -267,7 +259,7 @@ export function RichTextEditor({
               return <div key={index} className="mx-2 h-6 w-px bg-gray-600" />;
             }
 
-            const Icon = button.icon;
+            const Icon = button.icon!;
             return (
               <Button
                 key={index}

@@ -3,26 +3,15 @@
 import { useState, useEffect } from "react";
 import {
   Calendar,
-  Clock,
   Play,
-  Pause,
   Edit,
   Trash2,
   Plus,
-  Filter,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  format,
-  addDays,
-  startOfWeek,
-  endOfWeek,
-  isSameDay,
-  parseISO,
-} from "date-fns";
+import { format, addDays, startOfWeek, isSameDay, parseISO } from "date-fns";
 
 interface ScheduledContent {
   id: string;
@@ -81,22 +70,6 @@ export function ContentScheduler() {
       }
     } catch (error) {
       console.error("Failed to publish content:", error);
-    }
-  };
-
-  const handleReschedule = async (contentId: string, newDate: string) => {
-    try {
-      const response = await fetch(`/api/admin/scheduler/${contentId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ scheduledAt: newDate }),
-      });
-
-      if (response.ok) {
-        await loadScheduledContent();
-      }
-    } catch (error) {
-      console.error("Failed to reschedule content:", error);
     }
   };
 
@@ -165,7 +138,7 @@ export function ContentScheduler() {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <Button
-              variant={viewMode === "calendar" ? "default" : "ghost"}
+              variant={viewMode === "calendar" ? "primary" : "ghost"}
               size="sm"
               onClick={() => setViewMode("calendar")}
             >
@@ -173,7 +146,7 @@ export function ContentScheduler() {
               CALENDAR
             </Button>
             <Button
-              variant={viewMode === "list" ? "default" : "ghost"}
+              variant={viewMode === "list" ? "primary" : "ghost"}
               size="sm"
               onClick={() => setViewMode("list")}
             >
@@ -183,7 +156,9 @@ export function ContentScheduler() {
 
           <select
             value={filterType}
-            onChange={(e) => setFilterType(e.target.value as any)}
+            onChange={(e) =>
+              setFilterType(e.target.value as "all" | "PROJECT" | "BLOG_POST")
+            }
             className="border-2 border-white bg-black px-4 py-2 font-mono text-white uppercase"
           >
             <option value="all">ALL TYPES</option>

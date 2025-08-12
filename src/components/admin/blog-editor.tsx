@@ -62,13 +62,16 @@ export function BlogEditor({ post }: BlogEditorProps) {
         readingTime: Math.ceil(stats.minutes),
       }));
     }
-  }, []);
+  }, [formData.content]);
 
-  const handleInputChange = (field: keyof BlogFormData, value: any) => {
+  const handleInputChange = (
+    field: keyof BlogFormData,
+    value: string | boolean | number
+  ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
 
     // Auto-generate slug from title
-    if (field === "title" && !post) {
+    if (field === "title" && !post && typeof value === "string") {
       const slug = value
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")

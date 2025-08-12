@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
@@ -37,32 +37,12 @@ export function TestimonialManagement({
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTestimonial, setSelectedTestimonial] =
     useState<TestimonialWithAuthor | null>(null);
-  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     fetchTestimonials();
   }, []);
 
-  useEffect(() => {
-    filterTestimonials();
-  }, [testimonials, filter, searchQuery]);
-
-  const fetchTestimonials = async () => {
-    try {
-      const response = await fetch("/api/testimonials");
-      const data = await response.json();
-
-      if (data.success) {
-        setTestimonials(data.data);
-      }
-    } catch (error) {
-      console.error("Error fetching testimonials:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filterTestimonials = () => {
+  const filterTestimonials = useCallback(() => {
     let filtered = testimonials;
 
     // Apply status filter
@@ -93,6 +73,25 @@ export function TestimonialManagement({
     }
 
     setFilteredTestimonials(filtered);
+  }, [testimonials, filter, searchQuery]);
+
+  useEffect(() => {
+    filterTestimonials();
+  }, [filterTestimonials]);
+
+  const fetchTestimonials = async () => {
+    try {
+      const response = await fetch("/api/testimonials");
+      const data = await response.json();
+
+      if (data.success) {
+        setTestimonials(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching testimonials:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const updateTestimonial = async (
@@ -371,7 +370,7 @@ function TestimonialDetails({
             Content
           </Typography>
           <Typography variant="body" className="leading-relaxed text-gray-300">
-            "{testimonial.content}"
+            &quot;{testimonial.content}&quot;
           </Typography>
         </div>
 

@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export interface APIError {
   code: string;
   message: string;
-  details?: Record<string, any>;
+  details?: Record<string, unknown>;
   timestamp: Date;
   requestId: string;
 }
@@ -15,25 +15,25 @@ export interface ErrorResponse {
   statusCode: number;
 }
 
-export interface SuccessResponse<T = any> {
+export interface SuccessResponse<T = unknown> {
   success: true;
   data: T;
   statusCode: number;
 }
 
-export type APIResponse<T = any> = SuccessResponse<T> | ErrorResponse;
+export type APIResponse<T = unknown> = SuccessResponse<T> | ErrorResponse;
 
 // Error Classes
 export class APIErrorBase extends Error {
   public readonly statusCode: number;
   public readonly code: string;
-  public readonly details?: Record<string, any>;
+  public readonly details?: Record<string, unknown>;
 
   constructor(
     message: string,
     statusCode: number,
     code: string,
-    details?: Record<string, any>
+    details?: Record<string, unknown>
   ) {
     super(message);
     this.name = this.constructor.name;
@@ -44,7 +44,7 @@ export class APIErrorBase extends Error {
 }
 
 export class ValidationError extends APIErrorBase {
-  constructor(message: string, details?: Record<string, any>) {
+  constructor(message: string, details?: Record<string, unknown>) {
     super(message, 400, "VALIDATION_ERROR", details);
   }
 }
@@ -138,7 +138,7 @@ export function handleAPIError(error: unknown): NextResponse<ErrorResponse> {
 
   // Handle Prisma errors
   if (error && typeof error === "object" && "code" in error) {
-    const prismaError = error as any;
+    const prismaError = error as { code: string; meta?: Record<string, unknown> };
 
     switch (prismaError.code) {
       case "P2002":
@@ -238,7 +238,7 @@ export async function logError(
     requestId?: string;
     url?: string;
     userAgent?: string;
-    additionalData?: Record<string, any>;
+    additionalData?: Record<string, unknown>;
   }
 ) {
   const errorLog = {
@@ -273,7 +273,7 @@ export async function logError(
 }
 
 // Async Error Handler Wrapper
-export function withErrorHandling<T extends any[], R>(
+export function withErrorHandling<T extends unknown[], R>(
   handler: (...args: T) => Promise<R>
 ) {
   return async (...args: T): Promise<R | NextResponse<ErrorResponse>> => {
@@ -287,7 +287,7 @@ export function withErrorHandling<T extends any[], R>(
 
 // Validation Helper
 export function validateRequired(
-  data: Record<string, any>,
+  data: Record<string, unknown>,
   requiredFields: string[]
 ): void {
   const missingFields = requiredFields.filter(

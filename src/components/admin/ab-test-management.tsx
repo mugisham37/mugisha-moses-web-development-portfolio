@@ -12,8 +12,8 @@ interface ABTestExperiment {
   trafficSplit: number;
   targetPages: string[];
   component: string;
-  controlVersion: any;
-  variantVersion: any;
+  controlVersion: Record<string, unknown>;
+  variantVersion: Record<string, unknown>;
   primaryGoal: string;
   successMetric: string;
   controlConversions: number;

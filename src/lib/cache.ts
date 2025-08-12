@@ -4,6 +4,7 @@
  */
 
 import { unstable_cache } from "next/cache";
+import { ProjectFilters } from "./types";
 
 // Cache configuration
 export const CACHE_TAGS = {
@@ -28,10 +29,10 @@ export const CACHE_DURATIONS = {
 
 // In-memory cache for frequently accessed data
 class MemoryCache {
-  private cache = new Map<string, { data: any; expires: number }>();
+  private cache = new Map<string, { data: unknown; expires: number }>();
   private maxSize = 1000; // Maximum number of cached items
 
-  set(key: string, data: any, ttl: number): void {
+  set(key: string, data: unknown, ttl: number): void {
     // Clean up expired entries if cache is getting full
     if (this.cache.size >= this.maxSize) {
       this.cleanup();
@@ -76,6 +77,10 @@ class MemoryCache {
       size: this.cache.size,
       maxSize: this.maxSize,
     };
+  }
+
+  getAllKeys(): string[] {
+    return Array.from(this.cache.keys());
   }
 }
 
@@ -145,6 +150,9 @@ export class CacheManager {
     const { staleTime, revalidateTime, tags = [] } = options;
     const cacheKey = keyParts.join(":");
 
+    // TODO: Implement cache invalidation using tags
+    console.debug(`Cache tags for ${cacheKey}:`, tags);
+
     // Try to get fresh data from memory cache
     const cached = memoryCache.get<{ data: T; timestamp: number }>(cacheKey);
     const now = Date.now();
@@ -196,7 +204,7 @@ export class CacheManager {
     return results;
   }
 
-  static batchSet(items: Array<{ key: string; data: any; ttl: number }>): void {
+  static batchSet(items: Array<{ key: string; data: unknown; ttl: number }>): void {
     for (const item of items) {
       memoryCache.set(item.key, item.data, item.ttl);
     }
@@ -229,8 +237,13 @@ export class CacheManager {
     const regex = new RegExp(pattern.replace(/\*/g, ".*"));
     const keysToDelete: string[] = [];
 
-    // Note: We can't iterate over Map keys directly in this context
-    // This would need to be implemented based on the actual cache structure
+    // Get all cache keys and filter by pattern
+    memoryCache.getAllKeys().forEach((key: string) => {
+      if (regex.test(key)) {
+        keysToDelete.push(key);
+      }
+    });
+
     for (const key of keysToDelete) {
       memoryCache.delete(key);
     }
@@ -248,7 +261,7 @@ export class CacheManager {
 
 // Specialized cache functions for different data types
 export const ProjectCache = {
-  async getProjects(filters?: any) {
+  async getProjects(filters?: ProjectFilters) {
     return CacheManager.cached(
       async () => {
         // This would be replaced with actual project fetching logic

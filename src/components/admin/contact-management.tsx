@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { AnimationWrapper } from "@/components/ui/animation";
 import {
   Mail,
-  Phone,
   Calendar,
   User,
   MessageSquare,
@@ -390,8 +389,7 @@ export function ContactManagement({ className }: ContactManagementProps) {
                 return (
                   <AnimationWrapper
                     key={submission.id}
-                    type="slideIn"
-                    direction="left"
+                    type="slideInLeft"
                     delay={index * 0.05}
                   >
                     <Card

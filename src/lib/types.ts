@@ -33,18 +33,19 @@ export interface BlogPost {
   id: string;
   title: string;
   slug: string;
-  excerpt?: string;
+  excerpt?: string | null;
   content: string;
-  metaTitle?: string;
-  metaDescription?: string;
-  ogImage?: string;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  ogImage?: string | null;
   status: "DRAFT" | "PUBLISHED" | "SCHEDULED" | "ARCHIVED";
   featured: boolean;
-  publishedAt?: Date;
+  publishedAt?: Date | null;
   viewCount: number;
   readingTime: number;
   createdAt: Date;
   updatedAt: Date;
+  authorId: string;
 }
 
 // Extended blog types
@@ -52,7 +53,7 @@ export interface BlogCategory {
   id: string;
   name: string;
   slug: string;
-  description?: string;
+  description?: string | null;
   color: string;
   _count?: {
     posts: number;
@@ -83,7 +84,7 @@ export interface BlogAnalytics {
   id: string;
   postId: string;
   event: string;
-  metadata?: any;
+  metadata?: Record<string, unknown>;
   createdAt: Date;
 }
 
@@ -134,7 +135,7 @@ export interface ProjectAnalytics {
   id: string;
   projectId: string;
   event: string;
-  metadata?: any;
+  metadata?: Record<string, unknown>;
   createdAt: Date;
 }
 
@@ -166,4 +167,20 @@ export interface ProjectCardProps {
   showMetrics?: boolean;
   showCategories?: boolean;
   interactive?: boolean;
+}
+
+// Contact form types
+export interface ContactFormData {
+  name: string;
+  email: string;
+  subject?: string;
+  message: string;
+  company?: string;
+  phone?: string;
+}
+
+export interface ContactSubmissionResult {
+  isValid: boolean;
+  isSpam: boolean;
+  errors: string[];
 }

@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Plus,
   Search,
-  Filter,
   Edit,
   Trash2,
   Eye,
@@ -29,7 +28,6 @@ export function BlogManagementInterface({
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [selectedPosts, setSelectedPosts] = useState<string[]>([]);
 
   // Load posts on mount
   useEffect(() => {
