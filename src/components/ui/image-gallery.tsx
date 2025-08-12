@@ -8,7 +8,6 @@ import {
   X,
   Play,
   Pause,
-  ZoomIn,
   Download,
   Share2,
   Maximize2,
@@ -17,9 +16,6 @@ import { OptimizedImage } from "./optimized-image";
 import { Button } from "./button";
 import { Typography } from "./typography";
 import { cn } from "@/lib/utils";
-import { useTouchGestures } from "@/hooks/use-touch-gestures";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { TouchTarget } from "@/components/mobile/touch-target";
 
 interface GalleryImage {
   src: string;
@@ -72,6 +68,18 @@ export function ImageGallery({
     return () => clearInterval(interval);
   }, [isAutoPlaying, images.length, autoPlayInterval]);
 
+  const nextImage = useCallback(() => {
+    const newIndex = (currentIndex + 1) % images.length;
+    setCurrentIndex(newIndex);
+    onImageChange?.(newIndex);
+  }, [currentIndex, images.length, onImageChange]);
+
+  const prevImage = useCallback(() => {
+    const newIndex = (currentIndex - 1 + images.length) % images.length;
+    setCurrentIndex(newIndex);
+    onImageChange?.(newIndex);
+  }, [currentIndex, images.length, onImageChange]);
+
   // Keyboard navigation
   useEffect(() => {
     if (!enableKeyboard) return;
@@ -103,19 +111,7 @@ export function ImageGallery({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [enableKeyboard, showLightbox, isAutoPlaying]);
-
-  const nextImage = useCallback(() => {
-    const newIndex = (currentIndex + 1) % images.length;
-    setCurrentIndex(newIndex);
-    onImageChange?.(newIndex);
-  }, [currentIndex, images.length, onImageChange]);
-
-  const prevImage = useCallback(() => {
-    const newIndex = (currentIndex - 1 + images.length) % images.length;
-    setCurrentIndex(newIndex);
-    onImageChange?.(newIndex);
-  }, [currentIndex, images.length, onImageChange]);
+  }, [enableKeyboard, showLightbox, isAutoPlaying, nextImage, prevImage]);
 
   const goToImage = useCallback(
     (index: number) => {
@@ -159,7 +155,7 @@ export function ImageGallery({
           text: currentImage.alt,
           url: currentImage.src,
         });
-      } catch (error) {
+      } catch {
         // Fallback to copying URL
         navigator.clipboard.writeText(currentImage.src);
       }

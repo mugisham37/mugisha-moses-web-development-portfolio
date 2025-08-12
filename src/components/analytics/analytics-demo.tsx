@@ -18,9 +18,12 @@ export function AnalyticsDemo() {
     buttonVariant === "variant" ? "bg-red-500" : "bg-yellow-400";
 
   const handleTrackEvent = () => {
-    trackEvent("demo_button_click", {
-      count: eventCount + 1,
-      variant: buttonVariant,
+    trackEvent({
+      event: "demo_button_click",
+      metadata: {
+        count: eventCount + 1,
+        variant: buttonVariant,
+      },
     });
     setEventCount((prev) => prev + 1);
   };

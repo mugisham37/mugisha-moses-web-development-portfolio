@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useMemo, useCallback } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, RootState } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -11,7 +11,6 @@ interface ParticleSystemProps {
 
 function ParticleSystem({ count = 2500 }: ParticleSystemProps) {
   const ref = useRef<THREE.Points>(null);
-  const { viewport } = useThree();
 
   // Generate random positions for particles - optimized for 60fps
   const positions = useMemo(() => {
@@ -70,7 +69,7 @@ function GeometricShapes({ count = 12 }: GeometricShapesProps) {
 
   // Generate random shapes data - optimized for 60fps
   const shapes = useMemo(() => {
-    return Array.from({ length: count }, (_, i) => ({
+    return Array.from({ length: count }, () => ({
       position: [
         (Math.random() - 0.5) * 30,
         (Math.random() - 0.5) * 30,
@@ -176,7 +175,7 @@ function GridLines({ size = 50, divisions = 30 }: GridLinesProps) {
 }
 
 export function ThreeBackground() {
-  const handleCreated = useCallback((state: any) => {
+  const handleCreated = useCallback((state: RootState) => {
     // Optimize for 60fps performance across all devices
     state.gl.setClearColor("#000000");
     state.gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));

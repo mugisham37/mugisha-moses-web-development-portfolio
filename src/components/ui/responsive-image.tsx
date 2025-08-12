@@ -142,7 +142,7 @@ export function ResponsiveImage({
 // Preset configurations for common use cases
 export const ResponsiveImagePresets = {
   // Hero images - large, high priority
-  hero: (props: Partial<ResponsiveImageProps>) => (
+  hero: (props: ResponsiveImageProps) => (
     <ResponsiveImage
       aspectRatio="video"
       priority
@@ -153,7 +153,7 @@ export const ResponsiveImagePresets = {
   ),
 
   // Thumbnail images - small, optimized
-  thumbnail: (props: Partial<ResponsiveImageProps>) => (
+  thumbnail: (props: ResponsiveImageProps) => (
     <ResponsiveImage
       aspectRatio="square"
       quality={75}
@@ -163,7 +163,7 @@ export const ResponsiveImagePresets = {
   ),
 
   // Card images - medium size, balanced quality
-  card: (props: Partial<ResponsiveImageProps>) => (
+  card: (props: ResponsiveImageProps) => (
     <ResponsiveImage
       aspectRatio="video"
       quality={80}
@@ -173,7 +173,7 @@ export const ResponsiveImagePresets = {
   ),
 
   // Gallery images - high quality, lazy loaded
-  gallery: (props: Partial<ResponsiveImageProps>) => (
+  gallery: (props: ResponsiveImageProps) => (
     <ResponsiveImage
       quality={90}
       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 70vw"
@@ -182,7 +182,7 @@ export const ResponsiveImagePresets = {
   ),
 
   // Avatar images - small, circular
-  avatar: (props: Partial<ResponsiveImageProps>) => (
+  avatar: (props: ResponsiveImageProps) => (
     <ResponsiveImage
       aspectRatio="square"
       objectFit="cover"

@@ -122,7 +122,7 @@ const AnimationWrapper = React.forwardRef<HTMLDivElement, AnimationWrapperProps>
 );
 AnimationWrapper.displayName = "AnimationWrapper";
 
-interface BrutalistMotionProps extends React.HTMLAttributes<HTMLDivElement> {
+interface BrutalistMotionProps {
   children: React.ReactNode;
   hover?: boolean;
   press?: boolean;
@@ -130,8 +130,13 @@ interface BrutalistMotionProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const BrutalistMotion = React.forwardRef<HTMLDivElement, BrutalistMotionProps>(
-  ({ children, hover = false, press = false, className, ...props }, ref) => {
-    const motionProps: any = {};
+  ({ children, hover = false, press = false, className }, ref) => {
+    const motionProps: {
+      variants?: Variants;
+      initial?: string;
+      whileHover?: string;
+      whileTap?: string;
+    } = {};
     
     if (hover) {
       motionProps.variants = animationVariants.brutalistHover;
@@ -150,7 +155,6 @@ const BrutalistMotion = React.forwardRef<HTMLDivElement, BrutalistMotionProps>(
         ref={ref}
         className={cn(className)}
         {...motionProps}
-        {...props}
       >
         {children}
       </motion.div>

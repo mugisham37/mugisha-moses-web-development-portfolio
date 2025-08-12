@@ -44,7 +44,7 @@ export function useMobile(): MobileDetection {
       const isTouchDevice =
         "ontouchstart" in window ||
         navigator.maxTouchPoints > 0 ||
-        // @ts-ignore - legacy support
+        // @ts-expect-error - legacy support for IE
         navigator.msMaxTouchPoints > 0;
 
       // Screen size category

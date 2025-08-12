@@ -32,11 +32,11 @@ export function useAnalytics() {
     }
   };
 
-  const trackPageView = (path: string, metadata?: Record<string, any>) => {
+  const trackPageView = (path: string, metadata?: AnalyticsMetadata) => {
     providerTrackPageView(path, metadata);
   };
 
-  const trackBlogView = (postId: string, metadata?: Record<string, any>) => {
+  const trackBlogView = (postId: string, metadata?: AnalyticsMetadata) => {
     trackEvent({
       event: "blog_view",
       postId,
@@ -54,7 +54,7 @@ export function useAnalytics() {
 
   const trackProjectView = (
     projectId: string,
-    metadata?: Record<string, any>
+    metadata?: AnalyticsMetadata
   ) => {
     trackEvent({
       event: "project_view",
@@ -64,7 +64,7 @@ export function useAnalytics() {
 
   const trackProjectLike = (
     projectId: string,
-    metadata?: Record<string, any>
+    metadata?: AnalyticsMetadata
   ) => {
     trackEvent({
       event: "project_like",
@@ -74,7 +74,7 @@ export function useAnalytics() {
 
   const trackContactFormSubmission = (
     type: string,
-    metadata?: Record<string, any>
+    metadata?: AnalyticsMetadata
   ) => {
     trackConversion("contact_form_submission", undefined, {
       type,
@@ -82,11 +82,11 @@ export function useAnalytics() {
     });
   };
 
-  const trackNewsletterSignup = (metadata?: Record<string, any>) => {
+  const trackNewsletterSignup = (metadata?: AnalyticsMetadata) => {
     trackConversion("newsletter_signup", undefined, metadata);
   };
 
-  const trackConsultationBooking = (metadata?: Record<string, any>) => {
+  const trackConsultationBooking = (metadata?: AnalyticsMetadata) => {
     trackConversion("consultation_booking", undefined, metadata);
   };
 
@@ -104,7 +104,7 @@ export function useAnalytics() {
   };
 }
 
-export function usePageView(path: string, metadata?: Record<string, any>) {
+export function usePageView(path: string, metadata?: AnalyticsMetadata) {
   const { trackPageView } = useAnalytics();
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export function usePageView(path: string, metadata?: Record<string, any>) {
   }, [path, trackPageView, metadata]);
 }
 
-export function useBlogView(postId: string, metadata?: Record<string, any>) {
+export function useBlogView(postId: string, metadata?: AnalyticsMetadata) {
   const { trackBlogView } = useAnalytics();
 
   useEffect(() => {
@@ -122,7 +122,7 @@ export function useBlogView(postId: string, metadata?: Record<string, any>) {
 
 export function useProjectView(
   projectId: string,
-  metadata?: Record<string, any>
+  metadata?: AnalyticsMetadata
 ) {
   const { trackProjectView } = useAnalytics();
 

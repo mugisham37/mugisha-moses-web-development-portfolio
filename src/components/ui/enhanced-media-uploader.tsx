@@ -5,11 +5,9 @@ import { useDropzone } from "react-dropzone";
 import {
   Upload,
   X,
-  Image as ImageIcon,
   File,
   Loader2,
   Settings,
-  Compress,
   Check,
   AlertCircle,
 } from "lucide-react";
@@ -63,7 +61,6 @@ export function EnhancedMediaUploader({
   accept = "image/*",
   enableCompression = true,
   compressionSettings = {},
-  generateThumbnails = true,
   className = "",
 }: EnhancedMediaUploaderProps) {
   const [files, setFiles] = useState<UploadedFile[]>([]);
@@ -77,7 +74,7 @@ export function EnhancedMediaUploader({
 
   const compressImage = useCallback(
     (file: File): Promise<File> => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         if (!enableCompression || !file.type.startsWith("image/")) {
           resolve(file);
           return;
@@ -134,7 +131,7 @@ export function EnhancedMediaUploader({
                     `.${outputFormat.split("/")[1]}`
                   ),
                   { type: outputFormat }
-                );
+                ) as File;
                 resolve(compressedFile);
               } else {
                 resolve(file);
@@ -538,7 +535,7 @@ export function EnhancedMediaUploader({
                     <div className="mt-2 flex items-center gap-2">
                       {file.compressed && (
                         <div className="flex items-center gap-1">
-                          <Compress className="text-accent h-3 w-3" />
+                          <Settings className="text-accent h-3 w-3" />
                           <Typography variant="caption" className="text-accent">
                             COMPRESSED
                           </Typography>
