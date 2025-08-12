@@ -55,7 +55,7 @@ export default async function TestimonialsPage() {
       {/* Client Logos */}
       <Section className="py-16">
         <Container>
-          <ClientLogoShowcase />
+          <ClientLogoShowcase clients={[]} />
         </Container>
       </Section>
 
@@ -94,7 +94,7 @@ export default async function TestimonialsPage() {
                 Share Your Experience
               </Typography>
               <Typography variant="body" className="text-gray-400">
-                Worked with us? We'd love to hear about your experience and
+                Worked with us? We&apos;d love to hear about your experience and
                 showcase your success story.
               </Typography>
             </div>

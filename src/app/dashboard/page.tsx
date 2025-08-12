@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
+import Link from "next/link"
 import { auth } from "@/lib/auth"
 import { SignOutButton } from "@/components/auth/signout-button"
 
@@ -51,12 +52,12 @@ export default async function DashboardPage() {
                 QUICK ACTIONS
               </h2>
               <div className="space-y-3">
-                <a
+                <Link
                   href="/"
                   className="block w-full bg-transparent text-white font-mono font-bold py-2 px-4 text-center uppercase tracking-wider hover:bg-white hover:text-black transition-colors border border-white text-sm"
                 >
                   VIEW SITE
-                </a>
+                </Link>
                 {session.user.role === "ADMIN" && (
                   <a
                     href="/admin"

@@ -24,7 +24,7 @@ interface SearchPageProps {
   };
 }
 
-function SearchResults({ query, type }: { query?: string; type?: string }) {
+function SearchResults({ query }: { query?: string }) {
   if (!query) {
     return (
       <div className="py-12 text-center">
@@ -43,7 +43,7 @@ function SearchResults({ query, type }: { query?: string; type?: string }) {
   return (
     <div className="py-12 text-center">
       <Typography variant="h3" className="mb-4 text-white">
-        SEARCH RESULTS FOR "{query.toUpperCase()}"
+        SEARCH RESULTS FOR &quot;{query.toUpperCase()}&quot;
       </Typography>
       <Typography variant="body" className="text-gray-400">
         Search functionality will be implemented in a future update.
@@ -53,7 +53,7 @@ function SearchResults({ query, type }: { query?: string; type?: string }) {
 }
 
 export default function SearchPage({ searchParams }: SearchPageProps) {
-  const { q: query, type } = searchParams;
+  const { q: query } = searchParams;
 
   const breadcrumbs = [{ name: "Search", url: "/search", current: true }];
 
@@ -123,7 +123,7 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
                 </div>
               }
             >
-              <SearchResults query={query} type={type} />
+              <SearchResults query={query} />
             </Suspense>
           </div>
         </Section>

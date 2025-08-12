@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { getBlogPost } from "@/lib/blog-queries";
 import { db } from "@/lib/db";
 import { BlogPostContent } from "@/components/blog/blog-post-content";
 import { BlogPostHeader } from "@/components/blog/blog-post-header";
@@ -22,32 +23,6 @@ interface BlogPostPageProps {
   };
 }
 
-async function getBlogPost(slug: string) {
-  try {
-    const post = await db.blogPost.findUnique({
-      where: {
-        slug,
-        status: "PUBLISHED",
-        publishedAt: {
-          lte: new Date(),
-        },
-      },
-      include: {
-        author: {
-          select: { id: true, name: true, email: true },
-        },
-        categories: true,
-        tags: true,
-      },
-    });
-
-    return post;
-  } catch (error) {
-    console.error("Failed to fetch blog post:", error);
-    return null;
-  }
-}
-
 async function getRelatedPosts(postId: string, categoryIds: string[]) {
   try {
     const posts = await db.blogPost.findMany({
@@ -57,21 +32,47 @@ async function getRelatedPosts(postId: string, categoryIds: string[]) {
         publishedAt: { lte: new Date() },
         categories: {
           some: {
-            id: { in: categoryIds },
+            categoryId: { in: categoryIds },
           },
         },
       },
       include: {
         author: {
-          select: { name: true },
+          select: { id: true, name: true, email: true },
         },
-        categories: true,
+        categories: {
+          include: {
+            category: true,
+          },
+        },
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
       },
       orderBy: { publishedAt: "desc" },
       take: 3,
     });
 
-    return posts;
+    return posts.map((post) => ({
+      ...post,
+      excerpt: post.excerpt || undefined,
+      metaTitle: post.metaTitle || undefined,
+      metaDescription: post.metaDescription || undefined,
+      ogImage: post.ogImage || undefined,
+      publishedAt: post.publishedAt || undefined,
+      author: {
+        id: post.author.id,
+        name: post.author.name,
+        email: post.author.email,
+      },
+      categories: post.categories.map((cat) => ({
+        ...cat.category,
+        description: cat.category.description || undefined,
+      })),
+      tags: post.tags.map((tag) => tag.tag),
+    }));
   } catch (error) {
     console.error("Failed to fetch related posts:", error);
     return [];
@@ -130,6 +131,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const blogPostJsonLd = generateBlogPostJsonLd({
     ...post,
+    excerpt: post.excerpt || undefined,
+    publishedAt: post.publishedAt || undefined,
     categories: post.categories.map((cat) => ({
       name: cat.name,
       slug: cat.slug,

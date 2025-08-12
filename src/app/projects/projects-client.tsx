@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   ProjectWithRelations,
   ProjectFilters,
@@ -37,7 +37,6 @@ export function ProjectsPageClient({
   currentPage,
 }: ProjectsPageClientProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
 
   // Update URL with new search parameters

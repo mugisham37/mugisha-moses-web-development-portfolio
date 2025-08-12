@@ -32,7 +32,7 @@ export default function ContactPage() {
           <AnimationWrapper type="fadeIn">
             <div className="mb-16 text-center">
               <Typography variant="display" className="mb-6">
-                LET'S BUILD SOMETHING
+                LET&apos;S BUILD SOMETHING
                 <br />
                 <span className="text-brutalist-yellow">EXTRAORDINARY</span>
               </Typography>
@@ -40,8 +40,8 @@ export default function ContactPage() {
                 variant="h4"
                 className="text-brutalist-off-white-100 mx-auto max-w-3xl"
               >
-                Ready to transform your ideas into reality? Choose how you'd
-                like to connect and let's start the conversation.
+                Ready to transform your ideas into reality? Choose how you&apos;d
+                like to connect and let&apos;s start the conversation.
               </Typography>
             </div>
           </AnimationWrapper>
@@ -94,7 +94,7 @@ export default function ContactPage() {
                         variant="caption"
                         className="text-brutalist-off-white-100"
                       >
-                        We'll dive deep into your project requirements and
+                        We&apos;ll dive deep into your project requirements and
                         goals.
                       </Typography>
                     </div>
@@ -112,7 +112,7 @@ export default function ContactPage() {
                         variant="caption"
                         className="text-brutalist-off-white-100"
                       >
-                        You'll receive a detailed proposal tailored to your
+                        You&apos;ll receive a detailed proposal tailored to your
                         specific needs.
                       </Typography>
                     </div>
@@ -153,7 +153,7 @@ export default function ContactPage() {
 
                   <div>
                     <Typography variant="body" className="mb-2 font-bold">
-                      What's included in a consultation?
+                      What&apos;s included in a consultation?
                     </Typography>
                     <Typography
                       variant="caption"

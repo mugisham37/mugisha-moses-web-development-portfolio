@@ -70,10 +70,13 @@ async function ProjectPageContent({ params }: ProjectPageProps) {
     4
   );
 
+  // Save project ID for server action
+  const projectId = project.id;
+
   // Server action to increment view count
   async function handleViewIncrement() {
     "use server";
-    await incrementProjectViews(project.id, {
+    await incrementProjectViews(projectId, {
       userAgent: "server-side",
       timestamp: new Date().toISOString(),
     });

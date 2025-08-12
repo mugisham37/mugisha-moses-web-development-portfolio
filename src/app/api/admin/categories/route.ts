@@ -10,7 +10,7 @@ const createCategorySchema = z.object({
   color: z.string().regex(/^#[0-9A-F]{6}$/i, "Invalid color format"),
 });
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const session = await auth();
 
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Validation error", details: error.errors },
+        { error: "Validation error", details: error.issues },
         { status: 400 }
       );
     }

@@ -189,10 +189,10 @@ export default function AnimationsDemoPage() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
-            {["lift", "tilt", "glow", "invert", "scale"].map((effect) => (
+            {(["lift", "tilt", "glow", "invert", "scale"] as const).map((effect) => (
               <InteractiveCard
                 key={effect}
-                hoverEffect={effect as any}
+                hoverEffect={effect}
                 className="p-4 text-center"
               >
                 <Typography

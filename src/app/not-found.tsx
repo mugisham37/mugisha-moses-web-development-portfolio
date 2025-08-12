@@ -25,8 +25,8 @@ export default function NotFound() {
             variant="body"
             className="text-muted-foreground mx-auto mb-6 max-w-md"
           >
-            The page you're looking for has been moved, deleted, or never
-            existed. Let's get you back on track.
+            The page you&apos;re looking for has been moved, deleted, or never
+            existed. Let&apos;s get you back on track.
           </Typography>
         </div>
 
