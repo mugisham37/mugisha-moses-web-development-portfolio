@@ -69,7 +69,7 @@ export function ServiceFAQ({ service }: ServiceFAQProps) {
           className="mx-auto max-w-3xl text-xl text-gray-300"
         >
           Get instant answers to common questions about our{" "}
-          {service.name.toLowerCase()} service. Don't see your question? Contact
+          {service.name.toLowerCase()} service. Don&apos;t see your question? Contact
           us directly.
         </Typography>
       </div>

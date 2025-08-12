@@ -5,13 +5,17 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { optimizeTouchTarget } from "@/lib/mobile-utils";
 
-interface TouchTargetProps extends React.HTMLAttributes<HTMLDivElement> {
+// Separate the conflicting props
+interface TouchTargetBaseProps {
   size?: "minimum" | "recommended" | "large";
   variant?: "button" | "link" | "icon" | "custom";
   hapticFeedback?: boolean;
-  children: React.ReactNode;
   disabled?: boolean;
   asChild?: boolean;
+}
+
+interface TouchTargetProps extends TouchTargetBaseProps, Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+  children: React.ReactNode;
 }
 
 /**
@@ -77,16 +81,18 @@ export const TouchTarget = forwardRef<HTMLDivElement, TouchTargetProps>(
       className
     );
 
+    const dynamicStyles: React.CSSProperties = {
+      minWidth: touchTargetStyles.minWidth,
+      minHeight: touchTargetStyles.minHeight,
+      padding: touchTargetStyles.padding,
+    };
+
     if (asChild) {
       return (
         <div
           ref={ref}
           className={baseClasses}
-          style={{
-            minWidth: touchTargetStyles.minWidth,
-            minHeight: touchTargetStyles.minHeight,
-            padding: touchTargetStyles.padding,
-          }}
+          style={dynamicStyles}
           onClick={handleClick}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -101,17 +107,12 @@ export const TouchTarget = forwardRef<HTMLDivElement, TouchTargetProps>(
       <motion.div
         ref={ref}
         className={baseClasses}
-        style={{
-          minWidth: touchTargetStyles.minWidth,
-          minHeight: touchTargetStyles.minHeight,
-          padding: touchTargetStyles.padding,
-        }}
+        style={dynamicStyles}
         onClick={handleClick}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         whileTap={{ scale: disabled ? 1 : 0.95 }}
         transition={{ duration: 0.1 }}
-        {...props}
       >
         {children}
       </motion.div>

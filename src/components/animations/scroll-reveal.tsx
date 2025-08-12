@@ -29,33 +29,33 @@ const getVariants = (
     case "up":
       return {
         hidden: { opacity: 0, y: distance },
-        visible: { opacity: 1, y: 0, transition: baseTransition },
+        visible: { opacity: 1, y: 0, transition: baseTransition as any },
       };
     case "down":
       return {
         hidden: { opacity: 0, y: -distance },
-        visible: { opacity: 1, y: 0, transition: baseTransition },
+        visible: { opacity: 1, y: 0, transition: baseTransition as any },
       };
     case "left":
       return {
         hidden: { opacity: 0, x: distance },
-        visible: { opacity: 1, x: 0, transition: baseTransition },
+        visible: { opacity: 1, x: 0, transition: baseTransition as any },
       };
     case "right":
       return {
         hidden: { opacity: 0, x: -distance },
-        visible: { opacity: 1, x: 0, transition: baseTransition },
+        visible: { opacity: 1, x: 0, transition: baseTransition as any },
       };
     case "scale":
       return {
         hidden: { opacity: 0, scale: 0.8 },
-        visible: { opacity: 1, scale: 1, transition: baseTransition },
+        visible: { opacity: 1, scale: 1, transition: baseTransition as any },
       };
     case "fade":
     default:
       return {
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: baseTransition },
+        visible: { opacity: 1, transition: baseTransition as any },
       };
   }
 };
@@ -74,7 +74,7 @@ export function ScrollReveal({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once,
-    margin: rootMargin,
+    margin: rootMargin as any,
     amount: threshold,
   });
 
@@ -130,7 +130,7 @@ export function StaggeredReveal({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once,
-    margin: rootMargin,
+    margin: rootMargin as any,
     amount: threshold,
   });
 
@@ -214,7 +214,7 @@ export function RevealOnScroll({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once,
-    margin: rootMargin,
+    margin: rootMargin as any,
     amount: threshold,
   });
 
@@ -250,7 +250,7 @@ export function CountUpOnScroll({
 }: CountUpOnScrollProps) {
   const [count, setCount] = React.useState(start);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" as any });
 
   React.useEffect(() => {
     if (!isInView) return;

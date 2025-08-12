@@ -185,7 +185,6 @@ export function ContactMethods({
               <AnimationWrapper
                 key={method.type}
                 type="slideIn"
-                direction="up"
                 delay={index * 0.1}
               >
                 <Card

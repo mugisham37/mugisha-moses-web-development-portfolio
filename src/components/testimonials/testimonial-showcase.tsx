@@ -74,7 +74,19 @@ export function TestimonialShowcase({
     }
   };
 
-  const handleTestimonialSubmit = async (data: any) => {
+  const handleTestimonialSubmit = async (data: {
+    name: string;
+    email: string;
+    role: string;
+    company?: string;
+    content: string;
+    rating: number;
+    projectType?: string;
+    videoUrl?: string;
+    linkedinProfile?: string;
+    allowPublic: boolean;
+    allowMarketing: boolean;
+  }) => {
     try {
       const response = await fetch("/api/testimonials", {
         method: "POST",
@@ -256,6 +268,7 @@ export function TestimonialShowcase({
         <Section className="bg-brutalist-charcoal-100 py-20">
           <Container>
             <ClientLogoShowcase
+              clients={[]} // Empty array for now, can be populated from API
               title="Trusted by Industry Leaders"
               subtitle="Companies that chose excellence and achieved extraordinary results"
               showIndustry={true}
@@ -288,7 +301,7 @@ export function TestimonialShowcase({
                 className="mx-auto mb-8 max-w-2xl text-gray-300"
               >
                 Experience the same level of excellence that our clients rave
-                about. Let's build something extraordinary together.
+                about. Let&apos;s build something extraordinary together.
               </Typography>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button

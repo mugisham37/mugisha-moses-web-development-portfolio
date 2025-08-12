@@ -101,7 +101,7 @@ export function ServiceGuarantees() {
           variant="body"
           className="mx-auto max-w-3xl text-xl text-gray-300"
         >
-          We don't just promise excellence—we guarantee it. Our iron-clad
+          We don&apos;t just promise excellence—we guarantee it. Our iron-clad
           guarantees ensure you get exactly what you pay for, when you need it.
         </Typography>
       </div>
@@ -143,7 +143,7 @@ export function ServiceGuarantees() {
               variant="h2"
               className="mb-8 font-mono text-xl md:text-2xl"
             >
-              These aren't just marketing promises. They're legally binding
+              These aren&apos;t just marketing promises. They&apos;re legally binding
               commitments backed by our reputation and your success.
             </Typography>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
@@ -210,7 +210,7 @@ function GuaranteeCard({ guarantee }: GuaranteeCardProps) {
             variant="h4"
             className="text-brutalist-yellow mb-3 text-sm font-bold tracking-wider uppercase"
           >
-            What's Included
+            What&apos;s Included
           </Typography>
           <ul className="space-y-2">
             {guarantee.details.map((detail, index) => (

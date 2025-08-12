@@ -124,15 +124,23 @@ export function EnhancedMediaUploader({
           canvas.toBlob(
             (blob) => {
               if (blob) {
-                const compressedFile = new File(
-                  [blob],
-                  file.name.replace(
+                try {
+                  const fileName = file.name.replace(
                     /\.[^/.]+$/,
                     `.${outputFormat.split("/")[1]}`
-                  ),
-                  { type: outputFormat }
-                ) as File;
-                resolve(compressedFile);
+                  );
+                  
+                  // Create file-like object
+                  const compressedFile = Object.assign(blob, {
+                    name: fileName,
+                    lastModified: Date.now(),
+                  }) as File;
+                  
+                  resolve(compressedFile);
+                } catch {
+                  // Fallback if File constructor fails
+                  resolve(file);
+                }
               } else {
                 resolve(file);
               }

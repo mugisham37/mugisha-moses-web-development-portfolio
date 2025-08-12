@@ -63,7 +63,7 @@ export function ServiceFeatures({ service }: ServiceFeaturesProps) {
                 KEY PERFORMANCE INDICATORS
               </Typography>
               <Typography variant="body" className="text-xl">
-                These aren't just features—they're competitive advantages that
+                These aren&apos;t just features—they&apos;re competitive advantages that
                 set you apart.
               </Typography>
             </div>

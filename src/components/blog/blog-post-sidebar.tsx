@@ -2,14 +2,12 @@
 
 import { useState, useEffect } from "react";
 import {
-  Share2,
   Twitter,
   Facebook,
   Linkedin,
   Link as LinkIcon,
   Rss,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { BlogPost } from "@/lib/types";
 import { useAnalytics } from "@/hooks/use-analytics";
 
@@ -31,8 +29,8 @@ export function BlogPostSidebar({ post }: BlogPostSidebarProps) {
       const article = document.querySelector(".blog-content");
       if (!article) return;
 
-      const articleTop = article.offsetTop;
-      const articleHeight = article.offsetHeight;
+      const articleTop = (article as HTMLElement).offsetTop;
+      const articleHeight = (article as HTMLElement).offsetHeight;
       const windowHeight = window.innerHeight;
       const scrollTop = window.scrollY;
 
@@ -55,7 +53,6 @@ export function BlogPostSidebar({ post }: BlogPostSidebarProps) {
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareTitle = post.title;
-  const shareText = post.excerpt || post.title;
 
   const shareLinks = {
     twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`,

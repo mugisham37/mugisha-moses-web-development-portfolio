@@ -167,7 +167,9 @@ export function BlogSearch() {
                 <div className="border-t border-gray-800 p-4">
                   <button
                     onClick={() =>
-                      handleSearch({ preventDefault: () => {} } as any)
+                      handleSearch({
+                        preventDefault: () => {},
+                      } as React.FormEvent)
                     }
                     className="w-full text-center font-mono text-yellow-400 uppercase hover:text-yellow-300"
                   >

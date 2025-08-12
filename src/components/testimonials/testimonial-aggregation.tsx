@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
-import { Button } from "@/components/ui/button";
 import { StarRating } from "./star-rating";
 import type { Testimonial } from "@prisma/client";
 
@@ -45,11 +44,7 @@ export function TestimonialAggregation({
   const [stats, setStats] = useState<AggregationStats | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    calculateStats();
-  }, [testimonials]);
-
-  const calculateStats = async () => {
+  const calculateStats = useCallback(async () => {
     setLoading(true);
 
     try {
@@ -109,7 +104,11 @@ export function TestimonialAggregation({
     } finally {
       setLoading(false);
     }
-  };
+  }, [testimonials]);
+
+  useEffect(() => {
+    calculateStats();
+  }, [calculateStats]);
 
   if (loading || !stats) {
     return (

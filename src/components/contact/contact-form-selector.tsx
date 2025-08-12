@@ -51,7 +51,6 @@ export function ContactFormSelector({
   const [selectedForm, setSelectedForm] = useState<FormType>(
     defaultForm || null
   );
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [serviceContext, setServiceContext] = useState<{
     service?: string;
     tier?: string;
@@ -64,7 +63,11 @@ export function ContactFormSelector({
     const tier = searchParams.get("tier");
     const type = searchParams.get("type");
 
-    setServiceContext({ service, tier, type });
+    setServiceContext({
+      service: service || undefined,
+      tier: tier || undefined,
+      type: type || undefined,
+    });
 
     // Auto-select form based on URL parameters
     if (type === "consultation") {
@@ -76,8 +79,7 @@ export function ContactFormSelector({
     }
   }, [searchParams]);
 
-  const handleFormSuccess = (data: any) => {
-    setIsSubmitted(true);
+  const handleFormSuccess = (data: Record<string, unknown>) => {
     console.log("Form submitted successfully:", data);
   };
 
@@ -87,7 +89,6 @@ export function ContactFormSelector({
 
   const handleBackToSelector = () => {
     setSelectedForm(null);
-    setIsSubmitted(false);
   };
 
   // Show form selector
@@ -97,14 +98,14 @@ export function ContactFormSelector({
         <div className="space-y-6">
           <div className="mb-8 text-center">
             <Typography variant="h2" className="mb-4">
-              LET'S WORK TOGETHER
+              LET&apos;S WORK TOGETHER
             </Typography>
             <Typography
               variant="body"
               className="text-brutalist-off-white-100 mx-auto max-w-2xl"
             >
-              Choose the best way to get in touch. I'll respond to all inquiries
-              within 24 hours.
+              Choose the best way to get in touch. I&apos;ll respond to all
+              inquiries within 24 hours.
             </Typography>
           </div>
 
@@ -116,7 +117,6 @@ export function ContactFormSelector({
                 <AnimationWrapper
                   key={option.type}
                   type="slideIn"
-                  direction="up"
                   delay={index * 0.1}
                 >
                   <Card
@@ -233,7 +233,7 @@ export function ContactFormSelector({
   return (
     <div className={className}>
       {/* Back button */}
-      <AnimationWrapper type="slideIn" direction="left">
+      <AnimationWrapper type="slideIn">
         <Button
           variant="ghost"
           size="sm"
@@ -258,12 +258,11 @@ export function ContactFormSelector({
       </AnimationWrapper>
 
       {/* Render selected form */}
-      <AnimationWrapper type="slideIn" direction="up" delay={0.2}>
+      <AnimationWrapper type="slideIn" delay={0.2}>
         {selectedForm === "general" && (
           <ContactForm
             onSuccess={handleFormSuccess}
             onError={handleFormError}
-            serviceContext={serviceContext}
           />
         )}
 
@@ -271,7 +270,6 @@ export function ContactFormSelector({
           <ProjectInquiryForm
             onSuccess={handleFormSuccess}
             onError={handleFormError}
-            serviceContext={serviceContext}
           />
         )}
 
@@ -279,7 +277,6 @@ export function ContactFormSelector({
           <ConsultationBookingForm
             onSuccess={handleFormSuccess}
             onError={handleFormError}
-            serviceContext={serviceContext}
           />
         )}
       </AnimationWrapper>

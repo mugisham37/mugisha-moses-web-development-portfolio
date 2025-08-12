@@ -1,7 +1,14 @@
 import Script from "next/script";
 
+// Define proper types for structured data
+type StructuredDataValue = string | number | boolean | null | StructuredDataObject | StructuredDataObject[];
+
+interface StructuredDataObject {
+  [key: string]: StructuredDataValue;
+}
+
 interface StructuredDataProps {
-  data: Record<string, any> | Array<Record<string, any>>;
+  data: StructuredDataObject | StructuredDataObject[];
 }
 
 export function StructuredData({ data }: StructuredDataProps) {

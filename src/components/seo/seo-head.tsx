@@ -1,6 +1,13 @@
 import Head from "next/head";
 import { SITE_CONFIG } from "@/lib/constants";
 
+// Define proper types for structured data
+type StructuredDataValue = string | number | boolean | null | StructuredDataObject | StructuredDataObject[];
+
+interface StructuredDataObject {
+  [key: string]: StructuredDataValue;
+}
+
 interface SEOHeadProps {
   title?: string;
   description?: string;
@@ -18,7 +25,7 @@ interface SEOHeadProps {
     property?: string;
     content: string;
   }>;
-  structuredData?: Record<string, any> | Array<Record<string, any>>;
+  structuredData?: StructuredDataObject | StructuredDataObject[];
 }
 
 export function SEOHead({

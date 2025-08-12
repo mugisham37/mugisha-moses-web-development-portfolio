@@ -2,9 +2,7 @@
 
 import { useState, useEffect } from "react";
 // Syntax highlighter imports - these will be handled by the enhanced code block processing
-import { Copy, Check } from "lucide-react";
 import { BlogPost } from "@/lib/types";
-import { Button } from "@/components/ui/button";
 
 interface BlogPostContentProps {
   post: BlogPost & {

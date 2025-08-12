@@ -40,7 +40,14 @@ export function AnimationPreferencesProvider({
     const reducedMotion = mediaQuery.matches;
 
     // Check for high performance mode (low-end devices)
-    const connection = (navigator as any).connection;
+    const connection = (
+      navigator as Navigator & {
+        connection?: {
+          effectiveType?: string;
+          saveData?: boolean;
+        };
+      }
+    ).connection;
     const highPerformance =
       connection?.effectiveType === "slow-2g" ||
       connection?.effectiveType === "2g" ||
@@ -306,7 +313,7 @@ export const brutalistVariants = {
 };
 
 // Get appropriate variants based on performance
-export function getBrutalistVariants(
+export function useBrutalistVariants(
   performance: "high" | "standard" | "enhanced" = "standard"
 ) {
   const { highPerformance, reducedMotion } = useAnimationPreferences();
@@ -319,7 +326,8 @@ export function getBrutalistVariants(
     return brutalistVariants.highPerf;
   }
 
-  return brutalistVariants[performance];
+  const performanceKey = performance === "high" ? "highPerf" : performance;
+  return brutalistVariants[performanceKey as keyof typeof brutalistVariants];
 }
 
 // Animation timing utilities

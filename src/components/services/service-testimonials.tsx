@@ -312,7 +312,7 @@ function TestimonialContent({
         variant={compact ? "body" : "h2"}
         className={`${compact ? "text-lg" : "text-2xl"} mx-auto max-w-4xl leading-relaxed text-gray-300`}
       >
-        "{testimonial.content}"
+        &ldquo;{testimonial.content}&rdquo;
       </Typography>
 
       {/* Outcome */}

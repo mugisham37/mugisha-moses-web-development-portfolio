@@ -72,7 +72,7 @@ export function ServicePricing({ service }: ServicePricingProps) {
               className="mx-auto mb-8 max-w-3xl text-xl"
             >
               Our {service.name.toLowerCase()} solutions typically generate 3-5x
-              ROI within the first year. This isn't just development—it's
+              ROI within the first year. This isn&apos;t just development—it&apos;s
               business transformation.
             </Typography>
 

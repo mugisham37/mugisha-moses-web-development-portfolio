@@ -28,6 +28,20 @@ interface TestimonialFormData {
   allowMarketing: boolean;
 }
 
+interface FormErrors {
+  name?: string;
+  email?: string;
+  role?: string;
+  company?: string;
+  content?: string;
+  rating?: string;
+  projectType?: string;
+  videoUrl?: string;
+  linkedinProfile?: string;
+  allowPublic?: string;
+  allowMarketing?: string;
+}
+
 export function TestimonialSubmissionForm({
   onSubmit,
   className = "",
@@ -48,10 +62,10 @@ export function TestimonialSubmissionForm({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<TestimonialFormData>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<TestimonialFormData> = {};
+    const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
@@ -147,7 +161,7 @@ export function TestimonialSubmissionForm({
               variant="body"
               className="mx-auto max-w-md text-gray-300"
             >
-              Your testimonial has been submitted successfully. We'll review it
+              Your testimonial has been submitted successfully. We&apos;ll review it
               and get back to you soon.
             </Typography>
             <Button

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface TypewriterTextProps {
@@ -184,7 +184,7 @@ export function StaggeredTypewriter({
   wordClassName = "",
   onComplete,
 }: StaggeredTypewriterProps) {
-  const [completedWords, setCompletedWords] = useState(0);
+  const [_completedWords, setCompletedWords] = useState(0);
 
   const handleWordComplete = useCallback(() => {
     setCompletedWords((prev) => {

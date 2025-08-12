@@ -53,7 +53,7 @@ const getEnhancedVariants = (
           y: 0,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition,
+          transition: baseTransition as any,
         },
       };
     case "down":
@@ -68,7 +68,7 @@ const getEnhancedVariants = (
           y: 0,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition,
+          transition: baseTransition as any,
         },
       };
     case "left":
@@ -83,7 +83,7 @@ const getEnhancedVariants = (
           x: 0,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition,
+          transition: baseTransition as any,
         },
       };
     case "right":
@@ -98,7 +98,7 @@ const getEnhancedVariants = (
           x: 0,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition,
+          transition: baseTransition as any,
         },
       };
     case "scale":
@@ -113,7 +113,7 @@ const getEnhancedVariants = (
           scale: 1,
           rotateX: 0,
           rotateY: 0,
-          transition: baseTransition,
+          transition: baseTransition as any,
         },
       };
     case "rotate":
@@ -127,14 +127,14 @@ const getEnhancedVariants = (
           opacity: 1,
           rotate: 0,
           scale: 1,
-          transition: baseTransition,
+          transition: baseTransition as any,
         },
       };
     case "fade":
     default:
       return {
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: baseTransition },
+        visible: { opacity: 1, transition: baseTransition as any },
       };
   }
 };
@@ -156,7 +156,7 @@ export function EnhancedScrollReveal({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once,
-    margin: rootMargin,
+    margin: rootMargin as any,
     amount: threshold,
   });
 

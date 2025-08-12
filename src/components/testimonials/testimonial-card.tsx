@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
 import { StarRating } from "./star-rating";
@@ -71,7 +72,7 @@ export function TestimonialCard({
             variant={isCompact ? "body" : "h4"}
             className={`leading-relaxed text-gray-300 ${isCompact ? "text-sm" : "text-base"} `}
           >
-            "{testimonial.content}"
+            &ldquo;{testimonial.content}&rdquo;
           </Typography>
 
           {/* Author Info */}
@@ -79,10 +80,12 @@ export function TestimonialCard({
             <div className="flex-shrink-0">
               {testimonial.avatarUrl ? (
                 <div className="relative h-12 w-12 overflow-hidden border-2 border-white">
-                  <img
+                  <Image
                     src={testimonial.avatarUrl}
                     alt={testimonial.name}
                     className="h-full w-full object-cover"
+                    width={48}
+                    height={48}
                   />
                 </div>
               ) : (

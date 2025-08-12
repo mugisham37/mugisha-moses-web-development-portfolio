@@ -152,7 +152,7 @@ export function InteractiveCard({
   clickable = false,
   onClick,
 }: InteractiveCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [_isHovered, setIsHovered] = useState(false);
 
   const getHoverAnimation = () => {
     switch (hoverEffect) {
@@ -238,7 +238,7 @@ export function MagneticHover({
   disabled = false,
 }: MagneticHoverProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+  const [_isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (disabled) return;

@@ -30,7 +30,7 @@ export function ParallaxContainer({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset,
+    offset: offset as any,
   });
 
   const y = useTransform(
@@ -82,7 +82,14 @@ export function BackgroundParallax({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start end", "end start"] as any,
+  });
+
+  // Pre-calculate transforms for all layers
+  const layerTransforms = layers.map((layer) => {
+    const y = useTransform(scrollYProgress, [0, 1], [0, layer.speed * -100]);
+    const springY = useSpring(y, { stiffness: 100, damping: 30 });
+    return springY;
   });
 
   return (
@@ -91,28 +98,19 @@ export function BackgroundParallax({
       className={cn("relative overflow-hidden", className)}
       style={{ height }}
     >
-      {layers.map((layer, index) => {
-        const y = useTransform(
-          scrollYProgress,
-          [0, 1],
-          [0, layer.speed * -100]
-        );
-        const springY = useSpring(y, { stiffness: 100, damping: 30 });
-
-        return (
-          <motion.div
-            key={index}
-            className="absolute inset-0"
-            style={{
-              y: springY,
-              zIndex: layer.zIndex || index,
-              opacity: layer.opacity || 1,
-            }}
-          >
-            {layer.content}
-          </motion.div>
-        );
-      })}
+      {layers.map((layer, index) => (
+        <motion.div
+          key={index}
+          className="absolute inset-0"
+          style={{
+            y: layerTransforms[index],
+            zIndex: layer.zIndex || index,
+            opacity: layer.opacity || 1,
+          }}
+        >
+          {layer.content}
+        </motion.div>
+      ))}
     </div>
   );
 }
@@ -136,7 +134,7 @@ export function ParallaxText({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start end", "end start"] as any,
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, speed * -100]);
@@ -229,7 +227,6 @@ export function MouseParallax({
   reverse = false,
 }: MouseParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -303,8 +300,8 @@ export function InfiniteScrollParallax({
 
   const directionFactor = direction === "left" || direction === "up" ? -1 : 1;
 
-  useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor * velocityFactor.get() * (delta / 1000);
+  useAnimationFrame((_t, delta) => {
+    const moveBy = directionFactor * velocityFactor.get() * (delta / 1000);
 
     if (direction === "left" || direction === "right") {
       baseX.set(baseX.get() + moveBy);
@@ -368,7 +365,22 @@ export function BrutalistParallaxBackground({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start end", "end start"] as any,
+  });
+
+  // Pre-calculate transforms for all shapes
+  const shapeTransforms = shapes.map((shape) => {
+    const y = useTransform(scrollYProgress, [0, 1], [0, shape.speed * -200]);
+    const rotate = useTransform(
+      scrollYProgress,
+      [0, 1],
+      [0, shape.speed * 360]
+    );
+
+    const springY = useSpring(y, { stiffness: 100, damping: 30 });
+    const springRotate = useSpring(rotate, { stiffness: 100, damping: 30 });
+
+    return { y: springY, rotate: springRotate };
   });
 
   return (
@@ -376,38 +388,22 @@ export function BrutalistParallaxBackground({
       ref={ref}
       className={cn("absolute inset-0 overflow-hidden", className)}
     >
-      {shapes.map((shape, index) => {
-        const y = useTransform(
-          scrollYProgress,
-          [0, 1],
-          [0, shape.speed * -200]
-        );
-        const rotate = useTransform(
-          scrollYProgress,
-          [0, 1],
-          [0, shape.speed * 360]
-        );
-
-        const springY = useSpring(y, { stiffness: 100, damping: 30 });
-        const springRotate = useSpring(rotate, { stiffness: 100, damping: 30 });
-
-        return (
-          <motion.div
-            key={index}
-            className="absolute border-4 border-black"
-            style={{
-              left: shape.position.x,
-              top: shape.position.y,
-              width: shape.size,
-              height: shape.size,
-              backgroundColor: shape.color,
-              y: springY,
-              rotate: springRotate,
-              borderRadius: shape.type === "circle" ? "50%" : "0",
-            }}
-          />
-        );
-      })}
+      {shapes.map((shape, index) => (
+        <motion.div
+          key={index}
+          className="absolute border-4 border-black"
+          style={{
+            left: shape.position.x,
+            top: shape.position.y,
+            width: shape.size,
+            height: shape.size,
+            backgroundColor: shape.color,
+            y: shapeTransforms[index].y,
+            rotate: shapeTransforms[index].rotate,
+            borderRadius: shape.type === "circle" ? "50%" : "0",
+          }}
+        />
+      ))}
     </div>
   );
 }
@@ -431,7 +427,7 @@ export function ParallaxSection({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start end", "end start"] as any,
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, speed * -100]);

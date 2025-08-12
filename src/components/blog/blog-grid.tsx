@@ -15,7 +15,13 @@ interface BlogGridProps {
 }
 
 interface BlogResponse {
-  posts: BlogPost[];
+  posts: Array<
+    BlogPost & {
+      author: { name: string | null };
+      categories: Array<{ name: string; slug: string; color: string }>;
+      tags: Array<{ name: string; slug: string }>;
+    }
+  >;
   pagination: {
     page: number;
     limit: number;

@@ -2,15 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
-import { TestimonialCard } from "./testimonial-card";
 import {
   linkedInIntegration,
   isLinkedInConfigured,
 } from "@/lib/linkedin-integration";
-import type { Testimonial } from "@prisma/client";
 
 interface LinkedInTestimonialsProps {
   className?: string;
@@ -265,10 +264,12 @@ function LinkedInRecommendationCard({
           <div className="flex-shrink-0">
             {recommendation.recommender.profilePicture ? (
               <div className="relative h-12 w-12 overflow-hidden border-2 border-white">
-                <img
+                <Image
                   src={recommendation.recommender.profilePicture}
                   alt={`${recommendation.recommender.firstName} ${recommendation.recommender.lastName}`}
                   className="h-full w-full object-cover"
+                  width={48}
+                  height={48}
                 />
               </div>
             ) : (
@@ -290,7 +291,7 @@ function LinkedInRecommendationCard({
 
         {/* Recommendation Text */}
         <Typography variant="body" className="leading-relaxed text-gray-300">
-          "{recommendation.text}"
+          &ldquo;{recommendation.text}&rdquo;
         </Typography>
 
         {/* Date */}

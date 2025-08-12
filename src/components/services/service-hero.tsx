@@ -139,7 +139,7 @@ export function ServiceHero({ service }: ServiceHeroProps) {
                   variant="h4"
                   className="text-brutalist-yellow mb-4 text-sm font-bold tracking-wider uppercase"
                 >
-                  What's Included
+                  What&apos;s Included
                 </Typography>
                 <ul className="space-y-3">
                   {service.features.slice(0, 6).map((feature, index) => (

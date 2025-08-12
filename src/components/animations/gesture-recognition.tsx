@@ -4,7 +4,6 @@ import React, { useRef, useState, useEffect } from "react";
 import {
   motion,
   PanInfo,
-  useDragControls,
   useMotionValue,
   useTransform,
   useAnimation,
@@ -34,7 +33,7 @@ export function SwipeGesture({
   disabled = false,
 }: SwipeGestureProps) {
   const handleDragEnd = (
-    event: MouseEvent | TouchEvent | PointerEvent,
+    _event: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) => {
     if (disabled) return;
@@ -104,7 +103,7 @@ export function PullToRefresh({
   const controls = useAnimation();
 
   const handleDrag = (
-    event: MouseEvent | TouchEvent | PointerEvent,
+    _event: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) => {
     if (disabled || isRefreshing) return;
@@ -116,7 +115,7 @@ export function PullToRefresh({
   };
 
   const handleDragEnd = async (
-    event: MouseEvent | TouchEvent | PointerEvent,
+    _event: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) => {
     if (disabled || isRefreshing) return;
@@ -202,8 +201,8 @@ export function LongPressGesture({
 }: LongPressGestureProps) {
   const [isPressed, setIsPressed] = useState(false);
   const [progress, setProgress] = useState(0);
-  const timeoutRef = useRef<NodeJS.Timeout>();
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const startLongPress = () => {
     if (disabled) return;
@@ -379,7 +378,7 @@ export function DragToDismiss({
   );
 
   const handleDragEnd = (
-    event: MouseEvent | TouchEvent | PointerEvent,
+    _event: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) => {
     if (disabled) return;
@@ -442,8 +441,8 @@ export function MultiTouchGesture({
   disabled = false,
 }: MultiTouchGestureProps) {
   const [tapCount, setTapCount] = useState(0);
-  const tapTimeoutRef = useRef<NodeJS.Timeout>();
-  const longPressTimeoutRef = useRef<NodeJS.Timeout>();
+  const tapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const longPressTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleTapStart = () => {
     if (disabled) return;
