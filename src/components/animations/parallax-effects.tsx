@@ -13,37 +13,73 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-// Custom hook for layer transforms
-function useLayerTransforms(
-  scrollYProgress: MotionValue<number>,
-  layers: Array<{ speed: number }>
-) {
-  const transforms = layers.map((layer) => {
-    const y = useTransform(scrollYProgress, [0, 1], [0, layer.speed * -100]);
-    return useSpring(y, { stiffness: 100, damping: 30 });
-  });
-  return transforms;
+// Individual layer component to avoid hook rules
+function ParallaxLayer({
+  layer,
+  index,
+  scrollYProgress,
+}: {
+  layer: {
+    content: React.ReactNode;
+    speed: number;
+    zIndex?: number;
+    opacity?: number;
+  };
+  index: number;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const y = useTransform(scrollYProgress, [0, 1], [0, layer.speed * -100]);
+  const springY = useSpring(y, { stiffness: 100, damping: 30 });
+
+  return (
+    <motion.div
+      className="absolute inset-0"
+      style={{
+        y: springY,
+        zIndex: layer.zIndex || index,
+        opacity: layer.opacity || 1,
+      }}
+    >
+      {layer.content}
+    </motion.div>
+  );
 }
 
-// Custom hook for shape transforms
-function useShapeTransforms(
-  scrollYProgress: MotionValue<number>,
-  shapes: Array<{ speed: number }>
-) {
-  const transforms = shapes.map((shape) => {
-    const y = useTransform(scrollYProgress, [0, 1], [0, shape.speed * -200]);
-    const rotate = useTransform(
-      scrollYProgress,
-      [0, 1],
-      [0, shape.speed * 360]
-    );
+// Individual shape component to avoid hook rules
+function ParallaxShape({
+  shape,
+  scrollYProgress,
+}: {
+  shape: {
+    type: "rectangle" | "circle" | "triangle";
+    size: number;
+    color: string;
+    speed: number;
+    position: { x: string; y: string };
+  };
+  scrollYProgress: MotionValue<number>;
+}) {
+  const y = useTransform(scrollYProgress, [0, 1], [0, shape.speed * -200]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, shape.speed * 360]);
 
-    const springY = useSpring(y, { stiffness: 100, damping: 30 });
-    const springRotate = useSpring(rotate, { stiffness: 100, damping: 30 });
+  const springY = useSpring(y, { stiffness: 100, damping: 30 });
+  const springRotate = useSpring(rotate, { stiffness: 100, damping: 30 });
 
-    return { y: springY, rotate: springRotate };
-  });
-  return transforms;
+  return (
+    <motion.div
+      className="absolute border-4 border-black"
+      style={{
+        left: shape.position.x,
+        top: shape.position.y,
+        width: shape.size,
+        height: shape.size,
+        backgroundColor: shape.color,
+        y: springY,
+        rotate: springRotate,
+        borderRadius: shape.type === "circle" ? "50%" : "0",
+      }}
+    />
+  );
 }
 
 interface ParallaxContainerProps {
@@ -119,9 +155,6 @@ export function BackgroundParallax({
     offset: ["start end", "end start"],
   });
 
-  // Use custom hook for layer transforms
-  const layerTransforms = useLayerTransforms(scrollYProgress, layers);
-
   return (
     <div
       ref={ref}
@@ -129,17 +162,12 @@ export function BackgroundParallax({
       style={{ height }}
     >
       {layers.map((layer, index) => (
-        <motion.div
+        <ParallaxLayer
           key={index}
-          className="absolute inset-0"
-          style={{
-            y: layerTransforms[index],
-            zIndex: layer.zIndex || index,
-            opacity: layer.opacity || 1,
-          }}
-        >
-          {layer.content}
-        </motion.div>
+          layer={layer}
+          index={index}
+          scrollYProgress={scrollYProgress}
+        />
       ))}
     </div>
   );
@@ -398,28 +426,16 @@ export function BrutalistParallaxBackground({
     offset: ["start end", "end start"],
   });
 
-  // Use custom hook for shape transforms
-  const shapeTransforms = useShapeTransforms(scrollYProgress, shapes);
-
   return (
     <div
       ref={ref}
       className={cn("absolute inset-0 overflow-hidden", className)}
     >
       {shapes.map((shape, index) => (
-        <motion.div
+        <ParallaxShape
           key={index}
-          className="absolute border-4 border-black"
-          style={{
-            left: shape.position.x,
-            top: shape.position.y,
-            width: shape.size,
-            height: shape.size,
-            backgroundColor: shape.color,
-            y: shapeTransforms[index].y,
-            rotate: shapeTransforms[index].rotate,
-            borderRadius: shape.type === "circle" ? "50%" : "0",
-          }}
+          shape={shape}
+          scrollYProgress={scrollYProgress}
         />
       ))}
     </div>

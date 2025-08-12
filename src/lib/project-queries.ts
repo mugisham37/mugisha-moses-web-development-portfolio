@@ -133,8 +133,23 @@ export async function getProjects(options: ProjectQueryOptions = {}) {
     db.project.count({ where }),
   ]);
 
+  // Transform projects to handle null values
+  const transformedProjects = projects.map(project => ({
+    ...project,
+    content: project.content || undefined,
+    githubUrl: project.githubUrl || undefined,
+    liveUrl: project.liveUrl || undefined,
+    thumbnail: project.thumbnail || undefined,
+    videoUrl: project.videoUrl || undefined,
+    publishedAt: project.publishedAt || undefined,
+    categories: project.categories.map(cat => ({
+      ...cat,
+      description: cat.description || undefined,
+    })),
+  }));
+
   return {
-    projects,
+    projects: transformedProjects,
     totalCount,
     hasMore: limit ? offset + limit < totalCount : false,
   };
@@ -160,7 +175,21 @@ export async function getProjectBySlug(slug: string) {
     },
   });
 
-  return project;
+  if (!project) return null;
+
+  return {
+    ...project,
+    content: project.content || undefined,
+    githubUrl: project.githubUrl || undefined,
+    liveUrl: project.liveUrl || undefined,
+    thumbnail: project.thumbnail || undefined,
+    videoUrl: project.videoUrl || undefined,
+    publishedAt: project.publishedAt || undefined,
+    categories: project.categories.map(cat => ({
+      ...cat,
+      description: cat.description || undefined,
+    })),
+  };
 }
 
 // Get featured projects
@@ -184,7 +213,19 @@ export async function getFeaturedProjects(limit = 6) {
     take: limit,
   });
 
-  return projects;
+  return projects.map(project => ({
+    ...project,
+    content: project.content || undefined,
+    githubUrl: project.githubUrl || undefined,
+    liveUrl: project.liveUrl || undefined,
+    thumbnail: project.thumbnail || undefined,
+    videoUrl: project.videoUrl || undefined,
+    publishedAt: project.publishedAt || undefined,
+    categories: project.categories.map(cat => ({
+      ...cat,
+      description: cat.description || undefined,
+    })),
+  }));
 }
 
 // Get related projects based on technologies and categories
@@ -221,7 +262,19 @@ export async function getRelatedProjects(
     take: limit,
   });
 
-  return projects;
+  return projects.map(project => ({
+    ...project,
+    content: project.content || undefined,
+    githubUrl: project.githubUrl || undefined,
+    liveUrl: project.liveUrl || undefined,
+    thumbnail: project.thumbnail || undefined,
+    videoUrl: project.videoUrl || undefined,
+    publishedAt: project.publishedAt || undefined,
+    categories: project.categories.map(cat => ({
+      ...cat,
+      description: cat.description || undefined,
+    })),
+  }));
 }
 
 // Get all unique technologies used in projects
@@ -252,7 +305,10 @@ export async function getProjectCategories() {
     orderBy: { name: "asc" },
   });
 
-  return categories;
+  return categories.map(cat => ({
+    ...cat,
+    description: cat.description || undefined,
+  }));
 }
 
 // Increment project view count

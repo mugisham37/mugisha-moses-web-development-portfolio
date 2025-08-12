@@ -6,8 +6,8 @@ import {
   Smartphone,
   Tablet,
   Monitor,
-  TouchIcon,
-  Gesture,
+  TouchpadIcon,
+  Hand,
   RefreshCw,
   Menu,
   ArrowLeft,
@@ -19,7 +19,6 @@ import { Container } from "@/components/layout/container";
 import { Typography } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import {
-  TouchTarget,
   TouchButton,
   TouchIconButton,
 } from "@/components/mobile/touch-target";
@@ -99,7 +98,7 @@ export default function MobileTestPage() {
                     </Typography>
                   </div>
                   <div className="flex items-center gap-3">
-                    <TouchIcon
+                    <TouchpadIcon
                       className={`h-6 w-6 ${mobile.isTouchDevice ? "text-yellow-400" : "text-white/40"}`}
                     />
                     <Typography variant="body" className="font-mono">
@@ -108,7 +107,7 @@ export default function MobileTestPage() {
                     </Typography>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Gesture className="h-6 w-6 text-white" />
+                    <Hand className="h-6 w-6 text-white" />
                     <Typography variant="body" className="font-mono">
                       Orientation: {mobile.orientation.toUpperCase()}
                     </Typography>
@@ -312,7 +311,7 @@ export default function MobileTestPage() {
                     Connection:{" "}
                     {typeof navigator !== "undefined" &&
                     "connection" in navigator
-                      ? // @ts-ignore
+                      ? // @ts-expect-error - navigator.connection is experimental
                         navigator.connection?.effectiveType || "Unknown"
                       : "N/A"}
                   </Typography>
@@ -322,7 +321,7 @@ export default function MobileTestPage() {
                     Memory:{" "}
                     {typeof performance !== "undefined" &&
                     "memory" in performance
-                      ? // @ts-ignore
+                      ? // @ts-expect-error - performance.memory is experimental
                         `${Math.round(performance.memory?.usedJSHeapSize / 1024 / 1024)}MB`
                       : "N/A"}
                   </Typography>

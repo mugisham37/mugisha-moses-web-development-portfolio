@@ -155,6 +155,7 @@ export function EnhancedScrollReveal({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     margin: rootMargin as any,
     amount: threshold,
   });

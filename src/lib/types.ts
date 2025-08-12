@@ -35,14 +35,14 @@ export interface BlogPost {
   id: string;
   title: string;
   slug: string;
-  excerpt?: string | null;
+  excerpt?: string;
   content: string;
-  metaTitle?: string | null;
-  metaDescription?: string | null;
-  ogImage?: string | null;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: string;
   status: "DRAFT" | "PUBLISHED" | "SCHEDULED" | "ARCHIVED";
   featured: boolean;
-  publishedAt?: Date | null;
+  publishedAt?: Date;
   viewCount: number;
   readingTime: number;
   createdAt: Date;
@@ -55,7 +55,7 @@ export interface BlogCategory {
   id: string;
   name: string;
   slug: string;
-  description?: string | null;
+  description?: string;
   color: string;
   _count?: {
     posts: number;
@@ -116,7 +116,7 @@ export interface ProjectCategory {
   id: string;
   name: string;
   slug: string;
-  description?: string | null;
+  description?: string;
   color: string;
   _count?: {
     projects: number;

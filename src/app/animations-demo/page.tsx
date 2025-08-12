@@ -8,7 +8,6 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import {
   EnhancedScrollReveal,
-  ParallaxScrollReveal,
   ScrollCounter,
   MultiDirectionalReveal,
   ScrollTextReveal,
@@ -28,7 +27,6 @@ import {
   VelocityParallax,
   MouseParallax,
   BrutalistParallaxBackground,
-  ParallaxSection,
 } from "@/components/animations/parallax-effects";
 import {
   BrutalistSpinner,

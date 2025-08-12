@@ -50,14 +50,14 @@ async function ProjectsContent({ searchParams }: ProjectsPageProps) {
     search: searchParams.search,
     technologies: searchParams.technologies?.split(",").filter(Boolean),
     categories: searchParams.categories?.split(",").filter(Boolean),
-    status: searchParams.status?.split(",").filter(Boolean) as any,
+    status: searchParams.status?.split(",").filter(Boolean) as ("DRAFT" | "ACTIVE" | "ARCHIVED" | "FEATURED")[],
     featured: searchParams.featured === "true" ? true : undefined,
   };
 
   const sort = searchParams.sort
     ? (() => {
         const [field, direction] = searchParams.sort.split("-");
-        return { field: field as any, direction: direction as "asc" | "desc" };
+        return { field: field as "createdAt" | "updatedAt" | "viewCount" | "likeCount" | "title", direction: direction as "asc" | "desc" };
       })()
     : { field: "createdAt" as const, direction: "desc" as const };
 

@@ -1,17 +1,5 @@
 import { db } from "./db";
-import { BlogPost, BlogCategory, BlogTag, BlogAnalytics } from "./types";
-
-// Extended blog post type for queries
-export interface BlogPostWithRelations extends Omit<BlogPost, 'categories' | 'tags'> {
-  author: {
-    id: string;
-    name: string | null;
-    email: string;
-  };
-  categories: BlogCategory[];
-  tags: BlogTag[];
-  analytics?: BlogAnalytics[];
-}
+import { BlogPostWithRelations, BlogAnalytics } from "./types";
 
 export async function getAllBlogPosts(): Promise<BlogPostWithRelations[]> {
   try {
@@ -45,6 +33,9 @@ export async function getAllBlogPosts(): Promise<BlogPostWithRelations[]> {
     return posts.map((post) => ({
       ...post,
       excerpt: post.excerpt || undefined,
+      metaTitle: post.metaTitle || undefined,
+      metaDescription: post.metaDescription || undefined,
+      ogImage: post.ogImage || undefined,
       publishedAt: post.publishedAt || undefined,
       author: {
         id: post.author.id,
@@ -94,6 +85,9 @@ export async function getBlogPostBySlug(
     return {
       ...post,
       excerpt: post.excerpt || undefined,
+      metaTitle: post.metaTitle || undefined,
+      metaDescription: post.metaDescription || undefined,
+      ogImage: post.ogImage || undefined,
       publishedAt: post.publishedAt || undefined,
       author: {
         id: post.author.id,
@@ -112,3 +106,6 @@ export async function getBlogPostBySlug(
     return null;
   }
 }
+
+// Alias for backward compatibility
+export const getBlogPost = getBlogPostBySlug;

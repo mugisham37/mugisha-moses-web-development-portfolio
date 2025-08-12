@@ -74,6 +74,7 @@ export function ScrollReveal({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     margin: rootMargin as any,
     amount: threshold,
   });
@@ -130,6 +131,7 @@ export function StaggeredReveal({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     margin: rootMargin as any,
     amount: threshold,
   });
@@ -214,6 +216,7 @@ export function RevealOnScroll({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     margin: rootMargin as any,
     amount: threshold,
   });
