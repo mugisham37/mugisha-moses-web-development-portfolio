@@ -1,10 +1,78 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enable experimental features for better SEO
+  // Enable experimental features for better performance and SEO
   experimental: {
-    optimizePackageImports: ["lucide-react"],
+    optimizePackageImports: [
+      "lucide-react",
+      "framer-motion",
+      "@react-three/fiber",
+      "@react-three/drei",
+    ],
+    serverComponentsExternalPackages: ["@prisma/client"],
+    optimizeCss: true,
+    webVitalsAttribution: ["CLS", "LCP", "FCP", "FID", "TTFB"],
   },
+
+  // Compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+
+  // Bundle analyzer and optimization
+  webpack: (config, { dev, isServer }) => {
+    // Production optimizations
+    if (!dev) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: "all",
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: "vendors",
+              chunks: "all",
+              priority: 10,
+            },
+            common: {
+              name: "common",
+              minChunks: 2,
+              chunks: "all",
+              priority: 5,
+              reuseExistingChunk: true,
+            },
+            animations: {
+              test: /[\\/]node_modules[\\/](framer-motion|@react-spring)[\\/]/,
+              name: "animations",
+              chunks: "all",
+              priority: 15,
+            },
+            three: {
+              test: /[\\/]node_modules[\\/](@react-three|three)[\\/]/,
+              name: "three",
+              chunks: "all",
+              priority: 15,
+            },
+          },
+        },
+      };
+    }
+
+    // Optimize bundle size
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      // Tree shake unused lodash functions
+      lodash: "lodash-es",
+    };
+
+    return config;
+  },
+
+  // Output configuration for better caching
+  output: "standalone",
+
+  // Power optimizations
+  poweredByHeader: false,
 
   // Enhanced image optimization
   images: {
@@ -32,12 +100,13 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Headers for SEO and security
+  // Enhanced headers for security, performance, and caching
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: [
+          // Security headers
           {
             key: "X-Content-Type-Options",
             value: "nosniff",
@@ -53,6 +122,53 @@ const nextConfig: NextConfig = {
           {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Content-Security-Policy",
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https: wss:; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains; preload",
+          },
+          {
+            key: "Permissions-Policy",
+            value:
+              "camera=(), microphone=(), geolocation=(), browsing-topics=()",
+          },
+          // Performance headers
+          {
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
+          },
+        ],
+      },
+      // Static assets caching
+      {
+        source: "/favicon.ico",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/_next/static/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/_next/image(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

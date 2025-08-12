@@ -82,18 +82,61 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  // Add security headers
+  // Add comprehensive security headers
   const response = NextResponse.next();
 
-  // Security headers
+  // Core security headers
   response.headers.set("X-Frame-Options", "DENY");
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   response.headers.set("X-XSS-Protection", "1; mode=block");
-  response.headers.set(
-    "Content-Security-Policy",
-    "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:;"
-  );
+
+  // Strict Transport Security (HTTPS enforcement)
+  if (request.nextUrl.protocol === "https:") {
+    response.headers.set(
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubDomains; preload"
+    );
+  }
+
+  // Content Security Policy
+  const cspDirectives = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live https://va.vercel-scripts.com",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: https: blob:",
+    "font-src 'self' data:",
+    "connect-src 'self' https: wss:",
+    "media-src 'self' https:",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+    "upgrade-insecure-requests",
+  ];
+  response.headers.set("Content-Security-Policy", cspDirectives.join("; "));
+
+  // Permissions Policy (Feature Policy)
+  const permissionsPolicy = [
+    "camera=()",
+    "microphone=()",
+    "geolocation=()",
+    "browsing-topics=()",
+    "interest-cohort=()",
+  ];
+  response.headers.set("Permissions-Policy", permissionsPolicy.join(", "));
+
+  // Additional security headers
+  response.headers.set("X-DNS-Prefetch-Control", "on");
+  response.headers.set("X-Permitted-Cross-Domain-Policies", "none");
+
+  // Performance and caching headers for static assets
+  if (pathname.startsWith("/_next/static/") || pathname.includes(".")) {
+    response.headers.set(
+      "Cache-Control",
+      "public, max-age=31536000, immutable"
+    );
+  }
 
   // Rate limiting for specific routes
   if (isRateLimitedRoute(pathname)) {

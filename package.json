@@ -44,7 +44,17 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "playwright:install": "playwright install",
-    "playwright:install-deps": "playwright install-deps"
+    "playwright:install-deps": "playwright install-deps",
+    "analyze": "ANALYZE=true npm run build && node scripts/analyze-bundle.js",
+    "deploy": "node scripts/deploy.js",
+    "deploy:staging": "NODE_ENV=staging node scripts/deploy.js",
+    "deploy:production": "NODE_ENV=production node scripts/deploy.js",
+    "config:production": "node scripts/production-config.js",
+    "lighthouse": "lhci autorun",
+    "lighthouse:ci": "lhci autorun --upload.target=temporary-public-storage",
+    "performance:monitor": "node -e \"require('./src/lib/performance-monitor.js').performanceMonitor.startMonitoring()\"",
+    "cache:warm": "node -e \"require('./src/lib/cache.js').warmCriticalCaches()\"",
+    "health:check": "curl -f http://localhost:3000/api/health || exit 1"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
