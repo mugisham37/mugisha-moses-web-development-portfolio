@@ -76,3 +76,93 @@ export function processContactSubmission(
     errors,
   };
 }
+
+// Contact method formatting utilities
+export interface ContactMethod {
+  type: string;
+  label: string;
+  value: string;
+  icon: string;
+  primary: boolean;
+  description: string;
+  link: string;
+}
+
+export function formatContactMethod(method: ContactMethod): ContactMethod {
+  // Format phone numbers
+  if (method.type === "phone") {
+    const formatted = method.value.replace(/\D/g, "");
+    return {
+      ...method,
+      value: `+${formatted.slice(0, 3)} ${formatted.slice(3, 6)} ${formatted.slice(6, 9)} ${formatted.slice(9)}`,
+    };
+  }
+
+  // Format email addresses
+  if (method.type === "email") {
+    return {
+      ...method,
+      value: method.value.toLowerCase(),
+    };
+  }
+
+  // Format social media handles
+  if (method.type === "twitter" && !method.value.startsWith("@")) {
+    return {
+      ...method,
+      value: `@${method.value}`,
+    };
+  }
+
+  // Format URLs
+  if (["linkedin", "github", "website"].includes(method.type)) {
+    let formattedValue = method.value;
+    if (!formattedValue.startsWith("http://") && !formattedValue.startsWith("https://")) {
+      formattedValue = `https://${formattedValue}`;
+    }
+    return {
+      ...method,
+      link: formattedValue,
+      value: formattedValue.replace(/^https?:\/\//, ""),
+    };
+  }
+
+  return method;
+}
+
+export function validateContactMethod(method: ContactMethod): boolean {
+  switch (method.type) {
+    case "email":
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(method.value);
+    
+    case "phone":
+      const phoneRegex = /^\+?[\d\s\-\(\)]{10,}$/;
+      return phoneRegex.test(method.value);
+    
+    case "linkedin":
+      return method.value.includes("linkedin.com") || method.value.includes("/in/");
+    
+    case "github":
+      return method.value.includes("github.com");
+    
+    case "twitter":
+      return method.value.startsWith("@") || method.value.includes("twitter.com");
+    
+    default:
+      return method.value.length > 0;
+  }
+}
+
+export function getContactMethodIcon(type: string): string {
+  const iconMap: Record<string, string> = {
+    email: "Mail",
+    phone: "Phone",
+    linkedin: "Linkedin",
+    github: "Github",
+    twitter: "Twitter",
+    website: "ExternalLink",
+  };
+  
+  return iconMap[type] || "ExternalLink";
+}

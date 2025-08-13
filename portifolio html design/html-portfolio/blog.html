@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Brutalist Developer Blog - Insights on web development, design patterns, and industrial aesthetics">
+    <title>Blog | Brutalist Developer Portfolio</title>
+
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload critical fonts -->
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap">
+    </noscript>
+
+    <!-- Critical CSS inlined for performance -->
+    <style>
+        :root {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-accent: #ff0;
+            --font-mono: "Space Mono", "Courier New", monospace;
+            --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+            --font-size-display: clamp(4rem, 12vw, 8rem);
+            --font-size-h1: clamp(3rem, 8vw, 4rem);
+            --space-md: 16px;
+            --container-padding-mobile: 16px;
+            --container-padding-tablet: 24px;
+            --container-padding-desktop: 32px;
+            --transition-fast: .2s ease
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            font-size: 16px
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--color-white);
+            background-color: var(--color-black);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-top: 80px
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            line-height: 1.1;
+            margin-bottom: var(--space-md)
+        }
+
+        h1 {
+            font-size: var(--font-size-h1)
+        }
+
+        .display {
+            font-size: var(--font-size-display);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: .9;
+            letter-spacing: .02em
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding-mobile)
+        }
+
+        @media (min-width:768px) {
+            body {
+                padding-top: 88px
+            }
+
+            .container {
+                padding: 0 var(--container-padding-tablet)
+            }
+        }
+
+        @media (min-width:1024px) {
+            body {
+                padding-top: 96px
+            }
+
+            .container {
+                padding: 0 var(--container-padding-desktop)
+            }
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, .95);
+            border-bottom: 4px solid var(--color-white);
+            backdrop-filter: blur(8px);
+            z-index: 1000
+        }
+    </style>
+
+    <!-- Main CSS (minified) loaded asynchronously -->
+    <link rel="preload" href="css/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="css/main.min.css">
+    </noscript>
+
+    <!-- Component CSS -->
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/cards.css">
+    <link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/components/typography.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+
+    <!-- Page-specific CSS -->
+    <link rel="stylesheet" href="css/pages/blog.css">
+
+    <!-- Utility CSS -->
+    <link rel="stylesheet" href="css/utilities/animations.css">
+    <link rel="stylesheet" href="css/utilities/responsive.css">
+    <link rel="stylesheet" href="css/utilities/accessibility.css">
+</head>
+
+<body>
+    <!-- Skip navigation for accessibility -->
+    <a href="#main" class="skip-nav sr-only focus-visible">Skip to main content</a>
+    <a href="#footer" class="skip-nav sr-only focus-visible">Skip to footer</a>
+
+    <!-- Header with navigation -->
+    <header class="header" id="header" role="banner">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <div class="nav__container">
+                <!-- Logo -->
+                <div class="nav__logo">
+                    <a href="index.html" class="nav__logo-link" aria-label="Home - Brutalist Developer Portfolio">
+                        <span class="nav__logo-text">BRUTALIST</span>
+                        <span class="nav__logo-accent">DEV</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <ul class="nav__menu" role="menubar">
+                    <li class="nav__item" role="none">
+                        <a href="index.html" class="nav__link" role="menuitem">
+                            HOME
+                        </a>
+                    </li>
+                    <li class="nav__item" role="none">
+                        <a href="projects.html" class="nav__link" role="menuitem">
+                            PROJECTS
+                        </a>
+                    </li>
+                    <li class="nav__item" role="none">
+                        <a href="blog.html" class="nav__link nav__link--active" role="menuitem" aria-current="page">
+                            BLOG
+                        </a>
+                    </li>
+                    <li class="nav__item" role="none">
+                        <a href="contact.html" class="nav__link" role="menuitem">
+                            CONTACT
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- CTA Button -->
+                <div class="nav__cta">
+                    <a href="contact.html" class="btn btn--accent btn--sm">
+                        HIRE ME
+                    </a>
+                </div>
+
+                <!-- Mobile menu toggle -->
+                <button id="nav-toggle" class="nav__toggle" aria-label="Toggle mobile menu" aria-expanded="false"
+                    aria-controls="mobile-menu">
+                    <span class="nav__toggle-line"></span>
+                    <span class="nav__toggle-line"></span>
+                    <span class="nav__toggle-line"></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+            <ul class="nav__mobile-menu" role="menu">
+                <li class="nav__mobile-item" role="none">
+                    <a href="index.html" class="nav__mobile-link" role="menuitem">
+                        HOME
+                    </a>
+                </li>
+                <li class="nav__mobile-item" role="none">
+                    <a href="projects.html" class="nav__mobile-link" role="menuitem">
+                        PROJECTS
+                    </a>
+                </li>
+                <li class="nav__mobile-item" role="none">
+                    <a href="blog.html" class="nav__mobile-link nav__mobile-link--active" role="menuitem">
+                        BLOG
+                    </a>
+                </li>
+                <li class="nav__mobile-item" role="none">
+                    <a href="contact.html" class="nav__mobile-link" role="menuitem">
+                        CONTACT
+                    </a>
+                </li>
+                <li class="nav__mobile-item nav__mobile-item--cta" role="none">
+                    <a href="contact.html" class="btn btn--accent btn--full" role="menuitem">
+                        HIRE ME
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Mobile menu overlay -->
+        <div class="nav__overlay" id="mobile-overlay" aria-hidden="true"></div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main" id="main" role="main">
+        <!-- Blog Header Section -->
+        <section class="blog-header" role="region" aria-labelledby="blog-title">
+            <div class="container">
+                <div class="blog-header__content">
+                    <h1 id="blog-title" class="blog-header__title">BLOG</h1>
+                    <p class="blog-header__subtitle">
+                        Insights on web development, design patterns, and industrial aesthetics
+                    </p>
+                    <p class="blog-header__description">
+                        Exploring the intersection of brutalist design and modern web development.
+                        Raw thoughts on code, creativity, and digital craftsmanship.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Content Section -->
+        <section class="blog-content" role="region" aria-label="Blog posts and sidebar">
+            <div class="container">
+                <div class="blog-layout">
+                    <!-- Main Blog Content -->
+                    <div class="blog-main">
+                        <!-- Featured Post -->
+                        <article class="card blog-card blog-card--featured" role="article">
+                            <div class="card__meta">
+                                <time class="card__date" datetime="2024-03-15">MARCH 15, 2024</time>
+                                <span class="card__category">FEATURED</span>
+                            </div>
+                            <div class="card__content">
+                                <h2 class="card__title">THE BRUTALIST WEB: EMBRACING RAW FUNCTIONALITY</h2>
+                                <p class="card__excerpt">
+                                    Exploring how brutalist design principles can revolutionize modern web development.
+                                    From concrete architecture to digital interfaces, discover the power of
+                                    uncompromising
+                                    functionality and honest materials in web design.
+                                </p>
+                                <div class="card__tags">
+                                    <span class="tag">Design Philosophy</span>
+                                    <span class="tag">Web Development</span>
+                                    <span class="tag">Brutalism</span>
+                                </div>
+                                <div class="card__actions">
+                                    <a href="#" class="btn btn--accent btn--sm">READ MORE</a>
+                                    <span class="card__read-time">8 MIN READ</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Blog Posts Grid -->
+                        <div class="blog-grid">
+                            <!-- Blog Post 1 -->
+                            <article class="card blog-card" role="article">
+                                <div class="card__meta">
+                                    <time class="card__date" datetime="2024-03-10">MARCH 10, 2024</time>
+                                    <span class="card__category">TUTORIAL</span>
+                                </div>
+                                <div class="card__content">
+                                    <h3 class="card__title">CSS GRID: BUILDING INDUSTRIAL LAYOUTS</h3>
+                                    <p class="card__excerpt">
+                                        Master CSS Grid to create robust, industrial-strength layouts that embody
+                                        brutalist design principles. Learn to build grids that prioritize function
+                                        over decoration.
+                                    </p>
+                                    <div class="card__tags">
+                                        <span class="tag">CSS</span>
+                                        <span class="tag">Layout</span>
+                                        <span class="tag">Tutorial</span>
+                                    </div>
+                                    <div class="card__actions">
+                                        <a href="#" class="btn btn--primary btn--sm">READ MORE</a>
+                                        <span class="card__read-time">12 MIN READ</span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Blog Post 2 -->
+                            <article class="card blog-card" role="article">
+                                <div class="card__meta">
+                                    <time class="card__date" datetime="2024-03-05">MARCH 05, 2024</time>
+                                    <span class="card__category">OPINION</span>
+                                </div>
+                                <div class="card__content">
+                                    <h3 class="card__title">MINIMALISM VS BRUTALISM IN UI DESIGN</h3>
+                                    <p class="card__excerpt">
+                                        A deep dive into the philosophical differences between minimalist and brutalist
+                                        approaches to user interface design. When to choose raw functionality over
+                                        polished aesthetics.
+                                    </p>
+                                    <div class="card__tags">
+                                        <span class="tag">UI Design</span>
+                                        <span class="tag">Philosophy</span>
+                                        <span class="tag">Opinion</span>
+                                    </div>
+                                    <div class="card__actions">
+                                        <a href="#" class="btn btn--secondary btn--sm">READ MORE</a>
+                                        <span class="card__read-time">6 MIN READ</span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Blog Post 3 -->
+                            <article class="card blog-card" role="article">
+                                <div class="card__meta">
+                                    <time class="card__date" datetime="2024-02-28">FEBRUARY 28, 2024</time>
+                                    <span class="card__category">TECHNICAL</span>
+                                </div>
+                                <div class="card__content">
+                                    <h3 class="card__title">PERFORMANCE-FIRST DEVELOPMENT</h3>
+                                    <p class="card__excerpt">
+                                        How brutalist principles apply to web performance optimization. Building fast,
+                                        efficient applications that prioritize user experience over visual flourishes.
+                                    </p>
+                                    <div class="card__tags">
+                                        <span class="tag">Performance</span>
+                                        <span class="tag">Optimization</span>
+                                        <span class="tag">JavaScript</span>
+                                    </div>
+                                    <div class="card__actions">
+                                        <a href="#" class="btn btn--primary btn--sm">READ MORE</a>
+                                        <span class="card__read-time">10 MIN READ</span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Blog Post 4 -->
+                            <article class="card blog-card" role="article">
+                                <div class="card__meta">
+                                    <time class="card__date" datetime="2024-02-20">FEBRUARY 20, 2024</time>
+                                    <span class="card__category">CASE STUDY</span>
+                                </div>
+                                <div class="card__content">
+                                    <h3 class="card__title">REBUILDING A LEGACY SYSTEM</h3>
+                                    <p class="card__excerpt">
+                                        A case study on modernizing a 10-year-old e-commerce platform using brutalist
+                                        design principles. Lessons learned from prioritizing functionality and user
+                                        needs.
+                                    </p>
+                                    <div class="card__tags">
+                                        <span class="tag">Case Study</span>
+                                        <span class="tag">Legacy Code</span>
+                                        <span class="tag">Refactoring</span>
+                                    </div>
+                                    <div class="card__actions">
+                                        <a href="#" class="btn btn--accent btn--sm">READ MORE</a>
+                                        <span class="card__read-time">15 MIN READ</span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Blog Post 5 -->
+                            <article class="card blog-card" role="article">
+                                <div class="card__meta">
+                                    <time class="card__date" datetime="2024-02-15">FEBRUARY 15, 2024</time>
+                                    <span class="card__category">TUTORIAL</span>
+                                </div>
+                                <div class="card__content">
+                                    <h3 class="card__title">TYPOGRAPHY IN BRUTALIST WEB DESIGN</h3>
+                                    <p class="card__excerpt">
+                                        Master the art of brutalist typography. Learn to use bold, industrial fonts
+                                        that communicate directly and effectively without unnecessary ornamentation.
+                                    </p>
+                                    <div class="card__tags">
+                                        <span class="tag">Typography</span>
+                                        <span class="tag">Design</span>
+                                        <span class="tag">CSS</span>
+                                    </div>
+                                    <div class="card__actions">
+                                        <a href="#" class="btn btn--secondary btn--sm">READ MORE</a>
+                                        <span class="card__read-time">8 MIN READ</span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Blog Post 6 -->
+                            <article class="card blog-card" role="article">
+                                <div class="card__meta">
+                                    <time class="card__date" datetime="2024-02-10">FEBRUARY 10, 2024</time>
+                                    <span class="card__category">OPINION</span>
+                                </div>
+                                <div class="card__content">
+                                    <h3 class="card__title">THE DEATH OF SKEUOMORPHISM</h3>
+                                    <p class="card__excerpt">
+                                        Why brutalist design represents the natural evolution beyond skeuomorphism and
+                                        flat design. Embracing digital materials for what they truly are.
+                                    </p>
+                                    <div class="card__tags">
+                                        <span class="tag">Design History</span>
+                                        <span class="tag">Philosophy</span>
+                                        <span class="tag">UI/UX</span>
+                                    </div>
+                                    <div class="card__actions">
+                                        <a href="#" class="btn btn--primary btn--sm">READ MORE</a>
+                                        <span class="card__read-time">7 MIN READ</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Pagination -->
+                        <nav class="blog-pagination" role="navigation" aria-label="Blog pagination">
+                            <div class="pagination">
+                                <button class="btn btn--ghost btn--sm pagination__btn pagination__btn--disabled"
+                                    disabled>
+                                    PREVIOUS
+                                </button>
+                                <div class="pagination__pages">
+                                    <button class="btn btn--accent btn--sm pagination__page pagination__page--active">
+                                        1
+                                    </button>
+                                    <button class="btn btn--ghost btn--sm pagination__page">
+                                        2
+                                    </button>
+                                    <button class="btn btn--ghost btn--sm pagination__page">
+                                        3
+                                    </button>
+                                    <span class="pagination__ellipsis">...</span>
+                                    <button class="btn btn--ghost btn--sm pagination__page">
+                                        12
+                                    </button>
+                                </div>
+                                <button class="btn btn--primary btn--sm pagination__btn">
+                                    NEXT
+                                </button>
+                            </div>
+                        </nav>
+                    </div>
+
+                    <!-- Blog Sidebar -->
+                    <aside class="blog-sidebar" role="complementary" aria-label="Blog sidebar">
+                        <!-- Search -->
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-section__title">SEARCH</h3>
+                            <form class="search-form" role="search" aria-label="Search blog posts">
+                                <div class="search-form__group">
+                                    <label for="blog-search" class="sr-only">Search blog posts</label>
+                                    <input type="search" id="blog-search" name="search" class="search-form__input"
+                                        placeholder="SEARCH POSTS..." aria-describedby="search-description">
+                                    <button type="submit" class="btn btn--accent btn--sm search-form__submit">
+                                        SEARCH
+                                    </button>
+                                </div>
+                                <p id="search-description" class="search-form__note">
+                                    Visual search form - not functional
+                                </p>
+                            </form>
+                        </div>
+
+                        <!-- Categories Filter -->
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-section__title">CATEGORIES</h3>
+                            <div class="filter-buttons">
+                                <button class="btn btn--ghost btn--sm filter-btn filter-btn--active">
+                                    ALL POSTS
+                                </button>
+                                <button class="btn btn--ghost btn--sm filter-btn">
+                                    TUTORIAL
+                                </button>
+                                <button class="btn btn--ghost btn--sm filter-btn">
+                                    OPINION
+                                </button>
+                                <button class="btn btn--ghost btn--sm filter-btn">
+                                    TECHNICAL
+                                </button>
+                                <button class="btn btn--ghost btn--sm filter-btn">
+                                    CASE STUDY
+                                </button>
+                                <button class="btn btn--ghost btn--sm filter-btn">
+                                    FEATURED
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-section__title">POPULAR TAGS</h3>
+                            <div class="tag-cloud">
+                                <span class="tag tag--clickable">JavaScript</span>
+                                <span class="tag tag--clickable">CSS</span>
+                                <span class="tag tag--clickable">Design</span>
+                                <span class="tag tag--clickable">Performance</span>
+                                <span class="tag tag--clickable">Typography</span>
+                                <span class="tag tag--clickable">UI/UX</span>
+                                <span class="tag tag--clickable">Philosophy</span>
+                                <span class="tag tag--clickable">Tutorial</span>
+                                <span class="tag tag--clickable">Brutalism</span>
+                                <span class="tag tag--clickable">Layout</span>
+                                <span class="tag tag--clickable">Optimization</span>
+                                <span class="tag tag--clickable">Case Study</span>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter Signup -->
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-section__title">STAY UPDATED</h3>
+                            <p class="sidebar-section__description">
+                                Get notified when new posts are published. Raw insights delivered directly.
+                            </p>
+                            <form class="newsletter-form" role="form" aria-label="Newsletter signup">
+                                <div class="newsletter-form__group">
+                                    <label for="sidebar-newsletter-email" class="sr-only">Email Address</label>
+                                    <input type="email" id="sidebar-newsletter-email" name="email"
+                                        class="newsletter-form__input" placeholder="YOUR EMAIL ADDRESS" required
+                                        aria-describedby="sidebar-newsletter-description">
+                                    <button type="submit" class="btn btn--accent btn--sm newsletter-form__submit">
+                                        SUBSCRIBE
+                                    </button>
+                                </div>
+                                <p id="sidebar-newsletter-description" class="newsletter-form__note">
+                                    Visual form only - not functional
+                                </p>
+                            </form>
+                        </div>
+
+                        <!-- Recent Posts -->
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-section__title">RECENT POSTS</h3>
+                            <div class="recent-posts">
+                                <article class="recent-post">
+                                    <h4 class="recent-post__title">
+                                        <a href="#" class="recent-post__link">CSS GRID: BUILDING INDUSTRIAL LAYOUTS</a>
+                                    </h4>
+                                    <time class="recent-post__date" datetime="2024-03-10">MARCH 10, 2024</time>
+                                </article>
+                                <article class="recent-post">
+                                    <h4 class="recent-post__title">
+                                        <a href="#" class="recent-post__link">MINIMALISM VS BRUTALISM IN UI DESIGN</a>
+                                    </h4>
+                                    <time class="recent-post__date" datetime="2024-03-05">MARCH 05, 2024</time>
+                                </article>
+                                <article class="recent-post">
+                                    <h4 class="recent-post__title">
+                                        <a href="#" class="recent-post__link">PERFORMANCE-FIRST DEVELOPMENT</a>
+                                    </h4>
+                                    <time class="recent-post__date" datetime="2024-02-28">FEBRUARY 28, 2024</time>
+                                </article>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <!-- Brand Section -->
+                <div class="footer__section footer__section--brand">
+                    <div class="footer__logo">
+                        <span class="footer__logo-text">BRUTALIST</span>
+                        <span class="footer__logo-accent">DEV</span>
+                    </div>
+                    <p class="footer__tagline">
+                        Industrial design meets code. Crafting digital experiences with raw functionality
+                        and uncompromising aesthetics.
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link" aria-label="GitHub Profile">
+                            <span class="footer__social-text">GITHUB</span>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="LinkedIn Profile">
+                            <span class="footer__social-text">LINKEDIN</span>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="Twitter Profile">
+                            <span class="footer__social-text">TWITTER</span>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="Dribbble Profile">
+                            <span class="footer__social-text">DRIBBBLE</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Section -->
+                <div class="footer__section footer__section--nav">
+                    <h3 class="footer__section-title">NAVIGATION</h3>
+                    <nav class="footer__nav" role="navigation" aria-label="Footer navigation">
+                        <ul class="footer__nav-list">
+                            <li class="footer__nav-item">
+                                <a href="index.html" class="footer__nav-link">HOME</a>
+                            </li>
+                            <li class="footer__nav-item">
+                                <a href="projects.html" class="footer__nav-link">PROJECTS</a>
+                            </li>
+                            <li class="footer__nav-item">
+                                <a href="blog.html" class="footer__nav-link">BLOG</a>
+                            </li>
+                            <li class="footer__nav-item">
+                                <a href="contact.html" class="footer__nav-link">CONTACT</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <h4 class="footer__subsection-title">SERVICES</h4>
+                    <ul class="footer__nav-list">
+                        <li class="footer__nav-item">
+                            <a href="#" class="footer__nav-link">WEB DEVELOPMENT</a>
+                        </li>
+                        <li class="footer__nav-item">
+                            <a href="#" class="footer__nav-link">UI/UX DESIGN</a>
+                        </li>
+                        <li class="footer__nav-item">
+                            <a href="#" class="footer__nav-link">CONSULTING</a>
+                        </li>
+                        <li class="footer__nav-item">
+                            <a href="#" class="footer__nav-link">CODE REVIEW</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="footer__section footer__section--contact">
+                    <h3 class="footer__section-title">CONTACT INFO</h3>
+                    <div class="footer__contact-info">
+                        <div class="footer__contact-item">
+                            <span class="footer__contact-label">EMAIL</span>
+                            <a href="mailto:hello@brutalistdev.com" class="footer__contact-link">
+                                HELLO@BRUTALISTDEV.COM
+                            </a>
+                        </div>
+                        <div class="footer__contact-item">
+                            <span class="footer__contact-label">PHONE</span>
+                            <a href="tel:+1234567890" class="footer__contact-link">
+                                +1 (234) 567-8900
+                            </a>
+                        </div>
+                        <div class="footer__contact-item">
+                            <span class="footer__contact-label">LOCATION</span>
+                            <span class="footer__contact-text">
+                                SAN FRANCISCO, CA
+                            </span>
+                        </div>
+                        <div class="footer__contact-item">
+                            <span class="footer__contact-label">TIMEZONE</span>
+                            <span class="footer__contact-text">
+                                PST (UTC-8)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="footer__section footer__section--newsletter">
+                    <h3 class="footer__section-title">STAY UPDATED</h3>
+                    <p class="footer__newsletter-description">
+                        Get the latest updates on new projects, blog posts, and industry insights.
+                    </p>
+                    <form class="footer__newsletter-form" role="form" aria-label="Newsletter signup">
+                        <div class="footer__form-group">
+                            <label for="newsletter-email" class="footer__form-label sr-only">
+                                Email Address
+                            </label>
+                            <input type="email" id="newsletter-email" name="email" class="footer__form-input"
+                                placeholder="YOUR EMAIL ADDRESS" required aria-describedby="newsletter-description">
+                            <button type="submit" class="btn btn--accent btn--sm footer__form-submit">
+                                SUBSCRIBE
+                            </button>
+                        </div>
+                        <p id="newsletter-description" class="footer__form-note">
+                            No spam, unsubscribe anytime. Visual form only - not functional.
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer__bottom">
+                <div class="footer__legal">
+                    <p class="footer__copyright">
+                        © 2024 BRUTALIST DEV. ALL RIGHTS RESERVED.
+                    </p>
+                    <nav class="footer__legal-nav" role="navigation" aria-label="Legal navigation">
+                        <ul class="footer__legal-list">
+                            <li class="footer__legal-item">
+                                <a href="#" class="footer__legal-link">PRIVACY POLICY</a>
+                            </li>
+                            <li class="footer__legal-item">
+                                <a href="#" class="footer__legal-link">TERMS OF SERVICE</a>
+                            </li>
+                            <li class="footer__legal-item">
+                                <a href="#" class="footer__legal-link">COOKIES</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__credits">
+                    <p class="footer__credit-text">
+                        DESIGNED & BUILT WITH BRUTALIST PRINCIPLES
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript (minified for production) -->
+    <script src="js/main.min.js"></script>
+    <script src="js/mobile-menu.min.js"></script>
+</body>
+
+</html>

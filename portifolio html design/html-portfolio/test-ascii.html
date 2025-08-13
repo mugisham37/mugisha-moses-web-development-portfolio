@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Portrait Test</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .test-container {
+            text-align: center;
+        }
+
+        #test-canvas {
+            border: 2px solid #fff;
+            margin: 20px 0;
+            display: block;
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        button {
+            background: #ffff00;
+            color: #000;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>ASCII Portrait System Test</h1>
+        <canvas id="test-canvas"></canvas>
+        <div class="controls">
+            <button onclick="restartAnimation()">Restart</button>
+            <button onclick="pauseAnimation()">Pause</button>
+            <button onclick="resumeAnimation()">Resume</button>
+        </div>
+        <div id="status">Loading...</div>
+    </div>
+
+    <script src="js/ascii-portrait.js"></script>
+    <script>
+        let portraitSystem;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const statusDiv = document.getElementById('status');
+
+            try {
+                statusDiv.textContent = 'Initializing ASCII Portrait System...';
+
+                portraitSystem = new ASCIIPortraitSystem('test-canvas', 'images/portrait-placeholder.svg', {
+                    width: 80,
+                    height: 60,
+                    fontSize: 8,
+                    autoStart: true,
+                    loop: true,
+                    onComplete: function () {
+                        statusDiv.textContent = 'Animation Complete - Looping...';
+                    }
+                });
+
+                statusDiv.textContent = 'ASCII Portrait System Initialized';
+
+            } catch (error) {
+                statusDiv.textContent = 'Error: ' + error.message;
+                console.error('ASCII Portrait Test Error:', error);
+            }
+        });
+
+        function restartAnimation() {
+            if (portraitSystem) {
+                portraitSystem.restart();
+                document.getElementById('status').textContent = 'Animation Restarted';
+            }
+        }
+
+        function pauseAnimation() {
+            if (portraitSystem) {
+                portraitSystem.pause();
+                document.getElementById('status').textContent = 'Animation Paused';
+            }
+        }
+
+        function resumeAnimation() {
+            if (portraitSystem) {
+                portraitSystem.resume();
+                document.getElementById('status').textContent = 'Animation Resumed';
+            }
+        }
+    </script>
+</body>
+
+</html>

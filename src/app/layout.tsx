@@ -27,6 +27,14 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   title: {
     default: SITE_CONFIG.name,
@@ -68,13 +76,7 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   metadataBase: new URL(SITE_CONFIG.url),
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-    viewportFit: "cover",
-  },
+
   other: {
     "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-capable": "yes",

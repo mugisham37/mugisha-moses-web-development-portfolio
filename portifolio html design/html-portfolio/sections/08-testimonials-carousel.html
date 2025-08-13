@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Testimonials - Brutalist Developer Portfolio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Critical CSS -->
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-accent: #ffff00;
+            --color-muted: #333333;
+            --font-display: "Space Mono", "Courier New", monospace;
+            --font-mono: "JetBrains Mono", "Space Mono", "Courier New", monospace;
+            --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+            --font-size-h1: clamp(3rem, 8vw, 4rem);
+            --font-size-body: 1rem;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --container-padding-xs: 16px;
+            --container-padding-md: 24px;
+            --container-padding-lg: 32px;
+            --container-2xl: 1440px;
+            --transition-fast: 0.15s ease-out;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: var(--font-size-body);
+            line-height: 1.6;
+            color: var(--color-white);
+            background-color: var(--color-black);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            padding: var(--space-8) 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-2xl);
+            margin: 0 auto;
+            padding-left: var(--container-padding-xs);
+            padding-right: var(--container-padding-xs);
+        }
+    </style>
+
+    <!-- Component CSS -->
+    <link rel="stylesheet" href="../css/components/testimonial-carousel.css">
+    <link rel="stylesheet" href="../css/utilities/animations.css">
+</head>
+
+<body>
+    <!-- Client Impact - 3D Testimonial Carousel -->
+    <section class="client-impact fade-in-scroll" role="region" aria-labelledby="client-impact-title">
+        <div class="container">
+            <div class="client-impact__header">
+                <h2 id="client-impact-title" class="client-impact__title">CLIENT IMPACT</h2>
+                <p class="client-impact__subtitle">
+                    Real results from real clients - proven success in delivering exceptional digital solutions
+                </p>
+            </div>
+
+            <!-- 3D Testimonial Carousel -->
+            <div class="testimonial-carousel" role="region" aria-label="Client testimonials carousel">
+                <div class="testimonial-carousel__container" id="testimonial-carousel-container">
+
+                    <!-- Testimonial Card 1 -->
+                    <article class="testimonial-card testimonial-card--active" data-testimonial="0" role="article">
+                        <div class="testimonial-card__content">
+                            <div class="testimonial-card__quote">
+                                <blockquote class="testimonial-quote">
+                                    "Working with this developer was a game-changer for our startup. The e-commerce
+                                    platform delivered exceeded all expectations and launched 2 weeks ahead of
+                                    schedule."
+                                </blockquote>
+                            </div>
+
+                            <div class="testimonial-card__client">
+                                <div class="testimonial-client__photo">
+                                    <picture>
+                                        <source srcset="../images/testimonials/client-1.webp" type="image/webp">
+                                        <img src="../images/testimonials/client-1.jpg"
+                                            alt="Sarah Chen, CEO of TechStart" loading="lazy" decoding="async"
+                                            fetchpriority="low">
+                                    </picture>
+                                </div>
+                                <div class="testimonial-client__info">
+                                    <h3 class="testimonial-client__name">SARAH CHEN</h3>
+                                    <p class="testimonial-client__title">CEO, TECHSTART</p>
+                                    <p class="testimonial-client__company">E-COMMERCE PLATFORM</p>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-card__metrics">
+                                <div class="testimonial-metric">
+                                    <span class="testimonial-metric__value">2 WEEKS</span>
+                                    <span class="testimonial-metric__label">AHEAD OF SCHEDULE</span>
+                                </div>
+                                <div class="testimonial-metric">
+                                    <span class="testimonial-metric__value">15%</span>
+                                    <span class="testimonial-metric__label">UNDER BUDGET</span>
+                                </div>
+                                <div class="testimonial-metric">
+                                    <span class="testimonial-metric__value">98%</span>
+                                    <span class="testimonial-metric__label">SATISFACTION SCORE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Additional testimonial cards would go here -->
+
+                </div>
+
+                <!-- Carousel Navigation -->
+                <div class="testimonial-carousel__navigation" role="navigation" aria-label="Testimonial navigation">
+                    <button class="testimonial-nav testimonial-nav--prev" aria-label="Previous testimonial"
+                        id="testimonial-prev">
+                        <span class="testimonial-nav__icon">←</span>
+                    </button>
+                    <div class="testimonial-carousel__indicators">
+                        <button class="testimonial-indicator testimonial-indicator--active"
+                            aria-label="View testimonial 1" data-testimonial="0"></button>
+                        <button class="testimonial-indicator" aria-label="View testimonial 2"
+                            data-testimonial="1"></button>
+                        <button class="testimonial-indicator" aria-label="View testimonial 3"
+                            data-testimonial="2"></button>
+                    </div>
+                    <button class="testimonial-nav testimonial-nav--next" aria-label="Next testimonial"
+                        id="testimonial-next">
+                        <span class="testimonial-nav__icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="../js/components/testimonial-carousel.js"></script>
+</body>
+
+</html>

@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
       "@react-three/fiber",
       "@react-three/drei",
     ],
-    optimizeCss: true,
     webVitalsAttribution: ["CLS", "LCP", "FCP", "FID", "TTFB"],
   },
 
@@ -21,54 +20,7 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
 
-  // Bundle analyzer and optimization
-  webpack: (config, { dev, isServer }) => {
-    // Production optimizations
-    if (!dev) {
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: "all",
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name: "vendors",
-              chunks: "all",
-              priority: 10,
-            },
-            common: {
-              name: "common",
-              minChunks: 2,
-              chunks: "all",
-              priority: 5,
-              reuseExistingChunk: true,
-            },
-            animations: {
-              test: /[\\/]node_modules[\\/](framer-motion|@react-spring)[\\/]/,
-              name: "animations",
-              chunks: "all",
-              priority: 15,
-            },
-            three: {
-              test: /[\\/]node_modules[\\/](@react-three|three)[\\/]/,
-              name: "three",
-              chunks: "all",
-              priority: 15,
-            },
-          },
-        },
-      };
-    }
-
-    // Optimize bundle size
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      // Tree shake unused lodash functions
-      lodash: "lodash-es",
-    };
-
-    return config;
-  },
+  // Remove turbo config as it's not supported in Next.js 15
 
   // Output configuration for better caching
   output: "standalone",

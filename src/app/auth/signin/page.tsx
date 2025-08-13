@@ -9,18 +9,19 @@ export const metadata: Metadata = {
 }
 
 interface SignInPageProps {
-  searchParams: {
+  searchParams: Promise<{
     callbackUrl?: string
     error?: string
-  }
+  }>
 }
 
 export default async function SignInPage({ searchParams }: SignInPageProps) {
   const session = await auth()
+  const params = await searchParams
   
   // Redirect if already authenticated
   if (session?.user) {
-    redirect(searchParams.callbackUrl || "/dashboard")
+    redirect(params.callbackUrl || "/dashboard")
   }
 
   return (
@@ -37,8 +38,8 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
           </div>
 
           <SignInForm 
-            callbackUrl={searchParams.callbackUrl}
-            error={searchParams.error}
+            callbackUrl={params.callbackUrl}
+            error={params.error}
           />
 
           <div className="mt-8 text-center">

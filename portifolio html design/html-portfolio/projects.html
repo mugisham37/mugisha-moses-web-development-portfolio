@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Projects - Brutalist Developer Portfolio showcasing web development projects with industrial design aesthetics">
+    <title>Projects | Brutalist Developer Portfolio</title>
+
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload critical fonts -->
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap">
+    </noscript>
+
+    <!-- Critical CSS inlined for performance -->
+    <style>
+        :root {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-accent: #ff0;
+            --font-mono: "Space Mono", "Courier New", monospace;
+            --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+            --font-size-display: clamp(4rem, 12vw, 8rem);
+            --font-size-h1: clamp(3rem, 8vw, 4rem);
+            --space-md: 16px;
+            --container-padding-mobile: 16px;
+            --container-padding-tablet: 24px;
+            --container-padding-desktop: 32px;
+            --transition-fast: .2s ease
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            font-size: 16px
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--color-white);
+            background-color: var(--color-black);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-top: 80px
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            line-height: 1.1;
+            margin-bottom: var(--space-md)
+        }
+
+        h1 {
+            font-size: var(--font-size-h1)
+        }
+
+        .display {
+            font-size: var(--font-size-display);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: .9;
+            letter-spacing: .02em
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding-mobile)
+        }
+
+        @media (min-width:768px) {
+            body {
+                padding-top: 88px
+            }
+
+            .container {
+                padding: 0 var(--container-padding-tablet)
+            }
+        }
+
+        @media (min-width:1024px) {
+            body {
+                padding-top: 96px
+            }
+
+            .container {
+                padding: 0 var(--container-padding-desktop)
+            }
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, .95);
+            border-bottom: 4px solid var(--color-white);
+            backdrop-filter: blur(8px);
+            z-index: 1000
+        }
+    </style>
+
+    <!-- Main CSS (minified) loaded asynchronously -->
+    <link rel="preload" href="css/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="css/main.min.css">
+    </noscript>
+
+    <!-- Component CSS -->
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/cards.css">
+    <link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/components/typography.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+
+    <!-- Page-specific CSS -->
+    <link rel="stylesheet" href="css/pages/projects.css">
+
+    <!-- Utility CSS -->
+    <link rel="stylesheet" href="css/utilities/animations.css">
+    <link rel="stylesheet" href="css/utilities/responsive.css">
+    <link rel="stylesheet" href="css/utilities/accessibility.css">
+</head>
+
+<body>
+    <!-- Skip navigation for accessibility -->
+    <a href="#main" class="skip-nav sr-only focus-visible">Skip to main content</a>
+    <a href="#footer" class="skip-nav sr-only focus-visible">Skip to footer</a>
+
+    <!-- Header with navigation -->
+    <header class="header" id="header" role="banner">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <div class="nav__container">
+                <!-- Logo -->
+                <div class="nav__logo">
+                    <a href="index.html" class="nav__logo-link" aria-label="Home - Brutalist Developer Portfolio">
+                        <span class="nav__logo-text">BRUTALIST</span>
+                        <span class="nav__logo-accent">DEV</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <ul class="nav__menu" role="menubar">
+                    <li class="nav__item" role="none">
+                        <a href="index.html" class="nav__link" role="menuitem">
+                            HOME
+                        </a>
+                    </li>
+                    <li class="nav__item" role="none">
+                        <a href="projects.html" class="nav__link nav__link--active" role="menuitem" aria-current="page">
+                            PROJECTS
+                        </a>
+                    </li>
+                    <li class="nav__item" role="none">
+                        <a href="blog.html" class="nav__link" role="menuitem">
+                            BLOG
+                        </a>
+                    </li>
+                    <li class="nav__item" role="none">
+                        <a href="contact.html" class="nav__link" role="menuitem">
+                            CONTACT
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- CTA Button -->
+                <div class="nav__cta">
+                    <a href="contact.html" class="btn btn--accent btn--sm">
+                        HIRE ME
+                    </a>
+                </div>
+
+                <!-- Mobile menu toggle -->
+                <button id="nav-toggle" class="nav__toggle" aria-label="Toggle mobile menu" aria-expanded="false"
+                    aria-controls="mobile-menu">
+                    <span class="nav__toggle-line"></span>
+                    <span class="nav__toggle-line"></span>
+                    <span class="nav__toggle-line"></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+            <ul class="nav__mobile-menu" role="menu">
+                <li class="nav__mobile-item" role="none">
+                    <a href="index.html" class="nav__mobile-link" role="menuitem">
+                        HOME
+                    </a>
+                </li>
+                <li class="nav__mobile-item" role="none">
+                    <a href="projects.html" class="nav__mobile-link nav__mobile-link--active" role="menuitem">
+                        PROJECTS
+                    </a>
+                </li>
+                <li class="nav__mobile-item" role="none">
+                    <a href="blog.html" class="nav__mobile-link" role="menuitem">
+                        BLOG
+                    </a>
+                </li>
+                <li class="nav__mobile-item" role="none">
+                    <a href="contact.html" class="nav__mobile-link" role="menuitem">
+                        CONTACT
+                    </a>
+                </li>
+                <li class="nav__mobile-item nav__mobile-item--cta" role="none">
+                    <a href="contact.html" class="btn btn--accent btn--full" role="menuitem">
+                        HIRE ME
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Mobile menu overlay -->
+        <div class="nav__overlay" id="mobile-overlay" aria-hidden="true"></div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main" id="main" role="main">
+        <!-- Projects hero section -->
+        <section class="projects-hero" aria-labelledby="projects-title">
+            <div class="container">
+                <div class="projects-hero__content">
+                    <h1 id="projects-title" class="projects-hero__title">
+                        MY PROJECTS
+                    </h1>
+                    <p class="projects-hero__subtitle">
+                        A COLLECTION OF BRUTALIST WEB APPLICATIONS
+                    </p>
+                    <p class="projects-hero__description">
+                        Each project showcases different technologies and approaches to modern web development,
+                        built with industrial design principles and uncompromising functionality.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects grid section -->
+        <section class="projects-grid" aria-labelledby="projects-grid-title">
+            <div class="container">
+                <h2 id="projects-grid-title" class="sr-only">Projects Collection</h2>
+
+                <!-- Projects filters and search -->
+                <div class="projects-filters" role="search" aria-labelledby="filters-title">
+                    <h3 id="filters-title" class="sr-only">Filter and Search Projects</h3>
+
+                    <!-- Search interface -->
+                    <div class="projects-search">
+                        <div class="search-input-group">
+                            <input type="search" class="search-input" placeholder="SEARCH PROJECTS..."
+                                aria-label="Search projects" disabled>
+                            <button type="button" class="search-button" aria-label="Search" disabled>
+                                <span class="search-icon">🔍</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filter buttons -->
+                    <div class="projects-filter-buttons" role="group" aria-labelledby="filter-buttons-title">
+                        <h4 id="filter-buttons-title" class="sr-only">Filter by Technology</h4>
+                        <button type="button" class="filter-btn filter-btn--active" data-filter="all">
+                            ALL PROJECTS
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="react">
+                            REACT
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="vue">
+                            VUE.JS
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="node">
+                            NODE.JS
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="next">
+                            NEXT.JS
+                        </button>
+                        <button type="button" class="filter-btn" data-filter="fullstack">
+                            FULL-STACK
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Projects grid -->
+                <div class="card-grid card-grid--3" role="list">
+
+                    <!-- Project 1: E-commerce Platform -->
+                    <article class="card project-card" role="listitem">
+                        <div class="card__image">
+                            <img src="images/project-thumbnails/project-1.svg"
+                                alt="E-commerce Platform - Modern online shopping interface" loading="lazy">
+                            <div class="card__overlay">
+                                <div class="card__technologies">
+                                    <span class="tech-tag">REACT</span>
+                                    <span class="tech-tag">NODE.JS</span>
+                                    <span class="tech-tag">MONGODB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title">E-COMMERCE PLATFORM</h3>
+                            <p class="card__description">
+                                Full-stack e-commerce solution with user authentication, product catalog,
+                                shopping cart, and payment integration. Built with modern React patterns
+                                and scalable backend architecture.
+                            </p>
+                            <div class="card__actions">
+                                <a href="#" class="btn btn--primary btn--sm"
+                                    aria-label="View E-commerce Platform project">
+                                    VIEW PROJECT
+                                </a>
+                                <a href="#" class="btn btn--ghost btn--sm"
+                                    aria-label="View E-commerce Platform source code">
+                                    GITHUB
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Task Manager -->
+                    <article class="card project-card" role="listitem">
+                        <div class="card__image">
+                            <img src="images/project-thumbnails/project-2.svg"
+                                alt="Task Manager Application - Project management interface" loading="lazy">
+                            <div class="card__overlay">
+                                <div class="card__technologies">
+                                    <span class="tech-tag">VUE.JS</span>
+                                    <span class="tech-tag">EXPRESS</span>
+                                    <span class="tech-tag">POSTGRES</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title">TASK MANAGER</h3>
+                            <p class="card__description">
+                                Collaborative project management tool with real-time updates, team collaboration,
+                                and advanced filtering. Features drag-and-drop interface and comprehensive
+                                reporting dashboard.
+                            </p>
+                            <div class="card__actions">
+                                <a href="#" class="btn btn--primary btn--sm" aria-label="View Task Manager project">
+                                    VIEW PROJECT
+                                </a>
+                                <a href="#" class="btn btn--ghost btn--sm" aria-label="View Task Manager source code">
+                                    GITHUB
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Weather Dashboard -->
+                    <article class="card project-card" role="listitem">
+                        <div class="card__image">
+                            <img src="images/project-thumbnails/project-3.svg"
+                                alt="Weather Dashboard - Real-time weather tracking interface" loading="lazy">
+                            <div class="card__overlay">
+                                <div class="card__technologies">
+                                    <span class="tech-tag">NEXT.JS</span>
+                                    <span class="tech-tag">TAILWIND</span>
+                                    <span class="tech-tag">API</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title">WEATHER DASHBOARD</h3>
+                            <p class="card__description">
+                                Real-time weather tracking application with location-based forecasts,
+                                interactive maps, and detailed analytics. Optimized for performance
+                                with server-side rendering.
+                            </p>
+                            <div class="card__actions">
+                                <a href="#" class="btn btn--primary btn--sm"
+                                    aria-label="View Weather Dashboard project">
+                                    VIEW PROJECT
+                                </a>
+                                <a href="#" class="btn btn--ghost btn--sm"
+                                    aria-label="View Weather Dashboard source code">
+                                    GITHUB
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4: Portfolio Website -->
+                    <article class="card project-card card--accent" role="listitem">
+                        <div class="card__image">
+                            <img src="images/project-thumbnails/project-4.svg"
+                                alt="Portfolio Website - Personal developer showcase" loading="lazy">
+                            <div class="card__overlay">
+                                <div class="card__technologies">
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">VANILLA JS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title">PORTFOLIO WEBSITE</h3>
+                            <p class="card__description">
+                                Brutalist developer portfolio showcasing projects and skills with
+                                industrial design aesthetics. Built with semantic HTML, modern CSS,
+                                and minimal JavaScript for optimal performance.
+                            </p>
+                            <div class="card__actions">
+                                <a href="#" class="btn btn--primary btn--sm"
+                                    aria-label="View Portfolio Website project">
+                                    VIEW PROJECT
+                                </a>
+                                <a href="#" class="btn btn--ghost btn--sm"
+                                    aria-label="View Portfolio Website source code">
+                                    GITHUB
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 5: Chat Application -->
+                    <article class="card project-card" role="listitem">
+                        <div class="card__image">
+                            <img src="images/project-thumbnails/project-5.svg"
+                                alt="Chat Application - Real-time messaging platform" loading="lazy">
+                            <div class="card__overlay">
+                                <div class="card__technologies">
+                                    <span class="tech-tag">SOCKET.IO</span>
+                                    <span class="tech-tag">NODE.JS</span>
+                                    <span class="tech-tag">REDIS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title">CHAT APPLICATION</h3>
+                            <p class="card__description">
+                                Real-time messaging platform with room-based conversations, file sharing,
+                                and user presence indicators. Scalable architecture supporting thousands
+                                of concurrent users.
+                            </p>
+                            <div class="card__actions">
+                                <a href="#" class="btn btn--primary btn--sm" aria-label="View Chat Application project">
+                                    VIEW PROJECT
+                                </a>
+                                <a href="#" class="btn btn--ghost btn--sm"
+                                    aria-label="View Chat Application source code">
+                                    GITHUB
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 6: Blog CMS -->
+                    <article class="card project-card" role="listitem">
+                        <div class="card__image">
+                            <img src="images/project-thumbnails/project-6.svg"
+                                alt="Blog CMS - Content management system interface" loading="lazy">
+                            <div class="card__overlay">
+                                <div class="card__technologies">
+                                    <span class="tech-tag">GATSBY</span>
+                                    <span class="tech-tag">GRAPHQL</span>
+                                    <span class="tech-tag">STRAPI</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title">BLOG CMS</h3>
+                            <p class="card__description">
+                                Headless content management system with static site generation,
+                                SEO optimization, and markdown support. Features advanced content
+                                workflows and multi-author collaboration.
+                            </p>
+                            <div class="card__actions">
+                                <a href="#" class="btn btn--primary btn--sm" aria-label="View Blog CMS project">
+                                    VIEW PROJECT
+                                </a>
+                                <a href="#" class="btn btn--ghost btn--sm" aria-label="View Blog CMS source code">
+                                    GITHUB
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Pagination -->
+                <div class="projects-pagination" role="navigation" aria-labelledby="pagination-title">
+                    <h3 id="pagination-title" class="sr-only">Projects Pagination</h3>
+
+                    <div class="pagination">
+                        <button type="button" class="pagination-btn pagination-btn--prev" disabled
+                            aria-label="Previous page">
+                            <span class="pagination-arrow">←</span>
+                            <span class="pagination-text">PREV</span>
+                        </button>
+
+                        <div class="pagination-numbers" role="group" aria-label="Page numbers">
+                            <button type="button" class="pagination-number pagination-number--active"
+                                aria-current="page">
+                                1
+                            </button>
+                            <button type="button" class="pagination-number">
+                                2
+                            </button>
+                            <button type="button" class="pagination-number">
+                                3
+                            </button>
+                            <span class="pagination-ellipsis">...</span>
+                            <button type="button" class="pagination-number">
+                                8
+                            </button>
+                        </div>
+
+                        <button type="button" class="pagination-btn pagination-btn--next" aria-label="Next page">
+                            <span class="pagination-text">NEXT</span>
+                            <span class="pagination-arrow">→</span>
+                        </button>
+                    </div>
+
+                    <!-- Results info -->
+                    <div class="pagination-info">
+                        <p class="pagination-results">
+                            SHOWING <strong>1-6</strong> OF <strong>24</strong> PROJECTS
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <!-- Brand Section -->
+                <div class="footer__section footer__section--brand">
+                    <div class="footer__logo">
+                        <span class="footer__logo-text">BRUTALIST</span>
+                        <span class="footer__logo-accent">DEV</span>
+                    </div>
+                    <p class="footer__tagline">
+                        Industrial design meets code. Crafting digital experiences with raw functionality
+                        and uncompromising aesthetics.
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link" aria-label="GitHub Profile">
+                            <span class="footer__social-text">GITHUB</span>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="LinkedIn Profile">
+                            <span class="footer__social-text">LINKEDIN</span>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="Twitter Profile">
+                            <span class="footer__social-text">TWITTER</span>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="Dribbble Profile">
+                            <span class="footer__social-text">DRIBBBLE</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Section -->
+                <div class="footer__section footer__section--nav">
+                    <h3 class="footer__section-title">NAVIGATION</h3>
+                    <nav class="footer__nav" role="navigation" aria-label="Footer navigation">
+                        <ul class="footer__nav-list">
+                            <li class="footer__nav-item">
+                                <a href="index.html" class="footer__nav-link">HOME</a>
+                            </li>
+                            <li class="footer__nav-item">
+                                <a href="projects.html" class="footer__nav-link">PROJECTS</a>
+                            </li>
+                            <li class="footer__nav-item">
+                                <a href="blog.html" class="footer__nav-link">BLOG</a>
+                            </li>
+                            <li class="footer__nav-item">
+                                <a href="contact.html" class="footer__nav-link">CONTACT</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <h4 class="footer__subsection-title">SERVICES</h4>
+                    <ul class="footer__nav-list">
+                        <li class="footer__nav-item">
+                            <a href="#" class="footer__nav-link">WEB DEVELOPMENT</a>
+                        </li>
+                        <li class="footer__nav-item">
+                            <a href="#" class="footer__nav-link">UI/UX DESIGN</a>
+                        </li>
+                        <li class="footer__nav-item">
+                            <a href="#" class="footer__nav-link">CONSULTING</a>
+                        </li>
+                        <li class="footer__nav-item">
+                            <a href="#" class="footer__nav-link">CODE REVIEW</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="footer__section footer__section--contact">
+                    <h3 class="footer__section-title">CONTACT INFO</h3>
+                    <div class="footer__contact-info">
+                        <div class="footer__contact-item">
+                            <span class="footer__contact-label">EMAIL</span>
+                            <a href="mailto:hello@brutalistdev.com" class="footer__contact-link">
+                                HELLO@BRUTALISTDEV.COM
+                            </a>
+                        </div>
+                        <div class="footer__contact-item">
+                            <span class="footer__contact-label">PHONE</span>
+                            <a href="tel:+1234567890" class="footer__contact-link">
+                                +1 (234) 567-8900
+                            </a>
+                        </div>
+                        <div class="footer__contact-item">
+                            <span class="footer__contact-label">LOCATION</span>
+                            <span class="footer__contact-text">
+                                SAN FRANCISCO, CA
+                            </span>
+                        </div>
+                        <div class="footer__contact-item">
+                            <span class="footer__contact-label">TIMEZONE</span>
+                            <span class="footer__contact-text">
+                                PST (UTC-8)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="footer__section footer__section--newsletter">
+                    <h3 class="footer__section-title">STAY UPDATED</h3>
+                    <p class="footer__newsletter-description">
+                        Get the latest updates on new projects, blog posts, and industry insights.
+                    </p>
+                    <form class="footer__newsletter-form" role="form" aria-label="Newsletter signup">
+                        <div class="footer__form-group">
+                            <label for="newsletter-email" class="footer__form-label sr-only">
+                                Email Address
+                            </label>
+                            <input type="email" id="newsletter-email" name="email" class="footer__form-input"
+                                placeholder="YOUR EMAIL ADDRESS" required aria-describedby="newsletter-description">
+                            <button type="submit" class="btn btn--accent btn--sm footer__form-submit">
+                                SUBSCRIBE
+                            </button>
+                        </div>
+                        <p id="newsletter-description" class="footer__form-note">
+                            No spam, unsubscribe anytime. Visual form only - not functional.
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer__bottom">
+                <div class="footer__legal">
+                    <p class="footer__copyright">
+                        © 2024 BRUTALIST DEV. ALL RIGHTS RESERVED.
+                    </p>
+                    <nav class="footer__legal-nav" role="navigation" aria-label="Legal navigation">
+                        <ul class="footer__legal-list">
+                            <li class="footer__legal-item">
+                                <a href="#" class="footer__legal-link">PRIVACY POLICY</a>
+                            </li>
+                            <li class="footer__legal-item">
+                                <a href="#" class="footer__legal-link">TERMS OF SERVICE</a>
+                            </li>
+                            <li class="footer__legal-item">
+                                <a href="#" class="footer__legal-link">COOKIES</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__credits">
+                    <p class="footer__credit-text">
+                        DESIGNED & BUILT WITH BRUTALIST PRINCIPLES
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript (minified for production) -->
+    <script src="js/main.min.js"></script>
+    <script src="js/mobile-menu.min.js"></script>
+</body>
+
+</html>

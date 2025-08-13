@@ -1,0 +1,443 @@
+/* ==========================================================================
+   BRUTALIST DEVELOPER PORTFOLIO - MAIN CSS
+   Industrial Digital Brutalism with Surgical Precision
+   ========================================================================== */
+
+/* Import design tokens and theme system */
+@import url("./brutalist-theme.css");
+
+/* Import component styles */
+@import url("./components/accessibility.css");
+@import url("./components/layout.css");
+@import url("./components/typography.css");
+
+/* ==========================================================================
+   RESET AND BASE STYLES
+   ========================================================================== */
+
+/* Modern CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-white);
+  background-color: var(--color-black);
+  -webkit-font-smoothing: var(--font-smoothing);
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: var(--font-rendering);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY SYSTEM
+   ========================================================================== */
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+}
+
+/* Display heading for hero sections */
+.display {
+  font-size: var(--font-size-display);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+
+/* Body text */
+p {
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+/* Lists */
+ul,
+ol {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+/* Code and monospace text */
+code,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+/* Typography utilities */
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Color utilities */
+.text-primary {
+  color: var(--color-white);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-muted {
+  color: var(--color-charcoal-light);
+}
+
+.bg-primary {
+  background-color: var(--color-black);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
+}
+
+.bg-white {
+  background-color: var(--color-white);
+}
+
+/* Spacing utilities */
+.mb-xs {
+  margin-bottom: var(--space-xs);
+}
+.mb-sm {
+  margin-bottom: var(--space-sm);
+}
+.mb-md {
+  margin-bottom: var(--space-md);
+}
+.mb-lg {
+  margin-bottom: var(--space-lg);
+}
+.mb-xl {
+  margin-bottom: var(--space-xl);
+}
+
+.mt-xs {
+  margin-top: var(--space-xs);
+}
+.mt-sm {
+  margin-top: var(--space-sm);
+}
+.mt-md {
+  margin-top: var(--space-md);
+}
+.mt-lg {
+  margin-top: var(--space-lg);
+}
+.mt-xl {
+  margin-top: var(--space-xl);
+}
+
+.p-xs {
+  padding: var(--space-xs);
+}
+.p-sm {
+  padding: var(--space-sm);
+}
+.p-md {
+  padding: var(--space-md);
+}
+.p-lg {
+  padding: var(--space-lg);
+}
+.p-xl {
+  padding: var(--space-xl);
+}
+
+/* Layout utilities */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--container-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--container-padding-desktop);
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.grid {
+  display: grid;
+}
+
+/* Visibility utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus utilities for accessibility */
+.focus-visible:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Remove hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover animations for touch devices */
+  .btn:hover,
+  .card:hover,
+  .nav__item:hover,
+  a:hover {
+    transform: none;
+    box-shadow: none;
+    background-color: initial;
+    color: initial;
+  }
+
+  /* Keep focus states for touch devices */
+  .btn:focus,
+  .card:focus,
+  .nav__item:focus,
+  a:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Enhanced touch targets - minimum 44px */
+@media (pointer: coarse) {
+  .btn,
+  .nav__item,
+  .card__action,
+  input,
+  textarea,
+  select,
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Increase tap target spacing */
+  .nav__menu {
+    gap: var(--space-lg);
+  }
+
+  .btn + .btn {
+    margin-left: var(--space-md);
+  }
+
+  /* Larger form elements for touch */
+  input,
+  textarea,
+  select {
+    padding: var(--space-md);
+    font-size: 1rem; /* Prevent zoom on iOS */
+  }
+
+  /* Increase card padding for better touch experience */
+  .card__content {
+    padding: var(--space-lg);
+  }
+}
+
+/* Safe area support for devices with notches */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  .header {
+    padding-left: max(
+      var(--container-padding-mobile),
+      env(safe-area-inset-left)
+    );
+    padding-right: max(
+      var(--container-padding-mobile),
+      env(safe-area-inset-right)
+    );
+  }
+
+  .footer {
+    padding-left: max(
+      var(--container-padding-mobile),
+      env(safe-area-inset-left)
+    );
+    padding-right: max(
+      var(--container-padding-mobile),
+      env(safe-area-inset-right)
+    );
+    padding-bottom: max(var(--space-xl), env(safe-area-inset-bottom));
+  }
+}
+
+/* Improved focus states for keyboard and touch navigation */
+.focus-ring:focus-visible,
+.btn:focus-visible,
+.nav__item:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* High contrast focus for better visibility */
+@media (prefers-contrast: high) {
+  .focus-ring:focus-visible,
+  .btn:focus-visible,
+  .nav__item:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline-width: 4px;
+    outline-color: var(--color-white);
+    background-color: var(--color-black);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+/* Mobile First Approach */
+/* Base styles above are for mobile (320px+) */
+
+/* Small tablets and large phones (768px+) */
+@media (min-width: 768px) {
+  :root {
+    --font-size-body: 1.125rem;
+  }
+}
+
+/* Tablets and small desktops (1024px+) */
+@media (min-width: 1024px) {
+  :root {
+    --font-size-body: 1.125rem;
+  }
+}
+
+/* Large desktops (1440px+) */
+@media (min-width: 1440px) {
+  :root {
+    --font-size-body: 1.125rem;
+  }
+}
+
+/* Extra large screens (1920px+) */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
+}

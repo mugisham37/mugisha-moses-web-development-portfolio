@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Features Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #fff;
+        }
+
+        .test-title {
+            color: #ff0;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timezone-clock {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid #333;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .online {
+            background: #0f0;
+        }
+
+        .away {
+            background: #fa0;
+        }
+
+        .calendar-day {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 2px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+
+        .available {
+            border-color: #ff0;
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .busy {
+            background: #333;
+        }
+
+        .selected {
+            background: #ff0;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Contact System Features Test</h1>
+
+    <div class="test-section">
+        <div class="test-title">1. Real-time Timezone Clocks</div>
+        <div class="timezone-clock">
+            <span>San Francisco:</span>
+            <span id="sf-time">--:--</span>
+        </div>
+        <div class="timezone-clock">
+            <span>New York:</span>
+            <span id="ny-time">--:--</span>
+        </div>
+        <div class="timezone-clock">
+            <span>London:</span>
+            <span id="london-time">--:--</span>
+        </div>
+        <div class="timezone-clock">
+            <span>Tokyo:</span>
+            <span id="tokyo-time">--:--</span>
+        </div>
+        <div class="timezone-clock">
+            <span>Sydney:</span>
+            <span id="sydney-time">--:--</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">2. Live Response Status</div>
+        <div>
+            <span class="status-indicator" id="status-indicator"></span>
+            <span id="status-text">Checking...</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">3. Enhanced Calendar (Sample Days)</div>
+        <div>
+            <div class="calendar-day available" onclick="selectDay(this, '2024-01-15')">15</div>
+            <div class="calendar-day busy">16</div>
+            <div class="calendar-day available" onclick="selectDay(this, '2024-01-17')">17</div>
+            <div class="calendar-day available" onclick="selectDay(this, '2024-01-18')">18</div>
+            <div class="calendar-day busy">19</div>
+        </div>
+        <div id="selected-date" style="margin-top: 10px; color: #ff0;"></div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">4. Form Submission Feedback</div>
+        <button onclick="testSubmission('loading')"
+            style="margin: 5px; padding: 10px; background: #333; color: #fff; border: 1px solid #fff;">Test
+            Loading</button>
+        <button onclick="testSubmission('success')"
+            style="margin: 5px; padding: 10px; background: #333; color: #fff; border: 1px solid #fff;">Test
+            Success</button>
+        <button onclick="testSubmission('error')"
+            style="margin: 5px; padding: 10px; background: #333; color: #fff; border: 1px solid #fff;">Test
+            Error</button>
+        <div id="feedback-area" style="margin-top: 10px; padding: 10px; border: 1px solid #333; min-height: 50px;">
+        </div>
+    </div>
+
+    <script>
+        // Test timezone functionality
+        function updateTimezones() {
+            const now = new Date();
+
+            const sfTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+            document.getElementById("sf-time").textContent = formatTime(sfTime);
+
+            const nyTime = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+            document.getElementById("ny-time").textContent = formatTime(nyTime);
+
+            const londonTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/London" }));
+            document.getElementById("london-time").textContent = formatTime(londonTime);
+
+            const tokyoTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+            document.getElementById("tokyo-time").textContent = formatTime(tokyoTime);
+
+            const sydneyTime = new Date(now.toLocaleString("en-US", { timeZone: "Australia/Sydney" }));
+            document.getElementById("sydney-time").textContent = formatTime(sydneyTime);
+        }
+
+        function formatTime(date) {
+            return date.toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true
+            });
+        }
+
+        // Test response status
+        function updateResponseStatus() {
+            const now = new Date();
+            const hour = now.getHours();
+            const day = now.getDay();
+
+            const isBusinessHours = day >= 1 && day <= 5 && hour >= 9 && hour <= 18;
+
+            const indicator = document.getElementById("status-indicator");
+            const text = document.getElementById("status-text");
+
+            if (isBusinessHours) {
+                indicator.className = "status-indicator online";
+                text.textContent = "ONLINE - Typically respond within 2 hours";
+            } else {
+                indicator.className = "status-indicator away";
+                text.textContent = "AWAY - Will respond within 24 hours";
+            }
+        }
+
+        // Test calendar selection
+        function selectDay(element, date) {
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            document.getElementById('selected-date').textContent = `Selected: ${date}`;
+        }
+
+        // Test submission feedback
+        function testSubmission(type) {
+            const feedbackArea = document.getElementById('feedback-area');
+
+            switch (type) {
+                case 'loading':
+                    feedbackArea.innerHTML = '<div style="color: #fa0;">⏳ SENDING YOUR INQUIRY... Please wait.</div>';
+                    break;
+                case 'success':
+                    feedbackArea.innerHTML = '<div style="color: #0f0;">✅ INQUIRY SENT SUCCESSFULLY!<br>Thank you! We\'ll respond within 2 hours.<br>Confirmation ID: #ABC123XYZ</div>';
+                    break;
+                case 'error':
+                    feedbackArea.innerHTML = '<div style="color: #f44;">❌ SUBMISSION FAILED<br>Please try again or contact directly.</div>';
+                    break;
+            }
+        }
+
+        // Initialize
+        updateTimezones();
+        updateResponseStatus();
+
+        // Update every second
+        setInterval(updateTimezones, 1000);
+        setInterval(updateResponseStatus, 30000);
+
+        console.log('Contact features test initialized successfully!');
+    </script>
+</body>
+
+</html>

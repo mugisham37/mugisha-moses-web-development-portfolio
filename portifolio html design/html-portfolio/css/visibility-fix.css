@@ -1,0 +1,274 @@
+/* ==========================================================================
+   VISIBILITY FIX - ENSURE ALL SECTIONS ARE VISIBLE
+   Critical CSS to prevent sections from being hidden
+   ========================================================================== */
+
+/* Force visibility for all main sections */
+.capabilities-matrix,
+.project-showcase,
+.terminal-section,
+.technical-arsenal,
+.client-impact {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  transform: translateY(0) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Ensure container elements are visible */
+.capabilities-matrix .container,
+.project-showcase .container,
+.terminal-section .container,
+.technical-arsenal .container,
+.client-impact .container {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Force visibility for section headers */
+.capabilities-matrix__header,
+.project-showcase__header,
+.terminal-section__header,
+.technical-arsenal__header,
+.client-impact__header {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  transform: translateY(0) !important;
+}
+
+/* Force visibility for section titles */
+.capabilities-matrix__title,
+.project-showcase__title,
+.terminal-section__title,
+.technical-arsenal__title,
+.client-impact__title {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  color: var(--color-white) !important;
+}
+
+/* Force visibility for section subtitles */
+.capabilities-matrix__subtitle,
+.project-showcase__subtitle,
+.terminal-section__subtitle,
+.technical-arsenal__subtitle,
+.client-impact__subtitle {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  color: var(--color-accent) !important;
+}
+
+/* Force visibility for content areas */
+.capabilities-grid,
+.project-showcase__container,
+.terminal-container,
+.skills-grid,
+.testimonial-carousel {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  transform: translateY(0) !important;
+}
+
+/* Specific fixes for grid layouts */
+.capabilities-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 2rem !important;
+}
+
+.skills-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  gap: 2rem !important;
+}
+
+/* Force visibility for capability blocks */
+.capability-block {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: var(--color-black) !important;
+  border: 4px solid var(--color-white) !important;
+  padding: 2rem !important;
+  min-height: 300px !important;
+}
+
+/* Force visibility for project cards */
+.project-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  flex: 0 0 400px !important;
+  height: 500px !important;
+}
+
+/* Force visibility for skill categories */
+.skill-category {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  background: var(--color-black) !important;
+  border: 4px solid var(--color-white) !important;
+  padding: 2rem !important;
+}
+
+/* Force visibility for testimonial cards */
+.testimonial-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  background: var(--color-black) !important;
+  border: 4px solid var(--color-white) !important;
+}
+
+/* Force visibility for terminal components */
+.terminal,
+.terminal-stats {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: var(--color-black) !important;
+  border: 4px solid var(--color-white) !important;
+}
+
+/* Override any fade-in-scroll hiding */
+.fade-in-scroll {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  visibility: visible !important;
+}
+
+/* Ensure text content is visible */
+.capability-block__title,
+.capability-block__description,
+.project-card__title,
+.skill-category__title,
+.testimonial-quote {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: var(--color-white) !important;
+}
+
+/* Ensure accent text is visible */
+.tech-badge,
+.testimonial-client__title,
+.experience-years {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: var(--color-accent) !important;
+}
+
+/* Force visibility for interactive elements */
+.capability-block__demo,
+.project-card__content,
+.terminal__body,
+.testimonial-card__content {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex !important;
+}
+
+/* Responsive visibility fixes */
+@media (max-width: 768px) {
+  .capabilities-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .terminal-container {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .capabilities-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .capability-block {
+    padding: 1.5rem !important;
+    min-height: 250px !important;
+  }
+
+  .skill-category {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Ensure proper section flow */
+.capabilities-matrix,
+.project-showcase,
+.terminal-section,
+.technical-arsenal,
+.client-impact {
+  position: relative !important;
+  z-index: auto !important;
+}
+
+/* Force proper background colors */
+.capabilities-matrix {
+  background: var(--color-black) !important;
+}
+
+.project-showcase {
+  background: var(--color-black) !important;
+}
+
+.terminal-section {
+  background: var(--color-black) !important;
+}
+
+.technical-arsenal {
+  background: var(--color-black) !important;
+}
+
+.client-impact {
+  background: var(--color-black) !important;
+}
+
+/* Ensure proper spacing and prevent overlap */
+.capabilities-matrix,
+.project-showcase,
+.terminal-section,
+.technical-arsenal,
+.client-impact {
+  padding: 6rem 0 !important;
+  margin: 0 !important;
+  clear: both !important;
+  overflow: visible !important;
+}
+
+/* Force proper container max-width */
+.container {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 2rem !important;
+}
+
+/* Debug helper - uncomment to see section boundaries */
+/*
+.capabilities-matrix,
+.project-showcase,
+.terminal-section,
+.technical-arsenal,
+.client-impact {
+  border: 2px solid red !important;
+  margin: 1rem 0 !important;
+}
+*/

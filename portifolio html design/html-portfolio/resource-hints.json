@@ -1,0 +1,47 @@
+{
+  "preload": [
+    {
+      "href": "/css/critical.css",
+      "as": "style",
+      "type": "text/css"
+    },
+    {
+      "href": "/css/main.min.css",
+      "as": "style",
+      "type": "text/css"
+    },
+    {
+      "href": "/js/main.min.js",
+      "as": "script",
+      "type": "text/javascript"
+    }
+  ],
+  "prefetch": [
+    {
+      "href": "/css/components/capabilities-matrix.css",
+      "as": "style"
+    },
+    {
+      "href": "/css/components/terminal.css",
+      "as": "style"
+    },
+    {
+      "href": "/css/components/technical-arsenal.css",
+      "as": "style"
+    }
+  ],
+  "preconnect": [
+    {
+      "href": "https://fonts.googleapis.com",
+      "crossorigin": true
+    },
+    {
+      "href": "https://fonts.gstatic.com",
+      "crossorigin": true
+    },
+    {
+      "href": "https://api.github.com",
+      "crossorigin": true
+    }
+  ]
+}

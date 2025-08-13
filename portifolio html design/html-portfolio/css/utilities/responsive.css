@@ -1,0 +1,382 @@
+/* ==========================================================================
+   RESPONSIVE UTILITIES
+   Mobile-first responsive design with comprehensive media queries
+   ========================================================================== */
+
+/* ==========================================================================
+   MOBILE FIRST BASE STYLES (320px+)
+   All base styles in main.css are mobile-first
+   ========================================================================== */
+
+/* ==========================================================================
+   SMALL MOBILE DEVICES (320px - 479px)
+   ========================================================================== */
+@media (max-width: 479px) {
+  /* Typography adjustments for very small screens */
+  :root {
+    --font-size-display: clamp(2.5rem, 10vw, 4rem);
+    --font-size-h1: clamp(2rem, 8vw, 3rem);
+    --font-size-h2: clamp(1.75rem, 6vw, 2.25rem);
+    --font-size-h3: clamp(1.5rem, 4vw, 1.875rem);
+    --font-size-h4: clamp(1.25rem, 3vw, 1.5rem);
+    --font-size-body: 0.875rem;
+    --font-size-caption: 0.75rem;
+  }
+
+  /* Reduce spacing for very small screens */
+  .container {
+    padding: 0 12px;
+  }
+
+  /* Stack navigation items vertically on very small screens */
+  .nav__menu {
+    gap: var(--space-xs);
+  }
+
+  /* Reduce button padding */
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+
+  /* Adjust card spacing */
+  .card {
+    margin-bottom: var(--space-md);
+  }
+
+  /* Hero section adjustments */
+  .hero {
+    min-height: 80vh;
+    padding: var(--space-lg) 0;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}
+
+/* ==========================================================================
+   MOBILE DEVICES (480px - 767px)
+   ========================================================================== */
+@media (min-width: 480px) and (max-width: 767px) {
+  /* Slightly larger typography */
+  :root {
+    --font-size-body: 1rem;
+  }
+
+  /* Two-column layout for some elements */
+  .hero-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Adjust button sizes */
+  .btn {
+    padding: 10px 20px;
+  }
+
+  /* Card grid improvements */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+/* ==========================================================================
+   TABLET DEVICES (768px - 1023px)
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Typography scaling */
+  :root {
+    --font-size-body: 1.125rem;
+  }
+
+  /* Header adjustments */
+  .header {
+    height: 88px;
+  }
+
+  .nav__menu {
+    gap: var(--space-lg);
+  }
+
+  /* Hero section improvements */
+  .hero-metrics {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  /* Two-column layouts */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  /* Footer layout */
+  .footer__content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  /* Contact form layout */
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+}
+
+/* ==========================================================================
+   DESKTOP DEVICES (1024px - 1439px)
+   ========================================================================== */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  /* Header improvements */
+  .header {
+    height: 96px;
+  }
+
+  .nav__menu {
+    gap: var(--space-xl);
+  }
+
+  /* Hero section full layout */
+  .hero-metrics {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+  }
+
+  /* Three-column layouts */
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  .blog-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  /* Footer full layout */
+  .footer__content {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  /* Design showcase improvements */
+  .design-showcase__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  /* Contact page layout */
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+}
+
+/* ==========================================================================
+   LARGE DESKTOP DEVICES (1440px+)
+   ========================================================================== */
+@media (min-width: 1440px) {
+  /* Maximum content width */
+  .container {
+    max-width: 1440px;
+  }
+
+  /* Hero section enhancements */
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Four-column layouts where appropriate */
+  .projects-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  /* Design showcase full width */
+  .design-showcase__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3xl);
+  }
+
+  /* Enhanced spacing */
+  section {
+    padding: var(--space-3xl) 0;
+  }
+}
+
+/* ==========================================================================
+   EXTRA LARGE SCREENS (1920px+)
+   ========================================================================== */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
+
+  /* Scale up typography slightly */
+  :root {
+    --font-size-body: 1.25rem;
+  }
+
+  /* Increase section padding */
+  section {
+    padding: 4rem 0;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE UTILITIES
+   ========================================================================== */
+
+/* Show/hide elements at different breakpoints */
+.mobile-only {
+  display: block;
+}
+
+.tablet-only,
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+
+  .tablet-only {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tablet-only {
+    display: none;
+  }
+
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* Responsive text alignment */
+.text-center-mobile {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .text-left-tablet {
+    text-align: left;
+  }
+
+  .text-center-tablet {
+    text-align: center;
+  }
+
+  .text-right-tablet {
+    text-align: right;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-left-desktop {
+    text-align: left;
+  }
+
+  .text-center-desktop {
+    text-align: center;
+  }
+
+  .text-right-desktop {
+    text-align: right;
+  }
+}
+
+/* Responsive spacing utilities */
+@media (min-width: 768px) {
+  .mt-lg-tablet {
+    margin-top: var(--space-lg);
+  }
+
+  .mb-lg-tablet {
+    margin-bottom: var(--space-lg);
+  }
+
+  .p-lg-tablet {
+    padding: var(--space-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .mt-xl-desktop {
+    margin-top: var(--space-xl);
+  }
+
+  .mb-xl-desktop {
+    margin-bottom: var(--space-xl);
+  }
+
+  .p-xl-desktop {
+    padding: var(--space-xl);
+  }
+}
+
+/* Responsive grid utilities */
+.grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .grid-2-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-3-desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-4-desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Responsive flexbox utilities */
+.flex-col-mobile {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .flex-row-tablet {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .flex-row-desktop {
+    flex-direction: row;
+  }
+}

@@ -20,7 +20,7 @@ interface ProjectsPageClientProps {
   totalCount: number;
   hasMore: boolean;
   categories: (ProjectCategory & { _count?: { projects: number } })[];
-  technologies: string[];
+  technologies: Array<{ name: string; count: number }>;
   initialFilters: ProjectFilters;
   initialSort: ProjectSortOptions;
   currentPage: number;
@@ -251,17 +251,18 @@ export function ProjectsPageClient({
             <div className="flex flex-wrap gap-2">
               {technologies.map((tech) => (
                 <button
-                  key={tech}
+                  key={tech.name}
                   onClick={() => {
                     const newFilters = {
                       ...initialFilters,
-                      technologies: [tech],
+                      technologies: [tech.name],
                     };
                     handleFiltersChange(newFilters);
                   }}
                   className="hover:bg-accent bg-gray-800 px-3 py-2 font-mono text-sm text-white transition-colors hover:text-black"
+                  title={`${tech.count} project${tech.count !== 1 ? "s" : ""}`}
                 >
-                  {tech.toUpperCase()}
+                  {tech.name.toUpperCase()} ({tech.count})
                 </button>
               ))}
             </div>
