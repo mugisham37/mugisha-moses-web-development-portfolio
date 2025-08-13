@@ -1,67 +1,205 @@
 @import "tailwindcss";
 
 :root {
-  /* Brutalist Color System */
-  --background: #000000;
-  --foreground: #ffffff;
-  --primary: #000000;
-  --primary-foreground: #ffffff;
-  --secondary: #ffffff;
-  --secondary-foreground: #000000;
-  --accent: #ffff00;
-  --accent-foreground: #000000;
-  --muted: #1a1a1a;
-  --muted-foreground: #f8f8f8;
-  --border: #ffffff;
-  --input: #1a1a1a;
-  --ring: #ffff00;
+  /* Design Token System - Colors */
+  --color-primary-black: #000000;
+  --color-primary-white: #ffffff;
+  --color-primary-gray-100: #f5f5f5;
+  --color-primary-gray-200: #e5e5e5;
+  --color-primary-gray-300: #d4d4d4;
+  --color-primary-gray-400: #a3a3a3;
+  --color-primary-gray-500: #737373;
+  --color-primary-gray-600: #525252;
+  --color-primary-gray-700: #404040;
+  --color-primary-gray-800: #262626;
+  --color-primary-gray-900: #171717;
+  --color-accent-yellow: #ffff00;
+  --color-accent-yellowDark: #e6e600;
+  --color-accent-yellowLight: #ffff33;
+  --color-semantic-success: #22c55e;
+  --color-semantic-warning: #f59e0b;
+  --color-semantic-error: #ef4444;
+  --color-semantic-info: #3b82f6;
+  --color-brutalist-charcoal-100: #1a1a1a;
+  --color-brutalist-charcoal-200: #2a2a2a;
+  --color-brutalist-offWhite-100: #f8f8f8;
+  --color-brutalist-offWhite-200: #f0f0f0;
 
-  /* Brutalist spacing and sizing */
-  --border-width: 4px;
-  --border-radius: 0px;
-  --shadow-brutalist: 4px 4px 0px 0px #000000;
-  --shadow-brutalist-lg: 8px 8px 0px 0px #000000;
-  --shadow-brutalist-yellow: 4px 4px 0px 0px #ffff00;
+  /* Design Token System - Typography */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+  --font-size-7xl: 4.5rem;
+  --font-size-8xl: 6rem;
+  --font-size-9xl: 8rem;
+  --font-size-display: 8rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  --line-height-none: 1;
+  --line-height-tight: 1.1;
+  --line-height-snug: 1.2;
+  --line-height-normal: 1.3;
+  --line-height-relaxed: 1.4;
+  --line-height-loose: 1.5;
+  --letter-spacing-tighter: -0.02em;
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wider: 0.1em;
+  --letter-spacing-widest: 0.15em;
+
+  /* Design Token System - Spacing */
+  --spacing-px: 1px;
+  --spacing-0: 0px;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+  --spacing-40: 10rem;
+  --spacing-48: 12rem;
+  --spacing-56: 14rem;
+  --spacing-64: 16rem;
+
+  /* Design Token System - Shadows */
+  --shadow-brutalist-sm: 4px 4px 0px rgba(255, 255, 255, 0.1);
+  --shadow-brutalist-md: 8px 8px 0px rgba(255, 255, 255, 0.1);
+  --shadow-brutalist-lg: 12px 12px 0px rgba(255, 255, 255, 0.1);
+  --shadow-brutalist-xl: 16px 16px 0px rgba(255, 255, 255, 0.1);
+  --shadow-brutalist-2xl: 20px 20px 0px rgba(255, 255, 255, 0.1);
+  --shadow-accent-sm: 4px 4px 0px rgba(255, 255, 0, 0.3);
+  --shadow-accent-md: 8px 8px 0px rgba(255, 255, 0, 0.3);
+  --shadow-accent-lg: 12px 12px 0px rgba(255, 255, 0, 0.3);
+  --shadow-accent-xl: 16px 16px 0px rgba(255, 255, 0, 0.3);
+  --shadow-accent-2xl: 20px 20px 0px rgba(255, 255, 0, 0.3);
+  --shadow-light-sm: 4px 4px 0px rgba(0, 0, 0, 0.1);
+  --shadow-light-md: 8px 8px 0px rgba(0, 0, 0, 0.1);
+  --shadow-light-lg: 12px 12px 0px rgba(0, 0, 0, 0.1);
+  --shadow-light-xl: 16px 16px 0px rgba(0, 0, 0, 0.1);
+  --shadow-light-2xl: 20px 20px 0px rgba(0, 0, 0, 0.1);
+
+  /* Design Token System - Animations */
+  --duration-fast: 0.15s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.6s;
+  --duration-slower: 1s;
+  --easing-easeOut: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-easeIn: cubic-bezier(0.4, 0, 1, 1);
+  --easing-easeInOut: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --easing-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+
+  /* Design Token System - Borders */
+  --border-width-none: 0px;
+  --border-width-thin: 1px;
+  --border-width-default: 2px;
+  --border-width-thick: 4px;
+  --border-width-brutalist: 4px;
+  --border-width-brutalist-lg: 6px;
+  --border-width-brutalist-xl: 8px;
+  --border-radius-none: 0px;
+  --border-radius-sm: 2px;
+  --border-radius-default: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --border-radius-brutalist: 0px;
+
+  /* Design Token System - Z-Index */
+  --z-index-hide: -1;
+  --z-index-auto: auto;
+  --z-index-base: 0;
+  --z-index-docked: 10;
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1100;
+  --z-index-banner: 1200;
+  --z-index-overlay: 1300;
+  --z-index-modal: 1400;
+  --z-index-popover: 1500;
+  --z-index-skipLink: 1600;
+  --z-index-toast: 1700;
+  --z-index-tooltip: 1800;
+
+  /* Semantic Color Mapping for Components */
+  --background: var(--color-primary-black);
+  --foreground: var(--color-primary-white);
+  --primary: var(--color-primary-black);
+  --primary-foreground: var(--color-primary-white);
+  --secondary: var(--color-primary-white);
+  --secondary-foreground: var(--color-primary-black);
+  --accent: var(--color-accent-yellow);
+  --accent-foreground: var(--color-primary-black);
+  --muted: var(--color-brutalist-charcoal-100);
+  --muted-foreground: var(--color-brutalist-offWhite-100);
+  --border: var(--color-primary-white);
+  --input: var(--color-brutalist-charcoal-100);
+  --ring: var(--color-accent-yellow);
+
+  /* Legacy Support */
+  --border-width: var(--border-width-brutalist);
+  --border-radius: var(--border-radius-brutalist);
+  --shadow-brutalist: var(--shadow-brutalist-md);
+  --shadow-brutalist-lg: var(--shadow-brutalist-lg);
+  --shadow-brutalist-yellow: var(--shadow-accent-md);
 }
 
 /* Light mode theme */
 .light {
-  --background: #ffffff;
-  --foreground: #000000;
-  --primary: #ffffff;
-  --primary-foreground: #000000;
-  --secondary: #000000;
-  --secondary-foreground: #ffffff;
-  --accent: #ffff00;
-  --accent-foreground: #000000;
-  --muted: #f0f0f0;
-  --muted-foreground: #1a1a1a;
-  --border: #000000;
-  --input: #f8f8f8;
-  --ring: #ffff00;
-  --shadow-brutalist: 4px 4px 0px 0px #000000;
-  --shadow-brutalist-lg: 8px 8px 0px 0px #000000;
-  --shadow-brutalist-yellow: 4px 4px 0px 0px #ffff00;
+  /* Override shadow tokens for light mode */
+  --shadow-brutalist-sm: var(--shadow-light-sm);
+  --shadow-brutalist-md: var(--shadow-light-md);
+  --shadow-brutalist-lg: var(--shadow-light-lg);
+  --shadow-brutalist-xl: var(--shadow-light-xl);
+  --shadow-brutalist-2xl: var(--shadow-light-2xl);
+
+  /* Semantic color overrides for light mode */
+  --background: var(--color-primary-white);
+  --foreground: var(--color-primary-black);
+  --primary: var(--color-primary-white);
+  --primary-foreground: var(--color-primary-black);
+  --secondary: var(--color-primary-black);
+  --secondary-foreground: var(--color-primary-white);
+  --accent: var(--color-accent-yellow);
+  --accent-foreground: var(--color-primary-black);
+  --muted: var(--color-brutalist-offWhite-200);
+  --muted-foreground: var(--color-brutalist-charcoal-100);
+  --border: var(--color-primary-black);
+  --input: var(--color-brutalist-offWhite-100);
+  --ring: var(--color-accent-yellow);
+
+  /* Legacy support for light mode */
+  --shadow-brutalist: var(--shadow-light-md);
+  --shadow-brutalist-lg: var(--shadow-light-lg);
+  --shadow-brutalist-yellow: var(--shadow-accent-md);
 }
 
 /* Dark mode theme (default) */
 .dark {
-  --background: #000000;
-  --foreground: #ffffff;
-  --primary: #000000;
-  --primary-foreground: #ffffff;
-  --secondary: #ffffff;
-  --secondary-foreground: #000000;
-  --accent: #ffff00;
-  --accent-foreground: #000000;
-  --muted: #1a1a1a;
-  --muted-foreground: #f8f8f8;
-  --border: #ffffff;
-  --input: #1a1a1a;
-  --ring: #ffff00;
-  --shadow-brutalist: 4px 4px 0px 0px #ffffff;
-  --shadow-brutalist-lg: 8px 8px 0px 0px #ffffff;
-  --shadow-brutalist-yellow: 4px 4px 0px 0px #ffff00;
+  /* Dark mode uses default token values */
+  /* Semantic colors already set in :root */
+
+  /* Legacy support for dark mode */
+  --shadow-brutalist: var(--shadow-brutalist-md);
+  --shadow-brutalist-lg: var(--shadow-brutalist-lg);
+  --shadow-brutalist-yellow: var(--shadow-accent-md);
 }
 
 /* Base styles */
@@ -71,29 +209,389 @@
 
 html {
   scroll-behavior: smooth;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1,
+    "pnum" 1,
+    "tnum" 0,
+    "onum" 1,
+    "lnum" 0,
+    "dlig" 0;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Inter", sans-serif;
+  font-family:
+    var(--font-inter), "Inter", "Inter Fallback", "Helvetica Neue", "Arial",
+    sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Brutalist typography */
+/* Enhanced font loading states */
+.fonts-loading {
+  visibility: hidden;
+}
+
+.fonts-loaded {
+  visibility: visible;
+}
+
+/* Font display optimization */
+@supports (font-display: swap) {
+  * {
+    font-display: swap;
+  }
+}
+
+/* Enhanced Typography System */
+
+/* Advanced font feature settings for optimal rendering */
+html {
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1,
+    "pnum" 1,
+    "tnum" 0,
+    "onum" 1,
+    "lnum" 0,
+    "dlig" 0,
+    "ss01" 1; /* Stylistic sets for enhanced readability */
+  font-variant-ligatures: common-ligatures contextual;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  text-rendering: optimizeLegibility;
+}
+
+/* Enhanced brutalist typography with refined hierarchy */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Space Mono", monospace;
+  font-family:
+    var(--font-space-mono), "Space Mono Fallback", "Courier New", "Consolas",
+    "Monaco", monospace;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  text-wrap: balance;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 0,
+    "calt" 0,
+    "tnum" 1; /* Tabular numbers for headings */
+  font-variant-numeric: tabular-nums;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Refined body text with enhanced readability */
+p,
+.body-text {
+  font-family:
+    var(--font-inter), "Inter Fallback", "Helvetica Neue", "Arial", "system-ui",
+    sans-serif;
+  text-wrap: pretty;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1,
+    "pnum" 1,
+    "onum" 1;
+  font-variant-ligatures: common-ligatures contextual;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  word-break: break-word;
+  hyphens: auto;
+  orphans: 3;
+  widows: 3;
+}
+
+/* Responsive typography utilities */
+.responsive-text {
+  /* Fluid typography scaling */
+  font-size: clamp(
+    var(--min-font-size, 1rem),
+    var(--preferred-font-size, 2.5vw),
+    var(--max-font-size, 2rem)
+  );
+}
+
+/* Typography scale with fluid sizing */
+.text-fluid-xs {
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+}
+.text-fluid-sm {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+.text-fluid-base {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+}
+.text-fluid-lg {
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
+}
+.text-fluid-xl {
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+}
+.text-fluid-2xl {
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
+}
+.text-fluid-3xl {
+  font-size: clamp(1.875rem, 5vw, 2.25rem);
+}
+.text-fluid-4xl {
+  font-size: clamp(2.25rem, 6vw, 3rem);
+}
+.text-fluid-5xl {
+  font-size: clamp(3rem, 7vw, 3.75rem);
+}
+.text-fluid-6xl {
+  font-size: clamp(3.75rem, 8vw, 4.5rem);
+}
+.text-fluid-7xl {
+  font-size: clamp(4.5rem, 9vw, 6rem);
+}
+.text-fluid-8xl {
+  font-size: clamp(6rem, 10vw, 8rem);
+}
+.text-fluid-9xl {
+  font-size: clamp(8rem, 12vw, 10rem);
+}
+
+/* Enhanced font loading and rendering */
+@font-face {
+  font-family: "Space Mono Fallback";
+  src: local("Courier New"), local("monospace");
+  font-display: swap;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+}
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Helvetica Neue"), local("Arial"), local("sans-serif");
+  font-display: swap;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+}
+
+/* Enhanced Typography Utilities */
+
+/* Text wrapping utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.text-nowrap {
+  text-wrap: nowrap;
+}
+
+/* Advanced text rendering optimization */
+.text-optimize {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1,
+    "ss01" 1;
+  font-variant-ligatures: common-ligatures contextual;
+}
+
+.text-optimize-mono {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 0,
+    "calt" 0,
+    "tnum" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Enhanced typography spacing utilities */
+.text-spacing-tightest {
+  letter-spacing: -0.05em;
+}
+.text-spacing-tighter {
+  letter-spacing: -0.025em;
+}
+.text-spacing-tight {
+  letter-spacing: -0.01em;
+}
+.text-spacing-normal {
+  letter-spacing: 0em;
+}
+.text-spacing-wide {
+  letter-spacing: 0.025em;
+}
+.text-spacing-wider {
+  letter-spacing: 0.05em;
+}
+.text-spacing-widest {
+  letter-spacing: 0.1em;
+}
+.text-spacing-ultra {
+  letter-spacing: 0.15em;
+}
+
+/* Enhanced line height utilities */
+.leading-none {
+  line-height: 1;
+}
+.leading-tighter {
+  line-height: 1.05;
+}
+.leading-tight {
   line-height: 1.1;
+}
+.leading-snug {
+  line-height: 1.2;
+}
+.leading-normal {
+  line-height: 1.3;
+}
+.leading-relaxed {
+  line-height: 1.4;
+}
+.leading-loose {
+  line-height: 1.5;
+}
+.leading-looser {
+  line-height: 1.6;
+}
+
+/* Typography hierarchy utilities */
+.typography-display {
+  font-family: var(--font-space-mono), "Space Mono Fallback", monospace;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.typography-heading {
+  font-family: var(--font-space-mono), "Space Mono Fallback", monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.typography-subheading {
+  font-family: var(--font-space-mono), "Space Mono Fallback", monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.typography-body {
+  font-family: var(--font-inter), "Inter Fallback", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0em;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.typography-body-large {
+  font-family: var(--font-inter), "Inter Fallback", sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.typography-caption {
+  font-family: var(--font-space-mono), "Space Mono Fallback", monospace;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+/* Responsive typography utilities */
+.responsive-text-xs {
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+}
+.responsive-text-sm {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+.responsive-text-base {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+}
+.responsive-text-lg {
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
+}
+.responsive-text-xl {
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+}
+.responsive-text-2xl {
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
+}
+.responsive-text-3xl {
+  font-size: clamp(1.875rem, 5vw, 2.25rem);
+}
+.responsive-text-4xl {
+  font-size: clamp(2.25rem, 6vw, 3rem);
+}
+.responsive-text-5xl {
+  font-size: clamp(3rem, 7vw, 3.75rem);
+}
+.responsive-text-6xl {
+  font-size: clamp(3.75rem, 8vw, 4.5rem);
+}
+.responsive-text-7xl {
+  font-size: clamp(4.5rem, 9vw, 6rem);
+}
+.responsive-text-8xl {
+  font-size: clamp(6rem, 10vw, 8rem);
+}
+.responsive-text-9xl {
+  font-size: clamp(8rem, 12vw, 10rem);
+}
+.responsive-text-display {
+  font-size: clamp(8rem, 15vw, 12rem);
+}
+
+/* Font variant utilities */
+.font-variant-normal {
+  font-variant: normal;
+}
+.font-variant-small-caps {
+  font-variant: small-caps;
+}
+.font-variant-oldstyle-nums {
+  font-variant-numeric: oldstyle-nums;
+}
+.font-variant-lining-nums {
+  font-variant-numeric: lining-nums;
+}
+.font-variant-tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+.font-variant-proportional-nums {
+  font-variant-numeric: proportional-nums;
 }
 
 /* Brutalist form elements */

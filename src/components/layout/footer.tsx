@@ -104,8 +104,8 @@ export function MainFooter({ className = "" }: MainFooterProps) {
               </Link>
 
               <Typography
-                variant="lg"
-                className="mb-8 max-w-md leading-relaxed text-white/80"
+                variant="body"
+                className="mb-8 max-w-md text-lg leading-relaxed text-white/80"
               >
                 Elite full-stack developer crafting brutalist digital
                 experiences that convert visitors into clients through technical

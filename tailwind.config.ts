@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { designTokens } from "./src/lib/design-tokens";
 
 const config: Config = {
   content: [
@@ -9,70 +10,178 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Brutalist color palette
+        // Design token-based color system
+        "primary-black": designTokens.colors.primary.black,
+        "primary-white": designTokens.colors.primary.white,
+        "primary-gray": designTokens.colors.primary.gray,
+        "accent-yellow": designTokens.colors.accent.yellow,
+        "accent-yellow-dark": designTokens.colors.accent.yellowDark,
+        "accent-yellow-light": designTokens.colors.accent.yellowLight,
+        semantic: designTokens.colors.semantic,
         brutalist: {
-          black: "#000000",
-          white: "#FFFFFF",
-          yellow: "#FFFF00",
-          charcoal: {
-            100: "#1A1A1A",
-            200: "#2A2A2A",
-          },
-          "off-white": {
-            100: "#F8F8F8",
-            200: "#F0F0F0",
-          },
-          "yellow-variant": {
-            100: "#FEF08A",
-            200: "#EAB308",
-          },
+          black: designTokens.colors.primary.black,
+          white: designTokens.colors.primary.white,
+          yellow: designTokens.colors.accent.yellow,
+          charcoal: designTokens.colors.brutalist.charcoal,
+          "off-white": designTokens.colors.brutalist.offWhite,
         },
-        // Semantic color mapping
+        // Semantic color mapping using CSS custom properties
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: {
-          DEFAULT: "#000000",
-          foreground: "#FFFFFF",
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
-          DEFAULT: "#FFFFFF",
-          foreground: "#000000",
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
         },
         accent: {
-          DEFAULT: "#FFFF00",
-          foreground: "#000000",
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
         },
         muted: {
-          DEFAULT: "#1A1A1A",
-          foreground: "#F8F8F8",
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
         },
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
       },
-      fontFamily: {
-        mono: ["Space Mono", "monospace"],
-        sans: ["Inter", "sans-serif"],
-      },
+      fontFamily: designTokens.typography.fontFamilies,
       fontSize: {
-        display: ["8rem", { lineHeight: "1", letterSpacing: "-0.02em" }],
-        "6xl": ["4rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        "5xl": ["3rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        "4xl": ["2.25rem", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
-        "3xl": ["1.875rem", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
-        "2xl": ["1.5rem", { lineHeight: "1.3", letterSpacing: "-0.01em" }],
-        xl: ["1.25rem", { lineHeight: "1.4", letterSpacing: "-0.01em" }],
-        lg: ["1.125rem", { lineHeight: "1.5" }],
-        base: ["1rem", { lineHeight: "1.5" }],
-        sm: ["0.875rem", { lineHeight: "1.5" }],
-        xs: ["0.75rem", { lineHeight: "1.5" }],
+        // Base font sizes with enhanced line heights and letter spacing
+        xs: [
+          designTokens.typography.fontSizes.xs,
+          {
+            lineHeight: designTokens.typography.lineHeights.relaxed,
+            letterSpacing: designTokens.typography.letterSpacing.normal,
+          },
+        ],
+        sm: [
+          designTokens.typography.fontSizes.sm,
+          {
+            lineHeight: designTokens.typography.lineHeights.relaxed,
+            letterSpacing: designTokens.typography.letterSpacing.normal,
+          },
+        ],
+        base: [
+          designTokens.typography.fontSizes.base,
+          {
+            lineHeight: designTokens.typography.lineHeights.loose,
+            letterSpacing: designTokens.typography.letterSpacing.normal,
+          },
+        ],
+        lg: [
+          designTokens.typography.fontSizes.lg,
+          {
+            lineHeight: designTokens.typography.lineHeights.relaxed,
+            letterSpacing: designTokens.typography.letterSpacing.normal,
+          },
+        ],
+        xl: [
+          designTokens.typography.fontSizes.xl,
+          {
+            lineHeight: designTokens.typography.lineHeights.relaxed,
+            letterSpacing: designTokens.typography.letterSpacing.normal,
+          },
+        ],
+        "2xl": [
+          designTokens.typography.fontSizes["2xl"],
+          {
+            lineHeight: designTokens.typography.lineHeights.normal,
+            letterSpacing: designTokens.typography.letterSpacing.normal,
+          },
+        ],
+        "3xl": [
+          designTokens.typography.fontSizes["3xl"],
+          {
+            lineHeight: designTokens.typography.lineHeights.normal,
+            letterSpacing: designTokens.typography.letterSpacing.tight,
+          },
+        ],
+        "4xl": [
+          designTokens.typography.fontSizes["4xl"],
+          {
+            lineHeight: designTokens.typography.lineHeights.snug,
+            letterSpacing: designTokens.typography.letterSpacing.tight,
+          },
+        ],
+        "5xl": [
+          designTokens.typography.fontSizes["5xl"],
+          {
+            lineHeight: designTokens.typography.lineHeights.snug,
+            letterSpacing: designTokens.typography.letterSpacing.tighter,
+          },
+        ],
+        "6xl": [
+          designTokens.typography.fontSizes["6xl"],
+          {
+            lineHeight: designTokens.typography.lineHeights.tight,
+            letterSpacing: designTokens.typography.letterSpacing.tighter,
+          },
+        ],
+        "7xl": [
+          designTokens.typography.fontSizes["7xl"],
+          {
+            lineHeight: designTokens.typography.lineHeights.tight,
+            letterSpacing: designTokens.typography.letterSpacing.tighter,
+          },
+        ],
+        "8xl": [
+          designTokens.typography.fontSizes["8xl"],
+          {
+            lineHeight: designTokens.typography.lineHeights.tighter,
+            letterSpacing: designTokens.typography.letterSpacing.tighter,
+          },
+        ],
+        "9xl": [
+          designTokens.typography.fontSizes["9xl"],
+          {
+            lineHeight: designTokens.typography.lineHeights.none,
+            letterSpacing: designTokens.typography.letterSpacing.tighter,
+          },
+        ],
+        display: [
+          designTokens.typography.fontSizes.display,
+          {
+            lineHeight: designTokens.typography.lineHeights.none,
+            letterSpacing: designTokens.typography.letterSpacing.tighter,
+          },
+        ],
+
+        // Fluid typography sizes for responsive scaling
+        "fluid-xs": designTokens.typography.fontSizes["fluid-xs"],
+        "fluid-sm": designTokens.typography.fontSizes["fluid-sm"],
+        "fluid-base": designTokens.typography.fontSizes["fluid-base"],
+        "fluid-lg": designTokens.typography.fontSizes["fluid-lg"],
+        "fluid-xl": designTokens.typography.fontSizes["fluid-xl"],
+        "fluid-2xl": designTokens.typography.fontSizes["fluid-2xl"],
+        "fluid-3xl": designTokens.typography.fontSizes["fluid-3xl"],
+        "fluid-4xl": designTokens.typography.fontSizes["fluid-4xl"],
+        "fluid-5xl": designTokens.typography.fontSizes["fluid-5xl"],
+        "fluid-6xl": designTokens.typography.fontSizes["fluid-6xl"],
+        "fluid-7xl": designTokens.typography.fontSizes["fluid-7xl"],
+        "fluid-8xl": designTokens.typography.fontSizes["fluid-8xl"],
+        "fluid-9xl": designTokens.typography.fontSizes["fluid-9xl"],
+        "fluid-display": designTokens.typography.fontSizes["fluid-display"],
       },
+      fontWeight: designTokens.typography.fontWeights,
+      lineHeight: designTokens.typography.lineHeights,
+      letterSpacing: designTokens.typography.letterSpacing,
       spacing: {
+        ...designTokens.spacing,
+        // Additional spacing values for specific use cases
         "18": "4.5rem",
         "88": "22rem",
         "128": "32rem",
       },
       borderWidth: {
+        ...designTokens.borders.width,
         "3": "3px",
         "6": "6px",
       },
+      borderRadius: designTokens.borders.radius,
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
         "slide-in-up": "slideInUp 0.5s ease-out",
@@ -125,12 +234,29 @@ const config: Config = {
         },
       },
       boxShadow: {
-        brutalist: "4px 4px 0px 0px #000000",
-        "brutalist-lg": "8px 8px 0px 0px #000000",
-        "brutalist-yellow": "4px 4px 0px 0px #FFFF00",
-        "brutalist-yellow-lg": "8px 8px 0px 0px #FFFF00",
-        "brutalist-inset": "inset 4px 4px 0px 0px #000000",
+        // Design token-based shadows
+        "brutalist-sm": designTokens.shadows.brutalist.sm,
+        "brutalist-md": designTokens.shadows.brutalist.md,
+        "brutalist-lg": designTokens.shadows.brutalist.lg,
+        "brutalist-xl": designTokens.shadows.brutalist.xl,
+        "brutalist-2xl": designTokens.shadows.brutalist["2xl"],
+        "accent-sm": designTokens.shadows.accent.sm,
+        "accent-md": designTokens.shadows.accent.md,
+        "accent-lg": designTokens.shadows.accent.lg,
+        "accent-xl": designTokens.shadows.accent.xl,
+        "accent-2xl": designTokens.shadows.accent["2xl"],
+        "light-sm": designTokens.shadows.light.sm,
+        "light-md": designTokens.shadows.light.md,
+        "light-lg": designTokens.shadows.light.lg,
+        "light-xl": designTokens.shadows.light.xl,
+        "light-2xl": designTokens.shadows.light["2xl"],
+        // Legacy support
+        brutalist: designTokens.shadows.brutalist.md,
+        "brutalist-yellow": designTokens.shadows.accent.md,
+        "brutalist-yellow-lg": designTokens.shadows.accent.lg,
+        "brutalist-inset": "inset 4px 4px 0px 0px var(--color-primary-black)",
       },
+      zIndex: designTokens.zIndex,
       backdropBlur: {
         xs: "2px",
       },
@@ -176,9 +302,14 @@ const config: Config = {
     },
   },
   plugins: [
-    // Custom plugin for mobile utilities
-    function ({ addUtilities, theme }) {
+    // Custom plugin for mobile utilities and enhanced typography
+    function ({
+      addUtilities,
+    }: {
+      addUtilities: (utilities: Record<string, any>) => void;
+    }) {
       const newUtilities = {
+        // Mobile optimization utilities
         ".touch-manipulation": {
           "touch-action": "manipulation",
           "-webkit-touch-callout": "none",
@@ -201,6 +332,46 @@ const config: Config = {
           "padding-bottom": "env(safe-area-inset-bottom)",
           "padding-left": "env(safe-area-inset-left)",
           "padding-right": "env(safe-area-inset-right)",
+        },
+
+        // Enhanced typography utilities
+        ".font-feature-normal": {
+          "font-feature-settings": '"kern" 1, "liga" 1, "calt" 1',
+        },
+        ".font-feature-mono": {
+          "font-feature-settings": '"kern" 1, "liga" 0, "calt" 0, "tnum" 1',
+        },
+        ".font-feature-display": {
+          "font-feature-settings": '"kern" 1, "liga" 0, "calt" 0, "ss01" 1',
+        },
+
+        // Text optimization utilities
+        ".text-crisp": {
+          "-webkit-font-smoothing": "antialiased",
+          "-moz-osx-font-smoothing": "grayscale",
+          "text-rendering": "optimizeLegibility",
+        },
+
+        // Typography hierarchy utilities
+        ".typography-scale-display": {
+          "font-size": "clamp(4rem, 12vw, 10rem)",
+          "line-height": "0.9",
+          "letter-spacing": "-0.025em",
+        },
+        ".typography-scale-hero": {
+          "font-size": "clamp(3rem, 8vw, 6rem)",
+          "line-height": "1",
+          "letter-spacing": "-0.02em",
+        },
+        ".typography-scale-heading": {
+          "font-size": "clamp(1.5rem, 4vw, 3rem)",
+          "line-height": "1.1",
+          "letter-spacing": "-0.01em",
+        },
+        ".typography-scale-body": {
+          "font-size": "clamp(1rem, 2.5vw, 1.125rem)",
+          "line-height": "1.5",
+          "letter-spacing": "0em",
         },
       };
       addUtilities(newUtilities);

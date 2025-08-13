@@ -84,12 +84,13 @@ export default function Home() {
 
             {/* Button Examples */}
             <div className="space-y-6">
-              <Typography variant="h3">Button Variants</Typography>
+              <Typography variant="h3">Enhanced Button System</Typography>
               <div className="flex flex-wrap gap-4">
                 <Button variant="primary">PRIMARY</Button>
                 <Button variant="secondary">SECONDARY</Button>
                 <Button variant="accent">ACCENT</Button>
                 <Button variant="ghost">GHOST</Button>
+                <Button variant="destructive">DESTRUCTIVE</Button>
               </div>
               <div className="flex flex-wrap gap-4">
                 <Button variant="primary" size="sm">
@@ -103,6 +104,17 @@ export default function Home() {
                 </Button>
                 <Button variant="primary" size="xl">
                   EXTRA LARGE
+                </Button>
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Button variant="accent" leftIcon={<span>⬇</span>}>
+                  WITH LEFT ICON
+                </Button>
+                <Button variant="secondary" rightIcon={<span>→</span>}>
+                  WITH RIGHT ICON
+                </Button>
+                <Button variant="primary" loading loadingText="Processing...">
+                  LOADING STATE
                 </Button>
               </div>
             </div>

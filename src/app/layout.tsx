@@ -14,17 +14,58 @@ import {
   generateOrganizationJsonLd,
 } from "@/lib/seo";
 
+// Enhanced font loading with optimized preloading and fallbacks
 const spaceMono = Space_Mono({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "700"],
   variable: "--font-space-mono",
   display: "swap",
+  preload: true,
+  fallback: [
+    "Space Mono Fallback",
+    "Courier New",
+    "Consolas",
+    "Monaco",
+    "monospace",
+  ],
+  adjustFontFallback: true,
+  declarations: [
+    {
+      prop: "font-feature-settings",
+      value: '"kern" 1, "liga" 0, "calt" 0',
+    },
+    {
+      prop: "font-variant-numeric",
+      value: "tabular-nums",
+    },
+  ],
 });
 
 const inter = Inter({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-inter",
   display: "swap",
+  preload: true,
+  fallback: [
+    "Inter Fallback",
+    "Helvetica Neue",
+    "Arial",
+    "system-ui",
+    "sans-serif",
+  ],
+  adjustFontFallback: true,
+  declarations: [
+    {
+      prop: "font-feature-settings",
+      value:
+        '"kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0',
+    },
+    {
+      prop: "font-variant-numeric",
+      value: "oldstyle-nums proportional-nums",
+    },
+  ],
 });
 
 export const viewport = {
@@ -116,6 +157,63 @@ export default function RootLayout({
         </CriticalErrorBoundary>
         <Analytics />
         <SpeedInsights />
+
+        {/* Enhanced font loading optimization script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                // Add fonts-loading class initially
+                document.documentElement.classList.add('fonts-loading');
+                
+                // Enhanced font loading detection
+                if (document.fonts && document.fonts.ready) {
+                  // Check for specific fonts
+                  const spaceMono = new FontFace('Space Mono', 'url()');
+                  const inter = new FontFace('Inter', 'url()');
+                  
+                  // Wait for critical fonts to load
+                  Promise.all([
+                    document.fonts.load('700 16px "Space Mono"'),
+                    document.fonts.load('400 16px "Inter"'),
+                    document.fonts.ready
+                  ]).then(function() {
+                    document.documentElement.classList.add('fonts-loaded');
+                    document.documentElement.classList.remove('fonts-loading');
+                    
+                    // Trigger reflow for better font rendering
+                    document.body.style.fontFamily = document.body.style.fontFamily;
+                  }).catch(function() {
+                    // Fallback if font loading fails
+                    setTimeout(function() {
+                      document.documentElement.classList.add('fonts-loaded');
+                      document.documentElement.classList.remove('fonts-loading');
+                    }, 2000);
+                  });
+                } else {
+                  // Fallback for browsers without font loading API
+                  setTimeout(function() {
+                    document.documentElement.classList.add('fonts-loaded');
+                    document.documentElement.classList.remove('fonts-loading');
+                  }, 3000);
+                }
+                
+                // Performance optimization: preload critical font variants
+                const preloadFonts = [
+                  { family: 'Space Mono', weight: '700', style: 'normal' },
+                  { family: 'Inter', weight: '400', style: 'normal' },
+                  { family: 'Inter', weight: '600', style: 'normal' },
+                ];
+                
+                preloadFonts.forEach(function(font) {
+                  if (document.fonts && document.fonts.load) {
+                    document.fonts.load(font.weight + ' 16px "' + font.family + '"');
+                  }
+                });
+              })();
+            `,
+          }}
+        />
       </body>
     </html>
   );
