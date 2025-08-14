@@ -50,7 +50,7 @@ export function CTAButton({
 
   // Handle mouse move for 3D tilt effect
   const handleMouseMove = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+    (event: React.MouseEvent<HTMLDivElement>) => {
       if (!buttonRef.current) return;
 
       const rect = buttonRef.current.getBoundingClientRect();
@@ -66,7 +66,7 @@ export function CTAButton({
       rotateX.set(rotateXValue);
       rotateY.set(rotateYValue);
     },
-    []
+    [rotateX, rotateY]
   );
 
   // Handle mouse enter

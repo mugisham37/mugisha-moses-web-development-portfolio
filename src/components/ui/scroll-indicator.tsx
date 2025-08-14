@@ -23,14 +23,12 @@ export function ScrollIndicator({
   onClick,
 }: ScrollIndicatorProps) {
   const [isVisible, setIsVisible] = useState(true);
-  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
     if (!hideAfterScroll) return;
 
     const handleScroll = () => {
       const scrolled = window.scrollY > 100;
-      setHasScrolled(scrolled);
 
       if (scrolled && isVisible) {
         setIsVisible(false);
@@ -88,50 +86,6 @@ export function ScrollIndicator({
     duration: 0.6,
     ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
     delay: 0.5,
-  };
-
-  const bounceAnimation = {
-    y: [0, 8, 0],
-    transition: {
-      duration: 1.8,
-      repeat: Infinity,
-      ease: "easeInOut",
-      repeatType: "reverse" as const,
-    },
-  };
-
-  const mouseAnimation = {
-    y: [0, 10, 0],
-    transition: {
-      duration: 1.8,
-      repeat: Infinity,
-      ease: "easeInOut",
-      repeatType: "reverse" as const,
-    },
-  };
-
-  const bounceVariants = {
-    animate: {
-      y: [0, 8, 0],
-      transition: {
-        duration: 1.8,
-        repeat: Infinity,
-        ease: "easeInOut",
-        repeatType: "reverse" as const,
-      },
-    },
-  };
-
-  const mouseVariants = {
-    animate: {
-      y: [0, 6, 0],
-      transition: {
-        duration: 1.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-        repeatType: "reverse" as const,
-      },
-    },
   };
 
   if (variant === "minimal") {

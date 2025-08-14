@@ -231,7 +231,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         // Call original onClick
         onClick?.(event);
       },
-      [loading, disabled, onClick]
+      [loading, disabled, onClick, announce, announceOnClick]
     );
 
     // Handle keyboard interactions

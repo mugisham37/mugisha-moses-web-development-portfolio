@@ -1,7 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { JSX } from "react";
 
 const cardVariants = cva(
   "relative border-4 border-white bg-black transition-all duration-300 ease-out overflow-hidden group",
@@ -141,12 +140,11 @@ const CardTitle = React.forwardRef<
     variant?: "default" | "accent" | "minimal";
   }
 >(({ className, level = 3, variant = "default", ...props }, ref) => {
-  const Component = `h${level}` as keyof JSX.IntrinsicElements;
-
-  return (
-    <Component
-      ref={ref}
-      className={cn(
+  return React.createElement(
+    `h${level}`,
+    {
+      ref,
+      className: cn(
         "font-mono leading-tight font-bold tracking-wider uppercase",
         level === 1 && "text-4xl lg:text-5xl",
         level === 2 && "text-3xl lg:text-4xl",
@@ -158,9 +156,9 @@ const CardTitle = React.forwardRef<
         variant === "minimal" &&
           "text-base font-medium tracking-normal normal-case",
         className
-      )}
-      {...props}
-    />
+      ),
+      ...props,
+    }
   );
 });
 CardTitle.displayName = "CardTitle";

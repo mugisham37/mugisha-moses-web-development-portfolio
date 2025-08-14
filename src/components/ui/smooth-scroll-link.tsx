@@ -3,7 +3,6 @@
 import React, { useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 
 interface SmoothScrollLinkProps {
   href: string;
@@ -13,7 +12,7 @@ interface SmoothScrollLinkProps {
   duration?: number;
   external?: boolean;
   onClick?: () => void;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function SmoothScrollLink({

@@ -77,7 +77,8 @@ export function Form({
       try {
         await onSubmit?.(event);
         announce("Form submitted successfully", "polite");
-      } catch (error) {
+      } catch (formError) {
+        console.error("Form submission error:", formError);
         announce(
           "Form submission failed. Please check for errors.",
           "assertive"
@@ -233,7 +234,7 @@ export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
           name={name}
           required={required}
           aria-required={required}
-          aria-invalid={hasError}
+          aria-invalid={hasError ? "true" : "false"}
           aria-describedby={cn(
             description && descriptionId,
             hasError && errorId
@@ -356,7 +357,7 @@ export const FormTextarea = React.forwardRef<
           name={name}
           required={required}
           aria-required={required}
-          aria-invalid={hasError}
+          aria-invalid={hasError ? "true" : "false"}
           aria-describedby={cn(
             description && descriptionId,
             hasError && errorId
