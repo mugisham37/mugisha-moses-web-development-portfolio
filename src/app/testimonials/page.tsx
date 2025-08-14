@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { TestimonialQueries } from "@/lib/db-utils";
 import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
 import { TestimonialStats } from "@/components/testimonials/testimonial-stats";
-import { ClientLogoShowcase } from "@/components/testimonials/client-logo-showcase";
 import { TestimonialSubmissionForm } from "@/components/testimonials/testimonial-submission-form";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
@@ -49,13 +48,6 @@ export default async function TestimonialsPage() {
       <Section className="bg-brutalist-charcoal-100 py-16">
         <Container>
           <TestimonialStats testimonials={testimonials} />
-        </Container>
-      </Section>
-
-      {/* Client Logos */}
-      <Section className="py-16">
-        <Container>
-          <ClientLogoShowcase clients={[]} />
         </Container>
       </Section>
 

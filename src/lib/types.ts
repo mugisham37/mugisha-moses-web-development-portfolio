@@ -111,7 +111,7 @@ export interface GitHubRepository {
   lastSyncAt: Date;
 }
 
-// Extended project types for showcase system
+// Extended project types for project system
 export interface ProjectCategory {
   id: string;
   name: string;

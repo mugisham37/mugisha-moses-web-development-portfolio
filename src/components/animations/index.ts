@@ -87,9 +87,6 @@ export {
   animationManager,
 } from "../../lib/animation-config";
 
-// Showcase component
-export { AnimationShowcase } from "./animation-showcase";
-
 // Legacy components (for backward compatibility)
 export {
   ScrollTriggered,

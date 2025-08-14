@@ -16,9 +16,6 @@ export default function robots(): MetadataRoute.Robots {
           "/dashboard/",
           "/unauthorized/",
           "/_next/",
-          "/demo/",
-          "/animations-demo/",
-          "/testimonials-demo/",
         ],
       },
       {

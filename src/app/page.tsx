@@ -16,13 +16,7 @@ import {
   ScrollStagger,
 } from "@/components/animations/scroll-triggered";
 import {
-  ViewportAnimation,
-  StaggeredAnimation,
-  ParallaxElement,
-} from "@/components/animations/advanced-scroll-effects";
-import {
   ScrollRevealStagger,
-  MultiLayerParallax,
   ScrollTextReveal,
 } from "@/components/animations/scroll-reveal-system";
 import {
@@ -34,7 +28,7 @@ import { SmoothScrollLink } from "@/components/ui/smooth-scroll-link";
 import { TechnicalSkillsVisualization } from "@/components/sections/technical-skills-visualization";
 import { TestimonialCarousel } from "@/components/sections/testimonial-carousel";
 import { ContactEngagementHub } from "@/components/sections/contact-engagement-hub";
-import { ProjectShowcase } from "@/components/sections/project-showcase";
+import { ProjectPreview } from "@/components/sections/project-preview";
 
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -100,7 +94,7 @@ export default function Home() {
       {/* Projects Preview Section */}
       <Section padding="xl" background="textured-light" id="projects-preview">
         <Container>
-          <ProjectShowcase />
+          <ProjectPreview />
         </Container>
       </Section>
 
