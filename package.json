@@ -30,7 +30,15 @@
     "health:check": "curl -f http://localhost:3000/api/health || exit 1",
     "lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html --chrome-flags=\"--headless\"",
     "bundle:analyze": "ANALYZE=true npm run build",
-    "preload:critical": "node -e \"require('./src/lib/performance-optimization.js').ResourcePreloader.preloadCriticalResources()\""
+    "preload:critical": "node -e \"require('./src/lib/performance-optimization.js').ResourcePreloader.preloadCriticalResources()\"",
+    "test:cross-browser": "node scripts/cross-browser-test.js",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:headed": "playwright test --headed",
+    "test:compatibility": "playwright test tests/e2e/cross-browser-compatibility.spec.ts",
+    "test:install": "playwright install",
+    "test:report": "playwright show-report"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
@@ -68,17 +76,25 @@
     "zod": "^4.0.17"
   },
   "devDependencies": {
+    "@axe-core/cli": "^4.10.2",
     "@eslint/eslintrc": "^3",
+    "@juggle/resize-observer": "^3.4.0",
+    "@playwright/test": "^1.49.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "css-vars-ponyfill": "^2.4.8",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
+    "intersection-observer": "^0.12.2",
+    "lighthouse": "^12.2.1",
+    "playwright": "^1.49.1",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^4",
     "tsx": "^4.20.3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "web-animations-js": "^2.3.2"
   }
 }

@@ -19,10 +19,8 @@ import {
   ViewportAnimation,
   StaggeredAnimation,
   ParallaxElement,
-  ScrollProgressIndicator,
 } from "@/components/animations/advanced-scroll-effects";
 import {
-  ScrollReveal,
   ScrollRevealStagger,
   MultiLayerParallax,
   ScrollTextReveal,
@@ -33,6 +31,10 @@ import {
   FloatingScrollIndicator,
 } from "@/components/animations/scroll-navigation";
 import { SmoothScrollLink } from "@/components/ui/smooth-scroll-link";
+import { TechnicalSkillsVisualization } from "@/components/sections/technical-skills-visualization";
+import { TestimonialCarousel } from "@/components/sections/testimonial-carousel";
+import { ContactEngagementHub } from "@/components/sections/contact-engagement-hub";
+import { ProjectShowcase } from "@/components/sections/project-showcase";
 
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -70,6 +72,7 @@ export default function Home() {
     { id: "blog-preview", label: "Blog", color: "#45b7d1" },
     { id: "services-preview", label: "Services", color: "#96ceb4" },
     { id: "testimonials-preview", label: "Testimonials", color: "#feca57" },
+    { id: "contact-engagement", label: "Contact", color: "#ff6b6b" },
   ];
 
   return (
@@ -97,156 +100,7 @@ export default function Home() {
       {/* Projects Preview Section */}
       <Section padding="xl" background="textured-light" id="projects-preview">
         <Container>
-          <StaggeredAnimation className="space-y-12" staggerDelay={0.15}>
-            <ViewportAnimation
-              variant="fadeInUp"
-              delay={0.1}
-              easing="brutalist"
-            >
-              <div className="space-y-4 text-center">
-                <ScrollTextReveal
-                  text="FEATURED PROJECTS"
-                  className="font-mono text-4xl font-bold text-black uppercase md:text-6xl"
-                  stagger={0.03}
-                  animation="slideUp"
-                />
-                <ViewportAnimation variant="fadeInUp" delay={0.3}>
-                  <Typography
-                    variant="body"
-                    className="text-brutalist-charcoal-200 mx-auto max-w-2xl"
-                  >
-                    Explore cutting-edge web applications built with modern
-                    technologies and brutalist design principles.
-                  </Typography>
-                </ViewportAnimation>
-              </div>
-            </ViewportAnimation>
-
-            <ScrollRevealStagger
-              animation="scaleInRotate"
-              config={{ stagger: 0.2, delay: 0.2, easing: "backOut" }}
-              className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-            >
-              <ParallaxElement speed={0.2} direction="vertical">
-                <Card
-                  variant="default"
-                  hover="lift"
-                  className="group border-4 border-black bg-white"
-                >
-                  <CardHeader>
-                    <CardTitle className="text-black">
-                      E-COMMERCE PLATFORM
-                    </CardTitle>
-                    <CardDescription className="text-brutalist-charcoal-200">
-                      Next.js • TypeScript • Stripe
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography
-                      variant="body"
-                      className="text-brutalist-charcoal-200 mb-4"
-                    >
-                      Full-stack e-commerce solution with advanced payment
-                      processing and inventory management.
-                    </Typography>
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
-                        React
-                      </span>
-                      <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
-                        Node.js
-                      </span>
-                      <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
-                        PostgreSQL
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </ParallaxElement>
-
-              <ParallaxElement speed={0.3} direction="vertical">
-                <Card
-                  variant="elevated"
-                  hover="glow"
-                  className="group bg-brutalist-charcoal-100 border-4 border-black"
-                >
-                  <CardHeader>
-                    <CardTitle className="text-brutalist-yellow">
-                      REAL-TIME DASHBOARD
-                    </CardTitle>
-                    <CardDescription className="text-white">
-                      React • WebSocket • D3.js
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography variant="body" className="mb-4 text-white">
-                      Interactive analytics dashboard with real-time data
-                      visualization and user management.
-                    </Typography>
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      <span className="bg-brutalist-yellow px-2 py-1 font-mono text-xs text-black uppercase">
-                        React
-                      </span>
-                      <span className="bg-brutalist-yellow px-2 py-1 font-mono text-xs text-black uppercase">
-                        WebSocket
-                      </span>
-                      <span className="bg-brutalist-yellow px-2 py-1 font-mono text-xs text-black uppercase">
-                        D3.js
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </ParallaxElement>
-
-              <ParallaxElement speed={0.25} direction="vertical">
-                <Card
-                  variant="accent"
-                  hover="invert"
-                  className="group bg-brutalist-yellow border-4 border-black"
-                >
-                  <CardHeader>
-                    <CardTitle className="text-black">
-                      MOBILE-FIRST PWA
-                    </CardTitle>
-                    <CardDescription className="text-black">
-                      PWA • Service Workers • IndexedDB
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography variant="body" className="mb-4 text-black">
-                      Progressive web application with offline functionality and
-                      native-like performance.
-                    </Typography>
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
-                        PWA
-                      </span>
-                      <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
-                        Offline
-                      </span>
-                      <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
-                        Mobile
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </ParallaxElement>
-            </ScrollRevealStagger>
-
-            <ViewportAnimation
-              variant="scaleInRotate"
-              delay={0.4}
-              easing="elastic"
-            >
-              <div className="text-center">
-                <Button variant="accent" size="lg" asChild>
-                  <SmoothScrollLink href="/projects">
-                    VIEW ALL PROJECTS →
-                  </SmoothScrollLink>
-                </Button>
-              </div>
-            </ViewportAnimation>
-          </StaggeredAnimation>
+          <ProjectShowcase />
         </Container>
       </Section>
 
@@ -257,84 +111,7 @@ export default function Home() {
         id="technical-experience"
       >
         <Container>
-          <MultiLayerParallax
-            className="space-y-12"
-            layers={[
-              { speed: 0.3, direction: "up" },
-              { speed: 0.5, direction: "down" },
-              { speed: 0.2, direction: "up" },
-            ]}
-          >
-            <ViewportAnimation
-              variant="brutalistSlam"
-              delay={0.1}
-              easing="elastic"
-            >
-              <div className="space-y-4 text-center">
-                <ScrollTextReveal
-                  text="TECHNICAL ARSENAL"
-                  className="text-brutalist-yellow font-mono text-4xl font-bold uppercase md:text-6xl"
-                  stagger={0.05}
-                  animation="rotateIn"
-                />
-                <ViewportAnimation variant="fadeInUp" delay={0.5}>
-                  <Typography
-                    variant="body"
-                    className="text-brutalist-off-white-100 mx-auto max-w-2xl"
-                  >
-                    Raw power. Uncompromising tools. Digital concrete that
-                    builds the future.
-                  </Typography>
-                </ViewportAnimation>
-              </div>
-            </ViewportAnimation>
-
-            <ScrollRevealStagger
-              animation="brutalistPunch"
-              config={{ stagger: 0.3, delay: 0.2, easing: "backOut" }}
-              className="grid grid-cols-1 gap-0 md:grid-cols-3"
-            >
-              <div className="group border-4 border-white p-8 transition-all duration-300 hover:bg-white hover:text-black">
-                <Typography
-                  variant="h3"
-                  className="mb-4 text-2xl font-bold uppercase"
-                >
-                  FRONTEND MASTERY
-                </Typography>
-                <Typography variant="body" className="mb-6">
-                  React, Next.js, TypeScript, Tailwind CSS. Modern frameworks
-                  wielded with precision.
-                </Typography>
-                <div className="bg-brutalist-yellow h-1 w-1/2 transition-all duration-300 group-hover:w-full"></div>
-              </div>
-              <div className="group border-4 border-white p-8 transition-all duration-300 hover:bg-white hover:text-black">
-                <Typography
-                  variant="h3"
-                  className="mb-4 text-2xl font-bold uppercase"
-                >
-                  BACKEND POWER
-                </Typography>
-                <Typography variant="body" className="mb-6">
-                  Node.js, Python, PostgreSQL, Redis. Server architecture that
-                  scales without compromise.
-                </Typography>
-                <div className="bg-brutalist-yellow h-1 w-1/2 transition-all duration-300 group-hover:w-full"></div>
-              </div>
-              <div className="group border-4 border-white p-8 transition-all duration-300 hover:bg-white hover:text-black">
-                <Typography
-                  variant="h3"
-                  className="mb-4 text-2xl font-bold uppercase"
-                >
-                  DEVOPS EXCELLENCE
-                </Typography>
-                <Typography variant="body" className="mb-6">
-                  Docker, AWS, CI/CD, Monitoring. Infrastructure that never
-                  sleeps, never fails.
-                </Typography>
-                <div className="bg-brutalist-yellow h-1 w-1/2 transition-all duration-300 group-hover:w-full"></div>
-              </div>
-            </ScrollRevealStagger>
-          </MultiLayerParallax>
+          <TechnicalSkillsVisualization />
         </Container>
       </Section>
 
@@ -344,96 +121,189 @@ export default function Home() {
           <ScrollStagger className="space-y-12" staggerDelay={0.2}>
             <ScrollTriggered animation="slideUp" delay={0.1}>
               <div className="space-y-4 text-center">
-                <Typography
-                  variant="h2"
-                  className="text-4xl font-bold text-black uppercase md:text-6xl"
-                >
-                  LATEST INSIGHTS
-                </Typography>
+                <ScrollTextReveal
+                  text="LATEST INSIGHTS"
+                  className="font-mono text-4xl font-bold text-black uppercase md:text-6xl"
+                  stagger={0.05}
+                  animation="slideUp"
+                />
                 <Typography
                   variant="body"
                   className="text-brutalist-charcoal-200 mx-auto max-w-2xl"
                 >
                   Deep dives into modern web development, architecture patterns,
-                  and industry best practices.
+                  and industry best practices. Raw knowledge that transforms
+                  developers.
                 </Typography>
               </div>
             </ScrollTriggered>
 
-            <ScrollTriggered animation="slideUp" delay={0.2}>
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                <Card
-                  variant="default"
-                  hover="lift"
-                  className="group border-4 border-black bg-white"
-                >
-                  <CardHeader>
-                    <CardTitle className="text-black">
-                      BUILDING SCALABLE REACT ARCHITECTURES
-                    </CardTitle>
-                    <CardDescription className="text-brutalist-charcoal-200">
-                      December 2024 • 8 min read
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
+            <ScrollRevealStagger
+              animation="scaleInRotate"
+              config={{ stagger: 0.2, delay: 0.2, easing: "backOut" }}
+              className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+            >
+              <Card
+                variant="default"
+                hover="lift"
+                className="group border-4 border-black bg-white"
+              >
+                <CardHeader>
+                  <CardTitle className="text-black">
+                    BUILDING SCALABLE REACT ARCHITECTURES
+                  </CardTitle>
+                  <CardDescription className="text-brutalist-charcoal-200">
+                    December 2024 • 8 min read • 2.5K views
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Typography
+                    variant="body"
+                    className="text-brutalist-charcoal-200 mb-4"
+                  >
+                    Exploring advanced patterns for building maintainable React
+                    applications that scale with your team and business needs.
+                    No fluff, just battle-tested strategies.
+                  </Typography>
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
+                      React
+                    </span>
+                    <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
+                      Architecture
+                    </span>
+                    <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
+                      Scalability
+                    </span>
+                  </div>
+                  <div className="text-brutalist-charcoal-200 flex items-center justify-between text-xs">
+                    <span>★★★★★ 4.9/5</span>
+                    <span>15 min read</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card
+                variant="elevated"
+                hover="glow"
+                className="group bg-brutalist-charcoal-100 border-4 border-black"
+              >
+                <CardHeader>
+                  <CardTitle className="text-brutalist-yellow">
+                    TYPESCRIPT ADVANCED PATTERNS
+                  </CardTitle>
+                  <CardDescription className="text-white">
+                    November 2024 • 12 min read • 3.1K views
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Typography variant="body" className="mb-4 text-white">
+                    Master advanced TypeScript techniques for building type-safe
+                    applications with complex business logic. Elite-level
+                    patterns that separate pros from amateurs.
+                  </Typography>
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    <span className="bg-brutalist-yellow px-2 py-1 font-mono text-xs text-black uppercase">
+                      TypeScript
+                    </span>
+                    <span className="bg-brutalist-yellow px-2 py-1 font-mono text-xs text-black uppercase">
+                      Patterns
+                    </span>
+                    <span className="bg-brutalist-yellow px-2 py-1 font-mono text-xs text-black uppercase">
+                      Type Safety
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-white">
+                    <span>★★★★★ 4.8/5</span>
+                    <span>20 min read</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card
+                variant="accent"
+                hover="invert"
+                className="group bg-brutalist-yellow border-4 border-black"
+              >
+                <CardHeader>
+                  <CardTitle className="text-black">
+                    PERFORMANCE OPTIMIZATION MASTERY
+                  </CardTitle>
+                  <CardDescription className="text-black">
+                    October 2024 • 10 min read • 4.2K views
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Typography variant="body" className="mb-4 text-black">
+                    Transform slow applications into speed demons. Achieve 90+
+                    Lighthouse scores and sub-2-second loading times with
+                    brutalist efficiency.
+                  </Typography>
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
+                      Performance
+                    </span>
+                    <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
+                      Optimization
+                    </span>
+                    <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
+                      Core Web Vitals
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-black">
+                    <span>★★★★★ 5.0/5</span>
+                    <span>18 min read</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </ScrollRevealStagger>
+
+            <ScrollTriggered animation="slideUp" delay={0.4}>
+              <div className="space-y-6 text-center">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                  <div className="text-center">
                     <Typography
-                      variant="body"
-                      className="text-brutalist-charcoal-200 mb-4"
+                      variant="h3"
+                      className="text-2xl font-bold text-black"
                     >
-                      Exploring advanced patterns for building maintainable
-                      React applications that scale with your team and business
-                      needs.
+                      50+
                     </Typography>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
-                        React
-                      </span>
-                      <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
-                        Architecture
-                      </span>
-                      <span className="text-brutalist-yellow bg-black px-2 py-1 font-mono text-xs uppercase">
-                        Scalability
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card
-                  variant="elevated"
-                  hover="glow"
-                  className="group bg-brutalist-charcoal-100 border-4 border-black"
-                >
-                  <CardHeader>
-                    <CardTitle className="text-brutalist-yellow">
-                      TYPESCRIPT ADVANCED PATTERNS
-                    </CardTitle>
-                    <CardDescription className="text-white">
-                      November 2024 • 12 min read
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography variant="body" className="mb-4 text-white">
-                      Master advanced TypeScript techniques for building
-                      type-safe applications with complex business logic.
+                    <Typography
+                      variant="caption"
+                      className="text-brutalist-charcoal-200 font-mono text-xs uppercase"
+                    >
+                      Technical Articles
                     </Typography>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="bg-brutalist-yellow px-2 py-1 font-mono text-xs text-black uppercase">
-                        TypeScript
-                      </span>
-                      <span className="bg-brutalist-yellow px-2 py-1 font-mono text-xs text-black uppercase">
-                        Patterns
-                      </span>
-                      <span className="bg-brutalist-yellow px-2 py-1 font-mono text-xs text-black uppercase">
-                        Type Safety
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </ScrollTriggered>
-
-            <ScrollTriggered animation="slideUp" delay={0.3}>
-              <div className="text-center">
+                  </div>
+                  <div className="text-center">
+                    <Typography
+                      variant="h3"
+                      className="text-2xl font-bold text-black"
+                    >
+                      25K+
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      className="text-brutalist-charcoal-200 font-mono text-xs uppercase"
+                    >
+                      Monthly Readers
+                    </Typography>
+                  </div>
+                  <div className="text-center">
+                    <Typography
+                      variant="h3"
+                      className="text-2xl font-bold text-black"
+                    >
+                      4.9/5
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      className="text-brutalist-charcoal-200 font-mono text-xs uppercase"
+                    >
+                      Average Rating
+                    </Typography>
+                  </div>
+                </div>
                 <Button variant="secondary" size="lg" asChild>
                   <SmoothScrollLink href="/blog">
                     READ ALL ARTICLES →
@@ -467,77 +337,122 @@ export default function Home() {
               </div>
             </ScrollTriggered>
 
-            <ScrollTriggered animation="slideUp" delay={0.2}>
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-                <Card variant="default" hover="lift" className="text-center">
-                  <CardHeader>
-                    <div className="mb-4 text-6xl">⚡</div>
+            <ScrollRevealStagger
+              animation="brutalistPunch"
+              config={{ stagger: 0.2, delay: 0.2, easing: "backOut" }}
+              className="grid grid-cols-1 gap-8 md:grid-cols-3"
+            >
+              <Card variant="default" hover="lift" className="text-center">
+                <CardHeader>
+                  <div className="mb-4 text-6xl">⚡</div>
+                  <div className="mb-2 flex items-center justify-center">
                     <CardTitle className="text-brutalist-yellow">
                       WEB DEVELOPMENT
                     </CardTitle>
-                    <CardDescription>Full-Stack Solutions</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography variant="body" className="mb-4">
-                      Custom web applications built with modern technologies and
-                      scalable architecture.
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      className="text-brutalist-yellow font-mono uppercase"
-                    >
-                      FROM $5,000
-                    </Typography>
-                  </CardContent>
-                </Card>
+                    <span className="ml-2 bg-green-500 px-2 py-1 font-mono text-xs text-white uppercase">
+                      POPULAR
+                    </span>
+                  </div>
+                  <CardDescription>Full-Stack Solutions</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Typography variant="body" className="mb-4">
+                    Custom web applications built with modern technologies and
+                    scalable architecture. 90+ Lighthouse scores guaranteed.
+                  </Typography>
+                  <div className="mb-4 space-y-2 text-xs">
+                    <div className="flex justify-between">
+                      <span>✓ React/Next.js Development</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>✓ Performance Optimization</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>✓ 3 Months Support</span>
+                    </div>
+                  </div>
+                  <Typography
+                    variant="caption"
+                    className="text-brutalist-yellow font-mono text-lg font-bold uppercase"
+                  >
+                    FROM $5,000
+                  </Typography>
+                </CardContent>
+              </Card>
 
-                <Card variant="elevated" hover="glow" className="text-center">
-                  <CardHeader>
-                    <div className="mb-4 text-6xl">🚀</div>
-                    <CardTitle className="text-brutalist-yellow">
-                      TECHNICAL CONSULTING
-                    </CardTitle>
-                    <CardDescription>Architecture & Strategy</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography variant="body" className="mb-4">
-                      Expert guidance on technology decisions, architecture
-                      design, and team scaling.
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      className="text-brutalist-yellow font-mono uppercase"
-                    >
-                      FROM $200/HOUR
-                    </Typography>
-                  </CardContent>
-                </Card>
+              <Card variant="elevated" hover="glow" className="text-center">
+                <CardHeader>
+                  <div className="mb-4 text-6xl">🚀</div>
+                  <CardTitle className="text-brutalist-yellow">
+                    TECHNICAL CONSULTING
+                  </CardTitle>
+                  <CardDescription>Architecture & Strategy</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Typography variant="body" className="mb-4">
+                    Expert guidance on technology decisions, architecture
+                    design, and team scaling. Immediate impact guaranteed.
+                  </Typography>
+                  <div className="mb-4 space-y-2 text-xs">
+                    <div className="flex justify-between">
+                      <span>✓ Code Quality Audits</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>✓ Performance Reviews</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>✓ Team Training</span>
+                    </div>
+                  </div>
+                  <Typography
+                    variant="caption"
+                    className="text-brutalist-yellow font-mono text-lg font-bold uppercase"
+                  >
+                    FROM $200/HOUR
+                  </Typography>
+                </CardContent>
+              </Card>
 
-                <Card variant="accent" hover="invert" className="text-center">
-                  <CardHeader>
-                    <div className="mb-4 text-6xl text-black">💎</div>
+              <Card variant="accent" hover="invert" className="text-center">
+                <CardHeader>
+                  <div className="mb-4 text-6xl text-black">💎</div>
+                  <div className="mb-2 flex items-center justify-center">
                     <CardTitle className="text-black">
                       PREMIUM SUPPORT
                     </CardTitle>
-                    <CardDescription className="text-black">
-                      24/7 Maintenance
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography variant="body" className="mb-4 text-black">
-                      Ongoing maintenance, updates, and performance optimization
-                      for your applications.
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      className="font-mono text-black uppercase"
-                    >
-                      FROM $1,500/MONTH
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </div>
-            </ScrollTriggered>
+                    <span className="ml-2 bg-red-500 px-2 py-1 font-mono text-xs text-white uppercase">
+                      24/7
+                    </span>
+                  </div>
+                  <CardDescription className="text-black">
+                    Elite Maintenance
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Typography variant="body" className="mb-4 text-black">
+                    Ongoing maintenance, updates, and performance optimization
+                    for your applications. Never worry about downtime again.
+                  </Typography>
+                  <div className="mb-4 space-y-2 text-xs text-black">
+                    <div className="flex justify-between">
+                      <span>✓ 24/7 Monitoring</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>✓ Security Updates</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>✓ Performance Reports</span>
+                    </div>
+                  </div>
+                  <Typography
+                    variant="caption"
+                    className="font-mono text-lg font-bold text-black uppercase"
+                  >
+                    FROM $1,500/MONTH
+                  </Typography>
+                </CardContent>
+              </Card>
+            </ScrollRevealStagger>
 
             <ScrollTriggered animation="slideUp" delay={0.3}>
               <div className="text-center">
@@ -559,148 +474,14 @@ export default function Home() {
         id="testimonials-preview"
       >
         <Container>
-          <ScrollStagger className="space-y-12" staggerDelay={0.2}>
-            <ScrollTriggered animation="slideUp" delay={0.1}>
-              <div className="space-y-4 text-center">
-                <Typography
-                  variant="h2"
-                  className="text-brutalist-yellow text-4xl font-bold uppercase md:text-6xl"
-                >
-                  CLIENT VICTORIES
-                </Typography>
-                <Typography
-                  variant="body"
-                  className="text-brutalist-off-white-100 mx-auto max-w-2xl"
-                >
-                  Real results from real clients who achieved extraordinary
-                  success with our elite development services.
-                </Typography>
-              </div>
-            </ScrollTriggered>
+          <TestimonialCarousel />
+        </Container>
+      </Section>
 
-            <ScrollTriggered animation="slideUp" delay={0.2}>
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                <Card variant="default" hover="lift" className="group">
-                  <CardContent className="p-8">
-                    <div className="text-brutalist-yellow mb-4 text-4xl">
-                      &ldquo;
-                    </div>
-                    <Typography variant="body" className="mb-6 text-lg">
-                      &ldquo;The team delivered a flawless e-commerce platform
-                      that increased our conversion rate by 340%. Their
-                      brutalist approach to problem-solving is exactly what we
-                      needed.&rdquo;
-                    </Typography>
-                    <div className="flex items-center space-x-4">
-                      <div className="bg-brutalist-yellow flex h-12 w-12 items-center justify-center rounded-full">
-                        <span className="text-lg font-bold text-black">S</span>
-                      </div>
-                      <div>
-                        <Typography
-                          variant="body"
-                          className="text-brutalist-yellow font-bold"
-                        >
-                          Sarah Chen
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          className="text-brutalist-off-white-100"
-                        >
-                          CEO, TechStart Inc.
-                        </Typography>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card variant="elevated" hover="glow" className="group">
-                  <CardContent className="p-8">
-                    <div className="text-brutalist-yellow mb-4 text-4xl">
-                      &ldquo;
-                    </div>
-                    <Typography variant="body" className="mb-6 text-lg">
-                      &ldquo;Exceptional technical expertise and uncompromising
-                      attention to detail. Our dashboard now handles 10x the
-                      traffic with zero downtime.&rdquo;
-                    </Typography>
-                    <div className="flex items-center space-x-4">
-                      <div className="bg-brutalist-yellow flex h-12 w-12 items-center justify-center rounded-full">
-                        <span className="text-lg font-bold text-black">M</span>
-                      </div>
-                      <div>
-                        <Typography
-                          variant="body"
-                          className="text-brutalist-yellow font-bold"
-                        >
-                          Marcus Rodriguez
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          className="text-brutalist-off-white-100"
-                        >
-                          CTO, DataFlow Systems
-                        </Typography>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </ScrollTriggered>
-
-            <ScrollTriggered animation="slideUp" delay={0.3}>
-              <div className="space-y-6 text-center">
-                <div className="flex items-center justify-center space-x-8">
-                  <div className="text-center">
-                    <Typography
-                      variant="h3"
-                      className="text-brutalist-yellow text-4xl font-bold"
-                    >
-                      50+
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      className="text-brutalist-off-white-100 uppercase"
-                    >
-                      Projects Delivered
-                    </Typography>
-                  </div>
-                  <div className="text-center">
-                    <Typography
-                      variant="h3"
-                      className="text-brutalist-yellow text-4xl font-bold"
-                    >
-                      98%
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      className="text-brutalist-off-white-100 uppercase"
-                    >
-                      Client Satisfaction
-                    </Typography>
-                  </div>
-                  <div className="text-center">
-                    <Typography
-                      variant="h3"
-                      className="text-brutalist-yellow text-4xl font-bold"
-                    >
-                      24/7
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      className="text-brutalist-off-white-100 uppercase"
-                    >
-                      Support Available
-                    </Typography>
-                  </div>
-                </div>
-                <Button variant="secondary" size="lg" asChild>
-                  <SmoothScrollLink href="/testimonials">
-                    READ ALL TESTIMONIALS →
-                  </SmoothScrollLink>
-                </Button>
-              </div>
-            </ScrollTriggered>
-          </ScrollStagger>
+      {/* Contact Engagement Section */}
+      <Section padding="xl" background="dark-gradient" id="contact-engagement">
+        <Container>
+          <ContactEngagementHub />
         </Container>
       </Section>
     </main>

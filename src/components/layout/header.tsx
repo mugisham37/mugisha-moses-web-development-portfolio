@@ -19,6 +19,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useScrollRestoration } from "@/hooks/use-scroll-restoration";
 import { cn } from "@/lib/utils";
+import { SkipNavigation } from "@/components/accessibility/skip-navigation";
 
 interface NavigationItem {
   label: string;
@@ -180,21 +181,8 @@ export function MainHeader({ className = "" }: MainHeaderProps) {
 
   return (
     <>
-      {/* Skip Navigation Links for Accessibility */}
-      <div className="sr-only">
-        <button
-          onClick={() => {
-            const mainContent = document.getElementById("main-content");
-            if (mainContent) {
-              mainContent.focus();
-              mainContent.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-          className="bg-accent-yellow absolute top-4 left-4 z-[9999] px-4 py-2 font-mono font-bold text-black uppercase focus:not-sr-only focus:relative"
-        >
-          Skip to main content
-        </button>
-      </div>
+      {/* Enhanced Skip Navigation Links for Accessibility */}
+      <SkipNavigation />
 
       <motion.header
         ref={headerRef}

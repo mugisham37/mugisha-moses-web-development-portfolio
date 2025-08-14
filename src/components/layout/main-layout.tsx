@@ -17,6 +17,8 @@ import {
   OptimizedMotionConfig,
   PerformanceMonitor,
 } from "@/components/animations/animation-utils";
+import { AccessibilityProvider } from "@/components/accessibility/accessibility-provider";
+import { AccessibilityToolbar } from "@/components/accessibility/accessibility-toolbar";
 import { PageTransition } from "@/components/animations/page-transitions";
 import { OfflineNotification } from "@/components/error/offline-notification";
 import { initializeOfflineSupport } from "@/lib/offline-detection";
@@ -75,73 +77,80 @@ export function MainLayout({
   }, []);
 
   return (
-    <AnimationPreferencesProvider>
-      <OptimizedMotionConfig>
-        <PerformanceMonitor showFPS={process.env.NODE_ENV === "development"}>
-          <div
-            className={`mobile-scroll safe-area-inset min-h-screen bg-black text-white ${className}`}
-          >
-            {/* Skip Navigation */}
-            <SkipNav />
-
-            {/* Scroll Initialization */}
-            <ScrollInitializer
-              hashScrollOffset={80}
-              enableSmoothLinks={true}
-              enableScrollRestoration={true}
-            />
-
-            {/* Enhanced Scroll Progress */}
-            {showScrollProgress && (
-              <>
-                <ScrollProgress />
-                <ScrollProgressBar
-                  color="accent"
-                  height={3}
-                  position="top"
-                  showPercentage={false}
-                />
-              </>
-            )}
-
-            {/* Enhanced Header with Integrated Mobile Navigation */}
-            {showHeader && <MainHeader />}
-
-            {/* Main Content with Page Transitions */}
-            <main
-              id="main-content"
-              className="flex-1"
-              role="main"
-              style={{
-                paddingTop: mobile.isMobile
-                  ? "env(safe-area-inset-top)"
-                  : undefined,
-                paddingBottom: mobile.isMobile
-                  ? "env(safe-area-inset-bottom)"
-                  : undefined,
-              }}
+    <AccessibilityProvider>
+      <AnimationPreferencesProvider>
+        <OptimizedMotionConfig>
+          <PerformanceMonitor showFPS={process.env.NODE_ENV === "development"}>
+            <div
+              className={`mobile-scroll safe-area-inset min-h-screen bg-black text-white ${className}`}
             >
-              {enablePageTransitions ? (
-                <PageTransition variant="brutalist">{children}</PageTransition>
-              ) : (
-                children
+              {/* Skip Navigation */}
+              <SkipNav />
+
+              {/* Scroll Initialization */}
+              <ScrollInitializer
+                hashScrollOffset={80}
+                enableSmoothLinks={true}
+                enableScrollRestoration={true}
+              />
+
+              {/* Enhanced Scroll Progress */}
+              {showScrollProgress && (
+                <>
+                  <ScrollProgress />
+                  <ScrollProgressBar
+                    color="accent"
+                    height={3}
+                    position="top"
+                    showPercentage={false}
+                  />
+                </>
               )}
-            </main>
 
-            {/* Footer */}
-            {showFooter && <MainFooter />}
+              {/* Enhanced Header with Integrated Mobile Navigation */}
+              {showHeader && <MainHeader />}
 
-            {/* Smooth Scroll to Top Button */}
-            <SmoothScrollToTop threshold={400} size="md" />
+              {/* Main Content with Page Transitions */}
+              <main
+                id="main-content"
+                className="flex-1"
+                role="main"
+                style={{
+                  paddingTop: mobile.isMobile
+                    ? "env(safe-area-inset-top)"
+                    : undefined,
+                  paddingBottom: mobile.isMobile
+                    ? "env(safe-area-inset-bottom)"
+                    : undefined,
+                }}
+              >
+                {enablePageTransitions ? (
+                  <PageTransition variant="brutalist">
+                    {children}
+                  </PageTransition>
+                ) : (
+                  children
+                )}
+              </main>
 
-            {/* Alternative Scroll Progress Circle */}
-            <ScrollProgressCircle size={50} strokeWidth={3} />
+              {/* Footer */}
+              {showFooter && <MainFooter />}
 
-            {/* Offline Notification */}
-            <OfflineNotification />
-          </div>
-        </PerformanceMonitor>
-      </OptimizedMotionConfig>
-    </AnimationPreferencesProvider>
+              {/* Smooth Scroll to Top Button */}
+              <SmoothScrollToTop threshold={400} size="md" />
+
+              {/* Alternative Scroll Progress Circle */}
+              <ScrollProgressCircle size={50} strokeWidth={3} />
+
+              {/* Offline Notification */}
+              <OfflineNotification />
+
+              {/* Accessibility Toolbar (Development Only) */}
+              <AccessibilityToolbar position="bottom-right" />
+            </div>
+          </PerformanceMonitor>
+        </OptimizedMotionConfig>
+      </AnimationPreferencesProvider>
+    </AccessibilityProvider>
   );
 }

@@ -14,11 +14,7 @@ const nextConfig: NextConfig = {
     ],
     webVitalsAttribution: ["CLS", "LCP", "FCP", "FID", "TTFB"],
     optimizeCss: true,
-    serverComponentsExternalPackages: ["@prisma/client"],
     typedRoutes: true,
-    instrumentationHook: true,
-    ppr: true, // Partial Prerendering
-    reactCompiler: true,
   },
 
   // External packages for server components

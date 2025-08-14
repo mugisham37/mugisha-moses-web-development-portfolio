@@ -3,6 +3,8 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { useAnnouncement } from "@/lib/accessibility";
+import { ScreenReaderOnly } from "@/components/accessibility/screen-reader-only";
 
 const buttonVariants = cva(
   [
@@ -113,6 +115,11 @@ export interface ButtonProps
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   loadingText?: string;
+  // Enhanced accessibility props
+  ariaLabel?: string;
+  ariaDescribedBy?: string;
+  announceOnClick?: string;
+  announceOnLoad?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -126,7 +133,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       leftIcon,
       rightIcon,
       loadingText,
-
+      ariaLabel,
+      ariaDescribedBy,
+      announceOnClick,
+      announceOnLoad,
       children,
       disabled,
       onClick,
@@ -139,9 +149,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       Array<{ id: number; x: number; y: number }>
     >([]);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
+    const announce = useAnnouncement();
 
     // Combine refs
     React.useImperativeHandle(ref, () => buttonRef.current!);
+
+    // Announce loading state changes
+    React.useEffect(() => {
+      if (loading && announceOnLoad) {
+        announce(announceOnLoad, "polite");
+      }
+    }, [loading, announceOnLoad, announce]);
 
     // Handle click with enhanced micro-interactions and haptic feedback simulation
     const handleClick = React.useCallback(
@@ -205,6 +223,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           }, 600);
         }
 
+        // Announce click action if specified
+        if (announceOnClick) {
+          announce(announceOnClick, "polite");
+        }
+
         // Call original onClick
         onClick?.(event);
       },
@@ -249,6 +272,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         data-loading={loading}
         aria-disabled={isDisabled}
         aria-busy={loading}
+        aria-label={ariaLabel}
+        aria-describedby={ariaDescribedBy}
         {...props}
       >
         {/* Enhanced ripple effects with sophisticated animations */}
@@ -339,8 +364,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
         {/* Screen reader loading announcement */}
         {loading && (
-          <span className="sr-only">{loadingText || "Loading..."}</span>
+          <ScreenReaderOnly>{loadingText || "Loading..."}</ScreenReaderOnly>
         )}
+
+        {/* Enhanced accessibility context */}
+        {isPressed && <ScreenReaderOnly>Button activated</ScreenReaderOnly>}
       </Comp>
     );
   }
