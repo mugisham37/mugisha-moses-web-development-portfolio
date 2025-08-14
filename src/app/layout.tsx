@@ -10,6 +10,11 @@ import { StructuredData } from "@/components/seo/structured-data";
 import { CriticalErrorBoundary } from "@/components/error/app-error-boundary";
 import { AnimationProvider } from "@/components/animations/animation-provider";
 import {
+  CriticalCSS,
+  FontPreloader,
+  ResourceHints,
+} from "@/components/performance/critical-css";
+import {
   generatePersonJsonLd,
   generateWebsiteJsonLd,
   generateOrganizationJsonLd,
@@ -142,12 +147,19 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceMono.variable} ${inter.variable}`}>
       <head>
+        <CriticalCSS />
+        <FontPreloader />
+        <ResourceHints />
         <link
           rel="alternate"
           type="application/rss+xml"
           title="Blog RSS Feed"
           href="/blog/rss.xml"
         />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body className="antialiased">
         <StructuredData data={globalStructuredData} />

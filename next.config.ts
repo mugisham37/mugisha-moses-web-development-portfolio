@@ -8,25 +8,46 @@ const nextConfig: NextConfig = {
       "framer-motion",
       "@react-three/fiber",
       "@react-three/drei",
+      "recharts",
+      "react-syntax-highlighter",
+      "date-fns",
     ],
     webVitalsAttribution: ["CLS", "LCP", "FCP", "FID", "TTFB"],
+    optimizeCss: true,
+    serverComponentsExternalPackages: ["@prisma/client"],
+    typedRoutes: true,
+    instrumentationHook: true,
+    ppr: true, // Partial Prerendering
+    reactCompiler: true,
   },
 
   // External packages for server components
-  serverExternalPackages: ["@prisma/client"],
+  serverExternalPackages: ["@prisma/client", "bcryptjs"],
 
   // Compiler optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
+    styledComponents: false,
+    emotion: false,
   },
-
-  // Remove turbo config as it's not supported in Next.js 15
 
   // Output configuration for better caching
   output: "standalone",
 
   // Power optimizations
   poweredByHeader: false,
+
+  // Bundle analyzer
+  ...(process.env.ANALYZE === "true" && {
+    webpack: (config: any) => {
+      config.plugins.push(
+        new (require("@next/bundle-analyzer")({
+          enabled: true,
+        }))()
+      );
+      return config;
+    },
+  }),
 
   // Enhanced image optimization
   images: {
