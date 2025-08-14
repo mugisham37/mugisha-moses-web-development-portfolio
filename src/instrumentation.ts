@@ -17,7 +17,7 @@ export async function register() {
     // Wrap database queries with performance monitoring
     const originalQuery = db.$queryRaw;
     db.$queryRaw = new Proxy(originalQuery, {
-      apply: async (target, thisArg, args) => {
+      apply: async (target, thisArg, args: [TemplateStringsArray, ...unknown[]]) => {
         const startTime = Date.now();
         try {
           const result = await target.apply(thisArg, args);

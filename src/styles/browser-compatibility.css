@@ -429,6 +429,7 @@ pre {
   /* Fix Safari flexbox bugs */
   .flex {
     -webkit-flex-shrink: 0;
+    flex-shrink: 0;
   }
 
   /* Fix Safari sticky positioning */
@@ -449,6 +450,7 @@ pre {
   /* Fix Firefox flexbox bugs */
   .flex {
     -moz-flex-shrink: 0;
+    flex-shrink: 0;
   }
 
   /* Fix Firefox outline styles */

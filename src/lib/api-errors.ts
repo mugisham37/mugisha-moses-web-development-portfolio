@@ -22,6 +22,18 @@ export class AuthorizationError extends Error {
   }
 }
 
+export class GitHubAPIError extends Error {
+  public statusCode: number;
+  public response?: unknown;
+
+  constructor(message: string, statusCode: number = 500, response?: unknown) {
+    super(message);
+    this.name = "GitHubAPIError";
+    this.statusCode = statusCode;
+    this.response = response;
+  }
+}
+
 export class NotFoundError extends Error {
   constructor(message: string = "Resource not found") {
     super(message);

@@ -3,6 +3,10 @@
  * Provides essential polyfills for older browsers and missing features
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
+/* eslint-disable @typescript-eslint/no-this-alias */
+
 /**
  * CSS.supports polyfill for older browsers
  */
@@ -14,8 +18,9 @@ if (!window.CSS || !window.CSS.supports) {
     if (value) {
       // Test property-value pair
       try {
-        (element.style as any)[property] = value;
-        return (element.style as any)[property] === value;
+        const style = element.style as any;
+        style[property] = value;
+        return style[property] === value;
       } catch {
         return false;
       }
@@ -30,7 +35,7 @@ if (!window.CSS || !window.CSS.supports) {
  * Object.assign polyfill for IE
  */
 if (typeof Object.assign !== "function") {
-  Object.assign = function (target: any, ...sources: any[]) {
+  Object.assign = function (target: Record<string, unknown>, ...sources: Record<string, unknown>[]) {
     if (target == null) {
       throw new TypeError("Cannot convert undefined or null to object");
     }
@@ -56,11 +61,11 @@ if (typeof Object.assign !== "function") {
  * Array.from polyfill for IE
  */
 if (!Array.from) {
-  Array.from = function <T>(
+  Array.from = function <T, U = T>(
     arrayLike: ArrayLike<T>,
-    mapFn?: (v: T, k: number) => any,
-    thisArg?: any
-  ): any[] {
+    mapFn?: (v: T, k: number) => U,
+    thisArg?: unknown
+  ): U[] {
     const C = this;
     const items = Object(arrayLike);
 
@@ -112,13 +117,13 @@ if (!Array.prototype.includes) {
     fromIndex?: number
   ): boolean {
     const O = Object(this);
-    const len = parseInt(O.length) || 0;
+    const len = parseInt(String(O.length)) || 0;
     if (len === 0) return false;
 
-    const n = parseInt(fromIndex) || 0;
+    const n = parseInt(String(fromIndex)) || 0;
     let k = n >= 0 ? n : Math.max(len + n, 0);
 
-    function sameValueZero(x: any, y: any): boolean {
+    function sameValueZero(x: unknown, y: unknown): boolean {
       return (
         x === y ||
         (typeof x === "number" && typeof y === "number" && isNaN(x) && isNaN(y))
@@ -317,12 +322,14 @@ if (typeof Promise === "undefined") {
  */
 if (!window.fetch) {
   window.fetch = function (
-    input: RequestInfo,
+    input: string | Request | URL,
     init?: RequestInit
   ): Promise<Response> {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      const url = typeof input === "string" ? input : input.url;
+      const url = typeof input === "string" ? input : 
+                  input instanceof URL ? input.toString() : 
+                  (input as Request).url;
       const method = init?.method || "GET";
       const headers = init?.headers || {};
       const body = init?.body;
@@ -346,7 +353,7 @@ if (!window.fetch) {
           json: () => Promise.resolve(JSON.parse(xhr.responseText)),
           blob: () => Promise.resolve(new Blob([xhr.response])),
           arrayBuffer: () => Promise.resolve(xhr.response),
-        } as Response;
+        } as unknown as Response;
 
         resolve(response);
       };
@@ -354,7 +361,16 @@ if (!window.fetch) {
       xhr.onerror = () => reject(new Error("Network error"));
       xhr.ontimeout = () => reject(new Error("Request timeout"));
 
-      xhr.send(body);
+      // Send with proper body handling
+      if (body && typeof body === 'string') {
+        xhr.send(body);
+      } else if (body instanceof FormData) {
+        xhr.send(body);
+      } else if (body instanceof URLSearchParams) {
+        xhr.send(body.toString());
+      } else {
+        xhr.send(body as any);
+      }
     });
   };
 }
@@ -388,7 +404,8 @@ if (!Element.prototype.matches) {
     (Element.prototype as any).oMatchesSelector ||
     (Element.prototype as any).webkitMatchesSelector ||
     function (this: Element, s: string): boolean {
-      const matches = (this.document || this.ownerDocument).querySelectorAll(s);
+      const element = this as any;
+      const matches = (element.document || element.ownerDocument).querySelectorAll(s);
       let i = matches.length;
       while (--i >= 0 && matches.item(i) !== this) {}
       return i > -1;
@@ -416,7 +433,15 @@ if (!Element.prototype.closest) {
  * NodeList.forEach polyfill for IE
  */
 if (window.NodeList && !NodeList.prototype.forEach) {
-  NodeList.prototype.forEach = Array.prototype.forEach;
+  NodeList.prototype.forEach = function<T extends Node>(
+    this: NodeList,
+    callback: (value: T, key: number, parent: NodeList) => void,
+    thisArg?: any
+  ): void {
+    for (let i = 0; i < this.length; i++) {
+      callback.call(thisArg, this[i] as T, i, this);
+    }
+  };
 }
 
 /**
@@ -444,15 +469,25 @@ if (!window.cancelAnimationFrame) {
 }
 
 /**
+ * Safe dynamic import helper
+ */
+async function safeDynamicImport(moduleName: string): Promise<any> {
+  try {
+    return await import(/* webpackIgnore: true */ moduleName);
+  } catch {
+    console.warn(`Module ${moduleName} not found. Install it with: npm install ${moduleName}`);
+    return null;
+  }
+}
+
+/**
  * IntersectionObserver polyfill loader
  */
 export async function loadIntersectionObserverPolyfill(): Promise<void> {
   if (!("IntersectionObserver" in window)) {
-    try {
-      await import("intersection-observer");
+    const polyfill = await safeDynamicImport("intersection-observer");
+    if (polyfill) {
       console.log("IntersectionObserver polyfill loaded");
-    } catch (error) {
-      console.warn("Failed to load IntersectionObserver polyfill:", error);
     }
   }
 }
@@ -462,12 +497,10 @@ export async function loadIntersectionObserverPolyfill(): Promise<void> {
  */
 export async function loadResizeObserverPolyfill(): Promise<void> {
   if (!("ResizeObserver" in window)) {
-    try {
-      const { ResizeObserver } = await import("@juggle/resize-observer");
-      (window as any).ResizeObserver = ResizeObserver;
+    const polyfill = await safeDynamicImport("@juggle/resize-observer");
+    if (polyfill?.ResizeObserver) {
+      (window as any).ResizeObserver = polyfill.ResizeObserver;
       console.log("ResizeObserver polyfill loaded");
-    } catch (error) {
-      console.warn("Failed to load ResizeObserver polyfill:", error);
     }
   }
 }
@@ -477,11 +510,9 @@ export async function loadResizeObserverPolyfill(): Promise<void> {
  */
 export async function loadWebAnimationsPolyfill(): Promise<void> {
   if (!("animate" in document.createElement("div"))) {
-    try {
-      await import("web-animations-js");
+    const polyfill = await safeDynamicImport("web-animations-js");
+    if (polyfill) {
       console.log("Web Animations API polyfill loaded");
-    } catch (error) {
-      console.warn("Failed to load Web Animations API polyfill:", error);
     }
   }
 }
@@ -492,8 +523,9 @@ export async function loadWebAnimationsPolyfill(): Promise<void> {
 export async function loadCSSCustomPropertiesPolyfill(): Promise<void> {
   // Check if CSS custom properties are supported
   if (!CSS.supports("--custom", "property")) {
-    try {
-      const { default: cssVars } = await import("css-vars-ponyfill");
+    const polyfill = await safeDynamicImport("css-vars-ponyfill");
+    if (polyfill?.default) {
+      const cssVars = polyfill.default;
       cssVars({
         include: 'style,link[rel="stylesheet"]',
         onlyLegacy: false,
@@ -513,8 +545,6 @@ export async function loadCSSCustomPropertiesPolyfill(): Promise<void> {
         },
       });
       console.log("CSS Custom Properties polyfill loaded");
-    } catch (error) {
-      console.warn("Failed to load CSS Custom Properties polyfill:", error);
     }
   }
 }

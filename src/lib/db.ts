@@ -100,7 +100,7 @@ class DatabaseConnectionManager {
         maxConnections: this.maxConnections,
         responseTime,
       };
-    } catch (error) {
+    } catch {
       return {
         isHealthy: false,
         connectionCount: this.connectionCount,

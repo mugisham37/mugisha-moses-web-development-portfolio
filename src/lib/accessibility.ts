@@ -524,12 +524,3 @@ export class AccessibilityTesting {
     return issues;
   }
 }
-
-// Export all utilities
-export {
-  ScreenReaderUtils,
-  FocusManager,
-  KeyboardNavigation,
-  ColorContrast,
-  AccessibilityTesting,
-};

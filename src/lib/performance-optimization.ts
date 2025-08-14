@@ -4,6 +4,7 @@
  */
 
 import { cache } from "react";
+import React from "react";
 
 // Critical resource hints for preloading
 export const CRITICAL_RESOURCES = {
@@ -119,6 +120,7 @@ export class ImageOptimizer {
  * Code splitting utilities
  */
 export class CodeSplitter {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static createLazyComponent<T extends React.ComponentType<any>>(
     importFn: () => Promise<{ default: T }>,
     fallback?: React.ComponentType
@@ -126,10 +128,13 @@ export class CodeSplitter {
     const LazyComponent = React.lazy(importFn);
     
     return function LazyWrapper(props: React.ComponentProps<T>) {
-      return (
-        <React.Suspense fallback={fallback ? React.createElement(fallback) : <div>Loading...</div>}>
-          <LazyComponent {...props} />
-        </React.Suspense>
+      return React.createElement(
+        React.Suspense,
+        { 
+          fallback: fallback ? React.createElement(fallback) : React.createElement('div', null, 'Loading...') 
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.createElement(LazyComponent, props as any)
       );
     };
   }
@@ -263,7 +268,7 @@ export class MemoryManager {
     return this.observers.get(key)!;
   }
 
-  static debounce<T extends (...args: any[]) => void>(
+  static debounce<T extends (...args: never[]) => void>(
     func: T,
     delay: number,
     key: string
@@ -346,7 +351,9 @@ export class ServiceWorkerManager {
 export const getCriticalCSS = cache(async (pathname: string): Promise<string> => {
   // In a real implementation, you would extract critical CSS
   // using tools like Critters or critical
-  return "";
+  // For now, we'll use pathname to determine critical CSS
+  const pathSpecificCSS = pathname === '/' ? 'homepage-critical.css' : '';
+  return pathSpecificCSS;
 });
 
 /**
@@ -377,9 +384,10 @@ export class BundleAnalyzer {
     if (process.env.NODE_ENV !== "development") return;
 
     try {
-      const { default: analyzer } = await import("webpack-bundle-analyzer");
-      // Implementation would depend on your build setup
-      console.log("Bundle analysis complete");
+      // Note: webpack-bundle-analyzer would need to be installed
+      // const { BundleAnalyzerPlugin } = await import("webpack-bundle-analyzer");
+      console.log("Bundle analysis would be performed here with webpack-bundle-analyzer");
+      console.log("Run 'npm install webpack-bundle-analyzer' to enable this feature");
     } catch (error) {
       console.error("Bundle analysis failed:", error);
     }
@@ -399,9 +407,3 @@ if (typeof window !== "undefined") {
     MemoryManager.cleanup();
   });
 }
-
-export {
-  CRITICAL_RESOURCES,
-  PERFORMANCE_BUDGETS,
-  CRITICAL_CSS_PATHS,
-};

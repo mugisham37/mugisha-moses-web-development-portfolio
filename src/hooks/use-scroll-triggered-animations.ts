@@ -19,7 +19,6 @@ export function useScrollTriggeredAnimation(
 ) {
   const {
     threshold = 0.1,
-    rootMargin = "0px",
     triggerOnce = true,
     delay = 0,
     onEnter,
@@ -28,13 +27,12 @@ export function useScrollTriggeredAnimation(
 
   const ref = useRef<HTMLElement>(null);
   const [hasTriggered, setHasTriggered] = useState(false);
-  const { reducedMotion, getOptimizedDuration } = useAnimationContext();
+  const { reducedMotion } = useAnimationContext();
 
   const isInView = useInView(ref, {
-    threshold,
-    margin: rootMargin,
+    amount: typeof threshold === 'number' ? threshold : 0.1,
     once: triggerOnce,
-  } as any);
+  });
 
   useEffect(() => {
     if (isInView && !hasTriggered) {
@@ -77,10 +75,9 @@ export function useStaggeredScrollAnimation(
   );
 
   const isInView = useInView(containerRef, {
-    threshold: restOptions.threshold || 0.1,
-    margin: restOptions.rootMargin || "0px",
+    amount: typeof (restOptions.threshold || 0.1) === 'number' ? (restOptions.threshold || 0.1) : 0.1,
     once: restOptions.triggerOnce !== false,
-  } as any);
+  });
 
   useEffect(() => {
     if (isInView) {

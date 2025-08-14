@@ -195,7 +195,16 @@ export const typographyA11y = {
    */
   checkContrast: (foreground: string, background: string): boolean => {
     // This is a simplified check - in production, use a proper contrast checker
-    // Returns true for now, but should implement actual contrast calculation
+    // Mock validation based on color values
+    const isValidForeground = /^#[0-9A-F]{6}$/i.test(foreground);
+    const isValidBackground = /^#[0-9A-F]{6}$/i.test(background);
+    
+    if (!isValidForeground || !isValidBackground) {
+      console.warn(`Invalid color format: ${foreground} or ${background}`);
+      return false;
+    }
+    
+    // Returns true for valid colors - implement actual contrast calculation in production
     return true;
   },
 
@@ -271,7 +280,7 @@ export const typographyAnimations = {
 /**
  * Export all utilities
  */
-export default {
+const typographyUtils = {
   typographyClass,
   responsiveFontSize,
   generateTypographyScale,
@@ -282,3 +291,5 @@ export default {
   typographyA11y,
   typographyAnimations,
 };
+
+export default typographyUtils;

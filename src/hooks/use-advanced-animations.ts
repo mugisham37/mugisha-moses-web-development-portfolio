@@ -8,19 +8,31 @@ import {
   useSpring,
   useMotionValue,
   useAnimation,
-  type AnimationControls,
 } from "framer-motion";
+
+// Types for better type safety
+interface InViewOptions {
+  threshold?: number | number[];
+  rootMargin?: string;
+  triggerOnce?: boolean;
+  onEnter?: () => void;
+  onLeave?: () => void;
+  onProgress?: (progress: number) => void;
+}
+
+interface AnimationData {
+  [key: string]: unknown;
+}
+
+interface AnimationSequenceStep {
+  animation: AnimationData;
+  duration?: number;
+  delay?: number;
+}
 
 // Advanced intersection observer hook with multiple thresholds
 export function useAdvancedInView(
-  options: {
-    threshold?: number | number[];
-    rootMargin?: string;
-    triggerOnce?: boolean;
-    onEnter?: () => void;
-    onLeave?: () => void;
-    onProgress?: (progress: number) => void;
-  } = {}
+  options: InViewOptions = {}
 ) {
   const {
     threshold = 0.1,
@@ -36,10 +48,9 @@ export function useAdvancedInView(
   const [intersectionRatio, setIntersectionRatio] = useState(0);
 
   const isInView = useInView(ref, {
-    threshold,
-    margin: rootMargin,
+    amount: typeof threshold === 'number' ? threshold : 0.1,
     once: triggerOnce,
-  } as any);
+  });
 
   useEffect(() => {
     if (!ref.current) return;
@@ -112,51 +123,60 @@ export function useAdvancedParallax(
     offset,
   });
 
-  // Create smooth spring animations
+  // Create smooth spring animations - always call hooks unconditionally
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
+  // Always create all transforms, but with conditional values
+  const yTransform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    direction === "vertical" ? [0, speed * -100] : [0, 0]
+  );
+  
+  const xTransform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    direction === "horizontal" ? [0, speed * -100] : [0, 0]
+  );
+  
+  const scaleTransform = useTransform(
+    scrollYProgress, 
+    [0, 0.5, 1], 
+    scale ? [1, 1 + speed * 0.2, 1] : [1, 1, 1]
+  );
+  
+  const rotateTransform = useTransform(
+    scrollYProgress, 
+    [0, 1], 
+    rotate ? [0, speed * 360] : [0, 0]
+  );
+  
+  const opacityTransform = useTransform(
+    scrollYProgress, 
+    [0, 0.5, 1], 
+    opacity ? [1, 0.5, 1] : [1, 1, 1]
+  );
+  
+  const filterTransform = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    blur ? [`blur(0px)`, `blur(${speed * 5}px)`, `blur(0px)`] : [`blur(0px)`, `blur(0px)`, `blur(0px)`]
+  );
+
+  // Apply spring animations to all transforms
+  const y = useSpring(yTransform, springConfig);
+  const x = useSpring(xTransform, springConfig);
+  const scaleSpring = useSpring(scaleTransform, springConfig);
+  const rotateSpring = useSpring(rotateTransform, springConfig);
+  const opacitySpring = useSpring(opacityTransform, springConfig);
+
   const transforms = {
-    y: useSpring(
-      useTransform(
-        scrollYProgress,
-        [0, 1],
-        direction === "vertical" ? [0, speed * -100] : [0, 0]
-      ),
-      springConfig
-    ),
-    x: useSpring(
-      useTransform(
-        scrollYProgress,
-        [0, 1],
-        direction === "horizontal" ? [0, speed * -100] : [0, 0]
-      ),
-      springConfig
-    ),
-    scale: scale
-      ? useSpring(
-          useTransform(scrollYProgress, [0, 0.5, 1], [1, 1 + speed * 0.2, 1]),
-          springConfig
-        )
-      : undefined,
-    rotate: rotate
-      ? useSpring(
-          useTransform(scrollYProgress, [0, 1], [0, speed * 360]),
-          springConfig
-        )
-      : undefined,
-    opacity: opacity
-      ? useSpring(
-          useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 1]),
-          springConfig
-        )
-      : undefined,
-    filter: blur
-      ? useTransform(
-          scrollYProgress,
-          [0, 0.5, 1],
-          [`blur(0px)`, `blur(${speed * 5}px)`, `blur(0px)`]
-        )
-      : undefined,
+    y,
+    x,
+    scale: scale ? scaleSpring : undefined,
+    rotate: rotate ? rotateSpring : undefined,
+    opacity: opacity ? opacitySpring : undefined,
+    filter: blur ? filterTransform : undefined,
   };
 
   return { ref, ...transforms };
@@ -186,9 +206,9 @@ export function useStaggeredAnimation(
   );
 
   const isInView = useInView(ref, {
-    threshold,
+    amount: typeof threshold === 'number' ? threshold : 0.1,
     once: triggerOnce,
-  } as any);
+  });
 
   useEffect(() => {
     if (isInView) {
@@ -231,7 +251,7 @@ export function useMagneticHover(
     maxDistance?: number;
   } = {}
 ) {
-  const { strength = 0.3, restoreSpeed = 0.15, maxDistance = 50 } = options;
+  const { strength = 0.3, maxDistance = 50 } = options;
 
   const ref = useRef<HTMLElement>(null);
   const x = useMotionValue(0);
@@ -362,7 +382,7 @@ export function useAnimationSequence() {
 
   const playSequence = useCallback(
     async (
-      sequence: Array<{ animation: any; duration?: number; delay?: number }>
+      sequence: Array<AnimationSequenceStep>
     ) => {
       setIsPlaying(true);
       setCurrentStep(0);
@@ -401,12 +421,12 @@ export function useAnimationSequence() {
 }
 
 // Utility function for throttling
-function throttle<T extends (...args: any[]) => any>(
+function throttle<T extends (...args: never[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: unknown, ...args: Parameters<T>) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;

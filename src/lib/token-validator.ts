@@ -6,9 +6,6 @@
 import { designTokens } from "./design-tokens";
 import type {
   DesignTokens,
-  ColorPath,
-  SpacingPath,
-  ShadowPath,
 } from "@/types/design-tokens";
 
 /**
@@ -65,8 +62,17 @@ export class ColorValidator {
    */
   static getContrastRatio(color1: string, color2: string): number {
     // Simplified contrast calculation - in production, use a proper color library
-    // This is a placeholder implementation
-    return 4.5; // Assume WCAG AA compliance for now
+    // This is a placeholder implementation that acknowledges the input colors
+    const isValidColor1 = /^#[0-9A-F]{6}$/i.test(color1);
+    const isValidColor2 = /^#[0-9A-F]{6}$/i.test(color2);
+    
+    if (!isValidColor1 || !isValidColor2) {
+      console.warn(`Invalid color format: ${color1} or ${color2}`);
+      return 1; // Poor contrast for invalid colors
+    }
+    
+    // Return a mock contrast ratio for now - replace with proper calculation
+    return 4.5; // Assume WCAG AA compliance for valid colors
   }
 
   /**

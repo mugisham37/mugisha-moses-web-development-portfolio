@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 
 interface ScrollPosition {
@@ -29,7 +29,7 @@ export function useScrollRestoration(options: ScrollRestorationOptions = {}) {
   const isRestoringRef = useRef(false);
 
   // Save scroll position
-  const saveScrollPosition = (path: string, position: ScrollPosition) => {
+  const saveScrollPosition = useCallback((path: string, position: ScrollPosition) => {
     if (!config.enabled || typeof window === "undefined") return;
 
     try {
@@ -40,10 +40,10 @@ export function useScrollRestoration(options: ScrollRestorationOptions = {}) {
     } catch (error) {
       console.warn("Failed to save scroll position:", error);
     }
-  };
+  }, [config.enabled, config.storageKey]);
 
   // Get saved scroll position
-  const getSavedScrollPosition = (path: string): ScrollPosition | null => {
+  const getSavedScrollPosition = useCallback((path: string): ScrollPosition | null => {
     if (!config.enabled || typeof window === "undefined") return null;
 
     try {
@@ -56,10 +56,10 @@ export function useScrollRestoration(options: ScrollRestorationOptions = {}) {
       console.warn("Failed to get saved scroll position:", error);
       return null;
     }
-  };
+  }, [config.enabled, config.storageKey]);
 
   // Restore scroll position
-  const restoreScrollPosition = (path: string) => {
+  const restoreScrollPosition = useCallback((path: string) => {
     if (!config.enabled) return;
 
     const savedPosition = getSavedScrollPosition(path);
@@ -79,10 +79,10 @@ export function useScrollRestoration(options: ScrollRestorationOptions = {}) {
         isRestoringRef.current = false;
       }, 100);
     }, config.restoreDelay);
-  };
+  }, [config.enabled, config.restoreDelay, getSavedScrollPosition]);
 
   // Throttled scroll handler
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (!config.enabled || isRestoringRef.current) return;
 
     if (saveTimeoutRef.current) {
@@ -96,10 +96,10 @@ export function useScrollRestoration(options: ScrollRestorationOptions = {}) {
       };
       saveScrollPosition(pathname, position);
     }, config.saveThrottle);
-  };
+  }, [config.enabled, config.saveThrottle, pathname, saveScrollPosition]);
 
   // Handle page visibility change
-  const handleVisibilityChange = () => {
+  const handleVisibilityChange = useCallback(() => {
     if (document.visibilityState === "hidden") {
       // Save immediately when page becomes hidden
       const position: ScrollPosition = {
@@ -108,16 +108,16 @@ export function useScrollRestoration(options: ScrollRestorationOptions = {}) {
       };
       saveScrollPosition(pathname, position);
     }
-  };
+  }, [pathname, saveScrollPosition]);
 
   // Handle beforeunload
-  const handleBeforeUnload = () => {
+  const handleBeforeUnload = useCallback(() => {
     const position: ScrollPosition = {
       x: window.scrollX,
       y: window.scrollY,
     };
     saveScrollPosition(pathname, position);
-  };
+  }, [pathname, saveScrollPosition]);
 
   useEffect(() => {
     if (!config.enabled) return;
@@ -145,7 +145,7 @@ export function useScrollRestoration(options: ScrollRestorationOptions = {}) {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [pathname, config.enabled]);
+  }, [pathname, config.enabled, handleScroll, handleVisibilityChange, handleBeforeUnload, restoreScrollPosition]);
 
   // Manual scroll position management
   const manualSave = (path?: string) => {

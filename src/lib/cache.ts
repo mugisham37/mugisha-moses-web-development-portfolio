@@ -11,6 +11,22 @@ interface CacheStats {
   misses: number;
 }
 
+// Cache configuration constants
+export const CACHE_DURATIONS = {
+  SHORT: 5 * 60 * 1000,      // 5 minutes
+  MEDIUM: 30 * 60 * 1000,    // 30 minutes
+  LONG: 60 * 60 * 1000,      // 1 hour
+  VERY_LONG: 24 * 60 * 60 * 1000, // 24 hours
+} as const;
+
+export const CACHE_TAGS = {
+  BLOG: 'blog',
+  PROJECTS: 'projects',
+  GITHUB: 'github',
+  ANALYTICS: 'analytics',
+  STATIC: 'static',
+} as const;
+
 class MemoryCache {
   private cache = new Map<string, CacheItem<unknown>>();
   private maxSize: number;

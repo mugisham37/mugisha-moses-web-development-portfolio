@@ -512,7 +512,7 @@ export class PerformanceEnhancement {
    */
   static deferNonCriticalJS(callback: () => void, delay = 0): void {
     if ("requestIdleCallback" in window) {
-      (window as any).requestIdleCallback(callback, { timeout: 5000 });
+      (window as typeof window & { requestIdleCallback: (callback: () => void, options?: { timeout: number }) => void }).requestIdleCallback(callback, { timeout: 5000 });
     } else {
       setTimeout(callback, delay);
     }

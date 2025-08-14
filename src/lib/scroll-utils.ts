@@ -64,15 +64,22 @@ export function scrollToElement(
     return false;
   }
 
-  // Calculate position with offset
-  const elementRect = element.getBoundingClientRect();
-  const absoluteElementTop = elementRect.top + window.pageYOffset;
-  const targetPosition = absoluteElementTop - offset;
-
-  window.scrollTo({
-    top: Math.max(0, targetPosition),
+  // Use scrollIntoView with the provided options for better browser support
+  element.scrollIntoView({
     behavior,
+    block,
+    inline,
   });
+
+  // Apply offset adjustment if needed
+  if (offset !== 0) {
+    setTimeout(() => {
+      window.scrollBy({
+        top: -offset,
+        behavior: "smooth",
+      });
+    }, 100);
+  }
 
   return true;
 }

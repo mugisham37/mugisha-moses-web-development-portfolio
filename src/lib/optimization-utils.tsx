@@ -172,7 +172,7 @@ export class QueryOptimizer {
       },
       [`blog-posts-${JSON.stringify(filters)}`],
       {
-        tags: [CACHE_TAGS.BLOG_POSTS],
+        tags: [CACHE_TAGS.BLOG],
         revalidate: CACHE_DURATIONS.MEDIUM,
       }
     )();

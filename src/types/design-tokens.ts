@@ -147,11 +147,11 @@ export interface BaseComponentProps {
   children?: React.ReactNode;
 }
 
-export interface VariantProps<T extends Record<string, any>> {
+export interface VariantProps<T extends Record<string, unknown>> {
   variant?: keyof T;
 }
 
-export interface SizeProps<T extends Record<string, any>> {
+export interface SizeProps<T extends Record<string, unknown>> {
   size?: keyof T;
 }
 

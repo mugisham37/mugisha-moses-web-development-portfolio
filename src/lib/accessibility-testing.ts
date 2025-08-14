@@ -388,7 +388,7 @@ export class AccessibilityAuditor {
       // Check for keyboard event handlers
       const hasClick =
         element.hasAttribute("onclick") ||
-        (element as any).onclick ||
+        (element as HTMLElement).onclick ||
         element.addEventListener;
 
       if (hasClick && element.tagName !== "BUTTON" && element.tagName !== "A") {

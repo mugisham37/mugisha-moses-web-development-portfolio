@@ -1,4 +1,4 @@
-import { ContactSubmission, ContactType, ContactStatus } from "@prisma/client";
+import { ContactSubmission } from "@prisma/client";
 import { ConsultationData } from "./contact-validation";
 
 // Email service interface (implement with your preferred email provider)
