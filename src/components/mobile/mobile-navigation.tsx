@@ -97,9 +97,14 @@ export function MobileNavigation({ className = "" }: MobileNavigationProps) {
     const updateBatteryStatus = async () => {
       if ("getBattery" in navigator) {
         try {
-          const battery = await (navigator as any).getBattery();
-          setBatteryLevel(Math.round(battery.level * 100));
-        } catch (error) {
+          const navWithBattery = navigator as Navigator & {
+            getBattery?: () => Promise<{ level: number }>;
+          };
+          const battery = await navWithBattery.getBattery?.();
+          if (battery) {
+            setBatteryLevel(Math.round(battery.level * 100));
+          }
+        } catch {
           // Fallback for browsers that don't support battery API
           setBatteryLevel(100);
         }
@@ -201,7 +206,7 @@ export function MobileNavigation({ className = "" }: MobileNavigationProps) {
   }, [isOpen]);
 
   // Enhanced touch gestures with haptic feedback
-  const { attachGestures } = useTouchGestures({
+  useTouchGestures({
     onSwipeRight: () => {
       if (!isOpen) {
         setIsOpen(true);
@@ -225,13 +230,13 @@ export function MobileNavigation({ className = "" }: MobileNavigationProps) {
   });
 
   // Enhanced drag handling for menu
-  const handleDrag = useCallback((event: any, info: PanInfo) => {
+  const handleDrag = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const { offset } = info;
     const progress = Math.max(0, Math.min(1, offset.x / 300));
     setDragProgress(progress);
   }, []);
 
-  const handleDragEnd = useCallback((event: any, info: PanInfo) => {
+  const handleDragEnd = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const { offset, velocity } = info;
     const shouldClose = offset.x > 150 || velocity.x > 500;
 
@@ -432,7 +437,6 @@ export function MobileNavigation({ className = "" }: MobileNavigationProps) {
               onDrag={handleDrag}
               onDragEnd={handleDragEnd}
               onTouchStart={handleDoubleTap}
-              ref={attachGestures}
               role="navigation"
               aria-label="Mobile navigation menu"
               style={{
@@ -632,6 +636,7 @@ export function MobileNavigation({ className = "" }: MobileNavigationProps) {
                     </Link>
                   </div>
                 </motion.div>
+                </div>
               </div>
             </motion.nav>
           </motion.div>

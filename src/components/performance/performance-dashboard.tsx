@@ -314,8 +314,9 @@ export function RealTimePerformanceMonitor() {
 
       if (frameCount % 60 === 0) {
         const fps = Math.round(1000 / ((currentTime - lastTime) / 60));
-        const memory = (performance as any).memory?.usedJSHeapSize
-          ? Math.round((performance as any).memory.usedJSHeapSize / 1024 / 1024)
+        const perfWithMemory = performance as { memory?: { usedJSHeapSize: number } };
+        const memory = perfWithMemory.memory?.usedJSHeapSize
+          ? Math.round(perfWithMemory.memory.usedJSHeapSize / 1024 / 1024)
           : 0;
         const timing = Math.round(currentTime - lastTime);
 

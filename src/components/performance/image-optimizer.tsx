@@ -227,7 +227,6 @@ export function LazyImage({
   className = "",
   ...props
 }: LazyImageProps) {
-  const [isInView, setIsInView] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
 
@@ -235,7 +234,6 @@ export function LazyImage({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsInView(true);
           // Delay loading slightly to improve performance
           setTimeout(() => setShouldLoad(true), 100);
           observer.disconnect();
@@ -298,10 +296,6 @@ export function ImageGallery({
   itemClassName = "",
   preloadCount = 3,
 }: ImageGalleryProps) {
-  const [preloadedIndices, setPreloadedIndices] = useState<Set<number>>(
-    new Set()
-  );
-
   // Preload first few images
   useEffect(() => {
     const preloadImages = async () => {
@@ -312,9 +306,6 @@ export function ImageGallery({
 
       for (const index of indicesToPreload) {
         const img = new window.Image();
-        img.onload = () => {
-          setPreloadedIndices((prev) => new Set([...prev, index]));
-        };
         img.src = images[index].src;
       }
     };

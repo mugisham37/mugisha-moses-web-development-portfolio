@@ -222,8 +222,11 @@ function addPerformanceMonitoring(): void {
       // First Input Delay (FID)
       const fidObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          const fid = entry.processingStart - entry.startTime;
-          console.log("FID:", fid);
+          const entryWithProcessing = entry as PerformanceEntry & { processingStart?: number; startTime: number };
+          if (entryWithProcessing.processingStart) {
+            const fid = entryWithProcessing.processingStart - entryWithProcessing.startTime;
+            console.log("FID:", fid);
+          }
         }
       });
       fidObserver.observe({ entryTypes: ["first-input"] });
@@ -232,8 +235,9 @@ function addPerformanceMonitoring(): void {
       let clsValue = 0;
       const clsObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          if (!(entry as any).hadRecentInput) {
-            clsValue += (entry as any).value;
+          const entryWithLayout = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+          if (!entryWithLayout.hadRecentInput && entryWithLayout.value) {
+            clsValue += entryWithLayout.value;
           }
         }
         console.log("CLS:", clsValue);
@@ -257,12 +261,21 @@ function addPerformanceMonitoring(): void {
   // Memory usage monitoring (Chrome only)
   if ("memory" in performance) {
     const logMemoryUsage = () => {
-      const memory = (performance as any).memory;
-      console.log("Memory usage:", {
-        used: Math.round(memory.usedJSHeapSize / 1048576) + " MB",
-        total: Math.round(memory.totalJSHeapSize / 1048576) + " MB",
-        limit: Math.round(memory.jsHeapSizeLimit / 1048576) + " MB",
-      });
+      const perfWithMemory = performance as Performance & {
+        memory?: {
+          usedJSHeapSize: number;
+          totalJSHeapSize: number;
+          jsHeapSizeLimit: number;
+        };
+      };
+      const memory = perfWithMemory.memory;
+      if (memory) {
+        console.log("Memory usage:", {
+          used: Math.round(memory.usedJSHeapSize / 1048576) + " MB",
+          total: Math.round(memory.totalJSHeapSize / 1048576) + " MB",
+          limit: Math.round(memory.jsHeapSizeLimit / 1048576) + " MB",
+        });
+      }
     };
 
     // Log memory usage every 30 seconds
@@ -271,22 +284,33 @@ function addPerformanceMonitoring(): void {
 
   // Network information monitoring
   if ("connection" in navigator) {
-    const connection = (navigator as any).connection;
-    console.log("Network info:", {
-      effectiveType: connection.effectiveType,
-      downlink: connection.downlink,
-      rtt: connection.rtt,
-      saveData: connection.saveData,
-    });
-
-    // Monitor network changes
-    connection.addEventListener("change", () => {
-      console.log("Network changed:", {
+    const navWithConnection = navigator as Navigator & {
+      connection?: {
+        effectiveType: string;
+        downlink: number;
+        rtt: number;
+        saveData: boolean;
+        addEventListener: (type: string, listener: EventListener) => void;
+      };
+    };
+    const connection = navWithConnection.connection;
+    if (connection) {
+      console.log("Network info:", {
         effectiveType: connection.effectiveType,
         downlink: connection.downlink,
         rtt: connection.rtt,
+        saveData: connection.saveData,
       });
-    });
+
+      // Monitor network changes
+      connection.addEventListener("change", () => {
+        console.log("Network changed:", {
+          effectiveType: connection.effectiveType,
+          downlink: connection.downlink,
+          rtt: connection.rtt,
+        });
+      });
+    }
   }
 
   // Page visibility monitoring
@@ -305,7 +329,7 @@ function addPerformanceMonitoring(): void {
         }
       });
       longTaskObserver.observe({ entryTypes: ["longtask"] });
-    } catch (error) {
+    } catch {
       // Long task API not supported
     }
   }

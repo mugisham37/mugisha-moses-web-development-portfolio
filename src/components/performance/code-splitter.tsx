@@ -1,13 +1,13 @@
 "use client";
 
-import React, { Suspense, lazy, useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { CodeSplitter } from "@/lib/performance-optimization";
 
 /**
  * Dynamic Component Loader
  * Provides advanced code splitting with preloading and error boundaries
  */
-interface DynamicComponentProps<T = any> {
+interface DynamicComponentProps<T = Record<string, unknown>> {
   loader: () => Promise<{ default: React.ComponentType<T> }>;
   fallback?: React.ComponentType;
   errorFallback?: React.ComponentType<{ error: Error; retry: () => void }>;
@@ -17,7 +17,7 @@ interface DynamicComponentProps<T = any> {
   className?: string;
 }
 
-export function DynamicComponent<T = any>({
+export function DynamicComponent<T extends React.JSX.IntrinsicAttributes = Record<string, unknown>>({
   loader,
   fallback: Fallback,
   errorFallback: ErrorFallback,
@@ -32,32 +32,32 @@ export function DynamicComponent<T = any>({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
-  const loadComponent = async () => {
+  const loadComponent = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
-      const module = await loader();
-      setComponent(() => module.default);
+      const componentModule = await loader();
+      setComponent(() => componentModule.default);
     } catch (err) {
       setError(err as Error);
       console.error("Failed to load component:", err);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [loader]);
 
   useEffect(() => {
     if (preload) {
       const timer = setTimeout(loadComponent, preloadDelay);
       return () => clearTimeout(timer);
     }
-  }, [preload, preloadDelay]);
+  }, [preload, preloadDelay, loadComponent]);
 
   useEffect(() => {
     if (!preload) {
       loadComponent();
     }
-  }, []);
+  }, [preload, loadComponent]);
 
   if (error && ErrorFallback) {
     return <ErrorFallback error={error} retry={loadComponent} />;
@@ -122,7 +122,6 @@ export function LazySection({
   className = "",
   preload = false,
 }: LazySectionProps) {
-  const [isVisible, setIsVisible] = useState(preload);
   const [shouldRender, setShouldRender] = useState(preload);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -132,7 +131,7 @@ export function LazySection({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setShouldRender(true);
           // Small delay to improve performance
           setTimeout(() => setShouldRender(true), 50);
           observer.disconnect();
@@ -188,7 +187,7 @@ export function RoutePreloader({
   const [isPreloaded, setIsPreloaded] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const preloadRoute = () => {
+  const preloadRoute = useCallback(() => {
     if (isPreloaded) return;
 
     // Preload the route
@@ -198,7 +197,7 @@ export function RoutePreloader({
     document.head.appendChild(link);
 
     setIsPreloaded(true);
-  };
+  }, [isPreloaded, href]);
 
   useEffect(() => {
     if (preloadOn === "immediate") {
@@ -220,7 +219,7 @@ export function RoutePreloader({
 
       return () => observer.disconnect();
     }
-  }, [preloadOn, href]);
+  }, [preloadOn, href, preloadRoute]);
 
   const handleMouseEnter = () => {
     if (preloadOn === "hover") {
@@ -247,8 +246,8 @@ export function RoutePreloader({
 interface BundleSplitterProps {
   components: Array<{
     name: string;
-    loader: () => Promise<{ default: React.ComponentType<any> }>;
-    props?: any;
+    loader: () => Promise<{ default: React.ComponentType<Record<string, unknown>> }>;
+    props?: Record<string, unknown>;
     priority?: number;
   }>;
   fallback?: React.ComponentType;
@@ -261,7 +260,7 @@ export function BundleSplitter({
   className = "",
 }: BundleSplitterProps) {
   const [loadedComponents, setLoadedComponents] = useState<
-    Map<string, React.ComponentType<any>>
+    Map<string, React.ComponentType<Record<string, unknown>>>
   >(new Map());
   const [loadingStates, setLoadingStates] = useState<Map<string, boolean>>(
     new Map()
@@ -278,10 +277,10 @@ export function BundleSplitter({
         try {
           setLoadingStates((prev) => new Map(prev).set(component.name, true));
 
-          const module = await component.loader();
+          const componentModule = await component.loader();
 
           setLoadedComponents((prev) =>
-            new Map(prev).set(component.name, module.default)
+            new Map(prev).set(component.name, componentModule.default)
           );
           setLoadingStates((prev) => {
             const newMap = new Map(prev);
@@ -303,7 +302,7 @@ export function BundleSplitter({
     };
 
     loadComponents();
-  }, []);
+  }, [sortedComponents]);
 
   return (
     <div className={className}>

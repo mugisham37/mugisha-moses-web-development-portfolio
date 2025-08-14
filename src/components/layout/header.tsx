@@ -7,7 +7,6 @@ import {
   motion,
   AnimatePresence,
   useScroll,
-  useTransform,
 } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
@@ -57,7 +56,7 @@ export function MainHeader({ className = "" }: MainHeaderProps) {
   });
 
   // Enhanced scroll behavior with direction detection
-  const { scrollY } = useScroll();
+  useScroll();
 
   useEffect(() => {
     const handleScroll = () => {

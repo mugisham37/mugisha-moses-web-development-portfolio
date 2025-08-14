@@ -49,7 +49,7 @@ export function ContactMethods({
   };
 
   const handleContactClick = (method: (typeof contactMethods)[0]) => {
-    const formattedUrl = formatContactMethod(method.type, method.value);
+    const formattedUrl = formatContactMethod(method.type, method.value) as string;
 
     if (method.type === "email" || method.type === "phone") {
       window.location.href = formattedUrl;

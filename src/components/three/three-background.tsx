@@ -173,7 +173,7 @@ function BrutalistGeometricShapes({
 
   // Enhanced brutalist geometric shapes with industrial design elements
   const shapes = useMemo(() => {
-    return Array.from({ length: count }, (_, i) => ({
+    return Array.from({ length: count }, () => ({
       position: [
         (Math.random() - 0.5) * 40,
         (Math.random() - 0.5) * 40,
@@ -497,7 +497,13 @@ export function ThreeBackground() {
     // Import performance monitor dynamically
     import("@/lib/background-performance").then(
       ({ backgroundPerformanceMonitor }) => {
-        const handlePerformanceUpdate = (metrics: any) => {
+        const handlePerformanceUpdate = (metrics: {
+          fps: number;
+          frameTime: number;
+          memoryUsage: number;
+          drawCalls: number;
+          triangles: number;
+        }) => {
           if (metrics.fps < 45) {
             // Reduce effects if performance is poor
             setAdaptiveConfig((prev) => ({

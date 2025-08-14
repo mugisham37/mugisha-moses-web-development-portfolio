@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -25,7 +25,6 @@ interface MobileOptimizedImageProps {
   fallbackSrc?: string;
   showLoadingState?: boolean;
   enableZoom?: boolean;
-  enableSwipe?: boolean;
 }
 
 /**
@@ -51,7 +50,6 @@ export function MobileOptimizedImage({
   fallbackSrc,
   showLoadingState = true,
   enableZoom = false,
-  enableSwipe = false,
 }: MobileOptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -269,7 +267,6 @@ interface MobileImageGalleryProps {
   }>;
   className?: string;
   aspectRatio?: "square" | "video" | "portrait" | "landscape";
-  enableSwipe?: boolean;
   showThumbnails?: boolean;
 }
 
@@ -277,7 +274,6 @@ export function MobileImageGallery({
   images,
   className = "",
   aspectRatio = "video",
-  enableSwipe = true,
   showThumbnails = true,
 }: MobileImageGalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);

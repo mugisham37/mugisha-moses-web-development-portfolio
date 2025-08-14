@@ -88,7 +88,59 @@ export interface ContactMethod {
   link: string;
 }
 
-export function formatContactMethod(method: ContactMethod): ContactMethod {
+// Overloaded function signatures
+export function formatContactMethod(method: ContactMethod): ContactMethod;
+export function formatContactMethod(type: string, value: string): string;
+export function formatContactMethod(
+  methodOrType: ContactMethod | string,
+  value?: string
+): ContactMethod | string {
+  // If called with type and value (two parameters)
+  if (typeof methodOrType === "string" && value !== undefined) {
+    const type = methodOrType;
+    
+    // Format phone numbers
+    if (type === "phone") {
+      const formatted = value.replace(/\D/g, "");
+      return `tel:+${formatted}`;
+    }
+
+    // Format email addresses
+    if (type === "email") {
+      return `mailto:${value.toLowerCase()}`;
+    }
+
+    // Format social media URLs
+    if (type === "twitter") {
+      const handle = value.startsWith("@") ? value.slice(1) : value;
+      return `https://twitter.com/${handle}`;
+    }
+
+    if (type === "linkedin") {
+      if (value.includes("linkedin.com")) {
+        return value.startsWith("http") ? value : `https://${value}`;
+      }
+      return `https://www.linkedin.com/in/${value}`;
+    }
+
+    if (type === "github") {
+      if (value.includes("github.com")) {
+        return value.startsWith("http") ? value : `https://${value}`;
+      }
+      return `https://github.com/${value}`;
+    }
+
+    // Format URLs
+    if (type === "website") {
+      return value.startsWith("http") ? value : `https://${value}`;
+    }
+
+    return value;
+  }
+
+  // If called with ContactMethod object (single parameter)
+  const method = methodOrType as ContactMethod;
+  
   // Format phone numbers
   if (method.type === "phone") {
     const formatted = method.value.replace(/\D/g, "");
