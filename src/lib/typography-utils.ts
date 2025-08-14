@@ -246,12 +246,25 @@ export const typographyAnimations = {
   },
 
   /**
-   * Counter animation configuration
+   * Enhanced counter animation configuration
    */
   counter: {
-    duration: 2000, // ms
+    duration: 2500, // ms - Increased for more dramatic effect
+    staggerDelay: 150, // ms - Delay between counter animations
     easing: "cubic-bezier(0.4, 0, 0.2, 1)",
     separator: ",",
+    easingFunctions: {
+      easeOut: [0.4, 0, 0.2, 1],
+      easeIn: [0.4, 0, 1, 1],
+      easeInOut: [0.4, 0, 0.2, 1],
+      bounce: [0.68, -0.55, 0.265, 1.55],
+      sharp: [0.4, 0, 0.6, 1],
+    },
+    spring: {
+      damping: 25,
+      stiffness: 200,
+      bounce: 0,
+    },
   },
 };
 

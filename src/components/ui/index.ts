@@ -1,6 +1,7 @@
 // UI Components barrel export
 export * from "./button";
 export * from "./card";
+export { CardShowcase } from "./card-showcase";
 export * from "./input";
 export * from "./typography";
 export * from "./animation";

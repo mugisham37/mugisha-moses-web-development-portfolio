@@ -16,8 +16,9 @@ const buttonVariants = cva(
     "transition-all duration-300 ease-out",
     "transform-gpu will-change-transform",
 
-    // Focus styles for accessibility
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+    // Enhanced focus styles for accessibility (WCAG compliant)
+    "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-yellow focus-visible:ring-offset-4 focus-visible:ring-offset-black",
+    "focus:outline-none focus:ring-4 focus:ring-accent-yellow focus:ring-offset-4 focus:ring-offset-black",
 
     // Disabled styles
     "disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed",
@@ -25,14 +26,17 @@ const buttonVariants = cva(
     // Loading styles
     "data-[loading=true]:cursor-wait",
 
-    // Hover transform base
-    "hover:transform hover:scale-[1.02] hover:-translate-y-1",
+    // Enhanced hover transform with sophisticated animations
+    "hover:transform hover:scale-[1.05] hover:-translate-y-2",
 
-    // Active state
-    "active:transform active:scale-[0.98] active:translate-y-0",
+    // Enhanced active state with haptic feedback simulation
+    "active:transform active:scale-[0.95] active:translate-y-1",
 
     // Reduced motion support
     "motion-reduce:transition-none motion-reduce:hover:transform-none motion-reduce:active:transform-none",
+
+    // Advanced micro-interaction support
+    "group",
   ],
   {
     variants: {
@@ -55,16 +59,24 @@ const buttonVariants = cva(
         accent: [
           "bg-accent-yellow text-black border-black",
           "hover:bg-black hover:text-accent-yellow hover:border-accent-yellow",
-          "hover:shadow-accent-lg",
-          "active:shadow-accent-sm",
+          "hover:shadow-[12px_12px_0px_rgba(255,255,0,0.8)]",
+          "active:shadow-[4px_4px_0px_rgba(255,255,0,0.6)]",
+          "focus:shadow-[8px_8px_0px_rgba(255,255,0,0.9)]",
           "touch:hover:bg-accent-yellow touch:hover:text-black touch:hover:border-black touch:hover:shadow-none",
+          // Enhanced micro-interactions
+          "before:absolute before:inset-0 before:bg-gradient-to-r before:from-accent-yellow before:via-yellow-300 before:to-accent-yellow before:opacity-0 before:blur-lg before:transition-all before:duration-300",
+          "hover:before:opacity-40 hover:before:scale-110",
         ],
         ghost: [
           "bg-transparent text-white border-white",
           "hover:bg-white hover:text-black hover:border-black",
-          "hover:shadow-brutalist-lg",
-          "active:shadow-brutalist-sm",
+          "hover:shadow-[12px_12px_0px_rgba(255,255,255,0.8)]",
+          "active:shadow-[4px_4px_0px_rgba(255,255,255,0.6)]",
+          "focus:shadow-[8px_8px_0px_rgba(255,255,255,0.9)]",
           "touch:hover:bg-transparent touch:hover:text-white touch:hover:border-white touch:hover:shadow-none",
+          // Enhanced micro-interactions
+          "before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-gray-200 before:to-white before:opacity-0 before:blur-lg before:transition-all before:duration-300",
+          "hover:before:opacity-30 hover:before:scale-110",
         ],
         destructive: [
           "bg-red-600 text-white border-red-600",
@@ -131,12 +143,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Combine refs
     React.useImperativeHandle(ref, () => buttonRef.current!);
 
-    // Handle click with micro-interactions
+    // Handle click with enhanced micro-interactions and haptic feedback simulation
     const handleClick = React.useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
         if (loading || disabled) return;
 
-        // Create ripple effect
+        // Create enhanced ripple effect
         const rect = buttonRef.current?.getBoundingClientRect();
         if (rect) {
           const x = event.clientX - rect.left;
@@ -150,12 +162,48 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             setRipples((prev) =>
               prev.filter((ripple) => ripple.id !== newRipple.id)
             );
-          }, 600);
+          }, 800);
         }
 
-        // Haptic feedback simulation (visual feedback for sound design consideration)
+        // Enhanced haptic feedback simulation through visual and transform feedback
         setIsPressed(true);
-        setTimeout(() => setIsPressed(false), 150);
+
+        // Advanced haptic simulation - multi-stage feedback
+        if (buttonRef.current) {
+          const button = buttonRef.current;
+
+          // Stage 1: Initial press (immediate feedback)
+          button.style.transform = "scale(0.95) translateY(2px)";
+          button.style.filter = "brightness(1.1)";
+
+          // Stage 2: Bounce back (tactile response simulation)
+          setTimeout(() => {
+            button.style.transform = "scale(1.02) translateY(-1px)";
+            button.style.filter = "brightness(1.05)";
+          }, 50);
+
+          // Stage 3: Settle (completion feedback)
+          setTimeout(() => {
+            button.style.transform = "";
+            button.style.filter = "";
+            setIsPressed(false);
+          }, 150);
+        }
+
+        // Sound design consideration - trigger visual feedback for audio cue
+        if (buttonRef.current) {
+          const sparkle = document.createElement("div");
+          sparkle.className =
+            "absolute top-0 right-0 w-2 h-2 bg-current rounded-full animate-ping pointer-events-none";
+          sparkle.style.opacity = "0.8";
+          buttonRef.current.appendChild(sparkle);
+
+          setTimeout(() => {
+            if (sparkle.parentNode) {
+              sparkle.parentNode.removeChild(sparkle);
+            }
+          }, 600);
+        }
 
         // Call original onClick
         onClick?.(event);
@@ -203,21 +251,39 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={loading}
         {...props}
       >
-        {/* Ripple effects */}
+        {/* Enhanced ripple effects with sophisticated animations */}
         {ripples.map((ripple) => (
-          <span
-            key={ripple.id}
-            className="pointer-events-none absolute animate-ping"
-            style={{
-              left: ripple.x - 10,
-              top: ripple.y - 10,
-              width: 20,
-              height: 20,
-              borderRadius: "50%",
-              backgroundColor: "currentColor",
-              opacity: 0.3,
-            }}
-          />
+          <React.Fragment key={ripple.id}>
+            {/* Primary ripple */}
+            <span
+              className="pointer-events-none absolute animate-ping"
+              style={{
+                left: ripple.x - 15,
+                top: ripple.y - 15,
+                width: 30,
+                height: 30,
+                borderRadius: "50%",
+                backgroundColor: "currentColor",
+                opacity: 0.4,
+                animationDuration: "0.8s",
+              }}
+            />
+            {/* Secondary ripple for depth */}
+            <span
+              className="pointer-events-none absolute animate-pulse"
+              style={{
+                left: ripple.x - 8,
+                top: ripple.y - 8,
+                width: 16,
+                height: 16,
+                borderRadius: "50%",
+                backgroundColor: "currentColor",
+                opacity: 0.6,
+                animationDuration: "0.4s",
+                animationDelay: "0.1s",
+              }}
+            />
+          </React.Fragment>
         ))}
 
         {/* Loading spinner */}

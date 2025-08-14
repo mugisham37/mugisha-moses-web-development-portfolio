@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Button } from "./button";
+import { CTAButtonShowcase } from "./cta-button-showcase";
 import {
   Download,
   ArrowRight,
@@ -385,3 +386,12 @@ export function ButtonShowcase() {
     </div>
   );
 }
+
+{
+  /* Advanced CTA Button System */
+}
+<section className="space-y-8">
+  <div className="border-t border-gray-800 pt-12">
+    <CTAButtonShowcase />
+  </div>
+</section>;

@@ -47,6 +47,14 @@ const config: Config = {
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
+
+        // Enhanced gradient colors
+        "gradient-dark-start": designTokens.colors.primary.black,
+        "gradient-dark-middle": designTokens.colors.brutalist.charcoal[200],
+        "gradient-dark-end": designTokens.colors.primary.black,
+        "gradient-light-start": designTokens.colors.primary.white,
+        "gradient-light-middle": designTokens.colors.brutalist.offWhite[200],
+        "gradient-light-end": designTokens.colors.brutalist.offWhite[100],
       },
       fontFamily: designTokens.typography.fontFamilies,
       fontSize: {

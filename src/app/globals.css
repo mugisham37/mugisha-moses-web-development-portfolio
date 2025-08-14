@@ -865,3 +865,422 @@ body {
     display: none;
   }
 }
+
+/* Enhanced Color Scheme and Visual Balance Implementation */
+
+/* Section transition effects for smooth color changes */
+section {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Enhanced gradient backgrounds with better visual depth */
+.bg-gradient-to-br {
+  background-attachment: fixed;
+  background-size: 200% 200%;
+  animation: gradientShift 20s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Subtle texture patterns for enhanced visual interest */
+.texture-dots {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.15) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+}
+
+.texture-lines {
+  background-image: linear-gradient(
+    45deg,
+    transparent 49%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 51%
+  );
+  background-size: 40px 40px;
+}
+
+.texture-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Enhanced section separators with visual rhythm */
+section + section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent-yellow) 25%,
+    var(--color-accent-yellow) 75%,
+    transparent 100%
+  );
+  z-index: 10;
+  opacity: 0.6;
+  animation: separatorPulse 3s ease-in-out infinite;
+}
+
+@keyframes separatorPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleX(1.02);
+  }
+}
+
+/* Enhanced color contrast utilities for WCAG AA compliance */
+.contrast-enhanced {
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.contrast-enhanced-light {
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Strategic accent color application */
+.accent-strategic {
+  position: relative;
+}
+
+.accent-strategic::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--color-accent-yellow);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.accent-strategic:hover::after {
+  transform: scaleX(1);
+}
+
+/* Enhanced visual hierarchy with color-based emphasis */
+.visual-hierarchy-primary {
+  color: var(--color-primary-white);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.visual-hierarchy-secondary {
+  color: var(--color-accent-yellow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.visual-hierarchy-tertiary {
+  color: var(--color-primary-gray-400);
+  font-weight: 400;
+  letter-spacing: 0.025em;
+}
+
+/* Smooth color transitions between sections */
+.section-transition {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced focus states with better color contrast */
+.focus-enhanced:focus {
+  outline: 4px solid var(--color-accent-yellow);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 8px rgba(255, 255, 0, 0.2);
+}
+
+/* Color-based interaction states */
+.interactive-element {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-element::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 0, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.interactive-element:hover::before {
+  left: 100%;
+}
+
+/* Enhanced brutalist shadows with color variations */
+.shadow-brutalist-colored {
+  box-shadow: 8px 8px 0px var(--color-accent-yellow);
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-brutalist-colored:hover {
+  box-shadow: 12px 12px 0px var(--color-accent-yellow);
+}
+
+.shadow-brutalist-invert {
+  box-shadow: 8px 8px 0px var(--color-primary-black);
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-brutalist-invert:hover {
+  box-shadow: 12px 12px 0px var(--color-primary-black);
+}
+
+/* Color-aware responsive utilities */
+@media (max-width: 768px) {
+  /* Optimize color contrast for mobile */
+  .mobile-contrast-enhanced {
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Reduce gradient complexity on mobile for performance */
+  .bg-gradient-to-br {
+    background-attachment: scroll;
+    animation: none;
+  }
+
+  /* Simplify textures on mobile */
+  .texture-dots,
+  .texture-lines,
+  .texture-grid {
+    opacity: 0.5;
+  }
+}
+
+/* High contrast mode enhancements */
+@media (prefers-contrast: high) {
+  :root {
+    --color-accent-yellow: #ffff00;
+    --color-primary-black: #000000;
+    --color-primary-white: #ffffff;
+  }
+
+  .bg-gradient-to-br {
+    background: var(--color-primary-black) !important;
+  }
+
+  .texture-dots,
+  .texture-lines,
+  .texture-grid {
+    display: none;
+  }
+
+  section + section::before {
+    height: 8px;
+    opacity: 1;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .bg-gradient-to-br {
+    animation: none;
+    background-attachment: scroll;
+  }
+
+  section + section::before {
+    animation: none;
+  }
+
+  .interactive-element::before {
+    display: none;
+  }
+
+  .section-transition {
+    transition: none;
+  }
+}
+
+/* Color scheme utilities for dynamic theming */
+.theme-dark {
+  --background-primary: var(--color-primary-black);
+  --foreground-primary: var(--color-primary-white);
+  --background-secondary: var(--color-brutalist-charcoal-100);
+  --foreground-secondary: var(--color-brutalist-off-white-100);
+}
+
+.theme-light {
+  --background-primary: var(--color-primary-white);
+  --foreground-primary: var(--color-primary-black);
+  --background-secondary: var(--color-brutalist-off-white-100);
+  --foreground-secondary: var(--color-brutalist-charcoal-100);
+}
+
+/* Enhanced visual balance with strategic spacing */
+.visual-balance {
+  margin-top: calc(var(--spacing-16) * var(--visual-rhythm, 1));
+  margin-bottom: calc(var(--spacing-16) * var(--visual-rhythm, 1));
+}
+
+/* Color-based content organization */
+.content-primary {
+  color: var(--foreground-primary);
+  background: var(--background-primary);
+}
+
+.content-secondary {
+  color: var(--foreground-secondary);
+  background: var(--background-secondary);
+}
+
+.content-accent {
+  color: var(--color-primary-black);
+  background: var(--color-accent-yellow);
+}
+
+/* Enhanced accessibility with color-blind friendly patterns */
+.colorblind-friendly {
+  position: relative;
+}
+
+.colorblind-friendly[data-color="accent"]::before {
+  content: "●";
+  position: absolute;
+  left: -1.5em;
+  color: var(--color-accent-yellow);
+  font-weight: bold;
+}
+
+.colorblind-friendly[data-color="primary"]::before {
+  content: "■";
+  position: absolute;
+  left: -1.5em;
+  color: var(--color-primary-white);
+  font-weight: bold;
+}
+
+.colorblind-friendly[data-color="secondary"]::before {
+  content: "▲";
+  position: absolute;
+  left: -1.5em;
+  color: var(--color-primary-gray-400);
+  font-weight: bold;
+}
+
+/* Print styles with appropriate color handling */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+
+  .bg-gradient-to-br {
+    background: white !important;
+  }
+
+  .texture-dots,
+  .texture-lines,
+  .texture-grid {
+    display: none !important;
+  }
+
+  section + section::before {
+    background: black !important;
+    height: 2px !important;
+  }
+}
+
+/* Enhanced color transitions for smooth user experience */
+.color-transition-smooth {
+  transition:
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Strategic color application for maximum visual impact */
+.impact-color {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-yellow) 0%,
+    var(--color-accent-yellowLight) 50%,
+    var(--color-accent-yellow) 100%
+  );
+  color: var(--color-primary-black);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5em 1em;
+  border: 4px solid var(--color-primary-black);
+  box-shadow: 8px 8px 0px var(--color-primary-black);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impact-color:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 12px 12px 0px var(--color-primary-black);
+}
+
+/* Subtle background textures for visual depth without distraction */
+.subtle-texture {
+  position: relative;
+}
+
+.subtle-texture::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 255, 255, 0.02) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(255, 255, 255, 0.02) 2px,
+      transparent 2px
+    );
+  background-size: 50px 50px;
+  background-position:
+    0 0,
+    25px 25px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.subtle-texture > * {
+  position: relative;
+  z-index: 2;
+}

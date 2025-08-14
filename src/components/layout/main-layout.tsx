@@ -5,7 +5,13 @@ import { MainHeader } from "./header";
 import { MainFooter } from "./footer";
 import { ScrollProgress } from "./scroll-progress";
 import { SkipNav } from "./skip-nav";
-import { MobileNavigation } from "@/components/mobile/mobile-navigation";
+import { ScrollInitializer } from "./scroll-initializer";
+import {
+  ScrollProgressBar,
+  SmoothScrollToTop,
+} from "@/components/effects/scroll-effects";
+import { ScrollProgressCircle } from "@/components/animations/enhanced-scroll-animations";
+
 import {
   AnimationPreferencesProvider,
   OptimizedMotionConfig,
@@ -78,14 +84,28 @@ export function MainLayout({
             {/* Skip Navigation */}
             <SkipNav />
 
-            {/* Scroll Progress */}
-            {showScrollProgress && <ScrollProgress />}
+            {/* Scroll Initialization */}
+            <ScrollInitializer
+              hashScrollOffset={80}
+              enableSmoothLinks={true}
+              enableScrollRestoration={true}
+            />
 
-            {/* Desktop Header */}
+            {/* Enhanced Scroll Progress */}
+            {showScrollProgress && (
+              <>
+                <ScrollProgress />
+                <ScrollProgressBar
+                  color="accent"
+                  height={3}
+                  position="top"
+                  showPercentage={false}
+                />
+              </>
+            )}
+
+            {/* Enhanced Header with Integrated Mobile Navigation */}
             {showHeader && <MainHeader />}
-
-            {/* Mobile Navigation */}
-            <MobileNavigation />
 
             {/* Main Content with Page Transitions */}
             <main
@@ -110,6 +130,12 @@ export function MainLayout({
 
             {/* Footer */}
             {showFooter && <MainFooter />}
+
+            {/* Smooth Scroll to Top Button */}
+            <SmoothScrollToTop threshold={400} size="md" />
+
+            {/* Alternative Scroll Progress Circle */}
+            <ScrollProgressCircle size={50} strokeWidth={3} />
 
             {/* Offline Notification */}
             <OfflineNotification />
