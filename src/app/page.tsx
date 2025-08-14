@@ -15,6 +15,23 @@ import {
   ScrollTriggered,
   ScrollStagger,
 } from "@/components/animations/scroll-triggered";
+import {
+  ViewportAnimation,
+  StaggeredAnimation,
+  ParallaxElement,
+  ScrollProgressIndicator,
+} from "@/components/animations/advanced-scroll-effects";
+import {
+  ScrollReveal,
+  ScrollRevealStagger,
+  MultiLayerParallax,
+  ScrollTextReveal,
+} from "@/components/animations/scroll-reveal-system";
+import {
+  ScrollNavigation,
+  ScrollProgressWithSections,
+  FloatingScrollIndicator,
+} from "@/components/animations/scroll-navigation";
 import { SmoothScrollLink } from "@/components/ui/smooth-scroll-link";
 
 import { SITE_CONFIG } from "@/lib/constants";
@@ -46,37 +63,71 @@ export default function Home() {
     },
   };
 
+  const navigationSections = [
+    { id: "hero", label: "Hero", color: "#ffff00" },
+    { id: "projects-preview", label: "Projects", color: "#ff6b6b" },
+    { id: "technical-experience", label: "Skills", color: "#4ecdc4" },
+    { id: "blog-preview", label: "Blog", color: "#45b7d1" },
+    { id: "services-preview", label: "Services", color: "#96ceb4" },
+    { id: "testimonials-preview", label: "Testimonials", color: "#feca57" },
+  ];
+
   return (
     <main className="min-h-screen" id="main-content">
       <StructuredData data={homePageStructuredData} />
 
+      {/* Advanced Scroll Navigation */}
+      <ScrollProgressWithSections
+        sections={navigationSections}
+        height={4}
+        showSectionMarkers={true}
+      />
+      <ScrollNavigation
+        sections={navigationSections}
+        position="right"
+        showLabels={true}
+      />
+      <FloatingScrollIndicator />
+
       {/* Hero Section */}
-      <HeroSection />
+      <section id="hero">
+        <HeroSection />
+      </section>
 
       {/* Projects Preview Section */}
       <Section padding="xl" background="textured-light" id="projects-preview">
         <Container>
-          <ScrollStagger className="space-y-12" staggerDelay={0.2}>
-            <ScrollTriggered animation="slideUp" delay={0.1}>
+          <StaggeredAnimation className="space-y-12" staggerDelay={0.15}>
+            <ViewportAnimation
+              variant="fadeInUp"
+              delay={0.1}
+              easing="brutalist"
+            >
               <div className="space-y-4 text-center">
-                <Typography
-                  variant="h2"
-                  className="text-4xl font-bold text-black uppercase md:text-6xl"
-                >
-                  FEATURED PROJECTS
-                </Typography>
-                <Typography
-                  variant="body"
-                  className="text-brutalist-charcoal-200 mx-auto max-w-2xl"
-                >
-                  Explore cutting-edge web applications built with modern
-                  technologies and brutalist design principles.
-                </Typography>
+                <ScrollTextReveal
+                  text="FEATURED PROJECTS"
+                  className="font-mono text-4xl font-bold text-black uppercase md:text-6xl"
+                  stagger={0.03}
+                  animation="slideUp"
+                />
+                <ViewportAnimation variant="fadeInUp" delay={0.3}>
+                  <Typography
+                    variant="body"
+                    className="text-brutalist-charcoal-200 mx-auto max-w-2xl"
+                  >
+                    Explore cutting-edge web applications built with modern
+                    technologies and brutalist design principles.
+                  </Typography>
+                </ViewportAnimation>
               </div>
-            </ScrollTriggered>
+            </ViewportAnimation>
 
-            <ScrollTriggered animation="slideUp" delay={0.2}>
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <ScrollRevealStagger
+              animation="scaleInRotate"
+              config={{ stagger: 0.2, delay: 0.2, easing: "backOut" }}
+              className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+            >
+              <ParallaxElement speed={0.2} direction="vertical">
                 <Card
                   variant="default"
                   hover="lift"
@@ -111,7 +162,9 @@ export default function Home() {
                     </div>
                   </CardContent>
                 </Card>
+              </ParallaxElement>
 
+              <ParallaxElement speed={0.3} direction="vertical">
                 <Card
                   variant="elevated"
                   hover="glow"
@@ -143,7 +196,9 @@ export default function Home() {
                     </div>
                   </CardContent>
                 </Card>
+              </ParallaxElement>
 
+              <ParallaxElement speed={0.25} direction="vertical">
                 <Card
                   variant="accent"
                   hover="invert"
@@ -175,10 +230,14 @@ export default function Home() {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-            </ScrollTriggered>
+              </ParallaxElement>
+            </ScrollRevealStagger>
 
-            <ScrollTriggered animation="slideUp" delay={0.3}>
+            <ViewportAnimation
+              variant="scaleInRotate"
+              delay={0.4}
+              easing="elastic"
+            >
               <div className="text-center">
                 <Button variant="accent" size="lg" asChild>
                   <SmoothScrollLink href="/projects">
@@ -186,8 +245,8 @@ export default function Home() {
                   </SmoothScrollLink>
                 </Button>
               </div>
-            </ScrollTriggered>
-          </ScrollStagger>
+            </ViewportAnimation>
+          </StaggeredAnimation>
         </Container>
       </Section>
 
@@ -198,69 +257,84 @@ export default function Home() {
         id="technical-experience"
       >
         <Container>
-          <ScrollStagger className="space-y-12" staggerDelay={0.2}>
-            <ScrollTriggered animation="slideUp" delay={0.1}>
+          <MultiLayerParallax
+            className="space-y-12"
+            layers={[
+              { speed: 0.3, direction: "up" },
+              { speed: 0.5, direction: "down" },
+              { speed: 0.2, direction: "up" },
+            ]}
+          >
+            <ViewportAnimation
+              variant="brutalistSlam"
+              delay={0.1}
+              easing="elastic"
+            >
               <div className="space-y-4 text-center">
-                <Typography
-                  variant="h2"
-                  className="text-brutalist-yellow text-4xl font-bold uppercase md:text-6xl"
-                >
-                  TECHNICAL ARSENAL
-                </Typography>
-                <Typography
-                  variant="body"
-                  className="text-brutalist-off-white-100 mx-auto max-w-2xl"
-                >
-                  Raw power. Uncompromising tools. Digital concrete that builds
-                  the future.
-                </Typography>
+                <ScrollTextReveal
+                  text="TECHNICAL ARSENAL"
+                  className="text-brutalist-yellow font-mono text-4xl font-bold uppercase md:text-6xl"
+                  stagger={0.05}
+                  animation="rotateIn"
+                />
+                <ViewportAnimation variant="fadeInUp" delay={0.5}>
+                  <Typography
+                    variant="body"
+                    className="text-brutalist-off-white-100 mx-auto max-w-2xl"
+                  >
+                    Raw power. Uncompromising tools. Digital concrete that
+                    builds the future.
+                  </Typography>
+                </ViewportAnimation>
               </div>
-            </ScrollTriggered>
+            </ViewportAnimation>
 
-            <ScrollTriggered animation="slideUp" delay={0.2}>
-              <div className="grid grid-cols-1 gap-0 md:grid-cols-3">
-                <div className="group border-4 border-white p-8 transition-all duration-300 hover:bg-white hover:text-black">
-                  <Typography
-                    variant="h3"
-                    className="mb-4 text-2xl font-bold uppercase"
-                  >
-                    FRONTEND MASTERY
-                  </Typography>
-                  <Typography variant="body" className="mb-6">
-                    React, Next.js, TypeScript, Tailwind CSS. Modern frameworks
-                    wielded with precision.
-                  </Typography>
-                  <div className="bg-brutalist-yellow h-1 w-1/2 transition-all duration-300 group-hover:w-full"></div>
-                </div>
-                <div className="group border-4 border-white p-8 transition-all duration-300 hover:bg-white hover:text-black">
-                  <Typography
-                    variant="h3"
-                    className="mb-4 text-2xl font-bold uppercase"
-                  >
-                    BACKEND POWER
-                  </Typography>
-                  <Typography variant="body" className="mb-6">
-                    Node.js, Python, PostgreSQL, Redis. Server architecture that
-                    scales without compromise.
-                  </Typography>
-                  <div className="bg-brutalist-yellow h-1 w-1/2 transition-all duration-300 group-hover:w-full"></div>
-                </div>
-                <div className="group border-4 border-white p-8 transition-all duration-300 hover:bg-white hover:text-black">
-                  <Typography
-                    variant="h3"
-                    className="mb-4 text-2xl font-bold uppercase"
-                  >
-                    DEVOPS EXCELLENCE
-                  </Typography>
-                  <Typography variant="body" className="mb-6">
-                    Docker, AWS, CI/CD, Monitoring. Infrastructure that never
-                    sleeps, never fails.
-                  </Typography>
-                  <div className="bg-brutalist-yellow h-1 w-1/2 transition-all duration-300 group-hover:w-full"></div>
-                </div>
+            <ScrollRevealStagger
+              animation="brutalistPunch"
+              config={{ stagger: 0.3, delay: 0.2, easing: "backOut" }}
+              className="grid grid-cols-1 gap-0 md:grid-cols-3"
+            >
+              <div className="group border-4 border-white p-8 transition-all duration-300 hover:bg-white hover:text-black">
+                <Typography
+                  variant="h3"
+                  className="mb-4 text-2xl font-bold uppercase"
+                >
+                  FRONTEND MASTERY
+                </Typography>
+                <Typography variant="body" className="mb-6">
+                  React, Next.js, TypeScript, Tailwind CSS. Modern frameworks
+                  wielded with precision.
+                </Typography>
+                <div className="bg-brutalist-yellow h-1 w-1/2 transition-all duration-300 group-hover:w-full"></div>
               </div>
-            </ScrollTriggered>
-          </ScrollStagger>
+              <div className="group border-4 border-white p-8 transition-all duration-300 hover:bg-white hover:text-black">
+                <Typography
+                  variant="h3"
+                  className="mb-4 text-2xl font-bold uppercase"
+                >
+                  BACKEND POWER
+                </Typography>
+                <Typography variant="body" className="mb-6">
+                  Node.js, Python, PostgreSQL, Redis. Server architecture that
+                  scales without compromise.
+                </Typography>
+                <div className="bg-brutalist-yellow h-1 w-1/2 transition-all duration-300 group-hover:w-full"></div>
+              </div>
+              <div className="group border-4 border-white p-8 transition-all duration-300 hover:bg-white hover:text-black">
+                <Typography
+                  variant="h3"
+                  className="mb-4 text-2xl font-bold uppercase"
+                >
+                  DEVOPS EXCELLENCE
+                </Typography>
+                <Typography variant="body" className="mb-6">
+                  Docker, AWS, CI/CD, Monitoring. Infrastructure that never
+                  sleeps, never fails.
+                </Typography>
+                <div className="bg-brutalist-yellow h-1 w-1/2 transition-all duration-300 group-hover:w-full"></div>
+              </div>
+            </ScrollRevealStagger>
+          </MultiLayerParallax>
         </Container>
       </Section>
 

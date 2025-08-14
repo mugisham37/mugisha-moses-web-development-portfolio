@@ -14,6 +14,7 @@ import { Typography } from "@/components/ui/typography";
 import { Container } from "@/components/layout/container";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { SmoothScrollLink } from "@/components/ui/smooth-scroll-link";
+import { MobileNavigation } from "@/components/mobile/mobile-navigation";
 import { SITE_CONFIG } from "@/lib/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useScrollRestoration } from "@/hooks/use-scroll-restoration";
@@ -615,6 +616,9 @@ export function MainHeader({ className = "" }: MainHeaderProps) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Mobile Navigation Component */}
+      <MobileNavigation />
 
       {/* Scroll Progress Indicator */}
       <ScrollProgress

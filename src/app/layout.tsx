@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import { StructuredData } from "@/components/seo/structured-data";
 import { CriticalErrorBoundary } from "@/components/error/app-error-boundary";
+import { AnimationProvider } from "@/components/animations/animation-provider";
 import {
   generatePersonJsonLd,
   generateWebsiteJsonLd,
@@ -151,9 +152,11 @@ export default function RootLayout({
       <body className="antialiased">
         <StructuredData data={globalStructuredData} />
         <CriticalErrorBoundary context={{ location: "root-layout" }}>
-          <AnalyticsProvider>
-            <MainLayout>{children}</MainLayout>
-          </AnalyticsProvider>
+          <AnimationProvider>
+            <AnalyticsProvider>
+              <MainLayout>{children}</MainLayout>
+            </AnalyticsProvider>
+          </AnimationProvider>
         </CriticalErrorBoundary>
         <Analytics />
         <SpeedInsights />

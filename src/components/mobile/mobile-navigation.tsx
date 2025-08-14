@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import {
   Home,
   FolderOpen,
@@ -13,11 +13,16 @@ import {
   Star,
   Menu,
   X,
+  ChevronRight,
+  Wifi,
+  Battery,
+  Signal,
 } from "lucide-react";
 import { Typography } from "@/components/ui/typography";
 import { useTouchGestures } from "@/hooks/use-touch-gestures";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { SITE_CONFIG } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 interface NavigationItem {
   label: string;
@@ -70,24 +75,88 @@ interface MobileNavigationProps {
 }
 
 /**
- * Mobile-optimized navigation with touch gestures and brutalist styling
- * Features swipe gestures, large touch targets, and smooth animations
+ * Enhanced Mobile-optimized navigation with advanced touch gestures and native-like experience
+ * Features swipe gestures, haptic feedback, large touch targets, and smooth animations
  */
 export function MobileNavigation({ className = "" }: MobileNavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [dragProgress, setDragProgress] = useState(0);
+  const [isConnected, setIsConnected] = useState(true);
+  const [batteryLevel, setBatteryLevel] = useState(100);
   const pathname = usePathname();
   const isMobile = useIsMobile();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const lastTapTime = useRef(0);
+
+  // Enhanced connectivity and battery status
+  useEffect(() => {
+    const updateConnectionStatus = () => {
+      setIsConnected(navigator.onLine);
+    };
+
+    const updateBatteryStatus = async () => {
+      if ("getBattery" in navigator) {
+        try {
+          const battery = await (navigator as any).getBattery();
+          setBatteryLevel(Math.round(battery.level * 100));
+        } catch (error) {
+          // Fallback for browsers that don't support battery API
+          setBatteryLevel(100);
+        }
+      }
+    };
+
+    window.addEventListener("online", updateConnectionStatus);
+    window.addEventListener("offline", updateConnectionStatus);
+    updateBatteryStatus();
+
+    return () => {
+      window.removeEventListener("online", updateConnectionStatus);
+      window.removeEventListener("offline", updateConnectionStatus);
+    };
+  }, []);
 
   // Close menu when route changes
   useEffect(() => {
     setIsOpen(false);
+    setDragProgress(0);
   }, [pathname]);
 
-  // Handle escape key
+  // Enhanced keyboard handling
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape" && isOpen) {
         setIsOpen(false);
+        setDragProgress(0);
+      }
+
+      // Enhanced accessibility - arrow key navigation
+      if (isOpen && (event.key === "ArrowDown" || event.key === "ArrowUp")) {
+        event.preventDefault();
+        const focusableElements = menuRef.current?.querySelectorAll(
+          "a[href], button:not([disabled])"
+        );
+
+        if (focusableElements && focusableElements.length > 0) {
+          const currentIndex = Array.from(focusableElements).indexOf(
+            document.activeElement as Element
+          );
+
+          let nextIndex;
+          if (event.key === "ArrowDown") {
+            nextIndex =
+              currentIndex < focusableElements.length - 1
+                ? currentIndex + 1
+                : 0;
+          } else {
+            nextIndex =
+              currentIndex > 0
+                ? currentIndex - 1
+                : focusableElements.length - 1;
+          }
+
+          (focusableElements[nextIndex] as HTMLElement).focus();
+        }
       }
     };
 
@@ -95,35 +164,102 @@ export function MobileNavigation({ className = "" }: MobileNavigationProps) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  // Prevent body scroll when menu is open
+  // Enhanced body scroll prevention with viewport handling
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      const scrollY = window.scrollY;
       document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
       document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+
+      // Add safe area padding for devices with notches
+      document.body.style.paddingTop = "env(safe-area-inset-top)";
+      document.body.style.paddingBottom = "env(safe-area-inset-bottom)";
     } else {
-      document.body.style.overflow = "";
+      const scrollY = document.body.style.top;
       document.body.style.position = "";
+      document.body.style.top = "";
       document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.paddingTop = "";
+      document.body.style.paddingBottom = "";
+
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      }
     }
 
     return () => {
-      document.body.style.overflow = "";
       document.body.style.position = "";
+      document.body.style.top = "";
       document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.paddingTop = "";
+      document.body.style.paddingBottom = "";
     };
   }, [isOpen]);
 
-  // Touch gestures for menu
+  // Enhanced touch gestures with haptic feedback
   const { attachGestures } = useTouchGestures({
     onSwipeRight: () => {
-      if (!isOpen) setIsOpen(true);
+      if (!isOpen) {
+        setIsOpen(true);
+        // Haptic feedback simulation
+        if ("vibrate" in navigator) {
+          navigator.vibrate(50);
+        }
+      }
     },
     onSwipeLeft: () => {
-      if (isOpen) setIsOpen(false);
+      if (isOpen) {
+        setIsOpen(false);
+        setDragProgress(0);
+        // Haptic feedback simulation
+        if ("vibrate" in navigator) {
+          navigator.vibrate(30);
+        }
+      }
     },
-    swipeThreshold: 50,
+    swipeThreshold: 75, // Increased threshold for better UX
   });
+
+  // Enhanced drag handling for menu
+  const handleDrag = useCallback((event: any, info: PanInfo) => {
+    const { offset } = info;
+    const progress = Math.max(0, Math.min(1, offset.x / 300));
+    setDragProgress(progress);
+  }, []);
+
+  const handleDragEnd = useCallback((event: any, info: PanInfo) => {
+    const { offset, velocity } = info;
+    const shouldClose = offset.x > 150 || velocity.x > 500;
+
+    if (shouldClose) {
+      setIsOpen(false);
+      setDragProgress(0);
+      // Haptic feedback
+      if ("vibrate" in navigator) {
+        navigator.vibrate(30);
+      }
+    } else {
+      setDragProgress(0);
+    }
+  }, []);
+
+  // Double tap to close
+  const handleDoubleTap = useCallback(() => {
+    const now = Date.now();
+    if (now - lastTapTime.current < 300) {
+      setIsOpen(false);
+      setDragProgress(0);
+      // Haptic feedback
+      if ("vibrate" in navigator) {
+        navigator.vibrate([30, 50, 30]);
+      }
+    }
+    lastTapTime.current = now;
+  }, []);
 
   const isActiveLink = (href: string) => {
     if (href === "/") {
@@ -132,6 +268,16 @@ export function MobileNavigation({ className = "" }: MobileNavigationProps) {
     return pathname.startsWith(href);
   };
 
+  // Enhanced menu toggle with animation states
+  const toggleMenu = useCallback(() => {
+    setIsOpen((prev) => !prev);
+    setDragProgress(0);
+    // Haptic feedback
+    if ("vibrate" in navigator) {
+      navigator.vibrate(40);
+    }
+  }, []);
+
   // Only render on mobile devices
   if (!isMobile) {
     return null;
@@ -139,42 +285,105 @@ export function MobileNavigation({ className = "" }: MobileNavigationProps) {
 
   return (
     <>
-      {/* Mobile Menu Button */}
-      <motion.button
-        className={`fixed top-4 right-4 z-50 flex h-12 w-12 items-center justify-center border-4 border-white bg-black text-white transition-all duration-200 hover:bg-white hover:text-black focus:ring-4 focus:ring-yellow-400 focus:outline-none ${className}`}
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label={isOpen ? "Close menu" : "Open menu"}
-        aria-expanded={isOpen}
-        whileTap={{ scale: 0.95 }}
-        style={{
-          minWidth: "48px",
-          minHeight: "48px",
-        }}
-      >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div
-              key="close"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <X className="h-6 w-6" />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="menu"
-              initial={{ rotate: 90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Menu className="h-6 w-6" />
-            </motion.div>
+      {/* Enhanced Mobile Menu Button with Status Indicators */}
+      <motion.div className="safe-area-inset fixed top-0 right-0 z-50">
+        {/* Status Bar Simulation */}
+        <div className="flex w-full items-center justify-between border-b-2 border-white/20 bg-black/90 px-4 py-2 backdrop-blur-sm">
+          <div className="flex items-center gap-2">
+            <div className="font-mono text-xs text-white">
+              {new Date().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </div>
+          </div>
+          <div className="flex items-center gap-1">
+            <Signal
+              className={cn(
+                "h-3 w-3",
+                isConnected ? "text-white" : "text-red-400"
+              )}
+            />
+            <Wifi
+              className={cn(
+                "h-3 w-3",
+                isConnected ? "text-white" : "text-red-400"
+              )}
+            />
+            <div className="flex items-center gap-1">
+              <Battery
+                className={cn(
+                  "h-3 w-3",
+                  batteryLevel > 20 ? "text-white" : "text-red-400"
+                )}
+              />
+              <span className="font-mono text-xs text-white">
+                {batteryLevel}%
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Enhanced Menu Button */}
+        <motion.button
+          className={cn(
+            "flex h-14 w-14 items-center justify-center",
+            "border-4 border-white bg-black text-white",
+            "transition-all duration-300 ease-out",
+            "focus:ring-4 focus:ring-yellow-400 focus:outline-none",
+            "active:scale-95 active:bg-yellow-400 active:text-black",
+            "safe-area-inset",
+            className
           )}
-        </AnimatePresence>
-      </motion.button>
+          onClick={toggleMenu}
+          onTouchStart={() => {
+            // Immediate visual feedback
+            if ("vibrate" in navigator) {
+              navigator.vibrate(10);
+            }
+          }}
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation-menu"
+          whileTap={{ scale: 0.9 }}
+          style={{
+            minWidth: "56px",
+            minHeight: "56px",
+            touchAction: "manipulation",
+          }}
+        >
+          <AnimatePresence mode="wait">
+            {isOpen ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -180, opacity: 0, scale: 0.5 }}
+                animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                exit={{ rotate: 180, opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <X className="h-7 w-7" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ rotate: 180, opacity: 0, scale: 0.5 }}
+                animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                exit={{ rotate: -180, opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <Menu className="h-7 w-7" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Button press indicator */}
+          <motion.div
+            className="absolute inset-0 bg-yellow-400 opacity-0"
+            animate={{ opacity: isOpen ? 0.2 : 0 }}
+            transition={{ duration: 0.2 }}
+          />
+        </motion.button>
+      </motion.div>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
@@ -195,90 +404,185 @@ export function MobileNavigation({ className = "" }: MobileNavigationProps) {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Menu Panel */}
+            {/* Enhanced Menu Panel with Native-like Experience */}
             <motion.nav
-              className="absolute inset-y-0 right-0 w-full max-w-sm border-l-4 border-white bg-black"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              ref={menuRef}
+              id="mobile-navigation-menu"
+              className={cn(
+                "absolute inset-y-0 right-0 w-full max-w-sm",
+                "border-l-4 border-white bg-black",
+                "safe-area-inset overflow-y-auto",
+                "scrollbar-thin scrollbar-track-black scrollbar-thumb-yellow-400"
+              )}
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{
+                x: dragProgress > 0 ? `${100 - dragProgress * 100}%` : 0,
+                opacity: 1,
+              }}
+              exit={{ x: "100%", opacity: 0 }}
               transition={{
                 type: "spring",
-                stiffness: 300,
-                damping: 30,
-                duration: 0.4,
+                stiffness: 400,
+                damping: 40,
+                duration: 0.5,
               }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 300 }}
+              dragElastic={0.2}
+              onDrag={handleDrag}
+              onDragEnd={handleDragEnd}
+              onTouchStart={handleDoubleTap}
               ref={attachGestures}
               role="navigation"
-              aria-label="Mobile navigation"
+              aria-label="Mobile navigation menu"
+              style={{
+                touchAction: "pan-x",
+              }}
             >
-              <div className="flex h-full flex-col p-6 pt-20">
-                {/* Brand */}
-                <div className="mb-8">
-                  <Typography
-                    variant="h2"
-                    weight="bold"
-                    transform="uppercase"
-                    className="text-yellow-400"
-                  >
-                    {SITE_CONFIG.author.name.split(" ")[0]}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    className="font-mono tracking-wider text-white/60 uppercase"
-                  >
-                    Developer Portfolio
-                  </Typography>
+              <div className="flex h-full flex-col safe-area-inset">
+                {/* Drag Indicator */}
+                <div className="flex justify-center py-3 border-b-2 border-white/10">
+                  <div className="w-12 h-1 bg-white/40 rounded-full" />
                 </div>
 
-                {/* Navigation Items */}
-                <div className="flex-1 space-y-2">
-                  {navigationItems.map((item, index) => {
-                    const Icon = item.icon;
-                    const isActive = isActiveLink(item.href);
-
-                    return (
-                      <motion.div
-                        key={item.href}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <Link
-                          href={item.href}
-                          className={`group flex items-center gap-4 rounded-none border-2 p-4 transition-all duration-200 focus:ring-4 focus:ring-yellow-400 focus:outline-none ${
-                            isActive
-                              ? "border-yellow-400 bg-yellow-400 text-black"
-                              : "border-white/20 text-white hover:border-white hover:bg-white hover:text-black"
-                          }`}
-                          style={{
-                            minHeight: "56px", // Large touch target
-                          }}
-                          aria-current={isActive ? "page" : undefined}
+                <div className="flex-1 p-6 pt-8">
+                  {/* Enhanced Brand Section */}
+                  <motion.div 
+                    className="mb-10"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-yellow-400 border-2 border-white flex items-center justify-center">
+                        <Typography
+                          variant="h3"
+                          weight="bold"
+                          className="text-black font-mono"
                         >
-                          <Icon className="h-6 w-6 flex-shrink-0" />
-                          <div className="flex-1">
-                            <Typography
-                              variant="body"
-                              weight="bold"
-                              transform="uppercase"
-                              className="font-mono"
-                            >
-                              {item.label}
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className={`font-mono ${
-                                isActive ? "text-black/70" : "text-white/60"
-                              }`}
-                            >
-                              {item.description}
-                            </Typography>
-                          </div>
-                        </Link>
-                      </motion.div>
-                    );
-                  })}
-                </div>
+                          {SITE_CONFIG.author.name.charAt(0)}
+                        </Typography>
+                      </div>
+                      <div>
+                        <Typography
+                          variant="h3"
+                          weight="bold"
+                          transform="uppercase"
+                          className="text-yellow-400 leading-tight"
+                        >
+                          {SITE_CONFIG.author.name.split(" ")[0]}
+                        </Typography>
+                        <Typography
+                          variant="caption"
+                          className="font-mono tracking-wider text-white/60 uppercase"
+                        >
+                          Developer Portfolio
+                        </Typography>
+                      </div>
+                    </div>
+                    
+                    {/* Status Indicator */}
+                    <div className="flex items-center gap-2 text-green-400">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                      <Typography variant="caption" className="font-mono uppercase">
+                        Available for Projects
+                      </Typography>
+                    </div>
+                  </motion.div>
+
+                  {/* Enhanced Navigation Items */}
+                  <div className="flex-1 space-y-3">
+                    {navigationItems.map((item, index) => {
+                      const Icon = item.icon;
+                      const isActive = isActiveLink(item.href);
+
+                      return (
+                        <motion.div
+                          key={item.href}
+                          initial={{ opacity: 0, x: 30, scale: 0.9 }}
+                          animate={{ opacity: 1, x: 0, scale: 1 }}
+                          transition={{ 
+                            delay: 0.2 + (index * 0.1),
+                            duration: 0.4,
+                            ease: "easeOut"
+                          }}
+                        >
+                          <Link
+                            href={item.href}
+                            className={cn(
+                              "group flex items-center gap-4 p-5 transition-all duration-300",
+                              "border-2 focus:ring-4 focus:ring-yellow-400 focus:outline-none",
+                              "active:scale-98 active:bg-yellow-400 active:text-black active:border-yellow-400",
+                              isActive
+                                ? "border-yellow-400 bg-yellow-400 text-black shadow-[4px_4px_0px_rgba(0,0,0,0.3)]"
+                                : "border-white/20 text-white hover:border-white hover:bg-white/10"
+                            )}
+                            style={{
+                              minHeight: "64px", // Enhanced touch target
+                              touchAction: "manipulation",
+                            }}
+                            aria-current={isActive ? "page" : undefined}
+                            onClick={() => {
+                              // Haptic feedback on navigation
+                              if ('vibrate' in navigator) {
+                                navigator.vibrate(25);
+                              }
+                            }}
+                          >
+                            <div className={cn(
+                              "flex items-center justify-center w-10 h-10 border-2 transition-all duration-300",
+                              isActive 
+                                ? "border-black bg-black text-yellow-400" 
+                                : "border-white/40 group-hover:border-white group-hover:bg-white group-hover:text-black"
+                            )}>
+                              <Icon className="h-5 w-5 flex-shrink-0" />
+                            </div>
+                            
+                            <div className="flex-1 min-w-0">
+                              <Typography
+                                variant="body"
+                                weight="bold"
+                                transform="uppercase"
+                                className="font-mono leading-tight truncate"
+                              >
+                                {item.label}
+                              </Typography>
+                              <Typography
+                                variant="caption"
+                                className={cn(
+                                  "font-mono text-sm leading-tight truncate",
+                                  isActive ? "text-black/70" : "text-white/60 group-hover:text-black/60"
+                                )}
+                              >
+                                {item.description}
+                              </Typography>
+                            </div>
+
+                            <ChevronRight className={cn(
+                              "h-5 w-5 flex-shrink-0 transition-transform duration-300",
+                              "group-hover:translate-x-1",
+                              isActive ? "text-black/70" : "text-white/40 group-hover:text-black/60"
+                            )} />
+
+                            {/* Active indicator */}
+                            {isActive && (
+                              <motion.div
+                                className="absolute left-0 top-0 bottom-0 w-1 bg-black"
+                                layoutId="activeIndicator"
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                              />
+                            )}
+
+                            {/* Hover effect background */}
+                            <motion.div
+                              className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100"
+                              transition={{ duration: 0.3 }}
+                            />
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
 
                 {/* Social Links */}
                 <motion.div

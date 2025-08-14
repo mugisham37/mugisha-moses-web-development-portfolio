@@ -182,18 +182,22 @@ export function getMobileClasses(): string {
 }
 
 /**
- * Optimize animations for mobile performance
+ * Enhanced mobile animation configuration with performance optimization
  */
 export function getMobileAnimationConfig(): {
   reducedMotion: boolean;
   duration: number;
   easing: string;
+  useGPU: boolean;
+  frameRate: number;
 } {
   if (typeof window === "undefined") {
     return {
       reducedMotion: false,
       duration: 300,
       easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+      useGPU: true,
+      frameRate: 60,
     };
   }
 
@@ -202,10 +206,138 @@ export function getMobileAnimationConfig(): {
   ).matches;
   const isMobile = isMobileDevice();
 
+  // Detect device performance capabilities
+  const isLowEndDevice =
+    navigator.hardwareConcurrency <= 2 || (navigator as any).deviceMemory <= 2;
+
+  // Detect connection speed
+  const connection = (navigator as any).connection;
+  const isSlowConnection =
+    connection &&
+    (connection.effectiveType === "slow-2g" ||
+      connection.effectiveType === "2g");
+
   return {
     reducedMotion: prefersReducedMotion,
-    duration: prefersReducedMotion ? 0 : isMobile ? 200 : 300,
+    duration: prefersReducedMotion
+      ? 0
+      : isLowEndDevice || isSlowConnection
+        ? 150
+        : isMobile
+          ? 200
+          : 300,
     easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+    useGPU: !isLowEndDevice,
+    frameRate: isLowEndDevice ? 30 : 60,
+  };
+}
+
+/**
+ * Enhanced mobile performance optimization
+ */
+export function optimizeMobilePerformance(): {
+  enableGPUAcceleration: () => void;
+  disableGPUAcceleration: () => void;
+  optimizeImages: () => void;
+  preloadCriticalResources: () => void;
+  enableServiceWorker: () => Promise<void>;
+} {
+  const enableGPUAcceleration = () => {
+    const style = document.createElement("style");
+    style.textContent = `
+      .gpu-accelerated {
+        transform: translateZ(0);
+        will-change: transform;
+        backface-visibility: hidden;
+        perspective: 1000px;
+      }
+      
+      .smooth-scroll {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+      }
+    `;
+    document.head.appendChild(style);
+  };
+
+  const disableGPUAcceleration = () => {
+    const elements = document.querySelectorAll(".gpu-accelerated");
+    elements.forEach((el) => {
+      (el as HTMLElement).style.transform = "";
+      (el as HTMLElement).style.willChange = "";
+    });
+  };
+
+  const optimizeImages = () => {
+    // Add intersection observer for lazy loading
+    if ("IntersectionObserver" in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute("data-src");
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      });
+
+      document.querySelectorAll("img[data-src]").forEach((img) => {
+        imageObserver.observe(img);
+      });
+    }
+  };
+
+  const preloadCriticalResources = () => {
+    // Preload critical fonts
+    const fontPreloads = [
+      "/fonts/SpaceMono-Regular.woff2",
+      "/fonts/SpaceMono-Bold.woff2",
+      "/fonts/Inter-Regular.woff2",
+      "/fonts/Inter-Bold.woff2",
+    ];
+
+    fontPreloads.forEach((font) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.href = font;
+      link.as = "font";
+      link.type = "font/woff2";
+      link.crossOrigin = "anonymous";
+      document.head.appendChild(link);
+    });
+
+    // Preload critical images
+    const criticalImages = ["/images/hero-bg.webp", "/images/logo.svg"];
+
+    criticalImages.forEach((src) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.href = src;
+      link.as = "image";
+      document.head.appendChild(link);
+    });
+  };
+
+  const enableServiceWorker = async () => {
+    if ("serviceWorker" in navigator) {
+      try {
+        const registration = await navigator.serviceWorker.register("/sw.js");
+        console.log("Service Worker registered:", registration);
+      } catch (error) {
+        console.log("Service Worker registration failed:", error);
+      }
+    }
+  };
+
+  return {
+    enableGPUAcceleration,
+    disableGPUAcceleration,
+    optimizeImages,
+    preloadCriticalResources,
+    enableServiceWorker,
   };
 }
 

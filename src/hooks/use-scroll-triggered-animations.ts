@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
+import { useAnimationContext } from "@/components/animations/animation-provider";
 
 interface ScrollTriggeredAnimationOptions {
   threshold?: number;
@@ -27,6 +28,7 @@ export function useScrollTriggeredAnimation(
 
   const ref = useRef<HTMLElement>(null);
   const [hasTriggered, setHasTriggered] = useState(false);
+  const { reducedMotion, getOptimizedDuration } = useAnimationContext();
 
   const isInView = useInView(ref, {
     threshold,
@@ -36,17 +38,26 @@ export function useScrollTriggeredAnimation(
 
   useEffect(() => {
     if (isInView && !hasTriggered) {
+      const optimizedDelay = reducedMotion ? 0 : delay;
       const timer = setTimeout(() => {
         setHasTriggered(true);
         onEnter?.();
-      }, delay);
+      }, optimizedDelay);
 
       return () => clearTimeout(timer);
     } else if (!isInView && hasTriggered && !triggerOnce) {
       setHasTriggered(false);
       onLeave?.();
     }
-  }, [isInView, hasTriggered, delay, triggerOnce, onEnter, onLeave]);
+  }, [
+    isInView,
+    hasTriggered,
+    delay,
+    triggerOnce,
+    onEnter,
+    onLeave,
+    reducedMotion,
+  ]);
 
   return {
     ref,
