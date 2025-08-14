@@ -3,6 +3,27 @@
  * Provides comprehensive cross-browser support and progressive enhancement
  */
 
+// Extend window interface for browser info storage
+declare global {
+  interface Window {
+    __BROWSER_INFO__?: BrowserInfo;
+    __FEATURE_SUPPORT__?: FeatureSupport;
+    mozRequestAnimationFrame?: typeof requestAnimationFrame;
+    webkitRequestAnimationFrame?: typeof requestAnimationFrame;
+    msRequestAnimationFrame?: typeof requestAnimationFrame;
+    mozCancelAnimationFrame?: typeof cancelAnimationFrame;
+    webkitCancelAnimationFrame?: typeof cancelAnimationFrame;
+    msCancelAnimationFrame?: typeof cancelAnimationFrame;
+    ResizeObserver?: unknown;
+  }
+}
+
+// Legacy browser support interfaces
+interface LegacyElement extends Element {
+  attachEvent?: (event: string, handler: EventListener) => void;
+  detachEvent?: (event: string, handler: EventListener) => void;
+}
+
 // Browser detection and feature support
 export interface BrowserInfo {
   name: string;
@@ -276,8 +297,8 @@ export function applyCompatibilityClasses(): void {
   document.documentElement.classList.add(...allClasses);
 
   // Store browser info for later use
-  (window as any).__BROWSER_INFO__ = browserInfo;
-  (window as any).__FEATURE_SUPPORT__ = featureSupport;
+  window.__BROWSER_INFO__ = browserInfo;
+  window.__FEATURE_SUPPORT__ = featureSupport;
 }
 
 /**
@@ -305,7 +326,7 @@ export async function loadPolyfills(): Promise<void> {
     polyfills.push(
       import("@juggle/resize-observer")
         .then(({ ResizeObserver }) => {
-          (window as any).ResizeObserver = ResizeObserver;
+          window.ResizeObserver = ResizeObserver;
           console.log("ResizeObserver polyfill loaded");
         })
         .catch(() => {
@@ -361,7 +382,7 @@ export class ProgressiveEnhancement {
     modernFeatures: () => void,
     fallback?: () => void
   ): void {
-    const browserInfo = (window as any).__BROWSER_INFO__;
+    const browserInfo = window.__BROWSER_INFO__;
 
     if (browserInfo?.supportsModernFeatures) {
       modernFeatures();
@@ -378,7 +399,7 @@ export class ProgressiveEnhancement {
     feature: keyof FeatureSupport,
     styles: Partial<CSSStyleDeclaration>
   ): void {
-    const featureSupport = (window as any).__FEATURE_SUPPORT__;
+    const featureSupport = window.__FEATURE_SUPPORT__;
 
     if (featureSupport?.[feature]) {
       Object.assign(element.style, styles);
@@ -390,8 +411,8 @@ export class ProgressiveEnhancement {
    */
   static async loadConditionalResource(
     condition: boolean,
-    loader: () => Promise<any>
-  ): Promise<any> {
+    loader: () => Promise<unknown>
+  ): Promise<unknown> {
     if (condition) {
       try {
         return await loader();
@@ -422,8 +443,8 @@ export class CrossBrowserEvents {
       element.addEventListener(event, handler, options);
     }
     // Legacy IE support
-    else if ((element as any).attachEvent) {
-      (element as any).attachEvent(`on${event}`, handler);
+    else if ((element as LegacyElement).attachEvent) {
+      (element as LegacyElement).attachEvent!(`on${event}`, handler);
     }
   }
 
@@ -441,8 +462,8 @@ export class CrossBrowserEvents {
       element.removeEventListener(event, handler, options);
     }
     // Legacy IE support
-    else if ((element as any).detachEvent) {
-      (element as any).detachEvent(`on${event}`, handler);
+    else if ((element as LegacyElement).detachEvent) {
+      (element as LegacyElement).detachEvent!(`on${event}`, handler);
     }
   }
 
@@ -450,7 +471,7 @@ export class CrossBrowserEvents {
    * Get event target with cross-browser support
    */
   static getEventTarget(event: Event): Element | null {
-    return (event.target as Element) || (event as any).srcElement || null;
+    return (event.target as Element) || (event as unknown as { srcElement?: Element }).srcElement || null;
   }
 
   /**
@@ -460,7 +481,7 @@ export class CrossBrowserEvents {
     if (event.preventDefault) {
       event.preventDefault();
     } else {
-      (event as any).returnValue = false;
+      (event as unknown as { returnValue: boolean }).returnValue = false;
     }
   }
 
@@ -471,7 +492,7 @@ export class CrossBrowserEvents {
     if (event.stopPropagation) {
       event.stopPropagation();
     } else {
-      (event as any).cancelBubble = true;
+      (event as unknown as { cancelBubble: boolean }).cancelBubble = true;
     }
   }
 }
@@ -515,6 +536,6 @@ export function initializeBrowserCompatibility(): void {
 
   console.log("Browser compatibility initialized:", {
     browser: browserInfo,
-    features: (window as any).__FEATURE_SUPPORT__,
+    features: window.__FEATURE_SUPPORT__,
   });
 }

@@ -16,8 +16,9 @@ import {
  * @param tokens - The design tokens object
  * @returns The token value or undefined if not found
  */
-export function getToken<T>(path: string, tokens: T): any {
-  return path.split(".").reduce((obj: any, key: string) => obj?.[key], tokens);
+export function getToken<T>(path: string, tokens: T): unknown {
+  return path.split(".").reduce((obj: unknown, key: string) => 
+    (obj as Record<string, unknown>)?.[key], tokens);
 }
 
 /**
@@ -26,7 +27,8 @@ export function getToken<T>(path: string, tokens: T): any {
  * @returns The color value
  */
 export function getColor(path: ColorPath): string {
-  return getToken(path, designTokens.colors) || "#000000";
+  const result = getToken(path, designTokens.colors);
+  return (typeof result === 'string') ? result : "#000000";
 }
 
 /**
@@ -35,7 +37,8 @@ export function getColor(path: ColorPath): string {
  * @returns The spacing value
  */
 export function getSpacing(path: SpacingPath): string {
-  return getToken(path, designTokens.spacing) || "0px";
+  const result = getToken(path, designTokens.spacing);
+  return (typeof result === 'string') ? result : "0px";
 }
 
 /**
@@ -44,7 +47,8 @@ export function getSpacing(path: SpacingPath): string {
  * @returns The shadow value
  */
 export function getShadow(path: ShadowPath): string {
-  return getToken(path, designTokens.shadows) || "none";
+  const result = getToken(path, designTokens.shadows);
+  return (typeof result === 'string') ? result : "none";
 }
 
 /**
@@ -55,12 +59,12 @@ export function generateCSSCustomProperties(): string {
   const cssVars: string[] = [];
 
   // Colors
-  const addColorVars = (obj: any, prefix = "") => {
+  const addColorVars = (obj: Record<string, unknown>, prefix = "") => {
     Object.entries(obj).forEach(([key, value]) => {
       if (typeof value === "string") {
         cssVars.push(`  --${prefix}${key}: ${value};`);
       } else if (typeof value === "object" && value !== null) {
-        addColorVars(value, `${prefix}${key}-`);
+        addColorVars(value as Record<string, unknown>, `${prefix}${key}-`);
       }
     });
   };
@@ -96,12 +100,12 @@ export function generateCSSCustomProperties(): string {
   });
 
   // Shadows
-  const addShadowVars = (obj: any, prefix = "") => {
+  const addShadowVars = (obj: Record<string, unknown>, prefix = "") => {
     Object.entries(obj).forEach(([key, value]) => {
       if (typeof value === "string") {
         cssVars.push(`  --shadow-${prefix}${key}: ${value};`);
       } else if (typeof value === "object" && value !== null) {
-        addShadowVars(value, `${prefix}${key}-`);
+        addShadowVars(value as Record<string, unknown>, `${prefix}${key}-`);
       }
     });
   };

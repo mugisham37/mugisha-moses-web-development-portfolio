@@ -2,6 +2,11 @@
 
 // Animation configuration system for consistent animations across the portfolio
 
+// Types for device capabilities
+interface NavigatorWithDeviceMemory extends Navigator {
+  deviceMemory?: number;
+}
+
 export const ANIMATION_DURATIONS = {
   fast: 0.3,
   normal: 0.6,
@@ -225,7 +230,7 @@ export function getDevicePerformanceLevel(): keyof typeof PERFORMANCE_SETTINGS {
 
   // Simple heuristic based on device capabilities
   const hardwareConcurrency = navigator.hardwareConcurrency || 4;
-  const deviceMemory = (navigator as any).deviceMemory || 4;
+  const deviceMemory = (navigator as NavigatorWithDeviceMemory).deviceMemory || 4;
 
   if (hardwareConcurrency >= 8 && deviceMemory >= 8) {
     return "highEnd";
@@ -237,17 +242,22 @@ export function getDevicePerformanceLevel(): keyof typeof PERFORMANCE_SETTINGS {
 }
 
 // Animation sequence builder
+// Types for animations
+interface AnimationConfig {
+  [key: string]: unknown;
+}
+
 export class AnimationSequenceBuilder {
   private sequence: Array<{
     element: string;
-    animation: any;
+    animation: AnimationConfig;
     delay: number;
     duration: number;
   }> = [];
 
   add(
     element: string,
-    animation: any,
+    animation: AnimationConfig,
     delay: number = 0,
     duration: number = ANIMATION_DURATIONS.normal
   ) {
@@ -257,7 +267,7 @@ export class AnimationSequenceBuilder {
 
   stagger(
     elements: string[],
-    animation: any,
+    animation: AnimationConfig,
     staggerDelay: number = STAGGER_DELAYS.normal,
     duration: number = ANIMATION_DURATIONS.normal
   ) {
@@ -304,7 +314,7 @@ export class AnimationManager {
     return AnimationManager.instance;
   }
 
-  shouldAnimate(animationId: string): boolean {
+  shouldAnimate(): boolean {
     if (this.reducedMotion) return false;
 
     const settings = PERFORMANCE_SETTINGS[this.performanceLevel];

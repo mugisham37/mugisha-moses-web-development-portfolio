@@ -19,12 +19,12 @@ export function generateTokenCSS(): string {
   const cssLines: string[] = [":root {"];
 
   // Helper function to add CSS variables recursively
-  const addCSSVars = (obj: any, prefix = "") => {
+  const addCSSVars = (obj: Record<string, unknown>, prefix = "") => {
     Object.entries(obj).forEach(([key, value]) => {
       if (typeof value === "string" || typeof value === "number") {
         cssLines.push(`  --${prefix}${key}: ${value};`);
       } else if (typeof value === "object" && value !== null) {
-        addCSSVars(value, `${prefix}${key}-`);
+        addCSSVars(value as Record<string, unknown>, `${prefix}${key}-`);
       }
     });
   };

@@ -3,6 +3,15 @@
  * Handles viewport, touch targets, and mobile-specific features
  */
 
+// Extended Navigator interface for device capabilities
+interface NavigatorWithDeviceInfo extends Navigator {
+  deviceMemory?: number;
+  connection?: {
+    effectiveType?: string;
+    saveData?: boolean;
+  };
+}
+
 /**
  * Viewport configuration for optimal mobile experience
  */
@@ -207,11 +216,12 @@ export function getMobileAnimationConfig(): {
   const isMobile = isMobileDevice();
 
   // Detect device performance capabilities
+  const navWithDeviceInfo = navigator as NavigatorWithDeviceInfo;
   const isLowEndDevice =
-    navigator.hardwareConcurrency <= 2 || (navigator as any).deviceMemory <= 2;
+    navigator.hardwareConcurrency <= 2 || (navWithDeviceInfo.deviceMemory ?? 4) <= 2;
 
   // Detect connection speed
-  const connection = (navigator as any).connection;
+  const connection = (navigator as NavigatorWithDeviceInfo).connection;
   const isSlowConnection =
     connection &&
     (connection.effectiveType === "slow-2g" ||

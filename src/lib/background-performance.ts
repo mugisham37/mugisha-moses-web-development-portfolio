@@ -5,6 +5,17 @@
 
 import React from "react";
 
+// Types for performance monitoring
+interface MemoryInfo {
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
+
+interface PerformanceWithMemory extends Performance {
+  memory: MemoryInfo;
+}
+
 export interface PerformanceMetrics {
   fps: number;
   frameTime: number;
@@ -193,7 +204,7 @@ export class BackgroundPerformanceMonitor {
   private getMemoryUsage(): number {
     // Use Performance API if available
     if ("memory" in performance) {
-      const memory = (performance as any).memory;
+      const memory = (performance as PerformanceWithMemory).memory;
       return Math.round(memory.usedJSHeapSize / 1024 / 1024); // Convert to MB
     }
     return 0;
