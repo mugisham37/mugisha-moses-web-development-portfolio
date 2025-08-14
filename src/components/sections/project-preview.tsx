@@ -102,12 +102,7 @@ export async function ProjectPreview() {
       </ScrollStagger>
 
       {/* Call to Action */}
-      <ScrollTriggered
-        animation="scale"
-        delay={0.4}
-        easing="elastic"
-        className="text-center"
-      >
+      <ScrollTriggered animation="scale" delay={0.4} className="text-center">
         <Button variant="accent" size="lg" asChild>
           <SmoothScrollLink href="/projects">
             VIEW ALL PROJECTS →
