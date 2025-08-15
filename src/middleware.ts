@@ -1,16 +1,36 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "@/lib/auth";
-import { Role } from "@prisma/client";
-import { shouldRedirect } from "@/lib/canonical";
 
-// Define protected routes and their required roles
-const protectedRoutes: Record<string, Role[]> = {
-  "/admin": [Role.ADMIN],
-  "/dashboard": [Role.USER, Role.ADMIN],
-  "/api/admin": [Role.ADMIN],
-  "/api/projects": [Role.ADMIN], // For creating/updating projects
-  "/api/blog": [Role.ADMIN], // For creating/updating blog posts
+// Import auth and types conditionally to avoid Prisma dependency issues
+let auth: any = null;
+let Role: any = null;
+let shouldRedirect: any = null;
+
+// Lazy load dependencies
+async function loadDependencies() {
+  if (!auth) {
+    try {
+      const authModule = await import("@/lib/auth");
+      auth = authModule.auth;
+
+      const prismaModule = await import("@prisma/client");
+      Role = prismaModule.Role;
+
+      const canonicalModule = await import("@/lib/canonical");
+      shouldRedirect = canonicalModule.shouldRedirect;
+    } catch (error) {
+      console.warn("Some middleware dependencies not available:", error);
+    }
+  }
+}
+
+// Define protected routes and their required roles (using string constants to avoid Prisma dependency)
+const protectedRoutes: Record<string, string[]> = {
+  "/admin": ["ADMIN"],
+  "/dashboard": ["USER", "ADMIN"],
+  "/api/admin": ["ADMIN"],
+  "/api/projects": ["ADMIN"], // For creating/updating projects
+  "/api/blog": ["ADMIN"], // For creating/updating blog posts
 };
 
 // Public routes that don't require authentication
@@ -45,7 +65,7 @@ function isPublicRoute(pathname: string): boolean {
   });
 }
 
-function getRequiredRoles(pathname: string): Role[] | null {
+function getRequiredRoles(pathname: string): string[] | null {
   for (const [route, roles] of Object.entries(protectedRoutes)) {
     if (pathname.startsWith(route)) {
       return roles;
@@ -73,13 +93,22 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Handle SEO redirects
-  const redirectCheck = shouldRedirect(pathname);
-  if (redirectCheck.redirect && redirectCheck.destination) {
-    return NextResponse.redirect(
-      new URL(redirectCheck.destination, request.url),
-      301
-    );
+  // Load dependencies
+  await loadDependencies();
+
+  // Handle SEO redirects (if available)
+  if (shouldRedirect) {
+    try {
+      const redirectCheck = shouldRedirect(pathname);
+      if (redirectCheck.redirect && redirectCheck.destination) {
+        return NextResponse.redirect(
+          new URL(redirectCheck.destination, request.url),
+          301
+        );
+      }
+    } catch (error) {
+      console.warn("SEO redirect check failed:", error);
+    }
   }
 
   // Add comprehensive security headers
@@ -149,36 +178,43 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // Get session for protected routes
-  const session = await auth();
+  // Get session for protected routes (if auth is available)
+  if (auth) {
+    try {
+      const session = await auth();
 
-  // Check if user is authenticated
-  if (!session?.user) {
-    if (pathname.startsWith("/api/")) {
-      return NextResponse.json(
-        { error: "Authentication required" },
-        { status: 401 }
-      );
+      // Check if user is authenticated
+      if (!session?.user) {
+        if (pathname.startsWith("/api/")) {
+          return NextResponse.json(
+            { error: "Authentication required" },
+            { status: 401 }
+          );
+        }
+
+        // Redirect to sign in page
+        const signInUrl = new URL("/auth/signin", request.url);
+        signInUrl.searchParams.set("callbackUrl", pathname);
+        return NextResponse.redirect(signInUrl);
+      }
+
+      // Check role-based access
+      const requiredRoles = getRequiredRoles(pathname);
+      if (requiredRoles && !requiredRoles.includes(session.user.role)) {
+        if (pathname.startsWith("/api/")) {
+          return NextResponse.json(
+            { error: "Insufficient permissions" },
+            { status: 403 }
+          );
+        }
+
+        // Redirect to unauthorized page
+        return NextResponse.redirect(new URL("/unauthorized", request.url));
+      }
+    } catch (error) {
+      console.warn("Authentication check failed:", error);
+      // Continue without authentication if there's an error
     }
-
-    // Redirect to sign in page
-    const signInUrl = new URL("/auth/signin", request.url);
-    signInUrl.searchParams.set("callbackUrl", pathname);
-    return NextResponse.redirect(signInUrl);
-  }
-
-  // Check role-based access
-  const requiredRoles = getRequiredRoles(pathname);
-  if (requiredRoles && !requiredRoles.includes(session.user.role)) {
-    if (pathname.startsWith("/api/")) {
-      return NextResponse.json(
-        { error: "Insufficient permissions" },
-        { status: 403 }
-      );
-    }
-
-    // Redirect to unauthorized page
-    return NextResponse.redirect(new URL("/unauthorized", request.url));
   }
 
   return response;

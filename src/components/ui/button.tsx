@@ -1,9 +1,11 @@
+"use client";
+
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import { useAnnouncement } from "@/lib/accessibility";
+import { useAnnouncement } from "@/hooks/use-accessibility";
 import { ScreenReaderOnly } from "@/components/accessibility/screen-reader-only";
 
 const buttonVariants = cva(

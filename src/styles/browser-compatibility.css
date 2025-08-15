@@ -483,18 +483,18 @@ pre {
    Feature Detection Classes
    ========================================================================== */
 
-/* WebP support */
+/* WebP support - using placeholder paths */
 .supports-webp .bg-image {
-  background-image: url("image.webp");
+  background-image: url("/images/placeholder.webp");
 }
 
 .no-webp .bg-image {
-  background-image: url("image.jpg");
+  background-image: url("/images/placeholder.jpg");
 }
 
 /* AVIF support */
 .supports-avif .bg-image {
-  background-image: url("image.avif");
+  background-image: url("/images/placeholder.avif");
 }
 
 /* Intersection Observer fallback */

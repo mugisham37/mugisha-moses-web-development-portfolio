@@ -9,7 +9,7 @@ import {
   Status,
   Alert,
 } from "@/components/accessibility/screen-reader-only";
-import { useAnnouncement } from "@/lib/accessibility";
+import { useAnnouncement } from "@/hooks/use-accessibility";
 
 // Form Context
 interface FormContextValue {

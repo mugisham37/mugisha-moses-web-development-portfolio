@@ -4,30 +4,76 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
+// Check if DATABASE_URL is properly configured
+const isDatabaseConfigured = () => {
+  const dbUrl = process.env.DATABASE_URL;
+  if (!dbUrl) {
+    return false;
+  }
+
+  // Check if it's a placeholder or invalid URL
+  if (
+    dbUrl.includes("username:password") ||
+    dbUrl.includes("postgres:password") ||
+    dbUrl.includes("localhost:5432/brutalist_portfolio")
+  ) {
+    return false;
+  }
+
+  return true;
+};
+
+const DATABASE_AVAILABLE = isDatabaseConfigured();
+
+if (!DATABASE_AVAILABLE) {
+  console.warn(
+    "⚠️  DATABASE_URL not properly configured. Database features will be disabled."
+  );
+  console.warn(
+    "   To enable database features, configure DATABASE_URL in your .env.local file"
+  );
+}
+
+// Create a mock Prisma client for when database is not available
+const createMockPrismaClient = () => {
+  const mockHandler = {
+    get: () => {
+      return () => {
+        throw new Error(
+          "Database not configured. Please set DATABASE_URL in your .env.local file."
+        );
+      };
+    },
+  };
+
+  return new Proxy({}, mockHandler) as PrismaClient;
+};
+
 // Enhanced Prisma client configuration with optimized connection pooling
-export const db =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    log:
-      process.env.NODE_ENV === "development"
-        ? ["query", "error", "warn"]
-        : ["error"],
-    ...(process.env.DATABASE_URL && {
+export const db = DATABASE_AVAILABLE
+  ? (globalForPrisma.prisma ??
+    new PrismaClient({
+      log:
+        process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
       datasources: {
         db: {
-          url: process.env.DATABASE_URL,
+          url: process.env.DATABASE_URL!,
         },
       },
-    }),
-    // Optimized connection and transaction settings
-    transactionOptions: {
-      maxWait: 5000, // 5 seconds max wait for transaction
-      timeout: 10000, // 10 seconds transaction timeout
-      isolationLevel: "ReadCommitted", // Optimal for most use cases
-    },
-    // Error formatting for better debugging
-    errorFormat: process.env.NODE_ENV === "development" ? "pretty" : "minimal",
-  });
+      // Optimized connection and transaction settings
+      transactionOptions: {
+        maxWait: 5000, // 5 seconds max wait for transaction
+        timeout: 10000, // 10 seconds transaction timeout
+        isolationLevel: "ReadCommitted", // Optimal for most use cases
+      },
+      // Error formatting for better debugging
+      errorFormat:
+        process.env.NODE_ENV === "development" ? "pretty" : "minimal",
+    }))
+  : createMockPrismaClient();
+
+// Export database availability status
+export const isDatabaseAvailable = DATABASE_AVAILABLE;
 
 // Connection pool monitoring and optimization
 class DatabaseConnectionManager {
@@ -113,10 +159,16 @@ class DatabaseConnectionManager {
 
 export const dbManager = DatabaseConnectionManager.getInstance();
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
+if (process.env.NODE_ENV !== "production" && DATABASE_AVAILABLE) {
+  globalForPrisma.prisma = db;
+}
 
 // Connection health check utility
 export async function checkDatabaseConnection(): Promise<boolean> {
+  if (!DATABASE_AVAILABLE) {
+    return false;
+  }
+
   try {
     await db.$queryRaw`SELECT 1`;
     return true;
@@ -128,6 +180,10 @@ export async function checkDatabaseConnection(): Promise<boolean> {
 
 // Graceful shutdown utility
 export async function disconnectDatabase(): Promise<void> {
+  if (!DATABASE_AVAILABLE) {
+    return;
+  }
+
   try {
     await db.$disconnect();
     console.log("Database disconnected successfully");

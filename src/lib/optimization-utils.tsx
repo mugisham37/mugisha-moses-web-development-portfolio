@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Performance optimization utilities for production deployment
  */

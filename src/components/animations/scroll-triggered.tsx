@@ -71,7 +71,7 @@ export function ScrollTriggered({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: triggerOnce,
-    margin: `-${threshold * 100}%`,
+    margin: `-${threshold * 100}%` as any,
   });
 
   // Parallax effect
@@ -166,7 +166,7 @@ export function ScrollStagger({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: triggerOnce,
-    margin: `-${threshold * 100}%`,
+    margin: `-${threshold * 100}%` as any,
   });
 
   return (

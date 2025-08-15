@@ -3,7 +3,7 @@
  * Provides focus management, screen reader support, and keyboard navigation
  */
 
-import { useEffect, useRef, useCallback } from "react";
+// React imports moved to separate client-side hooks file
 
 // ARIA Live Region Types
 export type LiveRegionPoliteness = "polite" | "assertive" | "off";
@@ -391,84 +391,7 @@ export class ColorContrast {
   }
 }
 
-// React Hooks for Accessibility
-export function useAnnouncement() {
-  return useCallback(
-    (message: string, priority: LiveRegionPoliteness = "polite") => {
-      ScreenReaderUtils.announce(message, priority);
-    },
-    []
-  );
-}
-
-export function useFocusManagement() {
-  return {
-    setFocus: useCallback(
-      (element: HTMLElement | string, options?: FocusOptions) => {
-        return FocusManager.setFocus(element, options);
-      },
-      []
-    ),
-    restoreFocus: useCallback(() => {
-      return FocusManager.restoreFocus();
-    }, []),
-    getFocusableElements: useCallback((container: HTMLElement) => {
-      return FocusManager.getFocusableElements(container);
-    }, []),
-  };
-}
-
-export function useFocusTrap(
-  containerRef: React.RefObject<HTMLElement>,
-  isActive: boolean,
-  options: FocusTrapOptions = {}
-) {
-  const deactivateRef = useRef<(() => void) | null>(null);
-
-  useEffect(() => {
-    if (isActive && containerRef.current) {
-      deactivateRef.current = FocusManager.createFocusTrap(
-        containerRef.current,
-        options
-      );
-    } else if (deactivateRef.current) {
-      deactivateRef.current();
-      deactivateRef.current = null;
-    }
-
-    return () => {
-      if (deactivateRef.current) {
-        deactivateRef.current();
-      }
-    };
-  }, [isActive, containerRef, options]);
-}
-
-export function useKeyboardNavigation(
-  elements: HTMLElement[],
-  options: {
-    orientation?: "horizontal" | "vertical" | "both";
-    wrap?: boolean;
-    columns?: number;
-  } = {}
-) {
-  const currentIndexRef = useRef(0);
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      const newIndex = KeyboardNavigation.handleArrowNavigation(
-        event,
-        elements,
-        currentIndexRef.current,
-        options
-      );
-      currentIndexRef.current = newIndex;
-    },
-    [elements, options]
-  );
-
-  return { handleKeyDown, currentIndex: currentIndexRef.current };
-}
+// React Hooks moved to separate client-side file - see src/hooks/use-accessibility.ts
 
 // Accessibility Testing Utilities
 export class AccessibilityTesting {

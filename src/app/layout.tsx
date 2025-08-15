@@ -4,12 +4,13 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Import styles
-import "@/styles/globals.css";
+import "./globals.css";
 import "@/styles/accessibility.css";
 import "@/styles/browser-compatibility.css";
 
 // Import browser compatibility initialization
 import { BrowserCompatibilityProvider } from "@/components/providers/browser-compatibility-provider";
+import { AnimationProvider } from "@/components/animations/animation-provider";
 
 // Font configurations with optimized loading
 const inter = Inter({
@@ -328,18 +329,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className="font-sans antialiased">
         {/* Browser compatibility provider for feature detection and polyfills */}
         <BrowserCompatibilityProvider>
-          {/* Skip to main content link for accessibility */}
-          <a
-            href="#main-content"
-            className="bg-accent-yellow sr-only z-50 px-4 py-2 font-mono font-bold tracking-wider text-black uppercase focus:not-sr-only focus:absolute focus:top-4 focus:left-4"
-          >
-            Skip to main content
-          </a>
+          <AnimationProvider>
+            {/* Skip to main content link for accessibility */}
+            <a
+              href="#main-content"
+              className="bg-accent-yellow sr-only z-50 px-4 py-2 font-mono font-bold tracking-wider text-black uppercase focus:not-sr-only focus:absolute focus:top-4 focus:left-4"
+            >
+              Skip to main content
+            </a>
 
-          {/* Main application content */}
-          <div id="main-content" className="min-h-screen">
-            {children}
-          </div>
+            {/* Main application content */}
+            <div id="main-content" className="min-h-screen">
+              {children}
+            </div>
+          </AnimationProvider>
 
           {/* Analytics and performance monitoring */}
           <Analytics />

@@ -107,8 +107,19 @@ export const fallbackProjects = [
 ];
 
 export function isDatabaseAvailable(): boolean {
-  return (
-    process.env.DATABASE_URL !== undefined &&
-    !process.env.DATABASE_URL.includes("username:password")
-  );
+  const dbUrl = process.env.DATABASE_URL;
+  if (!dbUrl) {
+    return false;
+  }
+
+  // Check if it's a placeholder or invalid URL
+  if (
+    dbUrl.includes("username:password") ||
+    dbUrl.includes("postgres:password") ||
+    dbUrl.includes("localhost:5432/brutalist_portfolio")
+  ) {
+    return false;
+  }
+
+  return true;
 }

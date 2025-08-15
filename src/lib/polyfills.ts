@@ -10,7 +10,7 @@
 /**
  * CSS.supports polyfill for older browsers
  */
-if (!window.CSS || !window.CSS.supports) {
+if (typeof window !== "undefined" && (!window.CSS || !window.CSS.supports)) {
   window.CSS = window.CSS || {};
   window.CSS.supports = function (property: string, value?: string): boolean {
     const element = document.createElement("div");
@@ -35,7 +35,10 @@ if (!window.CSS || !window.CSS.supports) {
  * Object.assign polyfill for IE
  */
 if (typeof Object.assign !== "function") {
-  Object.assign = function (target: Record<string, unknown>, ...sources: Record<string, unknown>[]) {
+  Object.assign = function (
+    target: Record<string, unknown>,
+    ...sources: Record<string, unknown>[]
+  ) {
     if (target == null) {
       throw new TypeError("Cannot convert undefined or null to object");
     }
@@ -193,7 +196,7 @@ if (!String.prototype.endsWith) {
 /**
  * Promise polyfill for IE
  */
-if (typeof Promise === "undefined") {
+if (typeof window !== "undefined" && typeof Promise === "undefined") {
   // Simple Promise polyfill
   (window as any).Promise = class SimplePromise {
     private state: "pending" | "fulfilled" | "rejected" = "pending";
@@ -320,16 +323,19 @@ if (typeof Promise === "undefined") {
 /**
  * fetch polyfill for IE
  */
-if (!window.fetch) {
+if (typeof window !== "undefined" && !window.fetch) {
   window.fetch = function (
     input: string | Request | URL,
     init?: RequestInit
   ): Promise<Response> {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      const url = typeof input === "string" ? input : 
-                  input instanceof URL ? input.toString() : 
-                  (input as Request).url;
+      const url =
+        typeof input === "string"
+          ? input
+          : input instanceof URL
+            ? input.toString()
+            : (input as Request).url;
       const method = init?.method || "GET";
       const headers = init?.headers || {};
       const body = init?.body;
@@ -362,7 +368,7 @@ if (!window.fetch) {
       xhr.ontimeout = () => reject(new Error("Request timeout"));
 
       // Send with proper body handling
-      if (body && typeof body === 'string') {
+      if (body && typeof body === "string") {
         xhr.send(body);
       } else if (body instanceof FormData) {
         xhr.send(body);
@@ -378,7 +384,7 @@ if (!window.fetch) {
 /**
  * CustomEvent polyfill for IE
  */
-if (typeof window.CustomEvent !== "function") {
+if (typeof window !== "undefined" && typeof window.CustomEvent !== "function") {
   function CustomEvent(event: string, params?: CustomEventInit): CustomEvent {
     params = params || { bubbles: false, cancelable: false, detail: null };
     const evt = document.createEvent("CustomEvent");
@@ -396,7 +402,7 @@ if (typeof window.CustomEvent !== "function") {
 /**
  * Element.matches polyfill for IE
  */
-if (!Element.prototype.matches) {
+if (typeof window !== "undefined" && !Element.prototype.matches) {
   Element.prototype.matches =
     (Element.prototype as any).matchesSelector ||
     (Element.prototype as any).mozMatchesSelector ||
@@ -405,7 +411,9 @@ if (!Element.prototype.matches) {
     (Element.prototype as any).webkitMatchesSelector ||
     function (this: Element, s: string): boolean {
       const element = this as any;
-      const matches = (element.document || element.ownerDocument).querySelectorAll(s);
+      const matches = (
+        element.document || element.ownerDocument
+      ).querySelectorAll(s);
       let i = matches.length;
       while (--i >= 0 && matches.item(i) !== this) {}
       return i > -1;
@@ -415,7 +423,7 @@ if (!Element.prototype.matches) {
 /**
  * Element.closest polyfill for IE
  */
-if (!Element.prototype.closest) {
+if (typeof window !== "undefined" && !Element.prototype.closest) {
   Element.prototype.closest = function (
     this: Element,
     s: string
@@ -432,8 +440,12 @@ if (!Element.prototype.closest) {
 /**
  * NodeList.forEach polyfill for IE
  */
-if (window.NodeList && !NodeList.prototype.forEach) {
-  NodeList.prototype.forEach = function<T extends Node>(
+if (
+  typeof window !== "undefined" &&
+  window.NodeList &&
+  !NodeList.prototype.forEach
+) {
+  NodeList.prototype.forEach = function <T extends Node>(
     this: NodeList,
     callback: (value: T, key: number, parent: NodeList) => void,
     thisArg?: any
@@ -447,7 +459,7 @@ if (window.NodeList && !NodeList.prototype.forEach) {
 /**
  * requestAnimationFrame polyfill for IE
  */
-if (!window.requestAnimationFrame) {
+if (typeof window !== "undefined" && !window.requestAnimationFrame) {
   let lastTime = 0;
   window.requestAnimationFrame = function (
     callback: FrameRequestCallback
@@ -462,7 +474,7 @@ if (!window.requestAnimationFrame) {
   };
 }
 
-if (!window.cancelAnimationFrame) {
+if (typeof window !== "undefined" && !window.cancelAnimationFrame) {
   window.cancelAnimationFrame = function (id: number): void {
     clearTimeout(id);
   };
@@ -475,7 +487,9 @@ async function safeDynamicImport(moduleName: string): Promise<any> {
   try {
     return await import(/* webpackIgnore: true */ moduleName);
   } catch {
-    console.warn(`Module ${moduleName} not found. Install it with: npm install ${moduleName}`);
+    console.warn(
+      `Module ${moduleName} not found. Install it with: npm install ${moduleName}`
+    );
     return null;
   }
 }
@@ -484,7 +498,7 @@ async function safeDynamicImport(moduleName: string): Promise<any> {
  * IntersectionObserver polyfill loader
  */
 export async function loadIntersectionObserverPolyfill(): Promise<void> {
-  if (!("IntersectionObserver" in window)) {
+  if (typeof window !== "undefined" && !("IntersectionObserver" in window)) {
     const polyfill = await safeDynamicImport("intersection-observer");
     if (polyfill) {
       console.log("IntersectionObserver polyfill loaded");
@@ -496,7 +510,7 @@ export async function loadIntersectionObserverPolyfill(): Promise<void> {
  * ResizeObserver polyfill loader
  */
 export async function loadResizeObserverPolyfill(): Promise<void> {
-  if (!("ResizeObserver" in window)) {
+  if (typeof window !== "undefined" && !("ResizeObserver" in window)) {
     const polyfill = await safeDynamicImport("@juggle/resize-observer");
     if (polyfill?.ResizeObserver) {
       (window as any).ResizeObserver = polyfill.ResizeObserver;
@@ -509,7 +523,10 @@ export async function loadResizeObserverPolyfill(): Promise<void> {
  * Web Animations API polyfill loader
  */
 export async function loadWebAnimationsPolyfill(): Promise<void> {
-  if (!("animate" in document.createElement("div"))) {
+  if (
+    typeof window !== "undefined" &&
+    !("animate" in document.createElement("div"))
+  ) {
     const polyfill = await safeDynamicImport("web-animations-js");
     if (polyfill) {
       console.log("Web Animations API polyfill loaded");
@@ -522,7 +539,7 @@ export async function loadWebAnimationsPolyfill(): Promise<void> {
  */
 export async function loadCSSCustomPropertiesPolyfill(): Promise<void> {
   // Check if CSS custom properties are supported
-  if (!CSS.supports("--custom", "property")) {
+  if (typeof window !== "undefined" && !CSS.supports("--custom", "property")) {
     const polyfill = await safeDynamicImport("css-vars-ponyfill");
     if (polyfill?.default) {
       const cssVars = polyfill.default;

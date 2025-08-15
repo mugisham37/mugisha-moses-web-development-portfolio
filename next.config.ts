@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enable experimental features for better performance and SEO
+  // Performance optimizations
   experimental: {
     optimizePackageImports: [
       "lucide-react",
@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     ],
     webVitalsAttribution: ["CLS", "LCP", "FCP", "FID", "TTFB"],
     optimizeCss: true,
-    typedRoutes: true,
+    // typedRoutes: true, // Disabled for Turbopack compatibility
   },
 
   // External packages for server components
@@ -32,18 +32,6 @@ const nextConfig: NextConfig = {
 
   // Power optimizations
   poweredByHeader: false,
-
-  // Bundle analyzer
-  ...(process.env.ANALYZE === "true" && {
-    webpack: (config: any) => {
-      config.plugins.push(
-        new (require("@next/bundle-analyzer")({
-          enabled: true,
-        }))()
-      );
-      return config;
-    },
-  }),
 
   // Enhanced image optimization
   images: {

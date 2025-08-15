@@ -38,6 +38,13 @@ const easingFunctions = {
   backOut: [0.34, 1.56, 0.64, 1] as const,
 };
 
+// Validation function to ensure animation variants are properly structured
+function validateAnimation(animation: string, variant: any): boolean {
+  if (!variant) return false;
+  if (!variant.hidden || !variant.visible) return false;
+  return true;
+}
+
 // Advanced reveal animations
 const revealVariants: Record<string, Variants> = {
   // Fade animations
@@ -63,6 +70,10 @@ const revealVariants: Record<string, Variants> = {
   },
 
   // Scale animations
+  scale: {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 },
+  },
   scaleIn: {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
@@ -70,6 +81,10 @@ const revealVariants: Record<string, Variants> = {
   scaleInUp: {
     hidden: { opacity: 0, scale: 0.8, y: 40 },
     visible: { opacity: 1, scale: 1, y: 0 },
+  },
+  scaleInRotate: {
+    hidden: { opacity: 0, scale: 0.5, rotate: -180 },
+    visible: { opacity: 1, scale: 1, rotate: 0 },
   },
 
   // Rotation animations
@@ -213,6 +228,17 @@ const revealVariants: Record<string, Variants> = {
   },
 };
 
+// Validate that essential animations exist
+if (
+  !revealVariants.fadeInUp ||
+  !revealVariants.fadeInUp.hidden ||
+  !revealVariants.fadeInUp.visible
+) {
+  console.error(
+    "ScrollRevealSystem: Critical error - fadeInUp animation is not properly defined!"
+  );
+}
+
 interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
@@ -242,7 +268,7 @@ export function ScrollReveal({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: triggerOnce,
-    margin: rootMargin,
+    margin: rootMargin as any,
     amount: threshold,
   });
 
@@ -258,11 +284,59 @@ export function ScrollReveal({
     }
   }, [isInView, hasRevealed, triggerOnce, onReveal, onHide]);
 
-  const variants = revealVariants[animation];
+  // Bulletproof animation variant selection
+  const getAnimationVariant = () => {
+    try {
+      const requestedVariant = revealVariants[animation];
+      if (
+        requestedVariant &&
+        requestedVariant.hidden &&
+        requestedVariant.visible
+      ) {
+        return requestedVariant;
+      }
+
+      // Fallback to fadeInUp
+      const fallbackVariant = revealVariants.fadeInUp;
+      if (
+        fallbackVariant &&
+        fallbackVariant.hidden &&
+        fallbackVariant.visible
+      ) {
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            `ScrollReveal: Animation "${animation}" not found. Using "fadeInUp" as fallback.`
+          );
+        }
+        return fallbackVariant;
+      }
+
+      // Ultimate fallback - hardcoded values
+      return {
+        hidden: { opacity: 0, y: 60 },
+        visible: { opacity: 1, y: 0 },
+      };
+    } catch (error) {
+      console.error("ScrollReveal: Error getting animation variant:", error);
+      return {
+        hidden: { opacity: 0, y: 60 },
+        visible: { opacity: 1, y: 0 },
+      };
+    }
+  };
+
+  const safeVariant = getAnimationVariant();
+
+  // Create safe variants with guaranteed properties
+  const variants = {
+    hidden: safeVariant.hidden || { opacity: 0, y: 60 },
+    visible: safeVariant.visible || { opacity: 1, y: 0 },
+  };
+
   const transition = {
     duration,
     delay,
-    ease: easingFunctions[easing],
+    ease: easingFunctions[easing] || easingFunctions.easeOut,
   };
 
   return (
@@ -275,10 +349,7 @@ export function ScrollReveal({
         ...variants,
         visible: {
           ...variants.visible,
-          transition: {
-            ...variants.visible?.transition,
-            ...transition,
-          },
+          transition,
         },
       }}
     >
@@ -315,7 +386,7 @@ export function ScrollRevealStagger({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: triggerOnce,
-    margin: rootMargin,
+    margin: rootMargin as any,
     amount: threshold,
   });
 
@@ -329,13 +400,60 @@ export function ScrollRevealStagger({
     },
   };
 
+  // Bulletproof animation variant selection
+  const getAnimationVariant = () => {
+    try {
+      const requestedVariant = revealVariants[animation];
+      if (
+        requestedVariant &&
+        requestedVariant.hidden &&
+        requestedVariant.visible
+      ) {
+        return requestedVariant;
+      }
+
+      // Fallback to fadeInUp
+      const fallbackVariant = revealVariants.fadeInUp;
+      if (
+        fallbackVariant &&
+        fallbackVariant.hidden &&
+        fallbackVariant.visible
+      ) {
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            `ScrollRevealStagger: Animation "${animation}" not found. Using "fadeInUp" as fallback.`
+          );
+        }
+        return fallbackVariant;
+      }
+
+      // Ultimate fallback - hardcoded values
+      return {
+        hidden: { opacity: 0, y: 60 },
+        visible: { opacity: 1, y: 0 },
+      };
+    } catch (error) {
+      console.error(
+        "ScrollRevealStagger: Error getting animation variant:",
+        error
+      );
+      return {
+        hidden: { opacity: 0, y: 60 },
+        visible: { opacity: 1, y: 0 },
+      };
+    }
+  };
+
+  const safeVariant = getAnimationVariant();
+
+  // Create safe item variants with guaranteed properties
   const itemVariants = {
-    ...revealVariants[animation],
+    hidden: safeVariant.hidden || { opacity: 0, y: 60 },
     visible: {
-      ...revealVariants[animation].visible,
+      ...(safeVariant.visible || { opacity: 1, y: 0 }),
       transition: {
         duration,
-        ease: easingFunctions[easing],
+        ease: easingFunctions[easing] || easingFunctions.easeOut,
       },
     },
   };

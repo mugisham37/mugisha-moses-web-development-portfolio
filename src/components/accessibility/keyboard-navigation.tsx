@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useCallback, useEffect } from "react";
-import { useKeyboardNavigation } from "@/lib/accessibility";
+import { useKeyboardNavigation } from "@/hooks/use-accessibility";
 import { cn } from "@/lib/utils";
 
 interface KeyboardNavigationProps {

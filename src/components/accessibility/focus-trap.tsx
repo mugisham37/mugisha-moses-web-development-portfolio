@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef } from "react";
-import { useFocusTrap, FocusTrapOptions } from "@/lib/accessibility";
+import { useFocusTrap } from "@/hooks/use-accessibility";
+import { FocusTrapOptions } from "@/lib/accessibility";
 
 interface FocusTrapProps {
   children: React.ReactNode;

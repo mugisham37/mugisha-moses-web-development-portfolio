@@ -3,7 +3,23 @@
  * Tracks Core Web Vitals, API performance, and system health
  */
 
-import { db } from "./db";
+// Import db conditionally to avoid issues during build/initialization
+let db: any = null;
+let isDatabaseAvailable: boolean = false;
+
+async function getDb() {
+  if (!db) {
+    try {
+      const dbModule = await import("./db");
+      db = dbModule.db;
+      isDatabaseAvailable = dbModule.isDatabaseAvailable;
+    } catch (error) {
+      console.warn("Database not available in performance monitor:", error);
+      return null;
+    }
+  }
+  return isDatabaseAvailable ? db : null;
+}
 
 // Performance thresholds based on Core Web Vitals
 export const PERFORMANCE_THRESHOLDS = {
@@ -75,19 +91,22 @@ class PerformanceMonitor {
       // Store in memory for immediate analysis
       this.metrics.push(metric);
 
-      // Store in database for long-term analysis
-      await db.performanceMetric.create({
-        data: {
-          sessionId: metric.sessionId || "unknown",
-          page: metric.url,
-          lcp: metric.type === "LCP" ? metric.value : undefined,
-          fid: metric.type === "FID" ? metric.value : undefined,
-          cls: metric.type === "CLS" ? metric.value : undefined,
-          fcp: metric.type === "FCP" ? metric.value : undefined,
-          ttfb: metric.type === "TTFB" ? metric.value : undefined,
-          connectionType: metric.connectionType,
-        },
-      });
+      // Store in database for long-term analysis (if available)
+      const database = await getDb();
+      if (database) {
+        await database.performanceMetric.create({
+          data: {
+            sessionId: metric.sessionId || "unknown",
+            page: metric.url,
+            lcp: metric.type === "LCP" ? metric.value : undefined,
+            fid: metric.type === "FID" ? metric.value : undefined,
+            cls: metric.type === "CLS" ? metric.value : undefined,
+            fcp: metric.type === "FCP" ? metric.value : undefined,
+            ttfb: metric.type === "TTFB" ? metric.value : undefined,
+            connectionType: metric.connectionType,
+          },
+        });
+      }
 
       // Check for performance issues
       await this.checkPerformanceThresholds(metric);
@@ -267,13 +286,19 @@ class PerformanceMonitor {
         metrics.memoryUsage = memUsage.heapUsed / memUsage.heapTotal;
       }
 
-      // Database connection health
+      // Database connection health (only if database is configured)
       try {
-        const startTime = Date.now();
-        await db.$queryRaw`SELECT 1`;
-        metrics.responseTime = Date.now() - startTime;
+        const database = await getDb();
+        if (database && isDatabaseAvailable) {
+          const startTime = Date.now();
+          await database.$queryRaw`SELECT 1`;
+          metrics.responseTime = Date.now() - startTime;
+        }
       } catch (error) {
-        console.error("Database health check failed:", error);
+        // Only log database errors if database should be available
+        if (isDatabaseAvailable) {
+          console.error("Database health check failed:", error);
+        }
       }
 
       // Cache hit rate (if using Redis or similar)
