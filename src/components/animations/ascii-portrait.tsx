@@ -124,7 +124,6 @@ export function ASCIIPortrait({
       if (!container) return;
 
       const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
 
       // Calculate responsive dimensions based on container size
       // const aspectRatio = width / height; // Reserved for future use
@@ -180,7 +179,7 @@ export function ASCIIPortrait({
       try {
         await loadImage();
         setupCanvas(canvas, ctx);
-        generateASCIIData(ctx);
+        generateASCIIData();
         generateRandomData();
         setIsLoaded(true);
 
@@ -265,7 +264,7 @@ export function ASCIIPortrait({
     }
   };
 
-  const generateASCIIData = (ctx: CanvasRenderingContext2D) => {
+  const generateASCIIData = () => {
     if (!imageRef.current) return;
 
     // Use responsive dimensions
@@ -356,7 +355,7 @@ export function ASCIIPortrait({
       }
     }
 
-    render(ctx);
+    render(_ctx);
   };
 
   const startAnimation = (ctx: CanvasRenderingContext2D) => {

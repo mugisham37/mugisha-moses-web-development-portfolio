@@ -72,7 +72,7 @@ export function ScrollAnimation({
 }: ScrollAnimationProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
-    threshold,
+    amount: threshold,
     once: triggerOnce,
   });
   const controls = useAnimation();
@@ -181,7 +181,7 @@ export function ScrollCounter({
   const ref = useRef<HTMLSpanElement>(null);
   const [count, setCount] = useState(start);
   const [hasStarted, setHasStarted] = useState(false);
-  const isInView = useInView(ref, { threshold, once: true });
+  const isInView = useInView(ref, { amount: threshold, once: true });
 
   useEffect(() => {
     if (isInView && !hasStarted) {
@@ -244,7 +244,7 @@ export function ScrollTypewriter({
   const [displayText, setDisplayText] = useState("");
   const [showCursor, setShowCursor] = useState(cursor);
   const [hasStarted, setHasStarted] = useState(false);
-  const isInView = useInView(ref, { threshold, once: true });
+  const isInView = useInView(ref, { amount: threshold, once: true });
 
   useEffect(() => {
     if (isInView && !hasStarted) {

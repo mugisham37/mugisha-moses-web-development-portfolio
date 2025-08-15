@@ -8,13 +8,12 @@ import {
   useTransform,
   useSpring,
   useMotionValue,
-  useAnimation,
   AnimatePresence,
   type Variants,
   type Transition,
+  type MotionStyle,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useScrollTriggeredAnimation } from "@/hooks/use-scroll-triggered-animations";
 
 // Advanced animation variants with sophisticated easing
 const advancedVariants: Record<string, Variants> = {
@@ -25,10 +24,6 @@ const advancedVariants: Record<string, Variants> = {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
     },
   },
   fadeInDown: {
@@ -37,10 +32,6 @@ const advancedVariants: Record<string, Variants> = {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
     },
   },
   slideInLeft: {
@@ -49,10 +40,6 @@ const advancedVariants: Record<string, Variants> = {
       opacity: 1,
       x: 0,
       rotateY: 0,
-      transition: {
-        duration: 0.9,
-        ease: [0.23, 1, 0.32, 1],
-      },
     },
   },
   slideInRight: {
@@ -61,10 +48,6 @@ const advancedVariants: Record<string, Variants> = {
       opacity: 1,
       x: 0,
       rotateY: 0,
-      transition: {
-        duration: 0.9,
-        ease: [0.23, 1, 0.32, 1],
-      },
     },
   },
   scaleInRotate: {
@@ -73,10 +56,6 @@ const advancedVariants: Record<string, Variants> = {
       opacity: 1,
       scale: 1,
       rotate: 0,
-      transition: {
-        duration: 1.2,
-        ease: [0.34, 1.56, 0.64, 1],
-      },
     },
   },
   morphIn: {
@@ -85,10 +64,6 @@ const advancedVariants: Record<string, Variants> = {
       opacity: 1,
       scale: 1,
       borderRadius: "0%",
-      transition: {
-        duration: 1,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
     },
   },
   // Stagger container variants
@@ -109,10 +84,6 @@ const advancedVariants: Record<string, Variants> = {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
     },
   },
   // Advanced stagger with rotation
@@ -123,10 +94,6 @@ const advancedVariants: Record<string, Variants> = {
       y: 0,
       rotate: 0,
       scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.23, 1, 0.32, 1],
-      },
     },
   },
   // Page transition variants
@@ -135,18 +102,10 @@ const advancedVariants: Record<string, Variants> = {
     animate: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
     },
     exit: {
       opacity: 0,
       y: -20,
-      transition: {
-        duration: 0.4,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
     },
   },
 };
@@ -188,12 +147,11 @@ export function ViewportAnimation({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: triggerOnce,
-    margin: `-${threshold * 100}%`,
+    amount: threshold,
   });
 
   const variants = advancedVariants[variant];
   const customTransition: Transition = {
-    ...variants.visible?.transition,
     delay,
     ease: advancedEasing[easing],
     ...(duration && { duration }),
@@ -247,7 +205,7 @@ export function StaggeredAnimation({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: triggerOnce,
-    margin: `-${threshold * 100}%`,
+    amount: threshold,
   });
 
   const containerVariants = {
@@ -327,7 +285,7 @@ export function ParallaxElement({
     springConfig
   );
 
-  const motionStyle: any = {};
+  const motionStyle: MotionStyle = {};
 
   if (direction === "vertical") {
     motionStyle.y = y;
@@ -425,7 +383,6 @@ export function MagneticElement({
   children,
   className,
   strength = 0.3,
-  restoreSpeed = 0.15,
 }: MagneticElementProps) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -537,7 +494,7 @@ export function AnimatedCounter({
   const [count, setCount] = useState(0);
   const isInView = useInView(ref, {
     once: true,
-    margin: `-${threshold * 100}%`,
+    amount: threshold,
   });
 
   useEffect(() => {

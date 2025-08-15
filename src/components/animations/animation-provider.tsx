@@ -7,8 +7,6 @@ import {
   shouldReduceMotion,
   getDevicePerformanceLevel,
   PERFORMANCE_SETTINGS,
-  type ANIMATION_DURATIONS,
-  type ANIMATION_EASINGS,
 } from "@/lib/animation-config";
 
 interface AnimationContextType {
@@ -108,10 +106,10 @@ export function AnimationProvider({
 
   // Global motion configuration
   const motionConfig = {
-    reducedMotion: reducedMotion ? "always" : "never",
+    reducedMotion: reducedMotion ? "always" as const : "never" as const,
     transition: {
       duration: reducedMotion ? 0.01 : 0.6,
-      ease: reducedMotion ? [0, 0, 1, 1] : [0.25, 0.46, 0.45, 0.94],
+      ease: reducedMotion ? [0, 0, 1, 1] as const : [0.25, 0.46, 0.45, 0.94] as const,
     },
   };
 
@@ -172,7 +170,7 @@ export function useOptimizedAnimation() {
   const optimizeTransition = (transition: {
     duration?: number;
     ease?: readonly number[];
-    [key: string]: any;
+    [key: string]: unknown;
   }) => {
     return {
       ...transition,
@@ -183,17 +181,17 @@ export function useOptimizedAnimation() {
     };
   };
 
-  const optimizeVariants = (variants: Record<string, any>) => {
+  const optimizeVariants = (variants: Record<string, unknown>) => {
     if (reducedMotion) {
       // Simplify variants for reduced motion
-      const simplifiedVariants: Record<string, any> = {};
+      const simplifiedVariants: Record<string, unknown> = {};
 
       Object.keys(variants).forEach((key) => {
         const variant = variants[key];
-        if (typeof variant === "object" && variant.transition) {
+        if (typeof variant === "object" && variant && 'transition' in variant) {
           simplifiedVariants[key] = {
             ...variant,
-            transition: optimizeTransition(variant.transition),
+            transition: optimizeTransition(variant.transition as { duration?: number; ease?: readonly number[]; [key: string]: unknown }),
           };
         } else {
           simplifiedVariants[key] = variant;
@@ -216,7 +214,7 @@ export function useOptimizedAnimation() {
 // Performance monitoring component
 export function AnimationPerformanceMonitor() {
   const [fps, setFps] = useState(60);
-  const [animationCount, setAnimationCount] = useState(0);
+  const [animationCount] = useState(0);
 
   useEffect(() => {
     let frameCount = 0;
