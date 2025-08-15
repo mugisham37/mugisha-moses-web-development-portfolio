@@ -62,6 +62,31 @@ const nextConfig: NextConfig = {
   // Enhanced headers for security, performance, and caching
   async headers() {
     return [
+      // Font files
+      {
+        source: "/fonts/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              process.env.NODE_ENV === "development"
+                ? "no-cache, no-store, must-revalidate"
+                : "public, max-age=31536000, immutable",
+          },
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET, OPTIONS",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type",
+          },
+        ],
+      },
       {
         source: "/(.*)",
         headers: [
@@ -109,7 +134,10 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value:
+              process.env.NODE_ENV === "development"
+                ? "no-cache, no-store, must-revalidate"
+                : "public, max-age=31536000, immutable",
           },
         ],
       },
@@ -118,7 +146,10 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value:
+              process.env.NODE_ENV === "development"
+                ? "no-cache, no-store, must-revalidate"
+                : "public, max-age=31536000, immutable",
           },
         ],
       },

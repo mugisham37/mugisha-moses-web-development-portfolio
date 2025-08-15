@@ -10,6 +10,7 @@ import React, {
 import { Canvas, useFrame, RootState } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as THREE from "three";
+import { config } from "process";
 
 // Enhanced background effects with user preference detection
 interface BackgroundEffectsConfig {
@@ -452,22 +453,26 @@ function useBackgroundEffectsConfig(): BackgroundEffectsConfig {
   });
 
   useEffect(() => {
-    // Import configuration manager dynamically to avoid SSR issues
-    import("@/lib/background-effects-config").then(
-      ({ backgroundEffectsConfig }) => {
-        const optimizedConfig = backgroundEffectsConfig.getOptimizedConfig();
+    // Use default config to avoid dynamic import issues
+    const defaultConfig = {
+      particleCount: 100,
+      geometricShapeCount: 20,
+      enableParticleEffects: true,
+      enableGeometricShapes: true,
+      enableGridLines: true,
+      animationIntensity: 1,
+      respectReducedMotion: false,
+    };
 
-        setConfig({
-          particleCount: optimizedConfig.particleCount,
-          geometricShapeCount: optimizedConfig.geometricShapeCount,
-          enableParticleEffects: optimizedConfig.enableParticleEffects,
-          enableGeometricShapes: optimizedConfig.enableGeometricShapes,
-          enableGridLines: optimizedConfig.enableGridLines,
-          animationIntensity: optimizedConfig.animationIntensity,
-          respectReducedMotion: optimizedConfig.respectReducedMotion,
-        });
-      }
-    );
+    setConfig({
+      particleCount: defaultConfig.particleCount,
+      geometricShapeCount: defaultConfig.geometricShapeCount,
+      enableParticleEffects: defaultConfig.enableParticleEffects,
+      enableGeometricShapes: defaultConfig.enableGeometricShapes,
+      enableGridLines: defaultConfig.enableGridLines,
+      animationIntensity: defaultConfig.animationIntensity,
+      respectReducedMotion: defaultConfig.respectReducedMotion,
+    });
   }, []);
 
   // Override with reduced motion preferences
@@ -494,68 +499,70 @@ export function ThreeBackground() {
   useEffect(() => {
     let performanceCheckInterval: NodeJS.Timeout | undefined;
 
-    // Import performance monitor dynamically
-    import("@/lib/background-performance").then(
-      ({ backgroundPerformanceMonitor }) => {
-        const handlePerformanceUpdate = (metrics: {
-          fps: number;
-          frameTime: number;
-          memoryUsage: number;
-          drawCalls: number;
-          triangles: number;
-        }) => {
-          if (metrics.fps < 45) {
-            // Reduce effects if performance is poor
-            setAdaptiveConfig((prev) => ({
-              ...prev,
-              particleCount: Math.max(
-                500,
-                Math.floor(prev.particleCount * 0.8)
-              ),
-              geometricShapeCount: Math.max(
-                3,
-                Math.floor(prev.geometricShapeCount * 0.7)
-              ),
-              animationIntensity: Math.max(0.2, prev.animationIntensity * 0.8),
-            }));
-          } else if (
-            metrics.fps > 55 &&
-            adaptiveConfig.particleCount < config.particleCount
-          ) {
-            // Gradually restore effects if performance improves
-            setAdaptiveConfig((prev) => ({
-              ...prev,
-              particleCount: Math.min(
-                config.particleCount,
-                Math.floor(prev.particleCount * 1.1)
-              ),
-              geometricShapeCount: Math.min(
-                config.geometricShapeCount,
-                Math.floor(prev.geometricShapeCount * 1.1)
-              ),
-              animationIntensity: Math.min(
-                config.animationIntensity,
-                prev.animationIntensity * 1.1
-              ),
-            }));
-          }
-        };
-
-        backgroundPerformanceMonitor.onPerformanceUpdate(
-          handlePerformanceUpdate
-        );
-
-        return () => {
-          backgroundPerformanceMonitor.removePerformanceCallback(
-            handlePerformanceUpdate
-          );
-          if (performanceCheckInterval) {
-            clearInterval(performanceCheckInterval);
-          }
-        };
+    // Use simple performance monitoring without dynamic imports
+    const handlePerformanceUpdate = (metrics: {
+      fps: number;
+      frameTime: number;
+      memoryUsage: number;
+      drawCalls: number;
+      triangles: number;
+    }) => {
+      if (metrics.fps < 45) {
+        // Reduce effects if performance is poor
+        setAdaptiveConfig((prev) => ({
+          ...prev,
+          particleCount: Math.max(500, Math.floor(prev.particleCount * 0.8)),
+          geometricShapeCount: Math.max(
+            3,
+            Math.floor(prev.geometricShapeCount * 0.7)
+          ),
+          animationIntensity: Math.max(0.2, prev.animationIntensity * 0.8),
+        }));
+      } else if (
+        metrics.fps > 55 &&
+        adaptiveConfig.particleCount < config.particleCount
+      ) {
+        // Gradually restore effects if performance improves
+        setAdaptiveConfig((prev) => ({
+          ...prev,
+          particleCount: Math.min(
+            config.particleCount,
+            Math.floor(prev.particleCount * 1.1)
+          ),
+          geometricShapeCount: Math.min(
+            config.geometricShapeCount,
+            Math.floor(prev.geometricShapeCount * 1.1)
+          ),
+          animationIntensity: Math.min(
+            config.animationIntensity,
+            prev.animationIntensity * 1.1
+          ),
+        }));
       }
-    );
-  }, [config, adaptiveConfig.particleCount]);
+    };
+
+    // Simple performance monitoring without external dependency
+    performanceCheckInterval = setInterval(() => {
+      // Simple FPS estimation
+      const now = performance.now();
+      const fps = 1000 / (now - (window as any).lastFrameTime || now);
+      (window as any).lastFrameTime = now;
+
+      handlePerformanceUpdate({
+        fps,
+        frameTime: 16.67, // Assume 60fps target
+        memoryUsage: 0,
+        drawCalls: 0,
+        triangles: 0,
+      });
+    }, 1000);
+
+    return () => {
+      if (performanceCheckInterval) {
+        clearInterval(performanceCheckInterval);
+      }
+    };
+  }, [config, adaptiveConfig]);
 
   const handleCreated = useCallback((state: RootState) => {
     // Enhanced optimization for 60fps performance across all devices

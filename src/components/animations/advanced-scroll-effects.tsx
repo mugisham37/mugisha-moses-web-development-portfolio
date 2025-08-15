@@ -150,10 +150,18 @@ export function ViewportAnimation({
     amount: threshold,
   });
 
-  const variants = advancedVariants[variant];
+  // Safe variant access with fallback
+  const variants = advancedVariants[variant] || advancedVariants.fadeInUp;
+
+  // Ensure variants has the required structure
+  const safeVariants = {
+    hidden: variants.hidden || { opacity: 0, y: 20 },
+    visible: variants.visible || { opacity: 1, y: 0 },
+  };
+
   const customTransition: Transition = {
     delay,
-    ease: advancedEasing[easing],
+    ease: advancedEasing[easing] || advancedEasing.brutalist,
     ...(duration && { duration }),
   };
 
@@ -170,9 +178,9 @@ export function ViewportAnimation({
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={{
-        ...variants,
+        ...safeVariants,
         visible: {
-          ...variants.visible,
+          ...safeVariants.visible,
           transition: customTransition,
         },
       }}

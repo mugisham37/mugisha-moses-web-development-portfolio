@@ -260,6 +260,40 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     const isDisabled = disabled || loading;
 
+    // Validate children when using asChild
+    if (asChild && process.env.NODE_ENV === "development") {
+      const childrenArray = React.Children.toArray(children);
+      if (childrenArray.length !== 1) {
+        console.warn(
+          `Button with asChild={true} expects exactly one child, but received ${childrenArray.length} children. This may cause React.Children.only errors.`
+        );
+      }
+    }
+
+    // When asChild is true, we need to render only the children without extra elements
+    if (asChild) {
+      return (
+        <Comp
+          ref={buttonRef}
+          className={cn(
+            buttonVariants({ variant, size, loading, className }),
+            isPressed && "translate-y-0 scale-[0.98] transform"
+          )}
+          onClick={handleClick}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+          data-loading={loading}
+          aria-disabled={isDisabled}
+          aria-busy={loading}
+          aria-label={ariaLabel}
+          aria-describedby={ariaDescribedBy}
+          {...props}
+        >
+          {children}
+        </Comp>
+      );
+    }
+
     return (
       <Comp
         ref={buttonRef}

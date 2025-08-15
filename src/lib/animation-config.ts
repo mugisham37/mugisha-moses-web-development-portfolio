@@ -230,7 +230,8 @@ export function getDevicePerformanceLevel(): keyof typeof PERFORMANCE_SETTINGS {
 
   // Simple heuristic based on device capabilities
   const hardwareConcurrency = navigator.hardwareConcurrency || 4;
-  const deviceMemory = (navigator as NavigatorWithDeviceMemory).deviceMemory || 4;
+  const deviceMemory =
+    (navigator as NavigatorWithDeviceMemory).deviceMemory || 4;
 
   if (hardwareConcurrency >= 8 && deviceMemory >= 8) {
     return "highEnd";
@@ -314,7 +315,7 @@ export class AnimationManager {
     return AnimationManager.instance;
   }
 
-  shouldAnimate(): boolean {
+  shouldAnimate(animationId?: string): boolean {
     if (this.reducedMotion) return false;
 
     const settings = PERFORMANCE_SETTINGS[this.performanceLevel];

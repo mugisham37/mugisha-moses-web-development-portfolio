@@ -481,28 +481,27 @@ if (typeof window !== "undefined" && !window.cancelAnimationFrame) {
 }
 
 /**
- * Safe dynamic import helper
+ * Simple polyfill loaders without dynamic imports
  */
-async function safeDynamicImport(moduleName: string): Promise<any> {
-  try {
-    return await import(/* webpackIgnore: true */ moduleName);
-  } catch {
-    console.warn(
-      `Module ${moduleName} not found. Install it with: npm install ${moduleName}`
-    );
-    return null;
-  }
-}
 
 /**
  * IntersectionObserver polyfill loader
  */
 export async function loadIntersectionObserverPolyfill(): Promise<void> {
   if (typeof window !== "undefined" && !("IntersectionObserver" in window)) {
-    const polyfill = await safeDynamicImport("intersection-observer");
-    if (polyfill) {
-      console.log("IntersectionObserver polyfill loaded");
-    }
+    console.log("IntersectionObserver not supported, using fallback");
+    // Simple fallback - just mark elements as visible
+    (window as any).IntersectionObserver = class {
+      constructor(callback: Function) {
+        // Simple fallback that immediately calls callback
+        setTimeout(() => {
+          callback([{ isIntersecting: true }]);
+        }, 100);
+      }
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    };
   }
 }
 
@@ -511,11 +510,36 @@ export async function loadIntersectionObserverPolyfill(): Promise<void> {
  */
 export async function loadResizeObserverPolyfill(): Promise<void> {
   if (typeof window !== "undefined" && !("ResizeObserver" in window)) {
-    const polyfill = await safeDynamicImport("@juggle/resize-observer");
-    if (polyfill?.ResizeObserver) {
-      (window as any).ResizeObserver = polyfill.ResizeObserver;
-      console.log("ResizeObserver polyfill loaded");
-    }
+    console.log("ResizeObserver not supported, using fallback");
+    // Simple fallback using window resize
+    (window as any).ResizeObserver = class {
+      private callback: Function;
+      private elements: Element[] = [];
+
+      constructor(callback: Function) {
+        this.callback = callback;
+        window.addEventListener("resize", this.handleResize.bind(this));
+      }
+
+      observe(element: Element) {
+        this.elements.push(element);
+      }
+
+      unobserve(element: Element) {
+        this.elements = this.elements.filter((el) => el !== element);
+      }
+
+      disconnect() {
+        this.elements = [];
+        window.removeEventListener("resize", this.handleResize.bind(this));
+      }
+
+      private handleResize() {
+        if (this.elements.length > 0) {
+          this.callback([]);
+        }
+      }
+    };
   }
 }
 
@@ -527,10 +551,19 @@ export async function loadWebAnimationsPolyfill(): Promise<void> {
     typeof window !== "undefined" &&
     !("animate" in document.createElement("div"))
   ) {
-    const polyfill = await safeDynamicImport("web-animations-js");
-    if (polyfill) {
-      console.log("Web Animations API polyfill loaded");
-    }
+    console.log("Web Animations API not supported, using fallback");
+    // Simple fallback that does nothing
+    Element.prototype.animate = function () {
+      return {
+        cancel: () => {},
+        finish: () => {},
+        pause: () => {},
+        play: () => {},
+        reverse: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+      } as any;
+    };
   }
 }
 
@@ -540,29 +573,19 @@ export async function loadWebAnimationsPolyfill(): Promise<void> {
 export async function loadCSSCustomPropertiesPolyfill(): Promise<void> {
   // Check if CSS custom properties are supported
   if (typeof window !== "undefined" && !CSS.supports("--custom", "property")) {
-    const polyfill = await safeDynamicImport("css-vars-ponyfill");
-    if (polyfill?.default) {
-      const cssVars = polyfill.default;
-      cssVars({
-        include: 'style,link[rel="stylesheet"]',
-        onlyLegacy: false,
-        watch: true,
-        variables: {
-          "--color-primary-black": "#000000",
-          "--color-primary-white": "#ffffff",
-          "--color-accent-yellow": "#ffff00",
-          "--spacing-4": "1rem",
-          "--spacing-8": "2rem",
-          "--spacing-16": "4rem",
-          "--font-size-base": "1rem",
-          "--font-size-lg": "1.125rem",
-          "--font-size-xl": "1.25rem",
-          "--shadow-brutalist": "8px 8px 0px rgba(255, 255, 255, 0.1)",
-          "--shadow-accent": "8px 8px 0px rgba(255, 255, 0, 0.3)",
-        },
-      });
-      console.log("CSS Custom Properties polyfill loaded");
-    }
+    console.log("CSS Custom Properties not supported, using fallback");
+    // Simple fallback - add CSS variables as regular CSS
+    const style = document.createElement("style");
+    style.textContent = `
+      :root {
+        /* Fallback CSS variables */
+      }
+      .bg-black { background-color: #000000; }
+      .text-white { color: #ffffff; }
+      .bg-accent-yellow { background-color: #ffff00; }
+      .text-black { color: #000000; }
+    `;
+    document.head.appendChild(style);
   }
 }
 
@@ -570,15 +593,11 @@ export async function loadCSSCustomPropertiesPolyfill(): Promise<void> {
  * Load all necessary polyfills
  */
 export async function loadAllPolyfills(): Promise<void> {
-  const polyfillPromises = [
-    loadIntersectionObserverPolyfill(),
-    loadResizeObserverPolyfill(),
-    loadWebAnimationsPolyfill(),
-    loadCSSCustomPropertiesPolyfill(),
-  ];
-
   try {
-    await Promise.all(polyfillPromises);
+    await loadIntersectionObserverPolyfill();
+    await loadResizeObserverPolyfill();
+    await loadWebAnimationsPolyfill();
+    await loadCSSCustomPropertiesPolyfill();
     console.log("All polyfills loaded successfully");
   } catch (error) {
     console.warn("Some polyfills failed to load:", error);

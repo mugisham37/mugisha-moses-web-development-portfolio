@@ -64,9 +64,8 @@ export function ScrollNavigation({
     }
   };
 
-  if (reducedMotion) {
-    return null; // Hide scroll navigation for reduced motion users
-  }
+  // Always render but conditionally show
+  const shouldShow = !reducedMotion;
 
   return (
     <motion.nav
@@ -75,9 +74,12 @@ export function ScrollNavigation({
         position === "left" ? "left-8" : "right-8",
         className
       )}
-      style={{ opacity }}
+      style={{ opacity: shouldShow ? opacity : 0 }}
       initial={{ opacity: 0, x: position === "left" ? -20 : 20 }}
-      animate={{ opacity: 1, x: 0 }}
+      animate={{
+        opacity: shouldShow ? 1 : 0,
+        x: shouldShow ? 0 : position === "left" ? -20 : 20,
+      }}
       transition={{ duration: 0.6, delay: 1 }}
     >
       <ul className="space-y-4">
@@ -238,16 +240,18 @@ export function ScrollProgressWithSections({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [sections, reducedMotion]);
 
-  if (reducedMotion) {
-    return null;
-  }
+  // Always render but conditionally show
+  const shouldShow = !reducedMotion;
 
   return (
-    <div className={cn("fixed top-0 right-0 left-0 z-50", className)}>
+    <div
+      className={cn("fixed top-0 right-0 left-0 z-50", className)}
+      style={{ opacity: shouldShow ? 1 : 0 }}
+    >
       {/* Main progress bar */}
       <motion.div
         className="bg-brutalist-yellow h-1 origin-left"
-        style={{ scaleX, height: `${height}px` }}
+        style={{ scaleX: shouldShow ? scaleX : 0, height: `${height}px` }}
       />
 
       {/* Section markers */}
@@ -322,17 +326,16 @@ export function FloatingScrollIndicator() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (reducedMotion || !isVisible) {
-    return null;
-  }
+  // Always render but conditionally show with opacity/visibility
+  const shouldShow = !reducedMotion && isVisible;
 
   return (
     <motion.div
       className="fixed bottom-8 left-8 z-40"
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
+      animate={{ opacity: shouldShow ? 1 : 0, y: shouldShow ? 0 : 20 }}
       transition={{ duration: 0.3 }}
+      style={{ pointerEvents: shouldShow ? "auto" : "none" }}
     >
       <div className="relative">
         {/* Circular progress */}
@@ -354,11 +357,13 @@ export function FloatingScrollIndicator() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeDasharray={`${2 * Math.PI * 28}`}
-            strokeDashoffset={useTransform(
-              progress,
-              [0, 100],
-              [2 * Math.PI * 28, 0]
-            )}
+            style={{
+              strokeDashoffset: useTransform(
+                progress,
+                [0, 100],
+                [2 * Math.PI * 28, 0]
+              ),
+            }}
           />
         </svg>
 

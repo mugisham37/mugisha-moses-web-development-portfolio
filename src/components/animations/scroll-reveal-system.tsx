@@ -1,18 +1,10 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useCallback } from "react";
-import {
-  motion,
-  useInView,
-  useScroll,
-  useTransform,
-  useSpring,
-  useAnimation,
-  type Variants,
-} from "framer-motion";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-// Comprehensive scroll reveal system with multiple animation types
+// Configuration interface
 interface ScrollRevealConfig {
   threshold?: number;
   rootMargin?: string;
@@ -29,6 +21,7 @@ interface ScrollRevealConfig {
     | "backOut";
 }
 
+// Easing functions
 const easingFunctions = {
   linear: [0, 0, 1, 1] as const,
   easeIn: [0.4, 0, 1, 1] as const,
@@ -38,23 +31,15 @@ const easingFunctions = {
   backOut: [0.34, 1.56, 0.64, 1] as const,
 };
 
-// Validation function to ensure animation variants are properly structured
-function validateAnimation(animation: string, variant: any): boolean {
-  if (!variant) return false;
-  if (!variant.hidden || !variant.visible) return false;
-  return true;
-}
-
-// Advanced reveal animations
-const revealVariants: Record<string, Variants> = {
-  // Fade animations
-  fadeIn: {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  },
+// Default animation variants - bulletproof definitions
+const DEFAULT_VARIANTS = {
   fadeInUp: {
     hidden: { opacity: 0, y: 60 },
     visible: { opacity: 1, y: 0 },
+  },
+  fadeIn: {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
   },
   fadeInDown: {
     hidden: { opacity: 0, y: -60 },
@@ -68,8 +53,6 @@ const revealVariants: Record<string, Variants> = {
     hidden: { opacity: 0, x: 60 },
     visible: { opacity: 1, x: 0 },
   },
-
-  // Scale animations
   scale: {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
@@ -86,8 +69,6 @@ const revealVariants: Record<string, Variants> = {
     hidden: { opacity: 0, scale: 0.5, rotate: -180 },
     visible: { opacity: 1, scale: 1, rotate: 0 },
   },
-
-  // Rotation animations
   rotateIn: {
     hidden: { opacity: 0, rotate: -180, scale: 0.5 },
     visible: { opacity: 1, rotate: 0, scale: 1 },
@@ -100,8 +81,6 @@ const revealVariants: Record<string, Variants> = {
     hidden: { opacity: 0, rotate: 90, transformOrigin: "right bottom" },
     visible: { opacity: 1, rotate: 0, transformOrigin: "right bottom" },
   },
-
-  // Flip animations
   flipInX: {
     hidden: { opacity: 0, rotateX: -90 },
     visible: { opacity: 1, rotateX: 0 },
@@ -110,8 +89,6 @@ const revealVariants: Record<string, Variants> = {
     hidden: { opacity: 0, rotateY: -90 },
     visible: { opacity: 1, rotateY: 0 },
   },
-
-  // Zoom animations
   zoomIn: {
     hidden: { opacity: 0, scale: 0.3 },
     visible: { opacity: 1, scale: 1 },
@@ -124,8 +101,6 @@ const revealVariants: Record<string, Variants> = {
     hidden: { opacity: 0, scale: 0.1, y: -2000 },
     visible: { opacity: 1, scale: 1, y: 0 },
   },
-
-  // Slide animations
   slideInUp: {
     hidden: { y: "100%" },
     visible: { y: "0%" },
@@ -142,8 +117,6 @@ const revealVariants: Record<string, Variants> = {
     hidden: { x: "100%" },
     visible: { x: "0%" },
   },
-
-  // Bounce animations
   bounceIn: {
     hidden: { opacity: 0, scale: 0.3 },
     visible: {
@@ -169,8 +142,6 @@ const revealVariants: Record<string, Variants> = {
       },
     },
   },
-
-  // Elastic animations
   elasticIn: {
     hidden: { opacity: 0, scale: 0 },
     visible: {
@@ -183,8 +154,6 @@ const revealVariants: Record<string, Variants> = {
       },
     },
   },
-
-  // Back animations
   backInUp: {
     hidden: { opacity: 0, y: 100, scale: 0.7 },
     visible: {
@@ -199,8 +168,6 @@ const revealVariants: Record<string, Variants> = {
       },
     },
   },
-
-  // Brutalist-specific animations
   brutalistSlam: {
     hidden: { opacity: 0, y: -100, rotateX: -90, scale: 0.5 },
     visible: {
@@ -228,21 +195,37 @@ const revealVariants: Record<string, Variants> = {
   },
 };
 
-// Validate that essential animations exist
-if (
-  !revealVariants.fadeInUp ||
-  !revealVariants.fadeInUp.hidden ||
-  !revealVariants.fadeInUp.visible
-) {
-  console.error(
-    "ScrollRevealSystem: Critical error - fadeInUp animation is not properly defined!"
-  );
+// Safe animation getter function
+function getSafeAnimation(animationName: string) {
+  // Check if the animation exists in our variants
+  if (DEFAULT_VARIANTS[animationName as keyof typeof DEFAULT_VARIANTS]) {
+    return DEFAULT_VARIANTS[animationName as keyof typeof DEFAULT_VARIANTS];
+  }
+
+  // Log warning in development
+  if (process.env.NODE_ENV === "development") {
+    console.warn(
+      `Animation "${animationName}" not found. Using fadeInUp as fallback.`
+    );
+  }
+
+  // Always return a safe fallback
+  return DEFAULT_VARIANTS.fadeInUp;
 }
 
+// Safe easing getter function
+function getSafeEasing(easingName: string) {
+  if (easingFunctions[easingName as keyof typeof easingFunctions]) {
+    return easingFunctions[easingName as keyof typeof easingFunctions];
+  }
+  return easingFunctions.easeOut;
+}
+
+// ScrollReveal component
 interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
-  animation?: keyof typeof revealVariants;
+  animation?: string;
   config?: ScrollRevealConfig;
   onReveal?: () => void;
   onHide?: () => void;
@@ -284,59 +267,13 @@ export function ScrollReveal({
     }
   }, [isInView, hasRevealed, triggerOnce, onReveal, onHide]);
 
-  // Bulletproof animation variant selection
-  const getAnimationVariant = () => {
-    try {
-      const requestedVariant = revealVariants[animation];
-      if (
-        requestedVariant &&
-        requestedVariant.hidden &&
-        requestedVariant.visible
-      ) {
-        return requestedVariant;
-      }
-
-      // Fallback to fadeInUp
-      const fallbackVariant = revealVariants.fadeInUp;
-      if (
-        fallbackVariant &&
-        fallbackVariant.hidden &&
-        fallbackVariant.visible
-      ) {
-        if (process.env.NODE_ENV === "development") {
-          console.warn(
-            `ScrollReveal: Animation "${animation}" not found. Using "fadeInUp" as fallback.`
-          );
-        }
-        return fallbackVariant;
-      }
-
-      // Ultimate fallback - hardcoded values
-      return {
-        hidden: { opacity: 0, y: 60 },
-        visible: { opacity: 1, y: 0 },
-      };
-    } catch (error) {
-      console.error("ScrollReveal: Error getting animation variant:", error);
-      return {
-        hidden: { opacity: 0, y: 60 },
-        visible: { opacity: 1, y: 0 },
-      };
-    }
-  };
-
-  const safeVariant = getAnimationVariant();
-
-  // Create safe variants with guaranteed properties
-  const variants = {
-    hidden: safeVariant.hidden || { opacity: 0, y: 60 },
-    visible: safeVariant.visible || { opacity: 1, y: 0 },
-  };
+  // Get safe animation variant
+  const animationVariant = getSafeAnimation(animation);
 
   const transition = {
     duration,
     delay,
-    ease: easingFunctions[easing] || easingFunctions.easeOut,
+    ease: getSafeEasing(easing),
   };
 
   return (
@@ -346,9 +283,9 @@ export function ScrollReveal({
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={{
-        ...variants,
+        hidden: animationVariant.hidden,
         visible: {
-          ...variants.visible,
+          ...animationVariant.visible,
           transition,
         },
       }}
@@ -358,10 +295,11 @@ export function ScrollReveal({
   );
 }
 
+// ScrollRevealStagger component
 interface ScrollRevealStaggerProps {
   children: React.ReactNode;
   className?: string;
-  animation?: keyof typeof revealVariants;
+  animation?: string;
   config?: ScrollRevealConfig;
   itemClassName?: string;
 }
@@ -400,60 +338,16 @@ export function ScrollRevealStagger({
     },
   };
 
-  // Bulletproof animation variant selection
-  const getAnimationVariant = () => {
-    try {
-      const requestedVariant = revealVariants[animation];
-      if (
-        requestedVariant &&
-        requestedVariant.hidden &&
-        requestedVariant.visible
-      ) {
-        return requestedVariant;
-      }
+  // Get safe animation variant
+  const animationVariant = getSafeAnimation(animation);
 
-      // Fallback to fadeInUp
-      const fallbackVariant = revealVariants.fadeInUp;
-      if (
-        fallbackVariant &&
-        fallbackVariant.hidden &&
-        fallbackVariant.visible
-      ) {
-        if (process.env.NODE_ENV === "development") {
-          console.warn(
-            `ScrollRevealStagger: Animation "${animation}" not found. Using "fadeInUp" as fallback.`
-          );
-        }
-        return fallbackVariant;
-      }
-
-      // Ultimate fallback - hardcoded values
-      return {
-        hidden: { opacity: 0, y: 60 },
-        visible: { opacity: 1, y: 0 },
-      };
-    } catch (error) {
-      console.error(
-        "ScrollRevealStagger: Error getting animation variant:",
-        error
-      );
-      return {
-        hidden: { opacity: 0, y: 60 },
-        visible: { opacity: 1, y: 0 },
-      };
-    }
-  };
-
-  const safeVariant = getAnimationVariant();
-
-  // Create safe item variants with guaranteed properties
   const itemVariants = {
-    hidden: safeVariant.hidden || { opacity: 0, y: 60 },
+    hidden: animationVariant.hidden,
     visible: {
-      ...(safeVariant.visible || { opacity: 1, y: 0 }),
+      ...animationVariant.visible,
       transition: {
         duration,
-        ease: easingFunctions[easing] || easingFunctions.easeOut,
+        ease: getSafeEasing(easing),
       },
     },
   };
@@ -479,7 +373,79 @@ export function ScrollRevealStagger({
   );
 }
 
-// Advanced parallax with multiple layers
+// ScrollTextReveal component
+interface ScrollTextRevealProps {
+  text: string;
+  className?: string;
+  delay?: number;
+  stagger?: number;
+  animation?: "fadeIn" | "slideUp" | "rotateIn" | "scaleIn";
+}
+
+export function ScrollTextReveal({
+  text,
+  className,
+  delay = 0,
+  stagger = 0.05,
+  animation = "fadeIn",
+}: ScrollTextRevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" as any });
+
+  const letterVariants = {
+    fadeIn: {
+      hidden: { opacity: 0 },
+      visible: { opacity: 1 },
+    },
+    slideUp: {
+      hidden: { opacity: 0, y: 20 },
+      visible: { opacity: 1, y: 0 },
+    },
+    rotateIn: {
+      hidden: { opacity: 0, rotateX: -90 },
+      visible: { opacity: 1, rotateX: 0 },
+    },
+    scaleIn: {
+      hidden: { opacity: 0, scale: 0 },
+      visible: { opacity: 1, scale: 1 },
+    },
+  };
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: stagger,
+        delayChildren: delay,
+      },
+    },
+  };
+
+  const selectedVariant = letterVariants[animation] || letterVariants.fadeIn;
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={containerVariants}
+    >
+      {text.split("").map((char, index) => (
+        <motion.span
+          key={index}
+          variants={selectedVariant}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          style={{ display: "inline-block" }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+}
+
+// MultiLayerParallax component
 interface MultiLayerParallaxProps {
   children: React.ReactNode;
   className?: string;
@@ -580,77 +546,7 @@ export function MultiLayerParallax({
   );
 }
 
-// Scroll-triggered text reveal
-interface ScrollTextRevealProps {
-  text: string;
-  className?: string;
-  delay?: number;
-  stagger?: number;
-  animation?: "fadeIn" | "slideUp" | "rotateIn" | "scaleIn";
-}
-
-export function ScrollTextReveal({
-  text,
-  className,
-  delay = 0,
-  stagger = 0.05,
-  animation = "fadeIn",
-}: ScrollTextRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  const letterVariants = {
-    fadeIn: {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1 },
-    },
-    slideUp: {
-      hidden: { opacity: 0, y: 20 },
-      visible: { opacity: 1, y: 0 },
-    },
-    rotateIn: {
-      hidden: { opacity: 0, rotateX: -90 },
-      visible: { opacity: 1, rotateX: 0 },
-    },
-    scaleIn: {
-      hidden: { opacity: 0, scale: 0 },
-      visible: { opacity: 1, scale: 1 },
-    },
-  };
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: stagger,
-        delayChildren: delay,
-      },
-    },
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={containerVariants}
-    >
-      {text.split("").map((char, index) => (
-        <motion.span
-          key={index}
-          variants={letterVariants[animation]}
-          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          style={{ display: "inline-block" }}
-        >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
-      ))}
-    </motion.div>
-  );
-}
-
-// Scroll-triggered morphing shapes
+// ScrollMorph component
 interface ScrollMorphProps {
   children: React.ReactNode;
   className?: string;
@@ -667,7 +563,7 @@ export function ScrollMorph({
   duration = 1,
 }: ScrollMorphProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20%" });
+  const isInView = useInView(ref, { once: true, margin: "-20%" as any });
 
   return (
     <motion.div
@@ -697,4 +593,6 @@ export function ScrollMorph({
   );
 }
 
-export { revealVariants, easingFunctions };
+// Export the variants and easing functions for backward compatibility
+export const revealVariants = DEFAULT_VARIANTS;
+export { easingFunctions };

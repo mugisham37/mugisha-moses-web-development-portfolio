@@ -47,8 +47,15 @@ export function AnimationProvider({
   const [reducedMotion, setReducedMotion] = useState(false);
   const [performanceLevel, setPerformanceLevel] =
     useState<keyof typeof PERFORMANCE_SETTINGS>("standard");
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // Mark as client-side to prevent hydration issues
+    setIsClient(true);
+
+    // Only run on client side
+    if (typeof window === "undefined") return;
+
     // Initialize reduced motion preference
     const initialReducedMotion = forceReducedMotion ?? shouldReduceMotion();
     setReducedMotion(initialReducedMotion);
@@ -59,7 +66,7 @@ export function AnimationProvider({
     setPerformanceLevel(initialPerformanceLevel);
 
     // Listen for reduced motion preference changes
-    if (typeof window !== "undefined" && !forceReducedMotion) {
+    if (!forceReducedMotion) {
       const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       const handleChange = (e: MediaQueryListEvent) => {
         setReducedMotion(e.matches);
@@ -104,12 +111,16 @@ export function AnimationProvider({
     getOptimizedEasing,
   };
 
-  // Global motion configuration
+  // Global motion configuration - use stable defaults during SSR
   const motionConfig = {
-    reducedMotion: reducedMotion ? "always" as const : "never" as const,
+    reducedMotion:
+      isClient && reducedMotion ? ("always" as const) : ("never" as const),
     transition: {
-      duration: reducedMotion ? 0.01 : 0.6,
-      ease: reducedMotion ? [0, 0, 1, 1] as const : [0.25, 0.46, 0.45, 0.94] as const,
+      duration: isClient && reducedMotion ? 0.01 : 0.6,
+      ease:
+        isClient && reducedMotion
+          ? ([0, 0, 1, 1] as const)
+          : ([0.25, 0.46, 0.45, 0.94] as const),
     },
   };
 
@@ -188,10 +199,16 @@ export function useOptimizedAnimation() {
 
       Object.keys(variants).forEach((key) => {
         const variant = variants[key];
-        if (typeof variant === "object" && variant && 'transition' in variant) {
+        if (typeof variant === "object" && variant && "transition" in variant) {
           simplifiedVariants[key] = {
             ...variant,
-            transition: optimizeTransition(variant.transition as { duration?: number; ease?: readonly number[]; [key: string]: unknown }),
+            transition: optimizeTransition(
+              variant.transition as {
+                duration?: number;
+                ease?: readonly number[];
+                [key: string]: unknown;
+              }
+            ),
           };
         } else {
           simplifiedVariants[key] = variant;

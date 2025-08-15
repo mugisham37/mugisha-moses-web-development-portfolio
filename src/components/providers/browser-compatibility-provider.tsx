@@ -15,10 +15,12 @@ interface BrowserCompatibilityProviderProps {
 export function BrowserCompatibilityProvider({
   children,
 }: BrowserCompatibilityProviderProps) {
-  const [isInitialized, setIsInitialized] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    // Only run on client side to prevent hydration issues
+    if (typeof window === "undefined") return;
+
     let mounted = true;
 
     const initializeCompatibility = async () => {
@@ -34,37 +36,22 @@ export function BrowserCompatibilityProvider({
 
         // Add performance monitoring
         addPerformanceMonitoring();
-
-        if (mounted) {
-          setIsInitialized(true);
-        }
       } catch (error) {
         console.error("Browser compatibility initialization failed:", error);
         if (mounted) {
           setHasError(true);
-          setIsInitialized(true); // Still render children even if initialization fails
         }
       }
     };
 
-    initializeCompatibility();
+    // Initialize after a small delay to ensure DOM is ready
+    const timeoutId = setTimeout(initializeCompatibility, 100);
 
     return () => {
       mounted = false;
+      clearTimeout(timeoutId);
     };
   }, []);
-
-  // Don't block rendering while initializing
-  if (!isInitialized) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-black">
-        <div className="text-center">
-          <div className="loading-placeholder mx-auto mb-4 h-16 w-16 rounded-full"></div>
-          <p className="font-mono text-sm text-white">Initializing...</p>
-        </div>
-      </div>
-    );
-  }
 
   if (hasError) {
     console.warn(
@@ -72,6 +59,7 @@ export function BrowserCompatibilityProvider({
     );
   }
 
+  // Always render children immediately to prevent hydration mismatch
   return <>{children}</>;
 }
 
@@ -222,9 +210,14 @@ function addPerformanceMonitoring(): void {
       // First Input Delay (FID)
       const fidObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          const entryWithProcessing = entry as PerformanceEntry & { processingStart?: number; startTime: number };
+          const entryWithProcessing = entry as PerformanceEntry & {
+            processingStart?: number;
+            startTime: number;
+          };
           if (entryWithProcessing.processingStart) {
-            const fid = entryWithProcessing.processingStart - entryWithProcessing.startTime;
+            const fid =
+              entryWithProcessing.processingStart -
+              entryWithProcessing.startTime;
             console.log("FID:", fid);
           }
         }
@@ -235,7 +228,10 @@ function addPerformanceMonitoring(): void {
       let clsValue = 0;
       const clsObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          const entryWithLayout = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+          const entryWithLayout = entry as PerformanceEntry & {
+            hadRecentInput?: boolean;
+            value?: number;
+          };
           if (!entryWithLayout.hadRecentInput && entryWithLayout.value) {
             clsValue += entryWithLayout.value;
           }

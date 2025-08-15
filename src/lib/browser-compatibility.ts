@@ -308,63 +308,80 @@ export async function loadPolyfills(): Promise<void> {
   const features = detectFeatureSupport();
   const polyfills: Promise<void>[] = [];
 
+  // Simple polyfills without dynamic imports to avoid webpack issues
+
   // IntersectionObserver polyfill
   if (!features.intersectionObserver) {
-    polyfills.push(
-      import("intersection-observer")
-        .then(() => {
-          console.log("IntersectionObserver polyfill loaded");
-        })
-        .catch(() => {
-          console.warn("Failed to load IntersectionObserver polyfill");
-        })
-    );
+    console.log("IntersectionObserver not supported, using simple fallback");
+    // Simple fallback implementation
+    (window as any).IntersectionObserver = class {
+      private callback: Function;
+
+      constructor(callback: Function) {
+        this.callback = callback;
+      }
+      observe(element: Element) {
+        // Simple fallback - just call callback with isIntersecting: true after delay
+        setTimeout(() => {
+          this.callback([{ target: element, isIntersecting: true }]);
+        }, 100);
+      }
+      unobserve() {}
+      disconnect() {}
+    };
   }
 
   // ResizeObserver polyfill
   if (!features.resizeObserver) {
-    polyfills.push(
-      import("@juggle/resize-observer")
-        .then(({ ResizeObserver }) => {
-          window.ResizeObserver = ResizeObserver;
-          console.log("ResizeObserver polyfill loaded");
-        })
-        .catch(() => {
-          console.warn("Failed to load ResizeObserver polyfill");
-        })
-    );
+    console.log("ResizeObserver not supported, using simple fallback");
+    (window as any).ResizeObserver = class {
+      private callback: Function;
+      private handleResize: () => void;
+
+      constructor(callback: Function) {
+        this.callback = callback;
+        this.handleResize = () => this.callback([]);
+        window.addEventListener("resize", this.handleResize);
+      }
+      observe() {}
+      unobserve() {}
+      disconnect() {
+        window.removeEventListener("resize", this.handleResize);
+      }
+    };
   }
 
   // Web Animations API polyfill
   if (!features.webAnimations) {
-    polyfills.push(
-      import("web-animations-js")
-        .then(() => {
-          console.log("Web Animations API polyfill loaded");
-        })
-        .catch(() => {
-          console.warn("Failed to load Web Animations API polyfill");
-        })
-    );
+    console.log("Web Animations API not supported, using simple fallback");
+    Element.prototype.animate = function () {
+      return {
+        cancel: () => {},
+        finish: () => {},
+        pause: () => {},
+        play: () => {},
+        reverse: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+      } as any;
+    };
   }
 
-  // CSS Custom Properties polyfill for IE
+  // CSS Custom Properties fallback for IE
   const browserInfo = detectBrowser();
   if (browserInfo.name === "Internet Explorer") {
-    polyfills.push(
-      import("css-vars-ponyfill")
-        .then(({ default: cssVars }) => {
-          cssVars({
-            include: 'style,link[rel="stylesheet"]',
-            onlyLegacy: false,
-            watch: true,
-          });
-          console.log("CSS Custom Properties polyfill loaded");
-        })
-        .catch(() => {
-          console.warn("Failed to load CSS Custom Properties polyfill");
-        })
-    );
+    console.log("CSS Custom Properties not supported, adding fallback styles");
+    const style = document.createElement("style");
+    style.textContent = `
+      :root {
+        /* Fallback for CSS custom properties */
+      }
+      .bg-black { background-color: #000000; }
+      .text-white { color: #ffffff; }
+      .bg-accent-yellow { background-color: #ffff00; }
+      .text-black { color: #000000; }
+    `;
+    document.head.appendChild(style);
   }
 
   await Promise.all(polyfills);
@@ -471,7 +488,11 @@ export class CrossBrowserEvents {
    * Get event target with cross-browser support
    */
   static getEventTarget(event: Event): Element | null {
-    return (event.target as Element) || (event as unknown as { srcElement?: Element }).srcElement || null;
+    return (
+      (event.target as Element) ||
+      (event as unknown as { srcElement?: Element }).srcElement ||
+      null
+    );
   }
 
   /**

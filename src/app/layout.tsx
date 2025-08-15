@@ -11,6 +11,10 @@ import "@/styles/browser-compatibility.css";
 // Import browser compatibility initialization
 import { BrowserCompatibilityProvider } from "@/components/providers/browser-compatibility-provider";
 import { AnimationProvider } from "@/components/animations/animation-provider";
+import ErrorBoundary from "@/components/error-boundary";
+import { DevCacheClearer } from "@/lib/cache-buster";
+import DevErrorHandler from "@/components/dev-error-handler";
+import ErrorTest from "@/components/error-test";
 
 // Font configurations with optimized loading
 const inter = Inter({
@@ -189,28 +193,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="dns-prefetch" href="https://vercel.live" />
 
-        {/* Preload critical resources */}
-        <link
-          rel="preload"
-          href="/fonts/space-mono-v12-latin-regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/space-mono-v12-latin-700.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/inter-v13-latin-regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+        {/* Note: Local font preloading disabled until font files are available */}
 
         {/* Critical CSS for above-the-fold content */}
         <style
@@ -326,27 +309,37 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         />
       </head>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         {/* Browser compatibility provider for feature detection and polyfills */}
         <BrowserCompatibilityProvider>
-          <AnimationProvider>
-            {/* Skip to main content link for accessibility */}
-            <a
-              href="#main-content"
-              className="bg-accent-yellow sr-only z-50 px-4 py-2 font-mono font-bold tracking-wider text-black uppercase focus:not-sr-only focus:absolute focus:top-4 focus:left-4"
-            >
-              Skip to main content
-            </a>
+          <ErrorBoundary>
+            <AnimationProvider>
+              {/* Skip to main content link for accessibility */}
+              <a
+                href="#main-content"
+                className="bg-accent-yellow sr-only z-50 px-4 py-2 font-mono font-bold tracking-wider text-black uppercase focus:not-sr-only focus:absolute focus:top-4 focus:left-4"
+              >
+                Skip to main content
+              </a>
 
-            {/* Main application content */}
-            <div id="main-content" className="min-h-screen">
-              {children}
-            </div>
-          </AnimationProvider>
+              {/* Main application content */}
+              <div id="main-content" className="min-h-screen">
+                <ErrorBoundary>
+                  <DevErrorHandler>{children}</DevErrorHandler>
+                </ErrorBoundary>
+              </div>
+            </AnimationProvider>
+          </ErrorBoundary>
 
           {/* Analytics and performance monitoring */}
           <Analytics />
           <SpeedInsights />
+
+          {/* Development cache clearer */}
+          <DevCacheClearer />
+
+          {/* Error fixes test */}
+          <ErrorTest />
 
           {/* Service worker registration script */}
           <script
