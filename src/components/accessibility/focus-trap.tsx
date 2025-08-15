@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useFocusTrap, FocusTrapOptions } from "@/lib/accessibility";
 
 interface FocusTrapProps {
@@ -23,7 +23,7 @@ export function FocusTrap({
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Use the focus trap hook
-  useFocusTrap(containerRef, isActive, {
+  useFocusTrap(containerRef as React.RefObject<HTMLElement>, isActive, {
     escapeDeactivates: true,
     clickOutsideDeactivates: false,
     returnFocusOnDeactivate: true,
@@ -46,7 +46,7 @@ export function useFocusTrapContainer(
 ) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useFocusTrap(containerRef, isActive, {
+  useFocusTrap(containerRef as React.RefObject<HTMLElement>, isActive, {
     escapeDeactivates: true,
     clickOutsideDeactivates: false,
     returnFocusOnDeactivate: true,

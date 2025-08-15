@@ -101,7 +101,6 @@ export function KeyboardNavigation({
  */
 interface NavigationItemProps {
   children: React.ReactNode;
-  index?: number;
   isActive?: boolean;
   className?: string;
   onClick?: () => void;
@@ -109,7 +108,6 @@ interface NavigationItemProps {
 
 export function NavigationItem({
   children,
-  index,
   isActive = false,
   className = "",
   onClick,

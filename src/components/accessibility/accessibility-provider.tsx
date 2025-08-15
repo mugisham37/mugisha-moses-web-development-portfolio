@@ -353,7 +353,7 @@ export function AccessibilitySettings() {
           <label className="mb-2 block font-mono">Font Size</label>
           <select
             value={settings.fontSize}
-            onChange={(e) => updateSetting("fontSize", e.target.value as any)}
+            onChange={(e) => updateSetting("fontSize", e.target.value as AccessibilitySettings["fontSize"])}
             className="w-full border-2 border-black p-2 font-mono"
           >
             <option value="small">Small</option>

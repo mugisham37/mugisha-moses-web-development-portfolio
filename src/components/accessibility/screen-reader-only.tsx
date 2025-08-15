@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 interface ScreenReaderOnlyProps {
   children: React.ReactNode;
-  as?: React.ElementType;
+  as?: "span" | "div" | "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   className?: string;
   focusable?: boolean;
 }
@@ -16,10 +16,12 @@ interface ScreenReaderOnlyProps {
  */
 export function ScreenReaderOnly({
   children,
-  as: Component = "span",
+  as = "span",
   className = "",
   focusable = false,
 }: ScreenReaderOnlyProps) {
+  const Component = as;
+  
   return (
     <Component
       className={cn(
@@ -31,7 +33,7 @@ export function ScreenReaderOnly({
         focusable && "focus:rounded-sm focus:border-2 focus:border-black",
         className
       )}
-      tabIndex={focusable ? 0 : undefined}
+      {...(focusable ? { tabIndex: 0 } : {})}
     >
       {children}
     </Component>

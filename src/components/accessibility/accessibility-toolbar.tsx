@@ -4,15 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Settings,
-  Eye,
-  EyeOff,
-  Volume2,
-  VolumeX,
-  Contrast,
-  MousePointer,
-  Keyboard,
   Zap,
-  CheckCircle,
   AlertTriangle,
   Info,
   X,
@@ -304,7 +296,7 @@ export function AccessibilityToolbar({
                   <select
                     value={settings.fontSize}
                     onChange={(e) =>
-                      updateSetting("fontSize", e.target.value as any)
+                      updateSetting("fontSize", e.target.value as "small" | "medium" | "large" | "extra-large")
                     }
                     className="w-full border-2 border-black bg-white p-2 font-mono text-sm"
                   >
