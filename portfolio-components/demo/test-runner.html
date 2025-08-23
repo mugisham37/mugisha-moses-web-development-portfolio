@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Integration Test Runner</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border: 2px solid #00ff00;
+            padding: 20px;
+        }
+
+        .test-controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        button {
+            background: #000;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-family: inherit;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .test-output {
+            background: #111;
+            border: 1px solid #333;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-size: 12px;
+        }
+
+        .test-results {
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #333;
+        }
+
+        .success {
+            color: #00ff00;
+        }
+
+        .warning {
+            color: #ffff00;
+        }
+
+        .error {
+            color: #ff0000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-header">
+        <h1>🧪 PORTFOLIO INTEGRATION TEST RUNNER</h1>
+        <p>Automated testing for component integration and conflict detection</p>
+    </div>
+
+    <div class="test-controls">
+        <button onclick="runFullPageTest()">Run Full Page Test</button>
+        <button onclick="runComponentTests()">Test Individual Components</button>
+        <button onclick="clearOutput()">Clear Output</button>
+        <button onclick="exportResults()">Export Results</button>
+    </div>
+
+    <div class="test-output" id="testOutput">
+        Click "Run Full Page Test" to begin integration testing...
+    </div>
+
+    <div class="test-results" id="testResults" style="display: none;">
+        <h3>Test Results Summary</h3>
+        <div id="resultsSummary"></div>
+    </div>
+
+    <iframe id="testFrame" src="about:blank" style="display: none;"></iframe>
+
+    <script>
+        let testOutput = document.getElementById('testOutput');
+        let testResults = document.getElementById('testResults');
+        let resultsSummary = document.getElementById('resultsSummary');
+        let testFrame = document.getElementById('testFrame');
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'warning' ? 'warning' : type === 'success' ? 'success' : '';
+            testOutput.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+            testOutput.scrollTop = testOutput.scrollHeight;
+        }
+
+        function clearOutput() {
+            testOutput.innerHTML = '';
+            testResults.style.display = 'none';
+        }
+
+        async function runFullPageTest() {
+            clearOutput();
+            log('🚀 Starting full page integration test...', 'info');
+
+            try {
+                // Load the full page in iframe
+                testFrame.style.display = 'block';
+                testFrame.src = 'full-page.html';
+
+                // Wait for iframe to load
+                await new Promise((resolve) => {
+                    testFrame.onload = resolve;
+                });
+
+                log('✅ Full page loaded successfully', 'success');
+
+                // Wait for tests to complete (they auto-run)
+                setTimeout(() => {
+                    try {
+                        const iframeWindow = testFrame.contentWindow;
+                        const testResults = iframeWindow.integrationTestResults;
+
+                        if (testResults) {
+                            displayTestResults(testResults);
+                        } else {
+                            log('⚠️ Test results not available yet, please wait...', 'warning');
+                            // Try again after more time
+                            setTimeout(() => {
+                                const laterResults = iframeWindow.integrationTestResults;
+                                if (laterResults) {
+                                    displayTestResults(laterResults);
+                                } else {
+                                    log('❌ Failed to retrieve test results', 'error');
+                                }
+                            }, 3000);
+                        }
+                    } catch (error) {
+                        log(`❌ Error accessing test results: ${error.message}`, 'error');
+                    }
+                }, 5000);
+
+            } catch (error) {
+                log(`❌ Error running full page test: ${error.message}`, 'error');
+            }
+        }
+
+        function displayTestResults(results) {
+            log(`📊 Test completed in ${results.duration}ms`, 'info');
+            log(`✅ Success rate: ${results.successRate}%`, results.successRate >= 90 ? 'success' : results.successRate >= 70 ? 'warning' : 'error');
+            log(`⚠️ Warnings: ${results.warnings.length}`, 'warning');
+            log(`❌ Errors: ${results.errors.length}`, 'error');
+
+            // Show detailed results
+            testResults.style.display = 'block';
+            resultsSummary.innerHTML = `
+                <div class="success">✅ Passed: ${results.results.filter(r => r.passed).length}/${results.results.length}</div>
+                <div class="warning">⚠️ Warnings: ${results.warnings.length}</div>
+                <div class="error">❌ Errors: ${results.errors.length}</div>
+                <div>⏱️ Duration: ${results.duration}ms</div>
+                <div>📈 Success Rate: ${results.successRate}%</div>
+            `;
+
+            // Log individual test results
+            results.results.forEach(result => {
+                const status = result.passed ? '✅' : '❌';
+                const type = result.passed ? 'success' : 'error';
+                log(`${status} ${result.category}`, type);
+            });
+
+            // Log warnings and errors
+            results.warnings.forEach(warning => {
+                log(`⚠️ ${warning}`, 'warning');
+            });
+
+            results.errors.forEach(error => {
+                log(`❌ ${error}`, 'error');
+            });
+
+            // Overall assessment
+            if (results.successRate >= 90) {
+                log('🎉 INTEGRATION TEST PASSED - Components are well integrated!', 'success');
+            } else if (results.successRate >= 70) {
+                log('⚠️ INTEGRATION TEST PARTIAL - Some issues need attention', 'warning');
+            } else {
+                log('❌ INTEGRATION TEST FAILED - Significant issues detected', 'error');
+            }
+        }
+
+        async function runComponentTests() {
+            clearOutput();
+            log('🔧 Running individual component tests...', 'info');
+
+            const components = [
+                'navigation', 'hero', 'trust', 'value-proposition',
+                'project-showcase', 'tech-capabilities', 'results',
+                'process', 'social-proof', 'contact-hub', 'footer'
+            ];
+
+            for (const component of components) {
+                try {
+                    const response = await fetch(`../${component}/index.html`);
+                    if (response.ok) {
+                        log(`✅ ${component} component accessible`, 'success');
+                    } else {
+                        log(`❌ ${component} component failed to load (${response.status})`, 'error');
+                    }
+                } catch (error) {
+                    log(`❌ ${component} component error: ${error.message}`, 'error');
+                }
+            }
+
+            log('🏁 Individual component tests completed', 'info');
+        }
+
+        function exportResults() {
+            try {
+                const iframeWindow = testFrame.contentWindow;
+                const testResults = iframeWindow.integrationTestResults;
+
+                if (testResults) {
+                    const dataStr = JSON.stringify(testResults, null, 2);
+                    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                    const url = URL.createObjectURL(dataBlob);
+
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `integration-test-results-${new Date().toISOString().slice(0, 19)}.json`;
+                    link.click();
+
+                    URL.revokeObjectURL(url);
+                    log('📁 Test results exported successfully', 'success');
+                } else {
+                    log('❌ No test results available to export', 'error');
+                }
+            } catch (error) {
+                log(`❌ Error exporting results: ${error.message}`, 'error');
+            }
+        }
+
+        // Auto-run basic checks on load
+        document.addEventListener('DOMContentLoaded', () => {
+            log('🔧 Test runner initialized', 'info');
+            log('📋 Available tests: Full Page Integration, Individual Components', 'info');
+            log('💡 Tip: Open browser console for detailed test output', 'info');
+        });
+    </script>
+</body>
+
+</html>

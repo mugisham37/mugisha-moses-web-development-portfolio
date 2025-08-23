@@ -1,9 +1,0 @@
-export { TestimonialCard } from "./testimonial-card";
-export { TestimonialCarousel } from "./testimonial-carousel";
-export { TestimonialGrid } from "./testimonial-grid";
-export { TestimonialSubmissionForm } from "./testimonial-submission-form";
-export { StarRating } from "./star-rating";
-export { TestimonialVideoPlayer } from "./testimonial-video-player";
-export { TestimonialStats } from "./testimonial-stats";
-export { LinkedInTestimonials } from "./linkedin-testimonials";
-export { TestimonialAggregation } from "./testimonial-aggregation";

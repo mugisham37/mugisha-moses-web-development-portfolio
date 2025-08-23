@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Showcase Component</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared/styles/variables.css">
+    <link rel="stylesheet" href="../shared/styles/animations.css">
+    <link rel="stylesheet" href="../shared/styles/utilities.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Live Project Showcase Section -->
+    <section class="showcase-section" id="showcaseSection">
+        <!-- Section Background Evolution -->
+        <div class="showcase-background">
+            <div class="showcase-particles" id="showcaseParticles"></div>
+            <div class="code-pattern-overlay"></div>
+            <div class="matrix-rain" id="matrixRain"></div>
+            <div class="section-transition-bridge"></div>
+        </div>
+
+        <!-- Showcase Container -->
+        <div class="showcase-container">
+            <!-- Section Header with Filter Integration -->
+            <div class="showcase-header">
+                <div class="header-left">
+                    <h2 class="showcase-title" id="showcaseTitle">LIVE PROJECT SHOWCASE</h2>
+                    <div class="showcase-subtitle">Real projects. Real results. Real code you can inspect.</div>
+                </div>
+
+                <!-- Interactive Filter System -->
+                <div class="filter-system" id="filterSystem">
+                    <div class="filter-container">
+                        <button class="filter-btn active" data-filter="all" id="filterAll">
+                            <span class="filter-icon">⚡</span>
+                            <span class="filter-text">ALL</span>
+                            <span class="filter-count">12</span>
+                        </button>
+                        <button class="filter-btn" data-filter="react" id="filterReact">
+                            <span class="filter-icon">⚛️</span>
+                            <span class="filter-text">REACT</span>
+                            <span class="filter-count">5</span>
+                        </button>
+                        <button class="filter-btn" data-filter="nodejs" id="filterNode">
+                            <span class="filter-icon">🟢</span>
+                            <span class="filter-text">NODE.JS</span>
+                            <span class="filter-count">4</span>
+                        </button>
+                        <button class="filter-btn" data-filter="fullstack" id="filterFullstack">
+                            <span class="filter-icon">🔗</span>
+                            <span class="filter-text">FULL-STACK</span>
+                            <span class="filter-count">6</span>
+                        </button>
+                        <button class="filter-btn" data-filter="mobile" id="filterMobile">
+                            <span class="filter-icon">📱</span>
+                            <span class="filter-text">MOBILE</span>
+                            <span class="filter-count">3</span>
+                        </button>
+                    </div>
+                    <div class="filter-indicator" id="filterIndicator"></div>
+                </div>
+            </div>
+
+            <!-- Featured Project Spotlight -->
+            <div class="featured-spotlight" id="featuredSpotlight">
+                <div class="spotlight-container">
+                    <div class="spotlight-demo">
+                        <div class="demo-frame">
+                            <div class="demo-header">
+                                <div class="demo-controls">
+                                    <span class="control-dot red"></span>
+                                    <span class="control-dot yellow"></span>
+                                    <span class="control-dot green"></span>
+                                </div>
+                                <div class="demo-url">https://enterprise-dashboard.live</div>
+                                <div class="live-indicator">
+                                    <span class="live-dot"></span>
+                                    <span class="live-text">LIVE</span>
+                                </div>
+                            </div>
+                            <div class="demo-content">
+                                <img src="../shared/assets/images/placeholder.svg" alt="Enterprise Dashboard Demo"
+                                    class="demo-image" id="featuredDemo">
+                                <div class="demo-overlay">
+                                    <button class="play-demo-btn" id="playFeaturedDemo">
+                                        <span class="play-icon">▶</span>
+                                        <span class="play-text">WATCH DEMO</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Technology Stack Display -->
+                        <div class="featured-tech-stack">
+                            <div class="tech-badge react">React 18</div>
+                            <div class="tech-badge node">Node.js</div>
+                            <div class="tech-badge postgres">PostgreSQL</div>
+                            <div class="tech-badge aws">AWS</div>
+                            <div class="tech-badge docker">Docker</div>
+                            <div class="tech-badge typescript">TypeScript</div>
+                        </div>
+                    </div>
+
+                    <div class="spotlight-info">
+                        <div class="project-title">Enterprise Analytics Dashboard</div>
+                        <div class="project-client">Fortune 500 Financial Services</div>
+
+                        <div class="project-description">
+                            Transformed legacy reporting system into a real-time analytics platform. Reduced data
+                            processing time by 85% and increased user engagement by 340% through intuitive interface
+                            design and advanced data visualization.
+                        </div>
+
+                        <!-- Enhanced Metrics -->
+                        <div class="spotlight-metrics">
+                            <div class="metric-item">
+                                <div class="metric-number" data-target="85">0</div>
+                                <div class="metric-label">% Faster Processing</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-number" data-target="340">0</div>
+                                <div class="metric-label">% User Engagement</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-number" data-target="99.9">0</div>
+                                <div class="metric-label">% Uptime</div>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced CTAs -->
+                        <div class="spotlight-actions">
+                            <button class="primary-showcase-cta" id="primaryShowcaseCta">
+                                <span class="cta-text">FULL CASE STUDY</span>
+                                <div class="cta-arrow">→</div>
+                            </button>
+                            <button class="secondary-showcase-cta" id="secondaryShowcaseCta">
+                                <span class="cta-text">LIVE DEMO</span>
+                                <div class="cta-external">↗</div>
+                            </button>
+                            <a href="#" class="github-showcase-link" id="githubShowcaseLink">
+                                <span class="github-icon">⚡</span>
+                                <span class="github-text">VIEW CODE</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Cards Grid -->
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Project Card 1 -->
+                <div class="project-card" data-tech="react fullstack" data-category="web-app">
+                    <div class="card-preview">
+                        <img src="../shared/assets/images/placeholder.svg" alt="E-commerce Platform"
+                            class="preview-image">
+                        <div class="preview-overlay">
+                            <button class="preview-play-btn">
+                                <span class="play-icon">▶</span>
+                            </button>
+                        </div>
+                        <div class="live-site-badge">
+                            <span class="live-dot"></span>
+                            <span class="live-text">LIVE</span>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-tech-stack">
+                            <div class="tech-badge react">React</div>
+                            <div class="tech-badge node">Node.js</div>
+                            <div class="tech-badge stripe">Stripe</div>
+                            <div class="tech-badge mongodb">MongoDB</div>
+                        </div>
+
+                        <h3 class="card-title">E-commerce Platform</h3>
+
+                        <div class="card-metrics">
+                            <div class="metric">
+                                <span class="metric-icon">↗</span>
+                                <span class="metric-text">47% Conversion increase</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon">⚡</span>
+                                <span class="metric-text">2.1s Load time</span>
+                            </div>
+                        </div>
+
+                        <div class="card-github">
+                            <div class="github-info">
+                                <span class="github-icon">⚡</span>
+                                <span class="github-text">View on GitHub</span>
+                                <span class="commit-badge">12 commits this week</span>
+                            </div>
+                        </div>
+
+                        <button class="card-cta">
+                            <span class="cta-text">CASE STUDY</span>
+                            <span class="cta-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card" data-tech="nodejs mobile" data-category="api">
+                    <div class="card-preview">
+                        <img src="../shared/assets/images/placeholder.svg" alt="Real-time Chat API"
+                            class="preview-image">
+                        <div class="preview-overlay">
+                            <button class="preview-play-btn">
+                                <span class="play-icon">▶</span>
+                            </button>
+                        </div>
+                        <div class="live-site-badge">
+                            <span class="live-dot"></span>
+                            <span class="live-text">LIVE</span>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-tech-stack">
+                            <div class="tech-badge node">Node.js</div>
+                            <div class="tech-badge socket">Socket.io</div>
+                            <div class="tech-badge redis">Redis</div>
+                            <div class="tech-badge docker">Docker</div>
+                        </div>
+
+                        <h3 class="card-title">Real-time Chat API</h3>
+
+                        <div class="card-metrics">
+                            <div class="metric">
+                                <span class="metric-icon">👥</span>
+                                <span class="metric-text">50K+ Concurrent users</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon">🚀</span>
+                                <span class="metric-text">99.9% Uptime</span>
+                            </div>
+                        </div>
+
+                        <div class="card-github">
+                            <div class="github-info">
+                                <span class="github-icon">⚡</span>
+                                <span class="github-text">View on GitHub</span>
+                                <span class="commit-badge">8 commits this week</span>
+                            </div>
+                        </div>
+
+                        <button class="card-cta">
+                            <span class="cta-text">CASE STUDY</span>
+                            <span class="cta-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card" data-tech="react nodejs fullstack" data-category="saas">
+                    <div class="card-preview">
+                        <img src="../shared/assets/images/placeholder.svg" alt="SaaS Analytics Platform"
+                            class="preview-image">
+                        <div class="preview-overlay">
+                            <button class="preview-play-btn">
+                                <span class="play-icon">▶</span>
+                            </button>
+                        </div>
+                        <div class="live-site-badge">
+                            <span class="live-dot"></span>
+                            <span class="live-text">LIVE</span>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-tech-stack">
+                            <div class="tech-badge react">React</div>
+                            <div class="tech-badge node">Node.js</div>
+                            <div class="tech-badge postgres">PostgreSQL</div>
+                            <div class="tech-badge aws">AWS</div>
+                        </div>
+
+                        <h3 class="card-title">SaaS Analytics Platform</h3>
+
+                        <div class="card-metrics">
+                            <div class="metric">
+                                <span class="metric-icon">💰</span>
+                                <span class="metric-text">$2M ARR Generated</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon">📈</span>
+                                <span class="metric-text">300% Growth rate</span>
+                            </div>
+                        </div>
+
+                        <div class="card-github">
+                            <div class="github-info">
+                                <span class="github-icon">⚡</span>
+                                <span class="github-text">View on GitHub</span>
+                                <span class="commit-badge">15 commits this week</span>
+                            </div>
+                        </div>
+
+                        <button class="card-cta">
+                            <span class="cta-text">CASE STUDY</span>
+                            <span class="cta-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="project-card" data-tech="mobile react" data-category="mobile">
+                    <div class="card-preview">
+                        <img src="../shared/assets/images/placeholder.svg" alt="Fitness Tracking App"
+                            class="preview-image">
+                        <div class="preview-overlay">
+                            <button class="preview-play-btn">
+                                <span class="play-icon">▶</span>
+                            </button>
+                        </div>
+                        <div class="live-site-badge">
+                            <span class="live-dot"></span>
+                            <span class="live-text">LIVE</span>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-tech-stack">
+                            <div class="tech-badge react">React Native</div>
+                            <div class="tech-badge firebase">Firebase</div>
+                            <div class="tech-badge stripe">Stripe</div>
+                            <div class="tech-badge expo">Expo</div>
+                        </div>
+
+                        <h3 class="card-title">Fitness Tracking App</h3>
+
+                        <div class="card-metrics">
+                            <div class="metric">
+                                <span class="metric-icon">📱</span>
+                                <span class="metric-text">100K+ Downloads</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon">⭐</span>
+                                <span class="metric-text">4.8 App Store rating</span>
+                            </div>
+                        </div>
+
+                        <div class="card-github">
+                            <div class="github-info">
+                                <span class="github-icon">⚡</span>
+                                <span class="github-text">View on GitHub</span>
+                                <span class="commit-badge">5 commits this week</span>
+                            </div>
+                        </div>
+
+                        <button class="card-cta">
+                            <span class="cta-text">CASE STUDY</span>
+                            <span class="cta-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 5 -->
+                <div class="project-card" data-tech="nodejs fullstack" data-category="api">
+                    <div class="card-preview">
+                        <img src="../shared/assets/images/placeholder.svg" alt="Blockchain API" class="preview-image">
+                        <div class="preview-overlay">
+                            <button class="preview-play-btn">
+                                <span class="play-icon">▶</span>
+                            </button>
+                        </div>
+                        <div class="live-site-badge">
+                            <span class="live-dot"></span>
+                            <span class="live-text">LIVE</span>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-tech-stack">
+                            <div class="tech-badge node">Node.js</div>
+                            <div class="tech-badge web3">Web3.js</div>
+                            <div class="tech-badge mongodb">MongoDB</div>
+                            <div class="tech-badge kubernetes">Kubernetes</div>
+                        </div>
+
+                        <h3 class="card-title">Blockchain API Gateway</h3>
+
+                        <div class="card-metrics">
+                            <div class="metric">
+                                <span class="metric-icon">🔗</span>
+                                <span class="metric-text">1M+ API calls/day</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon">⚡</span>
+                                <span class="metric-text">50ms Response time</span>
+                            </div>
+                        </div>
+
+                        <div class="card-github">
+                            <div class="github-info">
+                                <span class="github-icon">⚡</span>
+                                <span class="github-text">View on GitHub</span>
+                                <span class="commit-badge">20 commits this week</span>
+                            </div>
+                        </div>
+
+                        <button class="card-cta">
+                            <span class="cta-text">CASE STUDY</span>
+                            <span class="cta-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 6 -->
+                <div class="project-card" data-tech="react fullstack" data-category="web-app">
+                    <div class="card-preview">
+                        <img src="../shared/assets/images/placeholder.svg" alt="Social Media Platform"
+                            class="preview-image">
+                        <div class="preview-overlay">
+                            <button class="preview-play-btn">
+                                <span class="play-icon">▶</span>
+                            </button>
+                        </div>
+                        <div class="live-site-badge">
+                            <span class="live-dot"></span>
+                            <span class="live-text">LIVE</span>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-tech-stack">
+                            <div class="tech-badge react">React</div>
+                            <div class="tech-badge graphql">GraphQL</div>
+                            <div class="tech-badge postgres">PostgreSQL</div>
+                            <div class="tech-badge redis">Redis</div>
+                        </div>
+
+                        <h3 class="card-title">Social Media Platform</h3>
+
+                        <div class="card-metrics">
+                            <div class="metric">
+                                <span class="metric-icon">👥</span>
+                                <span class="metric-text">500K+ Active users</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon">💬</span>
+                                <span class="metric-text">10M+ Posts created</span>
+                            </div>
+                        </div>
+
+                        <div class="card-github">
+                            <div class="github-info">
+                                <span class="github-icon">⚡</span>
+                                <span class="github-text">View on GitHub</span>
+                                <span class="commit-badge">7 commits this week</span>
+                            </div>
+                        </div>
+
+                        <button class="card-cta">
+                            <span class="cta-text">CASE STUDY</span>
+                            <span class="cta-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Section -->
+            <div class="load-more-section">
+                <button class="load-more-btn" id="loadMoreBtn">
+                    <span class="load-text">LOAD MORE PROJECTS</span>
+                    <div class="load-progress" id="loadProgress"></div>
+                    <div class="load-glow"></div>
+                </button>
+
+                <div class="projects-counter">
+                    <span class="counter-text">Showing <span id="currentCount">6</span> of <span
+                            id="totalCount">12</span> projects</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../shared/scripts/utilities.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

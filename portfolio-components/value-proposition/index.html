@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Proposition Component</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared/styles/variables.css">
+    <link rel="stylesheet" href="../shared/styles/animations.css">
+    <link rel="stylesheet" href="../shared/styles/utilities.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Core Value Proposition Section -->
+    <section class="value-section" id="valueSection">
+        <!-- Section Background -->
+        <div class="value-background">
+            <div class="value-particles" id="valueParticles"></div>
+            <div class="value-grid"></div>
+            <div class="section-transition-divider"></div>
+        </div>
+
+        <!-- Value Container -->
+        <div class="value-container">
+            <!-- Section Header -->
+            <div class="value-header">
+                <h2 class="value-title" id="valueTitle">WHAT MAKES YOU DIFFERENT</h2>
+                <div class="value-subtitle">Three core principles that separate elite developers from code writers</div>
+                <div class="title-underline" id="titleUnderline"></div>
+            </div>
+
+            <!-- Three-Column Value Architecture -->
+            <div class="value-columns">
+                <!-- Column 1: Business-First Development -->
+                <div class="value-column" data-column="business">
+                    <div class="column-icon-container">
+                        <div class="column-icon business-icon" id="businessIcon">
+                            <svg viewBox="0 0 80 80" class="icon-svg">
+                                <path d="M10 60 L25 45 L40 50 L55 30 L70 35" stroke="currentColor" stroke-width="3"
+                                    fill="none" stroke-linecap="round" />
+                                <rect x="8" y="58" width="4" height="12" fill="currentColor" />
+                                <rect x="23" y="43" width="4" height="27" fill="currentColor" />
+                                <rect x="38" y="48" width="4" height="22" fill="currentColor" />
+                                <rect x="53" y="28" width="4" height="42" fill="currentColor" />
+                                <rect x="68" y="33" width="4" height="37" fill="currentColor" />
+                            </svg>
+                            <div class="icon-glow"></div>
+                        </div>
+                    </div>
+
+                    <h3 class="column-title">BUSINESS-FIRST DEVELOPMENT</h3>
+
+                    <p class="column-description">
+                        Every line of code serves a business purpose. I don't just build features—I engineer solutions
+                        that directly impact your bottom line, increase conversions, and drive measurable ROI.
+                    </p>
+
+                    <div class="column-metric">
+                        <span class="metric-indicator"></span>
+                        <span class="metric-text">Average ROI increase: <span class="metric-number"
+                                data-target="340">0</span>%</span>
+                    </div>
+                </div>
+
+                <!-- Column 2: Rapid Execution -->
+                <div class="value-column" data-column="speed">
+                    <div class="column-icon-container">
+                        <div class="column-icon speed-icon" id="speedIcon">
+                            <svg viewBox="0 0 80 80" class="icon-svg">
+                                <path d="M20 40 L35 25 L50 40 L65 25" stroke="currentColor" stroke-width="3" fill="none"
+                                    stroke-linecap="round" />
+                                <circle cx="40" cy="40" r="25" stroke="currentColor" stroke-width="2" fill="none" />
+                                <path d="M15 40 L25 40" stroke="currentColor" stroke-width="2" />
+                                <path d="M55 40 L65 40" stroke="currentColor" stroke-width="2" />
+                                <path d="M40 15 L40 25" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                            <div class="icon-glow"></div>
+                            <div class="speed-trail" id="speedTrail"></div>
+                        </div>
+                    </div>
+
+                    <h3 class="column-title">RAPID EXECUTION</h3>
+
+                    <p class="column-description">
+                        From concept to deployment in record time. Agile methodology, streamlined workflows, and
+                        battle-tested frameworks mean your ideas become reality faster than your competition can plan.
+                    </p>
+
+                    <div class="column-metric">
+                        <span class="metric-indicator"></span>
+                        <span class="metric-text">Average delivery: <span class="metric-number"
+                                data-target="40">0</span>% faster</span>
+                    </div>
+                </div>
+
+                <!-- Column 3: Future-Proof Architecture -->
+                <div class="value-column" data-column="architecture">
+                    <div class="column-icon-container">
+                        <div class="column-icon architecture-icon" id="architectureIcon">
+                            <svg viewBox="0 0 80 80" class="icon-svg">
+                                <circle cx="40" cy="20" r="6" fill="currentColor" />
+                                <circle cx="20" cy="40" r="6" fill="currentColor" />
+                                <circle cx="60" cy="40" r="6" fill="currentColor" />
+                                <circle cx="30" cy="60" r="6" fill="currentColor" />
+                                <circle cx="50" cy="60" r="6" fill="currentColor" />
+                                <path d="M40 26 L26 34 M40 26 L54 34 M26 46 L36 54 M54 46 L44 54" stroke="currentColor"
+                                    stroke-width="2" />
+                                <circle cx="40" cy="40" r="3" fill="currentColor" class="center-node" />
+                            </svg>
+                            <div class="icon-glow"></div>
+                            <div class="network-pulse" id="networkPulse"></div>
+                        </div>
+                    </div>
+
+                    <h3 class="column-title">FUTURE-PROOF ARCHITECTURE</h3>
+
+                    <p class="column-description">
+                        Scalable solutions built for tomorrow. Clean, modular code architecture that grows with your
+                        business, adapts to new requirements, and stands the test of technological evolution.
+                    </p>
+
+                    <div class="column-metric">
+                        <span class="metric-indicator"></span>
+                        <span class="metric-text">Built for <span class="metric-number" data-target="10">1</span>x scale
+                            growth</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call-to-Action Integration -->
+            <div class="value-cta-section">
+                <button class="value-cta-button" id="valueCta">
+                    <span class="cta-text" id="ctaText">SEE HOW THIS TRANSLATES TO RESULTS</span>
+                    <div class="cta-progress-bar" id="ctaProgressBar"></div>
+                    <div class="cta-glow-effect"></div>
+                </button>
+
+                <div class="cta-subtitle">Real case studies with measurable outcomes</div>
+
+                <div class="scroll-arrow" id="scrollArrow">
+                    <span class="arrow-text">Results section loading...</span>
+                    <div class="arrow-icon">↓</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../shared/scripts/utilities.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

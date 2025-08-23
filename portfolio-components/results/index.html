@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results & Impact - Portfolio Component</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared/styles/variables.css">
+    <link rel="stylesheet" href="../shared/styles/animations.css">
+    <link rel="stylesheet" href="../shared/styles/utilities.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Results & Impact Section -->
+    <section class="results-section" id="resultsSection">
+        <!-- Section Background Evolution -->
+        <div class="results-background">
+            <div class="success-particles" id="successParticles"></div>
+            <div class="golden-grid"></div>
+            <div class="achievement-streams" id="achievementStreams"></div>
+            <div class="terminal-success-line">
+                <span class="success-text">> compiling_results... SUCCESS</span>
+                <span class="cursor-blink">_</span>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container">
+            <!-- Section Header - Success Declaration -->
+            <div class="results-header">
+                <h2 class="results-title" id="resultsTitle">RESULTS & MEASURABLE IMPACT</h2>
+                <div class="results-subtitle">Real clients. Real results. Real revenue generated.</div>
+
+                <!-- Impact Counter Display -->
+                <div class="impact-counter-display">
+                    <div class="counter-metric">
+                        <div class="counter-number" data-target="12">0</div>
+                        <div class="counter-label">+ CLIENTS SERVED</div>
+                    </div>
+                    <div class="counter-metric">
+                        <div class="counter-number" data-target="2.3">$0</div>
+                        <div class="counter-label">M+ REVENUE GENERATED</div>
+                    </div>
+                    <div class="counter-metric">
+                        <div class="counter-number" data-target="47">0</div>
+                        <div class="counter-label">+ PROJECTS DEPLOYED</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Before/After Comparison Showcase -->
+            <div class="comparison-showcase">
+                <div class="showcase-header">
+                    <h3 class="showcase-title">TRANSFORMATION RESULTS</h3>
+                    <div class="showcase-subtitle">Quantified improvements across key business metrics</div>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Comparison Card 1 -->
+                    <div class="comparison-card" data-comparison="ecommerce">
+                        <div class="card-header">
+                            <h4 class="comparison-title">E-commerce Platform Optimization</h4>
+                            <div class="client-badge">Fortune 500 Retail</div>
+                        </div>
+
+                        <div class="comparison-content">
+                            <div class="before-section">
+                                <div class="section-label">BEFORE</div>
+                                <div class="metrics-list">
+                                    <div class="metric-item negative">
+                                        <span class="metric-icon">⏱️</span>
+                                        <span class="metric-text">3.2s load time</span>
+                                    </div>
+                                    <div class="metric-item negative">
+                                        <span class="metric-icon">📉</span>
+                                        <span class="metric-text">1.4% conversion rate</span>
+                                    </div>
+                                    <div class="metric-item negative">
+                                        <span class="metric-icon">🛒</span>
+                                        <span class="metric-text">67% cart abandonment</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="transformation-arrow">
+                                <div class="arrow-icon">→</div>
+                                <div class="transformation-text">OPTIMIZED</div>
+                            </div>
+
+                            <div class="after-section">
+                                <div class="section-label">AFTER</div>
+                                <div class="metrics-list">
+                                    <div class="metric-item positive">
+                                        <span class="metric-icon">⚡</span>
+                                        <span class="metric-text">0.8s load time</span>
+                                    </div>
+                                    <div class="metric-item positive">
+                                        <span class="metric-icon">📈</span>
+                                        <span class="metric-text">4.7% conversion rate</span>
+                                    </div>
+                                    <div class="metric-item positive">
+                                        <span class="metric-icon">✅</span>
+                                        <span class="metric-text">23% cart abandonment</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="impact-summary">
+                            <div class="impact-highlight">+235% revenue increase</div>
+                            <div class="impact-value">+$340K annual increase</div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Card 2 -->
+                    <div class="comparison-card" data-comparison="saas">
+                        <div class="card-header">
+                            <h4 class="comparison-title">SaaS Application Redesign</h4>
+                            <div class="client-badge">Tech Startup</div>
+                        </div>
+
+                        <div class="comparison-content">
+                            <div class="before-section">
+                                <div class="section-label">BEFORE</div>
+                                <div class="metrics-list">
+                                    <div class="metric-item negative">
+                                        <span class="metric-icon">👥</span>
+                                        <span class="metric-text">23% user retention</span>
+                                    </div>
+                                    <div class="metric-item negative">
+                                        <span class="metric-icon">⭐</span>
+                                        <span class="metric-text">4.2★ app rating</span>
+                                    </div>
+                                    <div class="metric-item negative">
+                                        <span class="metric-icon">🐌</span>
+                                        <span class="metric-text">156ms API response</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="transformation-arrow">
+                                <div class="arrow-icon">→</div>
+                                <div class="transformation-text">REDESIGNED</div>
+                            </div>
+
+                            <div class="after-section">
+                                <div class="section-label">AFTER</div>
+                                <div class="metrics-list">
+                                    <div class="metric-item positive">
+                                        <span class="metric-icon">🎯</span>
+                                        <span class="metric-text">89% user retention</span>
+                                    </div>
+                                    <div class="metric-item positive">
+                                        <span class="metric-icon">🌟</span>
+                                        <span class="metric-text">4.8★ app rating</span>
+                                    </div>
+                                    <div class="metric-item positive">
+                                        <span class="metric-icon">⚡</span>
+                                        <span class="metric-text">34ms API response</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="impact-summary">
+                            <div class="impact-highlight">+287% user engagement</div>
+                            <div class="impact-value">+$180K ARR</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenue Impact Dashboard -->
+            <div class="revenue-dashboard">
+                <div class="dashboard-header">
+                    <h3 class="dashboard-title">FINANCIAL IMPACT GENERATED</h3>
+                    <div class="dashboard-subtitle">Quantified business value delivered to clients</div>
+                </div>
+
+                <div class="revenue-categories">
+                    <div class="revenue-category">
+                        <div class="category-icon">💰</div>
+                        <div class="category-content">
+                            <div class="category-title">Direct Revenue Generated</div>
+                            <div class="category-amount" data-target="2340000">$0</div>
+                            <div class="category-details">Generated over 24 months</div>
+                        </div>
+                    </div>
+
+                    <div class="revenue-category">
+                        <div class="category-icon">💡</div>
+                        <div class="category-content">
+                            <div class="category-title">Cost Savings Achieved</div>
+                            <div class="category-amount" data-target="890000">$0</div>
+                            <div class="category-details">Reduced hosting costs by 67%</div>
+                        </div>
+                    </div>
+
+                    <div class="revenue-category">
+                        <div class="category-icon">🚀</div>
+                        <div class="category-content">
+                            <div class="category-title">Performance Improvements</div>
+                            <div class="category-amount" data-target="340">0%</div>
+                            <div class="category-details">Average improvement across projects</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievement Timeline -->
+            <div class="achievement-timeline">
+                <div class="timeline-header">
+                    <h3 class="timeline-title">MAJOR ACHIEVEMENTS</h3>
+                    <div class="timeline-subtitle">Career milestones and recognition</div>
+                </div>
+
+                <div class="timeline-scroll-container">
+                    <div class="timeline-track" id="achievementTrack">
+                        <div class="achievement-medallion" data-year="2019">
+                            <div class="medallion-icon">💼</div>
+                            <div class="medallion-content">
+                                <div class="medallion-year">2019</div>
+                                <div class="medallion-title">First $100K Project</div>
+                                <div class="medallion-description">Delivered enterprise solution</div>
+                            </div>
+                        </div>
+
+                        <div class="achievement-medallion" data-year="2020">
+                            <div class="medallion-icon">🏆</div>
+                            <div class="medallion-content">
+                                <div class="medallion-year">2020</div>
+                                <div class="medallion-title">AWS Certified</div>
+                                <div class="medallion-description">Solutions Architect Professional</div>
+                            </div>
+                        </div>
+
+                        <div class="achievement-medallion" data-year="2021">
+                            <div class="medallion-icon">🚀</div>
+                            <div class="medallion-content">
+                                <div class="medallion-year">2021</div>
+                                <div class="medallion-title">Founded Consultancy</div>
+                                <div class="medallion-description">Independent development practice</div>
+                            </div>
+                        </div>
+
+                        <div class="achievement-medallion" data-year="2022">
+                            <div class="medallion-icon">💎</div>
+                            <div class="medallion-content">
+                                <div class="medallion-year">2022</div>
+                                <div class="medallion-title">$1M Revenue Milestone</div>
+                                <div class="medallion-description">Exceeded client revenue target</div>
+                            </div>
+                        </div>
+
+                        <div class="achievement-medallion" data-year="2023">
+                            <div class="medallion-icon">⭐</div>
+                            <div class="medallion-content">
+                                <div class="medallion-year">2023</div>
+                                <div class="medallion-title">Open Source Success</div>
+                                <div class="medallion-description">1K+ GitHub stars</div>
+                            </div>
+                        </div>
+
+                        <div class="achievement-medallion current" data-year="2024">
+                            <div class="medallion-icon">🎯</div>
+                            <div class="medallion-content">
+                                <div class="medallion-year">2024</div>
+                                <div class="medallion-title">99.9% Satisfaction</div>
+                                <div class="medallion-description">Perfect client retention rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results CTA -->
+            <div class="results-cta-section">
+                <button class="results-cta-button" id="resultsCta">
+                    <span class="cta-text">ADD YOUR SUCCESS STORY</span>
+                    <div class="cta-success-animation"></div>
+                </button>
+                <div class="cta-subtitle">Join 50+ satisfied clients who've transformed their business</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../shared/scripts/utilities.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

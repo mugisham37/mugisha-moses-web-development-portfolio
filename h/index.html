@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Section - Brutalist Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared/styles/variables.css">
+    <link rel="stylesheet" href="../shared/styles/animations.css">
+    <link rel="stylesheet" href="../shared/styles/utilities.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <!-- Animated Background -->
+        <div class="hero-background">
+            <div class="stars-field" id="starsField"></div>
+            <div class="grid-overlay"></div>
+            <div class="particle-system" id="particleSystem"></div>
+            <div class="scan-lines"></div>
+        </div>
+
+        <!-- Hero Content Container -->
+        <div class="hero-container">
+            <!-- Left Column - Main Content -->
+            <div class="hero-content">
+                <!-- Primary Headline -->
+                <div class="headline-container">
+                    <h1 class="hero-headline" id="heroHeadline">
+                        <span class="headline-line">I ARCHITECT</span>
+                        <span class="headline-line">DIGITAL EXPERIENCES</span>
+                        <span class="headline-line">THAT DRIVE</span>
+                        <span class="headline-line highlight">MILLION-DOLLAR</span>
+                        <span class="headline-line highlight">RESULTS</span>
+                    </h1>
+                    <div class="typewriter-cursor" id="typewriterCursor">|</div>
+                </div>
+
+                <!-- Dynamic Subtitle -->
+                <div class="subtitle-container">
+                    <span class="subtitle-prefix">CURRENTLY:</span>
+                    <div class="rotating-subtitle" id="rotatingSubtitle">
+                        <span class="subtitle-text active">FULL-STACK DEVELOPER</span>
+                        <span class="subtitle-text">REACT ARCHITECT</span>
+                        <span class="subtitle-text">NODE.JS EXPERT</span>
+                        <span class="subtitle-text">CLOUD ENGINEER</span>
+                        <span class="subtitle-text">PROBLEM SOLVER</span>
+                    </div>
+                </div>
+
+                <!-- Impact Metrics -->
+                <div class="metrics-bar">
+                    <div class="metric-item">
+                        <div class="metric-number" data-target="50">0</div>
+                        <div class="metric-label">PROJECTS DEPLOYED</div>
+                        <div class="metric-border"></div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-number" data-target="99.9">0</div>
+                        <div class="metric-label">% UPTIME ACHIEVED</div>
+                        <div class="metric-border"></div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-number" data-target="2">$</div>
+                        <div class="metric-label">M+ CLIENT REVENUE</div>
+                        <div class="metric-border"></div>
+                    </div>
+                </div>
+
+                <!-- Value Proposition -->
+                <div class="value-proposition">
+                    <p class="value-text" id="valueText">
+                        I don't just write code—I engineer solutions that solve real business problems and generate
+                        measurable ROI. Every line serves a purpose, every feature drives results.
+                    </p>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hero-actions">
+                    <button class="primary-cta" id="primaryCta">
+                        <span class="cta-text">SEE MY IMPACT</span>
+                        <div class="cta-progress"></div>
+                        <div class="cta-glow"></div>
+                    </button>
+                    <button class="secondary-cta" id="secondaryCta">
+                        <span class="cta-text">QUICK CHAT</span>
+                        <div class="cta-border-animation"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column - Visual Impact -->
+            <div class="hero-visual">
+                <!-- Professional Headshot -->
+                <div class="portrait-container" id="portraitContainer">
+                    <div class="portrait-frame">
+                        <img src="../shared/assets/images/hero-portrait.jpg" alt="Professional Developer Portrait"
+                            class="portrait-image" id="portraitImage">
+                        <div class="frame-corners">
+                            <div class="corner top-left"></div>
+                            <div class="corner top-right"></div>
+                            <div class="corner bottom-left"></div>
+                            <div class="corner bottom-right"></div>
+                        </div>
+                        <div class="scan-effect" id="scanEffect"></div>
+                        <div class="portrait-glow"></div>
+                    </div>
+
+                    <!-- Status Panel -->
+                    <div class="status-panel">
+                        <div class="status-dot-large"></div>
+                        <span class="status-text-large">AVAILABLE FOR NEW PROJECTS</span>
+                    </div>
+
+                    <!-- Floating Badges -->
+                    <div class="achievement-badges">
+                        <div class="badge badge-1" data-tooltip="Amazon Web Services Certified">
+                            <span class="badge-text">AWS</span>
+                        </div>
+                        <div class="badge badge-2" data-tooltip="React Expert Level">
+                            <span class="badge-text">REACT</span>
+                        </div>
+                        <div class="badge badge-3" data-tooltip="5-Star Client Rating">
+                            <span class="badge-text">5★</span>
+                        </div>
+                        <div class="badge badge-4" data-tooltip="Node.js Specialist">
+                            <span class="badge-text">NODE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Code Display -->
+                <div class="code-display" id="codeDisplay">
+                    <div class="code-header">
+                        <span class="code-title">// CURRENTLY BUILDING</span>
+                        <div class="code-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                    </div>
+                    <div class="code-content" id="codeContent">
+                        <span class="code-line">const buildAmazingThings = () => {</span>
+                        <span class="code-line"> return innovation + passion;</span>
+                        <span class="code-line">};</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" id="scrollIndicator">
+            <div class="scroll-logo">DEV</div>
+            <div class="scroll-progress" id="scrollProgress"></div>
+            <div class="scroll-text">SCROLL TO EXPLORE</div>
+        </div>
+
+        <!-- Cursor Trail Effect -->
+        <div class="cursor-trail" id="cursorTrail"></div>
+    </section>
+
+    <script src="../shared/scripts/utilities.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
