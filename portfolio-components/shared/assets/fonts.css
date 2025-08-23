@@ -35,7 +35,10 @@
 
 /* Font Loading Optimization */
 .font-loading {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 .fonts-loaded .font-mono {

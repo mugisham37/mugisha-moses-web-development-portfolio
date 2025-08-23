@@ -24,7 +24,9 @@
   overflow: hidden;
   border-top: 12px solid var(--primary-white);
   border-bottom: 12px solid var(--primary-white);
-  box-shadow: 0 -12px 0 var(--accent-cyan), 0 12px 0 var(--accent-yellow);
+  box-shadow:
+    0 -12px 0 var(--accent-cyan),
+    0 12px 0 var(--accent-yellow);
 }
 
 /* BRUTAL PROCESS BACKGROUND SYSTEM */
@@ -53,7 +55,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 20% 80%,
       rgba(255, 255, 0, 0.08) 0%,
       transparent 50%
@@ -77,7 +80,8 @@
 .process-grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(var(--accent-cyan) 2px, transparent 2px),
+  background-image:
+    linear-gradient(var(--accent-cyan) 2px, transparent 2px),
     linear-gradient(90deg, var(--accent-cyan) 2px, transparent 2px);
   background-size: 60px 60px;
   opacity: 0.1;
@@ -95,14 +99,18 @@
 .brutal-concrete {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 4px 4px,
       var(--primary-white) 1px,
       transparent 1px
     ),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 50px 50px, 25px 25px, 25px 25px;
+  background-size:
+    50px 50px,
+    25px 25px,
+    25px 25px;
   opacity: 0.3;
   animation: concreteShift 30s linear infinite;
 }
@@ -256,7 +264,9 @@
   background: var(--accent-green);
   color: var(--primary-black);
   transform: translate(-6px, -6px) rotate(-1deg);
-  box-shadow: 12px 12px 0 var(--accent-yellow), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-yellow),
+    24px 24px 0 var(--primary-white);
 }
 
 .satisfaction-icon {
@@ -371,7 +381,8 @@
 .step-container:hover {
   border-color: var(--accent-cyan);
   transform: translate(-12px, -12px) rotate(-2deg);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     32px 32px 0 var(--primary-white);
   filter: drop-shadow(0 0 30px var(--accent-cyan));
 }
@@ -397,7 +408,9 @@
 
 .step-container:hover .step-number {
   color: var(--accent-cyan);
-  text-shadow: 4px 4px 0 var(--primary-black), 0 0 20px var(--accent-cyan);
+  text-shadow:
+    4px 4px 0 var(--primary-black),
+    0 0 20px var(--accent-cyan);
   transform: scale(1.1) rotate(-5deg);
 }
 
@@ -456,7 +469,9 @@
 .step-container:hover .step-icon {
   background: var(--accent-cyan);
   transform: translate(-6px, -6px) rotate(5deg) scale(1.1);
-  box-shadow: 12px 12px 0 var(--accent-yellow), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-yellow),
+    24px 24px 0 var(--primary-white);
 }
 
 .step-container:hover .step-icon svg {
@@ -850,7 +865,9 @@
 .timeline-bar:hover {
   border-color: var(--accent-yellow);
   transform: translate(-6px, -6px) rotate(-1deg);
-  box-shadow: 12px 12px 0 var(--accent-yellow), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-yellow),
+    24px 24px 0 var(--primary-white);
 }
 
 .bar-label {
@@ -972,7 +989,8 @@
 .pricing-tier:hover {
   border-color: var(--accent-yellow);
   transform: translate(-10px, -10px) rotate(-1deg);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 20px var(--accent-cyan));
 }
@@ -1165,7 +1183,8 @@
 .tool-item:hover {
   border-color: var(--accent-cyan);
   transform: translate(-8px, -8px) rotate(-2deg);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 20px var(--accent-cyan));
 }
@@ -1186,7 +1205,9 @@
 .tool-item:hover .tool-icon {
   color: var(--accent-yellow);
   transform: scale(1.2) rotate(10deg);
-  text-shadow: 4px 4px 0 var(--primary-black), 0 0 20px var(--accent-yellow);
+  text-shadow:
+    4px 4px 0 var(--primary-black),
+    0 0 20px var(--accent-yellow);
 }
 
 .tool-name {
@@ -1322,7 +1343,9 @@
 
 .primary-process-cta:hover {
   transform: translate(-12px, -12px) rotate(-2deg) scale(1.05);
-  box-shadow: 24px 24px 0 var(--accent-yellow), 48px 48px 0 var(--primary-white);
+  box-shadow:
+    24px 24px 0 var(--accent-yellow),
+    48px 48px 0 var(--primary-white);
   filter: drop-shadow(0 0 30px var(--accent-cyan));
 }
 
@@ -1421,7 +1444,8 @@
 .invitation-card:hover {
   border-color: var(--accent-yellow);
   transform: translate(-8px, -8px) rotate(-1deg);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     24px 24px 0 var(--primary-white);
 }
 
@@ -1480,7 +1504,9 @@
   background: var(--accent-cyan);
   color: var(--primary-black);
   transform: translate(-4px, -4px) rotate(-1deg) scale(1.05);
-  box-shadow: 8px 8px 0 var(--accent-yellow), 16px 16px 0 var(--primary-white);
+  box-shadow:
+    8px 8px 0 var(--accent-yellow),
+    16px 16px 0 var(--primary-white);
   text-shadow: 2px 2px 0 var(--primary-white);
 }
 
@@ -1557,10 +1583,14 @@
 @keyframes brutalTitleGlow {
   0%,
   100% {
-    text-shadow: 4px 4px 0 var(--primary-black), 0 0 30px rgba(0, 255, 255, 0.5);
+    text-shadow:
+      4px 4px 0 var(--primary-black),
+      0 0 30px rgba(0, 255, 255, 0.5);
   }
   50% {
-    text-shadow: 4px 4px 0 var(--primary-black), 0 0 50px rgba(255, 255, 0, 0.8);
+    text-shadow:
+      4px 4px 0 var(--primary-black),
+      0 0 50px rgba(255, 255, 0, 0.8);
   }
 }
 

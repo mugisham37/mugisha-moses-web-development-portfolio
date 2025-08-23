@@ -1,317 +1,425 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tech Capabilities Component</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../shared/styles/variables.css">
-    <link rel="stylesheet" href="../shared/styles/animations.css">
-    <link rel="stylesheet" href="../shared/styles/utilities.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/styles/variables.css" />
+    <link rel="stylesheet" href="../shared/styles/animations.css" />
+    <link rel="stylesheet" href="../shared/styles/utilities.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
     <!-- Technical Capabilities Matrix Section -->
     <section class="tech-capabilities-section" id="techCapabilitiesSection">
-        <!-- Section Background Evolution -->
-        <div class="tech-background">
-            <div class="binary-streams" id="binaryStreams"></div>
-            <div class="code-rain-overlay" id="codeRainOverlay"></div>
-            <div class="matrix-grid"></div>
-            <div class="terminal-prompt-line">
-                <span class="prompt-text">> analyzing_technical_capabilities...</span>
-                <span class="cursor-blink">_</span>
-            </div>
+      <!-- Section Background Evolution -->
+      <div class="tech-background">
+        <div class="binary-streams" id="binaryStreams"></div>
+        <div class="code-rain-overlay" id="codeRainOverlay"></div>
+        <div class="matrix-grid"></div>
+        <div class="terminal-prompt-line">
+          <span class="prompt-text">> analyzing_technical_capabilities...</span>
+          <span class="cursor-blink">_</span>
         </div>
+      </div>
 
-        <!-- Dual Section Container -->
-        <div class="tech-container">
-            <!-- Technical Capabilities Matrix -->
-            <div class="capabilities-matrix">
-                <!-- Section Header & Navigation -->
-                <div class="matrix-header">
-                    <h2 class="matrix-title" id="matrixTitle">TECHNICAL CAPABILITIES MATRIX</h2>
+      <!-- Dual Section Container -->
+      <div class="tech-container">
+        <!-- Technical Capabilities Matrix -->
+        <div class="capabilities-matrix">
+          <!-- Section Header & Navigation -->
+          <div class="matrix-header">
+            <h2 class="matrix-title" id="matrixTitle">
+              TECHNICAL CAPABILITIES MATRIX
+            </h2>
 
-                    <!-- Capability Navigation Tabs -->
-                    <div class="capability-tabs" id="capabilityTabs">
-                        <button class="tab-btn active" data-tab="skills">SKILLS</button>
-                        <button class="tab-btn" data-tab="timeline">TIMELINE</button>
-                        <button class="tab-btn" data-tab="certifications">CERTIFICATIONS</button>
-                        <button class="tab-btn" data-tab="code">CODE</button>
-                        <button class="tab-btn" data-tab="learning">LEARNING</button>
+            <!-- Capability Navigation Tabs -->
+            <div class="capability-tabs" id="capabilityTabs">
+              <button class="tab-btn active" data-tab="skills">SKILLS</button>
+              <button class="tab-btn" data-tab="timeline">TIMELINE</button>
+              <button class="tab-btn" data-tab="certifications">
+                CERTIFICATIONS
+              </button>
+              <button class="tab-btn" data-tab="code">CODE</button>
+              <button class="tab-btn" data-tab="learning">LEARNING</button>
+            </div>
+          </div>
+
+          <!-- Tab Content Container -->
+          <div class="tab-content-container">
+            <!-- Skills Tab - Interactive Radar Chart -->
+            <div class="tab-content active" id="skillsTab">
+              <div class="skills-layout">
+                <!-- Radar Chart -->
+                <div class="radar-chart-container">
+                  <div class="radar-chart" id="radarChart">
+                    <svg viewBox="0 0 500 500" class="radar-svg">
+                      <!-- Grid Lines -->
+                      <g class="radar-grid">
+                        <!-- Concentric circles -->
+                        <circle
+                          cx="250"
+                          cy="250"
+                          r="50"
+                          fill="none"
+                          stroke="#00ff41"
+                          stroke-width="1"
+                          opacity="0.3"
+                        />
+                        <circle
+                          cx="250"
+                          cy="250"
+                          r="100"
+                          fill="none"
+                          stroke="#00ff41"
+                          stroke-width="1"
+                          opacity="0.3"
+                        />
+                        <circle
+                          cx="250"
+                          cy="250"
+                          r="150"
+                          fill="none"
+                          stroke="#00ff41"
+                          stroke-width="1"
+                          opacity="0.3"
+                        />
+                        <circle
+                          cx="250"
+                          cy="250"
+                          r="200"
+                          fill="none"
+                          stroke="#00ff41"
+                          stroke-width="1"
+                          opacity="0.3"
+                        />
+                        <!-- Radial lines -->
+                        <line
+                          x1="250"
+                          y1="50"
+                          x2="250"
+                          y2="450"
+                          stroke="#00ff41"
+                          stroke-width="1"
+                          opacity="0.3"
+                        />
+                        <line
+                          x1="423"
+                          y1="173"
+                          x2="77"
+                          y2="327"
+                          stroke="#00ff41"
+                          stroke-width="1"
+                          opacity="0.3"
+                        />
+                        <line
+                          x1="423"
+                          y1="327"
+                          x2="77"
+                          y2="173"
+                          stroke="#00ff41"
+                          stroke-width="1"
+                          opacity="0.3"
+                        />
+                        <line
+                          x1="450"
+                          y1="250"
+                          x2="50"
+                          y2="250"
+                          stroke="#00ff41"
+                          stroke-width="1"
+                          opacity="0.3"
+                        />
+                      </g>
+                      <!-- Data Points -->
+                      <g class="radar-data" id="radarData">
+                        <!-- Will be populated by JavaScript -->
+                      </g>
+                    </svg>
+
+                    <!-- Skill Labels -->
+                    <div class="skill-labels">
+                      <div
+                        class="skill-label"
+                        data-skill="frontend"
+                        style="top: 10%; left: 50%"
+                      >
+                        Frontend
+                      </div>
+                      <div
+                        class="skill-label"
+                        data-skill="backend"
+                        style="top: 25%; right: 10%"
+                      >
+                        Backend
+                      </div>
+                      <div
+                        class="skill-label"
+                        data-skill="database"
+                        style="bottom: 25%; right: 10%"
+                      >
+                        Database
+                      </div>
+                      <div
+                        class="skill-label"
+                        data-skill="cloud"
+                        style="bottom: 10%; left: 50%"
+                      >
+                        Cloud
+                      </div>
+                      <div
+                        class="skill-label"
+                        data-skill="devops"
+                        style="bottom: 25%; left: 10%"
+                      >
+                        DevOps
+                      </div>
+                      <div
+                        class="skill-label"
+                        data-skill="mobile"
+                        style="top: 25%; left: 10%"
+                      >
+                        Mobile
+                      </div>
                     </div>
+                  </div>
                 </div>
 
-                <!-- Tab Content Container -->
-                <div class="tab-content-container">
-                    <!-- Skills Tab - Interactive Radar Chart -->
-                    <div class="tab-content active" id="skillsTab">
-                        <div class="skills-layout">
-                            <!-- Radar Chart -->
-                            <div class="radar-chart-container">
-                                <div class="radar-chart" id="radarChart">
-                                    <svg viewBox="0 0 500 500" class="radar-svg">
-                                        <!-- Grid Lines -->
-                                        <g class="radar-grid">
-                                            <!-- Concentric circles -->
-                                            <circle cx="250" cy="250" r="50" fill="none" stroke="#00ff41"
-                                                stroke-width="1" opacity="0.3" />
-                                            <circle cx="250" cy="250" r="100" fill="none" stroke="#00ff41"
-                                                stroke-width="1" opacity="0.3" />
-                                            <circle cx="250" cy="250" r="150" fill="none" stroke="#00ff41"
-                                                stroke-width="1" opacity="0.3" />
-                                            <circle cx="250" cy="250" r="200" fill="none" stroke="#00ff41"
-                                                stroke-width="1" opacity="0.3" />
-                                            <!-- Radial lines -->
-                                            <line x1="250" y1="50" x2="250" y2="450" stroke="#00ff41" stroke-width="1"
-                                                opacity="0.3" />
-                                            <line x1="423" y1="173" x2="77" y2="327" stroke="#00ff41" stroke-width="1"
-                                                opacity="0.3" />
-                                            <line x1="423" y1="327" x2="77" y2="173" stroke="#00ff41" stroke-width="1"
-                                                opacity="0.3" />
-                                            <line x1="450" y1="250" x2="50" y2="250" stroke="#00ff41" stroke-width="1"
-                                                opacity="0.3" />
-                                        </g>
-                                        <!-- Data Points -->
-                                        <g class="radar-data" id="radarData">
-                                            <!-- Will be populated by JavaScript -->
-                                        </g>
-                                    </svg>
+                <!-- Live GitHub Language Statistics -->
+                <div class="language-stats-panel">
+                  <div class="panel-header">
+                    <h3 class="panel-title">LIVE LANGUAGE STATS</h3>
+                    <div class="update-indicator">
+                      <span class="update-dot"></span>
+                      <span class="update-text">Updated 15 min ago</span>
+                    </div>
+                  </div>
 
-                                    <!-- Skill Labels -->
-                                    <div class="skill-labels">
-                                        <div class="skill-label" data-skill="frontend" style="top: 10%; left: 50%;">
-                                            Frontend</div>
-                                        <div class="skill-label" data-skill="backend" style="top: 25%; right: 10%;">
-                                            Backend</div>
-                                        <div class="skill-label" data-skill="database" style="bottom: 25%; right: 10%;">
-                                            Database</div>
-                                        <div class="skill-label" data-skill="cloud" style="bottom: 10%; left: 50%;">
-                                            Cloud</div>
-                                        <div class="skill-label" data-skill="devops" style="bottom: 25%; left: 10%;">
-                                            DevOps</div>
-                                        <div class="skill-label" data-skill="mobile" style="top: 25%; left: 10%;">Mobile
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Live GitHub Language Statistics -->
-                            <div class="language-stats-panel">
-                                <div class="panel-header">
-                                    <h3 class="panel-title">LIVE LANGUAGE STATS</h3>
-                                    <div class="update-indicator">
-                                        <span class="update-dot"></span>
-                                        <span class="update-text">Updated 15 min ago</span>
-                                    </div>
-                                </div>
-
-                                <div class="language-list" id="languageList">
-                                    <div class="language-item" data-language="javascript">
-                                        <div class="language-info">
-                                            <div class="language-logo">JS</div>
-                                            <span class="language-name">JavaScript</span>
-                                        </div>
-                                        <div class="language-progress">
-                                            <div class="progress-bar" data-percentage="35"></div>
-                                            <span class="percentage-text">35%</span>
-                                        </div>
-                                        <div class="language-details">Used in 23 repositories</div>
-                                    </div>
-
-                                    <div class="language-item" data-language="python">
-                                        <div class="language-info">
-                                            <div class="language-logo">PY</div>
-                                            <span class="language-name">Python</span>
-                                        </div>
-                                        <div class="language-progress">
-                                            <div class="progress-bar" data-percentage="25"></div>
-                                            <span class="percentage-text">25%</span>
-                                        </div>
-                                        <div class="language-details">Used in 18 repositories</div>
-                                    </div>
-
-                                    <div class="language-item" data-language="typescript">
-                                        <div class="language-info">
-                                            <div class="language-logo">TS</div>
-                                            <span class="language-name">TypeScript</span>
-                                        </div>
-                                        <div class="language-progress">
-                                            <div class="progress-bar" data-percentage="20"></div>
-                                            <span class="percentage-text">20%</span>
-                                        </div>
-                                        <div class="language-details">Used in 15 repositories</div>
-                                    </div>
-                                </div>
-
-                                <div class="stats-summary">
-                                    <div class="summary-item">
-                                        <span class="summary-label">Total Lines:</span>
-                                        <span class="summary-value" data-target="47000">0</span>
-                                    </div>
-                                    <div class="summary-item">
-                                        <span class="summary-label">This Week:</span>
-                                        <span class="summary-value">+2,340 lines</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                  <div class="language-list" id="languageList">
+                    <div class="language-item" data-language="javascript">
+                      <div class="language-info">
+                        <div class="language-logo">JS</div>
+                        <span class="language-name">JavaScript</span>
+                      </div>
+                      <div class="language-progress">
+                        <div class="progress-bar" data-percentage="35"></div>
+                        <span class="percentage-text">35%</span>
+                      </div>
+                      <div class="language-details">
+                        Used in 23 repositories
+                      </div>
                     </div>
 
-                    <!-- Timeline Tab -->
-                    <div class="tab-content" id="timelineTab">
-                        <div class="timeline-container">
-                            <div class="timeline-track" id="timelineTrack">
-                                <div class="timeline-node" data-year="2018">
-                                    <div class="node-badge">
-                                        <div class="tech-logo html">HTML</div>
-                                    </div>
-                                    <div class="node-info">
-                                        <div class="node-year">2018</div>
-                                        <div class="node-title">Foundation</div>
-                                        <div class="node-description">Started with HTML/CSS, Basic JavaScript</div>
-                                    </div>
-                                </div>
-
-                                <div class="timeline-node" data-year="2020">
-                                    <div class="node-badge">
-                                        <div class="tech-logo react">⚛️</div>
-                                    </div>
-                                    <div class="node-info">
-                                        <div class="node-year">2020</div>
-                                        <div class="node-title">React Mastery</div>
-                                        <div class="node-description">Advanced React, Node.js Full-Stack</div>
-                                    </div>
-                                </div>
-
-                                <div class="timeline-node" data-year="2022">
-                                    <div class="node-badge">
-                                        <div class="tech-logo cloud">☁️</div>
-                                    </div>
-                                    <div class="node-info">
-                                        <div class="node-year">2022</div>
-                                        <div class="node-title">Cloud Native</div>
-                                        <div class="node-description">AWS, Docker, Kubernetes Mastery</div>
-                                    </div>
-                                </div>
-
-                                <div class="timeline-node current" data-year="2025">
-                                    <div class="node-badge">
-                                        <div class="tech-logo ai">🤖</div>
-                                    </div>
-                                    <div class="node-info">
-                                        <div class="node-year">2025</div>
-                                        <div class="node-title">AI Integration</div>
-                                        <div class="node-description">Currently exploring Edge Computing, Web3</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="language-item" data-language="python">
+                      <div class="language-info">
+                        <div class="language-logo">PY</div>
+                        <span class="language-name">Python</span>
+                      </div>
+                      <div class="language-progress">
+                        <div class="progress-bar" data-percentage="25"></div>
+                        <span class="percentage-text">25%</span>
+                      </div>
+                      <div class="language-details">
+                        Used in 18 repositories
+                      </div>
                     </div>
 
-                    <!-- Certifications Tab -->
-                    <div class="tab-content" id="certificationsTab">
-                        <div class="certifications-grid" id="certificationsGrid">
-                            <div class="cert-card" data-cert="aws">
-                                <div class="cert-front">
-                                    <div class="cert-logo">AWS</div>
-                                    <div class="cert-title">Solutions Architect</div>
-                                    <div class="cert-date">Achieved 2023</div>
-                                    <div class="cert-level">Professional</div>
-                                </div>
-                                <div class="cert-back">
-                                    <div class="cert-id">ID: AWS-SAP-2023-001</div>
-                                    <button class="verify-btn">Verify Credential</button>
-                                    <div class="cert-skills">
-                                        <div class="skill-item">• Cloud Architecture</div>
-                                        <div class="skill-item">• Scalable Systems</div>
-                                        <div class="skill-item">• Security Best Practices</div>
-                                    </div>
-                                    <div class="cert-status">Valid until 2026</div>
-                                </div>
-                            </div>
-
-                            <div class="cert-card" data-cert="google">
-                                <div class="cert-front">
-                                    <div class="cert-logo">GCP</div>
-                                    <div class="cert-title">Professional Developer</div>
-                                    <div class="cert-date">Achieved 2023</div>
-                                    <div class="cert-level">Professional</div>
-                                </div>
-                                <div class="cert-back">
-                                    <div class="cert-id">ID: GCP-PD-2023-042</div>
-                                    <button class="verify-btn">Verify Credential</button>
-                                    <div class="cert-skills">
-                                        <div class="skill-item">• Application Development</div>
-                                        <div class="skill-item">• Cloud Services</div>
-                                        <div class="skill-item">• DevOps Integration</div>
-                                    </div>
-                                    <div class="cert-status">Valid until 2025</div>
-                                </div>
-                            </div>
-
-                            <div class="cert-card" data-cert="react">
-                                <div class="cert-front">
-                                    <div class="cert-logo">⚛️</div>
-                                    <div class="cert-title">React Expert</div>
-                                    <div class="cert-date">Achieved 2024</div>
-                                    <div class="cert-level">Advanced</div>
-                                </div>
-                                <div class="cert-back">
-                                    <div class="cert-id">ID: REACT-EXP-2024-156</div>
-                                    <button class="verify-btn">Verify Credential</button>
-                                    <div class="cert-skills">
-                                        <div class="skill-item">• Advanced Patterns</div>
-                                        <div class="skill-item">• Performance Optimization</div>
-                                        <div class="skill-item">• Testing Strategies</div>
-                                    </div>
-                                    <div class="cert-status">Lifetime Valid</div>
-                                </div>
-                            </div>
-
-                            <div class="cert-card" data-cert="kubernetes">
-                                <div class="cert-front">
-                                    <div class="cert-logo">K8s</div>
-                                    <div class="cert-title">Kubernetes Admin</div>
-                                    <div class="cert-date">Achieved 2023</div>
-                                    <div class="cert-level">Certified</div>
-                                </div>
-                                <div class="cert-back">
-                                    <div class="cert-id">ID: CKA-2023-789</div>
-                                    <button class="verify-btn">Verify Credential</button>
-                                    <div class="cert-skills">
-                                        <div class="skill-item">• Cluster Management</div>
-                                        <div class="skill-item">• Container Orchestration</div>
-                                        <div class="skill-item">• Production Deployment</div>
-                                    </div>
-                                    <div class="cert-status">Valid until 2026</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="language-item" data-language="typescript">
+                      <div class="language-info">
+                        <div class="language-logo">TS</div>
+                        <span class="language-name">TypeScript</span>
+                      </div>
+                      <div class="language-progress">
+                        <div class="progress-bar" data-percentage="20"></div>
+                        <span class="percentage-text">20%</span>
+                      </div>
+                      <div class="language-details">
+                        Used in 15 repositories
+                      </div>
                     </div>
+                  </div>
 
-                    <!-- Code Tab -->
-                    <div class="tab-content" id="codeTab">
-                        <div class="code-carousel-container">
-                            <div class="code-editor" id="codeEditor">
-                                <div class="editor-header">
-                                    <div class="editor-tabs">
-                                        <div class="editor-tab active" data-code="react">component.tsx</div>
-                                        <div class="editor-tab" data-code="api">api.js</div>
-                                        <div class="editor-tab" data-code="algorithm">algorithm.js</div>
-                                    </div>
-                                    <div class="editor-actions">
-                                        <button class="copy-btn">Copy</button>
-                                        <button class="github-btn">GitHub</button>
-                                    </div>
-                                </div>
+                  <div class="stats-summary">
+                    <div class="summary-item">
+                      <span class="summary-label">Total Lines:</span>
+                      <span class="summary-value" data-target="47000">0</span>
+                    </div>
+                    <div class="summary-item">
+                      <span class="summary-label">This Week:</span>
+                      <span class="summary-value">+2,340 lines</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                                <div class="editor-content" id="editorContent">
-                                    <pre class="code-block"><code class="language-typescript">
+            <!-- Timeline Tab -->
+            <div class="tab-content" id="timelineTab">
+              <div class="timeline-container">
+                <div class="timeline-track" id="timelineTrack">
+                  <div class="timeline-node" data-year="2018">
+                    <div class="node-badge">
+                      <div class="tech-logo html">HTML</div>
+                    </div>
+                    <div class="node-info">
+                      <div class="node-year">2018</div>
+                      <div class="node-title">Foundation</div>
+                      <div class="node-description">
+                        Started with HTML/CSS, Basic JavaScript
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="timeline-node" data-year="2020">
+                    <div class="node-badge">
+                      <div class="tech-logo react">⚛️</div>
+                    </div>
+                    <div class="node-info">
+                      <div class="node-year">2020</div>
+                      <div class="node-title">React Mastery</div>
+                      <div class="node-description">
+                        Advanced React, Node.js Full-Stack
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="timeline-node" data-year="2022">
+                    <div class="node-badge">
+                      <div class="tech-logo cloud">☁️</div>
+                    </div>
+                    <div class="node-info">
+                      <div class="node-year">2022</div>
+                      <div class="node-title">Cloud Native</div>
+                      <div class="node-description">
+                        AWS, Docker, Kubernetes Mastery
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="timeline-node current" data-year="2025">
+                    <div class="node-badge">
+                      <div class="tech-logo ai">🤖</div>
+                    </div>
+                    <div class="node-info">
+                      <div class="node-year">2025</div>
+                      <div class="node-title">AI Integration</div>
+                      <div class="node-description">
+                        Currently exploring Edge Computing, Web3
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Certifications Tab -->
+            <div class="tab-content" id="certificationsTab">
+              <div class="certifications-grid" id="certificationsGrid">
+                <div class="cert-card" data-cert="aws">
+                  <div class="cert-front">
+                    <div class="cert-logo">AWS</div>
+                    <div class="cert-title">Solutions Architect</div>
+                    <div class="cert-date">Achieved 2023</div>
+                    <div class="cert-level">Professional</div>
+                  </div>
+                  <div class="cert-back">
+                    <div class="cert-id">ID: AWS-SAP-2023-001</div>
+                    <button class="verify-btn">Verify Credential</button>
+                    <div class="cert-skills">
+                      <div class="skill-item">• Cloud Architecture</div>
+                      <div class="skill-item">• Scalable Systems</div>
+                      <div class="skill-item">• Security Best Practices</div>
+                    </div>
+                    <div class="cert-status">Valid until 2026</div>
+                  </div>
+                </div>
+
+                <div class="cert-card" data-cert="google">
+                  <div class="cert-front">
+                    <div class="cert-logo">GCP</div>
+                    <div class="cert-title">Professional Developer</div>
+                    <div class="cert-date">Achieved 2023</div>
+                    <div class="cert-level">Professional</div>
+                  </div>
+                  <div class="cert-back">
+                    <div class="cert-id">ID: GCP-PD-2023-042</div>
+                    <button class="verify-btn">Verify Credential</button>
+                    <div class="cert-skills">
+                      <div class="skill-item">• Application Development</div>
+                      <div class="skill-item">• Cloud Services</div>
+                      <div class="skill-item">• DevOps Integration</div>
+                    </div>
+                    <div class="cert-status">Valid until 2025</div>
+                  </div>
+                </div>
+
+                <div class="cert-card" data-cert="react">
+                  <div class="cert-front">
+                    <div class="cert-logo">⚛️</div>
+                    <div class="cert-title">React Expert</div>
+                    <div class="cert-date">Achieved 2024</div>
+                    <div class="cert-level">Advanced</div>
+                  </div>
+                  <div class="cert-back">
+                    <div class="cert-id">ID: REACT-EXP-2024-156</div>
+                    <button class="verify-btn">Verify Credential</button>
+                    <div class="cert-skills">
+                      <div class="skill-item">• Advanced Patterns</div>
+                      <div class="skill-item">• Performance Optimization</div>
+                      <div class="skill-item">• Testing Strategies</div>
+                    </div>
+                    <div class="cert-status">Lifetime Valid</div>
+                  </div>
+                </div>
+
+                <div class="cert-card" data-cert="kubernetes">
+                  <div class="cert-front">
+                    <div class="cert-logo">K8s</div>
+                    <div class="cert-title">Kubernetes Admin</div>
+                    <div class="cert-date">Achieved 2023</div>
+                    <div class="cert-level">Certified</div>
+                  </div>
+                  <div class="cert-back">
+                    <div class="cert-id">ID: CKA-2023-789</div>
+                    <button class="verify-btn">Verify Credential</button>
+                    <div class="cert-skills">
+                      <div class="skill-item">• Cluster Management</div>
+                      <div class="skill-item">• Container Orchestration</div>
+                      <div class="skill-item">• Production Deployment</div>
+                    </div>
+                    <div class="cert-status">Valid until 2026</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Code Tab -->
+            <div class="tab-content" id="codeTab">
+              <div class="code-carousel-container">
+                <div class="code-editor" id="codeEditor">
+                  <div class="editor-header">
+                    <div class="editor-tabs">
+                      <div class="editor-tab active" data-code="react">
+                        component.tsx
+                      </div>
+                      <div class="editor-tab" data-code="api">api.js</div>
+                      <div class="editor-tab" data-code="algorithm">
+                        algorithm.js
+                      </div>
+                    </div>
+                    <div class="editor-actions">
+                      <button class="copy-btn">Copy</button>
+                      <button class="github-btn">GitHub</button>
+                    </div>
+                  </div>
+
+                  <div class="editor-content" id="editorContent">
+                    <pre class="code-block"><code class="language-typescript">
 // Clean Architecture - React Component with TypeScript
 interface UserProfileProps {
   user: User;
@@ -344,66 +452,69 @@ export const UserProfile: React.FC&lt;UserProfileProps&gt; = ({
   );
 };
                                     </code></pre>
-                                </div>
+                  </div>
 
-                                <div class="editor-footer">
-                                    <div class="performance-metrics">
-                                        <span class="metric">Execution: 0.3ms</span>
-                                        <span class="metric">Complexity: O(1)</span>
-                                        <span class="metric">Coverage: 98%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                  <div class="editor-footer">
+                    <div class="performance-metrics">
+                      <span class="metric">Execution: 0.3ms</span>
+                      <span class="metric">Complexity: O(1)</span>
+                      <span class="metric">Coverage: 98%</span>
                     </div>
-
-                    <!-- Learning Tab -->
-                    <div class="tab-content" id="learningTab">
-                        <div class="learning-dashboard">
-                            <div class="learning-track" data-track="nextjs">
-                                <div class="track-header">
-                                    <div class="track-logo">▲</div>
-                                    <div class="track-info">
-                                        <h4 class="track-title">Advanced Next.js 14</h4>
-                                        <div class="track-timeline">2 weeks remaining</div>
-                                    </div>
-                                    <div class="track-progress">75%</div>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar" data-progress="75"></div>
-                                </div>
-                                <div class="track-details">
-                                    <span class="track-focus">App Router, Server Components, Edge Runtime</span>
-                                    <span class="track-commitment">4 hours/week</span>
-                                </div>
-                            </div>
-
-                            <div class="learning-track" data-track="wasm">
-                                <div class="track-header">
-                                    <div class="track-logo">🦀</div>
-                                    <div class="track-info">
-                                        <h4 class="track-title">WebAssembly Integration</h4>
-                                        <div class="track-timeline">1 month remaining</div>
-                                    </div>
-                                    <div class="track-progress">45%</div>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar" data-progress="45"></div>
-                                </div>
-                                <div class="track-details">
-                                    <span class="track-focus">Rust for Web, Performance optimization</span>
-                                    <span class="track-commitment">3 hours/week</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+
+            <!-- Learning Tab -->
+            <div class="tab-content" id="learningTab">
+              <div class="learning-dashboard">
+                <div class="learning-track" data-track="nextjs">
+                  <div class="track-header">
+                    <div class="track-logo">▲</div>
+                    <div class="track-info">
+                      <h4 class="track-title">Advanced Next.js 14</h4>
+                      <div class="track-timeline">2 weeks remaining</div>
+                    </div>
+                    <div class="track-progress">75%</div>
+                  </div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar" data-progress="75"></div>
+                  </div>
+                  <div class="track-details">
+                    <span class="track-focus"
+                      >App Router, Server Components, Edge Runtime</span
+                    >
+                    <span class="track-commitment">4 hours/week</span>
+                  </div>
+                </div>
+
+                <div class="learning-track" data-track="wasm">
+                  <div class="track-header">
+                    <div class="track-logo">🦀</div>
+                    <div class="track-info">
+                      <h4 class="track-title">WebAssembly Integration</h4>
+                      <div class="track-timeline">1 month remaining</div>
+                    </div>
+                    <div class="track-progress">45%</div>
+                  </div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar" data-progress="45"></div>
+                  </div>
+                  <div class="track-details">
+                    <span class="track-focus"
+                      >Rust for Web, Performance optimization</span
+                    >
+                    <span class="track-commitment">3 hours/week</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <script src="../shared/scripts/utilities.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

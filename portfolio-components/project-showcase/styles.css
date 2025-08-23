@@ -24,7 +24,9 @@
   overflow: hidden;
   border-top: 12px solid var(--primary-white);
   border-bottom: 12px solid var(--primary-white);
-  box-shadow: 0 -12px 0 var(--accent-cyan), 0 12px 0 var(--accent-yellow);
+  box-shadow:
+    0 -12px 0 var(--accent-cyan),
+    0 12px 0 var(--accent-yellow);
 }
 
 /* BRUTAL SHOWCASE BACKGROUND SYSTEM */
@@ -53,7 +55,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 25% 75%,
       rgba(255, 255, 0, 0.08) 0%,
       transparent 50%
@@ -77,7 +80,8 @@
 .code-pattern-overlay {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(var(--accent-cyan) 2px, transparent 2px),
+  background-image:
+    linear-gradient(var(--accent-cyan) 2px, transparent 2px),
     linear-gradient(90deg, var(--accent-cyan) 2px, transparent 2px);
   background-size: 50px 50px;
   opacity: 0.08;
@@ -113,14 +117,18 @@
 .brutal-concrete {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 4px 4px,
       var(--primary-white) 1px,
       transparent 1px
     ),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px, 30px 30px, 30px 30px;
+  background-size:
+    60px 60px,
+    30px 30px,
+    30px 30px;
   opacity: 0.3;
   animation: concreteShift 35s linear infinite;
 }
@@ -367,7 +375,9 @@
   background: var(--accent-cyan);
   color: var(--primary-black);
   transform: translate(-4px, -4px) rotate(-1deg);
-  box-shadow: 8px 8px 0 var(--accent-yellow), 16px 16px 0 var(--primary-white);
+  box-shadow:
+    8px 8px 0 var(--accent-yellow),
+    16px 16px 0 var(--primary-white);
   text-shadow: 2px 2px 0 var(--primary-white);
 }
 
@@ -376,7 +386,9 @@
   border-color: var(--accent-yellow);
   color: var(--primary-black);
   transform: translate(-6px, -6px) rotate(-2deg);
-  box-shadow: 12px 12px 0 var(--accent-purple), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-purple),
+    24px 24px 0 var(--primary-white);
   text-shadow: 2px 2px 0 var(--primary-white);
 }
 
@@ -540,7 +552,8 @@
 .demo-frame:hover {
   border-color: var(--accent-yellow);
   transform: translate(-8px, -8px) rotate(-1deg);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 20px var(--accent-cyan));
 }
@@ -756,7 +769,8 @@
 
 .play-demo-btn:hover {
   transform: translate(-8px, -8px) rotate(-2deg) scale(1.05);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 30px var(--accent-cyan));
 }
@@ -878,7 +892,9 @@
   background: currentColor;
   color: var(--primary-black);
   transform: translate(-3px, -3px) rotate(-1deg) scale(1.1);
-  box-shadow: 6px 6px 0 var(--accent-yellow), 12px 12px 0 var(--primary-white);
+  box-shadow:
+    6px 6px 0 var(--accent-yellow),
+    12px 12px 0 var(--primary-white);
   text-shadow: 2px 2px 0 var(--primary-white);
 }
 
@@ -1044,7 +1060,9 @@
 .metric-item:hover {
   border-color: var(--accent-yellow);
   transform: translate(-6px, -6px) rotate(-1deg);
-  box-shadow: 12px 12px 0 var(--accent-yellow), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-yellow),
+    24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 20px var(--accent-cyan));
 }
 
@@ -1147,7 +1165,9 @@
 
 .primary-showcase-cta:hover {
   transform: translate(-6px, -6px) rotate(-1deg) scale(1.05);
-  box-shadow: 12px 12px 0 var(--accent-yellow), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-yellow),
+    24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 30px var(--accent-cyan));
 }
 
@@ -1200,7 +1220,9 @@
   background: var(--accent-cyan);
   color: var(--primary-black);
   transform: translate(-6px, -6px) rotate(1deg);
-  box-shadow: 12px 12px 0 var(--accent-purple), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-purple),
+    24px 24px 0 var(--primary-white);
   text-shadow: 2px 2px 0 var(--primary-white);
 }
 
@@ -1253,7 +1275,9 @@
   background: var(--accent-green);
   color: var(--primary-black);
   transform: translate(-4px, -4px) rotate(-1deg);
-  box-shadow: 8px 8px 0 var(--accent-yellow), 16px 16px 0 var(--primary-white);
+  box-shadow:
+    8px 8px 0 var(--accent-yellow),
+    16px 16px 0 var(--primary-white);
   text-shadow: 2px 2px 0 var(--primary-white);
 }
 
@@ -1319,7 +1343,8 @@
 .project-card:hover {
   border-color: var(--accent-cyan);
   transform: translate(-10px, -10px) rotate(-1deg);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 20px var(--accent-cyan));
 }
@@ -1407,7 +1432,9 @@
 
 .preview-play-btn:hover {
   transform: translate(-4px, -4px) rotate(-5deg) scale(1.1);
-  box-shadow: 8px 8px 0 var(--accent-yellow), 16px 16px 0 var(--primary-white);
+  box-shadow:
+    8px 8px 0 var(--accent-yellow),
+    16px 16px 0 var(--primary-white);
 }
 
 .live-site-badge {
@@ -1596,7 +1623,9 @@
 .card-github:hover {
   background: var(--accent-cyan);
   transform: translate(-4px, -4px) rotate(-1deg);
-  box-shadow: 8px 8px 0 var(--accent-yellow), 16px 16px 0 var(--primary-white);
+  box-shadow:
+    8px 8px 0 var(--accent-yellow),
+    16px 16px 0 var(--primary-white);
 }
 
 .github-info {
@@ -1688,7 +1717,9 @@
 
 .card-cta:hover {
   transform: translate(-6px, -6px) rotate(-1deg) scale(1.05);
-  box-shadow: 12px 12px 0 var(--accent-yellow), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-yellow),
+    24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 20px var(--accent-purple));
 }
 
@@ -1791,7 +1822,8 @@
 
 .load-more-btn:hover {
   transform: translate(-8px, -8px) rotate(-2deg) scale(1.05);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 40px var(--accent-cyan));
 }
@@ -1963,10 +1995,14 @@
 @keyframes brutalTitleGlow {
   0%,
   100% {
-    text-shadow: 4px 4px 0 var(--primary-black), 0 0 30px rgba(0, 255, 255, 0.5);
+    text-shadow:
+      4px 4px 0 var(--primary-black),
+      0 0 30px rgba(0, 255, 255, 0.5);
   }
   50% {
-    text-shadow: 4px 4px 0 var(--primary-black), 0 0 50px rgba(255, 255, 0, 0.8);
+    text-shadow:
+      4px 4px 0 var(--primary-black),
+      0 0 50px rgba(255, 255, 0, 0.8);
   }
 }
 

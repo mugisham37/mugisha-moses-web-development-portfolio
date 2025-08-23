@@ -1,382 +1,403 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trust & Credibility Component</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../shared/styles/variables.css">
-    <link rel="stylesheet" href="../shared/styles/animations.css">
-    <link rel="stylesheet" href="../shared/styles/utilities.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/styles/variables.css" />
+    <link rel="stylesheet" href="../shared/styles/animations.css" />
+    <link rel="stylesheet" href="../shared/styles/utilities.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
     <!-- Trust & Credibility Section -->
     <section class="trust-section" id="trustSection">
-        <!-- Section Background -->
-        <div class="trust-background">
-            <div class="trust-particles" id="trustParticles"></div>
-            <div class="trust-grid"></div>
-            <div class="section-divider"></div>
+      <!-- Section Background -->
+      <div class="trust-background">
+        <div class="trust-particles" id="trustParticles"></div>
+        <div class="trust-grid"></div>
+        <div class="section-divider"></div>
+      </div>
+
+      <!-- Trust Container -->
+      <div class="trust-container">
+        <!-- Section Header -->
+        <div class="trust-header">
+          <h2 class="trust-title">PROVEN TRACK RECORD</h2>
+          <div class="trust-subtitle">
+            Real clients. Real results. Real impact.
+          </div>
         </div>
 
-        <!-- Trust Container -->
-        <div class="trust-container">
-            <!-- Section Header -->
-            <div class="trust-header">
-                <h2 class="trust-title">PROVEN TRACK RECORD</h2>
-                <div class="trust-subtitle">Real clients. Real results. Real impact.</div>
+        <!-- Social Proof Strip -->
+        <div class="social-proof-strip">
+          <div class="testimonial-carousel" id="testimonialCarousel">
+            <div class="testimonial-track" id="testimonialTrack">
+              <!-- Testimonial Cards -->
+              <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">
+                  Delivered a complex e-commerce platform 2 weeks ahead of
+                  schedule. Revenue increased 340% in first quarter.
+                </p>
+                <div class="client-info">
+                  <div class="client-name">Sarah Chen</div>
+                  <div class="client-title">CTO</div>
+                  <div class="client-company">TechFlow Solutions</div>
+                  <div class="verification-badge">
+                    <span class="verify-icon">✓</span>
+                    <span class="verify-text">Verified Client</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">
+                  Transformed our legacy system into a modern, scalable
+                  architecture. Performance improved by 500%.
+                </p>
+                <div class="client-info">
+                  <div class="client-name">Marcus Rodriguez</div>
+                  <div class="client-title">VP ENGINEERING</div>
+                  <div class="client-company">DataCore Inc</div>
+                  <div class="verification-badge">
+                    <span class="verify-icon">✓</span>
+                    <span class="verify-text">Verified Client</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">
+                  Built our MVP from concept to launch in 6 weeks. Secured $2M
+                  Series A funding based on the prototype.
+                </p>
+                <div class="client-info">
+                  <div class="client-name">Emily Watson</div>
+                  <div class="client-title">FOUNDER & CEO</div>
+                  <div class="client-company">InnovateLab</div>
+                  <div class="verification-badge">
+                    <span class="verify-icon">✓</span>
+                    <span class="verify-text">Verified Client</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">
+                  Optimized our API performance and reduced server costs by 60%.
+                  Exceptional problem-solving skills.
+                </p>
+                <div class="client-info">
+                  <div class="client-name">David Kim</div>
+                  <div class="client-title">LEAD ARCHITECT</div>
+                  <div class="client-company">CloudScale</div>
+                  <div class="verification-badge">
+                    <span class="verify-icon">✓</span>
+                    <span class="verify-text">Verified Client</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">
+                  Delivered a mission-critical system with 99.99% uptime. Zero
+                  downtime during peak traffic events.
+                </p>
+                <div class="client-info">
+                  <div class="client-name">Lisa Thompson</div>
+                  <div class="client-title">OPERATIONS DIRECTOR</div>
+                  <div class="client-company">Enterprise Solutions</div>
+                  <div class="verification-badge">
+                    <span class="verify-icon">✓</span>
+                    <span class="verify-text">Verified Client</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <!-- Social Proof Strip -->
-            <div class="social-proof-strip">
-                <div class="testimonial-carousel" id="testimonialCarousel">
-                    <div class="testimonial-track" id="testimonialTrack">
-                        <!-- Testimonial Cards -->
-                        <div class="testimonial-card">
-                            <div class="quote-mark">"</div>
-                            <p class="testimonial-text">Delivered a complex e-commerce platform 2 weeks ahead of
-                                schedule. Revenue increased 340% in first quarter.</p>
-                            <div class="client-info">
-                                <div class="client-name">Sarah Chen</div>
-                                <div class="client-title">CTO</div>
-                                <div class="client-company">TechFlow Solutions</div>
-                                <div class="verification-badge">
-                                    <span class="verify-icon">✓</span>
-                                    <span class="verify-text">Verified Client</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card">
-                            <div class="quote-mark">"</div>
-                            <p class="testimonial-text">Transformed our legacy system into a modern, scalable
-                                architecture. Performance improved by 500%.</p>
-                            <div class="client-info">
-                                <div class="client-name">Marcus Rodriguez</div>
-                                <div class="client-title">VP ENGINEERING</div>
-                                <div class="client-company">DataCore Inc</div>
-                                <div class="verification-badge">
-                                    <span class="verify-icon">✓</span>
-                                    <span class="verify-text">Verified Client</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card">
-                            <div class="quote-mark">"</div>
-                            <p class="testimonial-text">Built our MVP from concept to launch in 6 weeks. Secured $2M
-                                Series A funding based on the prototype.</p>
-                            <div class="client-info">
-                                <div class="client-name">Emily Watson</div>
-                                <div class="client-title">FOUNDER & CEO</div>
-                                <div class="client-company">InnovateLab</div>
-                                <div class="verification-badge">
-                                    <span class="verify-icon">✓</span>
-                                    <span class="verify-text">Verified Client</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card">
-                            <div class="quote-mark">"</div>
-                            <p class="testimonial-text">Optimized our API performance and reduced server costs by 60%.
-                                Exceptional problem-solving skills.</p>
-                            <div class="client-info">
-                                <div class="client-name">David Kim</div>
-                                <div class="client-title">LEAD ARCHITECT</div>
-                                <div class="client-company">CloudScale</div>
-                                <div class="verification-badge">
-                                    <span class="verify-icon">✓</span>
-                                    <span class="verify-text">Verified Client</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card">
-                            <div class="quote-mark">"</div>
-                            <p class="testimonial-text">Delivered a mission-critical system with 99.99% uptime. Zero
-                                downtime during peak traffic events.</p>
-                            <div class="client-info">
-                                <div class="client-name">Lisa Thompson</div>
-                                <div class="client-title">OPERATIONS DIRECTOR</div>
-                                <div class="client-company">Enterprise Solutions</div>
-                                <div class="verification-badge">
-                                    <span class="verify-icon">✓</span>
-                                    <span class="verify-text">Verified Client</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Carousel Navigation -->
-                    <div class="carousel-nav">
-                        <div class="nav-dots" id="navDots"></div>
-                        <div class="progress-bar" id="progressBar"></div>
-                    </div>
-                </div>
+            <!-- Carousel Navigation -->
+            <div class="carousel-nav">
+              <div class="nav-dots" id="navDots"></div>
+              <div class="progress-bar" id="progressBar"></div>
             </div>
-
-            <!-- Live GitHub Integration Hub -->
-            <div class="github-hub">
-                <div class="github-section">
-                    <div class="github-header">
-                        <h3 class="github-title">LIVE DEVELOPMENT ACTIVITY</h3>
-                        <div class="github-subtitle">Real-time commits and contributions</div>
-                        <div class="github-stats">
-                            <span class="stat-label">Total contributions:</span>
-                            <span class="stat-number" data-target="1847">0</span>
-                            <span class="stat-period">this year</span>
-                        </div>
-                    </div>
-
-                    <!-- GitHub Contribution Graph -->
-                    <div class="contribution-graph" id="contributionGraph">
-                        <div class="graph-loading">Loading GitHub activity...</div>
-                    </div>
-                </div>
-
-                <!-- Current Project Status -->
-                <div class="project-status">
-                    <div class="status-header">
-                        <span class="status-label">CURRENTLY BUILDING:</span>
-                        <div class="live-indicator">
-                            <span class="live-dot"></span>
-                            <span class="live-text">ACTIVE</span>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-name">Enterprise Dashboard v2.0</div>
-                        <div class="project-progress">
-                            <div class="progress-track">
-                                <div class="progress-fill" data-progress="78"></div>
-                            </div>
-                            <span class="progress-percentage">78%</span>
-                        </div>
-
-                        <div class="project-details">
-                            <div class="tech-stack">
-                                <span class="tech-badge">React</span>
-                                <span class="tech-badge">Node.js</span>
-                                <span class="tech-badge">PostgreSQL</span>
-                            </div>
-                            <div class="project-timeline">Est. completion: 8 days</div>
-                            <a href="#" class="github-link">View on GitHub →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Awards & Certifications Showcase -->
-            <div class="certifications-showcase">
-                <div class="certifications-header">
-                    <h3 class="certifications-title">VERIFIED EXPERTISE</h3>
-                    <div class="certifications-subtitle">Industry-recognized certifications and achievements</div>
-                </div>
-
-                <div class="certifications-grid" id="certificationsGrid">
-                    <div class="cert-card" data-cert="aws">
-                        <div class="cert-front">
-                            <div class="cert-logo">AWS</div>
-                            <div class="cert-title">Solutions Architect</div>
-                            <div class="cert-date">Achieved 2023</div>
-                            <div class="cert-level">Professional</div>
-                        </div>
-                        <div class="cert-back">
-                            <div class="cert-id">ID: AWS-SAP-2023-001</div>
-                            <button class="verify-btn">Verify Credential</button>
-                            <div class="cert-skills">
-                                <div class="skill-item">• Cloud Architecture</div>
-                                <div class="skill-item">• Scalable Systems</div>
-                                <div class="skill-item">• Security Best Practices</div>
-                            </div>
-                            <div class="cert-status">Valid until 2026</div>
-                        </div>
-                    </div>
-
-                    <div class="cert-card" data-cert="google">
-                        <div class="cert-front">
-                            <div class="cert-logo">GCP</div>
-                            <div class="cert-title">Professional Developer</div>
-                            <div class="cert-date">Achieved 2023</div>
-                            <div class="cert-level">Professional</div>
-                        </div>
-                        <div class="cert-back">
-                            <div class="cert-id">ID: GCP-PD-2023-042</div>
-                            <button class="verify-btn">Verify Credential</button>
-                            <div class="cert-skills">
-                                <div class="skill-item">• Application Development</div>
-                                <div class="skill-item">• Cloud Services</div>
-                                <div class="skill-item">• DevOps Integration</div>
-                            </div>
-                            <div class="cert-status">Valid until 2025</div>
-                        </div>
-                    </div>
-
-                    <div class="cert-card" data-cert="react">
-                        <div class="cert-front">
-                            <div class="cert-logo">⚛️</div>
-                            <div class="cert-title">React Expert</div>
-                            <div class="cert-date">Achieved 2024</div>
-                            <div class="cert-level">Advanced</div>
-                        </div>
-                        <div class="cert-back">
-                            <div class="cert-id">ID: REACT-EXP-2024-156</div>
-                            <button class="verify-btn">Verify Credential</button>
-                            <div class="cert-skills">
-                                <div class="skill-item">• Advanced Patterns</div>
-                                <div class="skill-item">• Performance Optimization</div>
-                                <div class="skill-item">• Testing Strategies</div>
-                            </div>
-                            <div class="cert-status">Lifetime Valid</div>
-                        </div>
-                    </div>
-
-                    <div class="cert-card" data-cert="kubernetes">
-                        <div class="cert-front">
-                            <div class="cert-logo">K8s</div>
-                            <div class="cert-title">Kubernetes Admin</div>
-                            <div class="cert-date">Achieved 2023</div>
-                            <div class="cert-level">Certified</div>
-                        </div>
-                        <div class="cert-back">
-                            <div class="cert-id">ID: CKA-2023-789</div>
-                            <button class="verify-btn">Verify Credential</button>
-                            <div class="cert-skills">
-                                <div class="skill-item">• Cluster Management</div>
-                                <div class="skill-item">• Container Orchestration</div>
-                                <div class="skill-item">• Production Deployment</div>
-                            </div>
-                            <div class="cert-status">Valid until 2026</div>
-                        </div>
-                    </div>
-
-                    <div class="cert-card" data-cert="docker">
-                        <div class="cert-front">
-                            <div class="cert-logo">🐳</div>
-                            <div class="cert-title">Docker Certified</div>
-                            <div class="cert-date">Achieved 2023</div>
-                            <div class="cert-level">Associate</div>
-                        </div>
-                        <div class="cert-back">
-                            <div class="cert-id">ID: DCA-2023-445</div>
-                            <button class="verify-btn">Verify Credential</button>
-                            <div class="cert-skills">
-                                <div class="skill-item">• Containerization</div>
-                                <div class="skill-item">• Multi-stage Builds</div>
-                                <div class="skill-item">• Production Deployment</div>
-                            </div>
-                            <div class="cert-status">Valid until 2025</div>
-                        </div>
-                    </div>
-
-                    <div class="cert-card" data-cert="security">
-                        <div class="cert-front">
-                            <div class="cert-logo">🔒</div>
-                            <div class="cert-title">Security+</div>
-                            <div class="cert-date">Achieved 2024</div>
-                            <div class="cert-level">Certified</div>
-                        </div>
-                        <div class="cert-back">
-                            <div class="cert-id">ID: SEC-PLUS-2024-123</div>
-                            <button class="verify-btn">Verify Credential</button>
-                            <div class="cert-skills">
-                                <div class="skill-item">• Application Security</div>
-                                <div class="skill-item">• Threat Assessment</div>
-                                <div class="skill-item">• Secure Development</div>
-                            </div>
-                            <div class="cert-status">Valid until 2027</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Featured Media & Recognition -->
-            <div class="media-recognition">
-                <div class="media-header">
-                    <h3 class="media-title">FEATURED ON</h3>
-                    <div class="media-subtitle">Recognition from industry leaders</div>
-                </div>
-
-                <!-- Logo Marquee -->
-                <div class="logo-marquee" id="logoMarquee">
-                    <div class="marquee-track">
-                        <div class="platform-logo" data-platform="github">
-                            <span class="logo-text">GitHub</span>
-                            <div class="feature-tooltip">Featured Developer</div>
-                        </div>
-                        <div class="platform-logo" data-platform="devto">
-                            <span class="logo-text">Dev.to</span>
-                            <div class="feature-tooltip">Top Author</div>
-                        </div>
-                        <div class="platform-logo" data-platform="medium">
-                            <span class="logo-text">Medium</span>
-                            <div class="feature-tooltip">Staff Pick Articles</div>
-                        </div>
-                        <div class="platform-logo" data-platform="hackernews">
-                            <span class="logo-text">Hacker News</span>
-                            <div class="feature-tooltip">Front Page Features</div>
-                        </div>
-                        <div class="platform-logo" data-platform="producthunt">
-                            <span class="logo-text">Product Hunt</span>
-                            <div class="feature-tooltip">#1 Product of the Day</div>
-                        </div>
-                        <div class="platform-logo" data-platform="stackoverflow">
-                            <span class="logo-text">Stack Overflow</span>
-                            <div class="feature-tooltip">Top 1% Contributor</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Press Mentions -->
-                <div class="press-mentions">
-                    <div class="article-card">
-                        <div class="article-thumbnail"></div>
-                        <div class="article-content">
-                            <div class="article-publication">TechCrunch</div>
-                            <div class="article-title">Rising Stars in Full-Stack Development</div>
-                            <div class="article-meta">
-                                <span class="article-date">2 weeks ago</span>
-                                <span class="article-read">5 min read</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="article-card">
-                        <div class="article-thumbnail"></div>
-                        <div class="article-content">
-                            <div class="article-publication">Dev Community</div>
-                            <div class="article-title">Building Scalable React Applications</div>
-                            <div class="article-meta">
-                                <span class="article-date">1 month ago</span>
-                                <span class="article-read">8 min read</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="article-card">
-                        <div class="article-thumbnail"></div>
-                        <div class="article-content">
-                            <div class="article-publication">JavaScript Weekly</div>
-                            <div class="article-title">Performance Optimization Techniques</div>
-                            <div class="article-meta">
-                                <span class="article-date">3 weeks ago</span>
-                                <span class="article-read">12 min read</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <!-- Live GitHub Integration Hub -->
+        <div class="github-hub">
+          <div class="github-section">
+            <div class="github-header">
+              <h3 class="github-title">LIVE DEVELOPMENT ACTIVITY</h3>
+              <div class="github-subtitle">
+                Real-time commits and contributions
+              </div>
+              <div class="github-stats">
+                <span class="stat-label">Total contributions:</span>
+                <span class="stat-number" data-target="1847">0</span>
+                <span class="stat-period">this year</span>
+              </div>
+            </div>
+
+            <!-- GitHub Contribution Graph -->
+            <div class="contribution-graph" id="contributionGraph">
+              <div class="graph-loading">Loading GitHub activity...</div>
+            </div>
+          </div>
+
+          <!-- Current Project Status -->
+          <div class="project-status">
+            <div class="status-header">
+              <span class="status-label">CURRENTLY BUILDING:</span>
+              <div class="live-indicator">
+                <span class="live-dot"></span>
+                <span class="live-text">ACTIVE</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-name">Enterprise Dashboard v2.0</div>
+              <div class="project-progress">
+                <div class="progress-track">
+                  <div class="progress-fill" data-progress="78"></div>
+                </div>
+                <span class="progress-percentage">78%</span>
+              </div>
+
+              <div class="project-details">
+                <div class="tech-stack">
+                  <span class="tech-badge">React</span>
+                  <span class="tech-badge">Node.js</span>
+                  <span class="tech-badge">PostgreSQL</span>
+                </div>
+                <div class="project-timeline">Est. completion: 8 days</div>
+                <a href="#" class="github-link">View on GitHub →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Awards & Certifications Showcase -->
+        <div class="certifications-showcase">
+          <div class="certifications-header">
+            <h3 class="certifications-title">VERIFIED EXPERTISE</h3>
+            <div class="certifications-subtitle">
+              Industry-recognized certifications and achievements
+            </div>
+          </div>
+
+          <div class="certifications-grid" id="certificationsGrid">
+            <div class="cert-card" data-cert="aws">
+              <div class="cert-front">
+                <div class="cert-logo">AWS</div>
+                <div class="cert-title">Solutions Architect</div>
+                <div class="cert-date">Achieved 2023</div>
+                <div class="cert-level">Professional</div>
+              </div>
+              <div class="cert-back">
+                <div class="cert-id">ID: AWS-SAP-2023-001</div>
+                <button class="verify-btn">Verify Credential</button>
+                <div class="cert-skills">
+                  <div class="skill-item">• Cloud Architecture</div>
+                  <div class="skill-item">• Scalable Systems</div>
+                  <div class="skill-item">• Security Best Practices</div>
+                </div>
+                <div class="cert-status">Valid until 2026</div>
+              </div>
+            </div>
+
+            <div class="cert-card" data-cert="google">
+              <div class="cert-front">
+                <div class="cert-logo">GCP</div>
+                <div class="cert-title">Professional Developer</div>
+                <div class="cert-date">Achieved 2023</div>
+                <div class="cert-level">Professional</div>
+              </div>
+              <div class="cert-back">
+                <div class="cert-id">ID: GCP-PD-2023-042</div>
+                <button class="verify-btn">Verify Credential</button>
+                <div class="cert-skills">
+                  <div class="skill-item">• Application Development</div>
+                  <div class="skill-item">• Cloud Services</div>
+                  <div class="skill-item">• DevOps Integration</div>
+                </div>
+                <div class="cert-status">Valid until 2025</div>
+              </div>
+            </div>
+
+            <div class="cert-card" data-cert="react">
+              <div class="cert-front">
+                <div class="cert-logo">⚛️</div>
+                <div class="cert-title">React Expert</div>
+                <div class="cert-date">Achieved 2024</div>
+                <div class="cert-level">Advanced</div>
+              </div>
+              <div class="cert-back">
+                <div class="cert-id">ID: REACT-EXP-2024-156</div>
+                <button class="verify-btn">Verify Credential</button>
+                <div class="cert-skills">
+                  <div class="skill-item">• Advanced Patterns</div>
+                  <div class="skill-item">• Performance Optimization</div>
+                  <div class="skill-item">• Testing Strategies</div>
+                </div>
+                <div class="cert-status">Lifetime Valid</div>
+              </div>
+            </div>
+
+            <div class="cert-card" data-cert="kubernetes">
+              <div class="cert-front">
+                <div class="cert-logo">K8s</div>
+                <div class="cert-title">Kubernetes Admin</div>
+                <div class="cert-date">Achieved 2023</div>
+                <div class="cert-level">Certified</div>
+              </div>
+              <div class="cert-back">
+                <div class="cert-id">ID: CKA-2023-789</div>
+                <button class="verify-btn">Verify Credential</button>
+                <div class="cert-skills">
+                  <div class="skill-item">• Cluster Management</div>
+                  <div class="skill-item">• Container Orchestration</div>
+                  <div class="skill-item">• Production Deployment</div>
+                </div>
+                <div class="cert-status">Valid until 2026</div>
+              </div>
+            </div>
+
+            <div class="cert-card" data-cert="docker">
+              <div class="cert-front">
+                <div class="cert-logo">🐳</div>
+                <div class="cert-title">Docker Certified</div>
+                <div class="cert-date">Achieved 2023</div>
+                <div class="cert-level">Associate</div>
+              </div>
+              <div class="cert-back">
+                <div class="cert-id">ID: DCA-2023-445</div>
+                <button class="verify-btn">Verify Credential</button>
+                <div class="cert-skills">
+                  <div class="skill-item">• Containerization</div>
+                  <div class="skill-item">• Multi-stage Builds</div>
+                  <div class="skill-item">• Production Deployment</div>
+                </div>
+                <div class="cert-status">Valid until 2025</div>
+              </div>
+            </div>
+
+            <div class="cert-card" data-cert="security">
+              <div class="cert-front">
+                <div class="cert-logo">🔒</div>
+                <div class="cert-title">Security+</div>
+                <div class="cert-date">Achieved 2024</div>
+                <div class="cert-level">Certified</div>
+              </div>
+              <div class="cert-back">
+                <div class="cert-id">ID: SEC-PLUS-2024-123</div>
+                <button class="verify-btn">Verify Credential</button>
+                <div class="cert-skills">
+                  <div class="skill-item">• Application Security</div>
+                  <div class="skill-item">• Threat Assessment</div>
+                  <div class="skill-item">• Secure Development</div>
+                </div>
+                <div class="cert-status">Valid until 2027</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Media & Recognition -->
+        <div class="media-recognition">
+          <div class="media-header">
+            <h3 class="media-title">FEATURED ON</h3>
+            <div class="media-subtitle">Recognition from industry leaders</div>
+          </div>
+
+          <!-- Logo Marquee -->
+          <div class="logo-marquee" id="logoMarquee">
+            <div class="marquee-track">
+              <div class="platform-logo" data-platform="github">
+                <span class="logo-text">GitHub</span>
+                <div class="feature-tooltip">Featured Developer</div>
+              </div>
+              <div class="platform-logo" data-platform="devto">
+                <span class="logo-text">Dev.to</span>
+                <div class="feature-tooltip">Top Author</div>
+              </div>
+              <div class="platform-logo" data-platform="medium">
+                <span class="logo-text">Medium</span>
+                <div class="feature-tooltip">Staff Pick Articles</div>
+              </div>
+              <div class="platform-logo" data-platform="hackernews">
+                <span class="logo-text">Hacker News</span>
+                <div class="feature-tooltip">Front Page Features</div>
+              </div>
+              <div class="platform-logo" data-platform="producthunt">
+                <span class="logo-text">Product Hunt</span>
+                <div class="feature-tooltip">#1 Product of the Day</div>
+              </div>
+              <div class="platform-logo" data-platform="stackoverflow">
+                <span class="logo-text">Stack Overflow</span>
+                <div class="feature-tooltip">Top 1% Contributor</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Press Mentions -->
+          <div class="press-mentions">
+            <div class="article-card">
+              <div class="article-thumbnail"></div>
+              <div class="article-content">
+                <div class="article-publication">TechCrunch</div>
+                <div class="article-title">
+                  Rising Stars in Full-Stack Development
+                </div>
+                <div class="article-meta">
+                  <span class="article-date">2 weeks ago</span>
+                  <span class="article-read">5 min read</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="article-card">
+              <div class="article-thumbnail"></div>
+              <div class="article-content">
+                <div class="article-publication">Dev Community</div>
+                <div class="article-title">
+                  Building Scalable React Applications
+                </div>
+                <div class="article-meta">
+                  <span class="article-date">1 month ago</span>
+                  <span class="article-read">8 min read</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="article-card">
+              <div class="article-thumbnail"></div>
+              <div class="article-content">
+                <div class="article-publication">JavaScript Weekly</div>
+                <div class="article-title">
+                  Performance Optimization Techniques
+                </div>
+                <div class="article-meta">
+                  <span class="article-date">3 weeks ago</span>
+                  <span class="article-read">12 min read</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <script src="../shared/scripts/utilities.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

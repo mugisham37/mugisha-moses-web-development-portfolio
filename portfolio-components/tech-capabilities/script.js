@@ -302,11 +302,14 @@ class SearchOptimizer {
       point.style.opacity = "0";
       point.style.transform = "scale(0)";
 
-      setTimeout(() => {
-        point.style.transition = "all 0.5s ease-out";
-        point.style.opacity = "1";
-        point.style.transform = "scale(1)";
-      }, 200 + index * 100);
+      setTimeout(
+        () => {
+          point.style.transition = "all 0.5s ease-out";
+          point.style.opacity = "1";
+          point.style.transform = "scale(1)";
+        },
+        200 + index * 100
+      );
     });
   }
 
@@ -395,9 +398,12 @@ class SearchOptimizer {
     );
     summaryValues.forEach((element, index) => {
       const target = parseInt(element.dataset.target);
-      setTimeout(() => {
-        this.animateCounter(element, 0, target, 2000);
-      }, 500 + index * 300);
+      setTimeout(
+        () => {
+          this.animateCounter(element, 0, target, 2000);
+        },
+        500 + index * 300
+      );
     });
   }
 

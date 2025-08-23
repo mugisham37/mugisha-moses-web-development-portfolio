@@ -1,550 +1,712 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Social Proof Component</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../shared/styles/variables.css">
-    <link rel="stylesheet" href="../shared/styles/animations.css">
-    <link rel="stylesheet" href="../shared/styles/utilities.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/styles/variables.css" />
+    <link rel="stylesheet" href="../shared/styles/animations.css" />
+    <link rel="stylesheet" href="../shared/styles/utilities.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
     <!-- Social Proof & Recognition Section -->
     <section class="social-proof-section" id="socialProofSection">
-        <!-- Section Background Evolution -->
-        <div class="social-proof-background">
-            <div class="network-particles" id="networkParticles"></div>
-            <div class="trust-grid"></div>
-            <div class="connection-streams" id="connectionStreams"></div>
-            <div class="terminal-trust-line">
-                <span class="trust-text">> building_connections... VERIFIED</span>
-                <span class="cursor-blink">_</span>
-            </div>
+      <!-- Section Background Evolution -->
+      <div class="social-proof-background">
+        <div class="network-particles" id="networkParticles"></div>
+        <div class="trust-grid"></div>
+        <div class="connection-streams" id="connectionStreams"></div>
+        <div class="terminal-trust-line">
+          <span class="trust-text">> building_connections... VERIFIED</span>
+          <span class="cursor-blink">_</span>
+        </div>
+      </div>
+
+      <!-- Social Proof Container -->
+      <div class="social-proof-container">
+        <!-- Section Header -->
+        <div class="social-proof-header">
+          <h2 class="social-proof-title" id="socialProofTitle">
+            INDUSTRY RECOGNITION & SOCIAL PROOF
+          </h2>
+          <div class="social-proof-subtitle">
+            Validated by industry leaders, trusted by global brands
+          </div>
+          <div class="endorsement-metrics">
+            <span class="metric-item">Endorsed by 200+ professionals</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">Featured in 15+ publications</span>
+          </div>
         </div>
 
-        <!-- Social Proof Container -->
-        <div class="social-proof-container">
-            <!-- Section Header -->
-            <div class="social-proof-header">
-                <h2 class="social-proof-title" id="socialProofTitle">INDUSTRY RECOGNITION & SOCIAL PROOF</h2>
-                <div class="social-proof-subtitle">Validated by industry leaders, trusted by global brands</div>
-                <div class="endorsement-metrics">
-                    <span class="metric-item">Endorsed by 200+ professionals</span>
-                    <span class="metric-separator">•</span>
-                    <span class="metric-item">Featured in 15+ publications</span>
+        <!-- Client Logo Carousel -->
+        <div class="client-logo-carousel">
+          <div class="carousel-tier" data-tier="enterprise">
+            <div class="logo-track" id="enterpriseTrack">
+              <div class="client-logo" data-client="microsoft">
+                <img
+                  src="/placeholder.svg?height=60&width=140"
+                  alt="Microsoft"
+                />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Microsoft</div>
+                  <div class="tooltip-details">
+                    Enterprise API Integration • $150K • 6 months
+                  </div>
                 </div>
+              </div>
+              <div class="client-logo" data-client="amazon">
+                <img src="/placeholder.svg?height=60&width=140" alt="Amazon" />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Amazon</div>
+                  <div class="tooltip-details">
+                    Cloud Infrastructure • $200K • 8 months
+                  </div>
+                </div>
+              </div>
+              <div class="client-logo" data-client="shopify">
+                <img src="/placeholder.svg?height=60&width=140" alt="Shopify" />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Shopify</div>
+                  <div class="tooltip-details">
+                    E-commerce Platform • $120K • 4 months
+                  </div>
+                </div>
+              </div>
+              <div class="client-logo" data-client="adobe">
+                <img src="/placeholder.svg?height=60&width=140" alt="Adobe" />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Adobe</div>
+                  <div class="tooltip-details">
+                    Creative Tools Integration • $180K • 7 months
+                  </div>
+                </div>
+              </div>
+              <div class="client-logo" data-client="salesforce">
+                <img
+                  src="/placeholder.svg?height=60&width=140"
+                  alt="Salesforce"
+                />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Salesforce</div>
+                  <div class="tooltip-details">
+                    CRM Enhancement • $160K • 5 months
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <!-- Client Logo Carousel -->
-            <div class="client-logo-carousel">
-                <div class="carousel-tier" data-tier="enterprise">
-                    <div class="logo-track" id="enterpriseTrack">
-                        <div class="client-logo" data-client="microsoft">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Microsoft">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Microsoft</div>
-                                <div class="tooltip-details">Enterprise API Integration • $150K • 6 months</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="amazon">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Amazon">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Amazon</div>
-                                <div class="tooltip-details">Cloud Infrastructure • $200K • 8 months</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="shopify">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Shopify">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Shopify</div>
-                                <div class="tooltip-details">E-commerce Platform • $120K • 4 months</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="adobe">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Adobe">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Adobe</div>
-                                <div class="tooltip-details">Creative Tools Integration • $180K • 7 months</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="salesforce">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Salesforce">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Salesforce</div>
-                                <div class="tooltip-details">CRM Enhancement • $160K • 5 months</div>
-                            </div>
-                        </div>
-                    </div>
+          <div class="carousel-tier" data-tier="growth">
+            <div class="logo-track" id="growthTrack">
+              <div class="client-logo" data-client="stripe">
+                <img src="/placeholder.svg?height=60&width=140" alt="Stripe" />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Stripe</div>
+                  <div class="tooltip-details">
+                    Payment Integration • $80K • 3 months
+                  </div>
                 </div>
-
-                <div class="carousel-tier" data-tier="growth">
-                    <div class="logo-track" id="growthTrack">
-                        <div class="client-logo" data-client="stripe">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Stripe">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Stripe</div>
-                                <div class="tooltip-details">Payment Integration • $80K • 3 months</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="notion">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Notion">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Notion</div>
-                                <div class="tooltip-details">Productivity Tools • $90K • 4 months</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="figma">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Figma">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Figma</div>
-                                <div class="tooltip-details">Design Platform • $70K • 3 months</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="vercel">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Vercel">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Vercel</div>
-                                <div class="tooltip-details">Deployment Platform • $85K • 4 months</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="supabase">
-                            <img src="/placeholder.svg?height=60&width=140" alt="Supabase">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">Supabase</div>
-                                <div class="tooltip-details">Backend Services • $75K • 3 months</div>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+              <div class="client-logo" data-client="notion">
+                <img src="/placeholder.svg?height=60&width=140" alt="Notion" />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Notion</div>
+                  <div class="tooltip-details">
+                    Productivity Tools • $90K • 4 months
+                  </div>
                 </div>
-
-                <div class="carousel-tier" data-tier="startup">
-                    <div class="logo-track" id="startupTrack">
-                        <div class="client-logo" data-client="techflow">
-                            <img src="/placeholder.svg?height=60&width=140" alt="TechFlow">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">TechFlow</div>
-                                <div class="tooltip-details">Series A • $45K • Raised $2M post-launch</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="datalyze">
-                            <img src="/placeholder.svg?height=60&width=140" alt="DataLyze">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">DataLyze</div>
-                                <div class="tooltip-details">Seed Stage • $35K • 300% user growth</div>
-                            </div>
-                        </div>
-                        <div class="client-logo" data-client="cloudnine">
-                            <img src="/placeholder.svg?height=60&width=140" alt="CloudNine">
-                            <div class="logo-tooltip">
-                                <div class="tooltip-title">CloudNine</div>
-                                <div class="tooltip-details">Pre-Series A • $50K • Acquired by Fortune 500</div>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+              <div class="client-logo" data-client="figma">
+                <img src="/placeholder.svg?height=60&width=140" alt="Figma" />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Figma</div>
+                  <div class="tooltip-details">
+                    Design Platform • $70K • 3 months
+                  </div>
                 </div>
+              </div>
+              <div class="client-logo" data-client="vercel">
+                <img src="/placeholder.svg?height=60&width=140" alt="Vercel" />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Vercel</div>
+                  <div class="tooltip-details">
+                    Deployment Platform • $85K • 4 months
+                  </div>
+                </div>
+              </div>
+              <div class="client-logo" data-client="supabase">
+                <img
+                  src="/placeholder.svg?height=60&width=140"
+                  alt="Supabase"
+                />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">Supabase</div>
+                  <div class="tooltip-details">
+                    Backend Services • $75K • 3 months
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <!-- LinkedIn Recommendations Showcase -->
-            <div class="linkedin-recommendations">
-                <div class="recommendations-header">
-                    <h3 class="recommendations-title">LINKEDIN RECOMMENDATIONS</h3>
-                    <div class="linkedin-badge">
-                        <img src="/placeholder.svg?height=24&width=24" alt="LinkedIn">
-                        <span>Verified Professional Network</span>
-                    </div>
+          <div class="carousel-tier" data-tier="startup">
+            <div class="logo-track" id="startupTrack">
+              <div class="client-logo" data-client="techflow">
+                <img
+                  src="/placeholder.svg?height=60&width=140"
+                  alt="TechFlow"
+                />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">TechFlow</div>
+                  <div class="tooltip-details">
+                    Series A • $45K • Raised $2M post-launch
+                  </div>
                 </div>
-
-                <div class="recommendations-grid" id="recommendationsGrid">
-                    <div class="recommendation-card" data-linkedin="sarah-chen">
-                        <div class="card-header">
-                            <div class="profile-section">
-                                <img src="/placeholder.svg?height=60&width=60" alt="Sarah Chen" class="profile-photo">
-                                <div class="profile-info">
-                                    <div class="profile-name">Sarah Chen ✓</div>
-                                    <div class="profile-title">CTO at TechFlow Solutions</div>
-                                    <div class="mutual-connections">23 mutual connections</div>
-                                </div>
-                            </div>
-                            <div class="linkedin-link">
-                                <a href="#" class="view-linkedin">View on LinkedIn</a>
-                            </div>
-                        </div>
-                        <div class="recommendation-content">
-                            <div class="quote-marks">"</div>
-                            <p class="recommendation-text">Exceptional developer who delivered our complex e-commerce
-                                platform 2 weeks ahead of schedule. Technical expertise combined with business acumen is
-                                rare. Revenue increased 340% in first quarter post-launch.</p>
-                            <div class="recommendation-date">Recommended 2 months ago</div>
-                        </div>
-                    </div>
-
-                    <div class="recommendation-card" data-linkedin="marcus-rodriguez">
-                        <div class="card-header">
-                            <div class="profile-section">
-                                <img src="/placeholder.svg?height=60&width=60" alt="Marcus Rodriguez"
-                                    class="profile-photo">
-                                <div class="profile-info">
-                                    <div class="profile-name">Marcus Rodriguez ✓</div>
-                                    <div class="profile-title">VP Engineering at DataCore Inc</div>
-                                    <div class="mutual-connections">31 mutual connections</div>
-                                </div>
-                            </div>
-                            <div class="linkedin-link">
-                                <a href="#" class="view-linkedin">View on LinkedIn</a>
-                            </div>
-                        </div>
-                        <div class="recommendation-content">
-                            <div class="quote-marks">"</div>
-                            <p class="recommendation-text">Transformed our legacy system into a modern, scalable
-                                architecture. Performance improved by 500% and maintenance costs dropped 60%.
-                                Outstanding problem-solving skills and attention to detail.</p>
-                            <div class="recommendation-date">Recommended 1 month ago</div>
-                        </div>
-                    </div>
-
-                    <div class="recommendation-card" data-linkedin="emily-watson">
-                        <div class="card-header">
-                            <div class="profile-section">
-                                <img src="/placeholder.svg?height=60&width=60" alt="Emily Watson" class="profile-photo">
-                                <div class="profile-info">
-                                    <div class="profile-name">Emily Watson ✓</div>
-                                    <div class="profile-title">Founder & CEO at InnovateLab</div>
-                                    <div class="mutual-connections">18 mutual connections</div>
-                                </div>
-                            </div>
-                            <div class="linkedin-link">
-                                <a href="#" class="view-linkedin">View on LinkedIn</a>
-                            </div>
-                        </div>
-                        <div class="recommendation-content">
-                            <div class="quote-marks">"</div>
-                            <p class="recommendation-text">Built our MVP from concept to launch in 6 weeks. The quality
-                                and speed were incredible. We secured $2M Series A funding largely based on the
-                                prototype. Highly recommend for any startup.</p>
-                            <div class="recommendation-date">Recommended 3 weeks ago</div>
-                        </div>
-                    </div>
-
-                    <div class="recommendation-card" data-linkedin="david-kim">
-                        <div class="card-header">
-                            <div class="profile-section">
-                                <img src="/placeholder.svg?height=60&width=60" alt="David Kim" class="profile-photo">
-                                <div class="profile-info">
-                                    <div class="profile-name">David Kim ✓</div>
-                                    <div class="profile-title">Lead Architect at CloudScale</div>
-                                    <div class="mutual-connections">27 mutual connections</div>
-                                </div>
-                            </div>
-                            <div class="linkedin-link">
-                                <a href="#" class="view-linkedin">View on LinkedIn</a>
-                            </div>
-                        </div>
-                        <div class="recommendation-content">
-                            <div class="quote-marks">"</div>
-                            <p class="recommendation-text">Optimized our API performance and reduced server costs by
-                                60%. Deep understanding of cloud architecture and performance optimization. Exceptional
-                                problem-solving skills.</p>
-                            <div class="recommendation-date">Recommended 5 weeks ago</div>
-                        </div>
-                    </div>
-
-                    <div class="recommendation-card" data-linkedin="lisa-thompson">
-                        <div class="card-header">
-                            <div class="profile-section">
-                                <img src="/placeholder.svg?height=60&width=60" alt="Lisa Thompson"
-                                    class="profile-photo">
-                                <div class="profile-info">
-                                    <div class="profile-name">Lisa Thompson ✓</div>
-                                    <div class="profile-title">Operations Director at Enterprise Solutions</div>
-                                    <div class="mutual-connections">35 mutual connections</div>
-                                </div>
-                            </div>
-                            <div class="linkedin-link">
-                                <a href="#" class="view-linkedin">View on LinkedIn</a>
-                            </div>
-                        </div>
-                        <div class="recommendation-content">
-                            <div class="quote-marks">"</div>
-                            <p class="recommendation-text">Delivered a mission-critical system with 99.99% uptime. Zero
-                                downtime during peak traffic events. Reliability and performance exceeded all
-                                expectations. True professional.</p>
-                            <div class="recommendation-date">Recommended 1 week ago</div>
-                        </div>
-                    </div>
-
-                    <div class="recommendation-card" data-linkedin="alex-johnson">
-                        <div class="card-header">
-                            <div class="profile-section">
-                                <img src="/placeholder.svg?height=60&width=60" alt="Alex Johnson" class="profile-photo">
-                                <div class="profile-info">
-                                    <div class="profile-name">Alex Johnson ✓</div>
-                                    <div class="profile-title">CTO at FinTech Innovations</div>
-                                    <div class="mutual-connections">29 mutual connections</div>
-                                </div>
-                            </div>
-                            <div class="linkedin-link">
-                                <a href="#" class="view-linkedin">View on LinkedIn</a>
-                            </div>
-                        </div>
-                        <div class="recommendation-content">
-                            <div class="quote-marks">"</div>
-                            <p class="recommendation-text">Built our secure payment processing system with bank-level
-                                security. Passed all compliance audits on first try. Technical expertise in fintech is
-                                outstanding.</p>
-                            <div class="recommendation-date">Recommended 4 days ago</div>
-                        </div>
-                    </div>
+              </div>
+              <div class="client-logo" data-client="datalyze">
+                <img
+                  src="/placeholder.svg?height=60&width=140"
+                  alt="DataLyze"
+                />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">DataLyze</div>
+                  <div class="tooltip-details">
+                    Seed Stage • $35K • 300% user growth
+                  </div>
                 </div>
-            </div>""
-            <!-- Community Contributions Display -->
-            <div class="community-contributions">
-                <div class="contributions-header">
-                    <h3 class="contributions-title">OPEN SOURCE CONTRIBUTIONS</h3>
-                    <div class="github-stats">
-                        <span class="stat-item">2,300+ total stars</span>
-                        <span class="stat-separator">•</span>
-                        <span class="stat-item">847 contributions this year</span>
-                    </div>
+              </div>
+              <div class="client-logo" data-client="cloudnine">
+                <img
+                  src="/placeholder.svg?height=60&width=140"
+                  alt="CloudNine"
+                />
+                <div class="logo-tooltip">
+                  <div class="tooltip-title">CloudNine</div>
+                  <div class="tooltip-details">
+                    Pre-Series A • $50K • Acquired by Fortune 500
+                  </div>
                 </div>
-
-                <div class="contributions-grid">
-                    <div class="contribution-card" data-project="react-hooks">
-                        <div class="project-header">
-                            <img src="/placeholder.svg?height=48&width=48" alt="React" class="project-logo">
-                            <div class="project-info">
-                                <div class="project-name">react-advanced-hooks</div>
-                                <div class="project-role">Core Contributor</div>
-                                <div class="project-stats">⭐ 2.3K • 🍴 340 • 📦 50K weekly</div>
-                            </div>
-                        </div>
-                        <div class="contribution-details">
-                            <div class="contribution-stats">67 commits • 12 PRs merged • 8 issues resolved</div>
-                            <div class="impact-metric">Used by 10K+ developers worldwide</div>
-                            <div class="recognition">Featured in React newsletter</div>
-                        </div>
-                    </div>
-
-                    <div class="contribution-card" data-project="node-optimizer">
-                        <div class="project-header">
-                            <img src="/placeholder.svg?height=48&width=48" alt="Node.js" class="project-logo">
-                            <div class="project-info">
-                                <div class="project-name">node-performance-optimizer</div>
-                                <div class="project-role">Original Creator & Maintainer</div>
-                                <div class="project-stats">⭐ 1.8K • 🍴 220 • 📦 25K weekly</div>
-                            </div>
-                        </div>
-                        <div class="contribution-details">
-                            <div class="contribution-stats">134 commits • Original creator • 15 contributors</div>
-                            <div class="impact-metric">Used by 500+ companies • 40% avg speed improvement</div>
-                            <div class="recognition">Endorsed by Node.js core team</div>
-                        </div>
-                    </div>
-
-                    <div class="contribution-card" data-project="typescript-utils">
-                        <div class="project-header">
-                            <img src="/placeholder.svg?height=48&width=48" alt="TypeScript" class="project-logo">
-                            <div class="project-info">
-                                <div class="project-name">typescript-advanced-utils</div>
-                                <div class="project-role">Regular Contributor</div>
-                                <div class="project-stats">⭐ 1.2K • 🍴 180 • 📦 15K weekly</div>
-                            </div>
-                        </div>
-                        <div class="contribution-details">
-                            <div class="contribution-stats">43 commits • 8 PRs merged • 12 issues resolved</div>
-                            <div class="impact-metric">Improved type safety for 5K+ projects</div>
-                            <div class="recognition">Mentioned in TypeScript docs</div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-
-            <!-- Speaking Engagements & Publications -->
-            <div class="speaking-publications">
-                <div class="speaking-header">
-                    <h3 class="speaking-title">SPEAKING & PUBLICATIONS</h3>
-                    <div class="speaking-stats">
-                        <span class="stat-item">15+ conferences</span>
-                        <span class="stat-separator">•</span>
-                        <span class="stat-item">25K+ article reads</span>
-                    </div>
-                </div>
-
-                <div class="speaking-timeline">
-                    <div class="speaking-event" data-event="react-conf-2024">
-                        <div class="event-date">Dec 2024</div>
-                        <div class="event-content">
-                            <div class="event-header">
-                                <img src="/placeholder.svg?height=60&width=120" alt="React Conf 2024"
-                                    class="event-logo">
-                                <div class="event-info">
-                                    <div class="event-name">React Conf 2024</div>
-                                    <div class="event-role">Keynote Speaker</div>
-                                    <div class="event-audience">500+ developers</div>
-                                </div>
-                            </div>
-                            <div class="event-details">
-                                <div class="talk-title">"Building Scalable React Applications at Enterprise Scale"</div>
-                                <div class="event-metrics">4.8/5 rating • 97% would recommend • 500+ social shares</div>
-                                <div class="event-links">
-                                    <a href="#" class="event-link">View Slides</a>
-                                    <a href="#" class="event-link">Watch Recording</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="speaking-event" data-event="nodejs-berlin">
-                        <div class="event-date">Nov 2024</div>
-                        <div class="event-content">
-                            <div class="event-header">
-                                <img src="/placeholder.svg?height=60&width=120" alt="Node.js Berlin" class="event-logo">
-                                <div class="event-info">
-                                    <div class="event-name">Node.js Berlin Meetup</div>
-                                    <div class="event-role">Technical Workshop Leader</div>
-                                    <div class="event-audience">150 professionals</div>
-                                </div>
-                            </div>
-                            <div class="event-details">
-                                <div class="talk-title">"Performance Optimization Techniques for Node.js Applications"
-                                </div>
-                                <div class="event-metrics">4.9/5 rating • 25 consultation requests • 15 new projects
-                                </div>
-                                <div class="event-links">
-                                    <a href="#" class="event-link">View Materials</a>
-                                    <a href="#" class="event-link">GitHub Repo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="publications-grid">
-                    <div class="publication-card" data-publication="smashing-magazine">
-                        <div class="publication-header">
-                            <img src="/placeholder.svg?height=40&width=120" alt="Smashing Magazine"
-                                class="publication-logo">
-                            <div class="publication-metrics">25K+ reads • 500+ claps</div>
-                        </div>
-                        <div class="publication-content">
-                            <h4 class="article-title">"Advanced React Patterns for Enterprise Applications"</h4>
-                            <div class="article-meta">Published 2 weeks ago • 15 min read</div>
-                            <div class="article-engagement">150 comments • Featured on React newsletter</div>
-                        </div>
-                    </div>
-
-                    <div class="publication-card" data-publication="css-tricks">
-                        <div class="publication-header">
-                            <img src="/placeholder.svg?height=40&width=120" alt="CSS-Tricks" class="publication-logo">
-                            <div class="publication-metrics">18K+ reads • 300+ shares</div>
-                        </div>
-                        <div class="publication-content">
-                            <h4 class="article-title">"Building Scalable Node.js APIs: A Complete Guide"</h4>
-                            <div class="article-meta">Published 1 month ago • 12 min read</div>
-                            <div class="article-engagement">89 comments • Top post on r/node</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Industry Recognition & Awards -->
-            <div class="industry-recognition">
-                <div class="recognition-header">
-                    <h3 class="recognition-title">AWARDS & RECOGNITION</h3>
-                    <div class="recognition-subtitle">Consistent recognition for technical excellence and community
-                        contribution</div>
-                </div>
-
-                <div class="awards-gallery">
-                    <div class="award-category" data-category="technical">
-                        <div class="category-title">Technical Excellence</div>
-                        <div class="awards-list">
-                            <div class="award-item">
-                                <div class="award-icon">🏆</div>
-                                <div class="award-content">
-                                    <div class="award-name">Developer of the Year 2023</div>
-                                    <div class="award-organization">Local Tech Community</div>
-                                    <div class="award-verification">
-                                        <a href="#" class="verification-link">View Certificate</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="award-item">
-                                <div class="award-icon">🥇</div>
-                                <div class="award-content">
-                                    <div class="award-name">Best Innovation Award</div>
-                                    <div class="award-organization">Tech Innovation Summit</div>
-                                    <div class="award-verification">
-                                        <a href="#" class="verification-link">View Award</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="award-category" data-category="community">
-                        <div class="category-title">Community Recognition</div>
-                        <div class="awards-list">
-                            <div class="award-item">
-                                <div class="award-icon">🌟</div>
-                                <div class="award-content">
-                                    <div class="award-name">Outstanding Open Source Contributor</div>
-                                    <div class="award-organization">GitHub Recognition</div>
-                                    <div class="award-verification">
-                                        <a href="#" class="verification-link">View Profile</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="award-item">
-                                <div class="award-icon">👥</div>
-                                <div class="award-content">
-                                    <div class="award-name">Community Leader Award</div>
-                                    <div class="award-organization">Developer Meetup Organization</div>
-                                    <div class="award-verification">
-                                        <a href="#" class="verification-link">View Recognition</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="award-category" data-category="business">
-                        <div class="category-title">Business Impact</div>
-                        <div class="awards-list">
-                            <div class="award-item">
-                                <div class="award-icon">💼</div>
-                                <div class="award-content">
-                                    <div class="award-name">Client Success Story Winner</div>
-                                    <div class="award-organization">Freelancer Platform</div>
-                                    <div class="award-verification">
-                                        <a href="#" class="verification-link">Read Story</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="award-item">
-                                <div class="award-icon">🚀</div>
-                                <div class="award-content">
-                                    <div class="award-name">Digital Transformation Leader</div>
-                                    <div class="award-organization">Business Publication</div>
-                                    <div class="award-verification">
-                                        <a href="#" class="verification-link">Read Article</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <!-- LinkedIn Recommendations Showcase -->
+        <div class="linkedin-recommendations">
+          <div class="recommendations-header">
+            <h3 class="recommendations-title">LINKEDIN RECOMMENDATIONS</h3>
+            <div class="linkedin-badge">
+              <img src="/placeholder.svg?height=24&width=24" alt="LinkedIn" />
+              <span>Verified Professional Network</span>
+            </div>
+          </div>
+
+          <div class="recommendations-grid" id="recommendationsGrid">
+            <div class="recommendation-card" data-linkedin="sarah-chen">
+              <div class="card-header">
+                <div class="profile-section">
+                  <img
+                    src="/placeholder.svg?height=60&width=60"
+                    alt="Sarah Chen"
+                    class="profile-photo"
+                  />
+                  <div class="profile-info">
+                    <div class="profile-name">Sarah Chen ✓</div>
+                    <div class="profile-title">CTO at TechFlow Solutions</div>
+                    <div class="mutual-connections">23 mutual connections</div>
+                  </div>
+                </div>
+                <div class="linkedin-link">
+                  <a href="#" class="view-linkedin">View on LinkedIn</a>
+                </div>
+              </div>
+              <div class="recommendation-content">
+                <div class="quote-marks">"</div>
+                <p class="recommendation-text">
+                  Exceptional developer who delivered our complex e-commerce
+                  platform 2 weeks ahead of schedule. Technical expertise
+                  combined with business acumen is rare. Revenue increased 340%
+                  in first quarter post-launch.
+                </p>
+                <div class="recommendation-date">Recommended 2 months ago</div>
+              </div>
+            </div>
+
+            <div class="recommendation-card" data-linkedin="marcus-rodriguez">
+              <div class="card-header">
+                <div class="profile-section">
+                  <img
+                    src="/placeholder.svg?height=60&width=60"
+                    alt="Marcus Rodriguez"
+                    class="profile-photo"
+                  />
+                  <div class="profile-info">
+                    <div class="profile-name">Marcus Rodriguez ✓</div>
+                    <div class="profile-title">
+                      VP Engineering at DataCore Inc
+                    </div>
+                    <div class="mutual-connections">31 mutual connections</div>
+                  </div>
+                </div>
+                <div class="linkedin-link">
+                  <a href="#" class="view-linkedin">View on LinkedIn</a>
+                </div>
+              </div>
+              <div class="recommendation-content">
+                <div class="quote-marks">"</div>
+                <p class="recommendation-text">
+                  Transformed our legacy system into a modern, scalable
+                  architecture. Performance improved by 500% and maintenance
+                  costs dropped 60%. Outstanding problem-solving skills and
+                  attention to detail.
+                </p>
+                <div class="recommendation-date">Recommended 1 month ago</div>
+              </div>
+            </div>
+
+            <div class="recommendation-card" data-linkedin="emily-watson">
+              <div class="card-header">
+                <div class="profile-section">
+                  <img
+                    src="/placeholder.svg?height=60&width=60"
+                    alt="Emily Watson"
+                    class="profile-photo"
+                  />
+                  <div class="profile-info">
+                    <div class="profile-name">Emily Watson ✓</div>
+                    <div class="profile-title">
+                      Founder & CEO at InnovateLab
+                    </div>
+                    <div class="mutual-connections">18 mutual connections</div>
+                  </div>
+                </div>
+                <div class="linkedin-link">
+                  <a href="#" class="view-linkedin">View on LinkedIn</a>
+                </div>
+              </div>
+              <div class="recommendation-content">
+                <div class="quote-marks">"</div>
+                <p class="recommendation-text">
+                  Built our MVP from concept to launch in 6 weeks. The quality
+                  and speed were incredible. We secured $2M Series A funding
+                  largely based on the prototype. Highly recommend for any
+                  startup.
+                </p>
+                <div class="recommendation-date">Recommended 3 weeks ago</div>
+              </div>
+            </div>
+
+            <div class="recommendation-card" data-linkedin="david-kim">
+              <div class="card-header">
+                <div class="profile-section">
+                  <img
+                    src="/placeholder.svg?height=60&width=60"
+                    alt="David Kim"
+                    class="profile-photo"
+                  />
+                  <div class="profile-info">
+                    <div class="profile-name">David Kim ✓</div>
+                    <div class="profile-title">
+                      Lead Architect at CloudScale
+                    </div>
+                    <div class="mutual-connections">27 mutual connections</div>
+                  </div>
+                </div>
+                <div class="linkedin-link">
+                  <a href="#" class="view-linkedin">View on LinkedIn</a>
+                </div>
+              </div>
+              <div class="recommendation-content">
+                <div class="quote-marks">"</div>
+                <p class="recommendation-text">
+                  Optimized our API performance and reduced server costs by 60%.
+                  Deep understanding of cloud architecture and performance
+                  optimization. Exceptional problem-solving skills.
+                </p>
+                <div class="recommendation-date">Recommended 5 weeks ago</div>
+              </div>
+            </div>
+
+            <div class="recommendation-card" data-linkedin="lisa-thompson">
+              <div class="card-header">
+                <div class="profile-section">
+                  <img
+                    src="/placeholder.svg?height=60&width=60"
+                    alt="Lisa Thompson"
+                    class="profile-photo"
+                  />
+                  <div class="profile-info">
+                    <div class="profile-name">Lisa Thompson ✓</div>
+                    <div class="profile-title">
+                      Operations Director at Enterprise Solutions
+                    </div>
+                    <div class="mutual-connections">35 mutual connections</div>
+                  </div>
+                </div>
+                <div class="linkedin-link">
+                  <a href="#" class="view-linkedin">View on LinkedIn</a>
+                </div>
+              </div>
+              <div class="recommendation-content">
+                <div class="quote-marks">"</div>
+                <p class="recommendation-text">
+                  Delivered a mission-critical system with 99.99% uptime. Zero
+                  downtime during peak traffic events. Reliability and
+                  performance exceeded all expectations. True professional.
+                </p>
+                <div class="recommendation-date">Recommended 1 week ago</div>
+              </div>
+            </div>
+
+            <div class="recommendation-card" data-linkedin="alex-johnson">
+              <div class="card-header">
+                <div class="profile-section">
+                  <img
+                    src="/placeholder.svg?height=60&width=60"
+                    alt="Alex Johnson"
+                    class="profile-photo"
+                  />
+                  <div class="profile-info">
+                    <div class="profile-name">Alex Johnson ✓</div>
+                    <div class="profile-title">CTO at FinTech Innovations</div>
+                    <div class="mutual-connections">29 mutual connections</div>
+                  </div>
+                </div>
+                <div class="linkedin-link">
+                  <a href="#" class="view-linkedin">View on LinkedIn</a>
+                </div>
+              </div>
+              <div class="recommendation-content">
+                <div class="quote-marks">"</div>
+                <p class="recommendation-text">
+                  Built our secure payment processing system with bank-level
+                  security. Passed all compliance audits on first try. Technical
+                  expertise in fintech is outstanding.
+                </p>
+                <div class="recommendation-date">Recommended 4 days ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        ""
+        <!-- Community Contributions Display -->
+        <div class="community-contributions">
+          <div class="contributions-header">
+            <h3 class="contributions-title">OPEN SOURCE CONTRIBUTIONS</h3>
+            <div class="github-stats">
+              <span class="stat-item">2,300+ total stars</span>
+              <span class="stat-separator">•</span>
+              <span class="stat-item">847 contributions this year</span>
+            </div>
+          </div>
+
+          <div class="contributions-grid">
+            <div class="contribution-card" data-project="react-hooks">
+              <div class="project-header">
+                <img
+                  src="/placeholder.svg?height=48&width=48"
+                  alt="React"
+                  class="project-logo"
+                />
+                <div class="project-info">
+                  <div class="project-name">react-advanced-hooks</div>
+                  <div class="project-role">Core Contributor</div>
+                  <div class="project-stats">
+                    ⭐ 2.3K • 🍴 340 • 📦 50K weekly
+                  </div>
+                </div>
+              </div>
+              <div class="contribution-details">
+                <div class="contribution-stats">
+                  67 commits • 12 PRs merged • 8 issues resolved
+                </div>
+                <div class="impact-metric">
+                  Used by 10K+ developers worldwide
+                </div>
+                <div class="recognition">Featured in React newsletter</div>
+              </div>
+            </div>
+
+            <div class="contribution-card" data-project="node-optimizer">
+              <div class="project-header">
+                <img
+                  src="/placeholder.svg?height=48&width=48"
+                  alt="Node.js"
+                  class="project-logo"
+                />
+                <div class="project-info">
+                  <div class="project-name">node-performance-optimizer</div>
+                  <div class="project-role">Original Creator & Maintainer</div>
+                  <div class="project-stats">
+                    ⭐ 1.8K • 🍴 220 • 📦 25K weekly
+                  </div>
+                </div>
+              </div>
+              <div class="contribution-details">
+                <div class="contribution-stats">
+                  134 commits • Original creator • 15 contributors
+                </div>
+                <div class="impact-metric">
+                  Used by 500+ companies • 40% avg speed improvement
+                </div>
+                <div class="recognition">Endorsed by Node.js core team</div>
+              </div>
+            </div>
+
+            <div class="contribution-card" data-project="typescript-utils">
+              <div class="project-header">
+                <img
+                  src="/placeholder.svg?height=48&width=48"
+                  alt="TypeScript"
+                  class="project-logo"
+                />
+                <div class="project-info">
+                  <div class="project-name">typescript-advanced-utils</div>
+                  <div class="project-role">Regular Contributor</div>
+                  <div class="project-stats">
+                    ⭐ 1.2K • 🍴 180 • 📦 15K weekly
+                  </div>
+                </div>
+              </div>
+              <div class="contribution-details">
+                <div class="contribution-stats">
+                  43 commits • 8 PRs merged • 12 issues resolved
+                </div>
+                <div class="impact-metric">
+                  Improved type safety for 5K+ projects
+                </div>
+                <div class="recognition">Mentioned in TypeScript docs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Speaking Engagements & Publications -->
+        <div class="speaking-publications">
+          <div class="speaking-header">
+            <h3 class="speaking-title">SPEAKING & PUBLICATIONS</h3>
+            <div class="speaking-stats">
+              <span class="stat-item">15+ conferences</span>
+              <span class="stat-separator">•</span>
+              <span class="stat-item">25K+ article reads</span>
+            </div>
+          </div>
+
+          <div class="speaking-timeline">
+            <div class="speaking-event" data-event="react-conf-2024">
+              <div class="event-date">Dec 2024</div>
+              <div class="event-content">
+                <div class="event-header">
+                  <img
+                    src="/placeholder.svg?height=60&width=120"
+                    alt="React Conf 2024"
+                    class="event-logo"
+                  />
+                  <div class="event-info">
+                    <div class="event-name">React Conf 2024</div>
+                    <div class="event-role">Keynote Speaker</div>
+                    <div class="event-audience">500+ developers</div>
+                  </div>
+                </div>
+                <div class="event-details">
+                  <div class="talk-title">
+                    "Building Scalable React Applications at Enterprise Scale"
+                  </div>
+                  <div class="event-metrics">
+                    4.8/5 rating • 97% would recommend • 500+ social shares
+                  </div>
+                  <div class="event-links">
+                    <a href="#" class="event-link">View Slides</a>
+                    <a href="#" class="event-link">Watch Recording</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="speaking-event" data-event="nodejs-berlin">
+              <div class="event-date">Nov 2024</div>
+              <div class="event-content">
+                <div class="event-header">
+                  <img
+                    src="/placeholder.svg?height=60&width=120"
+                    alt="Node.js Berlin"
+                    class="event-logo"
+                  />
+                  <div class="event-info">
+                    <div class="event-name">Node.js Berlin Meetup</div>
+                    <div class="event-role">Technical Workshop Leader</div>
+                    <div class="event-audience">150 professionals</div>
+                  </div>
+                </div>
+                <div class="event-details">
+                  <div class="talk-title">
+                    "Performance Optimization Techniques for Node.js
+                    Applications"
+                  </div>
+                  <div class="event-metrics">
+                    4.9/5 rating • 25 consultation requests • 15 new projects
+                  </div>
+                  <div class="event-links">
+                    <a href="#" class="event-link">View Materials</a>
+                    <a href="#" class="event-link">GitHub Repo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="publications-grid">
+            <div class="publication-card" data-publication="smashing-magazine">
+              <div class="publication-header">
+                <img
+                  src="/placeholder.svg?height=40&width=120"
+                  alt="Smashing Magazine"
+                  class="publication-logo"
+                />
+                <div class="publication-metrics">25K+ reads • 500+ claps</div>
+              </div>
+              <div class="publication-content">
+                <h4 class="article-title">
+                  "Advanced React Patterns for Enterprise Applications"
+                </h4>
+                <div class="article-meta">
+                  Published 2 weeks ago • 15 min read
+                </div>
+                <div class="article-engagement">
+                  150 comments • Featured on React newsletter
+                </div>
+              </div>
+            </div>
+
+            <div class="publication-card" data-publication="css-tricks">
+              <div class="publication-header">
+                <img
+                  src="/placeholder.svg?height=40&width=120"
+                  alt="CSS-Tricks"
+                  class="publication-logo"
+                />
+                <div class="publication-metrics">18K+ reads • 300+ shares</div>
+              </div>
+              <div class="publication-content">
+                <h4 class="article-title">
+                  "Building Scalable Node.js APIs: A Complete Guide"
+                </h4>
+                <div class="article-meta">
+                  Published 1 month ago • 12 min read
+                </div>
+                <div class="article-engagement">
+                  89 comments • Top post on r/node
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Industry Recognition & Awards -->
+        <div class="industry-recognition">
+          <div class="recognition-header">
+            <h3 class="recognition-title">AWARDS & RECOGNITION</h3>
+            <div class="recognition-subtitle">
+              Consistent recognition for technical excellence and community
+              contribution
+            </div>
+          </div>
+
+          <div class="awards-gallery">
+            <div class="award-category" data-category="technical">
+              <div class="category-title">Technical Excellence</div>
+              <div class="awards-list">
+                <div class="award-item">
+                  <div class="award-icon">🏆</div>
+                  <div class="award-content">
+                    <div class="award-name">Developer of the Year 2023</div>
+                    <div class="award-organization">Local Tech Community</div>
+                    <div class="award-verification">
+                      <a href="#" class="verification-link">View Certificate</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="award-item">
+                  <div class="award-icon">🥇</div>
+                  <div class="award-content">
+                    <div class="award-name">Best Innovation Award</div>
+                    <div class="award-organization">Tech Innovation Summit</div>
+                    <div class="award-verification">
+                      <a href="#" class="verification-link">View Award</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="award-category" data-category="community">
+              <div class="category-title">Community Recognition</div>
+              <div class="awards-list">
+                <div class="award-item">
+                  <div class="award-icon">🌟</div>
+                  <div class="award-content">
+                    <div class="award-name">
+                      Outstanding Open Source Contributor
+                    </div>
+                    <div class="award-organization">GitHub Recognition</div>
+                    <div class="award-verification">
+                      <a href="#" class="verification-link">View Profile</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="award-item">
+                  <div class="award-icon">👥</div>
+                  <div class="award-content">
+                    <div class="award-name">Community Leader Award</div>
+                    <div class="award-organization">
+                      Developer Meetup Organization
+                    </div>
+                    <div class="award-verification">
+                      <a href="#" class="verification-link">View Recognition</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="award-category" data-category="business">
+              <div class="category-title">Business Impact</div>
+              <div class="awards-list">
+                <div class="award-item">
+                  <div class="award-icon">💼</div>
+                  <div class="award-content">
+                    <div class="award-name">Client Success Story Winner</div>
+                    <div class="award-organization">Freelancer Platform</div>
+                    <div class="award-verification">
+                      <a href="#" class="verification-link">Read Story</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="award-item">
+                  <div class="award-icon">🚀</div>
+                  <div class="award-content">
+                    <div class="award-name">Digital Transformation Leader</div>
+                    <div class="award-organization">Business Publication</div>
+                    <div class="award-verification">
+                      <a href="#" class="verification-link">Read Article</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <script src="../shared/scripts/utilities.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Custom Properties for Theme System */
+:root {
+  /* Extreme Brutalist Theme Variables */
+  --extreme-primary: #000000;
+  --extreme-secondary: #ffffff;
+  --extreme-accent: #ffff00;
+  --extreme-highlight: #00ffff;
+  --extreme-success: #00ff00;
+
+  /* Refined Brutalist Theme Variables */
+  --refined-primary: #1a1a1a;
+  --refined-secondary: #f5f5f5;
+  --refined-accent: #8b5cf6;
+  --refined-highlight: #06b6d4;
+  --refined-success: #10b981;
+
+  /* Typography */
+  --font-primary: var(--font-inter);
+  --font-mono: var(--font-space-mono);
+  --font-code: var(--font-jetbrains-mono);
+
+  /* Shadows */
+  --shadow-brutal: 8px 8px 0;
+  --shadow-brutal-double: 8px 8px 0 #ffff00, 16px 16px 0 #ffffff;
+  --shadow-brutal-triple:
+    8px 8px 0 #ffff00, 16px 16px 0 #ffffff, 24px 24px 0 #000000;
+  --shadow-refined-subtle: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-refined-elevated: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --shadow-refined-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+
+  /* Animations */
+  --animation-duration-fast: 0.3s;
+  --animation-duration-normal: 0.4s;
+  --animation-duration-slow: 0.6s;
+  --animation-easing-brutal: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --animation-easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary), sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility Classes */
+.font-space-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+.font-jetbrains-mono {
+  font-family: var(--font-code), monospace;
+}
+
+/* Brutalist Component Base Styles */
+.brutal-border {
+  border: 8px solid currentColor;
+}
+
+.brutal-shadow {
+  box-shadow: var(--shadow-brutal) currentColor;
+}
+
+.brutal-shadow-double {
+  box-shadow: var(--shadow-brutal-double);
+}
+
+.brutal-shadow-triple {
+  box-shadow: var(--shadow-brutal-triple);
+}
+
+.refined-shadow {
+  box-shadow: var(--shadow-refined-subtle);
+}
+
+.refined-shadow-elevated {
+  box-shadow: var(--shadow-refined-elevated);
+}
+
+.refined-shadow-glow {
+  box-shadow: var(--shadow-refined-glow);
+}
+
+/* Animation Classes */
+.animate-brutal-glitch {
+  animation: brutalGlitch var(--animation-duration-fast)
+    var(--animation-easing-brutal);
+}
+
+.animate-brutal-pulse {
+  animation: brutalPulse 2s ease-in-out infinite;
+}
+
+.animate-smooth-transition {
+  animation: smoothTransition var(--animation-duration-normal)
+    var(--animation-easing-smooth);
+}
+
+/* Keyframes */
+@keyframes brutalGlitch {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes brutalPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes smoothTransition {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentleFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .brutal-border {
+    border-width: 4px;
+  }
+
+  .brutal-shadow {
+    box-shadow: 4px 4px 0 currentColor;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

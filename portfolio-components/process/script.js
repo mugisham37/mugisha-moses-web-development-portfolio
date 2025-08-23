@@ -654,11 +654,14 @@ class BrutalistProcess {
       item.style.opacity = "0";
       item.style.transform = "translateX(-20px)";
 
-      setTimeout(() => {
-        item.style.opacity = "1";
-        item.style.transform = "translateX(0)";
-        item.style.transition = "all 0.3s ease";
-      }, 600 + index * 100);
+      setTimeout(
+        () => {
+          item.style.opacity = "1";
+          item.style.transform = "translateX(0)";
+          item.style.transition = "all 0.3s ease";
+        },
+        600 + index * 100
+      );
     });
   }
 

@@ -26,7 +26,9 @@
   justify-content: center;
   background: var(--primary-black);
   border-bottom: 12px solid var(--primary-white);
-  box-shadow: 0 12px 0 var(--accent-yellow), 0 24px 0 var(--primary-white);
+  box-shadow:
+    0 12px 0 var(--accent-yellow),
+    0 24px 0 var(--primary-white);
 }
 
 .hero-section::before {
@@ -48,7 +50,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 20% 80%,
       rgba(0, 255, 255, 0.1) 0%,
       transparent 50%
@@ -105,14 +108,18 @@
 .concrete-texture {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 3px 3px,
       var(--primary-white) 1px,
       transparent 1px
     ),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px, 20px 20px, 20px 20px;
+  background-size:
+    40px 40px,
+    20px 20px,
+    20px 20px;
   opacity: 0.4;
   animation: concreteShift 20s linear infinite;
 }
@@ -195,14 +202,16 @@
 .star.large {
   width: 8px;
   height: 8px;
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     0 0 20px var(--accent-cyan);
 }
 
 .grid-overlay {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(var(--accent-cyan) 2px, transparent 2px),
+  background-image:
+    linear-gradient(var(--accent-cyan) 2px, transparent 2px),
     linear-gradient(90deg, var(--accent-cyan) 2px, transparent 2px);
   background-size: 60px 60px;
   opacity: 0.15;
@@ -599,7 +608,8 @@
 
 .metric-item:hover {
   transform: translateY(-8px) rotate(-2deg);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     16px 16px 0 var(--primary-white);
 }
 
@@ -843,7 +853,9 @@
 
 .primary-cta:hover {
   transform: translate(-8px, -8px) rotate(-2deg) scale(1.05);
-  box-shadow: 16px 16px 0 var(--accent-yellow), 32px 32px 0 var(--primary-white);
+  box-shadow:
+    16px 16px 0 var(--accent-yellow),
+    32px 32px 0 var(--primary-white);
   filter: drop-shadow(0 0 30px var(--accent-cyan));
 }
 
@@ -1558,7 +1570,9 @@
 
 .portrait-frame:hover {
   transform: translate(-8px, -8px) rotate(-1deg);
-  box-shadow: 16px 16px 0 var(--accent-cyan), 32px 32px 0 var(--accent-yellow);
+  box-shadow:
+    16px 16px 0 var(--accent-cyan),
+    32px 32px 0 var(--accent-yellow);
 }
 
 .frame-border {

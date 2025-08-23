@@ -534,11 +534,14 @@ class BrutalistFooter {
     ];
 
     values.forEach((value, index) => {
-      setTimeout(() => {
-        if (index < finalValues.length) {
-          this.typewriterEffect(value, finalValues[index]);
-        }
-      }, (index + 1) * 800);
+      setTimeout(
+        () => {
+          if (index < finalValues.length) {
+            this.typewriterEffect(value, finalValues[index]);
+          }
+        },
+        (index + 1) * 800
+      );
     });
   }
 

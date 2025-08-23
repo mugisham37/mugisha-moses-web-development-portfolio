@@ -25,7 +25,9 @@
   overflow: hidden;
   border-top: 12px solid var(--primary-white);
   border-bottom: 12px solid var(--primary-white);
-  box-shadow: 0 -12px 0 var(--accent-cyan), 0 12px 0 var(--accent-yellow);
+  box-shadow:
+    0 -12px 0 var(--accent-cyan),
+    0 12px 0 var(--accent-yellow);
 }
 
 .contact-hub-section::before {
@@ -47,7 +49,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 30% 70%,
       rgba(255, 255, 0, 0.08) 0%,
       transparent 50%
@@ -104,14 +107,18 @@
 .concrete-overlay {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 4px 4px,
       var(--primary-white) 1px,
       transparent 1px
     ),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 50px 50px, 25px 25px, 25px 25px;
+  background-size:
+    50px 50px,
+    25px 25px,
+    25px 25px;
   opacity: 0.3;
   animation: concreteShift 25s linear infinite;
 }
@@ -138,7 +145,8 @@
 .contact-grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(var(--accent-cyan) 2px, transparent 2px),
+  background-image:
+    linear-gradient(var(--accent-cyan) 2px, transparent 2px),
     linear-gradient(90deg, var(--accent-cyan) 2px, transparent 2px);
   background-size: 60px 60px;
   opacity: 0.1;
@@ -148,7 +156,8 @@
 .engagement-streams {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 25% 60%,
       rgba(139, 92, 246, 0.12) 0%,
       transparent 60%
@@ -479,10 +488,14 @@
 @keyframes brutalTitleGlow {
   0%,
   100% {
-    text-shadow: 4px 4px 0 var(--primary-black), 0 0 30px rgba(0, 255, 255, 0.5);
+    text-shadow:
+      4px 4px 0 var(--primary-black),
+      0 0 30px rgba(0, 255, 255, 0.5);
   }
   50% {
-    text-shadow: 4px 4px 0 var(--primary-black), 0 0 50px rgba(255, 255, 0, 0.8);
+    text-shadow:
+      4px 4px 0 var(--primary-black),
+      0 0 50px rgba(255, 255, 0, 0.8);
   }
 }
 
@@ -1554,7 +1567,8 @@
     text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
   }
   50% {
-    text-shadow: 0 0 30px rgba(0, 255, 255, 0.8),
+    text-shadow:
+      0 0 30px rgba(0, 255, 255, 0.8),
       0 0 40px rgba(255, 255, 0, 0.3);
   }
 }
@@ -1710,7 +1724,8 @@
 
 .calendar-widget:hover {
   transform: translate(-8px, -8px) rotate(-1deg);
-  box-shadow: var(--brutal-shadow) var(--accent-yellow),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-yellow),
     24px 24px 0 var(--primary-white);
 }
 
@@ -2005,7 +2020,9 @@
 
 .book-meeting-btn:hover {
   transform: translate(-6px, -6px) scale(1.05);
-  box-shadow: 12px 12px 0 var(--accent-yellow), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-yellow),
+    24px 24px 0 var(--primary-white);
   filter: drop-shadow(0 0 30px var(--accent-cyan));
 }
 
@@ -2232,7 +2249,8 @@
 
 .inquiry-form:hover {
   transform: translate(-8px, -8px) rotate(1deg);
-  box-shadow: var(--brutal-shadow) var(--accent-cyan),
+  box-shadow:
+    var(--brutal-shadow) var(--accent-cyan),
     24px 24px 0 var(--primary-white);
 }
 
@@ -3071,7 +3089,9 @@
   border-color: var(--accent-cyan);
   background: rgba(0, 255, 255, 0.05);
   transform: translate(-6px, -6px) rotate(-1deg);
-  box-shadow: 12px 12px 0 var(--accent-yellow), 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 var(--accent-yellow),
+    24px 24px 0 var(--primary-white);
 }
 
 .contact-method.emergency {
@@ -3082,7 +3102,9 @@
 .contact-method.emergency:hover {
   border-color: #ff6666;
   background: rgba(255, 68, 68, 0.2);
-  box-shadow: 12px 12px 0 #ff4444, 24px 24px 0 var(--primary-white);
+  box-shadow:
+    12px 12px 0 #ff4444,
+    24px 24px 0 var(--primary-white);
 }
 
 .method-shadow {

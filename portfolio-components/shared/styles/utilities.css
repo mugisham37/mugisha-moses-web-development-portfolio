@@ -479,7 +479,8 @@ body {
   transition: all var(--duration-normal) var(--ease-in-out);
 }
 .transition-colors {
-  transition: color var(--duration-normal) var(--ease-in-out),
+  transition:
+    color var(--duration-normal) var(--ease-in-out),
     background-color var(--duration-normal) var(--ease-in-out),
     border-color var(--duration-normal) var(--ease-in-out);
 }

@@ -1,356 +1,432 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Process Component</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../shared/styles/variables.css">
-    <link rel="stylesheet" href="../shared/styles/animations.css">
-    <link rel="stylesheet" href="../shared/styles/utilities.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/styles/variables.css" />
+    <link rel="stylesheet" href="../shared/styles/animations.css" />
+    <link rel="stylesheet" href="../shared/styles/utilities.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
     <!-- Process & Onboarding Section -->
     <section class="process-section" id="processSection">
-        <!-- Section Background -->
-        <div class="process-background">
-            <div class="workflow-particles" id="workflowParticles"></div>
-            <div class="process-grid"></div>
-            <div class="connection-lines" id="connectionLines"></div>
+      <!-- Section Background -->
+      <div class="process-background">
+        <div class="workflow-particles" id="workflowParticles"></div>
+        <div class="process-grid"></div>
+        <div class="connection-lines" id="connectionLines"></div>
+      </div>
+
+      <!-- Process Container -->
+      <div class="process-container">
+        <!-- Section Header -->
+        <div class="process-header">
+          <h2 class="process-title" id="processTitle">
+            HOW WE'LL WORK TOGETHER
+          </h2>
+          <div class="process-subtitle">
+            A proven 4-step process that ensures project success
+          </div>
+          <div class="satisfaction-badge">
+            <span class="satisfaction-icon">✅</span>
+            <span class="satisfaction-text">97% client satisfaction rate</span>
+          </div>
         </div>
 
-        <!-- Process Container -->
-        <div class="process-container">
-            <!-- Section Header -->
-            <div class="process-header">
-                <h2 class="process-title" id="processTitle">HOW WE'LL WORK TOGETHER</h2>
-                <div class="process-subtitle">A proven 4-step process that ensures project success</div>
-                <div class="satisfaction-badge">
-                    <span class="satisfaction-icon">✅</span>
-                    <span class="satisfaction-text">97% client satisfaction rate</span>
+        <!-- 4-Step Process Visualization -->
+        <div class="process-steps">
+          <!-- Step 1: Discovery Call -->
+          <div class="process-step" data-step="1">
+            <div class="step-container">
+              <div class="step-number">01</div>
+              <div class="step-icon-container">
+                <div class="step-icon discovery-icon">
+                  <svg viewBox="0 0 80 80" class="icon-svg">
+                    <circle
+                      cx="35"
+                      cy="35"
+                      r="20"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      fill="none"
+                    />
+                    <path
+                      d="M50 50 L65 65"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                    />
+                    <circle
+                      cx="35"
+                      cy="35"
+                      r="8"
+                      fill="currentColor"
+                      opacity="0.3"
+                    />
+                  </svg>
                 </div>
+              </div>
+
+              <div class="step-content">
+                <h3 class="step-title">DISCOVERY CALL</h3>
+                <div class="step-subtitle">Understanding your vision</div>
+
+                <div class="step-details">
+                  <div class="detail-item">
+                    <span class="detail-icon">⏱️</span>
+                    <span class="detail-text"
+                      >60-90 minutes comprehensive consultation</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-icon">🎥</span>
+                    <span class="detail-text"
+                      >Video call with screen sharing</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-icon">📋</span>
+                    <span class="detail-text"
+                      >Detailed requirements + roadmap</span
+                    >
+                  </div>
+                </div>
+
+                <div class="step-outcome">
+                  <div class="outcome-label">What's Included:</div>
+                  <ul class="outcome-list">
+                    <li>Business goal analysis</li>
+                    <li>Technology stack recommendations</li>
+                    <li>Timeline & budget discussion</li>
+                    <li>Success metrics definition</li>
+                  </ul>
+                </div>
+              </div>
             </div>
+            <div class="step-connector"></div>
+          </div>
 
-            <!-- 4-Step Process Visualization -->
-            <div class="process-steps">
-                <!-- Step 1: Discovery Call -->
-                <div class="process-step" data-step="1">
-                    <div class="step-container">
-                        <div class="step-number">01</div>
-                        <div class="step-icon-container">
-                            <div class="step-icon discovery-icon">
-                                <svg viewBox="0 0 80 80" class="icon-svg">
-                                    <circle cx="35" cy="35" r="20" stroke="currentColor" stroke-width="3" fill="none" />
-                                    <path d="M50 50 L65 65" stroke="currentColor" stroke-width="3"
-                                        stroke-linecap="round" />
-                                    <circle cx="35" cy="35" r="8" fill="currentColor" opacity="0.3" />
-                                </svg>
-                            </div>
-                        </div>
+          <!-- Step 2: Strategic Planning -->
+          <div class="process-step" data-step="2">
+            <div class="step-container">
+              <div class="step-number">02</div>
+              <div class="step-icon-container">
+                <div class="step-icon planning-icon">
+                  <svg viewBox="0 0 80 80" class="icon-svg">
+                    <rect
+                      x="10"
+                      y="20"
+                      width="60"
+                      height="40"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                    />
+                    <path
+                      d="M20 30 L35 45 L60 20"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      fill="none"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="25" cy="15" r="3" fill="currentColor" />
+                    <circle cx="40" cy="15" r="3" fill="currentColor" />
+                    <circle cx="55" cy="15" r="3" fill="currentColor" />
+                  </svg>
+                </div>
+              </div>
 
-                        <div class="step-content">
-                            <h3 class="step-title">DISCOVERY CALL</h3>
-                            <div class="step-subtitle">Understanding your vision</div>
+              <div class="step-content">
+                <h3 class="step-title">STRATEGIC PLANNING</h3>
+                <div class="step-subtitle">Technical roadmap creation</div>
 
-                            <div class="step-details">
-                                <div class="detail-item">
-                                    <span class="detail-icon">⏱️</span>
-                                    <span class="detail-text">60-90 minutes comprehensive consultation</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">🎥</span>
-                                    <span class="detail-text">Video call with screen sharing</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📋</span>
-                                    <span class="detail-text">Detailed requirements + roadmap</span>
-                                </div>
-                            </div>
-
-                            <div class="step-outcome">
-                                <div class="outcome-label">What's Included:</div>
-                                <ul class="outcome-list">
-                                    <li>Business goal analysis</li>
-                                    <li>Technology stack recommendations</li>
-                                    <li>Timeline & budget discussion</li>
-                                    <li>Success metrics definition</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step-connector"></div>
+                <div class="step-details">
+                  <div class="detail-item">
+                    <span class="detail-icon">📅</span>
+                    <span class="detail-text"
+                      >3-5 days comprehensive planning</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-icon">📐</span>
+                    <span class="detail-text"
+                      >Technical specification + roadmap</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-icon">🤝</span>
+                    <span class="detail-text"
+                      >Daily check-ins during planning</span
+                    >
+                  </div>
                 </div>
 
-                <!-- Step 2: Strategic Planning -->
-                <div class="process-step" data-step="2">
-                    <div class="step-container">
-                        <div class="step-number">02</div>
-                        <div class="step-icon-container">
-                            <div class="step-icon planning-icon">
-                                <svg viewBox="0 0 80 80" class="icon-svg">
-                                    <rect x="10" y="20" width="60" height="40" stroke="currentColor" stroke-width="2"
-                                        fill="none" />
-                                    <path d="M20 30 L35 45 L60 20" stroke="currentColor" stroke-width="3" fill="none"
-                                        stroke-linecap="round" />
-                                    <circle cx="25" cy="15" r="3" fill="currentColor" />
-                                    <circle cx="40" cy="15" r="3" fill="currentColor" />
-                                    <circle cx="55" cy="15" r="3" fill="currentColor" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="step-content">
-                            <h3 class="step-title">STRATEGIC PLANNING</h3>
-                            <div class="step-subtitle">Technical roadmap creation</div>
-
-                            <div class="step-details">
-                                <div class="detail-item">
-                                    <span class="detail-icon">📅</span>
-                                    <span class="detail-text">3-5 days comprehensive planning</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📐</span>
-                                    <span class="detail-text">Technical specification + roadmap</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">🤝</span>
-                                    <span class="detail-text">Daily check-ins during planning</span>
-                                </div>
-                            </div>
-
-                            <div class="step-outcome">
-                                <div class="outcome-label">Planning Components:</div>
-                                <ul class="outcome-list">
-                                    <li>Architecture design & database schema</li>
-                                    <li>UI/UX wireframes & user flows</li>
-                                    <li>Sprint planning & milestones</li>
-                                    <li>Risk assessment & QA strategy</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step-connector"></div>
+                <div class="step-outcome">
+                  <div class="outcome-label">Planning Components:</div>
+                  <ul class="outcome-list">
+                    <li>Architecture design & database schema</li>
+                    <li>UI/UX wireframes & user flows</li>
+                    <li>Sprint planning & milestones</li>
+                    <li>Risk assessment & QA strategy</li>
+                  </ul>
                 </div>
-
-                <!-- Step 3: Agile Development -->
-                <div class="process-step" data-step="3">
-                    <div class="step-container">
-                        <div class="step-number">03</div>
-                        <div class="step-icon-container">
-                            <div class="step-icon development-icon">
-                                <svg viewBox="0 0 80 80" class="icon-svg">
-                                    <path d="M20 25 L30 35 L20 45" stroke="currentColor" stroke-width="3" fill="none"
-                                        stroke-linecap="round" />
-                                    <path d="M60 25 L50 35 L60 45" stroke="currentColor" stroke-width="3" fill="none"
-                                        stroke-linecap="round" />
-                                    <path d="M35 20 L45 50" stroke="currentColor" stroke-width="3"
-                                        stroke-linecap="round" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="step-content">
-                            <h3 class="step-title">AGILE DEVELOPMENT</h3>
-                            <div class="step-subtitle">Weekly demos and iterations</div>
-
-                            <div class="step-details">
-                                <div class="detail-item">
-                                    <span class="detail-icon">🔄</span>
-                                    <span class="detail-text">2-week sprints with weekly demos</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">💬</span>
-                                    <span class="detail-text">Daily standups + progress reports</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">👁️</span>
-                                    <span class="detail-text">Real-time progress tracking</span>
-                                </div>
-                            </div>
-
-                            <div class="step-outcome">
-                                <div class="outcome-label">Development Features:</div>
-                                <ul class="outcome-list">
-                                    <li>Live development environment</li>
-                                    <li>Weekly demo sessions</li>
-                                    <li>Automated testing & CI/CD</li>
-                                    <li>Performance monitoring</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step-connector"></div>
-                </div>
-
-                <!-- Step 4: Launch & Scale -->
-                <div class="process-step" data-step="4">
-                    <div class="step-container">
-                        <div class="step-number">04</div>
-                        <div class="step-icon-container">
-                            <div class="step-icon launch-icon">
-                                <svg viewBox="0 0 80 80" class="icon-svg">
-                                    <path d="M40 10 L45 25 L60 30 L45 35 L40 50 L35 35 L20 30 L35 25 Z"
-                                        fill="currentColor" />
-                                    <path d="M25 55 L35 45 M45 45 L55 55 M40 60 L40 70" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="step-content">
-                            <h3 class="step-title">LAUNCH & SCALE</h3>
-                            <div class="step-subtitle">Deployment and optimization</div>
-
-                            <div class="step-details">
-                                <div class="detail-item">
-                                    <span class="detail-icon">🚀</span>
-                                    <span class="detail-text">Production deployment + monitoring</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📚</span>
-                                    <span class="detail-text">Team training + documentation</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">🛠️</span>
-                                    <span class="detail-text">30-day post-launch support</span>
-                                </div>
-                            </div>
-
-                            <div class="step-outcome">
-                                <div class="outcome-label">Launch Components:</div>
-                                <ul class="outcome-list">
-                                    <li>Production environment setup</li>
-                                    <li>Team training & documentation</li>
-                                    <li>Performance optimization</li>
-                                    <li>Scaling recommendations</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+            <div class="step-connector"></div>
+          </div>
 
-            <!-- Project Timeline & Pricing -->
-            <div class="timeline-pricing-section">
-                <div class="section-split">
-                    <!-- Timeline Visualization -->
-                    <div class="timeline-section">
-                        <h3 class="section-title">PROJECT TIMELINES</h3>
-                        <div class="timeline-bars">
-                            <div class="timeline-bar">
-                                <div class="bar-label">Landing Page/Portfolio</div>
-                                <div class="bar-visual">
-                                    <div class="bar-fill" data-weeks="3"></div>
-                                    <span class="bar-duration">2-3 weeks</span>
-                                </div>
-                            </div>
-
-                            <div class="timeline-bar">
-                                <div class="bar-label">Web Application</div>
-                                <div class="bar-visual">
-                                    <div class="bar-fill" data-weeks="9"></div>
-                                    <span class="bar-duration">6-12 weeks</span>
-                                </div>
-                            </div>
-
-                            <div class="timeline-bar">
-                                <div class="bar-label">Enterprise Solution</div>
-                                <div class="bar-visual">
-                                    <div class="bar-fill" data-weeks="18"></div>
-                                    <span class="bar-duration">12-24 weeks</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pricing Transparency -->
-                    <div class="pricing-section">
-                        <h3 class="section-title">TRANSPARENT PRICING</h3>
-                        <div class="pricing-tiers">
-                            <div class="pricing-tier">
-                                <div class="tier-name">Starter Projects</div>
-                                <div class="tier-price">$5K - $15K</div>
-                                <div class="tier-description">Simple websites, landing pages</div>
-                            </div>
-
-                            <div class="pricing-tier">
-                                <div class="tier-name">Professional Solutions</div>
-                                <div class="tier-price">$15K - $50K</div>
-                                <div class="tier-description">Complex web applications</div>
-                            </div>
-
-                            <div class="pricing-tier">
-                                <div class="tier-name">Enterprise Systems</div>
-                                <div class="tier-price">$50K+</div>
-                                <div class="tier-description">Large-scale solutions</div>
-                            </div>
-                        </div>
-                    </div>
+          <!-- Step 3: Agile Development -->
+          <div class="process-step" data-step="3">
+            <div class="step-container">
+              <div class="step-number">03</div>
+              <div class="step-icon-container">
+                <div class="step-icon development-icon">
+                  <svg viewBox="0 0 80 80" class="icon-svg">
+                    <path
+                      d="M20 25 L30 35 L20 45"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      fill="none"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M60 25 L50 35 L60 45"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      fill="none"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M35 20 L45 50"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                    />
+                  </svg>
                 </div>
-            </div>
+              </div>
 
-            <!-- Communication Tools -->
-            <div class="communication-section">
-                <h3 class="communication-title">COMMUNICATION & TOOLS</h3>
-                <div class="tools-grid">
-                    <div class="tool-item">
-                        <div class="tool-icon">💬</div>
-                        <div class="tool-name">Slack</div>
-                        <div class="tool-purpose">Daily communication</div>
-                    </div>
+              <div class="step-content">
+                <h3 class="step-title">AGILE DEVELOPMENT</h3>
+                <div class="step-subtitle">Weekly demos and iterations</div>
 
-                    <div class="tool-item">
-                        <div class="tool-icon">🎥</div>
-                        <div class="tool-name">Zoom</div>
-                        <div class="tool-purpose">Weekly demos</div>
-                    </div>
-
-                    <div class="tool-item">
-                        <div class="tool-icon">📧</div>
-                        <div class="tool-name">Email</div>
-                        <div class="tool-purpose">Formal updates</div>
-                    </div>
-
-                    <div class="tool-item">
-                        <div class="tool-icon">⚡</div>
-                        <div class="tool-name">GitHub</div>
-                        <div class="tool-purpose">Code collaboration</div>
-                    </div>
-
-                    <div class="tool-item">
-                        <div class="tool-icon">📊</div>
-                        <div class="tool-name">Dashboard</div>
-                        <div class="tool-purpose">Progress tracking</div>
-                    </div>
+                <div class="step-details">
+                  <div class="detail-item">
+                    <span class="detail-icon">🔄</span>
+                    <span class="detail-text"
+                      >2-week sprints with weekly demos</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-icon">💬</span>
+                    <span class="detail-text"
+                      >Daily standups + progress reports</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-icon">👁️</span>
+                    <span class="detail-text">Real-time progress tracking</span>
+                  </div>
                 </div>
-            </div>
 
-            <!-- Process CTAs -->
-            <div class="process-ctas">
-                <button class="primary-process-cta" id="primaryProcessCta">
-                    <span class="cta-text">START YOUR PROJECT JOURNEY</span>
-                    <div class="cta-process-animation"></div>
-                </button>
-
-                <div class="secondary-process-cta">
-                    <div class="invitation-card">
-                        <div class="invitation-text">Join 50+ satisfied clients who've transformed their business</div>
-                        <button class="invitation-btn" id="invitationBtn">
-                            <span class="btn-text">ADD YOUR SUCCESS STORY</span>
-                        </button>
-                    </div>
+                <div class="step-outcome">
+                  <div class="outcome-label">Development Features:</div>
+                  <ul class="outcome-list">
+                    <li>Live development environment</li>
+                    <li>Weekly demo sessions</li>
+                    <li>Automated testing & CI/CD</li>
+                    <li>Performance monitoring</li>
+                  </ul>
                 </div>
+              </div>
             </div>
+            <div class="step-connector"></div>
+          </div>
+
+          <!-- Step 4: Launch & Scale -->
+          <div class="process-step" data-step="4">
+            <div class="step-container">
+              <div class="step-number">04</div>
+              <div class="step-icon-container">
+                <div class="step-icon launch-icon">
+                  <svg viewBox="0 0 80 80" class="icon-svg">
+                    <path
+                      d="M40 10 L45 25 L60 30 L45 35 L40 50 L35 35 L20 30 L35 25 Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M25 55 L35 45 M45 45 L55 55 M40 60 L40 70"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="step-content">
+                <h3 class="step-title">LAUNCH & SCALE</h3>
+                <div class="step-subtitle">Deployment and optimization</div>
+
+                <div class="step-details">
+                  <div class="detail-item">
+                    <span class="detail-icon">🚀</span>
+                    <span class="detail-text"
+                      >Production deployment + monitoring</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-icon">📚</span>
+                    <span class="detail-text"
+                      >Team training + documentation</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-icon">🛠️</span>
+                    <span class="detail-text">30-day post-launch support</span>
+                  </div>
+                </div>
+
+                <div class="step-outcome">
+                  <div class="outcome-label">Launch Components:</div>
+                  <ul class="outcome-list">
+                    <li>Production environment setup</li>
+                    <li>Team training & documentation</li>
+                    <li>Performance optimization</li>
+                    <li>Scaling recommendations</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Project Timeline & Pricing -->
+        <div class="timeline-pricing-section">
+          <div class="section-split">
+            <!-- Timeline Visualization -->
+            <div class="timeline-section">
+              <h3 class="section-title">PROJECT TIMELINES</h3>
+              <div class="timeline-bars">
+                <div class="timeline-bar">
+                  <div class="bar-label">Landing Page/Portfolio</div>
+                  <div class="bar-visual">
+                    <div class="bar-fill" data-weeks="3"></div>
+                    <span class="bar-duration">2-3 weeks</span>
+                  </div>
+                </div>
+
+                <div class="timeline-bar">
+                  <div class="bar-label">Web Application</div>
+                  <div class="bar-visual">
+                    <div class="bar-fill" data-weeks="9"></div>
+                    <span class="bar-duration">6-12 weeks</span>
+                  </div>
+                </div>
+
+                <div class="timeline-bar">
+                  <div class="bar-label">Enterprise Solution</div>
+                  <div class="bar-visual">
+                    <div class="bar-fill" data-weeks="18"></div>
+                    <span class="bar-duration">12-24 weeks</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pricing Transparency -->
+            <div class="pricing-section">
+              <h3 class="section-title">TRANSPARENT PRICING</h3>
+              <div class="pricing-tiers">
+                <div class="pricing-tier">
+                  <div class="tier-name">Starter Projects</div>
+                  <div class="tier-price">$5K - $15K</div>
+                  <div class="tier-description">
+                    Simple websites, landing pages
+                  </div>
+                </div>
+
+                <div class="pricing-tier">
+                  <div class="tier-name">Professional Solutions</div>
+                  <div class="tier-price">$15K - $50K</div>
+                  <div class="tier-description">Complex web applications</div>
+                </div>
+
+                <div class="pricing-tier">
+                  <div class="tier-name">Enterprise Systems</div>
+                  <div class="tier-price">$50K+</div>
+                  <div class="tier-description">Large-scale solutions</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Communication Tools -->
+        <div class="communication-section">
+          <h3 class="communication-title">COMMUNICATION & TOOLS</h3>
+          <div class="tools-grid">
+            <div class="tool-item">
+              <div class="tool-icon">💬</div>
+              <div class="tool-name">Slack</div>
+              <div class="tool-purpose">Daily communication</div>
+            </div>
+
+            <div class="tool-item">
+              <div class="tool-icon">🎥</div>
+              <div class="tool-name">Zoom</div>
+              <div class="tool-purpose">Weekly demos</div>
+            </div>
+
+            <div class="tool-item">
+              <div class="tool-icon">📧</div>
+              <div class="tool-name">Email</div>
+              <div class="tool-purpose">Formal updates</div>
+            </div>
+
+            <div class="tool-item">
+              <div class="tool-icon">⚡</div>
+              <div class="tool-name">GitHub</div>
+              <div class="tool-purpose">Code collaboration</div>
+            </div>
+
+            <div class="tool-item">
+              <div class="tool-icon">📊</div>
+              <div class="tool-name">Dashboard</div>
+              <div class="tool-purpose">Progress tracking</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Process CTAs -->
+        <div class="process-ctas">
+          <button class="primary-process-cta" id="primaryProcessCta">
+            <span class="cta-text">START YOUR PROJECT JOURNEY</span>
+            <div class="cta-process-animation"></div>
+          </button>
+
+          <div class="secondary-process-cta">
+            <div class="invitation-card">
+              <div class="invitation-text">
+                Join 50+ satisfied clients who've transformed their business
+              </div>
+              <button class="invitation-btn" id="invitationBtn">
+                <span class="btn-text">ADD YOUR SUCCESS STORY</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <script src="../shared/scripts/utilities.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

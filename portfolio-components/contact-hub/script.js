@@ -834,8 +834,8 @@ class BrutalistContactHub {
         type === "error"
           ? "#ff4444"
           : type === "success"
-          ? "#00ff00"
-          : "var(--accent-cyan)"
+            ? "#00ff00"
+            : "var(--accent-cyan)"
       };
       color: ${
         type === "success" ? "var(--primary-black)" : "var(--primary-white)"

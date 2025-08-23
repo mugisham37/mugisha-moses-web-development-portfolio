@@ -1,225 +1,232 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BRUTALIST HERO - MAXIMUM IMPACT</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
     <!-- BRUTALIST HERO SECTION -->
     <section class="hero-section">
-        <!-- BRUTAL BACKGROUND SYSTEM -->
-        <div class="hero-background">
-            <div class="stars-field" id="starsField"></div>
-            <div class="grid-overlay"></div>
-            <div class="particle-system" id="particleSystem"></div>
-            <div class="scan-lines"></div>
-            <div class="brutal-stripes"></div>
-            <div class="concrete-texture"></div>
-            <div class="noise-layer"></div>
+      <!-- BRUTAL BACKGROUND SYSTEM -->
+      <div class="hero-background">
+        <div class="stars-field" id="starsField"></div>
+        <div class="grid-overlay"></div>
+        <div class="particle-system" id="particleSystem"></div>
+        <div class="scan-lines"></div>
+        <div class="brutal-stripes"></div>
+        <div class="concrete-texture"></div>
+        <div class="noise-layer"></div>
+      </div>
+
+      <!-- BRUTAL HERO CONTAINER -->
+      <div class="hero-container">
+        <!-- LEFT COLUMN - BRUTAL CONTENT -->
+        <div class="hero-content">
+          <!-- BRUTAL HEADLINE SYSTEM -->
+          <div class="headline-container">
+            <div class="headline-shadow"></div>
+            <div class="headline-border"></div>
+            <h1 class="hero-headline" id="heroHeadline">
+              <span class="headline-line">I ARCHITECT</span>
+              <span class="headline-line">DIGITAL EXPERIENCES</span>
+              <span class="headline-line">THAT DRIVE</span>
+              <span class="headline-line highlight">MILLION-DOLLAR</span>
+              <span class="headline-line highlight">RESULTS</span>
+            </h1>
+            <div class="typewriter-cursor" id="typewriterCursor">|</div>
+            <div class="headline-strike"></div>
+            <div class="headline-glow"></div>
+          </div>
+
+          <!-- BRUTAL SUBTITLE SYSTEM -->
+          <div class="subtitle-container">
+            <div class="subtitle-block">
+              <span class="subtitle-prefix">CURRENTLY:</span>
+              <div class="prefix-underline"></div>
+            </div>
+            <div class="rotating-subtitle" id="rotatingSubtitle">
+              <span class="subtitle-text active">FULL-STACK DEVELOPER</span>
+              <span class="subtitle-text">REACT ARCHITECT</span>
+              <span class="subtitle-text">NODE.JS EXPERT</span>
+              <span class="subtitle-text">CLOUD ENGINEER</span>
+              <span class="subtitle-text">PROBLEM SOLVER</span>
+            </div>
+            <div class="subtitle-shadow"></div>
+            <div class="subtitle-border"></div>
+          </div>
+
+          <!-- BRUTAL IMPACT METRICS -->
+          <div class="metrics-bar">
+            <div class="metric-item">
+              <div class="metric-shadow"></div>
+              <div class="metric-border"></div>
+              <div class="metric-number" data-target="50">0</div>
+              <div class="metric-label">PROJECTS DEPLOYED</div>
+              <div class="metric-strike"></div>
+              <div class="metric-glow"></div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-shadow"></div>
+              <div class="metric-border"></div>
+              <div class="metric-number" data-target="99.9">0</div>
+              <div class="metric-label">% UPTIME ACHIEVED</div>
+              <div class="metric-strike"></div>
+              <div class="metric-glow"></div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-shadow"></div>
+              <div class="metric-border"></div>
+              <div class="metric-number" data-target="2">$</div>
+              <div class="metric-label">M+ CLIENT REVENUE</div>
+              <div class="metric-strike"></div>
+              <div class="metric-glow"></div>
+            </div>
+          </div>
+
+          <!-- BRUTAL VALUE PROPOSITION -->
+          <div class="value-proposition">
+            <div class="value-border"></div>
+            <div class="value-shadow"></div>
+            <p class="value-text" id="valueText">
+              I don't just write code—I engineer solutions that solve real
+              business problems and generate measurable ROI. Every line serves a
+              purpose, every feature drives results.
+            </p>
+            <div class="value-strike"></div>
+          </div>
+
+          <!-- BRUTAL CTA BUTTONS -->
+          <div class="hero-actions">
+            <button class="primary-cta" id="primaryCta">
+              <div class="cta-shadow"></div>
+              <div class="cta-border"></div>
+              <span class="cta-text">SEE MY IMPACT</span>
+              <div class="cta-progress"></div>
+              <div class="cta-glow"></div>
+              <div class="cta-strike"></div>
+              <div class="cta-shimmer"></div>
+            </button>
+            <button class="secondary-cta" id="secondaryCta">
+              <div class="cta-shadow"></div>
+              <div class="cta-border"></div>
+              <span class="cta-text">QUICK CHAT</span>
+              <div class="cta-border-animation"></div>
+              <div class="cta-strike"></div>
+            </button>
+          </div>
         </div>
 
-        <!-- BRUTAL HERO CONTAINER -->
-        <div class="hero-container">
-            <!-- LEFT COLUMN - BRUTAL CONTENT -->
-            <div class="hero-content">
-                <!-- BRUTAL HEADLINE SYSTEM -->
-                <div class="headline-container">
-                    <div class="headline-shadow"></div>
-                    <div class="headline-border"></div>
-                    <h1 class="hero-headline" id="heroHeadline">
-                        <span class="headline-line">I ARCHITECT</span>
-                        <span class="headline-line">DIGITAL EXPERIENCES</span>
-                        <span class="headline-line">THAT DRIVE</span>
-                        <span class="headline-line highlight">MILLION-DOLLAR</span>
-                        <span class="headline-line highlight">RESULTS</span>
-                    </h1>
-                    <div class="typewriter-cursor" id="typewriterCursor">|</div>
-                    <div class="headline-strike"></div>
-                    <div class="headline-glow"></div>
-                </div>
-
-                <!-- BRUTAL SUBTITLE SYSTEM -->
-                <div class="subtitle-container">
-                    <div class="subtitle-block">
-                        <span class="subtitle-prefix">CURRENTLY:</span>
-                        <div class="prefix-underline"></div>
-                    </div>
-                    <div class="rotating-subtitle" id="rotatingSubtitle">
-                        <span class="subtitle-text active">FULL-STACK DEVELOPER</span>
-                        <span class="subtitle-text">REACT ARCHITECT</span>
-                        <span class="subtitle-text">NODE.JS EXPERT</span>
-                        <span class="subtitle-text">CLOUD ENGINEER</span>
-                        <span class="subtitle-text">PROBLEM SOLVER</span>
-                    </div>
-                    <div class="subtitle-shadow"></div>
-                    <div class="subtitle-border"></div>
-                </div>
-
-                <!-- BRUTAL IMPACT METRICS -->
-                <div class="metrics-bar">
-                    <div class="metric-item">
-                        <div class="metric-shadow"></div>
-                        <div class="metric-border"></div>
-                        <div class="metric-number" data-target="50">0</div>
-                        <div class="metric-label">PROJECTS DEPLOYED</div>
-                        <div class="metric-strike"></div>
-                        <div class="metric-glow"></div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-shadow"></div>
-                        <div class="metric-border"></div>
-                        <div class="metric-number" data-target="99.9">0</div>
-                        <div class="metric-label">% UPTIME ACHIEVED</div>
-                        <div class="metric-strike"></div>
-                        <div class="metric-glow"></div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-shadow"></div>
-                        <div class="metric-border"></div>
-                        <div class="metric-number" data-target="2">$</div>
-                        <div class="metric-label">M+ CLIENT REVENUE</div>
-                        <div class="metric-strike"></div>
-                        <div class="metric-glow"></div>
-                    </div>
-                </div>
-
-                <!-- BRUTAL VALUE PROPOSITION -->
-                <div class="value-proposition">
-                    <div class="value-border"></div>
-                    <div class="value-shadow"></div>
-                    <p class="value-text" id="valueText">
-                        I don't just write code—I engineer solutions that solve real business problems and generate
-                        measurable ROI. Every line serves a purpose, every feature drives results.
-                    </p>
-                    <div class="value-strike"></div>
-                </div>
-
-                <!-- BRUTAL CTA BUTTONS -->
-                <div class="hero-actions">
-                    <button class="primary-cta" id="primaryCta">
-                        <div class="cta-shadow"></div>
-                        <div class="cta-border"></div>
-                        <span class="cta-text">SEE MY IMPACT</span>
-                        <div class="cta-progress"></div>
-                        <div class="cta-glow"></div>
-                        <div class="cta-strike"></div>
-                        <div class="cta-shimmer"></div>
-                    </button>
-                    <button class="secondary-cta" id="secondaryCta">
-                        <div class="cta-shadow"></div>
-                        <div class="cta-border"></div>
-                        <span class="cta-text">QUICK CHAT</span>
-                        <div class="cta-border-animation"></div>
-                        <div class="cta-strike"></div>
-                    </button>
-                </div>
+        <!-- RIGHT COLUMN - BRUTAL VISUAL IMPACT -->
+        <div class="hero-visual">
+          <!-- BRUTAL PROFESSIONAL HEADSHOT -->
+          <div class="portrait-container" id="portraitContainer">
+            <div class="portrait-shadow"></div>
+            <div class="portrait-frame">
+              <div class="frame-border"></div>
+              <img
+                src="../shared/assets/images/hero-portrait.jpg"
+                alt="Professional Developer Portrait"
+                class="portrait-image"
+                id="portraitImage"
+              />
+              <div class="frame-corners">
+                <div class="corner top-left"></div>
+                <div class="corner top-right"></div>
+                <div class="corner bottom-left"></div>
+                <div class="corner bottom-right"></div>
+              </div>
+              <div class="scan-effect" id="scanEffect"></div>
+              <div class="portrait-glow"></div>
+              <div class="frame-strike"></div>
+              <div class="frame-noise"></div>
             </div>
 
-            <!-- RIGHT COLUMN - BRUTAL VISUAL IMPACT -->
-            <div class="hero-visual">
-                <!-- BRUTAL PROFESSIONAL HEADSHOT -->
-                <div class="portrait-container" id="portraitContainer">
-                    <div class="portrait-shadow"></div>
-                    <div class="portrait-frame">
-                        <div class="frame-border"></div>
-                        <img src="../shared/assets/images/hero-portrait.jpg" alt="Professional Developer Portrait"
-                            class="portrait-image" id="portraitImage">
-                        <div class="frame-corners">
-                            <div class="corner top-left"></div>
-                            <div class="corner top-right"></div>
-                            <div class="corner bottom-left"></div>
-                            <div class="corner bottom-right"></div>
-                        </div>
-                        <div class="scan-effect" id="scanEffect"></div>
-                        <div class="portrait-glow"></div>
-                        <div class="frame-strike"></div>
-                        <div class="frame-noise"></div>
-                    </div>
-
-                    <!-- BRUTAL STATUS PANEL -->
-                    <div class="status-panel">
-                        <div class="status-shadow"></div>
-                        <div class="status-border"></div>
-                        <div class="status-dot-large"></div>
-                        <span class="status-text-large">AVAILABLE FOR NEW PROJECTS</span>
-                        <div class="status-strike"></div>
-                    </div>
-
-                    <!-- BRUTAL FLOATING BADGES -->
-                    <div class="achievement-badges">
-                        <div class="badge badge-1" data-tooltip="Amazon Web Services Certified">
-                            <div class="badge-shadow"></div>
-                            <div class="badge-border"></div>
-                            <span class="badge-text">AWS</span>
-                            <div class="badge-strike"></div>
-                        </div>
-                        <div class="badge badge-2" data-tooltip="React Expert Level">
-                            <div class="badge-shadow"></div>
-                            <div class="badge-border"></div>
-                            <span class="badge-text">REACT</span>
-                            <div class="badge-strike"></div>
-                        </div>
-                        <div class="badge badge-3" data-tooltip="5-Star Client Rating">
-                            <div class="badge-shadow"></div>
-                            <div class="badge-border"></div>
-                            <span class="badge-text">5★</span>
-                            <div class="badge-strike"></div>
-                        </div>
-                        <div class="badge badge-4" data-tooltip="Node.js Specialist">
-                            <div class="badge-shadow"></div>
-                            <div class="badge-border"></div>
-                            <span class="badge-text">NODE</span>
-                            <div class="badge-strike"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- BRUTAL LIVE CODE DISPLAY -->
-                <div class="code-display" id="codeDisplay">
-                    <div class="code-shadow"></div>
-                    <div class="code-border"></div>
-                    <div class="code-header">
-                        <span class="code-title">// CURRENTLY BUILDING</span>
-                        <div class="code-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <div class="header-strike"></div>
-                    </div>
-                    <div class="code-content" id="codeContent">
-                        <span class="code-line">const buildAmazingThings = () => {</span>
-                        <span class="code-line"> return innovation + passion;</span>
-                        <span class="code-line">};</span>
-                    </div>
-                    <div class="code-strike"></div>
-                    <div class="code-noise"></div>
-                </div>
+            <!-- BRUTAL STATUS PANEL -->
+            <div class="status-panel">
+              <div class="status-shadow"></div>
+              <div class="status-border"></div>
+              <div class="status-dot-large"></div>
+              <span class="status-text-large">AVAILABLE FOR NEW PROJECTS</span>
+              <div class="status-strike"></div>
             </div>
-        </div>
 
-        <!-- BRUTAL SCROLL INDICATOR -->
-        <div class="scroll-indicator" id="scrollIndicator">
-            <div class="scroll-shadow"></div>
-            <div class="scroll-border"></div>
-            <div class="scroll-logo">DEV</div>
-            <div class="scroll-progress" id="scrollProgress"></div>
-            <div class="scroll-text">SCROLL TO EXPLORE</div>
-            <div class="scroll-strike"></div>
-        </div>
+            <!-- BRUTAL FLOATING BADGES -->
+            <div class="achievement-badges">
+              <div
+                class="badge badge-1"
+                data-tooltip="Amazon Web Services Certified"
+              >
+                <div class="badge-shadow"></div>
+                <div class="badge-border"></div>
+                <span class="badge-text">AWS</span>
+                <div class="badge-strike"></div>
+              </div>
+              <div class="badge badge-2" data-tooltip="React Expert Level">
+                <div class="badge-shadow"></div>
+                <div class="badge-border"></div>
+                <span class="badge-text">REACT</span>
+                <div class="badge-strike"></div>
+              </div>
+              <div class="badge badge-3" data-tooltip="5-Star Client Rating">
+                <div class="badge-shadow"></div>
+                <div class="badge-border"></div>
+                <span class="badge-text">5★</span>
+                <div class="badge-strike"></div>
+              </div>
+              <div class="badge badge-4" data-tooltip="Node.js Specialist">
+                <div class="badge-shadow"></div>
+                <div class="badge-border"></div>
+                <span class="badge-text">NODE</span>
+                <div class="badge-strike"></div>
+              </div>
+            </div>
+          </div>
 
-        <!-- BRUTAL CURSOR TRAIL -->
-        <div class="cursor-trail" id="cursorTrail"></div>
+          <!-- BRUTAL LIVE CODE DISPLAY -->
+          <div class="code-display" id="codeDisplay">
+            <div class="code-shadow"></div>
+            <div class="code-border"></div>
+            <div class="code-header">
+              <span class="code-title">// CURRENTLY BUILDING</span>
+              <div class="code-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="header-strike"></div>
+            </div>
+            <div class="code-content" id="codeContent">
+              <span class="code-line">const buildAmazingThings = () => {</span>
+              <span class="code-line"> return innovation + passion;</span>
+              <span class="code-line">};</span>
+            </div>
+            <div class="code-strike"></div>
+            <div class="code-noise"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRUTAL SCROLL INDICATOR -->
+      <div class="scroll-indicator" id="scrollIndicator">
+        <div class="scroll-shadow"></div>
+        <div class="scroll-border"></div>
+        <div class="scroll-logo">DEV</div>
+        <div class="scroll-progress" id="scrollProgress"></div>
+        <div class="scroll-text">SCROLL TO EXPLORE</div>
+        <div class="scroll-strike"></div>
+      </div>
+
+      <!-- BRUTAL CURSOR TRAIL -->
+      <div class="cursor-trail" id="cursorTrail"></div>
     </section>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
