@@ -53,6 +53,26 @@ const nextConfig = {
 
   // Webpack optimizations
   webpack: (config, { dev, isServer }) => {
+    // CSS Modules configuration
+    config.module.rules.push({
+      test: /\.module\.css$/,
+      use: [
+        {
+          loader: "css-loader",
+          options: {
+            modules: {
+              localIdentName: dev
+                ? "[name]__[local]--[hash:base64:5]"
+                : "[hash:base64:8]",
+              exportLocalsConvention: "camelCase",
+            },
+            importLoaders: 1,
+          },
+        },
+        "postcss-loader",
+      ],
+    });
+
     // Optimize bundle size
     if (!dev && !isServer) {
       config.optimization.splitChunks = {

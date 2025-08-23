@@ -1,0 +1,382 @@
+/* =====================================
+   BRUTALIST HOVER EFFECTS LIBRARY
+   ===================================== */
+
+/* ===== BUTTON HOVER EFFECTS ===== */
+
+.brutal-button-hover {
+  position: relative;
+  overflow: hidden;
+  transition: all var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-button-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.brutal-button-hover:hover::before {
+  left: 100%;
+}
+
+.brutal-button-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--current-shadow-double);
+}
+
+/* Strike Effect */
+.brutal-button-strike {
+  position: relative;
+}
+
+.brutal-button-strike::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--current-accent);
+  transform: translateY(-50%) scaleX(0) skewX(-15deg);
+  transform-origin: left;
+  transition: transform var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-button-strike:hover::after {
+  animation: brutalTextStrike var(--current-animation-duration)
+    var(--current-animation-easing) forwards;
+}
+
+/* Glow Effect */
+.brutal-button-glow:hover {
+  animation: buttonHoverGlow 0.6s ease-in-out;
+}
+
+/* ===== CARD HOVER EFFECTS ===== */
+
+.brutal-card-hover {
+  transition: all var(--current-animation-duration)
+    var(--current-animation-easing);
+  cursor: pointer;
+}
+
+.brutal-card-hover:hover {
+  animation: cardHoverElevate var(--current-animation-duration)
+    var(--current-animation-easing) forwards;
+}
+
+/* Tilt Effect */
+.brutal-card-tilt {
+  transition: transform var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-card-tilt:hover {
+  animation: cardHoverTilt var(--current-animation-duration)
+    var(--current-animation-easing) forwards;
+}
+
+/* Border Rotation */
+.brutal-card-border-rotate {
+  position: relative;
+}
+
+.brutal-card-border-rotate::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: var(--current-border-width) var(--current-border-style)
+    var(--current-accent);
+  border-radius: var(--current-border-radius);
+  opacity: 0;
+  transition: opacity var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-card-border-rotate:hover::before {
+  opacity: 1;
+  animation: brutalBorderRotate 2s linear infinite;
+}
+
+/* ===== TEXT HOVER EFFECTS ===== */
+
+.brutal-text-glow:hover {
+  animation: brutalTextGlow 1s ease-in-out infinite;
+}
+
+.brutal-text-glitch:hover {
+  animation: brutalGlitch var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-text-shake:hover {
+  animation: brutalShake 0.5s ease-in-out;
+}
+
+/* Underline Effect */
+.brutal-text-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.brutal-text-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: var(--current-border-width);
+  background: var(--current-accent);
+  transition: width var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-text-underline:hover::after {
+  width: 100%;
+}
+
+/* ===== IMAGE HOVER EFFECTS ===== */
+
+.brutal-image-hover {
+  position: relative;
+  overflow: hidden;
+  transition: all var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-image-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--current-accent);
+  opacity: 0;
+  transition: opacity var(--current-animation-duration)
+    var(--current-animation-easing);
+  mix-blend-mode: multiply;
+}
+
+.brutal-image-hover:hover::before {
+  opacity: 0.3;
+}
+
+.brutal-image-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Scan Effect */
+.brutal-image-scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.brutal-image-scan::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--current-accent);
+  box-shadow: 0 0 10px var(--current-accent);
+  opacity: 0;
+  transition: opacity var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-image-scan:hover::after {
+  opacity: 1;
+  animation: scanLine 1s ease-in-out infinite;
+}
+
+/* ===== ICON HOVER EFFECTS ===== */
+
+.brutal-icon-spin:hover {
+  animation: brutalSpin 1s linear infinite;
+}
+
+.brutal-icon-bounce:hover {
+  animation: scaleInBounce 0.6s ease-in-out;
+}
+
+.brutal-icon-pulse:hover {
+  animation: brutalPulse 1s ease-in-out infinite;
+}
+
+.brutal-icon-shake:hover {
+  animation: brutalShake 0.5s ease-in-out;
+}
+
+/* ===== LINK HOVER EFFECTS ===== */
+
+.brutal-link {
+  position: relative;
+  text-decoration: none;
+  color: var(--current-text);
+  transition: color var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-link:hover {
+  color: var(--current-accent);
+}
+
+/* Bracket Effect */
+.brutal-link-bracket::before,
+.brutal-link-bracket::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: var(--current-accent);
+  transition: width var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-link-bracket::before {
+  top: 0;
+  left: 0;
+}
+
+.brutal-link-bracket::after {
+  bottom: 0;
+  right: 0;
+}
+
+.brutal-link-bracket:hover::before,
+.brutal-link-bracket:hover::after {
+  width: 100%;
+}
+
+/* ===== FORM HOVER EFFECTS ===== */
+
+.brutal-input-hover {
+  transition: all var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-input-hover:hover,
+.brutal-input-hover:focus {
+  border-color: var(--current-accent);
+  box-shadow: var(--current-shadow-brutal);
+  transform: translateY(-1px);
+}
+
+/* ===== NAVIGATION HOVER EFFECTS ===== */
+
+.brutal-nav-item {
+  position: relative;
+  transition: all var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-nav-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -4px;
+  width: 2px;
+  height: 0;
+  background: var(--current-accent);
+  transition: height var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.brutal-nav-item:hover::before {
+  height: 100%;
+}
+
+.brutal-nav-item:hover {
+  transform: translateX(4px);
+  color: var(--current-accent);
+}
+
+/* ===== REFINED THEME HOVER EFFECTS ===== */
+
+.refined-hover-lift {
+  transition: all var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.refined-hover-lift:hover {
+  animation: elegantLift var(--current-animation-duration)
+    var(--current-animation-easing) forwards;
+}
+
+.refined-hover-scale {
+  transition: transform var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.refined-hover-scale:hover {
+  animation: elegantScale var(--current-animation-duration)
+    var(--current-animation-easing) forwards;
+}
+
+.refined-hover-glow:hover {
+  animation: subtleGlow 1s ease-in-out infinite;
+}
+
+/* ===== RESPONSIVE HOVER EFFECTS ===== */
+
+/* Disable hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .brutal-button-hover:hover,
+  .brutal-card-hover:hover,
+  .brutal-image-hover:hover,
+  .refined-hover-lift:hover,
+  .refined-hover-scale:hover {
+    transform: none;
+    animation: none;
+  }
+
+  .brutal-button-hover:hover::before,
+  .brutal-card-border-rotate:hover::before,
+  .brutal-text-underline:hover::after {
+    opacity: 0;
+    width: 0;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .brutal-button-hover,
+  .brutal-card-hover,
+  .brutal-image-hover,
+  .brutal-text-glow,
+  .brutal-text-glitch,
+  .brutal-icon-spin,
+  .brutal-icon-bounce,
+  .brutal-icon-pulse,
+  .refined-hover-lift,
+  .refined-hover-scale {
+    transition: none;
+    animation: none;
+  }
+
+  .brutal-button-hover:hover,
+  .brutal-card-hover:hover,
+  .brutal-image-hover:hover,
+  .refined-hover-lift:hover,
+  .refined-hover-scale:hover {
+    transform: none;
+  }
+}

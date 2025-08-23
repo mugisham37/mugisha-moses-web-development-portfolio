@@ -1,0 +1,312 @@
+/* ===================================
+   BRUTALIST PORTFOLIO THEME VARIABLES
+   =================================== */
+
+/* ===== EXTREME BRUTALIST THEME ===== */
+:root {
+  /* Colors - Extreme Brutalist */
+  --extreme-bg: #000000;
+  --extreme-text: #ffffff;
+  --extreme-accent: #ffff00;
+  --extreme-secondary: #ffffff;
+  --extreme-highlight: #00ffff;
+  --extreme-success: #00ff00;
+  --extreme-warning: #ff8800;
+  --extreme-error: #ff0000;
+  --extreme-muted: #666666;
+  --extreme-border: #ffffff;
+
+  /* Gradient system - Extreme */
+  --extreme-gradient-primary: linear-gradient(135deg, #ffff00 0%, #00ffff 100%);
+  --extreme-gradient-secondary: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #000000 100%
+  );
+  --extreme-gradient-accent: linear-gradient(135deg, #00ff00 0%, #ffff00 100%);
+
+  /* Typography - Extreme Brutalist */
+  --extreme-font-primary: "Space Mono", monospace;
+  --extreme-font-code: "JetBrains Mono", monospace;
+  --extreme-font-weight-normal: 400;
+  --extreme-font-weight-bold: 700;
+  --extreme-line-height-tight: 1.2;
+  --extreme-line-height-normal: 1.5;
+  --extreme-line-height-loose: 1.8;
+  --extreme-letter-spacing-tight: -0.025em;
+  --extreme-letter-spacing-normal: 0;
+  --extreme-letter-spacing-wide: 0.025em;
+
+  /* Font sizes - Extreme */
+  --extreme-text-xs: 0.75rem; /* 12px */
+  --extreme-text-sm: 0.875rem; /* 14px */
+  --extreme-text-base: 1rem; /* 16px */
+  --extreme-text-lg: 1.125rem; /* 18px */
+  --extreme-text-xl: 1.25rem; /* 20px */
+  --extreme-text-2xl: 1.5rem; /* 24px */
+  --extreme-text-3xl: 1.875rem; /* 30px */
+  --extreme-text-4xl: 2.25rem; /* 36px */
+  --extreme-text-5xl: 3rem; /* 48px */
+  --extreme-text-6xl: 3.75rem; /* 60px */
+  --extreme-text-7xl: 4.5rem; /* 72px */
+  --extreme-text-8xl: 6rem; /* 96px */
+  --extreme-text-9xl: 8rem; /* 128px */
+
+  /* Border system - Extreme */
+  --extreme-border-width: 8px;
+  --extreme-border-style: solid;
+  --extreme-border-radius: 0px;
+  --extreme-border-color: var(--extreme-border);
+
+  /* Shadow system - Extreme */
+  --extreme-shadow-brutal: 8px 8px 0 var(--extreme-accent);
+  --extreme-shadow-double:
+    8px 8px 0 var(--extreme-accent), 16px 16px 0 var(--extreme-text);
+  --extreme-shadow-triple:
+    8px 8px 0 var(--extreme-accent), 16px 16px 0 var(--extreme-text),
+    24px 24px 0 var(--extreme-bg);
+  --extreme-shadow-inset: inset 4px 4px 0 var(--extreme-accent);
+  --extreme-shadow-text:
+    2px 2px 0 var(--extreme-bg), 4px 4px 0 var(--extreme-accent);
+
+  /* Animation system - Extreme */
+  --extreme-animation-duration: 0.3s;
+  --extreme-animation-easing: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --extreme-animation-delay: 0.1s;
+
+  /* Spacing system - Extreme */
+  --extreme-space-0: 0;
+  --extreme-space-1: 0.25rem; /* 4px */
+  --extreme-space-2: 0.5rem; /* 8px */
+  --extreme-space-3: 0.75rem; /* 12px */
+  --extreme-space-4: 1rem; /* 16px */
+  --extreme-space-5: 1.25rem; /* 20px */
+  --extreme-space-6: 1.5rem; /* 24px */
+  --extreme-space-8: 2rem; /* 32px */
+  --extreme-space-10: 2.5rem; /* 40px */
+  --extreme-space-12: 3rem; /* 48px */
+  --extreme-space-16: 4rem; /* 64px */
+  --extreme-space-20: 5rem; /* 80px */
+  --extreme-space-24: 6rem; /* 96px */
+  --extreme-space-32: 8rem; /* 128px */
+  --extreme-space-40: 10rem; /* 160px */
+  --extreme-space-48: 12rem; /* 192px */
+  --extreme-space-56: 14rem; /* 224px */
+  --extreme-space-64: 16rem; /* 256px */
+}
+
+/* ===== REFINED BRUTALIST THEME ===== */
+:root {
+  /* Colors - Refined Brutalist */
+  --refined-bg: #f5f5f5;
+  --refined-text: #1a1a1a;
+  --refined-accent: #8b5cf6;
+  --refined-secondary: #e5e7eb;
+  --refined-highlight: #06b6d4;
+  --refined-success: #10b981;
+  --refined-warning: #f59e0b;
+  --refined-error: #ef4444;
+  --refined-muted: #6b7280;
+  --refined-border: #d1d5db;
+
+  /* Gradient system - Refined */
+  --refined-gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+  --refined-gradient-secondary: linear-gradient(
+    135deg,
+    #f5f5f5 0%,
+    #e5e7eb 100%
+  );
+  --refined-gradient-accent: linear-gradient(135deg, #10b981 0%, #8b5cf6 100%);
+
+  /* Typography - Refined Brutalist */
+  --refined-font-primary: "Inter", sans-serif;
+  --refined-font-code: "JetBrains Mono", monospace;
+  --refined-font-weight-light: 300;
+  --refined-font-weight-normal: 400;
+  --refined-font-weight-medium: 500;
+  --refined-font-weight-semibold: 600;
+  --refined-font-weight-bold: 700;
+  --refined-line-height-tight: 1.25;
+  --refined-line-height-normal: 1.5;
+  --refined-line-height-loose: 1.75;
+  --refined-letter-spacing-tight: -0.025em;
+  --refined-letter-spacing-normal: 0;
+  --refined-letter-spacing-wide: 0.025em;
+
+  /* Font sizes - Refined (same scale as extreme) */
+  --refined-text-xs: 0.75rem;
+  --refined-text-sm: 0.875rem;
+  --refined-text-base: 1rem;
+  --refined-text-lg: 1.125rem;
+  --refined-text-xl: 1.25rem;
+  --refined-text-2xl: 1.5rem;
+  --refined-text-3xl: 1.875rem;
+  --refined-text-4xl: 2.25rem;
+  --refined-text-5xl: 3rem;
+  --refined-text-6xl: 3.75rem;
+  --refined-text-7xl: 4.5rem;
+  --refined-text-8xl: 6rem;
+  --refined-text-9xl: 8rem;
+
+  /* Border system - Refined */
+  --refined-border-width: 2px;
+  --refined-border-style: solid;
+  --refined-border-radius: 8px;
+  --refined-border-color: var(--refined-border);
+
+  /* Shadow system - Refined */
+  --refined-shadow-subtle:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --refined-shadow-elevated:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --refined-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  --refined-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --refined-shadow-text: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  /* Animation system - Refined */
+  --refined-animation-duration: 0.4s;
+  --refined-animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --refined-animation-delay: 0.15s;
+
+  /* Spacing system - Refined (same as extreme) */
+  --refined-space-0: 0;
+  --refined-space-1: 0.25rem;
+  --refined-space-2: 0.5rem;
+  --refined-space-3: 0.75rem;
+  --refined-space-4: 1rem;
+  --refined-space-5: 1.25rem;
+  --refined-space-6: 1.5rem;
+  --refined-space-8: 2rem;
+  --refined-space-10: 2.5rem;
+  --refined-space-12: 3rem;
+  --refined-space-16: 4rem;
+  --refined-space-20: 5rem;
+  --refined-space-24: 6rem;
+  --refined-space-32: 8rem;
+  --refined-space-40: 10rem;
+  --refined-space-48: 12rem;
+  --refined-space-56: 14rem;
+  --refined-space-64: 16rem;
+}
+
+/* ===== THEME STATE CLASSES ===== */
+
+/* Extreme Brutalist Theme Active */
+.theme-extreme {
+  --current-bg: var(--extreme-bg);
+  --current-text: var(--extreme-text);
+  --current-accent: var(--extreme-accent);
+  --current-secondary: var(--extreme-secondary);
+  --current-highlight: var(--extreme-highlight);
+  --current-success: var(--extreme-success);
+  --current-warning: var(--extreme-warning);
+  --current-error: var(--extreme-error);
+  --current-muted: var(--extreme-muted);
+  --current-border: var(--extreme-border);
+
+  --current-gradient-primary: var(--extreme-gradient-primary);
+  --current-gradient-secondary: var(--extreme-gradient-secondary);
+  --current-gradient-accent: var(--extreme-gradient-accent);
+
+  --current-font-primary: var(--extreme-font-primary);
+  --current-font-code: var(--extreme-font-code);
+  --current-font-weight-normal: var(--extreme-font-weight-normal);
+  --current-font-weight-bold: var(--extreme-font-weight-bold);
+  --current-line-height-normal: var(--extreme-line-height-normal);
+  --current-letter-spacing-normal: var(--extreme-letter-spacing-normal);
+
+  --current-border-width: var(--extreme-border-width);
+  --current-border-style: var(--extreme-border-style);
+  --current-border-radius: var(--extreme-border-radius);
+  --current-border-color: var(--extreme-border-color);
+
+  --current-shadow-brutal: var(--extreme-shadow-brutal);
+  --current-shadow-double: var(--extreme-shadow-double);
+  --current-shadow-triple: var(--extreme-shadow-triple);
+  --current-shadow-inset: var(--extreme-shadow-inset);
+  --current-shadow-text: var(--extreme-shadow-text);
+
+  --current-animation-duration: var(--extreme-animation-duration);
+  --current-animation-easing: var(--extreme-animation-easing);
+  --current-animation-delay: var(--extreme-animation-delay);
+}
+
+/* Refined Brutalist Theme Active */
+.theme-refined {
+  --current-bg: var(--refined-bg);
+  --current-text: var(--refined-text);
+  --current-accent: var(--refined-accent);
+  --current-secondary: var(--refined-secondary);
+  --current-highlight: var(--refined-highlight);
+  --current-success: var(--refined-success);
+  --current-warning: var(--refined-warning);
+  --current-error: var(--refined-error);
+  --current-muted: var(--refined-muted);
+  --current-border: var(--refined-border);
+
+  --current-gradient-primary: var(--refined-gradient-primary);
+  --current-gradient-secondary: var(--refined-gradient-secondary);
+  --current-gradient-accent: var(--refined-gradient-accent);
+
+  --current-font-primary: var(--refined-font-primary);
+  --current-font-code: var(--refined-font-code);
+  --current-font-weight-normal: var(--refined-font-weight-normal);
+  --current-font-weight-bold: var(--refined-font-weight-bold);
+  --current-line-height-normal: var(--refined-line-height-normal);
+  --current-letter-spacing-normal: var(--refined-letter-spacing-normal);
+
+  --current-border-width: var(--refined-border-width);
+  --current-border-style: var(--refined-border-style);
+  --current-border-radius: var(--refined-border-radius);
+  --current-border-color: var(--refined-border-color);
+
+  --current-shadow-brutal: var(--refined-shadow-subtle);
+  --current-shadow-double: var(--refined-shadow-elevated);
+  --current-shadow-triple: var(--refined-shadow-glow);
+  --current-shadow-inset: var(--refined-shadow-inner);
+  --current-shadow-text: var(--refined-shadow-text);
+
+  --current-animation-duration: var(--refined-animation-duration);
+  --current-animation-easing: var(--refined-animation-easing);
+  --current-animation-delay: var(--refined-animation-delay);
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+:root {
+  --breakpoint-xs: 475px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* ===== COMPONENT-SPECIFIC VARIABLES ===== */
+:root {
+  /* Navigation */
+  --nav-height: 80px;
+  --nav-height-mobile: 64px;
+
+  /* Hero */
+  --hero-min-height: 100vh;
+  --hero-padding-top: var(--nav-height);
+
+  /* Cards */
+  --card-padding: var(--current-space-6);
+  --card-border-radius: var(--current-border-radius);
+
+  /* Buttons */
+  --button-padding-x: var(--current-space-6);
+  --button-padding-y: var(--current-space-3);
+  --button-border-width: var(--current-border-width);
+
+  /* Forms */
+  --input-padding-x: var(--current-space-4);
+  --input-padding-y: var(--current-space-3);
+  --input-border-width: var(--current-border-width);
+
+  /* Modals */
+  --modal-backdrop-blur: 8px;
+  --modal-max-width: 600px;
+  --modal-padding: var(--current-space-8);
+}

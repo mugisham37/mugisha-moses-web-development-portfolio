@@ -1,105 +1,329 @@
+/* Import theme variables and animations first */
+@import "./styles/themes/theme-variables.css";
+@import "./styles/animations/brutalist-keyframes.css";
+@import "./styles/animations/hover-effects.css";
+@import "./styles/animations/loading-animations.css";
+@import "./styles/components/navigation.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* CSS Custom Properties for Theme System */
 :root {
-  /* Extreme Brutalist Theme Variables */
-  --extreme-primary: #000000;
-  --extreme-secondary: #ffffff;
-  --extreme-accent: #ffff00;
-  --extreme-highlight: #00ffff;
-  --extreme-success: #00ff00;
+  /* Current theme variables - dynamically updated by theme system */
+  --current-bg: var(--extreme-bg);
+  --current-text: var(--extreme-text);
+  --current-accent: var(--extreme-accent);
+  --current-secondary: var(--extreme-secondary);
+  --current-highlight: var(--extreme-highlight);
+  --current-success: var(--extreme-success);
+  --current-warning: var(--extreme-warning);
+  --current-error: var(--extreme-error);
 
-  /* Refined Brutalist Theme Variables */
-  --refined-primary: #1a1a1a;
-  --refined-secondary: #f5f5f5;
-  --refined-accent: #8b5cf6;
-  --refined-highlight: #06b6d4;
-  --refined-success: #10b981;
+  /* Current border system */
+  --current-border-width: var(--extreme-border-width);
+  --current-border-style: var(--extreme-border-style);
+  --current-border-radius: var(--extreme-border-radius);
 
-  /* Typography */
-  --font-primary: var(--font-inter);
-  --font-mono: var(--font-space-mono);
-  --font-code: var(--font-jetbrains-mono);
+  /* Current shadow system */
+  --current-shadow-brutal: var(--extreme-shadow-brutal);
+  --current-shadow-double: var(--extreme-shadow-double);
+  --current-shadow-triple: var(--extreme-shadow-triple);
 
-  /* Shadows */
-  --shadow-brutal: 8px 8px 0;
-  --shadow-brutal-double: 8px 8px 0 #ffff00, 16px 16px 0 #ffffff;
-  --shadow-brutal-triple:
-    8px 8px 0 #ffff00, 16px 16px 0 #ffffff, 24px 24px 0 #000000;
-  --shadow-refined-subtle: 4px 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-refined-elevated: 0 10px 30px rgba(0, 0, 0, 0.2);
-  --shadow-refined-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  /* Current typography */
+  --current-font-primary: var(--extreme-font-primary);
+  --current-font-code: var(--extreme-font-code);
 
-  /* Animations */
-  --animation-duration-fast: 0.3s;
-  --animation-duration-normal: 0.4s;
-  --animation-duration-slow: 0.6s;
-  --animation-easing-brutal: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  --animation-easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Current animation system */
+  --current-animation-duration: var(--extreme-animation-duration);
+  --current-animation-easing: var(--extreme-animation-easing);
+
+  /* Theme transition */
+  --theme-transition-duration: 600ms;
+  --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout and spacing */
+  --container-max-width: 1200px;
+  --container-padding: 2rem;
+  --section-spacing: 8rem;
+  --component-spacing: 4rem;
+
+  /* Z-index system */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
 }
 
-/* Base Styles */
-* {
+/* ===== BASE STYLES ===== */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-primary), sans-serif;
-  line-height: 1.6;
+  font-family: var(--current-font-primary);
+  font-size: var(--current-text-base);
+  line-height: var(--current-line-height-normal);
+  color: var(--current-text);
+  background: var(--current-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: all var(--theme-transition-duration)
+    var(--theme-transition-easing);
 }
 
-/* Utility Classes */
+/* ===== TYPOGRAPHY UTILITIES ===== */
+
+.font-primary {
+  font-family: var(--current-font-primary);
+}
+
+.font-code {
+  font-family: var(--current-font-code);
+}
+
 .font-space-mono {
-  font-family: var(--font-mono), monospace;
+  font-family: var(--extreme-font-primary);
 }
 
 .font-jetbrains-mono {
-  font-family: var(--font-code), monospace;
+  font-family: var(--current-font-code);
 }
 
-/* Brutalist Component Base Styles */
+.font-inter {
+  font-family: var(--refined-font-primary);
+}
+
+/* Text Sizes */
+.text-xs {
+  font-size: var(--current-text-xs);
+}
+.text-sm {
+  font-size: var(--current-text-sm);
+}
+.text-base {
+  font-size: var(--current-text-base);
+}
+.text-lg {
+  font-size: var(--current-text-lg);
+}
+.text-xl {
+  font-size: var(--current-text-xl);
+}
+.text-2xl {
+  font-size: var(--current-text-2xl);
+}
+.text-3xl {
+  font-size: var(--current-text-3xl);
+}
+.text-4xl {
+  font-size: var(--current-text-4xl);
+}
+.text-5xl {
+  font-size: var(--current-text-5xl);
+}
+.text-6xl {
+  font-size: var(--current-text-6xl);
+}
+.text-7xl {
+  font-size: var(--current-text-7xl);
+}
+.text-8xl {
+  font-size: var(--current-text-8xl);
+}
+.text-9xl {
+  font-size: var(--current-text-9xl);
+}
+
+/* ===== BRUTALIST COMPONENT BASE STYLES ===== */
+
 .brutal-border {
-  border: 8px solid currentColor;
+  border: var(--current-border-width) var(--current-border-style)
+    var(--current-border);
+  border-radius: var(--current-border-radius);
 }
 
 .brutal-shadow {
-  box-shadow: var(--shadow-brutal) currentColor;
+  box-shadow: var(--current-shadow-brutal);
 }
 
 .brutal-shadow-double {
-  box-shadow: var(--shadow-brutal-double);
+  box-shadow: var(--current-shadow-double);
 }
 
 .brutal-shadow-triple {
-  box-shadow: var(--shadow-brutal-triple);
+  box-shadow: var(--current-shadow-triple);
 }
 
-.refined-shadow {
-  box-shadow: var(--shadow-refined-subtle);
+.brutal-shadow-inset {
+  box-shadow: var(--current-shadow-inset);
 }
 
-.refined-shadow-elevated {
-  box-shadow: var(--shadow-refined-elevated);
+/* ===== COLOR UTILITIES ===== */
+
+.bg-current {
+  background: var(--current-bg);
+}
+.bg-accent {
+  background: var(--current-accent);
+}
+.bg-secondary {
+  background: var(--current-secondary);
+}
+.bg-highlight {
+  background: var(--current-highlight);
+}
+.bg-success {
+  background: var(--current-success);
+}
+.bg-warning {
+  background: var(--current-warning);
+}
+.bg-error {
+  background: var(--current-error);
 }
 
-.refined-shadow-glow {
-  box-shadow: var(--shadow-refined-glow);
+.text-current {
+  color: var(--current-text);
+}
+.text-accent {
+  color: var(--current-accent);
+}
+.text-secondary {
+  color: var(--current-secondary);
+}
+.text-highlight {
+  color: var(--current-highlight);
+}
+.text-success {
+  color: var(--current-success);
+}
+.text-warning {
+  color: var(--current-warning);
+}
+.text-error {
+  color: var(--current-error);
+}
+.text-muted {
+  color: var(--current-muted);
 }
 
-/* Animation Classes */
+.border-current {
+  border-color: var(--current-border);
+}
+.border-accent {
+  border-color: var(--current-accent);
+}
+.border-text {
+  border-color: var(--current-text);
+}
+
+/* ===== SPACING UTILITIES ===== */
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.section-spacing {
+  padding: var(--section-spacing) 0;
+}
+
+.component-spacing {
+  margin-bottom: var(--component-spacing);
+}
+
+/* ===== LAYOUT UTILITIES ===== */
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.grid-center {
+  display: grid;
+  place-items: center;
+}
+
+/* ===== INTERACTION UTILITIES ===== */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+.pointer-events-none {
+  pointer-events: none;
+}
+.select-none {
+  user-select: none;
+}
+
+/* ===== VISIBILITY UTILITIES ===== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hidden {
+  display: none;
+}
+.visible {
+  visibility: visible;
+}
+.invisible {
+  visibility: hidden;
+}
+
+/* ===== ANIMATION UTILITY CLASSES ===== */
+
 .animate-brutal-glitch {
-  animation: brutalGlitch var(--animation-duration-fast)
-    var(--animation-easing-brutal);
+  animation: brutalGlitch var(--current-animation-duration)
+    var(--current-animation-easing);
 }
 
 .animate-brutal-pulse {
@@ -107,80 +331,102 @@ body {
 }
 
 .animate-smooth-transition {
-  animation: smoothTransition var(--animation-duration-normal)
-    var(--animation-easing-smooth);
+  animation: smoothTransition var(--current-animation-duration)
+    var(--current-animation-easing);
 }
 
-/* Keyframes */
-@keyframes brutalGlitch {
-  0%,
-  100% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
+.animate-typewriter {
+  animation: typewriter 3s steps(40, end);
 }
 
-@keyframes brutalPulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+.animate-fade-in {
+  animation: fadeIn var(--current-animation-duration)
+    var(--current-animation-easing);
 }
 
-@keyframes smoothTransition {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.animate-fade-in-up {
+  animation: fadeInUp var(--current-animation-duration)
+    var(--current-animation-easing);
 }
 
-@keyframes gentleFloat {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
+.animate-slide-in-left {
+  animation: slideInFromLeft var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.animate-slide-in-right {
+  animation: slideInFromRight var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1024px) {
+  :root {
+    --container-padding: 1.5rem;
+    --section-spacing: 6rem;
+    --component-spacing: 3rem;
   }
 }
 
-@keyframes typewriter {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
+  :root {
+    --container-padding: 1rem;
+    --section-spacing: 4rem;
+    --component-spacing: 2rem;
+  }
+
   .brutal-border {
     border-width: 4px;
   }
 
   .brutal-shadow {
-    box-shadow: 4px 4px 0 currentColor;
+    box-shadow: 4px 4px 0 var(--current-accent);
+  }
+
+  .brutal-shadow-double {
+    box-shadow:
+      4px 4px 0 var(--current-accent),
+      8px 8px 0 var(--current-text);
+  }
+
+  /* Hide complex animations on mobile for performance */
+  .animate-brutal-glitch,
+  .animate-brutal-pulse {
+    animation: none;
   }
 }
+
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 0.75rem;
+    --section-spacing: 3rem;
+    --component-spacing: 1.5rem;
+  }
+
+  .text-5xl {
+    font-size: var(--current-text-4xl);
+  }
+  .text-6xl {
+    font-size: var(--current-text-5xl);
+  }
+  .text-7xl {
+    font-size: var(--current-text-6xl);
+  }
+  .text-8xl {
+    font-size: var(--current-text-7xl);
+  }
+  .text-9xl {
+    font-size: var(--current-text-8xl);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
@@ -191,5 +437,63 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --current-border-width: 3px;
+  }
+
+  .brutal-border {
+    border-width: 3px;
+  }
+}
+
+/* Focus Styles */
+:focus-visible {
+  outline: 2px solid var(--current-accent);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--current-accent);
+  outline-offset: 2px;
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .brutal-border {
+    border: 1px solid black;
+  }
+
+  .brutal-shadow,
+  .brutal-shadow-double,
+  .brutal-shadow-triple {
+    box-shadow: none;
   }
 }

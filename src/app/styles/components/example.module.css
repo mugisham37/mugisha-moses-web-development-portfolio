@@ -1,0 +1,128 @@
+/* =====================================
+   EXAMPLE CSS MODULE COMPONENT
+   ===================================== */
+
+.container {
+  background: var(--current-bg);
+  color: var(--current-text);
+  border: var(--current-border-width) var(--current-border-style)
+    var(--current-border);
+  border-radius: var(--current-border-radius);
+  padding: var(--current-space-6);
+  box-shadow: var(--current-shadow-brutal);
+  transition: all var(--current-animation-duration)
+    var(--current-animation-easing);
+}
+
+.container:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--current-shadow-double);
+}
+
+.title {
+  font-family: var(--current-font-code);
+  font-size: var(--current-text-2xl);
+  font-weight: var(--current-font-weight-bold);
+  color: var(--current-accent);
+  margin-bottom: var(--current-space-4);
+  text-shadow: var(--current-shadow-text);
+}
+
+.button {
+  background: var(--current-accent);
+  color: var(--current-bg);
+  border: var(--current-border-width) var(--current-border-style)
+    var(--current-accent);
+  border-radius: var(--current-border-radius);
+  padding: var(--current-space-3) var(--current-space-6);
+  font-family: var(--current-font-code);
+  font-weight: var(--current-font-weight-bold);
+  font-size: var(--current-text-sm);
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: var(--current-shadow-brutal);
+  transition: all var(--current-animation-duration)
+    var(--current-animation-easing);
+  position: relative;
+  overflow: hidden;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--current-shadow-double);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: var(--current-shadow-brutal);
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+/* Theme-specific styles */
+:global(.theme-extreme) .container {
+  background: var(--extreme-bg);
+  border-color: var(--extreme-text);
+}
+
+:global(.theme-refined) .container {
+  background: var(--refined-bg);
+  border-color: var(--refined-border);
+  border-radius: var(--refined-border-radius);
+  box-shadow: var(--refined-shadow-subtle);
+}
+
+:global(.theme-refined) .container:hover {
+  box-shadow: var(--refined-shadow-elevated);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--current-space-4);
+  }
+
+  .title {
+    font-size: var(--current-text-xl);
+  }
+
+  .button {
+    padding: var(--current-space-2) var(--current-space-4);
+    font-size: var(--current-text-xs);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .button {
+    transition: none;
+  }
+
+  .button::before {
+    display: none;
+  }
+}
+
+.container:focus-within {
+  outline: 2px solid var(--current-accent);
+  outline-offset: 2px;
+}
