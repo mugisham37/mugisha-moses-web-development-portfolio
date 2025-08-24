@@ -19,6 +19,7 @@
 @import "../styles/components/speaking-events.css";
 @import "../styles/components/footer.css";
 @import "../styles/components/ultimate-cta.css";
+@import "../styles/components/newsletter.css";
 
 @tailwind base;
 @tailwind components;
