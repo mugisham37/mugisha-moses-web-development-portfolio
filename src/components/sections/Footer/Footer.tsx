@@ -4,6 +4,7 @@ import React from "react";
 import { useThemeContext } from "@/contexts/ThemeContext";
 import { UltimateCTA } from "./UltimateCTA";
 import { Newsletter } from "./Newsletter";
+import { Resources } from "./Resources";
 
 interface FooterProps {
   className?: string;
@@ -27,6 +28,9 @@ export const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 
       {/* Newsletter Section */}
       <Newsletter />
+
+      {/* Resources Section */}
+      <Resources />
 
       {/* Footer Background Effects */}
       <div className="footer-section__background">

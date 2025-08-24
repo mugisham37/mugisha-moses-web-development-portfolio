@@ -112,4 +112,21 @@ export interface PortfolioData {
       current?: boolean;
     }>;
   };
+
+  resources: {
+    downloads: Array<{
+      id: string;
+      title: string;
+      description: string;
+      type: "guide" | "template" | "toolkit" | "checklist" | "whitepaper";
+      format: "pdf" | "zip" | "figma" | "notion";
+      size: string;
+      downloadUrl: string;
+      previewImage: string;
+      downloadCount: number;
+      rating: number;
+      tags: string[];
+      lastUpdated: string;
+    }>;
+  };
 }
