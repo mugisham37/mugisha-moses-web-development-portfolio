@@ -5,6 +5,8 @@ import { useTheme, useThemeClassName } from "@/hooks/useTheme";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { ClientLogos } from "./ClientLogos";
 import { LinkedInRecommendations } from "./LinkedInRecommendations";
+import { CommunityContributions } from "./CommunityContributions";
+import { SpeakingEvents } from "./SpeakingEvents";
 
 interface SocialProofProps {
   className?: string;
@@ -85,66 +87,10 @@ export const SocialProof: React.FC<SocialProofProps> = ({ className = "" }) => {
           <LinkedInRecommendations />
 
           {/* Community Contributions */}
-          <div className="social-proof__contributions">
-            <h3 className="social-proof__section-title">Open Source Impact</h3>
-            <div className="social-proof__contribution-grid">
-              <div className="social-proof__contribution-card">
-                <div className="social-proof__contribution-header">
-                  <h4>NextJS Performance Toolkit</h4>
-                  <span className="social-proof__contribution-role">
-                    Core Maintainer
-                  </span>
-                </div>
-                <div className="social-proof__contribution-stats">
-                  <div className="social-proof__stat">
-                    <span className="social-proof__stat-value">2,847</span>
-                    <span className="social-proof__stat-label">⭐ Stars</span>
-                  </div>
-                  <div className="social-proof__stat">
-                    <span className="social-proof__stat-value">342</span>
-                    <span className="social-proof__stat-label">🔀 Forks</span>
-                  </div>
-                  <div className="social-proof__stat">
-                    <span className="social-proof__stat-value">125K</span>
-                    <span className="social-proof__stat-label">
-                      📦 Downloads
-                    </span>
-                  </div>
-                </div>
-                <p className="social-proof__contribution-impact">
-                  Improved performance for 10,000+ applications
-                </p>
-              </div>
+          <CommunityContributions />
 
-              <div className="social-proof__contribution-card">
-                <div className="social-proof__contribution-header">
-                  <h4>React Brutalist UI</h4>
-                  <span className="social-proof__contribution-role">
-                    Creator
-                  </span>
-                </div>
-                <div className="social-proof__contribution-stats">
-                  <div className="social-proof__stat">
-                    <span className="social-proof__stat-value">1,523</span>
-                    <span className="social-proof__stat-label">⭐ Stars</span>
-                  </div>
-                  <div className="social-proof__stat">
-                    <span className="social-proof__stat-value">189</span>
-                    <span className="social-proof__stat-label">🔀 Forks</span>
-                  </div>
-                  <div className="social-proof__stat">
-                    <span className="social-proof__stat-value">45K</span>
-                    <span className="social-proof__stat-label">
-                      📦 Downloads
-                    </span>
-                  </div>
-                </div>
-                <p className="social-proof__contribution-impact">
-                  Adopted by 500+ design systems
-                </p>
-              </div>
-            </div>
-          </div>
+          {/* Speaking Events and Publications */}
+          <SpeakingEvents />
         </div>
 
         {/* Trust Indicators */}

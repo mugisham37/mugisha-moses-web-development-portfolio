@@ -50,6 +50,32 @@ export interface PortfolioData {
       impact: string;
       recognition: string;
     }>;
+
+    speakingEvents: Array<{
+      id: string;
+      title: string;
+      event: string;
+      date: string;
+      location: string;
+      type: "conference" | "meetup" | "workshop" | "podcast";
+      audience: number;
+      recording?: string;
+      slides?: string;
+      description: string;
+    }>;
+
+    publications: Array<{
+      id: string;
+      title: string;
+      platform: string;
+      date: string;
+      url: string;
+      type: "article" | "tutorial" | "case-study" | "whitepaper";
+      readTime: number;
+      views: number;
+      shares: number;
+      description: string;
+    }>;
   };
 
   results: {
