@@ -1,15 +1,10 @@
-import SystemStatus from "@/components/test/SystemStatus";
-import { ThemeTest } from "@/components/test/ThemeTest";
-import { ThemeDetector } from "@/components/theme";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { ThemeStatus } from "@/components/ui/ThemeStatus";
+import { Navigation } from "@/components/sections/Navigation";
+import { ThemeDetector } from "@/components/theme/ThemeDetector";
 
 export default function Home() {
   return (
     <ThemeDetector>
-      <ScrollProgress />
-      <ThemeStatus />
-
+      <Navigation />
       <main className="min-h-screen bg-current text-current">
         {/* Hero Section - Extreme Brutalist Theme */}
         <section className="min-h-screen flex items-center justify-center">
@@ -22,10 +17,6 @@ export default function Home() {
             </p>
             <div className="brutal-border p-6 bg-accent text-current inline-block mb-8">
               <span className="font-code">EXTREME BRUTALIST THEME ACTIVE</span>
-            </div>
-            <SystemStatus className="mb-8" />
-            <div className="mb-8">
-              <ThemeTest />
             </div>
             <div className="brutal-border p-4 bg-secondary text-current">
               <p className="font-code">

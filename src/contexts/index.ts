@@ -2,7 +2,7 @@
 export {
   ThemeContext,
   ThemeProvider as ThemeContextProvider,
-  useTheme,
+  useThemeContext,
 } from "./ThemeContext";
 // export { AnimationContext, AnimationProvider } from './AnimationContext';
 // export { PerformanceContext, PerformanceProvider } from './PerformanceContext';
