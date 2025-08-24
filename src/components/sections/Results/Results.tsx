@@ -6,6 +6,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { ComparisonShowcase } from "./ComparisonShowcase";
 import { RevenueDashboard } from "./RevenueDashboard";
 import { AchievementTimeline } from "./AchievementTimeline";
+import { ResultsCTA } from "./ResultsCTA";
 import { ResultsEffects } from "./ResultsEffects";
 import "./Results.css";
 
@@ -63,7 +64,6 @@ export const Results: React.FC<ResultsProps> = ({ className = "" }) => {
     >
       {/* Background Effects */}
       <ResultsEffects theme={currentTheme} isVisible={isVisible} />
-
       {/* Container */}
       <div className="results-container">
         {/* Terminal Success Line */}
@@ -134,39 +134,8 @@ export const Results: React.FC<ResultsProps> = ({ className = "" }) => {
             </div>
           </div>
 
-          {/* Results CTA */}
-          <div className="results-cta">
-            <div className="cta-content">
-              <h3 className="cta-title">Ready to See Similar Results?</h3>
-              <p className="cta-description">
-                Let&apos;s discuss how we can achieve these kinds of
-                improvements for your project.
-              </p>
-              <div className="cta-buttons">
-                <button className="cta-button cta-button--primary">
-                  <span className="button-text">START YOUR PROJECT</span>
-                  <div className="button-effects">
-                    <div className="button-shimmer"></div>
-                    <div className="button-glow"></div>
-                  </div>
-                </button>
-                <button className="cta-button cta-button--secondary">
-                  <span className="button-text">VIEW CASE STUDIES</span>
-                  <div className="button-effects">
-                    <div className="button-border-animation"></div>
-                  </div>
-                </button>
-              </div>
-            </div>
-            <div className="cta-guarantee">
-              <div className="guarantee-badge">
-                <span className="guarantee-icon">🛡️</span>
-                <span className="guarantee-text">
-                  100% SATISFACTION GUARANTEE
-                </span>
-              </div>
-            </div>
-          </div>
+          {/* Enhanced Results CTA */}
+          <ResultsCTA theme={currentTheme} />
         </div>
       </div>
     </section>
