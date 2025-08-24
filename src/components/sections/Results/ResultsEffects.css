@@ -7,13 +7,8 @@
   right: 0;
   bottom: 0;
   pointer-events: none;
+  z-index: var(--theme-z-background);
   overflow: hidden;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-.results-effects--visible {
-  opacity: 1;
 }
 
 .results-effects--extreme-brutalist {
@@ -29,7 +24,7 @@
 }
 
 /* Success Particles */
-.success-particles {
+.results-particles {
   position: absolute;
   top: 0;
   left: 0;
@@ -37,18 +32,26 @@
   bottom: 0;
 }
 
-.success-particle {
+.results-particle {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: var(--effects-secondary);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--effects-secondary);
-  animation: particleFloat 4s ease-in-out infinite;
+  animation: particleFloat 6s linear infinite;
+}
+
+.results-particle--extreme-brutalist {
+  background: var(--effects-primary);
+  box-shadow: 0 0 8px var(--effects-primary);
+}
+
+.results-particle--refined-brutalist {
+  background: var(--effects-secondary);
+  box-shadow: 0 0 6px var(--effects-secondary);
 }
 
 /* Golden Grid */
-.golden-grid {
+.results-grid {
   position: absolute;
   top: 0;
   left: 0;
@@ -70,10 +73,10 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--effects-primary) 50%,
+    var(--effects-accent) 50%,
     transparent 100%
   );
-  animation: gridPulse 3s ease-in-out infinite;
+  animation: gridPulse 4s ease-in-out infinite;
 }
 
 .grid-lines--horizontal .grid-line {
@@ -85,15 +88,15 @@
   width: 1px;
   height: 100%;
   background: linear-gradient(
-    0deg,
+    180deg,
     transparent 0%,
-    var(--effects-primary) 50%,
+    var(--effects-accent) 50%,
     transparent 100%
   );
 }
 
-/* Achievement Streams */
-.achievement-streams {
+/* Success Rays */
+.success-rays {
   position: absolute;
   top: 0;
   left: 0;
@@ -101,45 +104,34 @@
   bottom: 0;
 }
 
-.stream {
+.success-ray {
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(to bottom, var(--effects-primary), transparent);
+  animation: rayRise 3s ease-out infinite;
+  top: 100%;
+}
+
+/* Floating Icons */
+.floating-icons {
   position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
-  width: 2px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
 }
 
-.stream--left {
-  left: 10%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    var(--effects-accent) 50%,
-    transparent 100%
-  );
-}
-
-.stream--right {
-  right: 10%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    var(--effects-accent) 50%,
-    transparent 100%
-  );
-}
-
-.stream-item {
-  font-size: 16px;
-  filter: drop-shadow(0 0 8px currentColor);
-  animation: streamFlow 3s ease-in-out infinite;
+.floating-icon {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: iconFloat 8s ease-in-out infinite;
+  top: 100%;
+  opacity: 0.6;
 }
 
 /* Background Glow */
-.background-glow {
+.results-glow {
   position: absolute;
   top: 0;
   left: 0;
@@ -151,49 +143,63 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(40px);
-  animation: orbFloat 6s ease-in-out infinite;
+  animation: orbFloat 10s ease-in-out infinite;
 }
 
 .glow-orb--primary {
   width: 200px;
   height: 200px;
-  background: var(--effects-primary);
+  background: radial-gradient(
+    circle,
+    rgba(var(--theme-accent-rgb), 0.3) 0%,
+    transparent 70%
+  );
   top: 20%;
-  left: 20%;
-  opacity: 0.1;
+  left: 10%;
+  animation-delay: 0s;
 }
 
 .glow-orb--secondary {
   width: 150px;
   height: 150px;
-  background: var(--effects-secondary);
+  background: radial-gradient(
+    circle,
+    rgba(var(--theme-highlight-rgb), 0.2) 0%,
+    transparent 70%
+  );
   top: 60%;
-  right: 20%;
-  opacity: 0.15;
-  animation-delay: 2s;
+  right: 15%;
+  animation-delay: 3s;
 }
 
 .glow-orb--accent {
   width: 100px;
   height: 100px;
-  background: var(--effects-accent);
-  bottom: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0.2;
-  animation-delay: 4s;
+  background: radial-gradient(
+    circle,
+    rgba(var(--theme-secondary-rgb), 0.25) 0%,
+    transparent 70%
+  );
+  top: 40%;
+  left: 60%;
+  animation-delay: 6s;
 }
 
 /* Animations */
 @keyframes particleFloat {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.8;
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
   }
-  50% {
-    transform: translateY(-20px) scale(1.2);
+  10% {
     opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px) rotate(360deg);
+    opacity: 0;
   }
 }
 
@@ -207,45 +213,63 @@
   }
 }
 
-@keyframes streamFlow {
-  0%,
+@keyframes rayRise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
   100% {
-    transform: translateY(0) scale(1);
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes iconFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
     opacity: 0.6;
   }
   50% {
-    transform: translateY(-10px) scale(1.1);
-    opacity: 1;
+    transform: translateY(-50vh) rotate(180deg);
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
   }
 }
 
 @keyframes orbFloat {
   0%,
   100% {
-    transform: translate(0, 0) scale(1);
+    transform: translateY(0) translateX(0);
   }
   33% {
-    transform: translate(10px, -10px) scale(1.1);
+    transform: translateY(-20px) translateX(10px);
   }
   66% {
-    transform: translate(-10px, 10px) scale(0.9);
+    transform: translateY(10px) translateX(-15px);
   }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .success-particle {
-    width: 3px;
-    height: 3px;
-  }
-
-  .stream-item {
-    font-size: 14px;
+  .floating-icon {
+    font-size: 1.2rem;
   }
 
   .glow-orb--primary {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
   }
 
   .glow-orb--secondary {
@@ -257,30 +281,8 @@
     width: 80px;
     height: 80px;
   }
-}
 
-@media (max-width: 480px) {
-  .success-particle {
-    width: 2px;
-    height: 2px;
-  }
-
-  .stream-item {
-    font-size: 12px;
-  }
-
-  .glow-orb--primary {
-    width: 100px;
-    height: 100px;
-  }
-
-  .glow-orb--secondary {
-    width: 80px;
-    height: 80px;
-  }
-
-  .glow-orb--accent {
-    width: 60px;
+  .success-ray {
     height: 60px;
   }
 }
