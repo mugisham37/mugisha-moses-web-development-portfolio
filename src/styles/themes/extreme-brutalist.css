@@ -1,0 +1,74 @@
+/* Extreme Brutalist Theme Styles */
+
+.theme-extreme-brutalist {
+  /* Color variables */
+  --theme-primary: #000000;
+  --theme-secondary: #ffffff;
+  --theme-accent: #ffff00;
+  --theme-highlight: #00ffff;
+  --theme-success: #00ff00;
+  --theme-bg: #ffffff;
+  --theme-text: #000000;
+
+  /* Typography */
+  --theme-font-primary: "Space Mono", monospace;
+  --theme-font-code: "JetBrains Mono", monospace;
+
+  /* Borders */
+  --theme-border-width: 8px;
+  --theme-border-style: solid;
+  --theme-border-radius: 0px;
+
+  /* Shadows */
+  --theme-shadow-brutal: 8px 8px 0;
+  --theme-shadow-double: 8px 8px 0 #ffff00, 16px 16px 0 #ffffff;
+  --theme-shadow-triple:
+    8px 8px 0 #ffff00, 16px 16px 0 #ffffff, 24px 24px 0 #000000;
+
+  /* Animations */
+  --theme-animation-duration: 0.3s;
+  --theme-animation-easing: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Background and text */
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  font-family: var(--theme-font-primary);
+}
+
+/* Extreme brutalist specific styles */
+.theme-extreme-brutalist .brutal-element {
+  border: var(--theme-border-width) var(--theme-border-style) var(--theme-text);
+  border-radius: var(--theme-border-radius);
+  box-shadow: var(--theme-shadow-brutal) var(--theme-text);
+}
+
+.theme-extreme-brutalist .brutal-button {
+  background: var(--theme-accent);
+  color: var(--theme-primary);
+  border: var(--theme-border-width) var(--theme-border-style)
+    var(--theme-primary);
+  font-family: var(--theme-font-primary);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.theme-extreme-brutalist .brutal-button:hover {
+  box-shadow: var(--theme-shadow-double);
+  transform: translate(-4px, -4px);
+}
+
+.theme-extreme-brutalist .brutal-text {
+  font-family: var(--theme-font-primary);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.theme-extreme-brutalist .brutal-code {
+  font-family: var(--theme-font-code);
+  background: var(--theme-primary);
+  color: var(--theme-accent);
+  border: var(--theme-border-width) var(--theme-border-style)
+    var(--theme-accent);
+}

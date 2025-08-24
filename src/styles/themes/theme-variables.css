@@ -1,0 +1,117 @@
+/* Theme Variables CSS Custom Properties */
+
+:root {
+  /* Default theme variables (will be overridden by theme classes) */
+  --theme-primary: #000000;
+  --theme-secondary: #ffffff;
+  --theme-accent: #ffff00;
+  --theme-highlight: #00ffff;
+  --theme-success: #00ff00;
+  --theme-bg: #ffffff;
+  --theme-text: #000000;
+
+  /* Typography */
+  --theme-font-primary: "Space Mono", monospace;
+  --theme-font-code: "JetBrains Mono", monospace;
+
+  /* Font sizes */
+  --theme-text-xs: 0.75rem;
+  --theme-text-sm: 0.875rem;
+  --theme-text-base: 1rem;
+  --theme-text-lg: 1.125rem;
+  --theme-text-xl: 1.25rem;
+  --theme-text-2xl: 1.5rem;
+  --theme-text-3xl: 1.875rem;
+  --theme-text-4xl: 2.25rem;
+  --theme-text-5xl: 3rem;
+  --theme-text-6xl: 3.75rem;
+
+  /* Borders */
+  --theme-border-width: 8px;
+  --theme-border-style: solid;
+  --theme-border-radius: 0px;
+
+  /* Shadows */
+  --theme-shadow-brutal: 8px 8px 0;
+  --theme-shadow-subtle: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  --theme-shadow-double: 8px 8px 0 #ffff00, 16px 16px 0 #ffffff;
+  --theme-shadow-triple:
+    8px 8px 0 #ffff00, 16px 16px 0 #ffffff, 24px 24px 0 #000000;
+  --theme-shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --theme-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+
+  /* Animations */
+  --theme-animation-duration: 0.3s;
+  --theme-animation-easing: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --theme-transition-duration: 600ms;
+
+  /* Spacing */
+  --theme-spacing-xs: 0.25rem;
+  --theme-spacing-sm: 0.5rem;
+  --theme-spacing-md: 1rem;
+  --theme-spacing-lg: 1.5rem;
+  --theme-spacing-xl: 2rem;
+  --theme-spacing-2xl: 3rem;
+  --theme-spacing-3xl: 4rem;
+
+  /* Z-index layers */
+  --theme-z-background: -1;
+  --theme-z-base: 0;
+  --theme-z-content: 1;
+  --theme-z-overlay: 10;
+  --theme-z-modal: 100;
+  --theme-z-tooltip: 1000;
+}
+
+/* Utility classes for theme-aware styling */
+.theme-bg {
+  background-color: var(--theme-bg);
+}
+
+.theme-text {
+  color: var(--theme-text);
+}
+
+.theme-primary {
+  color: var(--theme-primary);
+}
+
+.theme-secondary {
+  color: var(--theme-secondary);
+}
+
+.theme-accent {
+  color: var(--theme-accent);
+}
+
+.theme-highlight {
+  color: var(--theme-highlight);
+}
+
+.theme-success {
+  color: var(--theme-success);
+}
+
+.theme-border {
+  border: var(--theme-border-width) var(--theme-border-style) var(--theme-text);
+}
+
+.theme-border-radius {
+  border-radius: var(--theme-border-radius);
+}
+
+.theme-shadow {
+  box-shadow: var(--theme-shadow-brutal);
+}
+
+.theme-shadow-subtle {
+  box-shadow: var(--theme-shadow-subtle);
+}
+
+.theme-font-primary {
+  font-family: var(--theme-font-primary);
+}
+
+.theme-font-code {
+  font-family: var(--theme-font-code);
+}

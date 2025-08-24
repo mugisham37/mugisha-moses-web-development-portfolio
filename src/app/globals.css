@@ -1,9 +1,12 @@
 /* Import theme variables and animations first */
-@import "./styles/themes/theme-variables.css";
-@import "./styles/animations/brutalist-keyframes.css";
-@import "./styles/animations/hover-effects.css";
-@import "./styles/animations/loading-animations.css";
-@import "./styles/components/navigation.css";
+@import "../styles/themes/theme-variables.css";
+@import "../styles/themes/theme-transitions.css";
+@import "../styles/themes/extreme-brutalist.css";
+@import "../styles/themes/refined-brutalist.css";
+@import "../styles/animations/brutalist-keyframes.css";
+@import "../styles/animations/hover-effects.css";
+@import "../styles/animations/loading-animations.css";
+@import "../styles/components/navigation.css";
 
 @tailwind base;
 @tailwind components;

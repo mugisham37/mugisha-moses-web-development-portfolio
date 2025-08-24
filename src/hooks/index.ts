@@ -1,5 +1,5 @@
 // Hooks barrel exports
-// Hooks will be exported here as they are implemented
+export { useThemePersistence } from "./useThemePersistence";
 // export { useTheme } from './useTheme';
 // export { useThemeTransition } from './useThemeTransition';
 // export { useScrollProgress } from './useScrollProgress';

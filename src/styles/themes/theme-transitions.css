@@ -1,0 +1,72 @@
+/* Theme transition styles */
+
+.theme-transition {
+  transition:
+    background-color var(--theme-transition-duration, 600ms)
+      var(--theme-animation-easing, ease),
+    color var(--theme-transition-duration, 600ms)
+      var(--theme-animation-easing, ease),
+    border-color var(--theme-transition-duration, 600ms)
+      var(--theme-animation-easing, ease),
+    box-shadow var(--theme-transition-duration, 600ms)
+      var(--theme-animation-easing, ease);
+}
+
+.theme-transitioning {
+  /* Additional styles during transition */
+  pointer-events: none;
+}
+
+.theme-transitioning * {
+  transition:
+    background-color var(--theme-transition-duration, 600ms)
+      var(--theme-animation-easing, ease),
+    color var(--theme-transition-duration, 600ms)
+      var(--theme-animation-easing, ease),
+    border-color var(--theme-transition-duration, 600ms)
+      var(--theme-animation-easing, ease),
+    box-shadow var(--theme-transition-duration, 600ms)
+      var(--theme-animation-easing, ease);
+}
+
+/* Theme loading state */
+.theme-loading {
+  opacity: 0;
+  animation: themeLoadingFadeIn 0.3s ease-out forwards;
+}
+
+@keyframes themeLoadingFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Base theme styles */
+.theme-extreme-brutalist {
+  --current-theme: "extreme-brutalist";
+}
+
+.theme-refined-brutalist {
+  --current-theme: "refined-brutalist";
+}
+
+/* Prevent flash of unstyled content during theme transitions */
+.theme-transition-enter {
+  opacity: 0;
+}
+
+.theme-transition-enter-active {
+  opacity: 1;
+  transition: opacity var(--theme-transition-duration, 600ms)
+    var(--theme-animation-easing, ease);
+}
+
+.theme-transition-exit {
+  opacity: 1;
+}
+
+.theme-transition-exit-active {
+  opacity: 0;
+  transition: opacity var(--theme-transition-duration, 600ms)
+    var(--theme-animation-easing, ease);
+}

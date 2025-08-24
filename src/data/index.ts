@@ -1,5 +1,5 @@
 // Data barrel exports
-// Data will be exported here as they are implemented
+export { themeConfiguration } from "./theme-config";
 // export * from './portfolio';
 // export * from './testimonials';
 // export * from './projects';
