@@ -2,5 +2,5 @@
 // Styles will be exported here as they are implemented
 // export * from './navigation';
 // export * from './hero';
-// export * from './social-proof';
+import "./social-proof.css";
 // export * from './results';

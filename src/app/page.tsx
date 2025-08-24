@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/sections/Navigation";
 import { HeroWithEffects, HeroContent } from "@/components/sections/Hero";
+import { SocialProof } from "@/components/sections/SocialProof";
 import { ThemeDetector } from "@/components/theme/ThemeDetector";
 
 export default function Home() {
@@ -12,33 +13,8 @@ export default function Home() {
           <HeroContent />
         </HeroWithEffects>
 
-        {/* Transition Section */}
-        <section className="min-h-screen flex items-center justify-center">
-          <div className="container mx-auto px-4 py-8 text-center">
-            <h2 className="text-5xl font-bold text-current font-primary mb-8">
-              TRANSITION ZONE
-            </h2>
-            <p className="text-lg text-current mb-8">
-              Watch the theme smoothly transition as you scroll through this
-              area. The transition happens at 40% scroll progress with 600ms
-              duration.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="brutal-border p-6 bg-secondary text-current"
-                >
-                  <h3 className="text-xl font-bold mb-4">Feature {i}</h3>
-                  <p>
-                    This card adapts to the current theme automatically with
-                    smooth transitions.
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Social Proof Section - Triggers theme transition to refined brutalist */}
+        <SocialProof />
 
         {/* Refined Section */}
         <section className="min-h-screen flex items-center justify-center">

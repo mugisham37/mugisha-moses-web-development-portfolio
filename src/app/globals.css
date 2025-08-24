@@ -12,6 +12,7 @@
 @import "../styles/components/hero-metrics.css";
 @import "../styles/components/hero-visual.css";
 @import "../styles/components/hero-cta.css";
+@import "../styles/components/social-proof.css";
 
 @tailwind base;
 @tailwind components;
