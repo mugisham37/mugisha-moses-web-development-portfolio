@@ -32,6 +32,7 @@
 @import "../styles/components/brutal-radio.css";
 @import "../styles/components/brutal-form.css";
 @import "../styles/components/animated-text.css";
+@import "../styles/components/brutal-modal.css";
 
 @tailwind base;
 @tailwind components;
