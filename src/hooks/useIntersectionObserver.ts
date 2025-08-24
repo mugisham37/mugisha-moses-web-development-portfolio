@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState, RefObject } from "react";
 
 interface UseIntersectionObserverOptions {
@@ -13,6 +11,9 @@ export const useIntersectionObserver = (
   ref: RefObject<Element>,
   options: UseIntersectionObserverOptions = {}
 ): boolean => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasTriggered, setHasTriggered] = useState(false);
+
   const {
     threshold = 0.1,
     rootMargin = "0px",
@@ -20,14 +21,11 @@ export const useIntersectionObserver = (
     root = null,
   } = options;
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasTriggered, setHasTriggered] = useState(false);
-
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    // Skip if already triggered and triggerOnce is true
+    // If triggerOnce is true and we've already triggered, don't observe
     if (triggerOnce && hasTriggered) return;
 
     const observer = new IntersectionObserver(
@@ -39,7 +37,7 @@ export const useIntersectionObserver = (
           if (triggerOnce) {
             setHasTriggered(true);
           }
-        } else if (!triggerOnce) {
+        } else if (!triggerOnce && !hasTriggered) {
           setIsVisible(false);
         }
       },
@@ -53,12 +51,9 @@ export const useIntersectionObserver = (
     observer.observe(element);
 
     return () => {
-      observer.unobserve(element);
       observer.disconnect();
     };
-  }, [ref, threshold, rootMargin, triggerOnce, root, hasTriggered]);
+  }, [ref, threshold, rootMargin, triggerOnce, hasTriggered, root]);
 
   return isVisible;
 };
-
-export default useIntersectionObserver;

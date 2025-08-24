@@ -17,6 +17,8 @@
 @import "../styles/components/linkedin-recommendations.css";
 @import "../styles/components/community-contributions.css";
 @import "../styles/components/speaking-events.css";
+@import "../styles/components/footer.css";
+@import "../styles/components/ultimate-cta.css";
 
 @tailwind base;
 @tailwind components;
