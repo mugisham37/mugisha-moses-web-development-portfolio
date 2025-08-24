@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useThemeContext } from "@/contexts/ThemeContext";
-import { useScrollProgress } from "@/hooks/useScrollProgress";
+import { useScrollProgressData } from "@/hooks/useScrollProgress";
 import { NavigationLogo } from "./NavigationLogo";
 import { NavigationMenu } from "./NavigationMenu";
 import { NavigationCTA } from "./NavigationCTA";
@@ -14,7 +14,7 @@ interface NavigationProps {
 
 export const Navigation: React.FC<NavigationProps> = ({ className = "" }) => {
   const { currentTheme, config } = useThemeContext();
-  const { scrollY, progress } = useScrollProgress();
+  const { scrollY, progress } = useScrollProgressData();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 

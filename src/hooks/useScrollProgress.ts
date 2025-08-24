@@ -17,6 +17,13 @@ interface ScrollProgressData {
 
 export const useScrollProgress = (
   options: UseScrollProgressOptions = {}
+): number => {
+  const scrollData = useScrollProgressData(options);
+  return scrollData.progress;
+};
+
+export const useScrollProgressData = (
+  options: UseScrollProgressOptions = {}
 ): ScrollProgressData => {
   const { throttleMs = 16, element } = options; // ~60fps by default
 

@@ -1,127 +1,108 @@
-/* Hero CTA Component Styles */
+/* ===== HERO CTA STYLES ===== */
 
 .hero-cta {
   position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
-  padding: 2rem 0;
-  margin-top: 2rem;
+  gap: calc(var(--component-spacing) * 1.5);
+  margin-top: calc(var(--component-spacing) * 2);
+  z-index: 10;
 }
 
-/* CTA Buttons */
+/* ===== CTA BUTTONS CONTAINER ===== */
+
 .hero-cta__buttons {
   display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  gap: var(--component-spacing);
+  width: 100%;
+  max-width: 400px;
 }
+
+/* ===== BRUTAL BUTTON BASE STYLES ===== */
 
 .hero-cta__btn {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  min-height: 60px;
   padding: 1rem 2rem;
-  font-family: var(--cta-font-code, "JetBrains Mono", monospace);
-  font-size: 1rem;
-  font-weight: bold;
+  font-family: var(--cta-font-primary, var(--current-font-primary));
+  font-size: 1.125rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border: var(--cta-border-width) solid var(--cta-text);
-  background: transparent;
-  color: var(--cta-text);
+  border: none;
   cursor: pointer;
-  transition: all var(--cta-animation-duration) var(--cta-animation-easing);
   overflow: hidden;
-  min-width: 180px;
-  animation: ctaEntrance 0.8s ease-out;
+  transition: all var(--cta-animation-duration) var(--cta-animation-easing);
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
+  opacity: 0;
+  animation: ctaSlideIn 0.8s var(--cta-animation-easing) forwards;
 }
 
-.hero-cta__btn:hover {
-  transform: translateY(-2px);
+.hero-cta__btn:focus {
+  outline: 2px solid var(--cta-accent);
+  outline-offset: 4px;
 }
 
-.hero-cta__btn:active {
-  transform: translateY(0);
+.hero-cta__btn:focus:not(:focus-visible) {
+  outline: none;
 }
 
-/* Primary CTA Button */
-.hero-cta__btn--primary {
-  background: var(--cta-accent);
-  color: var(--cta-bg);
-  border-color: var(--cta-accent);
-}
+/* ===== BUTTON TEXT ===== */
 
-.hero-cta__btn--primary:hover {
-  background: var(--cta-text);
-  color: var(--cta-bg);
-  border-color: var(--cta-text);
-}
-
-/* Secondary CTA Button */
-.hero-cta__btn--secondary {
-  background: transparent;
-  color: var(--cta-text);
-  border-color: var(--cta-text);
-}
-
-.hero-cta__btn--secondary:hover {
-  background: var(--cta-text);
-  color: var(--cta-bg);
-}
-
-/* Button Text */
 .hero-cta__btn-text {
   position: relative;
-  z-index: 2;
+  z-index: 5;
+  transition: all var(--cta-animation-duration) var(--cta-animation-easing);
+  transform: translateZ(0);
 }
 
-/* Button Effects */
+/* ===== BUTTON EFFECTS CONTAINER ===== */
+
 .hero-cta__btn-effects {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  z-index: 1;
+  overflow: hidden;
 }
+
+/* ===== BUTTON SHADOW EFFECT ===== */
 
 .hero-cta__btn-shadow {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--cta-text);
-  transform: translate(4px, 4px);
-  z-index: -1;
-  transition: transform var(--cta-animation-duration)
-    var(--cta-animation-easing);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all var(--cta-animation-duration) var(--cta-animation-easing);
+  transform: translateZ(0);
 }
 
-.hero-cta__btn:hover .hero-cta__btn-shadow {
-  transform: translate(8px, 8px);
-}
+/* ===== BUTTON BORDER EFFECT ===== */
 
 .hero-cta__btn-border {
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border: 2px solid var(--cta-accent);
-  opacity: 0;
-  transform: scale(0.95);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
   transition: all var(--cta-animation-duration) var(--cta-animation-easing);
+  transform: translateZ(0);
 }
 
-.hero-cta__btn:hover .hero-cta__btn-border {
-  opacity: 1;
-  transform: scale(1);
-}
+/* ===== SHIMMER EFFECT ===== */
 
 .hero-cta__btn-shimmer {
   position: absolute;
@@ -129,68 +110,319 @@
   left: -100%;
   width: 100%;
   height: 100%;
+  z-index: 3;
   background: linear-gradient(
     90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
   );
-  transition: left 0.6s ease;
+  transition: all 0.6s ease;
+  transform: skewX(-20deg);
 }
 
-.hero-cta__btn:hover .hero-cta__btn-shimmer {
-  left: 100%;
-}
+/* ===== STRIKE EFFECT ===== */
 
 .hero-cta__btn-strike {
   position: absolute;
   top: 50%;
   left: 0;
-  right: 0;
-  height: 2px;
+  width: 0;
+  height: 3px;
+  z-index: 4;
   background: var(--cta-accent);
   transform: translateY(-50%) scaleX(0) skewX(-15deg);
-  transform-origin: left;
-  transition: transform var(--cta-animation-duration)
-    var(--cta-animation-easing);
+  transform-origin: left center;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ===== PRIMARY BUTTON STYLES ===== */
+
+.hero-cta__btn--primary {
+  background: var(--cta-accent);
+  color: var(--cta-bg);
+}
+
+.hero-cta__btn--primary .hero-cta__btn-shadow {
+  background: var(--cta-accent);
+}
+
+.hero-cta__btn--primary .hero-cta__btn-border {
+  border: var(--cta-border-width) solid var(--cta-text);
+}
+
+/* ===== SECONDARY BUTTON STYLES ===== */
+
+.hero-cta__btn--secondary {
+  background: transparent;
+  color: var(--cta-text);
+}
+
+.hero-cta__btn--secondary .hero-cta__btn-shadow {
+  background: var(--cta-text);
+}
+
+.hero-cta__btn--secondary .hero-cta__btn-border {
+  border: var(--cta-border-width) solid var(--cta-text);
+}
+
+/* ===== EXTREME BRUTALIST THEME ===== */
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--primary {
+  background: var(--extreme-accent);
+  color: var(--extreme-bg);
+  border-radius: 0;
+  box-shadow: 8px 8px 0 var(--extreme-text);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--primary:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 var(--extreme-text);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--primary:active {
+  transform: translate(4px, 4px);
+  box-shadow: 4px 4px 0 var(--extreme-text);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--primary .hero-cta__btn-shadow {
+  background: var(--extreme-text);
+  transform: translate(8px, 8px);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--primary:hover
+  .hero-cta__btn-shadow {
+  transform: translate(12px, 12px);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--primary .hero-cta__btn-border {
+  border: 8px solid var(--extreme-text);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--primary .hero-cta__btn-strike {
+  background: var(--extreme-bg);
+  height: 4px;
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary {
+  background: transparent;
+  color: var(--extreme-text);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--extreme-accent);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--extreme-accent);
+  background: var(--extreme-text);
+  color: var(--extreme-bg);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary:active {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--extreme-accent);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary
+  .hero-cta__btn-shadow {
+  background: var(--extreme-accent);
+  transform: translate(6px, 6px);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary:hover
+  .hero-cta__btn-shadow {
+  transform: translate(9px, 9px);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary
+  .hero-cta__btn-border {
+  border: 6px solid var(--extreme-text);
+}
+
+.hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary
+  .hero-cta__btn-strike {
+  background: var(--extreme-accent);
+  height: 3px;
+}
+
+/* ===== REFINED BRUTALIST THEME ===== */
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--primary {
+  background: linear-gradient(
+    135deg,
+    var(--refined-accent) 0%,
+    var(--refined-highlight) 100%
+  );
+  color: var(--refined-bg);
+  border-radius: var(--refined-border-radius);
+  box-shadow:
+    0 4px 12px rgba(139, 92, 246, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 24px rgba(139, 92, 246, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--primary:active {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 8px rgba(139, 92, 246, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--primary .hero-cta__btn-shadow {
+  background: linear-gradient(
+    135deg,
+    var(--refined-accent) 0%,
+    var(--refined-highlight) 100%
+  );
+  border-radius: var(--refined-border-radius);
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--primary .hero-cta__btn-border {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--refined-border-radius);
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--primary .hero-cta__btn-strike {
+  background: var(--refined-bg);
+  height: 2px;
+  border-radius: 1px;
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--refined-text);
+  border-radius: var(--refined-border-radius);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--secondary:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--secondary:active {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--secondary
+  .hero-cta__btn-shadow {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--refined-border-radius);
+  filter: blur(4px);
+  opacity: 0.8;
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--secondary
+  .hero-cta__btn-border {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--refined-border-radius);
+}
+
+.hero-cta__btn--refined-brutalist.hero-cta__btn--secondary
+  .hero-cta__btn-strike {
+  background: var(--refined-accent);
+  height: 2px;
+  border-radius: 1px;
+}
+
+/* ===== HOVER EFFECTS ===== */
+
+.hero-cta__btn:hover .hero-cta__btn-shimmer {
+  left: 100%;
+  transition: all 0.6s ease;
 }
 
 .hero-cta__btn:hover .hero-cta__btn-strike {
+  width: 100%;
   transform: translateY(-50%) scaleX(1) skewX(-15deg);
 }
 
-/* Scroll Indicator */
+.hero-cta__btn:focus .hero-cta__btn-strike {
+  width: 100%;
+  transform: translateY(-50%) scaleX(1) skewX(-15deg);
+}
+
+/* ===== PROGRESS INDICATORS ===== */
+
+.hero-cta__btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+  transition: width 0.3s ease;
+}
+
+.hero-cta__btn:hover::before {
+  width: 100%;
+}
+
+/* ===== SCROLL INDICATOR ===== */
+
 .hero-cta__scroll-indicator {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  opacity: 0.8;
-  animation: scrollIndicatorFloat 3s ease-in-out infinite;
+  margin-top: calc(var(--component-spacing) * 1.5);
+  opacity: 0;
+  animation: scrollIndicatorFadeIn 1s ease 2s forwards;
 }
 
 .hero-cta__scroll-logo {
+  position: relative;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--cta-text);
+  border: var(--cta-border-width) solid var(--cta-text);
   border-radius: 50%;
-  background: transparent;
+  background: var(--cta-bg);
+  animation: scrollPulse 2s ease-in-out infinite;
+  cursor: pointer;
+  transition: all var(--cta-animation-duration) var(--cta-animation-easing);
+}
+
+.hero-cta__scroll-logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 .hero-cta__scroll-icon {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: var(--cta-text);
   animation: scrollBounce 2s ease-in-out infinite;
 }
 
 .hero-cta__scroll-progress {
-  width: 2px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.2);
   position: relative;
+  width: 2px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1px;
   overflow: hidden;
 }
 
@@ -198,111 +430,82 @@
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: 20px;
+  width: 100%;
+  height: 0;
   background: var(--cta-accent);
+  border-radius: 1px;
   animation: scrollProgress 3s ease-in-out infinite;
 }
 
 .hero-cta__scroll-text {
-  font-family: var(--cta-font-code, "JetBrains Mono", monospace);
+  font-family: var(--cta-font-code, var(--current-font-code));
   font-size: 0.75rem;
-  color: var(--cta-text);
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  opacity: 0.7;
+  color: var(--cta-text);
+  opacity: 0.8;
+  animation: scrollTextPulse 3s ease-in-out infinite;
 }
 
-/* Theme Variations */
-.hero-cta--extreme-brutalist .hero-cta__btn {
-  border-width: 4px;
-  border-radius: 0;
+/* ===== THEME-SPECIFIC SCROLL INDICATOR ===== */
+
+.hero-cta--extreme-brutalist .hero-cta__scroll-logo {
+  border: 4px solid var(--extreme-text);
+  box-shadow: 4px 4px 0 var(--extreme-accent);
+  background: var(--extreme-bg);
 }
 
-.hero-cta--extreme-brutalist .hero-cta__btn-shadow {
-  transform: translate(8px, 8px);
+.hero-cta--extreme-brutalist .hero-cta__scroll-logo:hover {
+  transform: translate(-2px, -2px) scale(1.1);
+  box-shadow: 6px 6px 0 var(--extreme-accent);
 }
 
-.hero-cta--extreme-brutalist .hero-cta__btn:hover .hero-cta__btn-shadow {
-  transform: translate(12px, 12px);
+.hero-cta--extreme-brutalist .hero-cta__scroll-icon {
+  color: var(--extreme-text);
 }
 
-.hero-cta--refined-brutalist .hero-cta__btn {
-  border-width: 2px;
-  border-radius: 8px;
+.hero-cta--extreme-brutalist .hero-cta__scroll-bar {
+  background: var(--extreme-accent);
 }
 
-.hero-cta--refined-brutalist .hero-cta__btn-shadow {
-  transform: translate(4px, 4px);
-  filter: blur(4px);
-  opacity: 0.3;
+.hero-cta--extreme-brutalist .hero-cta__scroll-text {
+  color: var(--extreme-text);
 }
 
-.hero-cta--refined-brutalist .hero-cta__btn:hover .hero-cta__btn-shadow {
-  transform: translate(6px, 6px);
-  opacity: 0.5;
+.hero-cta--refined-brutalist .hero-cta__scroll-logo {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .hero-cta {
-    gap: 2rem;
-    padding: 1.5rem 0;
-  }
-
-  .hero-cta__buttons {
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .hero-cta__btn {
-    width: 100%;
-    padding: 0.875rem 1.5rem;
-    font-size: 0.875rem;
-    min-width: auto;
-  }
-
-  .hero-cta__scroll-indicator {
-    gap: 0.75rem;
-  }
-
-  .hero-cta__scroll-logo {
-    width: 32px;
-    height: 32px;
-  }
-
-  .hero-cta__scroll-icon {
-    font-size: 1rem;
-  }
-
-  .hero-cta__scroll-progress {
-    height: 40px;
-  }
+.hero-cta--refined-brutalist .hero-cta__scroll-logo:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
 }
 
-@media (max-width: 480px) {
-  .hero-cta {
-    gap: 1.5rem;
-    padding: 1rem 0;
-  }
-
-  .hero-cta__btn {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.8rem;
-  }
-
-  .hero-cta__scroll-text {
-    font-size: 0.7rem;
-  }
+.hero-cta--refined-brutalist .hero-cta__scroll-icon {
+  color: var(--refined-text);
 }
 
-/* Animations */
-@keyframes ctaEntrance {
+.hero-cta--refined-brutalist .hero-cta__scroll-bar {
+  background: linear-gradient(
+    180deg,
+    var(--refined-accent) 0%,
+    var(--refined-highlight) 100%
+  );
+}
+
+.hero-cta--refined-brutalist .hero-cta__scroll-text {
+  color: var(--refined-text);
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes ctaSlideIn {
   0% {
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(30px) scale(0.9);
   }
   100% {
     opacity: 1;
@@ -310,13 +513,24 @@
   }
 }
 
-@keyframes scrollIndicatorFloat {
-  0%,
+@keyframes scrollIndicatorFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   100% {
+    opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes scrollPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
   50% {
-    transform: translateY(-10px);
+    transform: scale(1.05);
   }
 }
 
@@ -326,38 +540,729 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(5px);
+    transform: translateY(-3px);
   }
 }
 
 @keyframes scrollProgress {
   0% {
-    transform: translateY(-100%);
+    height: 0;
   }
   50% {
-    transform: translateY(0);
+    height: 100%;
   }
   100% {
-    transform: translateY(200%);
+    height: 0;
   }
 }
 
-/* Accessibility */
+@keyframes scrollTextPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (min-width: 768px) {
+  .hero-cta__buttons {
+    flex-direction: row;
+    max-width: 600px;
+    gap: calc(var(--component-spacing) * 1.5);
+  }
+
+  .hero-cta__btn {
+    min-height: 70px;
+    font-size: 1.25rem;
+  }
+
+  .hero-cta__scroll-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .hero-cta__scroll-icon {
+    font-size: 2rem;
+  }
+
+  .hero-cta__scroll-progress {
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-cta {
+    gap: var(--component-spacing);
+    margin-top: var(--component-spacing);
+  }
+
+  .hero-cta__btn {
+    min-height: 50px;
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+
+  .hero-cta__scroll-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .hero-cta__scroll-icon {
+    font-size: 1.25rem;
+  }
+
+  .hero-cta__scroll-progress {
+    height: 30px;
+  }
+
+  .hero-cta__scroll-text {
+    font-size: 0.625rem;
+  }
+
+  /* Reduce shadow complexity on mobile */
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--primary {
+    box-shadow: 4px 4px 0 var(--extreme-text);
+  }
+
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--primary:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--extreme-text);
+  }
+
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary {
+    box-shadow: 3px 3px 0 var(--extreme-accent);
+  }
+
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--extreme-accent);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta__btn {
+    min-height: 45px;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .hero-cta__scroll-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hero-cta__scroll-icon {
+    font-size: 1rem;
+  }
+
+  .hero-cta__scroll-progress {
+    height: 25px;
+  }
+
+  /* Minimal shadows on small mobile */
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--primary {
+    box-shadow: 2px 2px 0 var(--extreme-text);
+  }
+
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--primary:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--extreme-text);
+  }
+
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary {
+    box-shadow: 2px 2px 0 var(--extreme-accent);
+  }
+
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--extreme-accent);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
 @media (prefers-reduced-motion: reduce) {
   .hero-cta__btn,
-  .hero-cta__scroll-indicator,
+  .hero-cta__scroll-logo,
   .hero-cta__scroll-icon,
-  .hero-cta__scroll-bar {
+  .hero-cta__scroll-bar,
+  .hero-cta__scroll-text {
+    animation: none !important;
+  }
+
+  .hero-cta__btn {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-cta__scroll-indicator {
+    opacity: 1;
     animation: none;
   }
 
-  .hero-cta__btn:hover {
-    transform: none;
+  .hero-cta__btn-shimmer {
+    display: none;
+  }
+
+  .hero-cta__btn:hover .hero-cta__btn-shimmer {
+    display: none;
   }
 }
 
-/* Focus States */
+@media (prefers-contrast: high) {
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--primary {
+    border: 2px solid var(--extreme-text);
+  }
+
+  .hero-cta__btn--extreme-brutalist.hero-cta__btn--secondary {
+    border: 2px solid var(--extreme-text);
+  }
+
+  .hero-cta__btn--refined-brutalist.hero-cta__btn--primary {
+    border: 2px solid var(--refined-text);
+  }
+
+  .hero-cta__btn--refined-brutalist.hero-cta__btn--secondary {
+    border: 2px solid var(--refined-text);
+  }
+
+  .hero-cta__scroll-logo {
+    border-width: 3px;
+  }
+}
+
+/* ===== FOCUS STATES ===== */
+
 .hero-cta__btn:focus-visible {
-  outline: 2px solid var(--cta-accent);
+  outline: 3px solid var(--cta-accent);
   outline-offset: 4px;
+}
+
+.hero-cta__scroll-logo:focus-visible {
+  outline: 3px solid var(--cta-accent);
+  outline-offset: 4px;
+}
+
+/* ===== LOADING STATES ===== */
+
+.hero-cta__btn--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.hero-cta__btn--loading .hero-cta__btn-text::after {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.5em;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: buttonSpinner 1s linear infinite;
+}
+
+@keyframes buttonSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+.hero-cta__btn,
+.hero-cta__btn-effects,
+.hero-cta__btn-shadow,
+.hero-cta__btn-border,
+.hero-cta__btn-shimmer,
+.hero-cta__btn-strike,
+.hero-cta__scroll-logo,
+.hero-cta__scroll-bar {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* GPU acceleration for smooth animations */
+.hero-cta__btn:hover,
+.hero-cta__btn:focus,
+.hero-cta__btn:active {
+  will-change: transform, box-shadow;
+}
+
+.hero-cta__scroll-logo:hover {
+  will-change: transform, box-shadow;
+}
+
+/* ===== ENHANCED BUTTON EFFECTS ===== */
+
+/* Progress Indicator */
+.hero-cta__btn-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--cta-accent);
+  transform-origin: left center;
+  transition: all 0.3s ease;
+  z-index: 6;
+}
+
+/* Glow Effect */
+.hero-cta__btn-glow {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: var(--cta-accent);
+  filter: blur(20px);
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+/* ===== ENHANCED SCROLL INDICATOR ===== */
+
+.hero-cta__scroll-progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  color: var(--cta-accent);
+}
+
+.hero-cta__scroll-progress-circle {
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.hero-cta__terminal-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--cta-font-code);
+  font-size: 0.625rem;
+  color: var(--cta-text);
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+.hero-cta__terminal-prompt {
+  color: var(--cta-accent);
+  font-weight: bold;
+}
+
+.hero-cta__terminal-command {
+  color: var(--cta-highlight);
+}
+
+.hero-cta__terminal-cursor {
+  color: var(--cta-accent);
+  animation: terminalBlink 1s infinite;
+}
+
+/* ===== BACKGROUND EFFECTS ===== */
+
+.hero-cta__bg-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.hero-cta__bg-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(var(--cta-text) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cta-text) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
+  animation: bgGridMove 20s linear infinite;
+}
+
+.hero-cta__bg-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 20% 20%, var(--cta-accent) 1px, transparent 1px),
+    radial-gradient(
+      circle at 80% 80%,
+      var(--cta-highlight) 1px,
+      transparent 1px
+    );
+  background-size:
+    30px 30px,
+    40px 40px;
+  opacity: 0.1;
+  animation: bgParticlesMove 15s linear infinite;
+}
+
+.hero-cta__bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--cta-accent) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0.03;
+  animation: bgGlowPulse 8s ease-in-out infinite;
+}
+
+/* ===== THEME-SPECIFIC ENHANCEMENTS ===== */
+
+/* Extreme Brutalist Theme Enhancements */
+.hero-cta--extreme-brutalist .hero-cta__btn-progress {
+  height: 4px;
+  background: var(--extreme-accent);
+}
+
+.hero-cta--extreme-brutalist .hero-cta__btn-glow {
+  display: none; /* No glow in extreme theme */
+}
+
+.hero-cta--extreme-brutalist .hero-cta__terminal-indicator {
+  border: 2px solid var(--extreme-text);
+  padding: 0.25rem 0.5rem;
+  background: var(--extreme-bg);
+  box-shadow: 2px 2px 0 var(--extreme-accent);
+}
+
+.hero-cta--extreme-brutalist .hero-cta__bg-grid {
+  opacity: 0.1;
+  background-image:
+    linear-gradient(var(--extreme-text) 2px, transparent 2px),
+    linear-gradient(90deg, var(--extreme-text) 2px, transparent 2px);
+  background-size: 15px 15px;
+}
+
+.hero-cta--extreme-brutalist .hero-cta__bg-particles {
+  opacity: 0.15;
+  background-image:
+    radial-gradient(
+      circle at 25% 25%,
+      var(--extreme-accent) 2px,
+      transparent 2px
+    ),
+    radial-gradient(circle at 75% 75%, var(--extreme-text) 1px, transparent 1px);
+  background-size:
+    25px 25px,
+    35px 35px;
+}
+
+.hero-cta--extreme-brutalist .hero-cta__bg-glow {
+  display: none; /* No glow in extreme theme */
+}
+
+/* Refined Brutalist Theme Enhancements */
+.hero-cta--refined-brutalist .hero-cta__btn-progress {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--refined-accent) 0%,
+    var(--refined-highlight) 100%
+  );
+  border-radius: 1px;
+}
+
+.hero-cta--refined-brutalist .hero-cta__btn-glow {
+  background: linear-gradient(
+    135deg,
+    var(--refined-accent) 0%,
+    var(--refined-highlight) 100%
+  );
+  filter: blur(25px);
+}
+
+.hero-cta--refined-brutalist .hero-cta__terminal-indicator {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.hero-cta--refined-brutalist .hero-cta__bg-grid {
+  opacity: 0.03;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 25px 25px;
+}
+
+.hero-cta--refined-brutalist .hero-cta__bg-particles {
+  opacity: 0.08;
+  background-image:
+    radial-gradient(
+      circle at 30% 30%,
+      var(--refined-accent) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 70% 70%,
+      var(--refined-highlight) 1px,
+      transparent 1px
+    );
+  background-size:
+    35px 35px,
+    45px 45px;
+}
+
+.hero-cta--refined-brutalist .hero-cta__bg-glow {
+  background: radial-gradient(
+    circle,
+    var(--refined-accent) 0%,
+    var(--refined-highlight) 30%,
+    transparent 70%
+  );
+  opacity: 0.05;
+}
+
+/* ===== ADDITIONAL ANIMATIONS ===== */
+
+@keyframes terminalBlink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes bgGridMove {
+  0% {
+    background-position:
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      20px 20px,
+      20px 20px;
+  }
+}
+
+@keyframes bgParticlesMove {
+  0% {
+    background-position:
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      30px 30px,
+      40px 40px;
+  }
+}
+
+@keyframes bgGlowPulse {
+  0%,
+  100% {
+    opacity: 0.03;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.06;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* ===== ENHANCED RESPONSIVE DESIGN ===== */
+
+@media (min-width: 768px) {
+  .hero-cta__terminal-indicator {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .hero-cta__bg-grid {
+    background-size: 25px 25px;
+  }
+
+  .hero-cta__bg-particles {
+    background-size:
+      35px 35px,
+      45px 45px;
+  }
+
+  .hero-cta__bg-glow {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-cta__btn-glow {
+    display: none; /* Disable glow on mobile for performance */
+  }
+
+  .hero-cta__bg-effects {
+    opacity: 0.5; /* Reduce background effects intensity */
+  }
+
+  .hero-cta__terminal-indicator {
+    font-size: 0.5rem;
+    padding: 0.125rem 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta__bg-effects {
+    opacity: 0.3; /* Further reduce on small mobile */
+  }
+
+  .hero-cta__terminal-indicator {
+    display: none; /* Hide terminal indicator on very small screens */
+  }
+
+  .hero-cta__scroll-progress-ring {
+    display: none; /* Simplify scroll indicator */
+  }
+}
+
+/* ===== ENHANCED ACCESSIBILITY ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta__bg-grid,
+  .hero-cta__bg-particles,
+  .hero-cta__bg-glow,
+  .hero-cta__terminal-cursor {
+    animation: none !important;
+  }
+
+  .hero-cta__btn-progress,
+  .hero-cta__btn-glow,
+  .hero-cta__scroll-progress-circle {
+    transition: none !important;
+  }
+
+  .hero-cta__bg-effects {
+    opacity: 0.1;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .hero-cta__btn-progress {
+    height: 4px;
+  }
+
+  .hero-cta__terminal-indicator {
+    border-width: 2px;
+  }
+
+  .hero-cta__bg-grid {
+    opacity: 0.2;
+  }
+
+  .hero-cta__bg-particles {
+    opacity: 0.2;
+  }
+}
+
+/* ===== ENHANCED FOCUS STATES ===== */
+
+.hero-cta__btn:focus-visible .hero-cta__btn-progress {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.hero-cta__scroll-indicator:focus-visible {
+  outline: 3px solid var(--cta-accent);
+  outline-offset: 4px;
+}
+
+.hero-cta__scroll-indicator:focus-visible .hero-cta__scroll-logo {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== ENHANCED LOADING STATES ===== */
+
+.hero-cta__btn--loading .hero-cta__btn-effects {
+  opacity: 0.5;
+}
+
+.hero-cta__btn--loading .hero-cta__btn-shimmer {
+  animation: loadingShimmer 1.5s ease-in-out infinite;
+}
+
+.hero-cta__btn--loading .hero-cta__btn-progress {
+  animation: loadingProgress 2s ease-in-out infinite;
+}
+
+@keyframes loadingShimmer {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  50% {
+    left: 0%;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes loadingProgress {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right center;
+  }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+.hero-cta__btn-progress,
+.hero-cta__btn-glow,
+.hero-cta__scroll-progress-circle,
+.hero-cta__bg-grid,
+.hero-cta__bg-particles,
+.hero-cta__bg-glow {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* GPU acceleration for complex animations */
+.hero-cta__btn:hover .hero-cta__btn-progress,
+.hero-cta__btn:focus .hero-cta__btn-progress,
+.hero-cta__btn:hover .hero-cta__btn-glow,
+.hero-cta__btn:focus .hero-cta__btn-glow {
+  will-change: transform, opacity;
+}
+
+.hero-cta__scroll-indicator:hover .hero-cta__scroll-logo,
+.hero-cta__scroll-indicator:focus .hero-cta__scroll-logo {
+  will-change: transform, box-shadow;
 }

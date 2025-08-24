@@ -15,7 +15,7 @@ export const ScrollProgress: React.FC<ScrollProgressProps> = ({
   showPercentage = false,
   position = "top",
 }) => {
-  const { progress } = useScrollProgress();
+  const progress = useScrollProgress();
   const { activeTheme, getThemeClass } = useThemeDetector();
 
   const progressClasses = [

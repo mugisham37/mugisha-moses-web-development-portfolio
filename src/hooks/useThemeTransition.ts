@@ -24,7 +24,7 @@ export const useThemeTransition = (
   options: Partial<UseThemeTransitionOptions> = {}
 ): UseThemeTransitionReturn => {
   const config = { ...DEFAULT_OPTIONS, ...options };
-  const { progress: scrollProgress } = useScrollProgress({ throttleMs: 16 });
+  const scrollProgress = useScrollProgress({ throttleMs: 16 });
   const { currentTheme, setTheme, isTransitioning } = useThemeContext();
 
   // Hysteresis values to prevent rapid theme switching
