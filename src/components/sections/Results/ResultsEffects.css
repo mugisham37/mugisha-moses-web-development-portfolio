@@ -1,0 +1,281 @@
+/* Results Effects Styles */
+
+.results-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: var(--theme-z-background);
+  overflow: hidden;
+}
+
+.results-effects--extreme-brutalist {
+  --effect-primary: #ffff00;
+  --effect-secondary: #00ff00;
+  --effect-tertiary: #00ffff;
+  --effect-accent: #ffffff;
+}
+
+.results-effects--refined-brutalist {
+  --effect-primary: #8b5cf6;
+  --effect-secondary: #10b981;
+  --effect-tertiary: #06b6d4;
+  --effect-accent: #f5f5f5;
+}
+
+/* Success Particles Canvas */
+.results-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+/* Golden Grid Background */
+.results-grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.05;
+}
+
+.grid-lines {
+  position: absolute;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--effect-primary) 50%,
+    transparent 100%
+  );
+}
+
+.grid-lines--vertical {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  left: 50%;
+  animation: gridPulseVertical 4s ease-in-out infinite;
+}
+
+.grid-lines--horizontal {
+  left: 0;
+  right: 0;
+  height: 1px;
+  top: 50%;
+  background: linear-gradient(
+    0deg,
+    transparent 0%,
+    var(--effect-primary) 50%,
+    transparent 100%
+  );
+  animation: gridPulseHorizontal 4s ease-in-out infinite 2s;
+}
+
+/* Animated Background Gradients */
+.results-gradients {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: float 8s ease-in-out infinite;
+}
+
+.gradient-orb--1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    var(--effect-primary) 0%,
+    transparent 70%
+  );
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.gradient-orb--2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    var(--effect-secondary) 0%,
+    transparent 70%
+  );
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.gradient-orb--3 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(
+    circle,
+    var(--effect-tertiary) 0%,
+    transparent 70%
+  );
+  bottom: 20%;
+  left: 50%;
+  animation-delay: 4s;
+}
+
+/* Success Streams */
+.success-streams {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.3;
+}
+
+.stream {
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--effect-secondary) 50%,
+    transparent 100%
+  );
+  animation: streamFlow 3s linear infinite;
+}
+
+.stream--1 {
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.stream--2 {
+  left: 60%;
+  animation-delay: 1s;
+}
+
+.stream--3 {
+  right: 25%;
+  animation-delay: 2s;
+}
+
+/* Enhanced Effects for Refined Theme */
+.results-effects--refined-brutalist .results-particles {
+  opacity: 0.6;
+}
+
+.results-effects--refined-brutalist .results-gradients {
+  opacity: 0.15;
+}
+
+.results-effects--refined-brutalist .gradient-orb {
+  filter: blur(80px);
+}
+
+.results-effects--refined-brutalist .success-streams {
+  opacity: 0.2;
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .results-effects * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .results-effects {
+    opacity: 0.7;
+  }
+
+  .gradient-orb {
+    filter: blur(40px);
+  }
+
+  .gradient-orb--1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .gradient-orb--2 {
+    width: 250px;
+    height: 250px;
+  }
+
+  .gradient-orb--3 {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Animations */
+@keyframes gridPulseVertical {
+  0%,
+  100% {
+    opacity: 0.05;
+    transform: translateX(-50%) scaleY(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: translateX(-50%) scaleY(1.5);
+  }
+}
+
+@keyframes gridPulseHorizontal {
+  0%,
+  100% {
+    opacity: 0.05;
+    transform: translateY(-50%) scaleX(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: translateY(-50%) scaleX(1.5);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -20px) scale(1.1);
+  }
+  50% {
+    transform: translate(-10px, -40px) scale(0.9);
+  }
+  75% {
+    transform: translate(-30px, -10px) scale(1.05);
+  }
+}
+
+@keyframes streamFlow {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100vh + 100px));
+    opacity: 0;
+  }
+}

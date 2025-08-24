@@ -295,12 +295,94 @@ export const portfolioData: PortfolioData = {
     ],
   },
   results: {
-    comparisons: [],
+    comparisons: [
+      {
+        title: "E-commerce Platform Optimization",
+        client: "TechCorp Enterprise",
+        before: [
+          { metric: "Page Load Time", value: "4.2s", icon: "⏱️" },
+          { metric: "Conversion Rate", value: "2.1%", icon: "📈" },
+          { metric: "Monthly Revenue", value: "$45K", icon: "💰" },
+          { metric: "User Satisfaction", value: "3.2/5", icon: "⭐" },
+        ],
+        after: [
+          { metric: "Page Load Time", value: "1.1s", icon: "⚡" },
+          { metric: "Conversion Rate", value: "5.8%", icon: "🚀" },
+          { metric: "Monthly Revenue", value: "$127K", icon: "💎" },
+          { metric: "User Satisfaction", value: "4.9/5", icon: "🌟" },
+        ],
+        impact: {
+          highlight: "Revenue Increase",
+          value: "+182%",
+        },
+      },
+      {
+        title: "SaaS Application Modernization",
+        client: "GrowthCo",
+        before: [
+          { metric: "System Uptime", value: "94.2%", icon: "⚠️" },
+          { metric: "Response Time", value: "850ms", icon: "🐌" },
+          { metric: "User Retention", value: "67%", icon: "📉" },
+          { metric: "Support Tickets", value: "340/mo", icon: "🎫" },
+        ],
+        after: [
+          { metric: "System Uptime", value: "99.9%", icon: "✅" },
+          { metric: "Response Time", value: "120ms", icon: "⚡" },
+          { metric: "User Retention", value: "94%", icon: "📊" },
+          { metric: "Support Tickets", value: "45/mo", icon: "🎯" },
+        ],
+        impact: {
+          highlight: "Performance Boost",
+          value: "+607%",
+        },
+      },
+    ],
     revenue: {
-      generated: 0,
-      saved: 0,
-      improvement: 0,
+      generated: 2500000,
+      saved: 850000,
+      improvement: 340,
     },
-    achievements: [],
+    achievements: [
+      {
+        year: 2020,
+        title: "First Enterprise Client",
+        description:
+          "Landed first major enterprise contract, delivering a full-stack platform modernization project.",
+        icon: "🏢",
+        current: false,
+      },
+      {
+        year: 2021,
+        title: "Performance Optimization Breakthrough",
+        description:
+          "Achieved 400% performance improvement for a high-traffic e-commerce platform.",
+        icon: "⚡",
+        current: false,
+      },
+      {
+        year: 2022,
+        title: "$1M Revenue Milestone",
+        description:
+          "Generated over $1M in direct revenue for clients through optimization and development projects.",
+        icon: "💰",
+        current: false,
+      },
+      {
+        year: 2023,
+        title: "Next.js Performance Toolkit",
+        description:
+          "Released performance toolkit that became featured in Next.js official documentation.",
+        icon: "🛠️",
+        current: false,
+      },
+      {
+        year: 2024,
+        title: "Current: Innovation Focus",
+        description:
+          "Leading cutting-edge projects in AI integration, performance optimization, and brutalist design systems.",
+        icon: "🚀",
+        current: true,
+      },
+    ],
   },
 };

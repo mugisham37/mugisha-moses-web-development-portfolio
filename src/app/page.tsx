@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/sections/Navigation";
 import { HeroWithEffects, HeroContent } from "@/components/sections/Hero";
 import { SocialProof } from "@/components/sections/SocialProof";
+import { Results } from "@/components/sections/Results";
 import { ThemeDetector } from "@/components/theme/ThemeDetector";
 
 export default function Home() {
@@ -16,34 +17,8 @@ export default function Home() {
         {/* Social Proof Section - Triggers theme transition to refined brutalist */}
         <SocialProof />
 
-        {/* Refined Section */}
-        <section className="min-h-screen flex items-center justify-center">
-          <div className="container mx-auto px-4 py-8 text-center">
-            <h2 className="text-5xl font-bold text-current font-primary mb-8">
-              REFINED BRUTALIST
-            </h2>
-            <p className="text-lg text-current mb-8">
-              This section uses the refined brutalist theme with softer edges,
-              gradients, and professional styling while maintaining the brutal
-              aesthetic.
-            </p>
-            <div className="brutal-border p-8 bg-highlight text-current inline-block mb-8">
-              <span className="font-code">PROFESSIONAL & POLISHED</span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-              <div className="brutal-border p-6 bg-success text-current">
-                <h3 className="text-xl font-bold mb-4">✓ Smooth Transitions</h3>
-                <p>600ms cubic-bezier transitions between themes</p>
-              </div>
-              <div className="brutal-border p-6 bg-success text-current">
-                <h3 className="text-xl font-bold mb-4">
-                  ✓ Hysteresis Prevention
-                </h3>
-                <p>Prevents rapid theme switching with smart logic</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Results Section - Enhanced visual design with success particles and golden grid */}
+        <Results />
 
         {/* Final Section */}
         <section className="min-h-screen flex items-center justify-center">
