@@ -1,0 +1,538 @@
+/* ===== BRUTAL INPUT COMPONENT STYLES ===== */
+
+/* Base Input Container */
+.brutal-input-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Input Label */
+.brutal-input__label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--input-font, var(--current-font-primary));
+  font-size: var(--input-font-size, var(--current-text-sm));
+  font-weight: 600;
+  color: var(--input-text, var(--current-text));
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+
+.brutal-input__required {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* Input Wrapper */
+.brutal-input__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Base Input Field */
+.brutal-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--input-height, 3rem);
+  padding: var(--input-padding, 0.75rem 1rem);
+
+  /* Typography */
+  font-family: var(--input-font, var(--current-font-primary));
+  font-size: var(--input-font-size, var(--current-text-base));
+  font-weight: 500;
+  line-height: 1.2;
+
+  /* Colors and borders */
+  background: var(--input-bg, var(--current-bg));
+  color: var(--input-text, var(--current-text));
+  border: var(--input-border-width, var(--current-border-width))
+    var(--current-border-style) var(--input-border, var(--current-text));
+  border-radius: var(--input-border-radius, var(--current-border-radius));
+
+  /* Shadow system */
+  box-shadow: var(--input-shadow, var(--current-shadow-brutal));
+
+  /* Transitions */
+  transition: all
+    var(--input-animation-duration, var(--current-animation-duration))
+    var(--input-animation-easing, var(--current-animation-easing));
+
+  /* Interaction */
+  outline: none;
+  resize: none;
+
+  /* Transform for hardware acceleration */
+  transform: translateZ(0);
+}
+
+.brutal-input::placeholder {
+  color: var(--input-placeholder, rgba(var(--current-text-rgb), 0.5));
+  opacity: 1;
+}
+
+/* Input with Icons */
+.brutal-input--with-icon-left {
+  padding-left: 2.5rem;
+}
+
+.brutal-input--with-icon-right {
+  padding-right: 2.5rem;
+}
+
+.brutal-input--clearable {
+  padding-right: 2.5rem;
+}
+
+/* Input Icons */
+.brutal-input__icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--input-icon-size, 1.25rem);
+  height: var(--input-icon-size, 1.25rem);
+  color: var(--input-text, var(--current-text));
+  pointer-events: none;
+  z-index: 2;
+}
+
+.brutal-input__icon--left {
+  left: 0.75rem;
+}
+
+.brutal-input__icon--right {
+  right: 0.75rem;
+}
+
+/* Clear Button */
+.brutal-input__clear {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--input-text, var(--current-text));
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all var(--input-animation-duration, 0.3s) ease;
+  z-index: 2;
+}
+
+.brutal-input__clear:hover {
+  opacity: 1;
+  background: var(--input-accent, var(--current-accent));
+  color: var(--current-bg);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Loading Spinner */
+.brutal-input__loading {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.brutal-input__spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--input-accent, var(--current-accent));
+  border-radius: 50%;
+  animation: brutal-input-spin 0.8s linear infinite;
+}
+
+@keyframes brutal-input-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Effects Layer */
+.brutal-input__effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Focus Ring */
+.brutal-input__focus-ring {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--input-accent, var(--current-accent));
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(1);
+  transition: all var(--input-animation-duration, 0.3s) ease;
+}
+
+/* Glow Effect (Refined Theme) */
+.brutal-input__glow {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: var(--input-accent, var(--current-accent));
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity var(--input-animation-duration, 0.3s) ease;
+  z-index: -1;
+}
+
+/* Glitch Effect (Extreme Theme) */
+.brutal-input__glitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--input-bg, var(--current-bg));
+  opacity: 0;
+  mix-blend-mode: difference;
+}
+
+/* Scan Lines (Extreme Theme) */
+.brutal-input__scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(var(--current-accent-rgb), 0.1) 2px,
+    rgba(var(--current-accent-rgb), 0.1) 4px
+  );
+  opacity: 0;
+  transition: opacity var(--input-animation-duration, 0.3s) ease;
+}
+
+/* Helper Messages */
+.brutal-input__helpers {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-height: 1.25rem;
+}
+
+.brutal-input__message {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: var(--current-text-xs);
+  font-weight: 500;
+  line-height: 1.2;
+  flex: 1;
+}
+
+.brutal-input__message-icon {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+}
+
+.brutal-input__message--error {
+  color: #ef4444;
+}
+
+.brutal-input__message--success {
+  color: var(--current-success);
+}
+
+.brutal-input__message--hint {
+  color: rgba(var(--current-text-rgb), 0.7);
+}
+
+/* Character Count */
+.brutal-input__count {
+  font-size: var(--current-text-xs);
+  font-weight: 500;
+  color: rgba(var(--current-text-rgb), 0.7);
+  white-space: nowrap;
+}
+
+.brutal-input__count--over-limit {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* ===== FOCUS STATES ===== */
+
+.brutal-input:focus {
+  border-color: var(--input-accent, var(--current-accent));
+  box-shadow:
+    var(--input-shadow, var(--current-shadow-brutal)),
+    0 0 0 2px rgba(var(--current-accent-rgb), 0.2);
+}
+
+.brutal-input-container--focused .brutal-input__focus-ring {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.brutal-input-container--focused.brutal-input-container--refined
+  .brutal-input__glow {
+  opacity: 0.3;
+}
+
+.brutal-input-container--focused.brutal-input-container--extreme
+  .brutal-input__scan-lines {
+  opacity: 1;
+}
+
+/* ===== VALIDATION STATES ===== */
+
+/* Error State */
+.brutal-input-container--error .brutal-input {
+  border-color: #ef4444;
+}
+
+.brutal-input-container--error .brutal-input:focus {
+  box-shadow:
+    var(--input-shadow, var(--current-shadow-brutal)),
+    0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+/* Success State */
+.brutal-input-container--success .brutal-input {
+  border-color: var(--current-success);
+}
+
+.brutal-input-container--success .brutal-input:focus {
+  box-shadow:
+    var(--input-shadow, var(--current-shadow-brutal)),
+    0 0 0 2px rgba(var(--current-success-rgb), 0.2);
+}
+
+/* Warning State */
+.brutal-input-container--warning .brutal-input {
+  border-color: #f59e0b;
+}
+
+.brutal-input-container--warning .brutal-input:focus {
+  box-shadow:
+    var(--input-shadow, var(--current-shadow-brutal)),
+    0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+/* ===== THEME-SPECIFIC STYLES ===== */
+
+/* Extreme Brutalist Theme */
+.brutal-input-container--extreme-brutalist .brutal-input {
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-weight: 600;
+}
+
+.brutal-input-container--extreme-brutalist .brutal-input:focus {
+  transform: translate(-1px, -1px);
+}
+
+.brutal-input-container--extreme-brutalist.brutal-input-container--focused
+  .brutal-input__glitch {
+  opacity: 0.05;
+  animation: brutal-input-glitch 0.3s ease-out;
+}
+
+@keyframes brutal-input-glitch {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-1px, 1px);
+  }
+  40% {
+    transform: translate(-1px, -1px);
+  }
+  60% {
+    transform: translate(1px, 1px);
+  }
+  80% {
+    transform: translate(1px, -1px);
+  }
+}
+
+/* Refined Brutalist Theme */
+.brutal-input-container--refined-brutalist .brutal-input {
+  letter-spacing: 0.01em;
+}
+
+/* ===== VARIANT STYLES ===== */
+
+/* Outlined Variant */
+.brutal-input--outlined {
+  background: transparent;
+}
+
+/* Filled Variant */
+.brutal-input--filled {
+  background: rgba(var(--current-text-rgb), 0.1);
+}
+
+/* Ghost Variant */
+.brutal-input--ghost {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.brutal-input--ghost:focus {
+  border-color: var(--input-accent, var(--current-accent));
+  box-shadow: var(--input-shadow, var(--current-shadow-brutal));
+}
+
+/* ===== SIZE VARIANTS ===== */
+
+/* Small Size */
+.brutal-input-container--sm .brutal-input__focus-ring {
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-width: 1px;
+}
+
+/* Large Size */
+.brutal-input-container--lg .brutal-input__focus-ring {
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-width: 3px;
+}
+
+/* ===== STATE STYLES ===== */
+
+/* Loading State */
+.brutal-input-container--loading .brutal-input {
+  cursor: wait;
+}
+
+.brutal-input-container--loading .brutal-input__effects {
+  opacity: 0.7;
+}
+
+/* Disabled State */
+.brutal-input-container--disabled .brutal-input {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.brutal-input-container--disabled .brutal-input__effects {
+  opacity: 0.3;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .brutal-input {
+    border-width: 2px;
+  }
+
+  .brutal-input:focus {
+    transform: translate(-0.5px, -0.5px);
+  }
+
+  /* Disable complex animations on mobile for performance */
+  .brutal-input__glitch,
+  .brutal-input__scan-lines {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .brutal-input-container--lg .brutal-input {
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    font-size: var(--current-text-base);
+  }
+
+  .brutal-input-container--md .brutal-input {
+    height: 2.75rem;
+    padding: 0.625rem 0.875rem;
+    font-size: var(--current-text-sm);
+  }
+
+  .brutal-input-container--sm .brutal-input {
+    height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: var(--current-text-xs);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .brutal-input,
+  .brutal-input__focus-ring,
+  .brutal-input__glow,
+  .brutal-input__glitch,
+  .brutal-input__scan-lines,
+  .brutal-input__clear {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .brutal-input {
+    border-width: 3px;
+  }
+
+  .brutal-input__focus-ring {
+    border-width: 3px;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .brutal-input {
+    background: white !important;
+    color: black !important;
+    border: 2px solid black !important;
+    box-shadow: none !important;
+  }
+
+  .brutal-input__effects {
+    display: none;
+  }
+}

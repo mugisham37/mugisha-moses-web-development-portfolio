@@ -1,0 +1,509 @@
+/* ===== BRUTAL TEXTAREA COMPONENT STYLES ===== */
+
+/* Base Textarea Container */
+.brutal-textarea-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Textarea Label */
+.brutal-textarea__label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--textarea-font, var(--current-font-primary));
+  font-size: var(--textarea-font-size, var(--current-text-sm));
+  font-weight: 600;
+  color: var(--textarea-text, var(--current-text));
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+
+.brutal-textarea__required {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* Textarea Wrapper */
+.brutal-textarea__wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+/* Base Textarea Field */
+.brutal-textarea {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: var(--textarea-min-height, 6rem);
+  padding: var(--textarea-padding, 0.75rem 1rem);
+
+  /* Typography */
+  font-family: var(--textarea-font, var(--current-font-primary));
+  font-size: var(--textarea-font-size, var(--current-text-base));
+  font-weight: 500;
+  line-height: 1.5;
+
+  /* Colors and borders */
+  background: var(--textarea-bg, var(--current-bg));
+  color: var(--textarea-text, var(--current-text));
+  border: var(--textarea-border-width, var(--current-border-width))
+    var(--current-border-style) var(--textarea-border, var(--current-text));
+  border-radius: var(--textarea-border-radius, var(--current-border-radius));
+
+  /* Shadow system */
+  box-shadow: var(--textarea-shadow, var(--current-shadow-brutal));
+
+  /* Transitions */
+  transition: all
+    var(--textarea-animation-duration, var(--current-animation-duration))
+    var(--textarea-animation-easing, var(--current-animation-easing));
+
+  /* Interaction */
+  outline: none;
+  resize: vertical;
+
+  /* Transform for hardware acceleration */
+  transform: translateZ(0);
+}
+
+.brutal-textarea::placeholder {
+  color: var(--textarea-placeholder, rgba(var(--current-text-rgb), 0.5));
+  opacity: 1;
+}
+
+/* Auto-resize textarea */
+.brutal-textarea-container--auto-resize .brutal-textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+/* Textarea with clearable */
+.brutal-textarea--clearable {
+  padding-right: 2.5rem;
+}
+
+/* Clear Button */
+.brutal-textarea__clear {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--textarea-text, var(--current-text));
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all var(--textarea-animation-duration, 0.3s) ease;
+  z-index: 2;
+}
+
+.brutal-textarea__clear:hover {
+  opacity: 1;
+  background: var(--textarea-accent, var(--current-accent));
+  color: var(--current-bg);
+  transform: scale(1.1);
+}
+
+/* Loading Spinner */
+.brutal-textarea__loading {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.brutal-textarea__spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--textarea-accent, var(--current-accent));
+  border-radius: 50%;
+  animation: brutal-textarea-spin 0.8s linear infinite;
+}
+
+@keyframes brutal-textarea-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Effects Layer */
+.brutal-textarea__effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Focus Ring */
+.brutal-textarea__focus-ring {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--textarea-accent, var(--current-accent));
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(1);
+  transition: all var(--textarea-animation-duration, 0.3s) ease;
+}
+
+/* Glow Effect (Refined Theme) */
+.brutal-textarea__glow {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: var(--textarea-accent, var(--current-accent));
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity var(--textarea-animation-duration, 0.3s) ease;
+  z-index: -1;
+}
+
+/* Glitch Effect (Extreme Theme) */
+.brutal-textarea__glitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--textarea-bg, var(--current-bg));
+  opacity: 0;
+  mix-blend-mode: difference;
+}
+
+/* Scan Lines (Extreme Theme) */
+.brutal-textarea__scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(var(--current-accent-rgb), 0.1) 2px,
+    rgba(var(--current-accent-rgb), 0.1) 4px
+  );
+  opacity: 0;
+  transition: opacity var(--textarea-animation-duration, 0.3s) ease;
+}
+
+/* Helper Messages */
+.brutal-textarea__helpers {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-height: 1.25rem;
+}
+
+.brutal-textarea__message {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: var(--current-text-xs);
+  font-weight: 500;
+  line-height: 1.2;
+  flex: 1;
+}
+
+.brutal-textarea__message-icon {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+}
+
+.brutal-textarea__message--error {
+  color: #ef4444;
+}
+
+.brutal-textarea__message--success {
+  color: var(--current-success);
+}
+
+.brutal-textarea__message--hint {
+  color: rgba(var(--current-text-rgb), 0.7);
+}
+
+/* Character Count */
+.brutal-textarea__count {
+  font-size: var(--current-text-xs);
+  font-weight: 500;
+  color: rgba(var(--current-text-rgb), 0.7);
+  white-space: nowrap;
+}
+
+.brutal-textarea__count--over-limit {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* ===== FOCUS STATES ===== */
+
+.brutal-textarea:focus {
+  border-color: var(--textarea-accent, var(--current-accent));
+  box-shadow:
+    var(--textarea-shadow, var(--current-shadow-brutal)),
+    0 0 0 2px rgba(var(--current-accent-rgb), 0.2);
+}
+
+.brutal-textarea-container--focused .brutal-textarea__focus-ring {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.brutal-textarea-container--focused.brutal-textarea-container--refined
+  .brutal-textarea__glow {
+  opacity: 0.3;
+}
+
+.brutal-textarea-container--focused.brutal-textarea-container--extreme
+  .brutal-textarea__scan-lines {
+  opacity: 1;
+}
+
+/* ===== VALIDATION STATES ===== */
+
+/* Error State */
+.brutal-textarea-container--error .brutal-textarea {
+  border-color: #ef4444;
+}
+
+.brutal-textarea-container--error .brutal-textarea:focus {
+  box-shadow:
+    var(--textarea-shadow, var(--current-shadow-brutal)),
+    0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+/* Success State */
+.brutal-textarea-container--success .brutal-textarea {
+  border-color: var(--current-success);
+}
+
+.brutal-textarea-container--success .brutal-textarea:focus {
+  box-shadow:
+    var(--textarea-shadow, var(--current-shadow-brutal)),
+    0 0 0 2px rgba(var(--current-success-rgb), 0.2);
+}
+
+/* Warning State */
+.brutal-textarea-container--warning .brutal-textarea {
+  border-color: #f59e0b;
+}
+
+.brutal-textarea-container--warning .brutal-textarea:focus {
+  box-shadow:
+    var(--textarea-shadow, var(--current-shadow-brutal)),
+    0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+/* ===== THEME-SPECIFIC STYLES ===== */
+
+/* Extreme Brutalist Theme */
+.brutal-textarea-container--extreme-brutalist .brutal-textarea {
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-weight: 600;
+}
+
+.brutal-textarea-container--extreme-brutalist .brutal-textarea:focus {
+  transform: translate(-1px, -1px);
+}
+
+.brutal-textarea-container--extreme-brutalist.brutal-textarea-container--focused
+  .brutal-textarea__glitch {
+  opacity: 0.05;
+  animation: brutal-textarea-glitch 0.3s ease-out;
+}
+
+@keyframes brutal-textarea-glitch {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-1px, 1px);
+  }
+  40% {
+    transform: translate(-1px, -1px);
+  }
+  60% {
+    transform: translate(1px, 1px);
+  }
+  80% {
+    transform: translate(1px, -1px);
+  }
+}
+
+/* Refined Brutalist Theme */
+.brutal-textarea-container--refined-brutalist .brutal-textarea {
+  letter-spacing: 0.01em;
+}
+
+/* ===== VARIANT STYLES ===== */
+
+/* Outlined Variant */
+.brutal-textarea--outlined {
+  background: transparent;
+}
+
+/* Filled Variant */
+.brutal-textarea--filled {
+  background: rgba(var(--current-text-rgb), 0.1);
+}
+
+/* Ghost Variant */
+.brutal-textarea--ghost {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.brutal-textarea--ghost:focus {
+  border-color: var(--textarea-accent, var(--current-accent));
+  box-shadow: var(--textarea-shadow, var(--current-shadow-brutal));
+}
+
+/* ===== SIZE VARIANTS ===== */
+
+/* Small Size */
+.brutal-textarea-container--sm .brutal-textarea__focus-ring {
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-width: 1px;
+}
+
+/* Large Size */
+.brutal-textarea-container--lg .brutal-textarea__focus-ring {
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-width: 3px;
+}
+
+/* ===== STATE STYLES ===== */
+
+/* Loading State */
+.brutal-textarea-container--loading .brutal-textarea {
+  cursor: wait;
+}
+
+.brutal-textarea-container--loading .brutal-textarea__effects {
+  opacity: 0.7;
+}
+
+/* Disabled State */
+.brutal-textarea-container--disabled .brutal-textarea {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.brutal-textarea-container--disabled .brutal-textarea__effects {
+  opacity: 0.3;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .brutal-textarea {
+    border-width: 2px;
+  }
+
+  .brutal-textarea:focus {
+    transform: translate(-0.5px, -0.5px);
+  }
+
+  /* Disable complex animations on mobile for performance */
+  .brutal-textarea__glitch,
+  .brutal-textarea__scan-lines {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .brutal-textarea-container--lg .brutal-textarea {
+    min-height: 6rem;
+    padding: 0.75rem 1rem;
+    font-size: var(--current-text-base);
+  }
+
+  .brutal-textarea-container--md .brutal-textarea {
+    min-height: 5rem;
+    padding: 0.625rem 0.875rem;
+    font-size: var(--current-text-sm);
+  }
+
+  .brutal-textarea-container--sm .brutal-textarea {
+    min-height: 4rem;
+    padding: 0.5rem 0.75rem;
+    font-size: var(--current-text-xs);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .brutal-textarea,
+  .brutal-textarea__focus-ring,
+  .brutal-textarea__glow,
+  .brutal-textarea__glitch,
+  .brutal-textarea__scan-lines,
+  .brutal-textarea__clear {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .brutal-textarea {
+    border-width: 3px;
+  }
+
+  .brutal-textarea__focus-ring {
+    border-width: 3px;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .brutal-textarea {
+    background: white !important;
+    color: black !important;
+    border: 2px solid black !important;
+    box-shadow: none !important;
+  }
+
+  .brutal-textarea__effects {
+    display: none;
+  }
+}

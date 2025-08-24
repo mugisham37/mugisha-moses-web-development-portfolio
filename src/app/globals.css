@@ -25,6 +25,12 @@
 @import "../styles/components/social-platforms.css";
 @import "../styles/components/brutal-button.css";
 @import "../styles/components/brutal-card.css";
+@import "../styles/components/brutal-input.css";
+@import "../styles/components/brutal-textarea.css";
+@import "../styles/components/brutal-select.css";
+@import "../styles/components/brutal-checkbox.css";
+@import "../styles/components/brutal-radio.css";
+@import "../styles/components/brutal-form.css";
 
 @tailwind base;
 @tailwind components;

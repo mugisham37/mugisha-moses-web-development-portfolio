@@ -233,14 +233,14 @@
   - Build theme-aware styling with CSS custom properties
   - _Requirements: 2.6, 3.2, 9.2_
 
-- [ ] 32. Create BrutalCard component with layered effects
+- [x] 32. Create BrutalCard component with layered effects
   - Build BrutalCard with theme-aware styling and shadow systems
   - Implement hover animations with elevation and border effects
   - Add clip-path styling for geometric brutalist shapes
   - Create responsive behavior and accessibility features
   - _Requirements: 2.6, 3.2, 6.4_
 
-- [ ] 33. Implement BrutalInput and form components
+- [x] 33. Implement BrutalInput and form components
   - Create BrutalInput with theme-aware styling and validation states
   - Build form validation with real-time feedback and error handling
   - Add focus effects and accessibility features
