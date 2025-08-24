@@ -2,7 +2,7 @@
 const nextConfig = {
   // Enable experimental features for better performance
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled temporarily due to critters dependency issue
     optimizePackageImports: ["framer-motion", "web-vitals"],
   },
 
@@ -141,7 +141,7 @@ const nextConfig = {
 
   // Environment variables
   env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY,
+    // Add your environment variables here if needed
   },
 
   // Compiler options
@@ -156,7 +156,7 @@ const nextConfig = {
   },
 
   // Output configuration
-  output: "standalone",
+  // output: "standalone", // Disabled due to Windows symlink permission issues
 
   // Enable SWC minification
   swcMinify: true,

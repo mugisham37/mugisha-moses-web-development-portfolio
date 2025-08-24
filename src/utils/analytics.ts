@@ -306,7 +306,7 @@ export const trackWebVitals = (metric: WebVitalsMetric): void => {
 };
 
 // User session tracking
-export const trackUserSession = (): void => {
+export const trackUserSession = (): string => {
   const sessionStart = Date.now();
   const sessionId = `session_${sessionStart}_${Math.random().toString(36).substr(2, 9)}`;
 
@@ -435,10 +435,4 @@ if (typeof window !== "undefined") {
   });
 }
 
-// Type declarations for gtag
-declare global {
-  interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
-  }
-}
+// Type declarations for gtag are handled in GoogleAnalytics.tsx

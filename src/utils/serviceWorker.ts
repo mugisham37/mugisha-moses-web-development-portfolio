@@ -1,5 +1,14 @@
 "use client";
 
+// Type declarations for Background Sync API
+declare global {
+  interface ServiceWorkerRegistration {
+    sync?: {
+      register(tag: string): Promise<void>;
+    };
+  }
+}
+
 // Service Worker registration and management
 export interface ServiceWorkerConfig {
   onSuccess?: (registration: ServiceWorkerRegistration) => void;
@@ -183,7 +192,7 @@ export function registerBackgroundSync(tag: string, data?: any) {
   ) {
     navigator.serviceWorker.ready
       .then((registration) => {
-        return registration.sync.register(tag);
+        return registration.sync?.register(tag);
       })
       .catch((error) => {
         console.error("[SW] Background sync registration failed:", error);
@@ -232,13 +241,12 @@ export async function getCacheSize() {
     return {
       quota: estimate.quota,
       usage: estimate.usage,
-      usageDetails: estimate.usageDetails,
     };
   }
   return null;
 }
 
-export default {
+const serviceWorkerUtils = {
   registerServiceWorker,
   unregisterServiceWorker,
   showUpdateAvailableNotification,
@@ -247,3 +255,5 @@ export default {
   clearCache,
   getCacheSize,
 };
+
+export default serviceWorkerUtils;

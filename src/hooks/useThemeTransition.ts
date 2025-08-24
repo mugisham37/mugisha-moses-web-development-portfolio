@@ -142,11 +142,13 @@ export const useThemeTransition = (
       handleThemeTransition(finalTheme);
     }
 
+    // Capture the current ref value for cleanup
+    const hysteresisData = hysteresisRef.current;
+
     return () => {
       // Cleanup debounce timeout on unmount
-      const currentTimeout = hysteresisRef.current.debounceTimeout;
-      if (currentTimeout) {
-        clearTimeout(currentTimeout);
+      if (hysteresisData.debounceTimeout) {
+        clearTimeout(hysteresisData.debounceTimeout);
       }
     };
   }, [

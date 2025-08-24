@@ -286,7 +286,7 @@ export function calculateImagePriority(
 }
 
 // Export all configurations
-export default {
+const imageOptimizationConfig = {
   imageConfig,
   imagePresets,
   performanceBudgets,
@@ -303,3 +303,5 @@ export default {
   getOptimalFormat,
   calculateImagePriority,
 };
+
+export default imageOptimizationConfig;

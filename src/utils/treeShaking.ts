@@ -1,6 +1,8 @@
 // Tree shaking optimization utilities
 // This file helps ensure proper tree shaking by providing optimized imports
 
+import { lazy } from "react";
+
 // Framer Motion - Import only what we need
 export {
   motion,
@@ -44,14 +46,14 @@ export { useTheme } from "@/hooks/useTheme";
 export { useScrollProgress } from "@/hooks/useScrollProgress";
 export { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 export { useAnimatedCounter } from "@/hooks/useAnimatedCounter";
-export { useParallax } from "@/hooks/useParallax";
+// export { useParallax } from "@/hooks/useParallax"; // Hook not implemented yet
 export { usePerformanceMonitor } from "@/hooks/usePerformanceMonitor";
 
-// UI Components - Optimized exports
-export { default as BrutalButton } from "@/components/ui/BrutalButton/BrutalButton";
-export { default as BrutalCard } from "@/components/ui/BrutalCard/BrutalCard";
-export { default as BrutalInput } from "@/components/ui/BrutalInput/BrutalInput";
-export { default as Modal } from "@/components/ui/Modal/Modal";
+// UI Components - Optimized exports (using named exports)
+export { BrutalButton } from "@/components/ui/BrutalButton/BrutalButton";
+export { BrutalCard } from "@/components/ui/BrutalCard/BrutalCard";
+export { BrutalInput } from "@/components/ui/BrutalInput/BrutalInput";
+export { Modal } from "@/components/ui/Modal/Modal";
 
 // Effects - Lazy loaded exports
 export const ParticleSystem = lazy(
@@ -67,16 +69,16 @@ export const CursorTrail = lazy(
   () => import("@/components/effects/CursorTrail")
 );
 
-// Utilities - Tree-shakeable exports
-export { default as themeDetector } from "@/utils/theme-detector";
-export { default as animationHelpers } from "@/utils/animation-helpers";
-export { default as performanceUtils } from "@/utils/performance-utils";
-export { default as seoHelpers } from "@/utils/seo-helpers";
+// Utilities - Tree-shakeable exports (commented out until implemented)
+// export { default as themeDetector } from "@/utils/theme-detector";
+// export { default as animationHelpers } from "@/utils/animation-helpers";
+// export { default as performanceUtils } from "@/utils/performance-utils";
+// export { default as seoHelpers } from "@/utils/seo-helpers";
 
 // Types - Re-export for consistency
 export type { ThemeType, ThemeConfig } from "@/types/theme";
-export type { ComponentProps, AnimationProps } from "@/types/components";
-export type { PerformanceMetrics } from "@/types/performance";
+export type { BaseComponentProps } from "@/types/components";
+// export type { PerformanceMetrics } from "@/types/performance"; // Not implemented yet
 
 // Constants - Tree-shakeable constants
 export const THEME_TRANSITION_DURATION = 600;
@@ -93,8 +95,7 @@ export const PERFORMANCE_BUDGET = {
 export const optimizeBundle = {
   // Lazy load heavy components
   lazyLoad: <T extends React.ComponentType<any>>(
-    importFn: () => Promise<{ default: T }>,
-    fallback?: React.ComponentType
+    importFn: () => Promise<{ default: T }>
   ) => {
     return lazy(importFn);
   },
@@ -183,7 +184,8 @@ export const bundleAnalytics = {
   },
 };
 
-export default {
+// Export configuration object
+const treeShakingConfig = {
   optimizeBundle,
   bundleAnalytics,
   THEME_TRANSITION_DURATION,
@@ -191,3 +193,5 @@ export default {
   ANIMATION_EASING,
   PERFORMANCE_BUDGET,
 };
+
+export default treeShakingConfig;

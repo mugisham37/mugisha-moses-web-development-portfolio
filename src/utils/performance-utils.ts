@@ -411,9 +411,11 @@ export const performanceOptimization = {
   },
 };
 
-export default {
+const performanceUtils = {
   initializePerformanceMonitoring,
   getPerformanceMonitor,
   bundleAnalysis,
   performanceOptimization,
 };
+
+export default performanceUtils;

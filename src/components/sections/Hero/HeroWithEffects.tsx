@@ -7,10 +7,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 // Dynamically import canvas-based effects to avoid SSR issues
 const ParticleSystem = dynamic(
-  () =>
-    import("@/components/effects/ParticleSystem").then((mod) => ({
-      default: mod.ParticleSystem,
-    })),
+  () => import("@/components/effects/ParticleSystem"),
   {
     ssr: false,
     loading: () => <div className="hero__effect-loading" aria-hidden="true" />,

@@ -10,6 +10,15 @@ import {
   WebVitalsMetric,
 } from "@/utils/analytics";
 
+// Web Vitals types
+interface WebVitalsMetricData {
+  id: string;
+  name: string;
+  value: number;
+  delta: number;
+  navigationType: string;
+}
+
 interface PerformanceMetrics {
   // Core Web Vitals
   cls: number | null;
@@ -73,7 +82,6 @@ export const usePerformanceMonitor = (
     lastUpdate: Date.now(),
   });
 
-  const observerRef = useRef<PerformanceObserver | null>(null);
   const frameCountRef = useRef(0);
   const lastFrameTimeRef = useRef(performance.now());
   const reportingIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -86,7 +94,7 @@ export const usePerformanceMonitor = (
     import("web-vitals")
       .then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
         // Cumulative Layout Shift
-        getCLS((metric) => {
+        getCLS((metric: WebVitalsMetricData) => {
           const webVital: WebVitalsMetric = {
             id: metric.id,
             name: "CLS",
@@ -110,7 +118,7 @@ export const usePerformanceMonitor = (
         });
 
         // First Input Delay
-        getFID((metric) => {
+        getFID((metric: WebVitalsMetricData) => {
           const webVital: WebVitalsMetric = {
             id: metric.id,
             name: "FID",
@@ -134,7 +142,7 @@ export const usePerformanceMonitor = (
         });
 
         // First Contentful Paint
-        getFCP((metric) => {
+        getFCP((metric: WebVitalsMetricData) => {
           const webVital: WebVitalsMetric = {
             id: metric.id,
             name: "FCP",
@@ -158,7 +166,7 @@ export const usePerformanceMonitor = (
         });
 
         // Largest Contentful Paint
-        getLCP((metric) => {
+        getLCP((metric: WebVitalsMetricData) => {
           const webVital: WebVitalsMetric = {
             id: metric.id,
             name: "LCP",
@@ -182,7 +190,7 @@ export const usePerformanceMonitor = (
         });
 
         // Time to First Byte
-        getTTFB((metric) => {
+        getTTFB((metric: WebVitalsMetricData) => {
           const webVital: WebVitalsMetric = {
             id: metric.id,
             name: "TTFB",

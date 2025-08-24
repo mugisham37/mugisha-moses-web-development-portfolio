@@ -161,11 +161,7 @@ export function AnalyticsProvider() {
 // Extend Window interface for gtag
 declare global {
   interface Window {
-    gtag?: {
-      (command: string, targetId: string, config?: Record<string, any>): void;
-      q?: any[];
-      l?: number;
-    };
+    gtag?: (...args: any[]) => void;
     dataLayer: any[];
   }
 }

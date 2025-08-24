@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "@/components/theme/ThemeProvider";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import AnalyticsProvider from "@/components/analytics/AnalyticsProvider";
 import CookieConsent from "@/components/analytics/CookieConsent";
 import PerformanceDashboard from "@/components/analytics/PerformanceDashboard";
@@ -102,9 +102,14 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
 
-        {/* DNS prefetch for performance */}
+        {/* Preconnect and DNS prefetch for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
         {/* Favicon and app icons */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
