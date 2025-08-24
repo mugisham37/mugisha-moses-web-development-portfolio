@@ -10,6 +10,11 @@
   --theme-bg: #ffffff;
   --theme-text: #000000;
 
+  /* RGB values for alpha transparency */
+  --theme-accent-rgb: 255, 255, 0;
+  --theme-highlight-rgb: 0, 255, 255;
+  --theme-success-rgb: 0, 255, 0;
+
   /* Typography */
   --theme-font-primary: "Space Mono", monospace;
   --theme-font-code: "JetBrains Mono", monospace;

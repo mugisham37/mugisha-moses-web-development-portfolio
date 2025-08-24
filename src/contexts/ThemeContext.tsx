@@ -134,6 +134,14 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       root.style.setProperty("--theme-bg", config.colors.bg);
       root.style.setProperty("--theme-text", config.colors.text);
 
+      // Set RGB values for alpha transparency
+      root.style.setProperty("--theme-accent-rgb", config.colors.accentRgb);
+      root.style.setProperty(
+        "--theme-highlight-rgb",
+        config.colors.highlightRgb
+      );
+      root.style.setProperty("--theme-success-rgb", config.colors.successRgb);
+
       root.style.setProperty("--theme-font-primary", config.typography.primary);
       root.style.setProperty("--theme-font-code", config.typography.code);
 

@@ -92,7 +92,7 @@ export const portfolioData: PortfolioData = {
         company: "TechCorp Enterprise",
         content:
           "Moses delivered exceptional results on our platform modernization. His technical expertise and attention to detail transformed our legacy system into a scalable, high-performance solution.",
-        profileImage: "/images/testimonials/sarah-johnson.jpg",
+        profileImage: "/images/testimonials/sarah-johnson.svg",
         linkedinUrl: "https://linkedin.com/in/sarah-johnson",
         mutualConnections: 47,
         date: "2024-01-15",
@@ -104,7 +104,7 @@ export const portfolioData: PortfolioData = {
         company: "StartupX",
         content:
           "Working with Moses was a game-changer for our startup. He built our MVP from scratch and helped us scale to handle millions of users. Highly recommended!",
-        profileImage: "/images/testimonials/david-chen.jpg",
+        profileImage: "/images/testimonials/david-chen.svg",
         linkedinUrl: "https://linkedin.com/in/david-chen",
         mutualConnections: 23,
         date: "2024-02-20",

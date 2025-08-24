@@ -10,6 +10,10 @@ export interface ThemeColors {
   success: string;
   bg: string;
   text: string;
+  // RGB values for alpha transparency
+  accentRgb: string;
+  highlightRgb: string;
+  successRgb: string;
 }
 
 export interface ThemeTypography {

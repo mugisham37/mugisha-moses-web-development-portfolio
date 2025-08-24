@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from "react";
 import { useTheme, useThemeClassName } from "@/hooks/useTheme";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { ClientLogos } from "./ClientLogos";
+import { LinkedInRecommendations } from "./LinkedInRecommendations";
 
 interface SocialProofProps {
   className?: string;
@@ -80,50 +81,8 @@ export const SocialProof: React.FC<SocialProofProps> = ({ className = "" }) => {
           {/* Client Logo Carousel */}
           <ClientLogos />
 
-          {/* Recommendations */}
-          <div className="social-proof__recommendations">
-            <h3 className="social-proof__section-title">What Clients Say</h3>
-            <div className="social-proof__recommendation-grid">
-              <div className="social-proof__recommendation-card">
-                <div className="social-proof__recommendation-header">
-                  <div className="social-proof__recommendation-avatar">SJ</div>
-                  <div className="social-proof__recommendation-info">
-                    <h4>Sarah Johnson</h4>
-                    <p>CTO at TechCorp Enterprise</p>
-                    <span className="social-proof__recommendation-connections">
-                      47 mutual connections
-                    </span>
-                  </div>
-                  <div className="social-proof__linkedin-badge">in</div>
-                </div>
-                <blockquote className="social-proof__recommendation-content">
-                  &ldquo;Moses delivered exceptional results on our platform
-                  modernization. His technical expertise and attention to detail
-                  transformed our legacy system into a scalable,
-                  high-performance solution.&rdquo;
-                </blockquote>
-              </div>
-
-              <div className="social-proof__recommendation-card">
-                <div className="social-proof__recommendation-header">
-                  <div className="social-proof__recommendation-avatar">DC</div>
-                  <div className="social-proof__recommendation-info">
-                    <h4>David Chen</h4>
-                    <p>Founder & CEO at StartupX</p>
-                    <span className="social-proof__recommendation-connections">
-                      23 mutual connections
-                    </span>
-                  </div>
-                  <div className="social-proof__linkedin-badge">in</div>
-                </div>
-                <blockquote className="social-proof__recommendation-content">
-                  &ldquo;Working with Moses was a game-changer for our startup.
-                  He built our MVP from scratch and helped us scale to handle
-                  millions of users. Highly recommended!&rdquo;
-                </blockquote>
-              </div>
-            </div>
-          </div>
+          {/* LinkedIn Recommendations */}
+          <LinkedInRecommendations />
 
           {/* Community Contributions */}
           <div className="social-proof__contributions">

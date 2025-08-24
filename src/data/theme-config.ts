@@ -10,6 +10,9 @@ export const themeConfiguration: ThemeConfiguration = {
       success: "#00ff00",
       bg: "#ffffff",
       text: "#000000",
+      accentRgb: "255, 255, 0",
+      highlightRgb: "0, 255, 255",
+      successRgb: "0, 255, 0",
     },
     typography: {
       primary: "Space Mono, monospace",
@@ -53,6 +56,9 @@ export const themeConfiguration: ThemeConfiguration = {
       success: "#10b981",
       bg: "#f5f5f5",
       text: "#1a1a1a",
+      accentRgb: "139, 92, 246",
+      highlightRgb: "6, 182, 212",
+      successRgb: "16, 185, 129",
     },
     typography: {
       primary: "Inter, sans-serif",

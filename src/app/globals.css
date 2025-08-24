@@ -14,6 +14,7 @@
 @import "../styles/components/hero-cta.css";
 @import "../styles/components/social-proof.css";
 @import "../styles/components/client-logos.css";
+@import "../styles/components/linkedin-recommendations.css";
 
 @tailwind base;
 @tailwind components;
@@ -22,32 +23,39 @@
 /* CSS Custom Properties for Theme System */
 :root {
   /* Current theme variables - dynamically updated by theme system */
-  --current-bg: var(--extreme-bg);
-  --current-text: var(--extreme-text);
-  --current-accent: var(--extreme-accent);
-  --current-secondary: var(--extreme-secondary);
-  --current-highlight: var(--extreme-highlight);
-  --current-success: var(--extreme-success);
-  --current-warning: var(--extreme-warning);
-  --current-error: var(--extreme-error);
+  --current-bg: var(--theme-bg);
+  --current-text: var(--theme-text);
+  --current-accent: var(--theme-accent);
+  --current-secondary: var(--theme-secondary);
+  --current-highlight: var(--theme-highlight);
+  --current-success: var(--theme-success);
+  --current-primary: var(--theme-primary);
+
+  /* RGB values for alpha transparency */
+  --current-accent-rgb: var(--theme-accent-rgb);
+  --current-highlight-rgb: var(--theme-highlight-rgb);
+  --current-success-rgb: var(--theme-success-rgb);
 
   /* Current border system */
-  --current-border-width: var(--extreme-border-width);
-  --current-border-style: var(--extreme-border-style);
-  --current-border-radius: var(--extreme-border-radius);
+  --current-border-width: var(--theme-border-width);
+  --current-border-style: var(--theme-border-style);
+  --current-border-radius: var(--theme-border-radius);
 
   /* Current shadow system */
-  --current-shadow-brutal: var(--extreme-shadow-brutal);
-  --current-shadow-double: var(--extreme-shadow-double);
-  --current-shadow-triple: var(--extreme-shadow-triple);
+  --current-shadow-brutal: var(--theme-shadow-brutal);
+  --current-shadow-double: var(--theme-shadow-double);
+  --current-shadow-triple: var(--theme-shadow-triple);
+  --current-shadow-subtle: var(--theme-shadow-subtle);
+  --current-shadow-elevated: var(--theme-shadow-elevated);
+  --current-shadow-glow: var(--theme-shadow-glow);
 
   /* Current typography */
-  --current-font-primary: var(--extreme-font-primary);
-  --current-font-code: var(--extreme-font-code);
+  --current-font-primary: var(--theme-font-primary);
+  --current-font-code: var(--theme-font-code);
 
   /* Current animation system */
-  --current-animation-duration: var(--extreme-animation-duration);
-  --current-animation-easing: var(--extreme-animation-easing);
+  --current-animation-duration: var(--theme-animation-duration);
+  --current-animation-easing: var(--theme-animation-easing);
 
   /* Theme transition */
   --theme-transition-duration: 600ms;
