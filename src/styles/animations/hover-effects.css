@@ -1,0 +1,383 @@
+/* Brutalist Hover Effects */
+
+/* Button Hover Effects */
+.brutal-button {
+  position: relative;
+  overflow: hidden;
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.brutal-button:hover {
+  transform: translate(-2px, -2px);
+}
+
+.brutal-button:hover .brutal-button__shadow {
+  transform: translate(4px, 4px);
+}
+
+.brutal-button:hover .brutal-button__border {
+  animation: brutalBorderRotate 2s linear infinite;
+}
+
+.brutal-button:hover .brutal-button__shimmer {
+  transform: translateX(100%);
+}
+
+.brutal-button:hover .brutal-button__strike {
+  transform: translateY(-50%) scaleX(1) skewX(-15deg);
+}
+
+/* Card Hover Effects */
+.brutal-card {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.brutal-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow:
+    8px 8px 0 var(--theme-accent),
+    16px 16px 0 var(--theme-highlight);
+}
+
+.brutal-card:hover .brutal-card__border {
+  border-color: var(--theme-highlight);
+}
+
+.brutal-card:hover .brutal-card__content {
+  transform: scale(1.02);
+}
+
+/* Text Hover Effects */
+.brutal-text:hover {
+  animation: brutalTextGlow 1s ease-in-out;
+}
+
+.brutal-link {
+  position: relative;
+  text-decoration: none;
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.brutal-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--theme-accent);
+  transition: width var(--theme-animation-duration)
+    var(--theme-animation-easing);
+}
+
+.brutal-link:hover::after {
+  width: 100%;
+}
+
+.brutal-link:hover {
+  color: var(--theme-accent);
+  text-shadow: 2px 2px 0 var(--theme-highlight);
+}
+
+/* Image Hover Effects */
+.brutal-image {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+  filter: grayscale(0.2) contrast(1.1);
+}
+
+.brutal-image:hover {
+  filter: grayscale(0) contrast(1.2);
+  transform: scale(1.05);
+}
+
+/* Navigation Hover Effects */
+.navigation-item {
+  position: relative;
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.navigation-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--theme-accent),
+    transparent
+  );
+  transition: left var(--theme-animation-duration) var(--theme-animation-easing);
+  opacity: 0.3;
+}
+
+.navigation-item:hover::before {
+  left: 100%;
+}
+
+.navigation-item:hover {
+  color: var(--theme-accent);
+  transform: translateY(-2px);
+}
+
+/* Logo Hover Effects */
+.brutal-logo {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.brutal-logo:hover {
+  animation: brutalGlitch 0.5s ease-out;
+  transform: scale(1.1);
+}
+
+/* Form Input Hover Effects */
+.brutal-input {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.brutal-input:hover {
+  border-color: var(--theme-accent);
+  box-shadow: 4px 4px 0 var(--theme-accent);
+}
+
+.brutal-input:focus {
+  border-color: var(--theme-highlight);
+  box-shadow:
+    4px 4px 0 var(--theme-highlight),
+    8px 8px 0 var(--theme-accent);
+  outline: none;
+}
+
+/* Icon Hover Effects */
+.brutal-icon {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.brutal-icon:hover {
+  animation: bounce 0.6s ease-in-out;
+  color: var(--theme-accent);
+}
+
+/* Badge Hover Effects */
+.brutal-badge {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.brutal-badge:hover {
+  animation: brutalPulse 1s ease-in-out;
+  transform: scale(1.1);
+}
+
+/* Menu Item Hover Effects */
+.menu-item {
+  position: relative;
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.menu-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--theme-accent);
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+  transform: translateX(-50%);
+}
+
+.menu-item:hover::after {
+  width: 100%;
+}
+
+.menu-item:hover {
+  color: var(--theme-accent);
+}
+
+/* Social Icon Hover Effects */
+.social-icon {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.social-icon:hover {
+  animation: wobble 0.8s ease-in-out;
+  color: var(--theme-accent);
+  transform: scale(1.2);
+}
+
+/* CTA Button Hover Effects */
+.cta-button {
+  position: relative;
+  overflow: hidden;
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.cta-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+.cta-button:hover {
+  transform: translate(-3px, -3px);
+  box-shadow:
+    6px 6px 0 var(--theme-accent),
+    12px 12px 0 var(--theme-highlight);
+}
+
+/* Metric Card Hover Effects */
+.metric-card {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.metric-card:hover {
+  animation: brutalShadowShift 2s ease-in-out infinite;
+  transform: scale(1.05);
+}
+
+.metric-card:hover .metric-value {
+  animation: brutalTextGlow 1s ease-in-out;
+}
+
+/* Portfolio Item Hover Effects */
+.portfolio-item {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+  overflow: hidden;
+}
+
+.portfolio-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    var(--theme-accent) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform var(--theme-animation-duration)
+    var(--theme-animation-easing);
+  opacity: 0.1;
+}
+
+.portfolio-item:hover::before {
+  transform: translateX(100%);
+}
+
+.portfolio-item:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--theme-accent);
+}
+
+/* Testimonial Card Hover Effects */
+.testimonial-card {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.testimonial-card:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+  box-shadow:
+    8px 8px 0 var(--theme-accent),
+    16px 16px 20px rgba(0, 0, 0, 0.3);
+}
+
+.testimonial-card:hover .testimonial-avatar {
+  animation: brutalPulse 1s ease-in-out;
+}
+
+/* Achievement Badge Hover Effects */
+.achievement-badge {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.achievement-badge:hover {
+  animation: rotateIn 0.6s ease-out;
+  transform: scale(1.1);
+}
+
+/* Progress Bar Hover Effects */
+.progress-bar {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.progress-bar:hover .progress-fill {
+  animation: brutalTextGlow 1s ease-in-out infinite;
+}
+
+/* Tag Hover Effects */
+.brutal-tag {
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+.brutal-tag:hover {
+  animation: shake 0.5s ease-in-out;
+  background: var(--theme-accent);
+  color: var(--theme-bg);
+}
+
+/* Mobile Touch Effects */
+@media (hover: none) and (pointer: coarse) {
+  .brutal-button:active,
+  .brutal-card:active,
+  .cta-button:active {
+    transform: translate(-1px, -1px);
+    transition-duration: 0.1s;
+  }
+
+  .brutal-button:active .brutal-button__shadow,
+  .brutal-card:active,
+  .cta-button:active {
+    transform: translate(2px, 2px);
+  }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .brutal-button:hover,
+  .brutal-card:hover,
+  .brutal-text:hover,
+  .brutal-link:hover,
+  .brutal-image:hover,
+  .navigation-item:hover,
+  .brutal-logo:hover,
+  .brutal-input:hover,
+  .brutal-icon:hover,
+  .brutal-badge:hover,
+  .menu-item:hover,
+  .social-icon:hover,
+  .cta-button:hover,
+  .metric-card:hover,
+  .portfolio-item:hover,
+  .testimonial-card:hover,
+  .achievement-badge:hover,
+  .brutal-tag:hover {
+    animation: none;
+    transform: none;
+  }
+
+  .brutal-button:hover,
+  .brutal-card:hover,
+  .cta-button:hover {
+    box-shadow: 4px 4px 0 var(--theme-accent);
+  }
+}

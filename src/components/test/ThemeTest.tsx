@@ -90,7 +90,7 @@ export const ThemeTest: React.FC = () => {
           </div>
           <button className="brutal-button px-4 py-2">Brutal Button</button>
           <code className="brutal-code p-2 block">
-            console.log('Theme-aware code block');
+            console.log(&apos;Theme-aware code block&apos;);
           </code>
         </div>
       </div>

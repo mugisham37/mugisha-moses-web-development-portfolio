@@ -1,9 +1,11 @@
 // Hooks barrel exports
 export { useThemePersistence } from "./useThemePersistence";
-// export { useTheme } from './useTheme';
-// export { useThemeTransition } from './useThemeTransition';
-// export { useScrollProgress } from './useScrollProgress';
-// export { useIntersectionObserver } from './useIntersectionObserver';
+export { useThemeTransition } from "./useThemeTransition";
+export { useScrollProgress } from "./useScrollProgress";
+export {
+  useIntersectionObserver,
+  useIntersectionObserverMultiple,
+} from "./useIntersectionObserver";
 // export { useAnimatedCounter } from './useAnimatedCounter';
 // export { useParallax } from './useParallax';
 // export { usePerformanceMonitor } from './usePerformanceMonitor';

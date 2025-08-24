@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Mono, JetBrains_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -43,7 +43,7 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceMono.variable} ${jetbrainsMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <ThemeProvider defaultTheme="extreme-brutalist">
+        <ThemeProvider initialTheme="extreme-brutalist">
           {children}
         </ThemeProvider>
       </body>
