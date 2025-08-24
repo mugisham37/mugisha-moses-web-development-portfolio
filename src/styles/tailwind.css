@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/* Tailwind CSS v4 Configuration */
+@theme {
+  /* Font Families */
+  --font-space-mono: "Space Mono", monospace;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
+  --font-inter: "Inter", sans-serif;
+
+  /* Extreme Brutalist Theme Colors */
+  --color-extreme-primary: #000000;
+  --color-extreme-secondary: #ffffff;
+  --color-extreme-accent: #ffff00;
+  --color-extreme-highlight: #00ffff;
+  --color-extreme-success: #00ff00;
+
+  /* Refined Brutalist Theme Colors */
+  --color-refined-primary: #1a1a1a;
+  --color-refined-secondary: #f5f5f5;
+  --color-refined-accent: #8b5cf6;
+  --color-refined-highlight: #06b6d4;
+  --color-refined-success: #10b981;
+
+  /* Box Shadows */
+  --shadow-brutal: 8px 8px 0;
+  --shadow-brutal-double: 8px 8px 0 #ffff00, 16px 16px 0 #ffffff;
+  --shadow-brutal-triple:
+    8px 8px 0 #ffff00, 16px 16px 0 #ffffff, 24px 24px 0 #000000;
+  --shadow-refined-subtle: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-refined-elevated: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --shadow-refined-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+
+  /* Animations */
+  --animate-brutal-glitch: brutalGlitch 0.3s ease-out;
+  --animate-brutal-pulse: brutalPulse 2s ease-in-out infinite;
+  --animate-smooth-transition: smoothTransition 0.4s ease;
+  --animate-gentle-float: gentleFloat 6s ease-in-out infinite;
+  --animate-typewriter: typewriter 3s steps(40, end);
+}
+
+/* Keyframes */
+@keyframes brutalGlitch {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes brutalPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes smoothTransition {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentleFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Space_Mono, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import {
+  FloatingContact,
+  CookieConsent,
+  NotificationSystem,
+} from "@/components/layout";
 import "./globals.css";
 
 const inter = Inter({
@@ -45,6 +50,9 @@ export default function RootLayout({
       >
         <ThemeProvider initialTheme="extreme-brutalist">
           {children}
+          <FloatingContact />
+          <CookieConsent />
+          <NotificationSystem />
         </ThemeProvider>
       </body>
     </html>

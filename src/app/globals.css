@@ -37,10 +37,11 @@
 @import "../styles/components/page-transition.css";
 @import "../styles/components/scroll-progress.css";
 @import "../styles/components/keyboard-navigation.css";
+@import "../styles/components/floating-contact.css";
+@import "../styles/components/cookie-consent.css";
+@import "../styles/components/notification-system.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "../styles/tailwind.css";
 
 /* CSS Custom Properties for Theme System */
 :root {
