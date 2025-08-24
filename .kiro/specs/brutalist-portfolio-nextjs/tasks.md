@@ -92,14 +92,14 @@
   - Add value proposition section with strike-through animations
   - _Requirements: 2.2, 3.1, 3.2_
 
-- [ ] 13. Build hero metrics with animated counters
+- [x] 13. Build hero metrics with animated counters
   - Create HeroMetrics component with brutal card styling
   - Implement useAnimatedCounter hook with easing functions and intersection observer
   - Add hover effects with shadow transformations and border rotations
   - Build responsive grid layout for metric display
   - _Requirements: 2.2, 3.1, 3.2, 5.4_
 
-- [ ] 14. Create hero visual elements and portrait system
+- [x] 14. Create hero visual elements and portrait system
   - Build HeroVisual component with professional portrait display
   - Implement scan effects and frame corners with animations
   - Create floating achievement badges with hover tooltips

@@ -1,0 +1,363 @@
+/* Hero CTA Component Styles */
+
+.hero-cta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+/* CTA Buttons */
+.hero-cta__buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-cta__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-family: var(--cta-font-code, "JetBrains Mono", monospace);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: var(--cta-border-width) solid var(--cta-text);
+  background: transparent;
+  color: var(--cta-text);
+  cursor: pointer;
+  transition: all var(--cta-animation-duration) var(--cta-animation-easing);
+  overflow: hidden;
+  min-width: 180px;
+  animation: ctaEntrance 0.8s ease-out;
+}
+
+.hero-cta__btn:hover {
+  transform: translateY(-2px);
+}
+
+.hero-cta__btn:active {
+  transform: translateY(0);
+}
+
+/* Primary CTA Button */
+.hero-cta__btn--primary {
+  background: var(--cta-accent);
+  color: var(--cta-bg);
+  border-color: var(--cta-accent);
+}
+
+.hero-cta__btn--primary:hover {
+  background: var(--cta-text);
+  color: var(--cta-bg);
+  border-color: var(--cta-text);
+}
+
+/* Secondary CTA Button */
+.hero-cta__btn--secondary {
+  background: transparent;
+  color: var(--cta-text);
+  border-color: var(--cta-text);
+}
+
+.hero-cta__btn--secondary:hover {
+  background: var(--cta-text);
+  color: var(--cta-bg);
+}
+
+/* Button Text */
+.hero-cta__btn-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Button Effects */
+.hero-cta__btn-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-cta__btn-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--cta-text);
+  transform: translate(4px, 4px);
+  z-index: -1;
+  transition: transform var(--cta-animation-duration)
+    var(--cta-animation-easing);
+}
+
+.hero-cta__btn:hover .hero-cta__btn-shadow {
+  transform: translate(8px, 8px);
+}
+
+.hero-cta__btn-border {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--cta-accent);
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all var(--cta-animation-duration) var(--cta-animation-easing);
+}
+
+.hero-cta__btn:hover .hero-cta__btn-border {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-cta__btn-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.hero-cta__btn:hover .hero-cta__btn-shimmer {
+  left: 100%;
+}
+
+.hero-cta__btn-strike {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--cta-accent);
+  transform: translateY(-50%) scaleX(0) skewX(-15deg);
+  transform-origin: left;
+  transition: transform var(--cta-animation-duration)
+    var(--cta-animation-easing);
+}
+
+.hero-cta__btn:hover .hero-cta__btn-strike {
+  transform: translateY(-50%) scaleX(1) skewX(-15deg);
+}
+
+/* Scroll Indicator */
+.hero-cta__scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.8;
+  animation: scrollIndicatorFloat 3s ease-in-out infinite;
+}
+
+.hero-cta__scroll-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--cta-text);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.hero-cta__scroll-icon {
+  font-size: 1.25rem;
+  color: var(--cta-text);
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.hero-cta__scroll-progress {
+  width: 2px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta__scroll-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: var(--cta-accent);
+  animation: scrollProgress 3s ease-in-out infinite;
+}
+
+.hero-cta__scroll-text {
+  font-family: var(--cta-font-code, "JetBrains Mono", monospace);
+  font-size: 0.75rem;
+  color: var(--cta-text);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+/* Theme Variations */
+.hero-cta--extreme-brutalist .hero-cta__btn {
+  border-width: 4px;
+  border-radius: 0;
+}
+
+.hero-cta--extreme-brutalist .hero-cta__btn-shadow {
+  transform: translate(8px, 8px);
+}
+
+.hero-cta--extreme-brutalist .hero-cta__btn:hover .hero-cta__btn-shadow {
+  transform: translate(12px, 12px);
+}
+
+.hero-cta--refined-brutalist .hero-cta__btn {
+  border-width: 2px;
+  border-radius: 8px;
+}
+
+.hero-cta--refined-brutalist .hero-cta__btn-shadow {
+  transform: translate(4px, 4px);
+  filter: blur(4px);
+  opacity: 0.3;
+}
+
+.hero-cta--refined-brutalist .hero-cta__btn:hover .hero-cta__btn-shadow {
+  transform: translate(6px, 6px);
+  opacity: 0.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-cta {
+    gap: 2rem;
+    padding: 1.5rem 0;
+  }
+
+  .hero-cta__buttons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .hero-cta__btn {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+    min-width: auto;
+  }
+
+  .hero-cta__scroll-indicator {
+    gap: 0.75rem;
+  }
+
+  .hero-cta__scroll-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hero-cta__scroll-icon {
+    font-size: 1rem;
+  }
+
+  .hero-cta__scroll-progress {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta {
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .hero-cta__btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .hero-cta__scroll-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* Animations */
+@keyframes ctaEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes scrollIndicatorFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scrollBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes scrollProgress {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta__btn,
+  .hero-cta__scroll-indicator,
+  .hero-cta__scroll-icon,
+  .hero-cta__scroll-bar {
+    animation: none;
+  }
+
+  .hero-cta__btn:hover {
+    transform: none;
+  }
+}
+
+/* Focus States */
+.hero-cta__btn:focus-visible {
+  outline: 2px solid var(--cta-accent);
+  outline-offset: 4px;
+}

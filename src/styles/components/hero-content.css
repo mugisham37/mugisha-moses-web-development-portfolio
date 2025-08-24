@@ -542,3 +542,155 @@
     padding: 1rem;
   }
 }
+
+/* Hero Visual Integration */
+.hero-content__visual {
+  margin-top: 3rem;
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+/* Responsive Layout for Content + Visual */
+@media (min-width: 1024px) {
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1400px;
+  }
+
+  .hero-content__headlines,
+  .hero-content__subtitles,
+  .hero-content__value-proposition,
+  .hero-content__metrics,
+  .hero-content__cta-section {
+    grid-column: 1;
+  }
+
+  .hero-content__visual {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    margin-top: 0;
+    align-self: center;
+  }
+
+  .hero-content__bg-effects {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+  }
+}
+
+/* Visual Component Entrance Animation */
+.hero-content__visual {
+  animation: visualEntrance 1s ease-out;
+}
+
+@keyframes visualEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(50px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Enhanced Background Effects for Visual Integration */
+.hero-content__bg-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.hero-content__bg-text {
+  position: absolute;
+  font-family: var(--content-font-primary);
+  font-weight: 900;
+  font-size: clamp(8rem, 15vw, 20rem);
+  color: var(--content-text);
+  opacity: 0.03;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hero-content__bg-text--1 {
+  top: 10%;
+  left: -10%;
+  transform: rotate(-15deg);
+  animation: bgTextFloat1 20s ease-in-out infinite;
+}
+
+.hero-content__bg-text--2 {
+  top: 40%;
+  right: -15%;
+  transform: rotate(10deg);
+  animation: bgTextFloat2 25s ease-in-out infinite;
+}
+
+.hero-content__bg-text--3 {
+  bottom: 10%;
+  left: 10%;
+  transform: rotate(-8deg);
+  animation: bgTextFloat3 30s ease-in-out infinite;
+}
+
+@keyframes bgTextFloat1 {
+  0%,
+  100% {
+    transform: rotate(-15deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-12deg) translateY(-20px);
+  }
+}
+
+@keyframes bgTextFloat2 {
+  0%,
+  100% {
+    transform: rotate(10deg) translateY(0);
+  }
+  50% {
+    transform: rotate(8deg) translateY(15px);
+  }
+}
+
+@keyframes bgTextFloat3 {
+  0%,
+  100% {
+    transform: rotate(-8deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-10deg) translateY(-10px);
+  }
+}
+
+/* Mobile Adjustments for Visual Integration */
+@media (max-width: 1023px) {
+  .hero-content__visual {
+    margin-top: 2rem;
+    order: -1; /* Show visual first on mobile */
+  }
+
+  .hero-content__bg-text {
+    font-size: clamp(4rem, 12vw, 8rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .hero-content__visual {
+    margin-top: 1.5rem;
+  }
+}

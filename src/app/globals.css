@@ -10,6 +10,8 @@
 @import "../styles/components/hero.css";
 @import "../styles/components/hero-content.css";
 @import "../styles/components/hero-metrics.css";
+@import "../styles/components/hero-visual.css";
+@import "../styles/components/hero-cta.css";
 
 @tailwind base;
 @tailwind components;

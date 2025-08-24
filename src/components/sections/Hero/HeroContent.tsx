@@ -5,6 +5,8 @@ import { useThemeContext } from "@/contexts/ThemeContext";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { TypewriterText } from "./TypewriterText";
 import { HeroMetrics } from "./HeroMetrics";
+import { HeroVisual } from "./HeroVisual";
+import { HeroCTA } from "./HeroCTA";
 import { portfolioData } from "@/data/portfolio";
 
 interface HeroContentProps {
@@ -25,8 +27,7 @@ export const HeroContent: React.FC<HeroContentProps> = ({ className = "" }) => {
     triggerOnce: true,
   });
 
-  const { headlines, subtitles, valueProposition, ctaButtons } =
-    portfolioData.hero;
+  const { headlines, subtitles, valueProposition } = portfolioData.hero;
 
   // Handle headline rotation
   useEffect(() => {
@@ -189,42 +190,7 @@ export const HeroContent: React.FC<HeroContentProps> = ({ className = "" }) => {
       {showValueProp && <HeroMetrics className="hero-content__metrics" />}
 
       {/* Call-to-Action Buttons */}
-      {showCTAs && (
-        <div className="hero-content__cta-section">
-          <div className="hero-content__cta-buttons">
-            {ctaButtons.map((button: any, index: number) => (
-              <button
-                key={index}
-                className={`hero-content__cta-btn hero-content__cta-btn--${button.variant} hero-content__cta-btn--${currentTheme}`}
-                data-action={button.action}
-                style={{
-                  animationDelay: `${index * 200}ms`,
-                }}
-              >
-                <span className="hero-content__cta-text">{button.text}</span>
-                <div className="hero-content__cta-effects" aria-hidden="true">
-                  <div className="hero-content__cta-shadow"></div>
-                  <div className="hero-content__cta-border"></div>
-                  <div className="hero-content__cta-shimmer"></div>
-                  <div className="hero-content__cta-strike"></div>
-                </div>
-              </button>
-            ))}
-          </div>
-
-          {/* CTA Status */}
-          <div className="hero-content__cta-status" aria-hidden="true">
-            <div className="hero-content__cta-status-line">
-              <span className="hero-content__cta-status-text">
-                READY_FOR_DEPLOYMENT
-              </span>
-              <div className="hero-content__cta-status-indicator">
-                <div className="hero-content__cta-status-pulse"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {showCTAs && <HeroCTA className="hero-content__cta" />}
 
       {/* Background Text Effects */}
       <div className="hero-content__bg-effects" aria-hidden="true">
@@ -238,6 +204,9 @@ export const HeroContent: React.FC<HeroContentProps> = ({ className = "" }) => {
           SCALE
         </div>
       </div>
+
+      {/* Hero Visual Elements */}
+      {showValueProp && <HeroVisual className="hero-content__visual" />}
     </div>
   );
 };
