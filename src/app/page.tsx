@@ -1,8 +1,11 @@
 import { Navigation } from "@/components/sections/Navigation";
 import { HeroWithEffects, HeroContent } from "@/components/sections/Hero";
-import { SocialProof } from "@/components/sections/SocialProof";
-import { Results } from "@/components/sections/Results";
-import { Footer } from "@/components/sections/Footer";
+import {
+  DynamicSocialProof,
+  DynamicResults,
+  DynamicFooter,
+  preloadSections,
+} from "@/components/layout/DynamicSections";
 import { ThemeDetector } from "@/components/theme/ThemeDetector";
 import {
   PageWrapper,
@@ -14,8 +17,17 @@ import {
   SmoothScroll,
 } from "@/components/layout/ScrollProgress";
 import { KeyboardNavigation } from "@/components/layout/KeyboardNavigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  // Preload sections for better performance
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      preloadSections();
+    }, 2000); // Preload after 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <ThemeDetector>
       <PageWrapper>
@@ -69,7 +81,7 @@ export default function Home() {
               className="social-proof-section"
             >
               <StaggeredChildren staggerDelay={100}>
-                <SocialProof />
+                <DynamicSocialProof />
               </StaggeredChildren>
             </SectionTransition>
 
@@ -81,7 +93,7 @@ export default function Home() {
               className="results-section"
             >
               <StaggeredChildren staggerDelay={120}>
-                <Results />
+                <DynamicResults />
               </StaggeredChildren>
             </SectionTransition>
           </main>
@@ -94,7 +106,7 @@ export default function Home() {
             className="footer-section"
           >
             <StaggeredChildren staggerDelay={80}>
-              <Footer />
+              <DynamicFooter />
             </StaggeredChildren>
           </SectionTransition>
         </SmoothScroll>

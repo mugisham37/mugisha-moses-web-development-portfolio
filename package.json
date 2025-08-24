@@ -5,12 +5,19 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
+    "build:production": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "bundle:analyze": "npm run build:analyze && node scripts/analyze-bundle.js",
+    "bundle:size": "npx bundlesize",
+    "bundle:report": "node scripts/analyze-bundle.js",
+    "perf:audit": "npx lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html",
+    "perf:build": "npm run build:production && npm run start & sleep 5 && npm run perf:audit"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
@@ -29,6 +36,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "bundlesize": "^0.18.2",
     "cssnano": "^7.1.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
@@ -38,6 +46,7 @@
     "postcss-import": "^16.1.1",
     "postcss-nested": "^7.0.2",
     "prettier": "^3.6.2",
-    "typescript": "^5"
+    "typescript": "^5",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }

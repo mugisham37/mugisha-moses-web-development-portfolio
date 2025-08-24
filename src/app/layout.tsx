@@ -6,6 +6,8 @@ import {
   CookieConsent,
   NotificationSystem,
 } from "@/components/layout";
+import { ServiceWorkerProvider } from "@/components/providers/ServiceWorkerProvider";
+import { PerformanceProvider } from "@/components/providers/PerformanceProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,6 +32,12 @@ export const metadata: Metadata = {
   keywords: ["portfolio", "brutalist", "nextjs", "typescript", "developer"],
   authors: [{ name: "Portfolio Owner" }],
   robots: "index, follow",
+  manifest: "/manifest.json",
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-title": "Brutalist Portfolio",
+  },
 };
 
 export const viewport = {
@@ -48,12 +56,16 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceMono.variable} ${jetbrainsMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <ThemeProvider initialTheme="extreme-brutalist">
-          {children}
-          <FloatingContact />
-          <CookieConsent />
-          <NotificationSystem />
-        </ThemeProvider>
+        <PerformanceProvider>
+          <ServiceWorkerProvider>
+            <ThemeProvider initialTheme="extreme-brutalist">
+              {children}
+              <FloatingContact />
+              <CookieConsent />
+              <NotificationSystem />
+            </ThemeProvider>
+          </ServiceWorkerProvider>
+        </PerformanceProvider>
       </body>
     </html>
   );

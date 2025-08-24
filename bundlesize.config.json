@@ -1,0 +1,38 @@
+{
+  "files": [
+    {
+      "path": ".next/static/js/pages/_app-*.js",
+      "maxSize": "50kb",
+      "compression": "gzip"
+    },
+    {
+      "path": ".next/static/js/pages/index-*.js",
+      "maxSize": "30kb",
+      "compression": "gzip"
+    },
+    {
+      "path": ".next/static/js/framework-*.js",
+      "maxSize": "45kb",
+      "compression": "gzip"
+    },
+    {
+      "path": ".next/static/js/vendor-*.js",
+      "maxSize": "100kb",
+      "compression": "gzip"
+    },
+    {
+      "path": ".next/static/js/animations-*.js",
+      "maxSize": "80kb",
+      "compression": "gzip"
+    },
+    {
+      "path": ".next/static/css/*.css",
+      "maxSize": "20kb",
+      "compression": "gzip"
+    }
+  ],
+  "ci": {
+    "trackBranches": ["main", "develop"],
+    "repoBranchBase": "main"
+  }
+}

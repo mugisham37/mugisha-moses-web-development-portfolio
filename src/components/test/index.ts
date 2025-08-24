@@ -3,3 +3,4 @@ export { ThemeTest } from "./ThemeTest";
 export { AnimatedTextTest } from "./AnimatedTextTest";
 export { default as SystemStatus } from "./SystemStatus";
 export { EffectsTest } from "./EffectsTest";
+export { default as ImageOptimizationTest } from "./ImageOptimizationTest";
