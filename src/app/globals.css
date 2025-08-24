@@ -24,6 +24,7 @@
 @import "../styles/components/newsletter.css";
 @import "../styles/components/social-platforms.css";
 @import "../styles/components/brutal-button.css";
+@import "../styles/components/brutal-card.css";
 
 @tailwind base;
 @tailwind components;

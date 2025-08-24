@@ -1,0 +1,579 @@
+/* ===== BRUTAL CARD COMPONENT STYLES ===== */
+
+.brutal-card {
+  /* Base card structure */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: var(--card-min-height, 12rem);
+  max-width: var(--card-max-width, 24rem);
+  width: 100%;
+
+  /* Colors and borders */
+  background: var(--card-bg, var(--current-bg));
+  color: var(--card-text, var(--current-text));
+  border: var(--card-border-width, var(--current-border-width))
+    var(--current-border-style) var(--card-border, var(--current-text));
+  border-radius: var(--card-border-radius, var(--current-border-radius));
+
+  /* Shadow system */
+  box-shadow: var(--card-shadow-active, var(--current-shadow-brutal));
+
+  /* Clip path for geometric shapes */
+  clip-path: var(--card-clip-path, none);
+
+  /* Transitions */
+  transition: all
+    var(--card-animation-duration, var(--current-animation-duration))
+    var(--card-animation-easing, var(--current-animation-easing));
+
+  /* Transform origin for animations */
+  transform-origin: center;
+  transform: translateZ(0); /* Force hardware acceleration */
+
+  /* Overflow handling */
+  overflow: hidden;
+}
+
+/* ===== CARD CONTENT ===== */
+
+.brutal-card__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--card-padding, 1.5rem);
+  z-index: 2;
+  height: 100%;
+}
+
+/* ===== EFFECTS LAYER ===== */
+
+.brutal-card__effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Base shadow effect */
+.brutal-card__shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--card-accent, var(--current-accent));
+  border-radius: inherit;
+  clip-path: inherit;
+  transform: translate(0, 0);
+  transition: transform var(--card-animation-duration, 0.3s)
+    var(--card-animation-easing, ease);
+  z-index: -1;
+}
+
+/* Border animation effect */
+.brutal-card__border-animation {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--card-highlight, var(--current-highlight));
+  border-radius: inherit;
+  clip-path: inherit;
+  opacity: 0;
+  transform: scale(1);
+  transition: all var(--card-animation-duration, 0.3s)
+    var(--card-animation-easing, ease);
+}
+
+/* Elevation effect */
+.brutal-card__elevation {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: -4px;
+  bottom: -4px;
+  background: var(--card-text, var(--current-text));
+  border-radius: inherit;
+  clip-path: inherit;
+  opacity: 0;
+  transition: opacity var(--card-animation-duration, 0.3s) ease;
+  z-index: -2;
+}
+
+/* Glow effect (refined theme) */
+.brutal-card__glow {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background: var(--card-accent, var(--current-accent));
+  border-radius: inherit;
+  clip-path: inherit;
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity var(--card-animation-duration, 0.3s) ease;
+  z-index: -3;
+}
+
+/* Glitch effect (extreme theme) */
+.brutal-card__glitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--card-bg, var(--current-bg));
+  border-radius: inherit;
+  clip-path: inherit;
+  opacity: 0;
+  mix-blend-mode: difference;
+}
+
+/* Scan lines effect (extreme theme) */
+.brutal-card__scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 0, 0.03) 2px,
+    rgba(255, 255, 0, 0.03) 4px
+  );
+  border-radius: inherit;
+  clip-path: inherit;
+  opacity: 0;
+  transition: opacity var(--card-animation-duration, 0.3s) ease;
+}
+
+/* ===== INTERACTIVE STATES ===== */
+
+.brutal-card--interactive {
+  cursor: pointer;
+  user-select: none;
+}
+
+.brutal-card--interactive:hover {
+  transform: translate(-3px, -3px);
+}
+
+.brutal-card--interactive:hover .brutal-card__shadow {
+  transform: translate(6px, 6px);
+}
+
+.brutal-card--interactive:hover .brutal-card__border-animation {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.brutal-card--interactive:hover .brutal-card__elevation {
+  opacity: 0.1;
+}
+
+.brutal-card--interactive:active {
+  transform: translate(-1px, -1px);
+}
+
+.brutal-card--interactive:active .brutal-card__shadow {
+  transform: translate(2px, 2px);
+}
+
+/* ===== FOCUS STATES ===== */
+
+.brutal-card--interactive:focus-visible {
+  outline: 2px solid var(--card-accent, var(--current-accent));
+  outline-offset: 2px;
+}
+
+.brutal-card--interactive:focus-visible .brutal-card__border-animation {
+  opacity: 1;
+  animation: brutal-card-focus-pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes brutal-card-focus-pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.03);
+  }
+}
+
+/* ===== THEME-SPECIFIC STYLES ===== */
+
+/* Extreme Brutalist Theme */
+.brutal-card--extreme {
+  font-family: var(--extreme-font-primary, "Space Mono", monospace);
+}
+
+.brutal-card--extreme.brutal-card--interactive:hover .brutal-card__glitch {
+  opacity: 0.1;
+  animation: brutal-card-glitch 0.3s ease-out;
+}
+
+.brutal-card--extreme.brutal-card--interactive:hover .brutal-card__scan-lines {
+  opacity: 1;
+  animation: brutal-card-scan 2s linear infinite;
+}
+
+@keyframes brutal-card-glitch {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes brutal-card-scan {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 20px;
+  }
+}
+
+/* Refined Brutalist Theme */
+.brutal-card--refined {
+  font-family: var(--refined-font-primary, "Inter", sans-serif);
+}
+
+.brutal-card--refined.brutal-card--interactive:hover .brutal-card__glow {
+  opacity: 0.2;
+}
+
+.brutal-card--refined .brutal-card__shadow {
+  filter: blur(1px);
+}
+
+/* ===== VARIANT STYLES ===== */
+
+/* Default Variant */
+.brutal-card--default {
+  /* Base styles already applied */
+}
+
+/* Elevated Variant */
+.brutal-card--elevated {
+  transform: translate(-2px, -2px);
+}
+
+.brutal-card--elevated .brutal-card__shadow {
+  transform: translate(4px, 4px);
+}
+
+.brutal-card--elevated.brutal-card--interactive:hover {
+  transform: translate(-4px, -4px);
+}
+
+.brutal-card--elevated.brutal-card--interactive:hover .brutal-card__shadow {
+  transform: translate(8px, 8px);
+}
+
+/* Flat Variant */
+.brutal-card--flat {
+  box-shadow: none;
+}
+
+.brutal-card--flat .brutal-card__shadow {
+  opacity: 0;
+}
+
+.brutal-card--flat.brutal-card--interactive:hover {
+  box-shadow: var(--card-shadow-active, var(--current-shadow-brutal));
+}
+
+.brutal-card--flat.brutal-card--interactive:hover .brutal-card__shadow {
+  opacity: 1;
+}
+
+/* Outlined Variant */
+.brutal-card--outlined {
+  background: transparent;
+  box-shadow: none;
+}
+
+.brutal-card--outlined .brutal-card__shadow {
+  opacity: 0;
+}
+
+.brutal-card--outlined.brutal-card--interactive:hover {
+  background: var(--card-accent, var(--current-accent));
+  color: var(--current-bg);
+}
+
+.brutal-card--outlined.brutal-card--interactive:hover .brutal-card__shadow {
+  opacity: 1;
+}
+
+/* ===== SIZE VARIANTS ===== */
+
+/* Small Size */
+.brutal-card--sm .brutal-card__border-animation {
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-width: 1px;
+}
+
+.brutal-card--sm .brutal-card__glow {
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  filter: blur(6px);
+}
+
+/* Medium Size (default) */
+.brutal-card--md {
+  /* Default styles already applied */
+}
+
+/* Large Size */
+.brutal-card--lg .brutal-card__border-animation {
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-width: 3px;
+}
+
+.brutal-card--lg .brutal-card__glow {
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+  filter: blur(16px);
+}
+
+/* Extra Large Size */
+.brutal-card--xl .brutal-card__border-animation {
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-width: 4px;
+}
+
+.brutal-card--xl .brutal-card__glow {
+  top: -16px;
+  left: -16px;
+  right: -16px;
+  bottom: -16px;
+  filter: blur(20px);
+}
+
+/* ===== PADDING VARIANTS ===== */
+
+.brutal-card--padding-none .brutal-card__content {
+  padding: 0;
+}
+
+.brutal-card--padding-sm .brutal-card__content {
+  padding: 0.75rem;
+}
+
+.brutal-card--padding-md .brutal-card__content {
+  padding: 1.5rem;
+}
+
+.brutal-card--padding-lg .brutal-card__content {
+  padding: 2rem;
+}
+
+.brutal-card--padding-xl .brutal-card__content {
+  padding: 3rem;
+}
+
+/* ===== CLIP PATH VARIANTS ===== */
+
+.brutal-card--clip-corner {
+  clip-path: polygon(0 0, calc(100% - 1rem) 0, 100% 1rem, 100% 100%, 0 100%);
+}
+
+.brutal-card--clip-diagonal {
+  clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 100%, 2rem 100%);
+}
+
+.brutal-card--clip-hexagon {
+  clip-path: polygon(
+    0 25%,
+    0 75%,
+    25% 100%,
+    75% 100%,
+    100% 75%,
+    100% 25%,
+    75% 0,
+    25% 0
+  );
+}
+
+.brutal-card--clip-arrow {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 2rem) 0,
+    100% 50%,
+    calc(100% - 2rem) 100%,
+    0 100%
+  );
+}
+
+.brutal-card--clip-none {
+  clip-path: none;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .brutal-card {
+    /* Reduce border width on mobile */
+    border-width: 2px;
+    max-width: 100%;
+  }
+
+  .brutal-card__shadow {
+    /* Reduce shadow offset on mobile */
+    transform: translate(2px, 2px);
+  }
+
+  .brutal-card--interactive:hover {
+    transform: translate(-2px, -2px);
+  }
+
+  .brutal-card--interactive:hover .brutal-card__shadow {
+    transform: translate(4px, 4px);
+  }
+
+  .brutal-card--elevated {
+    transform: translate(-1px, -1px);
+  }
+
+  .brutal-card--elevated .brutal-card__shadow {
+    transform: translate(2px, 2px);
+  }
+
+  .brutal-card--elevated.brutal-card--interactive:hover {
+    transform: translate(-3px, -3px);
+  }
+
+  .brutal-card--elevated.brutal-card--interactive:hover .brutal-card__shadow {
+    transform: translate(6px, 6px);
+  }
+
+  /* Disable complex animations on mobile for performance */
+  .brutal-card__glitch,
+  .brutal-card__scan-lines {
+    display: none;
+  }
+
+  /* Simplify clip paths on mobile */
+  .brutal-card--clip-hexagon {
+    clip-path: polygon(
+      0 10%,
+      0 90%,
+      10% 100%,
+      90% 100%,
+      100% 90%,
+      100% 10%,
+      90% 0,
+      10% 0
+    );
+  }
+}
+
+@media (max-width: 480px) {
+  .brutal-card--xl {
+    min-height: 16rem;
+  }
+
+  .brutal-card--lg {
+    min-height: 14rem;
+  }
+
+  .brutal-card--md {
+    min-height: 10rem;
+  }
+
+  .brutal-card--sm {
+    min-height: 8rem;
+  }
+
+  .brutal-card--padding-xl .brutal-card__content {
+    padding: 2rem;
+  }
+
+  .brutal-card--padding-lg .brutal-card__content {
+    padding: 1.5rem;
+  }
+
+  .brutal-card--padding-md .brutal-card__content {
+    padding: 1rem;
+  }
+
+  .brutal-card--padding-sm .brutal-card__content {
+    padding: 0.5rem;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .brutal-card,
+  .brutal-card__shadow,
+  .brutal-card__border-animation,
+  .brutal-card__elevation,
+  .brutal-card__glow,
+  .brutal-card__glitch,
+  .brutal-card__scan-lines {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .brutal-card {
+    border-width: 3px;
+  }
+
+  .brutal-card__border-animation {
+    border-width: 3px;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .brutal-card {
+    background: white !important;
+    color: black !important;
+    border: 2px solid black !important;
+    box-shadow: none !important;
+    clip-path: none !important;
+  }
+
+  .brutal-card__effects {
+    display: none;
+  }
+}
