@@ -17,17 +17,7 @@ import {
   SmoothScroll,
 } from "@/components/layout/ScrollProgress";
 import { KeyboardNavigation } from "@/components/layout/KeyboardNavigation";
-import { useEffect } from "react";
-
 export default function Home() {
-  // Preload sections for better performance
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      preloadSections();
-    }, 2000); // Preload after 2 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
   return (
     <ThemeDetector>
       <PageWrapper>

@@ -50,17 +50,21 @@ export const LazyLoader: React.FC<LazyLoaderProps> = ({
 };
 
 // Higher-order component for lazy loading with intersection observer
-export const withLazyLoading = <P extends object>(
+export const withLazyLoading = <P extends Record<string, any>>(
   Component: ComponentType<P>,
   fallback?: React.ReactNode
 ) => {
   const LazyComponent = lazy(() => Promise.resolve({ default: Component }));
 
-  return (props: P) => (
+  const WrappedComponent = (props: P) => (
     <LazyLoader fallback={fallback}>
-      <LazyComponent {...props} />
+      <LazyComponent {...(props as any)} />
     </LazyLoader>
   );
+
+  WrappedComponent.displayName = `withLazyLoading(${Component.displayName || Component.name || "Component"})`;
+
+  return WrappedComponent;
 };
 
 // Dynamic import helper with preloading

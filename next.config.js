@@ -1,4 +1,13 @@
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+// Optional bundle analyzer - only load if available
+let BundleAnalyzerPlugin;
+try {
+  BundleAnalyzerPlugin =
+    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+} catch (error) {
+  console.warn(
+    "webpack-bundle-analyzer not installed, bundle analysis disabled"
+  );
+}
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -71,7 +80,12 @@ const nextConfig = {
   // Webpack optimizations
   webpack: (config, { dev, isServer, webpack }) => {
     // Bundle analyzer for production builds
-    if (process.env.ANALYZE === "true" && !dev && !isServer) {
+    if (
+      process.env.ANALYZE === "true" &&
+      !dev &&
+      !isServer &&
+      BundleAnalyzerPlugin
+    ) {
       config.plugins.push(
         new BundleAnalyzerPlugin({
           analyzerMode: "static",
@@ -81,25 +95,7 @@ const nextConfig = {
       );
     }
 
-    // CSS Modules configuration
-    config.module.rules.push({
-      test: /\.module\.css$/,
-      use: [
-        {
-          loader: "css-loader",
-          options: {
-            modules: {
-              localIdentName: dev
-                ? "[name]__[local]--[hash:base64:5]"
-                : "[hash:base64:8]",
-              exportLocalsConvention: "camelCase",
-            },
-            importLoaders: 1,
-          },
-        },
-        "postcss-loader",
-      ],
-    });
+    // CSS Modules are handled automatically by Next.js
 
     // Tree shaking optimizations
     config.optimization.usedExports = true;

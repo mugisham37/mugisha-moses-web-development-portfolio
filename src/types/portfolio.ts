@@ -1,4 +1,73 @@
 export interface PortfolioData {
+  personal: {
+    name: string;
+    title: string;
+    bio: string;
+    location?: {
+      city?: string;
+      state?: string;
+      country?: string;
+    };
+  };
+
+  contact: {
+    email: string;
+    phone?: string;
+  };
+
+  social: {
+    linkedin?: string;
+    github?: string;
+    twitter?: string;
+  };
+
+  skills: {
+    technical: Array<{
+      name: string;
+      level: "beginner" | "intermediate" | "advanced" | "expert";
+    }>;
+  };
+
+  experience: {
+    current?: {
+      company: string;
+      position: string;
+      startDate: string;
+    };
+    education?: Array<{
+      institution: string;
+      degree: string;
+      year: string;
+    }>;
+  };
+
+  services?: Array<{
+    name: string;
+    slug: string;
+    description: string;
+    features?: string[];
+  }>;
+
+  projects?: Array<{
+    slug: string;
+    title: string;
+    description: string;
+    technologies: string[];
+    updatedAt?: string;
+  }>;
+
+  portfolio: {
+    launchDate?: string;
+  };
+
+  blog?: {
+    posts?: Array<{
+      slug: string;
+      title: string;
+      publishedAt?: string;
+      updatedAt?: string;
+    }>;
+  };
   hero: {
     headlines: string[];
     subtitles: string[];

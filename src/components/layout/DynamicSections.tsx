@@ -14,7 +14,10 @@ export const DynamicSocialProof = dynamic(
 );
 
 export const DynamicResults = dynamic(
-  () => import("@/components/sections/Results/Results"),
+  () =>
+    import("@/components/sections/Results/Results").then((mod) => ({
+      default: mod.Results,
+    })),
   {
     loading: () => <SectionSkeleton variant="results" />,
     ssr: false,
@@ -22,7 +25,10 @@ export const DynamicResults = dynamic(
 );
 
 export const DynamicFooter = dynamic(
-  () => import("@/components/sections/Footer/Footer"),
+  () =>
+    import("@/components/sections/Footer/Footer").then((mod) => ({
+      default: mod.Footer,
+    })),
   {
     loading: () => <SectionSkeleton variant="footer" />,
     ssr: false,
@@ -39,7 +45,10 @@ export const DynamicParticleSystem = dynamic(
 );
 
 export const DynamicModal = dynamic(
-  () => import("@/components/ui/Modal/Modal"),
+  () =>
+    import("@/components/ui/Modal/Modal").then((mod) => ({
+      default: mod.Modal,
+    })),
   {
     loading: () => <div className="modal-placeholder" />,
     ssr: false,
@@ -54,26 +63,29 @@ export const DynamicCursorTrail = dynamic(
   }
 );
 
-// Dynamic imports for form components
-export const DynamicContactForm = dynamic(
-  () => import("@/components/forms/ContactForm"),
-  {
-    loading: () => <SectionSkeleton variant="form" />,
-    ssr: false,
-  }
-);
+// Form components will be added later
+// export const DynamicContactForm = dynamic(
+//   () => import("@/components/forms/ContactForm"),
+//   {
+//     loading: () => <SectionSkeleton variant="form" />,
+//     ssr: false,
+//   }
+// );
 
-export const DynamicNewsletterForm = dynamic(
-  () => import("@/components/forms/NewsletterForm"),
-  {
-    loading: () => <SectionSkeleton variant="form" />,
-    ssr: false,
-  }
-);
+// export const DynamicNewsletterForm = dynamic(
+//   () => import("@/components/forms/NewsletterForm"),
+//   {
+//     loading: () => <SectionSkeleton variant="form" />,
+//     ssr: false,
+//   }
+// );
 
 // Dynamic imports for visualization components
 export const DynamicRevenueDashboard = dynamic(
-  () => import("@/components/sections/Results/RevenueDashboard"),
+  () =>
+    import("@/components/sections/Results/RevenueDashboard").then((mod) => ({
+      default: mod.RevenueDashboard,
+    })),
   {
     loading: () => <SectionSkeleton variant="dashboard" />,
     ssr: false,
@@ -81,7 +93,10 @@ export const DynamicRevenueDashboard = dynamic(
 );
 
 export const DynamicAchievementTimeline = dynamic(
-  () => import("@/components/sections/Results/AchievementTimeline"),
+  () =>
+    import("@/components/sections/Results/AchievementTimeline").then((mod) => ({
+      default: mod.AchievementTimeline,
+    })),
   {
     loading: () => <SectionSkeleton variant="timeline" />,
     ssr: false,
@@ -127,17 +142,19 @@ export const usePreloadOnIntersection = (
   return () => observer.disconnect();
 };
 
-export default {
+const DynamicSectionsExports = {
   DynamicSocialProof,
   DynamicResults,
   DynamicFooter,
   DynamicParticleSystem,
   DynamicModal,
   DynamicCursorTrail,
-  DynamicContactForm,
-  DynamicNewsletterForm,
+  // DynamicContactForm,
+  // DynamicNewsletterForm,
   DynamicRevenueDashboard,
   DynamicAchievementTimeline,
   preloadSections,
   usePreloadOnIntersection,
 };
+
+export default DynamicSectionsExports;

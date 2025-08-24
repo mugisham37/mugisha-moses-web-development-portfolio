@@ -1,6 +1,131 @@
 import { PortfolioData } from "../types/portfolio";
 
 export const portfolioData: PortfolioData = {
+  personal: {
+    name: "Moses Kirathe",
+    title: "Senior Full-Stack Developer & Performance Engineer",
+    bio: "I engineer high-performance web applications that scale beyond expectations, optimize systems for maximum efficiency, and deliver measurable business results through cutting-edge technology solutions.",
+    location: {
+      city: "San Francisco",
+      state: "CA",
+      country: "US",
+    },
+  },
+  contact: {
+    email: "hello@moseskirathe.dev",
+    phone: "+1 (555) 123-4567",
+  },
+  social: {
+    linkedin: "https://linkedin.com/in/moseskirathe",
+    github: "https://github.com/moseskirathe",
+    twitter: "@moseskirathe",
+  },
+  skills: {
+    technical: [
+      { name: "Next.js", level: "expert" },
+      { name: "React", level: "expert" },
+      { name: "TypeScript", level: "expert" },
+      { name: "Node.js", level: "expert" },
+      { name: "Performance Optimization", level: "expert" },
+      { name: "System Architecture", level: "expert" },
+      { name: "AWS", level: "advanced" },
+      { name: "PostgreSQL", level: "advanced" },
+      { name: "GraphQL", level: "advanced" },
+      { name: "Docker", level: "advanced" },
+    ],
+  },
+  experience: {
+    current: {
+      company: "Independent Consultant",
+      position: "Senior Full-Stack Developer",
+      startDate: "2020-01-01",
+    },
+    education: [
+      {
+        institution: "University of California, Berkeley",
+        degree: "Bachelor of Science in Computer Science",
+        year: "2018",
+      },
+    ],
+  },
+  services: [
+    {
+      name: "Full-Stack Development",
+      slug: "full-stack-development",
+      description:
+        "End-to-end web application development using modern technologies like Next.js, React, and Node.js.",
+      features: [
+        "Custom Web Applications",
+        "API Development",
+        "Database Design",
+        "Authentication Systems",
+        "Payment Integration",
+      ],
+    },
+    {
+      name: "Performance Optimization",
+      slug: "performance-optimization",
+      description:
+        "Comprehensive performance auditing and optimization to improve Core Web Vitals and user experience.",
+      features: [
+        "Core Web Vitals Optimization",
+        "Bundle Size Reduction",
+        "Caching Strategies",
+        "Database Optimization",
+        "CDN Implementation",
+      ],
+    },
+    {
+      name: "System Architecture",
+      slug: "system-architecture",
+      description:
+        "Scalable system design and architecture consulting for high-traffic applications.",
+      features: [
+        "Microservices Architecture",
+        "Cloud Infrastructure",
+        "Load Balancing",
+        "Auto-scaling Solutions",
+        "Monitoring & Analytics",
+      ],
+    },
+  ],
+  projects: [
+    {
+      slug: "techcorp-platform-modernization",
+      title: "TechCorp Platform Modernization",
+      description:
+        "Complete modernization of legacy enterprise platform serving millions of users.",
+      technologies: ["Next.js", "TypeScript", "PostgreSQL", "AWS"],
+      updatedAt: "2024-02-15",
+    },
+    {
+      slug: "startupx-mvp-development",
+      title: "StartupX MVP Development",
+      description: "Rapid MVP development and scaling for high-growth startup.",
+      technologies: ["React", "Node.js", "MongoDB", "Docker"],
+      updatedAt: "2024-01-20",
+    },
+  ],
+  portfolio: {
+    launchDate: "2020-01-01",
+  },
+  blog: {
+    posts: [
+      {
+        slug: "nextjs-performance-optimization-guide",
+        title: "The Complete Guide to Next.js Performance Optimization",
+        publishedAt: "2024-02-01",
+        updatedAt: "2024-02-15",
+      },
+      {
+        slug: "typescript-enterprise-best-practices",
+        title:
+          "TypeScript in Enterprise Applications: Best Practices and Patterns",
+        publishedAt: "2024-01-20",
+        updatedAt: "2024-01-25",
+      },
+    ],
+  },
   hero: {
     headlines: [
       "BRUTAL DEVELOPER",

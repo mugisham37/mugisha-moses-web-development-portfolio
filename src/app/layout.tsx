@@ -8,6 +8,11 @@ import {
 } from "@/components/layout";
 import { ServiceWorkerProvider } from "@/components/providers/ServiceWorkerProvider";
 import { PerformanceProvider } from "@/components/providers/PerformanceProvider";
+import { SEOProvider, HomepageStructuredData } from "@/components/seo";
+import { AnalyticsProvider } from "@/components/analytics";
+import { PerformanceMonitor } from "@/components/performance";
+import { generateMetadata } from "@/utils/seo-helpers";
+import { portfolioData } from "@/data/portfolio";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,19 +31,24 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
-export const metadata: Metadata = {
-  title: "Brutalist Portfolio - Next.js",
-  description: "A sophisticated brutalist portfolio built with Next.js 14",
-  keywords: ["portfolio", "brutalist", "nextjs", "typescript", "developer"],
-  authors: [{ name: "Portfolio Owner" }],
-  robots: "index, follow",
-  manifest: "/manifest.json",
-  other: {
-    "apple-mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "black-translucent",
-    "apple-mobile-web-app-title": "Brutalist Portfolio",
-  },
-};
+export const metadata: Metadata = generateMetadata({
+  title: `${portfolioData.personal.name} - ${portfolioData.personal.title}`,
+  description: portfolioData.personal.bio,
+  keywords: [
+    portfolioData.personal.name,
+    portfolioData.personal.title,
+    ...portfolioData.skills.technical.map((skill) => skill.name),
+    "portfolio",
+    "web development",
+    "brutalist design",
+    "Next.js",
+    "React",
+    "TypeScript",
+  ],
+  canonicalUrl: "/",
+  ogImage: "/images/og-homepage.jpg",
+  twitterImage: "/images/twitter-homepage.jpg",
+});
 
 export const viewport = {
   width: "device-width",
@@ -52,18 +62,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <HomepageStructuredData />
+        <AnalyticsProvider />
+      </head>
       <body
         className={`${inter.variable} ${spaceMono.variable} ${jetbrainsMono.variable} antialiased`}
         suppressHydrationWarning
       >
         <PerformanceProvider>
           <ServiceWorkerProvider>
-            <ThemeProvider initialTheme="extreme-brutalist">
-              {children}
-              <FloatingContact />
-              <CookieConsent />
-              <NotificationSystem />
-            </ThemeProvider>
+            <SEOProvider>
+              <ThemeProvider initialTheme="extreme-brutalist">
+                <PerformanceMonitor />
+                {children}
+                <FloatingContact />
+                <CookieConsent />
+                <NotificationSystem />
+              </ThemeProvider>
+            </SEOProvider>
           </ServiceWorkerProvider>
         </PerformanceProvider>
       </body>
