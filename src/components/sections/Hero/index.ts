@@ -2,7 +2,7 @@
 export { Hero } from "./Hero";
 export { HeroWithEffects } from "./HeroWithEffects";
 export { HeroContent } from "./HeroContent";
-export { TypewriterText } from "./TypewriterText";
+// TypewriterText moved to @/components/ui/AnimatedText
 export { HeroVisual } from "./HeroVisual";
 export { HeroMetrics } from "./HeroMetrics";
 export { HeroCTA } from "./HeroCTA";

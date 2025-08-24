@@ -4,5 +4,9 @@ export { useThemeTransition } from "./useThemeTransition";
 export { useScrollProgress } from "./useScrollProgress";
 export { useIntersectionObserver } from "./useIntersectionObserver";
 export { useAnimatedCounter } from "./useAnimatedCounter";
+export {
+  useAnimationPerformance,
+  useAdaptiveAnimation,
+} from "./useAnimationPerformance";
 // export { useParallax } from './useParallax';
 // export { usePerformanceMonitor } from './usePerformanceMonitor';

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useThemeContext } from "@/contexts/ThemeContext";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { TypewriterText } from "./TypewriterText";
+import { TypewriterText } from "@/components/ui/AnimatedText";
 import { HeroMetrics } from "./HeroMetrics";
 import { HeroVisual } from "./HeroVisual";
 import { HeroCTA } from "./HeroCTA";

@@ -2,5 +2,5 @@
 export * from "./BrutalButton";
 export * from "./BrutalCard";
 export * from "./BrutalInput";
-// export * from './AnimatedText';
+export * from "./AnimatedText";
 // export * from './Modal';
