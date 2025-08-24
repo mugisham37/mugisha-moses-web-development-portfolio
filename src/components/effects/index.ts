@@ -7,3 +7,9 @@ export { BackgroundStripes } from "./BackgroundStripes";
 export { BackgroundEffects } from "./BackgroundEffects";
 export { GlitchEffect } from "./GlitchEffect";
 export { CursorTrail } from "./CursorTrail";
+export { VisualEffectsLibrary } from "./VisualEffectsLibrary";
+export { EffectPerformanceMonitor } from "./EffectPerformanceMonitor";
+export { EffectsShowcase } from "./EffectsShowcase";
+
+// Effect types
+export type { EffectType } from "./VisualEffectsLibrary";

@@ -17,6 +17,9 @@ interface CursorTrailProps {
   trailSize?: number;
   trailColor?: string;
   className?: string;
+  enablePerformanceMonitoring?: boolean;
+  adaptiveQuality?: boolean;
+  particleMode?: boolean;
 }
 
 export const CursorTrail: React.FC<CursorTrailProps> = ({
@@ -26,11 +29,25 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
   trailSize = 4,
   trailColor,
   className = "",
+  enablePerformanceMonitoring = false,
+  adaptiveQuality = true,
+  particleMode = false,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trailPointsRef = useRef<TrailPoint[]>([]);
   const animationRef = useRef<number>();
   const [isVisible, setIsVisible] = useState(false);
+  const performanceRef = useRef<{
+    frameCount: number;
+    lastTime: number;
+    fps: number;
+    quality: number;
+  }>({
+    frameCount: 0,
+    lastTime: 0,
+    fps: 60,
+    quality: 1,
+  });
 
   // Theme-aware trail colors
   const getTrailColor = useCallback(() => {
@@ -72,7 +89,42 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
     });
   }, []);
 
-  // Render trail
+  // Performance monitoring
+  const updatePerformance = useCallback(() => {
+    if (!enablePerformanceMonitoring) return;
+
+    const now = performance.now();
+    performanceRef.current.frameCount++;
+
+    if (now - performanceRef.current.lastTime >= 1000) {
+      performanceRef.current.fps = performanceRef.current.frameCount;
+      performanceRef.current.frameCount = 0;
+      performanceRef.current.lastTime = now;
+
+      // Adaptive quality based on performance
+      if (adaptiveQuality) {
+        if (performanceRef.current.fps < 30) {
+          performanceRef.current.quality = Math.max(
+            0.3,
+            performanceRef.current.quality - 0.1
+          );
+        } else if (performanceRef.current.fps > 50) {
+          performanceRef.current.quality = Math.min(
+            1,
+            performanceRef.current.quality + 0.05
+          );
+        }
+      }
+
+      if (enablePerformanceMonitoring && performanceRef.current.fps < 30) {
+        console.warn(
+          `CursorTrail performance: ${performanceRef.current.fps} FPS (Quality: ${performanceRef.current.quality.toFixed(2)})`
+        );
+      }
+    }
+  }, [enablePerformanceMonitoring, adaptiveQuality]);
+
+  // Enhanced render trail with performance optimizations
   const renderTrail = useCallback(
     (ctx: CanvasRenderingContext2D) => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -80,82 +132,168 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
       if (trailPointsRef.current.length < 2) return;
 
       const color = getTrailColor();
+      const quality = adaptiveQuality ? performanceRef.current.quality : 1;
+      const effectiveTrailLength = Math.floor(trailLength * quality);
+      const points = trailPointsRef.current.slice(-effectiveTrailLength);
 
       if (theme === "extreme-brutalist") {
-        // Pixelated, brutal trail
-        trailPointsRef.current.forEach((point, index) => {
-          ctx.save();
-          ctx.globalAlpha = point.opacity;
-          ctx.fillStyle = color;
+        if (particleMode) {
+          // Particle-based brutal trail
+          points.forEach((point, index) => {
+            ctx.save();
+            ctx.globalAlpha = point.opacity * quality;
 
-          const size = trailSize * (1 - index / trailPointsRef.current.length);
-          ctx.fillRect(
-            Math.floor(point.x - size / 2),
-            Math.floor(point.y - size / 2),
-            Math.ceil(size),
-            Math.ceil(size)
-          );
+            // Create pixelated particles
+            const size = trailSize * (1 - index / points.length) * quality;
+            const pixelSize = Math.max(2, Math.floor(size / 2));
 
-          // Add brutal border
-          ctx.strokeStyle = "#000000";
-          ctx.lineWidth = 1;
-          ctx.strokeRect(
-            Math.floor(point.x - size / 2),
-            Math.floor(point.y - size / 2),
-            Math.ceil(size),
-            Math.ceil(size)
-          );
+            // Main particle
+            ctx.fillStyle = color;
+            ctx.fillRect(
+              Math.floor(point.x - pixelSize / 2),
+              Math.floor(point.y - pixelSize / 2),
+              pixelSize,
+              pixelSize
+            );
 
-          ctx.restore();
-        });
+            // Brutal border
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
+            ctx.strokeRect(
+              Math.floor(point.x - pixelSize / 2),
+              Math.floor(point.y - pixelSize / 2),
+              pixelSize,
+              pixelSize
+            );
+
+            // Add spark effects for recent points
+            if (index > points.length - 5) {
+              const sparkCount = Math.floor(3 * quality);
+              for (let i = 0; i < sparkCount; i++) {
+                const sparkX = point.x + (Math.random() - 0.5) * size * 2;
+                const sparkY = point.y + (Math.random() - 0.5) * size * 2;
+                const sparkSize = Math.max(1, Math.floor(pixelSize / 3));
+
+                ctx.fillStyle = index % 2 === 0 ? "#ffff00" : color;
+                ctx.fillRect(
+                  Math.floor(sparkX - sparkSize / 2),
+                  Math.floor(sparkY - sparkSize / 2),
+                  sparkSize,
+                  sparkSize
+                );
+              }
+            }
+
+            ctx.restore();
+          });
+        } else {
+          // Traditional pixelated trail
+          points.forEach((point, index) => {
+            ctx.save();
+            ctx.globalAlpha = point.opacity * quality;
+            ctx.fillStyle = color;
+
+            const size = trailSize * (1 - index / points.length) * quality;
+            ctx.fillRect(
+              Math.floor(point.x - size / 2),
+              Math.floor(point.y - size / 2),
+              Math.ceil(size),
+              Math.ceil(size)
+            );
+
+            // Add brutal border
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
+            ctx.strokeRect(
+              Math.floor(point.x - size / 2),
+              Math.floor(point.y - size / 2),
+              Math.ceil(size),
+              Math.ceil(size)
+            );
+
+            ctx.restore();
+          });
+        }
       } else {
-        // Smooth, refined trail
+        // Refined theme rendering
         ctx.save();
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
 
-        // Create gradient trail
-        trailPointsRef.current.forEach((point, index) => {
-          if (index === 0) return;
+        if (particleMode) {
+          // Smooth particle trail
+          points.forEach((point, index) => {
+            ctx.save();
+            const progress = index / points.length;
+            const size = trailSize * (1 - progress) * quality;
 
-          const prevPoint = trailPointsRef.current[index - 1];
-          const progress = index / trailPointsRef.current.length;
+            ctx.globalAlpha = point.opacity * (1 - progress) * quality;
+            ctx.fillStyle = color;
+            ctx.shadowBlur = size;
+            ctx.shadowColor = color;
 
-          ctx.globalAlpha = point.opacity * (1 - progress);
-          ctx.strokeStyle = color;
-          ctx.lineWidth = trailSize * (1 - progress);
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, size / 2, 0, Math.PI * 2);
+            ctx.fill();
 
-          ctx.beginPath();
-          ctx.moveTo(prevPoint.x, prevPoint.y);
-          ctx.lineTo(point.x, point.y);
-          ctx.stroke();
-        });
+            ctx.restore();
+          });
+        } else {
+          // Smooth line trail
+          points.forEach((point, index) => {
+            if (index === 0) return;
 
-        // Add glow effect
-        ctx.shadowBlur = trailSize * 2;
-        ctx.shadowColor = color;
-        ctx.globalCompositeOperation = "lighter";
+            const prevPoint = points[index - 1];
+            const progress = index / points.length;
 
-        trailPointsRef.current.forEach((point, index) => {
-          if (index === 0) return;
+            ctx.globalAlpha = point.opacity * (1 - progress) * quality;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = trailSize * (1 - progress) * quality;
 
-          const prevPoint = trailPointsRef.current[index - 1];
-          const progress = index / trailPointsRef.current.length;
+            ctx.beginPath();
+            ctx.moveTo(prevPoint.x, prevPoint.y);
+            ctx.lineTo(point.x, point.y);
+            ctx.stroke();
+          });
 
-          ctx.globalAlpha = point.opacity * (1 - progress) * 0.5;
-          ctx.strokeStyle = color;
-          ctx.lineWidth = trailSize * (1 - progress) * 0.5;
+          // Add glow effect if quality allows
+          if (quality > 0.7) {
+            ctx.shadowBlur = trailSize * 2;
+            ctx.shadowColor = color;
+            ctx.globalCompositeOperation = "lighter";
 
-          ctx.beginPath();
-          ctx.moveTo(prevPoint.x, prevPoint.y);
-          ctx.lineTo(point.x, point.y);
-          ctx.stroke();
-        });
+            points.forEach((point, index) => {
+              if (index === 0) return;
+
+              const prevPoint = points[index - 1];
+              const progress = index / points.length;
+
+              ctx.globalAlpha = point.opacity * (1 - progress) * 0.5 * quality;
+              ctx.strokeStyle = color;
+              ctx.lineWidth = trailSize * (1 - progress) * 0.5 * quality;
+
+              ctx.beginPath();
+              ctx.moveTo(prevPoint.x, prevPoint.y);
+              ctx.lineTo(point.x, point.y);
+              ctx.stroke();
+            });
+          }
+        }
 
         ctx.restore();
       }
+
+      updatePerformance();
     },
-    [theme, trailSize, getTrailColor]
+    [
+      theme,
+      trailSize,
+      getTrailColor,
+      trailLength,
+      adaptiveQuality,
+      particleMode,
+      updatePerformance,
+    ]
   );
 
   // Animation loop
