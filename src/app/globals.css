@@ -7,6 +7,9 @@
 @import "../styles/animations/hover-effects.css";
 @import "../styles/animations/loading-animations.css";
 @import "../styles/components/navigation.css";
+@import "../styles/components/hero.css";
+@import "../styles/components/hero-content.css";
+@import "../styles/components/hero-metrics.css";
 
 @tailwind base;
 @tailwind components;

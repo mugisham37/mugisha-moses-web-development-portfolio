@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/sections/Navigation";
+import { HeroWithEffects, HeroContent } from "@/components/sections/Hero";
 import { ThemeDetector } from "@/components/theme/ThemeDetector";
 
 export default function Home() {
@@ -6,25 +7,10 @@ export default function Home() {
     <ThemeDetector>
       <Navigation />
       <main className="min-h-screen bg-current text-current">
-        {/* Hero Section - Extreme Brutalist Theme */}
-        <section className="min-h-screen flex items-center justify-center">
-          <div className="container mx-auto px-4 py-8 text-center">
-            <h1 className="text-6xl font-bold text-current font-primary mb-8">
-              BRUTALIST PORTFOLIO
-            </h1>
-            <p className="text-xl text-current mb-8">
-              Next.js 14 project with dual-theme brutalist architecture.
-            </p>
-            <div className="brutal-border p-6 bg-accent text-current inline-block mb-8">
-              <span className="font-code">EXTREME BRUTALIST THEME ACTIVE</span>
-            </div>
-            <div className="brutal-border p-4 bg-secondary text-current">
-              <p className="font-code">
-                SCROLL DOWN TO SEE THEME TRANSITION AT 40%
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Hero Section with Background Effects System */}
+        <HeroWithEffects>
+          <HeroContent />
+        </HeroWithEffects>
 
         {/* Transition Section */}
         <section className="min-h-screen flex items-center justify-center">

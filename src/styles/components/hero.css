@@ -1,0 +1,560 @@
+/* ===== HERO SECTION STYLES ===== */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hero-bg, var(--current-bg));
+  color: var(--hero-text, var(--current-text));
+  transition: all var(--theme-transition-duration)
+    var(--theme-transition-easing);
+}
+
+/* ===== BACKGROUND EFFECTS LAYER ===== */
+
+.hero__background-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Background Pattern */
+.hero__background-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  background-image:
+    radial-gradient(circle at 25% 25%, var(--hero-accent) 2px, transparent 2px),
+    radial-gradient(
+      circle at 75% 75%,
+      var(--hero-highlight) 1px,
+      transparent 1px
+    );
+  background-size:
+    50px 50px,
+    30px 30px;
+  animation: patternMove 20s linear infinite;
+}
+
+/* Background Grid */
+.hero__background-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  background-image:
+    linear-gradient(var(--hero-text) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hero-text) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 15s linear infinite;
+}
+
+/* Background Stripes */
+.hero__background-stripes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.08;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--hero-accent),
+    var(--hero-accent) 2px,
+    transparent 2px,
+    transparent 20px
+  );
+  animation: stripesMove 25s linear infinite;
+}
+
+/* Scan Lines */
+.hero__scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--hero-highlight) 2px,
+    var(--hero-highlight) 4px
+  );
+  animation: scanMove 8s linear infinite;
+}
+
+/* Noise Texture */
+.hero__noise-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  background-image:
+    radial-gradient(circle at 20% 80%, var(--hero-text) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, var(--hero-accent) 1px, transparent 1px),
+    radial-gradient(
+      circle at 40% 40%,
+      var(--hero-highlight) 1px,
+      transparent 1px
+    );
+  background-size:
+    15px 15px,
+    20px 20px,
+    25px 25px;
+  animation: noiseMove 12s linear infinite;
+}
+
+/* ===== HERO CONTAINER ===== */
+
+.hero__container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--component-spacing);
+  align-items: center;
+  min-height: 80vh;
+}
+
+/* ===== PERFORMANCE OVERLAY ===== */
+
+.hero__performance-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  background: transparent;
+  will-change: transform;
+}
+
+/* ===== THEME-SPECIFIC STYLES ===== */
+
+/* Extreme Brutalist Theme */
+.hero--extreme-brutalist {
+  background: var(--extreme-bg);
+  color: var(--extreme-text);
+}
+
+.hero--extreme-brutalist::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(
+      45deg,
+      transparent 49%,
+      var(--extreme-accent) 49%,
+      var(--extreme-accent) 51%,
+      transparent 51%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 49%,
+      var(--extreme-text) 49%,
+      var(--extreme-text) 51%,
+      transparent 51%
+    );
+  background-size:
+    100px 100px,
+    120px 120px;
+  background-position:
+    0 0,
+    60px 60px;
+  opacity: 0.03;
+  z-index: 1;
+  animation: brutalistPattern 20s linear infinite;
+}
+
+.hero--extreme-brutalist .hero__container {
+  border: var(--extreme-border-width) var(--extreme-border-style)
+    var(--extreme-text);
+  box-shadow: var(--extreme-shadow-brutal) var(--extreme-accent);
+  background: var(--extreme-bg);
+}
+
+.hero--extreme-brutalist .hero__grid {
+  padding: calc(var(--component-spacing) * 1.5);
+}
+
+/* Refined Brutalist Theme */
+.hero--refined-brutalist {
+  background: linear-gradient(
+    135deg,
+    var(--refined-bg) 0%,
+    var(--refined-secondary) 100%
+  );
+  color: var(--refined-text);
+}
+
+.hero--refined-brutalist::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(
+      circle at 25% 25%,
+      var(--refined-accent) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      var(--refined-highlight) 0%,
+      transparent 50%
+    );
+  opacity: 0.05;
+  z-index: 1;
+  animation: refinedGlow 15s ease-in-out infinite alternate;
+}
+
+.hero--refined-brutalist .hero__container {
+  border: var(--refined-border-width) var(--refined-border-style)
+    var(--refined-accent);
+  border-radius: var(--refined-border-radius);
+  box-shadow: var(--refined-shadow-elevated);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.hero--refined-brutalist .hero__grid {
+  padding: var(--component-spacing);
+}
+
+/* ===== EFFECT COMPONENT STYLES ===== */
+
+/* Particle System */
+.particle-system {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.particle-system--extreme-brutalist .particle-system__canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.particle-system--refined-brutalist .particle-system__canvas {
+  filter: blur(0.5px);
+}
+
+/* Grid Background */
+.grid-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.grid-background--extreme-brutalist .grid-background__canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.grid-background--refined-brutalist .grid-background__canvas {
+  filter: blur(0.3px);
+}
+
+/* Background Stripes */
+.background-stripes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.background-stripes--extreme-brutalist .background-stripes__canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Scan Lines */
+.scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.scan-lines--extreme-brutalist .scan-lines__canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Noise Texture */
+.noise-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.noise-texture--extreme-brutalist .noise-texture__canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes brutalistPattern {
+  0% {
+    background-position:
+      0 0,
+      60px 60px;
+  }
+  100% {
+    background-position:
+      100px 100px,
+      160px 160px;
+  }
+}
+
+@keyframes refinedGlow {
+  0% {
+    opacity: 0.03;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.08;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes patternMove {
+  0% {
+    background-position:
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      50px 50px,
+      30px 30px;
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+@keyframes stripesMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+@keyframes scanMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 20px;
+  }
+}
+
+@keyframes noiseMove {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      15px 15px,
+      20px 20px,
+      25px 25px;
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (min-width: 768px) {
+  .hero__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--component-spacing) * 1.5);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero__grid {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: calc(var(--component-spacing) * 2);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 90vh;
+  }
+
+  .hero__grid {
+    min-height: 70vh;
+    gap: calc(var(--component-spacing) * 0.75);
+  }
+
+  .hero--extreme-brutalist .hero__container {
+    border-width: 4px;
+    box-shadow: 4px 4px 0 var(--extreme-accent);
+  }
+
+  .hero--extreme-brutalist .hero__grid,
+  .hero--refined-brutalist .hero__grid {
+    padding: calc(var(--component-spacing) * 0.75);
+  }
+
+  /* Reduce effect intensity on mobile */
+  .hero__background-effects {
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 85vh;
+  }
+
+  .hero__grid {
+    min-height: 65vh;
+    gap: calc(var(--component-spacing) * 0.5);
+  }
+
+  .hero--extreme-brutalist .hero__container {
+    border-width: 2px;
+    box-shadow: 2px 2px 0 var(--extreme-accent);
+  }
+
+  .hero--extreme-brutalist .hero__grid,
+  .hero--refined-brutalist .hero__grid {
+    padding: calc(var(--component-spacing) * 0.5);
+  }
+
+  /* Further reduce effects on small mobile */
+  .hero__background-effects {
+    opacity: 0.5;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .hero__background-effects * {
+    animation: none !important;
+  }
+
+  .hero__background-effects {
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .hero--extreme-brutalist .hero__container {
+    border-width: 4px;
+  }
+
+  .hero--refined-brutalist .hero__container {
+    border-width: 3px;
+    backdrop-filter: none;
+    background: var(--refined-bg);
+  }
+}
+
+/* ===== ENHANCED HERO WITH EFFECTS ===== */
+
+.hero--with-effects .hero__background-effects {
+  /* Layer canvas effects above CSS effects */
+}
+
+.hero__effect-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+.hero,
+.hero__background-effects,
+.hero__container {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.hero__background-effects canvas {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* GPU acceleration for smooth animations */
+@supports (backdrop-filter: blur(10px)) {
+  .hero--refined-brutalist .hero__container {
+    backdrop-filter: blur(10px);
+  }
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+  .hero--refined-brutalist .hero__container {
+    background: rgba(245, 245, 245, 0.95);
+  }
+}
