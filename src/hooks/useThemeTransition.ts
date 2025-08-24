@@ -3,7 +3,7 @@
 import { useEffect, useCallback, useRef } from "react";
 import { ThemeType, UseThemeTransitionOptions } from "@/types/theme";
 import { useScrollProgress } from "./useScrollProgress";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useThemeContext } from "@/contexts/ThemeContext";
 
 interface UseThemeTransitionReturn {
   currentScrollProgress: number;
@@ -25,7 +25,7 @@ export const useThemeTransition = (
 ): UseThemeTransitionReturn => {
   const config = { ...DEFAULT_OPTIONS, ...options };
   const { progress: scrollProgress } = useScrollProgress({ throttleMs: 16 });
-  const { currentTheme, setTheme, isTransitioning } = useTheme();
+  const { currentTheme, setTheme, isTransitioning } = useThemeContext();
 
   // Hysteresis values to prevent rapid theme switching
   const hysteresisRef = useRef({

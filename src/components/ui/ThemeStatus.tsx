@@ -4,7 +4,8 @@ import React from "react";
 import { useThemeDetector } from "@/components/theme";
 
 export const ThemeStatus: React.FC = () => {
-  const { scrollProgress, isTransitioning, activeTheme } = useThemeDetector();
+  const { currentScrollProgress, isTransitioning, activeTheme } =
+    useThemeDetector();
 
   return (
     <div className="fixed top-4 right-4 z-50 p-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg">
@@ -15,7 +16,7 @@ export const ThemeStatus: React.FC = () => {
         <div>
           Progress:{" "}
           <span className="font-bold">
-            {(scrollProgress * 100).toFixed(1)}%
+            {(currentScrollProgress * 100).toFixed(1)}%
           </span>
         </div>
         <div>

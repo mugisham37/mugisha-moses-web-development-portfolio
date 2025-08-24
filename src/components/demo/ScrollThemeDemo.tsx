@@ -4,7 +4,7 @@ import React from "react";
 import { ThemeDetector, useThemeDetector } from "@/components/theme";
 
 const ScrollThemeDemo: React.FC = () => {
-  const { scrollProgress, isTransitioning, activeTheme, getThemeClass } =
+  const { currentScrollProgress, isTransitioning, activeTheme, getThemeClass } =
     useThemeDetector();
 
   return (
@@ -14,7 +14,7 @@ const ScrollThemeDemo: React.FC = () => {
         <div className="fixed top-4 right-4 z-50 p-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg">
           <div className="text-sm font-mono">
             <div>Theme: {activeTheme}</div>
-            <div>Progress: {(scrollProgress * 100).toFixed(1)}%</div>
+            <div>Progress: {(currentScrollProgress * 100).toFixed(1)}%</div>
             <div>Transitioning: {isTransitioning ? "Yes" : "No"}</div>
           </div>
         </div>

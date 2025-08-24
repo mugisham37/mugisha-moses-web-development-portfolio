@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode, useEffect, useState } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useThemeContext } from "@/contexts/ThemeContext";
 import { ThemeType } from "@/types/theme";
 
 interface ThemeTransitionProps {
@@ -19,7 +19,8 @@ export const ThemeTransition: React.FC<ThemeTransitionProps> = ({
   className = "",
   transitionDuration = 600,
 }) => {
-  const { currentTheme, isTransitioning, transitionProgress } = useTheme();
+  const { currentTheme, isTransitioning, transitionProgress } =
+    useThemeContext();
   const [transitionClass, setTransitionClass] = useState("");
 
   useEffect(() => {
@@ -54,7 +55,8 @@ export const ThemeTransition: React.FC<ThemeTransitionProps> = ({
  * Hook to get theme transition state for custom animations
  */
 export const useThemeTransition = () => {
-  const { isTransitioning, transitionProgress, currentTheme } = useTheme();
+  const { isTransitioning, transitionProgress, currentTheme } =
+    useThemeContext();
 
   return {
     isTransitioning,

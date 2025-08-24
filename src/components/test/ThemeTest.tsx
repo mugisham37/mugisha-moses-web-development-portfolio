@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useThemeContext } from "@/contexts/ThemeContext";
 
 /**
  * Test component to verify theme system functionality
@@ -14,7 +14,7 @@ export const ThemeTest: React.FC = () => {
     transitionProgress,
     setTheme,
     config,
-  } = useTheme();
+  } = useThemeContext();
 
   return (
     <div className="theme-test p-4 border-2 border-current">

@@ -201,10 +201,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 };
 
 // Custom hook to use theme context
-export const useTheme = (): ThemeContextType => {
+export const useThemeContext = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error("useThemeContext must be used within a ThemeProvider");
   }
   return context;
 };
