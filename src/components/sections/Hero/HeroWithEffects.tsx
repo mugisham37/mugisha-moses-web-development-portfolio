@@ -17,43 +17,10 @@ const ParticleSystem = dynamic(
   }
 );
 
-const GridBackground = dynamic(
+const BackgroundEffects = dynamic(
   () =>
-    import("@/components/effects/GridBackground").then((mod) => ({
-      default: mod.GridBackground,
-    })),
-  {
-    ssr: false,
-    loading: () => <div className="hero__effect-loading" aria-hidden="true" />,
-  }
-);
-
-const ScanLines = dynamic(
-  () =>
-    import("@/components/effects/ScanLines").then((mod) => ({
-      default: mod.ScanLines,
-    })),
-  {
-    ssr: false,
-    loading: () => <div className="hero__effect-loading" aria-hidden="true" />,
-  }
-);
-
-const NoiseTexture = dynamic(
-  () =>
-    import("@/components/effects/NoiseTexture").then((mod) => ({
-      default: mod.NoiseTexture,
-    })),
-  {
-    ssr: false,
-    loading: () => <div className="hero__effect-loading" aria-hidden="true" />,
-  }
-);
-
-const BackgroundStripes = dynamic(
-  () =>
-    import("@/components/effects/BackgroundStripes").then((mod) => ({
-      default: mod.BackgroundStripes,
+    import("@/components/effects/BackgroundEffects").then((mod) => ({
+      default: mod.BackgroundEffects,
     })),
   {
     ssr: false,
@@ -168,37 +135,13 @@ export const HeroWithEffects: React.FC<HeroWithEffectsProps> = ({
               performanceMode="medium"
             />
 
-            <GridBackground
+            <BackgroundEffects
               theme={currentTheme}
               isActive={isVisible}
-              gridSize={currentTheme === "extreme-brutalist" ? 40 : 60}
-              opacity={currentTheme === "extreme-brutalist" ? 0.2 : 0.1}
-              animationSpeed={currentTheme === "extreme-brutalist" ? 2 : 1}
-            />
-
-            <BackgroundStripes
-              theme={currentTheme}
-              isActive={isVisible}
-              stripeCount={currentTheme === "extreme-brutalist" ? 6 : 4}
-              direction={
-                currentTheme === "extreme-brutalist" ? "diagonal" : "horizontal"
-              }
-              speed={currentTheme === "extreme-brutalist" ? 2 : 1}
-            />
-
-            <ScanLines
-              theme={currentTheme}
-              isActive={isVisible}
-              lineCount={currentTheme === "extreme-brutalist" ? 8 : 4}
-              speed={currentTheme === "extreme-brutalist" ? 1.5 : 1}
-              opacity={currentTheme === "extreme-brutalist" ? 0.3 : 0.15}
-            />
-
-            <NoiseTexture
-              theme={currentTheme}
-              isActive={isVisible}
-              intensity={currentTheme === "extreme-brutalist" ? 0.1 : 0.05}
-              scale={currentTheme === "extreme-brutalist" ? 1 : 0.8}
+              enableGrid={true}
+              enableScanLines={true}
+              enableNoise={true}
+              enableStripes={true}
             />
           </>
         )}

@@ -33,6 +33,7 @@
 @import "../styles/components/brutal-form.css";
 @import "../styles/components/animated-text.css";
 @import "../styles/components/brutal-modal.css";
+@import "../styles/components/effects.css";
 
 @tailwind base;
 @tailwind components;
