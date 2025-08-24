@@ -7,78 +7,48 @@
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: var(--theme-z-background);
   overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.results-effects--visible {
+  opacity: 1;
 }
 
 .results-effects--extreme-brutalist {
-  --effect-primary: #ffff00;
-  --effect-secondary: #00ff00;
-  --effect-tertiary: #00ffff;
-  --effect-accent: #ffffff;
+  --effects-primary: #ffff00;
+  --effects-secondary: #00ff00;
+  --effects-accent: #00ffff;
 }
 
 .results-effects--refined-brutalist {
-  --effect-primary: #8b5cf6;
-  --effect-secondary: #10b981;
-  --effect-tertiary: #06b6d4;
-  --effect-accent: #f5f5f5;
+  --effects-primary: #8b5cf6;
+  --effects-secondary: #10b981;
+  --effects-accent: #06b6d4;
 }
 
-/* Success Particles Canvas */
-.results-particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.8;
-}
-
-/* Golden Grid Background */
-.results-grid-bg {
+/* Success Particles */
+.success-particles {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.05;
 }
 
-.grid-lines {
+.success-particle {
   position: absolute;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--effect-primary) 50%,
-    transparent 100%
-  );
+  width: 4px;
+  height: 4px;
+  background: var(--effects-secondary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--effects-secondary);
+  animation: particleFloat 4s ease-in-out infinite;
 }
 
-.grid-lines--vertical {
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  left: 50%;
-  animation: gridPulseVertical 4s ease-in-out infinite;
-}
-
-.grid-lines--horizontal {
-  left: 0;
-  right: 0;
-  height: 1px;
-  top: 50%;
-  background: linear-gradient(
-    0deg,
-    transparent 0%,
-    var(--effect-primary) 50%,
-    transparent 100%
-  );
-  animation: gridPulseHorizontal 4s ease-in-out infinite 2s;
-}
-
-/* Animated Background Gradients */
-.results-gradients {
+/* Golden Grid */
+.golden-grid {
   position: absolute;
   top: 0;
   left: 0;
@@ -87,195 +57,230 @@
   opacity: 0.1;
 }
 
-.gradient-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  animation: float 8s ease-in-out infinite;
-}
-
-.gradient-orb--1 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(
-    circle,
-    var(--effect-primary) 0%,
-    transparent 70%
-  );
-  top: 20%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.gradient-orb--2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(
-    circle,
-    var(--effect-secondary) 0%,
-    transparent 70%
-  );
-  top: 60%;
-  right: 15%;
-  animation-delay: 2s;
-}
-
-.gradient-orb--3 {
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(
-    circle,
-    var(--effect-tertiary) 0%,
-    transparent 70%
-  );
-  bottom: 20%;
-  left: 50%;
-  animation-delay: 4s;
-}
-
-/* Success Streams */
-.success-streams {
+.grid-lines {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.3;
+}
+
+.grid-line {
+  position: absolute;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--effects-primary) 50%,
+    transparent 100%
+  );
+  animation: gridPulse 3s ease-in-out infinite;
+}
+
+.grid-lines--horizontal .grid-line {
+  width: 100%;
+  height: 1px;
+}
+
+.grid-lines--vertical .grid-line {
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    transparent 0%,
+    var(--effects-primary) 50%,
+    transparent 100%
+  );
+}
+
+/* Achievement Streams */
+.achievement-streams {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .stream {
   position: absolute;
+  top: 0;
+  bottom: 0;
   width: 2px;
-  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stream--left {
+  left: 10%;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    var(--effect-secondary) 50%,
+    var(--effects-accent) 50%,
     transparent 100%
   );
-  animation: streamFlow 3s linear infinite;
 }
 
-.stream--1 {
+.stream--right {
+  right: 10%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--effects-accent) 50%,
+    transparent 100%
+  );
+}
+
+.stream-item {
+  font-size: 16px;
+  filter: drop-shadow(0 0 8px currentColor);
+  animation: streamFlow 3s ease-in-out infinite;
+}
+
+/* Background Glow */
+.background-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: orbFloat 6s ease-in-out infinite;
+}
+
+.glow-orb--primary {
+  width: 200px;
+  height: 200px;
+  background: var(--effects-primary);
+  top: 20%;
   left: 20%;
-  animation-delay: 0s;
+  opacity: 0.1;
 }
 
-.stream--2 {
-  left: 60%;
-  animation-delay: 1s;
-}
-
-.stream--3 {
-  right: 25%;
+.glow-orb--secondary {
+  width: 150px;
+  height: 150px;
+  background: var(--effects-secondary);
+  top: 60%;
+  right: 20%;
+  opacity: 0.15;
   animation-delay: 2s;
 }
 
-/* Enhanced Effects for Refined Theme */
-.results-effects--refined-brutalist .results-particles {
-  opacity: 0.6;
-}
-
-.results-effects--refined-brutalist .results-gradients {
-  opacity: 0.15;
-}
-
-.results-effects--refined-brutalist .gradient-orb {
-  filter: blur(80px);
-}
-
-.results-effects--refined-brutalist .success-streams {
+.glow-orb--accent {
+  width: 100px;
+  height: 100px;
+  background: var(--effects-accent);
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 0.2;
-}
-
-/* Performance Optimizations */
-@media (prefers-reduced-motion: reduce) {
-  .results-effects * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .results-effects {
-    opacity: 0.7;
-  }
-
-  .gradient-orb {
-    filter: blur(40px);
-  }
-
-  .gradient-orb--1 {
-    width: 200px;
-    height: 200px;
-  }
-
-  .gradient-orb--2 {
-    width: 250px;
-    height: 250px;
-  }
-
-  .gradient-orb--3 {
-    width: 150px;
-    height: 150px;
-  }
+  animation-delay: 4s;
 }
 
 /* Animations */
-@keyframes gridPulseVertical {
+@keyframes particleFloat {
   0%,
   100% {
-    opacity: 0.05;
-    transform: translateX(-50%) scaleY(1);
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
   }
   50% {
-    opacity: 0.2;
-    transform: translateX(-50%) scaleY(1.5);
+    transform: translateY(-20px) scale(1.2);
+    opacity: 1;
   }
 }
 
-@keyframes gridPulseHorizontal {
+@keyframes gridPulse {
   0%,
   100% {
-    opacity: 0.05;
-    transform: translateY(-50%) scaleX(1);
+    opacity: 0.1;
   }
   50% {
-    opacity: 0.2;
-    transform: translateY(-50%) scaleX(1.5);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(20px, -20px) scale(1.1);
-  }
-  50% {
-    transform: translate(-10px, -40px) scale(0.9);
-  }
-  75% {
-    transform: translate(-30px, -10px) scale(1.05);
+    opacity: 0.3;
   }
 }
 
 @keyframes streamFlow {
-  0% {
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
+  0%,
   100% {
-    transform: translateY(calc(100vh + 100px));
-    opacity: 0;
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes orbFloat {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(10px, -10px) scale(1.1);
+  }
+  66% {
+    transform: translate(-10px, 10px) scale(0.9);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .success-particle {
+    width: 3px;
+    height: 3px;
+  }
+
+  .stream-item {
+    font-size: 14px;
+  }
+
+  .glow-orb--primary {
+    width: 150px;
+    height: 150px;
+  }
+
+  .glow-orb--secondary {
+    width: 100px;
+    height: 100px;
+  }
+
+  .glow-orb--accent {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .success-particle {
+    width: 2px;
+    height: 2px;
+  }
+
+  .stream-item {
+    font-size: 12px;
+  }
+
+  .glow-orb--primary {
+    width: 100px;
+    height: 100px;
+  }
+
+  .glow-orb--secondary {
+    width: 80px;
+    height: 80px;
+  }
+
+  .glow-orb--accent {
+    width: 60px;
+    height: 60px;
   }
 }
