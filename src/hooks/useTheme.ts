@@ -3,6 +3,7 @@
 import { useContext, useMemo, useCallback } from "react";
 import { ThemeContext } from "@/contexts/ThemeContext";
 import { ThemeType, ThemeConfig } from "@/types/theme";
+import { trackThemeChange } from "@/utils/analytics";
 
 // Enhanced useTheme hook with additional utilities
 export const useTheme = () => {
@@ -124,7 +125,7 @@ export const useThemeAnimation = (animationName: string) => {
       animationTimingFunction: easing,
       animationName: themeAnimation ? undefined : animationName,
     };
-  }, [config.animations, animationName]);
+  }, [config, animationName]);
 };
 
 // Hook for theme transition utilities
@@ -137,8 +138,12 @@ export const useThemeTransitionUtils = () => {
       currentTheme === "extreme-brutalist"
         ? "refined-brutalist"
         : "extreme-brutalist";
+
+    // Track theme change with analytics
+    trackThemeChange(newTheme, transitionProgress);
+
     setTheme(newTheme);
-  }, [currentTheme, setTheme]);
+  }, [currentTheme, setTheme, transitionProgress]);
 
   const getTransitionStyle = useCallback(
     (fromValue: string | number, toValue: string | number) => {

@@ -1,21 +1,9 @@
-// Optional bundle analyzer - only load if available
-let BundleAnalyzerPlugin;
-try {
-  BundleAnalyzerPlugin =
-    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-} catch (error) {
-  console.warn(
-    "webpack-bundle-analyzer not installed, bundle analysis disabled"
-  );
-}
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enable experimental features for better performance
   experimental: {
-    optimizePackageImports: ["framer-motion", "clsx"],
     optimizeCss: true,
-    webVitalsAttribution: ["CLS", "LCP"],
+    optimizePackageImports: ["framer-motion", "web-vitals"],
   },
 
   // Image optimization configuration
@@ -23,29 +11,79 @@ const nextConfig = {
     formats: ["image/webp", "image/avif"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // Compiler optimizations
-  compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
+  // Webpack configuration for bundle optimization
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    // Bundle analyzer in development
+    if (dev && !isServer) {
+      const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: "disabled",
+          generateStatsFile: true,
+          statsFilename: "bundle-stats.json",
+        })
+      );
+    }
+
+    // Optimize for production
+    if (!dev) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: "all",
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: "vendors",
+              chunks: "all",
+            },
+            analytics: {
+              test: /[\\/]src[\\/]utils[\\/]analytics/,
+              name: "analytics",
+              chunks: "all",
+            },
+            theme: {
+              test: /[\\/]src[\\/]components[\\/]theme/,
+              name: "theme",
+              chunks: "all",
+            },
+          },
+        },
+      };
+    }
+
+    // Add support for importing web-vitals
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "web-vitals": require.resolve("web-vitals"),
+    };
+
+    return config;
   },
 
-  // Performance optimizations
-  poweredByHeader: false,
-  compress: true,
-
-  // Security headers
+  // Headers for security and performance
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: [
+          // Security headers
+          {
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
+          },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
+          },
           {
             key: "X-Frame-Options",
-            value: "DENY",
+            value: "SAMEORIGIN",
           },
           {
             key: "X-Content-Type-Options",
@@ -55,16 +93,33 @@ const nextConfig = {
             key: "Referrer-Policy",
             value: "origin-when-cross-origin",
           },
+          // Performance headers
           {
-            key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
+            key: "X-UA-Compatible",
+            value: "IE=edge",
           },
+        ],
+      },
+      // Cache static assets
+      {
+        source: "/images/(.*)",
+        headers: [
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
         ],
       },
+      {
+        source: "/_next/static/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      // Service worker
       {
         source: "/sw.js",
         headers: [
@@ -77,105 +132,59 @@ const nextConfig = {
     ];
   },
 
-  // Webpack optimizations
-  webpack: (config, { dev, isServer, webpack }) => {
-    // Bundle analyzer for production builds
-    if (
-      process.env.ANALYZE === "true" &&
-      !dev &&
-      !isServer &&
-      BundleAnalyzerPlugin
-    ) {
-      config.plugins.push(
-        new BundleAnalyzerPlugin({
-          analyzerMode: "static",
-          openAnalyzer: false,
-          reportFilename: "../bundle-analyzer-report.html",
-        })
-      );
-    }
+  // Redirects for SEO
+  async redirects() {
+    return [
+      // Add any necessary redirects here
+    ];
+  },
 
-    // CSS Modules are handled automatically by Next.js
+  // Environment variables
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
+  },
 
-    // Tree shaking optimizations
-    config.optimization.usedExports = true;
-    config.optimization.sideEffects = false;
+  // Compiler options
+  compiler: {
+    // Remove console logs in production
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? {
+            exclude: ["error", "warn"],
+          }
+        : false,
+  },
 
-    // Advanced bundle splitting
-    if (!dev && !isServer) {
-      config.optimization.splitChunks = {
-        chunks: "all",
-        minSize: 20000,
-        maxSize: 244000,
-        cacheGroups: {
-          default: false,
-          vendors: false,
+  // Output configuration
+  output: "standalone",
 
-          // Framework chunk (React, Next.js)
-          framework: {
-            name: "framework",
-            chunks: "all",
-            test: /[\\/]node_modules[\\/](react|react-dom|next)[\\/]/,
-            priority: 40,
-            enforce: true,
-          },
+  // Enable SWC minification
+  swcMinify: true,
 
-          // Animation libraries
-          animations: {
-            name: "animations",
-            chunks: "all",
-            test: /[\\/]node_modules[\\/](framer-motion)[\\/]/,
-            priority: 30,
-            enforce: true,
-          },
+  // Disable x-powered-by header
+  poweredByHeader: false,
 
-          // UI libraries
-          ui: {
-            name: "ui",
-            chunks: "all",
-            test: /[\\/]node_modules[\\/](clsx|tailwindcss)[\\/]/,
-            priority: 25,
-            enforce: true,
-          },
+  // Compress responses
+  compress: true,
 
-          // Vendor chunk for other node_modules
-          vendor: {
-            name: "vendor",
-            chunks: "all",
-            test: /[\\/]node_modules[\\/]/,
-            priority: 20,
-            enforce: true,
-          },
+  // Generate ETags for caching
+  generateEtags: true,
 
-          // Common chunk for shared code
-          common: {
-            name: "common",
-            minChunks: 2,
-            chunks: "all",
-            priority: 10,
-            enforce: true,
-          },
-        },
-      };
+  // Enable React strict mode
+  reactStrictMode: true,
 
-      // Module concatenation for better tree shaking
-      config.optimization.concatenateModules = true;
+  // TypeScript configuration
+  typescript: {
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    ignoreBuildErrors: false,
+  },
 
-      // Minimize bundle size
-      config.optimization.minimize = true;
-    }
-
-    // Resolve optimizations
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      "@": require("path").resolve(__dirname, "src"),
-    };
-
-    // Module resolution optimizations
-    config.resolve.modules = ["node_modules"];
-    config.resolve.extensions = [".tsx", ".ts", ".jsx", ".js", ".json"];
-
-    return config;
+  // ESLint configuration
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: false,
   },
 };
 
