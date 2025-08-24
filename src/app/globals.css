@@ -13,6 +13,7 @@
 @import "../styles/components/hero-visual.css";
 @import "../styles/components/hero-cta.css";
 @import "../styles/components/social-proof.css";
+@import "../styles/components/client-logos.css";
 
 @tailwind base;
 @tailwind components;

@@ -3,6 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import { useTheme, useThemeClassName } from "@/hooks/useTheme";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { ClientLogos } from "./ClientLogos";
 
 interface SocialProofProps {
   className?: string;
@@ -76,38 +77,8 @@ export const SocialProof: React.FC<SocialProofProps> = ({ className = "" }) => {
 
         {/* Content Grid */}
         <div className="social-proof__content">
-          {/* Client Showcase */}
-          <div className="social-proof__clients">
-            <h3 className="social-proof__section-title">
-              Trusted by Industry Leaders
-            </h3>
-            <div className="social-proof__client-grid">
-              <div className="social-proof__client-card">
-                <div className="social-proof__client-logo">🏢</div>
-                <div className="social-proof__client-info">
-                  <h4>TechCorp Enterprise</h4>
-                  <p>$2.5M Platform Modernization</p>
-                  <span className="social-proof__client-tier">Enterprise</span>
-                </div>
-              </div>
-              <div className="social-proof__client-card">
-                <div className="social-proof__client-logo">🚀</div>
-                <div className="social-proof__client-info">
-                  <h4>StartupX</h4>
-                  <p>$150K MVP Development</p>
-                  <span className="social-proof__client-tier">Startup</span>
-                </div>
-              </div>
-              <div className="social-proof__client-card">
-                <div className="social-proof__client-logo">📈</div>
-                <div className="social-proof__client-info">
-                  <h4>GrowthCo</h4>
-                  <p>$500K Performance Optimization</p>
-                  <span className="social-proof__client-tier">Growth</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Client Logo Carousel */}
+          <ClientLogos />
 
           {/* Recommendations */}
           <div className="social-proof__recommendations">
