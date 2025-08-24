@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Image from "next/image";
 import { useTheme, useThemeClassName } from "@/hooks/useTheme";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { portfolioData } from "@/data/portfolio";
@@ -51,9 +52,11 @@ export const LinkedInRecommendations: React.FC<
             <div className="linkedin-recommendations__header">
               <div className="linkedin-recommendations__profile">
                 <div className="linkedin-recommendations__avatar">
-                  <img
+                  <Image
                     src={recommendation.profileImage}
                     alt={`${recommendation.name} profile`}
+                    width={60}
+                    height={60}
                     className="linkedin-recommendations__avatar-image"
                     onError={(e) => {
                       // Fallback to initials if image fails to load
@@ -117,23 +120,39 @@ export const LinkedInRecommendations: React.FC<
 
             {/* Recommendation Content */}
             <blockquote className="linkedin-recommendations__content">
-              <div className="linkedin-recommendations__quote-mark">"</div>
+              <div className="linkedin-recommendations__quote-mark">
+                &ldquo;
+              </div>
               <p className="linkedin-recommendations__text">
                 {recommendation.content}
               </p>
               <div className="linkedin-recommendations__quote-mark linkedin-recommendations__quote-mark--end">
-                "
+                &rdquo;
               </div>
             </blockquote>
 
             {/* Card Footer */}
             <div className="linkedin-recommendations__footer">
               <div className="linkedin-recommendations__date">
-                {new Date(recommendation.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+                {(() => {
+                  // Use deterministic date formatting to avoid hydration issues
+                  const date = new Date(recommendation.date + "T00:00:00.000Z");
+                  const months = [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December",
+                  ];
+                  return `${months[date.getUTCMonth()]} ${date.getUTCDate()}, ${date.getUTCFullYear()}`;
+                })()}
               </div>
 
               <div className="linkedin-recommendations__actions">
@@ -145,7 +164,16 @@ export const LinkedInRecommendations: React.FC<
                     👍
                   </span>
                   <span className="linkedin-recommendations__action-count">
-                    {Math.floor(Math.random() * 50) + 10}
+                    {(() => {
+                      // Generate deterministic "random" number based on recommendation ID
+                      let hash = 0;
+                      for (let i = 0; i < recommendation.id.length; i++) {
+                        const char = recommendation.id.charCodeAt(i);
+                        hash = (hash << 5) - hash + char;
+                        hash = hash & hash; // Convert to 32-bit integer
+                      }
+                      return Math.abs(hash % 50) + 10;
+                    })()}
                   </span>
                 </button>
 

@@ -146,7 +146,20 @@ export const portfolioData: PortfolioData = {
         recording: "https://youtube.com/watch?v=example",
         slides: "https://slides.com/example",
         description:
-          "Exploring how to create bold, impactful user interfaces using React and modern CSS techniques.",
+          "Exploring how to create bold, impactful user interfaces using React and modern CSS techniques while maintaining accessibility and performance.",
+      },
+      {
+        id: "nextjs-conf-2024",
+        title: "Scaling Next.js Applications to Handle Millions of Users",
+        event: "Next.js Conference 2024",
+        date: "2024-02-28",
+        location: "Austin, TX",
+        type: "conference" as const,
+        audience: 2500,
+        recording: "https://youtube.com/watch?v=nextjs-scaling",
+        slides: "https://slides.com/nextjs-scaling",
+        description:
+          "Advanced strategies for scaling Next.js applications including server-side optimization, caching strategies, and performance monitoring.",
       },
       {
         id: "js-meetup-2024",
@@ -158,11 +171,24 @@ export const portfolioData: PortfolioData = {
         audience: 150,
         slides: "https://slides.com/example2",
         description:
-          "Deep dive into Next.js performance optimization techniques and real-world case studies.",
+          "Deep dive into Next.js performance optimization techniques and real-world case studies showing 50%+ improvement in Core Web Vitals.",
+      },
+      {
+        id: "web-dev-workshop-2024",
+        title: "Full-Stack TypeScript Workshop: From Zero to Production",
+        event: "Web Development Bootcamp",
+        date: "2024-01-25",
+        location: "Seattle, WA",
+        type: "workshop" as const,
+        audience: 80,
+        slides: "https://slides.com/typescript-workshop",
+        description:
+          "Hands-on workshop covering full-stack TypeScript development with Next.js, Prisma, and deployment strategies.",
       },
       {
         id: "dev-podcast-2024",
-        title: "The Future of Web Development",
+        title:
+          "The Future of Web Development: AI, Performance, and Developer Experience",
         event: "Developer Insights Podcast",
         date: "2024-01-10",
         location: "Remote",
@@ -170,7 +196,20 @@ export const portfolioData: PortfolioData = {
         audience: 5000,
         recording: "https://podcast.com/episode/123",
         description:
-          "Discussion about emerging trends in web development and the evolution of developer tools.",
+          "Discussion about emerging trends in web development, AI integration, and the evolution of developer tools and workflows.",
+      },
+      {
+        id: "tech-talk-2023",
+        title: "Building Design Systems That Scale",
+        event: "Tech Talk Series",
+        date: "2023-12-15",
+        location: "Remote",
+        type: "meetup" as const,
+        audience: 300,
+        recording: "https://youtube.com/watch?v=design-systems",
+        slides: "https://slides.com/design-systems",
+        description:
+          "Comprehensive guide to building and maintaining design systems that can scale across multiple teams and products.",
       },
     ],
     publications: [
@@ -185,7 +224,21 @@ export const portfolioData: PortfolioData = {
         views: 25000,
         shares: 450,
         description:
-          "Comprehensive guide covering all aspects of Next.js performance optimization from basics to advanced techniques.",
+          "Comprehensive guide covering all aspects of Next.js performance optimization from basics to advanced techniques including Core Web Vitals improvement.",
+      },
+      {
+        id: "typescript-enterprise-guide",
+        title:
+          "TypeScript in Enterprise Applications: Best Practices and Patterns",
+        platform: "Smashing Magazine",
+        date: "2024-01-20",
+        url: "https://smashingmagazine.com/typescript-enterprise",
+        type: "article" as const,
+        readTime: 18,
+        views: 42000,
+        shares: 890,
+        description:
+          "Deep dive into TypeScript patterns and practices for large-scale enterprise applications with real-world examples.",
       },
       {
         id: "brutalist-design-case-study",
@@ -198,7 +251,7 @@ export const portfolioData: PortfolioData = {
         views: 18000,
         shares: 320,
         description:
-          "Real-world case study of implementing brutalist design principles in a production web application.",
+          "Real-world case study of implementing brutalist design principles in a production web application with performance considerations.",
       },
       {
         id: "react-patterns-article",
@@ -211,7 +264,33 @@ export const portfolioData: PortfolioData = {
         views: 32000,
         shares: 680,
         description:
-          "Exploring advanced React patterns including compound components, render props, and custom hooks.",
+          "Exploring advanced React patterns including compound components, render props, and custom hooks for building maintainable applications.",
+      },
+      {
+        id: "web-performance-whitepaper",
+        title: "Web Performance Optimization: A Technical Whitepaper",
+        platform: "GitHub",
+        date: "2023-11-15",
+        url: "https://github.com/example/web-performance-whitepaper",
+        type: "whitepaper" as const,
+        readTime: 25,
+        views: 15000,
+        shares: 280,
+        description:
+          "Technical whitepaper covering comprehensive web performance optimization strategies with benchmarks and case studies.",
+      },
+      {
+        id: "design-systems-tutorial",
+        title: "Building Design Systems with React and Storybook",
+        platform: "LogRocket Blog",
+        date: "2023-10-20",
+        url: "https://blog.logrocket.com/design-systems-react-storybook",
+        type: "tutorial" as const,
+        readTime: 14,
+        views: 28000,
+        shares: 520,
+        description:
+          "Step-by-step tutorial for creating scalable design systems using React, Storybook, and modern tooling.",
       },
     ],
   },

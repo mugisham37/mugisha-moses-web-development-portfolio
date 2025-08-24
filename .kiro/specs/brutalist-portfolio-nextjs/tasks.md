@@ -143,7 +143,7 @@
   - Create responsive grid layout for contribution showcase
   - _Requirements: 2.3, 3.2, 5.4_
 
-- [ ] 20. Implement speaking events and publications timeline
+- [x] 20. Implement speaking events and publications timeline
   - Create SpeakingEvents component with timeline layout
   - Build event cards with logos, metrics, and engagement stats
   - Add publication cards with read counts and social shares
