@@ -22,7 +22,7 @@ export const HeroCTA: React.FC<HeroCTAProps> = ({ className = "" }) => {
   const [hoveredButton, setHoveredButton] = useState<number | null>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollLogoRef = useRef<HTMLDivElement>(null);
-  const scrollProgress = useScrollProgress();
+  const { scrollProgress } = useScrollProgress();
 
   const isVisible = useIntersectionObserver(ctaRef, {
     threshold: 0.3,

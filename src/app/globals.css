@@ -34,6 +34,9 @@
 @import "../styles/components/animated-text.css";
 @import "../styles/components/brutal-modal.css";
 @import "../styles/components/effects.css";
+@import "../styles/components/page-transition.css";
+@import "../styles/components/scroll-progress.css";
+@import "../styles/components/keyboard-navigation.css";
 
 @tailwind base;
 @tailwind components;

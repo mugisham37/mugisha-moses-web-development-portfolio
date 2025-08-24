@@ -17,9 +17,12 @@ interface ScrollProgressData {
 
 export const useScrollProgress = (
   options: UseScrollProgressOptions = {}
-): number => {
+): { scrollProgress: number; scrollDirection: "up" | "down" | "none" } => {
   const scrollData = useScrollProgressData(options);
-  return scrollData.progress;
+  return {
+    scrollProgress: scrollData.progress,
+    scrollDirection: scrollData.direction,
+  };
 };
 
 export const useScrollProgressData = (
