@@ -21,6 +21,7 @@
 @import "../styles/components/footer.css";
 @import "../styles/components/ultimate-cta.css";
 @import "../styles/components/newsletter.css";
+@import "../styles/components/social-platforms.css";
 
 @tailwind base;
 @tailwind components;
