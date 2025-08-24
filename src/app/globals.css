@@ -23,6 +23,7 @@
 @import "../styles/components/ultimate-cta.css";
 @import "../styles/components/newsletter.css";
 @import "../styles/components/social-platforms.css";
+@import "../styles/components/brutal-button.css";
 
 @tailwind base;
 @tailwind components;
