@@ -148,14 +148,24 @@ export const HeroWithEffects: React.FC<HeroWithEffectsProps> = ({
             <ParticleSystem
               theme={currentTheme}
               isActive={isVisible}
-              particleCount={currentTheme === "extreme-brutalist" ? 100 : 60}
-              particleSize={currentTheme === "extreme-brutalist" ? 3 : 2}
-              speed={currentTheme === "extreme-brutalist" ? 1.5 : 0.8}
-              colors={[
-                config.colors.accent,
-                config.colors.highlight,
-                config.colors.text,
-              ]}
+              config={{
+                particleCount: currentTheme === "extreme-brutalist" ? 100 : 60,
+                size: {
+                  min: currentTheme === "extreme-brutalist" ? 2 : 1,
+                  max: currentTheme === "extreme-brutalist" ? 6 : 4,
+                },
+                speed: currentTheme === "extreme-brutalist" ? 1.5 : 0.8,
+                colors: [
+                  config.colors.accent,
+                  config.colors.highlight,
+                  config.colors.text,
+                ],
+                particleTypes:
+                  currentTheme === "extreme-brutalist"
+                    ? ["geometric", "sparks", "code"]
+                    : ["floating", "network", "energy"],
+              }}
+              performanceMode="medium"
             />
 
             <GridBackground

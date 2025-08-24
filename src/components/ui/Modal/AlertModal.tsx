@@ -4,11 +4,13 @@ import React from "react";
 import { Modal, ModalProps } from "./Modal";
 import { BrutalButton } from "../BrutalButton/BrutalButton";
 
-export interface AlertModalProps extends Omit<ModalProps, "children"> {
+export interface AlertModalProps
+  extends Omit<ModalProps, "children" | "variant"> {
   title: string;
   message: string;
   buttonText?: string;
-  variant?: "info" | "success" | "warning" | "error";
+  alertVariant?: "info" | "success" | "warning" | "error";
+  modalVariant?: "default" | "brutal" | "minimal" | "floating";
   icon?: React.ReactNode;
 }
 
@@ -26,7 +28,8 @@ export const AlertModal: React.FC<AlertModalProps> = ({
   title,
   message,
   buttonText = "OK",
-  variant = "info",
+  alertVariant = "info",
+  modalVariant = "default",
   icon,
   onClose,
   ...modalProps
@@ -34,7 +37,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
   const getVariantIcon = () => {
     if (icon) return icon;
 
-    switch (variant) {
+    switch (alertVariant) {
       case "success":
         return "✓";
       case "warning":
@@ -48,12 +51,13 @@ export const AlertModal: React.FC<AlertModalProps> = ({
   };
 
   const getVariantClass = () => {
-    return `alert-modal--${variant}`;
+    return `alert-modal--${alertVariant}`;
   };
 
   return (
     <Modal
       {...modalProps}
+      variant={modalVariant}
       title={title}
       onClose={onClose}
       size="sm"
@@ -62,7 +66,9 @@ export const AlertModal: React.FC<AlertModalProps> = ({
     >
       <div className="alert-modal__content">
         <div className="alert-modal__icon-container">
-          <span className={`alert-modal__icon alert-modal__icon--${variant}`}>
+          <span
+            className={`alert-modal__icon alert-modal__icon--${alertVariant}`}
+          >
             {getVariantIcon()}
           </span>
         </div>
