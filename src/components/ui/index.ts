@@ -4,4 +4,3 @@ export * from "./BrutalCard";
 export * from "./BrutalInput";
 export * from "./AnimatedText";
 export * from "./Modal";
-export * from "./OptimizedImage";

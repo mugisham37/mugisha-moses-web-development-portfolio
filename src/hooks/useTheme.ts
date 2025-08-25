@@ -3,7 +3,7 @@
 import { useContext, useMemo, useCallback } from "react";
 import { ThemeContext } from "@/contexts/ThemeContext";
 import { ThemeType, ThemeConfig } from "@/types/theme";
-import { trackThemeChange } from "@/utils/analytics";
+import { asyncAnalytics } from "@/utils/asyncAnalytics";
 
 // Enhanced useTheme hook with additional utilities
 export const useTheme = () => {
@@ -140,7 +140,7 @@ export const useThemeTransitionUtils = () => {
         : "extreme-brutalist";
 
     // Track theme change with analytics
-    trackThemeChange(newTheme, transitionProgress);
+    asyncAnalytics.trackEvent("theme_change", "user_interaction");
 
     setTheme(newTheme);
   }, [currentTheme, setTheme, transitionProgress]);
