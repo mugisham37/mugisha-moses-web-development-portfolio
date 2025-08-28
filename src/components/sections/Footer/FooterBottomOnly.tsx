@@ -2,22 +2,20 @@
 
 import React from "react";
 import { useThemeContext } from "@/contexts/ThemeContext";
-import { UltimateCTA } from "./UltimateCTA";
 import { FooterBottom } from "./FooterBottom";
 
-interface FooterProps {
+interface FooterBottomOnlyProps {
   className?: string;
-  showCTA?: boolean;
 }
 
-export const Footer: React.FC<FooterProps> = ({
+export const FooterBottomOnly: React.FC<FooterBottomOnlyProps> = ({
   className = "",
-  showCTA = true,
 }) => {
   const { currentTheme } = useThemeContext();
 
   const footerClasses = [
     "footer-section",
+    "footer-section--bottom-only",
     `footer-section--${currentTheme}`,
     className,
   ]
@@ -25,11 +23,8 @@ export const Footer: React.FC<FooterProps> = ({
     .join(" ");
 
   return (
-    <footer className={footerClasses} id="footerSection">
-      {/* Ultimate CTA Section */}
-      {showCTA && <UltimateCTA />}
-
-      {/* Footer Bottom Section */}
+    <footer className={footerClasses} id="footerBottomSection">
+      {/* Footer Bottom Section Only */}
       <FooterBottom />
 
       {/* Footer Background Effects */}

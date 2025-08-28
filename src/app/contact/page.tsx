@@ -3,6 +3,7 @@
 import React from "react";
 import { Navigation } from "@/components/sections/Navigation";
 import { Newsletter } from "@/components/sections/Footer/Newsletter";
+import { FooterBottomOnly } from "@/components/sections/Footer";
 import { ThemeDetector } from "@/components/theme/ThemeDetector";
 
 export default function ContactPage() {
@@ -14,6 +15,7 @@ export default function ContactPage() {
           <Newsletter />
         </div>
       </main>
+      <FooterBottomOnly />
     </ThemeDetector>
   );
 }

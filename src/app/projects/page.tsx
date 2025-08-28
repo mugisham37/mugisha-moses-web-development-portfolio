@@ -3,6 +3,7 @@
 import React from "react";
 import { Navigation } from "@/components/sections/Navigation";
 import { Resources } from "@/components/sections/Footer/Resources";
+import { FooterBottomOnly } from "@/components/sections/Footer";
 import { ThemeDetector } from "@/components/theme/ThemeDetector";
 
 export default function ProjectsPage() {
@@ -14,6 +15,7 @@ export default function ProjectsPage() {
           <Resources />
         </div>
       </main>
+      <FooterBottomOnly />
     </ThemeDetector>
   );
 }

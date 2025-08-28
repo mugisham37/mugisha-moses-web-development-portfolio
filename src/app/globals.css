@@ -19,9 +19,6 @@
 /* Results Section Components */
 @import "../components/sections/Results/Results.css";
 @import "../components/sections/Results/ResultsEffects.css";
-@import "../components/sections/Results/RevenueDashboard.css";
-@import "../components/sections/Results/ResultsCTA.css";
-@import "../components/sections/Results/ComparisonShowcase.css";
 @import "../components/sections/Results/AchievementTimeline.css";
 
 /* Component Styles - Brutalist UI Components */

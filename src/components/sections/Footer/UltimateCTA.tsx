@@ -35,7 +35,8 @@ export const UltimateCTA: React.FC<UltimateCTAProps> = ({ className = "" }) => {
     triggerOnce: true,
   });
 
-  const fullTitle = "READY TO START? LET'S BUILD SOMETHING AMAZING TOGETHER.";
+  const fullTitle =
+    "MAIN CTA - READY TO START? LET'S BUILD SOMETHING AMAZING TOGETHER.";
 
   // Typewriter effect for title
   useEffect(() => {

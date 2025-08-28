@@ -4,13 +4,13 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import "./AchievementTimeline.css";
 
-interface Achievement {
+interface Experience {
   year: number;
   title: string;
   description: string;
   icon: string;
   current?: boolean;
-  category: "technical" | "business" | "recognition" | "milestone";
+  category: "technical" | "leadership" | "learning" | "milestone";
   impact: string;
   metrics?: {
     value: string;
@@ -19,135 +19,133 @@ interface Achievement {
   technologies?: string[];
 }
 
-interface AchievementTimelineProps {
+interface ExperienceTimelineProps {
   theme: "extreme-brutalist" | "refined-brutalist";
 }
 
-const achievements: Achievement[] = [
+const experiences: Experience[] = [
   {
     year: 2020,
-    title: "First Enterprise Client",
+    title: "Junior Full-Stack Developer",
     description:
-      "Landed first major enterprise contract, delivering a full-stack platform modernization project.",
-    icon: "🏢",
+      "Started professional journey as a junior developer, learning enterprise-level development practices and modern web technologies.",
+    icon: "🌱",
     category: "milestone",
-    impact: "Foundation for enterprise expertise",
+    impact: "Foundation of professional development career",
     metrics: [
-      { value: "$250K", label: "Project Value" },
-      { value: "6 months", label: "Duration" },
+      { value: "6 months", label: "Learning Period" },
+      { value: "3", label: "Major Projects" },
     ],
     technologies: ["React", "Node.js", "PostgreSQL"],
   },
   {
     year: 2021,
-    title: "Performance Optimization Breakthrough",
+    title: "Mid-Level Developer",
     description:
-      "Achieved 400% performance improvement for a high-traffic e-commerce platform.",
+      "Gained expertise in performance optimization, advanced React patterns, and full-stack architecture design.",
     icon: "⚡",
     category: "technical",
-    impact: "Established performance engineering reputation",
+    impact: "Developed deep technical expertise",
     metrics: [
-      { value: "400%", label: "Speed Increase" },
-      { value: "85%", label: "Load Time Reduction" },
+      { value: "12", label: "Projects Completed" },
+      { value: "5", label: "Technologies Mastered" },
     ],
-    technologies: ["Next.js", "Redis", "CDN"],
+    technologies: ["Next.js", "TypeScript", "Redis", "AWS"],
   },
   {
     year: 2021,
-    title: "Open Source Recognition",
+    title: "Open Source Contributor",
     description:
-      "Created React Brutalist UI library, gaining 1500+ GitHub stars and community adoption.",
+      "Started contributing to open source projects and building personal libraries, establishing presence in developer community.",
     icon: "⭐",
-    category: "recognition",
-    impact: "Thought leadership in design systems",
+    category: "learning",
+    impact: "Built reputation in developer community",
     metrics: [
-      { value: "1,500+", label: "GitHub Stars" },
-      { value: "50K+", label: "Weekly Downloads" },
+      { value: "15+", label: "Contributions" },
+      { value: "3", label: "Personal Projects" },
     ],
     technologies: ["React", "TypeScript", "Storybook"],
   },
   {
     year: 2022,
-    title: "$1M Revenue Milestone",
+    title: "Senior Developer & Team Lead",
     description:
-      "Generated over $1M in direct revenue for clients through optimization and development projects.",
-    icon: "💰",
-    category: "business",
-    impact: "Proven ROI delivery capability",
+      "Promoted to senior role with team leadership responsibilities, mentoring junior developers and architecting complex systems.",
+    icon: "👥",
+    category: "leadership",
+    impact: "Developed leadership and mentoring skills",
     metrics: [
-      { value: "$1M+", label: "Revenue Generated" },
-      { value: "12", label: "Major Projects" },
+      { value: "5", label: "Team Members" },
+      { value: "8", label: "Major Deliveries" },
     ],
-    technologies: ["Full Stack", "Cloud", "Analytics"],
+    technologies: ["Team Leadership", "Architecture", "Mentoring"],
   },
   {
     year: 2022,
-    title: "Conference Speaker",
+    title: "Technical Speaker",
     description:
-      "Spoke at React Conference 2022 about building brutalist UIs with modern React patterns.",
+      "Began speaking at conferences and meetups, sharing knowledge about modern React development and design systems.",
     icon: "🎤",
-    category: "recognition",
-    impact: "Industry thought leadership",
+    category: "learning",
+    impact: "Enhanced communication and thought leadership",
     metrics: [
-      { value: "500+", label: "Attendees" },
-      { value: "95%", label: "Positive Feedback" },
+      { value: "3", label: "Conferences" },
+      { value: "500+", label: "Developers Reached" },
     ],
-    technologies: ["React", "Design Systems", "Performance"],
+    technologies: ["Public Speaking", "React", "Design Systems"],
   },
   {
     year: 2023,
-    title: "Next.js Performance Toolkit",
+    title: "Principal Developer",
     description:
-      "Released performance toolkit that became featured in Next.js official documentation.",
+      "Advanced to principal level, leading architectural decisions and establishing development standards across multiple teams.",
     icon: "🛠️",
     category: "technical",
-    impact: "Industry-standard tooling contribution",
+    impact: "Became technical authority and standard setter",
     metrics: [
-      { value: "10K+", label: "Monthly Users" },
-      { value: "Featured", label: "Next.js Docs" },
+      { value: "3", label: "Teams Led" },
+      { value: "15+", label: "Developers Mentored" },
     ],
-    technologies: ["Next.js", "Performance", "DevTools"],
+    technologies: ["Architecture", "Standards", "Cross-team Leadership"],
   },
   {
     year: 2023,
-    title: "15+ Enterprise Clients",
+    title: "Freelance Consultant",
     description:
-      "Expanded client base to include 15+ enterprise clients across various industries.",
+      "Expanded experience by taking on freelance consulting work, helping multiple companies with technical challenges.",
     icon: "📈",
-    category: "business",
-    impact: "Scalable business growth",
+    category: "milestone",
+    impact: "Gained diverse industry experience",
     metrics: [
-      { value: "15+", label: "Enterprise Clients" },
-      { value: "98%", label: "Retention Rate" },
+      { value: "10+", label: "Client Projects" },
+      { value: "5", label: "Industries" },
     ],
-    technologies: ["Enterprise", "Scalability", "Architecture"],
+    technologies: ["Consulting", "Multiple Stacks", "Business Strategy"],
   },
   {
     year: 2024,
-    title: "Current: Innovation Focus",
+    title: "Current: Technical Innovation Leader",
     description:
-      "Leading cutting-edge projects in AI integration, performance optimization, and brutalist design systems.",
+      "Currently leading innovation initiatives, exploring AI integration, and pushing boundaries of modern web development.",
     icon: "🚀",
     category: "milestone",
-    impact: "Pushing industry boundaries",
+    impact: "Driving industry innovation and best practices",
     current: true,
     metrics: [
-      { value: "5+", label: "AI Projects" },
-      { value: "∞", label: "Innovation" },
+      { value: "6+", label: "Years Experience" },
+      { value: "∞", label: "Learning Continues" },
     ],
-    technologies: ["AI/ML", "Next.js 14", "Edge Computing"],
+    technologies: ["AI/ML", "Next.js 14", "Innovation Leadership"],
   },
 ];
 
-export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
+export const AchievementTimeline: React.FC<ExperienceTimelineProps> = ({
   theme,
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const [visibleAchievements, setVisibleAchievements] = useState<number[]>([]);
-  const [activeAchievement, setActiveAchievement] = useState<number | null>(
-    null
-  );
+  const [visibleExperiences, setVisibleExperiences] = useState<number[]>([]);
+  const [activeExperience, setActiveExperience] = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, scrollLeft: 0 });
@@ -157,27 +155,27 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
     triggerOnce: true,
   });
 
-  // Animate achievements in sequence
+  // Animate experiences in sequence
   useEffect(() => {
     if (isVisible) {
-      achievements.forEach((_, index) => {
+      experiences.forEach((_, index) => {
         setTimeout(() => {
-          setVisibleAchievements((prev) => [...prev, index]);
+          setVisibleExperiences((prev) => [...prev, index]);
         }, index * 200);
       });
     }
   }, [isVisible]);
 
-  // Auto-highlight current achievement with enhanced effects
+  // Auto-highlight current experience with enhanced effects
   useEffect(() => {
-    const currentIndex = achievements.findIndex((a) => a.current);
+    const currentIndex = experiences.findIndex((e) => e.current);
     if (currentIndex !== -1 && isVisible) {
       setTimeout(() => {
-        setActiveAchievement(currentIndex);
-        // Auto-scroll to current achievement
+        setActiveExperience(currentIndex);
+        // Auto-scroll to current experience
         if (timelineRef.current) {
           const medallionPosition =
-            (currentIndex / (achievements.length - 1)) * 100;
+            (currentIndex / (experiences.length - 1)) * 100;
           const scrollPosition =
             (medallionPosition / 100) *
             (timelineRef.current.scrollWidth - timelineRef.current.clientWidth);
@@ -258,11 +256,11 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
     setIsDragging(false);
   }, []);
 
-  const getCategoryColor = (category: Achievement["category"]) => {
+  const getCategoryColor = (category: Experience["category"]) => {
     const colors = {
       technical: theme === "extreme-brutalist" ? "#00ffff" : "#06b6d4",
-      business: theme === "extreme-brutalist" ? "#00ff00" : "#10b981",
-      recognition: theme === "extreme-brutalist" ? "#ffff00" : "#8b5cf6",
+      leadership: theme === "extreme-brutalist" ? "#00ff00" : "#10b981",
+      learning: theme === "extreme-brutalist" ? "#ffff00" : "#8b5cf6",
       milestone: theme === "extreme-brutalist" ? "#ff6b00" : "#f59e0b",
     };
     return colors[category];
@@ -278,9 +276,9 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
     }
   };
 
-  const scrollToAchievement = (index: number) => {
+  const scrollToExperience = (index: number) => {
     if (timelineRef.current) {
-      const medallionPosition = (index / (achievements.length - 1)) * 100;
+      const medallionPosition = (index / (experiences.length - 1)) * 100;
       const scrollPosition =
         (medallionPosition / 100) *
         (timelineRef.current.scrollWidth - timelineRef.current.clientWidth);
@@ -288,7 +286,7 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
         left: scrollPosition,
         behavior: "smooth",
       });
-      setActiveAchievement(index);
+      setActiveExperience(index);
     }
   };
 
@@ -301,21 +299,21 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
     >
       {/* Timeline Header */}
       <div className="timeline-header">
-        <h3 className="timeline-title">ACHIEVEMENT TIMELINE</h3>
+        <h3 className="timeline-title">EXPERIENCE TIMELINE</h3>
         <p className="timeline-subtitle">
-          Key milestones and breakthrough moments in the journey
+          Professional growth journey and key learning milestones
         </p>
 
         {/* Category Legend */}
         <div className="category-legend">
-          {["technical", "business", "recognition", "milestone"].map(
+          {["technical", "leadership", "learning", "milestone"].map(
             (category) => (
               <div key={category} className="legend-item">
                 <div
                   className="legend-color"
                   style={{
                     backgroundColor: getCategoryColor(
-                      category as Achievement["category"]
+                      category as Experience["category"]
                     ),
                   }}
                 ></div>
@@ -344,15 +342,15 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
             ></div>
           </div>
           <div className="progress-indicators">
-            {achievements.map((_, index) => (
+            {experiences.map((_, index) => (
               <button
                 key={index}
-                className={`progress-dot ${activeAchievement === index ? "progress-dot--active" : ""}`}
-                onClick={() => scrollToAchievement(index)}
+                className={`progress-dot ${activeExperience === index ? "progress-dot--active" : ""}`}
+                onClick={() => scrollToExperience(index)}
                 style={{
-                  left: `${(index / (achievements.length - 1)) * 100}%`,
+                  left: `${(index / (experiences.length - 1)) * 100}%`,
                 }}
-                aria-label={`Go to ${achievements[index].year} achievement`}
+                aria-label={`Go to ${experiences[index].year} experience`}
               />
             ))}
           </div>
@@ -385,72 +383,72 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
             <div className="line-progress"></div>
           </div>
 
-          {/* Achievement Medallions */}
-          {achievements.map((achievement, index) => (
+          {/* Experience Medallions */}
+          {experiences.map((experience, index) => (
             <div
               key={index}
               className={`achievement-medallion ${
-                visibleAchievements.includes(index)
+                visibleExperiences.includes(index)
                   ? "achievement-medallion--visible"
                   : ""
               } ${
-                activeAchievement === index
+                activeExperience === index
                   ? "achievement-medallion--active"
                   : ""
-              } ${achievement.current ? "achievement-medallion--current" : ""}`}
+              } ${experience.current ? "achievement-medallion--current" : ""}`}
               style={{
-                left: `${(index / (achievements.length - 1)) * 100}%`,
+                left: `${(index / (experiences.length - 1)) * 100}%`,
                 animationDelay: `${index * 0.2}s`,
               }}
               onClick={() =>
-                setActiveAchievement(activeAchievement === index ? null : index)
+                setActiveExperience(activeExperience === index ? null : index)
               }
             >
               {/* Medallion */}
               <div
                 className="medallion"
                 style={{
-                  borderColor: getCategoryColor(achievement.category),
-                  boxShadow: `0 0 20px ${getCategoryColor(achievement.category)}`,
+                  borderColor: getCategoryColor(experience.category),
+                  boxShadow: `0 0 20px ${getCategoryColor(experience.category)}`,
                 }}
               >
-                <span className="medallion-icon">{achievement.icon}</span>
-                <div className="medallion-year">{achievement.year}</div>
+                <span className="medallion-icon">{experience.icon}</span>
+                <div className="medallion-year">{experience.year}</div>
 
                 {/* Current indicator */}
-                {achievement.current && (
+                {experience.current && (
                   <div className="current-indicator">
                     <div className="current-pulse"></div>
                   </div>
                 )}
               </div>
 
-              {/* Achievement Details */}
+              {/* Experience Details */}
               <div className="achievement-details">
                 <div className="details-card">
                   <div className="card-header">
-                    <h4 className="achievement-title">{achievement.title}</h4>
+                    <h4 className="achievement-title">{experience.title}</h4>
                     <span
                       className="achievement-category"
-                      style={{ color: getCategoryColor(achievement.category) }}
+                      style={{ color: getCategoryColor(experience.category) }}
                     >
-                      {achievement.category}
+                      {experience.category}
                     </span>
                   </div>
 
                   <p className="achievement-description">
-                    {achievement.description}
+                    {experience.description}
                   </p>
 
                   <div className="achievement-impact">
-                    <span className="impact-label">Impact:</span>
-                    <span className="impact-text">{achievement.impact}</span>
+                    <span className="impact-label">Growth:</span>
+                    <span className="impact-text">{experience.impact}</span>
                   </div>
 
-                  {/* Achievement Metrics */}
-                  {achievement.metrics && (
+                  {/* Experience Metrics */}
+                  {experience.metrics && (
                     <div className="achievement-metrics">
-                      {achievement.metrics.map((metric, metricIndex) => (
+                      {experience.metrics.map((metric, metricIndex) => (
                         <div key={metricIndex} className="metric-item">
                           <span className="metric-value">{metric.value}</span>
                           <span className="metric-label">{metric.label}</span>
@@ -460,11 +458,11 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
                   )}
 
                   {/* Technologies */}
-                  {achievement.technologies && (
+                  {experience.technologies && (
                     <div className="achievement-technologies">
-                      <span className="tech-label">Technologies:</span>
+                      <span className="tech-label">Skills:</span>
                       <div className="tech-tags">
-                        {achievement.technologies.map((tech, techIndex) => (
+                        {experience.technologies.map((tech, techIndex) => (
                           <span key={techIndex} className="tech-tag">
                             {tech}
                           </span>
@@ -478,7 +476,7 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
                     <div
                       className="card-glow"
                       style={{
-                        background: `radial-gradient(circle, ${getCategoryColor(achievement.category)} 0%, transparent 70%)`,
+                        background: `radial-gradient(circle, ${getCategoryColor(experience.category)} 0%, transparent 70%)`,
                       }}
                     ></div>
                   </div>
@@ -492,16 +490,16 @@ export const AchievementTimeline: React.FC<AchievementTimelineProps> = ({
       {/* Timeline Stats */}
       <div className="timeline-stats">
         <div className="stat-item">
-          <span className="stat-value">{achievements.length}</span>
-          <span className="stat-label">Major Milestones</span>
+          <span className="stat-value">{experiences.length}</span>
+          <span className="stat-label">Career Milestones</span>
         </div>
         <div className="stat-item">
-          <span className="stat-value">4</span>
-          <span className="stat-label">Years of Growth</span>
+          <span className="stat-value">6+</span>
+          <span className="stat-label">Years Experience</span>
         </div>
         <div className="stat-item">
           <span className="stat-value">∞</span>
-          <span className="stat-label">Innovation Continues</span>
+          <span className="stat-label">Learning Continues</span>
         </div>
       </div>
 
