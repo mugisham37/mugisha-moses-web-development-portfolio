@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import "./ExperienceTimeline.css";
 
@@ -143,15 +143,10 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({
   theme,
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
   const [visibleExperiences, setVisibleExperiences] = useState<number[]>([]);
-  const [activeExperience, setActiveExperience] = useState<number | null>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, scrollLeft: 0 });
 
   const isVisible = useIntersectionObserver(sectionRef, {
-    threshold: 0.2,
+    threshold: 0.1,
     triggerOnce: true,
   });
 
@@ -161,100 +156,10 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({
       experiences.forEach((_, index) => {
         setTimeout(() => {
           setVisibleExperiences((prev) => [...prev, index]);
-        }, index * 200);
+        }, index * 300);
       });
     }
   }, [isVisible]);
-
-  // Auto-highlight current experience with enhanced effects
-  useEffect(() => {
-    const currentIndex = experiences.findIndex((e) => e.current);
-    if (currentIndex !== -1 && isVisible) {
-      setTimeout(() => {
-        setActiveExperience(currentIndex);
-        // Auto-scroll to current experience
-        if (timelineRef.current) {
-          const medallionPosition =
-            (currentIndex / (experiences.length - 1)) * 100;
-          const scrollPosition =
-            (medallionPosition / 100) *
-            (timelineRef.current.scrollWidth - timelineRef.current.clientWidth);
-          timelineRef.current.scrollTo({
-            left: scrollPosition,
-            behavior: "smooth",
-          });
-        }
-      }, 2500);
-    }
-  }, [isVisible]);
-
-  // Enhanced scroll progress tracking
-  const handleScroll = useCallback(() => {
-    if (timelineRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = timelineRef.current;
-      const maxScroll = scrollWidth - clientWidth;
-      const progress = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
-      setScrollProgress(progress);
-    }
-  }, []);
-
-  useEffect(() => {
-    const timeline = timelineRef.current;
-    if (timeline) {
-      timeline.addEventListener("scroll", handleScroll);
-      return () => timeline.removeEventListener("scroll", handleScroll);
-    }
-  }, [handleScroll]);
-
-  // Enhanced touch/drag support
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    if (timelineRef.current) {
-      setIsDragging(true);
-      setDragStart({
-        x: e.pageX - timelineRef.current.offsetLeft,
-        scrollLeft: timelineRef.current.scrollLeft,
-      });
-    }
-  }, []);
-
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!isDragging || !timelineRef.current) return;
-      e.preventDefault();
-      const x = e.pageX - timelineRef.current.offsetLeft;
-      const walk = (x - dragStart.x) * 2;
-      timelineRef.current.scrollLeft = dragStart.scrollLeft - walk;
-    },
-    [isDragging, dragStart]
-  );
-
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    if (timelineRef.current) {
-      setIsDragging(true);
-      setDragStart({
-        x: e.touches[0].pageX - timelineRef.current.offsetLeft,
-        scrollLeft: timelineRef.current.scrollLeft,
-      });
-    }
-  }, []);
-
-  const handleTouchMove = useCallback(
-    (e: React.TouchEvent) => {
-      if (!isDragging || !timelineRef.current) return;
-      const x = e.touches[0].pageX - timelineRef.current.offsetLeft;
-      const walk = (x - dragStart.x) * 1.5;
-      timelineRef.current.scrollLeft = dragStart.scrollLeft - walk;
-    },
-    [isDragging, dragStart]
-  );
-
-  const handleTouchEnd = useCallback(() => {
-    setIsDragging(false);
-  }, []);
 
   const getCategoryColor = (category: Experience["category"]) => {
     const colors = {
@@ -266,267 +171,126 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({
     return colors[category];
   };
 
-  const handleNavigationScroll = (direction: "left" | "right") => {
-    if (timelineRef.current) {
-      const scrollAmount = 400;
-      timelineRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const scrollToExperience = (index: number) => {
-    if (timelineRef.current) {
-      const medallionPosition = (index / (experiences.length - 1)) * 100;
-      const scrollPosition =
-        (medallionPosition / 100) *
-        (timelineRef.current.scrollWidth - timelineRef.current.clientWidth);
-      timelineRef.current.scrollTo({
-        left: scrollPosition,
-        behavior: "smooth",
-      });
-      setActiveExperience(index);
-    }
-  };
-
   return (
     <div
       ref={sectionRef}
-      className={`experience-timeline experience-timeline--${theme} ${
-        isVisible ? "experience-timeline--visible" : ""
+      className={`vertical-timeline vertical-timeline--${theme} ${
+        isVisible ? "vertical-timeline--visible" : ""
       }`}
     >
       {/* Timeline Header */}
       <div className="timeline-header">
-        <h3 className="timeline-title">EXPERIENCE TIMELINE</h3>
+        <h3 className="timeline-title">EXPERIENCE JOURNEY</h3>
         <p className="timeline-subtitle">
-          Professional growth journey and key learning milestones
+          Professional growth milestones and key achievements
         </p>
-
-        {/* Category Legend */}
-        <div className="category-legend">
-          {["technical", "leadership", "learning", "milestone"].map(
-            (category) => (
-              <div key={category} className="legend-item">
-                <div
-                  className="legend-color"
-                  style={{
-                    backgroundColor: getCategoryColor(
-                      category as Experience["category"]
-                    ),
-                  }}
-                ></div>
-                <span className="legend-label">{category}</span>
-              </div>
-            )
-          )}
-        </div>
       </div>
 
-      {/* Timeline Navigation */}
-      <div className="timeline-navigation">
-        <button
-          className="nav-button nav-button--left"
-          onClick={() => handleNavigationScroll("left")}
-          aria-label="Scroll timeline left"
-        >
-          <span className="nav-icon">←</span>
-        </button>
-
-        <div className="timeline-progress">
-          <div className="progress-track">
-            <div
-              className="progress-fill"
-              style={{ width: `${scrollProgress}%` }}
-            ></div>
-          </div>
-          <div className="progress-indicators">
-            {experiences.map((_, index) => (
-              <button
-                key={index}
-                className={`progress-dot ${activeExperience === index ? "progress-dot--active" : ""}`}
-                onClick={() => scrollToExperience(index)}
-                style={{
-                  left: `${(index / (experiences.length - 1)) * 100}%`,
-                }}
-                aria-label={`Go to ${experiences[index].year} experience`}
-              />
-            ))}
-          </div>
+      {/* Vertical Timeline Container */}
+      <div className="timeline-container">
+        {/* Center Line */}
+        <div className="timeline-line">
+          <div className="line-progress"></div>
         </div>
 
-        <button
-          className="nav-button nav-button--right"
-          onClick={() => handleNavigationScroll("right")}
-          aria-label="Scroll timeline right"
-        >
-          <span className="nav-icon">→</span>
-        </button>
-      </div>
-
-      {/* Timeline Container */}
-      <div
-        className={`timeline-container ${isDragging ? "timeline-container--dragging" : ""}`}
-        ref={timelineRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="timeline-track">
-          {/* Timeline Line */}
-          <div className="timeline-line">
-            <div className="line-progress"></div>
-          </div>
-
-          {/* Experience Medallions */}
-          {experiences.map((experience, index) => (
+        {/* Timeline Items */}
+        {experiences.map((experience, index) => (
+          <div
+            key={index}
+            className={`timeline-item ${
+              index % 2 === 0 ? "timeline-item--left" : "timeline-item--right"
+            } ${
+              visibleExperiences.includes(index) ? "timeline-item--visible" : ""
+            } ${experience.current ? "timeline-item--current" : ""}`}
+            style={{
+              animationDelay: `${index * 0.3}s`,
+            }}
+          >
+            {/* Timeline Node */}
             <div
-              key={index}
-              className={`experience-medallion ${
-                visibleExperiences.includes(index)
-                  ? "experience-medallion--visible"
-                  : ""
-              } ${
-                activeExperience === index ? "experience-medallion--active" : ""
-              } ${experience.current ? "experience-medallion--current" : ""}`}
+              className="timeline-node"
               style={{
-                left: `${(index / (experiences.length - 1)) * 100}%`,
-                animationDelay: `${index * 0.2}s`,
+                borderColor: getCategoryColor(experience.category),
+                boxShadow: `0 0 20px ${getCategoryColor(experience.category)}`,
               }}
-              onClick={() =>
-                setActiveExperience(activeExperience === index ? null : index)
-              }
             >
-              {/* Medallion */}
-              <div
-                className="medallion"
-                style={{
-                  borderColor: getCategoryColor(experience.category),
-                  boxShadow: `0 0 20px ${getCategoryColor(experience.category)}`,
-                }}
-              >
-                <span className="medallion-icon">{experience.icon}</span>
-                <div className="medallion-year">{experience.year}</div>
+              <span className="node-icon">{experience.icon}</span>
+              <div className="node-year">{experience.year}</div>
 
-                {/* Current indicator */}
-                {experience.current && (
-                  <div className="current-indicator">
-                    <div className="current-pulse"></div>
-                  </div>
-                )}
+              {/* Current indicator */}
+              {experience.current && <div className="current-pulse"></div>}
+            </div>
+
+            {/* Experience Card */}
+            <div className="experience-card">
+              <div className="card-header">
+                <h4 className="card-title">{experience.title}</h4>
+                <span
+                  className="card-category"
+                  style={{ color: getCategoryColor(experience.category) }}
+                >
+                  {experience.category}
+                </span>
               </div>
 
-              {/* Experience Details */}
-              <div className="experience-details">
-                <div className="details-card">
-                  <div className="card-header">
-                    <h4 className="experience-title">{experience.title}</h4>
-                    <span
-                      className="experience-category"
-                      style={{ color: getCategoryColor(experience.category) }}
-                    >
-                      {experience.category}
-                    </span>
-                  </div>
+              <p className="card-description">{experience.description}</p>
 
-                  <p className="experience-description">
-                    {experience.description}
-                  </p>
+              <div className="card-impact">
+                <span className="impact-label">Impact:</span>
+                <span className="impact-text">{experience.impact}</span>
+              </div>
 
-                  <div className="experience-impact">
-                    <span className="impact-label">Growth:</span>
-                    <span className="impact-text">{experience.impact}</span>
-                  </div>
-
-                  {/* Experience Metrics */}
-                  {experience.metrics && (
-                    <div className="experience-metrics">
-                      {experience.metrics.map((metric, metricIndex) => (
-                        <div key={metricIndex} className="metric-item">
-                          <span className="metric-value">{metric.value}</span>
-                          <span className="metric-label">{metric.label}</span>
-                        </div>
-                      ))}
+              {/* Metrics */}
+              {experience.metrics && (
+                <div className="card-metrics">
+                  {experience.metrics.map((metric, metricIndex) => (
+                    <div key={metricIndex} className="metric-item">
+                      <span className="metric-value">{metric.value}</span>
+                      <span className="metric-label">{metric.label}</span>
                     </div>
-                  )}
+                  ))}
+                </div>
+              )}
 
-                  {/* Technologies */}
-                  {experience.technologies && (
-                    <div className="experience-technologies">
-                      <span className="tech-label">Skills:</span>
-                      <div className="tech-tags">
-                        {experience.technologies.map((tech, techIndex) => (
-                          <span key={techIndex} className="tech-tag">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Card effects */}
-                  <div className="card-effects">
-                    <div
-                      className="card-glow"
-                      style={{
-                        background: `radial-gradient(circle, ${getCategoryColor(experience.category)} 0%, transparent 70%)`,
-                      }}
-                    ></div>
+              {/* Technologies */}
+              {experience.technologies && (
+                <div className="card-technologies">
+                  <span className="tech-label">Technologies:</span>
+                  <div className="tech-tags">
+                    {experience.technologies.map((tech, techIndex) => (
+                      <span key={techIndex} className="tech-tag">
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </div>
+              )}
+
+              {/* Card Glow Effect */}
+              <div
+                className="card-glow"
+                style={{
+                  background: `linear-gradient(135deg, ${getCategoryColor(experience.category)}20, transparent)`,
+                }}
+              ></div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
       {/* Timeline Stats */}
       <div className="timeline-stats">
         <div className="stat-item">
           <span className="stat-value">{experiences.length}</span>
-          <span className="stat-label">Career Milestones</span>
+          <span className="stat-label">Milestones</span>
         </div>
         <div className="stat-item">
           <span className="stat-value">6+</span>
-          <span className="stat-label">Years Experience</span>
+          <span className="stat-label">Years</span>
         </div>
         <div className="stat-item">
           <span className="stat-value">∞</span>
-          <span className="stat-label">Learning Continues</span>
-        </div>
-      </div>
-
-      {/* Timeline Effects */}
-      <div className="timeline-effects">
-        <div className="effect-particles">
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={i}
-              className="effect-particle"
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${i * 0.5}s`,
-              }}
-            ></div>
-          ))}
-        </div>
-
-        <div className="effect-rays">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="effect-ray"
-              style={{
-                left: `${20 + i * 15}%`,
-                animationDelay: `${i * 0.8}s`,
-              }}
-            ></div>
-          ))}
+          <span className="stat-label">Growth</span>
         </div>
       </div>
     </div>
