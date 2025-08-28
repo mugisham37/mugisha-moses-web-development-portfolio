@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { ThemeType } from "@/types/theme";
 
 interface NavigationCTAProps {
@@ -43,6 +42,14 @@ export const NavigationCTA: React.FC<NavigationCTAProps> = ({
     }
   }, [isHovered]);
 
+  const handleCTAClick = () => {
+    // Scroll to contact section
+    const contactSection = document.querySelector("#contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const ctaClasses = [
     "navigation-cta",
     `navigation-cta--${theme}`,
@@ -55,12 +62,11 @@ export const NavigationCTA: React.FC<NavigationCTAProps> = ({
   return (
     <div className={ctaClasses}>
       {/* Main CTA Button */}
-      <Link
-        href="/contact"
+      <button
         className="navigation-cta__button"
+        onClick={handleCTAClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        prefetch={true}
       >
         {/* Button Content */}
         <div className="navigation-cta__content">
@@ -90,7 +96,7 @@ export const NavigationCTA: React.FC<NavigationCTAProps> = ({
           className="navigation-cta__scan-line"
           style={{ transform: `translateY(${scanProgress}%)` }}
         ></div>
-      </Link>
+      </button>
 
       {/* Terminal Indicator */}
       <div className="navigation-cta__terminal">
