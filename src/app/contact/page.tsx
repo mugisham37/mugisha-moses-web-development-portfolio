@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Navigation } from "@/components/sections/Navigation";
-import { Contact } from "@/components/sections/Footer/Contact";
+import { Newsletter } from "@/components/pages/Newsletter";
 import { FooterBottomOnly } from "@/components/sections/Footer";
 import { ThemeDetector } from "@/components/theme/ThemeDetector";
 
@@ -12,7 +12,7 @@ export default function ContactPage() {
       <Navigation />
       <main className="min-h-screen bg-current text-current">
         <div className="pt-20">
-          <Contact />
+          <Newsletter />
         </div>
       </main>
       <FooterBottomOnly />

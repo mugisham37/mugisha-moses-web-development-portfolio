@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Navigation } from "@/components/sections/Navigation";
-import { Resources } from "@/components/sections/Footer/Resources";
+import { Resources } from "@/components/pages/Resources";
 import { FooterBottomOnly } from "@/components/sections/Footer";
 import { ThemeDetector } from "@/components/theme/ThemeDetector";
 
