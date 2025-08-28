@@ -37,6 +37,7 @@ export const SocialProof: React.FC<SocialProofProps> = ({ className = "" }) => {
       ref={containerRef}
       className={`${containerClassName} ${className}`}
       id="social-proof"
+      data-section="social-proof"
     >
       {/* Background Effects */}
       <div className="social-proof__background">

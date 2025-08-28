@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useThemeContext } from "@/contexts/ThemeContext";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { HeroContent } from "./HeroContent";
 
 // Dynamically import canvas-based effects to avoid SSR issues
 const ParticleSystem = dynamic(
@@ -94,6 +95,7 @@ export const HeroWithEffects: React.FC<HeroWithEffectsProps> = ({
       ref={heroRef}
       className={`hero hero--with-effects ${className}`}
       id="hero"
+      data-section="hero"
       role="banner"
       aria-label="Hero section"
     >
@@ -146,7 +148,7 @@ export const HeroWithEffects: React.FC<HeroWithEffectsProps> = ({
 
       {/* Content Container */}
       <div className="hero__container">
-        <div className="hero__grid">{children}</div>
+        <div className="hero__grid">{children || <HeroContent />}</div>
       </div>
 
       {/* Performance Optimization Overlay */}

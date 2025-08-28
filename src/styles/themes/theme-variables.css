@@ -28,6 +28,9 @@
   --theme-text-sm: 0.875rem;
   --theme-text-base: 1rem;
   --theme-text-lg: 1.125rem;
+
+  /* Component spacing */
+  --component-spacing: 2rem;
   --theme-text-xl: 1.25rem;
   --theme-text-2xl: 1.5rem;
   --theme-text-3xl: 1.875rem;
