@@ -63,51 +63,16 @@ export const HeroCTA: React.FC<HeroCTAProps> = ({ className = "" }) => {
           // Simulate loading for contact action
           await new Promise((resolve) => setTimeout(resolve, 800));
 
-          // Try multiple possible contact section IDs
-          const contactSection =
-            document.getElementById("contact") ||
-            document.getElementById("footer") ||
-            document.querySelector('[data-section="contact"]') ||
-            document.querySelector("section:last-of-type");
-
-          if (contactSection) {
-            contactSection.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          } else {
-            // Fallback: scroll to bottom
-            window.scrollTo({
-              top: document.body.scrollHeight,
-              behavior: "smooth",
-            });
-          }
+          // Navigate to contact page
+          window.location.href = "/contact";
           break;
 
         case "scroll-to-projects":
           // Simulate loading for projects action
           await new Promise((resolve) => setTimeout(resolve, 600));
 
-          // Try multiple possible project section IDs
-          const projectsSection =
-            document.getElementById("projects") ||
-            document.getElementById("results") ||
-            document.querySelector('[data-section="projects"]') ||
-            document.querySelector('[data-section="results"]') ||
-            document.querySelector("section:nth-of-type(3)");
-
-          if (projectsSection) {
-            projectsSection.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          } else {
-            // Fallback: scroll down by 2 viewport heights
-            window.scrollBy({
-              top: window.innerHeight * 2,
-              behavior: "smooth",
-            });
-          }
+          // Navigate to projects page
+          window.location.href = "/projects";
           break;
 
         default:
@@ -226,8 +191,8 @@ export const HeroCTA: React.FC<HeroCTAProps> = ({ className = "" }) => {
             {/* Hidden description for screen readers */}
             <span id={`cta-description-${index}`} className="sr-only">
               {button.action === "contact"
-                ? "Navigate to contact section to get in touch"
-                : "Navigate to projects section to view portfolio"}
+                ? "Navigate to contact page to get in touch"
+                : "Navigate to projects page to view portfolio"}
             </span>
           </button>
         ))}

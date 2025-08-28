@@ -77,11 +77,8 @@ export const UltimateCTA: React.FC<UltimateCTAProps> = ({ className = "" }) => {
     // Handle different CTA actions
     switch (action) {
       case "start_project":
-        // Scroll to contact form or open modal
-        const contactSection = document.querySelector("#contact");
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: "smooth" });
-        }
+        // Navigate to contact page
+        window.location.href = "/contact";
         break;
       case "quick_quote":
         // Open quote form or redirect

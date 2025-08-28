@@ -28,7 +28,7 @@ const mobileMenuItems: MenuItem[] = [
   {
     id: "projects",
     label: "PROJECTS",
-    href: "#projects",
+    href: "/projects",
     badge: "NEW",
     description: "View my work",
   },
@@ -48,7 +48,7 @@ const mobileMenuItems: MenuItem[] = [
   {
     id: "contact",
     label: "CONTACT",
-    href: "#contact",
+    href: "/contact",
     description: "Let's connect",
   },
 ];
@@ -80,10 +80,16 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 
   // Handle menu item click
   const handleItemClick = (item: MenuItem) => {
-    // Smooth scroll to section
-    const element = document.querySelector(item.href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    // Check if it's a page navigation or section scroll
+    if (item.href.startsWith("/")) {
+      // Navigate to page
+      window.location.href = item.href;
+    } else {
+      // Smooth scroll to section
+      const element = document.querySelector(item.href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
 
     // Close menu after a short delay
@@ -214,7 +220,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                 handleItemClick({
                   id: "contact",
                   label: "CONTACT",
-                  href: "#contact",
+                  href: "/contact",
                   description: "Let's connect",
                 })
               }

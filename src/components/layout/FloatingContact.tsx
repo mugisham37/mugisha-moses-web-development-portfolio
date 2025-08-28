@@ -51,11 +51,8 @@ export const FloatingContact: React.FC<FloatingContactProps> = ({
   const handleContactClick = () => {
     setHasInteracted(true);
     setIsVisible(false);
-    // Scroll to footer section (which contains contact information)
-    const contactSection = document.getElementById("footer");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
+    // Navigate to contact page
+    window.location.href = "/contact";
   };
 
   const handleDismiss = () => {

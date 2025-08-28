@@ -27,7 +27,7 @@ const menuItems: MenuItem[] = [
   {
     id: "projects",
     label: "PROJECTS",
-    href: "#projects",
+    href: "/projects",
     badge: "NEW",
     commitCount: 247,
   },
@@ -46,7 +46,7 @@ const menuItems: MenuItem[] = [
   {
     id: "contact",
     label: "CONTACT",
-    href: "#contact",
+    href: "/contact",
     hasIndicator: true,
   },
 ];
@@ -61,10 +61,16 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
   const handleItemClick = (item: MenuItem) => {
     setActiveItem(item.id);
 
-    // Smooth scroll to section
-    const element = document.querySelector(item.href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    // Check if it's a page navigation or section scroll
+    if (item.href.startsWith("/")) {
+      // Navigate to page
+      window.location.href = item.href;
+    } else {
+      // Smooth scroll to section
+      const element = document.querySelector(item.href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 

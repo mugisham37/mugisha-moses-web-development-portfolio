@@ -43,11 +43,8 @@ export const NavigationCTA: React.FC<NavigationCTAProps> = ({
   }, [isHovered]);
 
   const handleCTAClick = () => {
-    // Scroll to contact section
-    const contactSection = document.querySelector("#contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
+    // Navigate to contact page
+    window.location.href = "/contact";
   };
 
   const ctaClasses = [
