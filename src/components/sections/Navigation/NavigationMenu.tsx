@@ -19,12 +19,6 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
-    id: "home",
-    label: "HOME",
-    href: "#hero",
-    hasIndicator: true,
-  },
-  {
     id: "projects",
     label: "PROJECTS",
     href: "/projects",
@@ -38,12 +32,6 @@ const menuItems: MenuItem[] = [
     commitCount: 1337,
   },
   {
-    id: "results",
-    label: "RESULTS",
-    href: "#results",
-    badge: "HOT",
-  },
-  {
     id: "contact",
     label: "CONTACT",
     href: "/contact",
@@ -55,7 +43,7 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
   theme,
   className = "",
 }) => {
-  const [activeItem, setActiveItem] = useState("home");
+  const [activeItem, setActiveItem] = useState("projects");
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   const handleItemClick = (item: MenuItem) => {

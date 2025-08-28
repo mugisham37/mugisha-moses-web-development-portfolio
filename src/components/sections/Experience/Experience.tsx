@@ -3,19 +3,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { AchievementTimeline } from "./AchievementTimeline";
-import { ResultsEffects } from "./ResultsEffects";
-import "./Results.css";
+import { ExperienceTimeline } from "./ExperienceTimeline";
+import { ExperienceEffects } from "./ExperienceEffects";
+import "./Experience.css";
 
-interface ResultsProps {
+interface ExperienceProps {
   className?: string;
 }
 
-export const Results: React.FC<ResultsProps> = ({ className = "" }) => {
+export const Experience: React.FC<ExperienceProps> = ({ className = "" }) => {
   const { currentTheme } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [achievementStream, setAchievementStream] = useState<string[]>([]);
+  const [experienceStream, setExperienceStream] = useState<string[]>([]);
 
   // Intersection observer for entrance animations
   const isInView = useIntersectionObserver(sectionRef, {
@@ -40,7 +40,7 @@ export const Results: React.FC<ResultsProps> = ({ className = "" }) => {
       let index = 0;
       const interval = setInterval(() => {
         if (index < experiences.length) {
-          setAchievementStream((prev) => [...prev, experiences[index]]);
+          setExperienceStream((prev) => [...prev, experiences[index]]);
           index++;
         } else {
           clearInterval(interval);
@@ -54,17 +54,17 @@ export const Results: React.FC<ResultsProps> = ({ className = "" }) => {
   return (
     <section
       ref={sectionRef}
-      className={`results-section results-section--${currentTheme} ${className} ${
-        isVisible ? "results-section--visible" : ""
+      className={`experience-section experience-section--${currentTheme} ${className} ${
+        isVisible ? "experience-section--visible" : ""
       }`}
-      id="results"
+      id="experience"
     >
       {/* Background Effects */}
-      <ResultsEffects theme={currentTheme} isVisible={isVisible} />
+      <ExperienceEffects theme={currentTheme} isVisible={isVisible} />
       {/* Container */}
-      <div className="results-container">
+      <div className="experience-container">
         {/* Terminal Success Line */}
-        <div className="results-terminal">
+        <div className="experience-terminal">
           <div className="terminal-line">
             <span className="terminal-prompt">$</span>
             <span className="terminal-command">
@@ -81,43 +81,43 @@ export const Results: React.FC<ResultsProps> = ({ className = "" }) => {
         </div>
 
         {/* Experience Stream */}
-        <div className="achievement-stream">
-          {achievementStream.map((experience, index) => (
+        <div className="experience-stream">
+          {experienceStream.map((experience, index) => (
             <div
               key={index}
-              className="achievement-item"
+              className="experience-item"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <span className="achievement-icon">💼</span>
-              <span className="achievement-text">{experience}</span>
+              <span className="experience-icon">💼</span>
+              <span className="experience-text">{experience}</span>
             </div>
           ))}
         </div>
 
         {/* Main Content */}
-        <div className="results-content">
+        <div className="experience-content">
           {/* Section Header */}
-          <header className="results-header">
+          <header className="experience-header">
             <div className="header-badge">
               <span className="badge-text">PROFESSIONAL EXPERIENCE</span>
               <div className="badge-glow"></div>
             </div>
-            <h2 className="results-title">
+            <h2 className="experience-title">
               <span className="title-line">YEARS OF</span>
               <span className="title-line title-line--accent">EXPERTISE</span>
               <span className="title-line">GAINED</span>
             </h2>
-            <p className="results-subtitle">
+            <p className="experience-subtitle">
               Real experience. Real growth. Real expertise. Here&apos;s the
               journey that shaped a seasoned developer and technical leader.
             </p>
           </header>
 
           {/* Experience Grid */}
-          <div className="results-grid">
+          <div className="experience-grid">
             {/* Experience Timeline */}
-            <div className="results-section-wrapper results-section-wrapper--full">
-              <AchievementTimeline theme={currentTheme} />
+            <div className="experience-section-wrapper experience-section-wrapper--full">
+              <ExperienceTimeline theme={currentTheme} />
             </div>
           </div>
         </div>

@@ -16,10 +16,10 @@
 @import "../styles/components/footer.css";
 @import "../styles/components/footer-bottom.css";
 
-/* Results Section Components */
-@import "../components/sections/Results/Results.css";
-@import "../components/sections/Results/ResultsEffects.css";
-@import "../components/sections/Results/AchievementTimeline.css";
+/* Experience Section Components */
+@import "../components/sections/Experience/Experience.css";
+@import "../components/sections/Experience/ExperienceEffects.css";
+@import "../components/sections/Experience/ExperienceTimeline.css";
 
 /* Component Styles - Brutalist UI Components */
 @import "../styles/components/brutal-button.css";

@@ -1,6 +1,6 @@
-/* Achievement Timeline Styles */
+/* Experience Timeline Styles */
 
-.achievement-timeline {
+.experience-timeline {
   position: relative;
   padding: var(--theme-spacing-2xl) 0;
   background: linear-gradient(
@@ -14,7 +14,7 @@
   overflow: hidden;
 }
 
-.achievement-timeline--extreme-brutalist {
+.experience-timeline--extreme-brutalist {
   --timeline-primary: #ffff00;
   --timeline-secondary: #00ff00;
   --timeline-accent: #00ffff;
@@ -22,7 +22,7 @@
   --timeline-bg: #000000;
 }
 
-.achievement-timeline--refined-brutalist {
+.experience-timeline--refined-brutalist {
   --timeline-primary: #8b5cf6;
   --timeline-secondary: #10b981;
   --timeline-accent: #06b6d4;
@@ -40,7 +40,7 @@
   transition: all 0.8s ease;
 }
 
-.achievement-timeline--visible .timeline-header {
+.experience-timeline--visible .timeline-header {
   opacity: 1;
   transform: translateY(0);
 }
@@ -101,7 +101,7 @@
   transition: all 0.8s ease 0.2s;
 }
 
-.achievement-timeline--visible .timeline-navigation {
+.experience-timeline--visible .timeline-navigation {
   opacity: 1;
   transform: translateY(0);
 }
@@ -209,7 +209,7 @@
   scroll-behavior: auto;
 }
 
-.achievement-timeline--visible .timeline-container {
+.experience-timeline--visible .timeline-container {
   opacity: 1;
   transform: translateY(0);
 }
@@ -263,8 +263,8 @@
   animation: lineProgress 4s ease-out 1.5s forwards;
 }
 
-/* Achievement Medallions */
-.achievement-medallion {
+/* Experience Medallions */
+.experience-medallion {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -274,20 +274,20 @@
   transition: all var(--theme-animation-duration) var(--theme-animation-easing);
 }
 
-.achievement-medallion--visible {
+.experience-medallion--visible {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
 
-.achievement-medallion:hover {
+.experience-medallion:hover {
   transform: translate(-50%, -50%) scale(1.1);
 }
 
-.achievement-medallion--active {
+.experience-medallion--active {
   z-index: var(--theme-z-overlay);
 }
 
-.achievement-medallion--current {
+.experience-medallion--current {
   z-index: var(--theme-z-overlay);
 }
 
@@ -329,8 +329,8 @@
   animation: medallionRotate 4s linear infinite;
 }
 
-.achievement-medallion--current .medallion::before,
-.achievement-medallion--active .medallion::before {
+.experience-medallion--current .medallion::before,
+.experience-medallion--active .medallion::before {
   opacity: 1;
 }
 
@@ -368,8 +368,8 @@
   animation: currentPulse 2s ease-in-out infinite;
 }
 
-/* Achievement Details */
-.achievement-details {
+/* Experience Details */
+.experience-details {
   position: absolute;
   top: -120px;
   left: 50%;
@@ -380,8 +380,8 @@
   z-index: var(--theme-z-overlay);
 }
 
-.achievement-medallion--active .achievement-details,
-.achievement-medallion:hover .achievement-details {
+.experience-medallion--active .experience-details,
+.experience-medallion:hover .experience-details {
   opacity: 1;
   pointer-events: auto;
   top: -140px;
@@ -405,7 +405,7 @@
   margin-bottom: var(--theme-spacing-md);
 }
 
-.achievement-title {
+.experience-title {
   font-family: var(--theme-font-primary);
   font-size: var(--theme-text-base);
   font-weight: bold;
@@ -415,7 +415,7 @@
   margin-right: var(--theme-spacing-sm);
 }
 
-.achievement-category {
+.experience-category {
   font-family: var(--theme-font-code);
   font-size: var(--theme-text-xs);
   font-weight: bold;
@@ -425,7 +425,7 @@
   border-radius: var(--theme-border-radius);
 }
 
-.achievement-description {
+.experience-description {
   font-size: var(--theme-text-sm);
   color: var(--timeline-text);
   line-height: 1.4;
@@ -433,7 +433,7 @@
   opacity: 0.9;
 }
 
-.achievement-impact {
+.experience-impact {
   display: flex;
   flex-direction: column;
   gap: var(--theme-spacing-xs);
@@ -454,8 +454,8 @@
   opacity: 0.8;
 }
 
-/* Achievement Metrics */
-.achievement-metrics {
+/* Experience Metrics */
+.experience-metrics {
   display: flex;
   gap: var(--theme-spacing-md);
   margin-top: var(--theme-spacing-md);
@@ -487,7 +487,7 @@
 }
 
 /* Technologies */
-.achievement-technologies {
+.experience-technologies {
   margin-top: var(--theme-spacing-md);
   padding-top: var(--theme-spacing-md);
   border-top: 1px solid rgba(var(--theme-text-rgb), 0.2);
@@ -552,7 +552,7 @@
   transition: all 0.8s ease 1.5s;
 }
 
-.achievement-timeline--visible .timeline-stats {
+.experience-timeline--visible .timeline-stats {
   opacity: 1;
   transform: translateY(0);
 }
@@ -639,7 +639,7 @@
 }
 
 @media (max-width: 768px) {
-  .achievement-timeline {
+  .experience-timeline {
     padding: var(--theme-spacing-xl) 0;
   }
 
@@ -681,16 +681,16 @@
     padding: var(--theme-spacing-md);
   }
 
-  .achievement-details {
+  .experience-details {
     top: -110px;
   }
 
-  .achievement-medallion--active .achievement-details,
-  .achievement-medallion:hover .achievement-details {
+  .experience-medallion--active .experience-details,
+  .experience-medallion:hover .experience-details {
     top: -130px;
   }
 
-  .achievement-metrics {
+  .experience-metrics {
     flex-direction: column;
     gap: var(--theme-spacing-sm);
   }

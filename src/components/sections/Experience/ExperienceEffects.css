@@ -1,6 +1,6 @@
-/* Results Effects Styles */
+/* Experience Effects Styles */
 
-.results-effects {
+.experience-effects {
   position: absolute;
   top: 0;
   left: 0;
@@ -12,24 +12,24 @@
   transition: opacity 1s ease;
 }
 
-.results-effects--visible {
+.experience-effects--visible {
   opacity: 1;
 }
 
-.results-effects--extreme-brutalist {
+.experience-effects--extreme-brutalist {
   --effects-accent: #ffff00;
   --effects-success: #00ff00;
   --effects-highlight: #00ffff;
 }
 
-.results-effects--refined-brutalist {
+.experience-effects--refined-brutalist {
   --effects-accent: #8b5cf6;
   --effects-success: #10b981;
   --effects-highlight: #06b6d4;
 }
 
 /* Success Particles */
-.results-effects__particles {
+.experience-effects__particles {
   position: absolute;
   top: 0;
   left: 0;
@@ -49,7 +49,7 @@
 }
 
 /* Golden Grid */
-.results-effects__grid {
+.experience-effects__grid {
   position: absolute;
   top: 0;
   left: 0;
@@ -68,7 +68,7 @@
 }
 
 /* Success Glow */
-.results-effects__glow {
+.experience-effects__glow {
   position: absolute;
   top: 50%;
   left: 50%;

@@ -16,7 +16,6 @@ interface GuaranteeItem {
 
 const guaranteeItems: GuaranteeItem[] = [
   { icon: "💯", text: "100% satisfaction guaranteed", id: "satisfaction" },
-  { icon: "⚡", text: "4-hour response time", id: "response" },
   { icon: "🆓", text: "Free consultation", id: "consultation" },
   { icon: "👥", text: "Join 50+ satisfied clients", id: "clients" },
 ];
@@ -35,8 +34,7 @@ export const UltimateCTA: React.FC<UltimateCTAProps> = ({ className = "" }) => {
     triggerOnce: true,
   });
 
-  const fullTitle =
-    "MAIN CTA - READY TO START? LET'S BUILD SOMETHING AMAZING TOGETHER.";
+  const fullTitle = "READY TO TRANSFORM YOUR VISION INTO REALITY?";
 
   // Typewriter effect for title
   useEffect(() => {
@@ -172,30 +170,6 @@ export const UltimateCTA: React.FC<UltimateCTAProps> = ({ className = "" }) => {
             <div className="ultimate-cta__button-strike"></div>
             <div className="ultimate-cta__button-glow"></div>
             <div className="ultimate-cta__button-shimmer"></div>
-          </button>
-
-          {/* Secondary CTA - Quick Quote */}
-          <button
-            className={`ultimate-cta__button ultimate-cta__button--secondary ${
-              hoveredButton === "quick_quote"
-                ? "ultimate-cta__button--hovered"
-                : ""
-            }`}
-            onClick={() => handleCTAClick("quick_quote")}
-            onMouseEnter={() => setHoveredButton("quick_quote")}
-            onMouseLeave={() => setHoveredButton(null)}
-          >
-            <div className="ultimate-cta__button-content">
-              <span className="ultimate-cta__button-text">GET QUICK QUOTE</span>
-              <div className="ultimate-cta__button-icon">💰</div>
-            </div>
-
-            {/* Button Effects */}
-            <div className="ultimate-cta__button-shadow ultimate-cta__button-shadow--1"></div>
-            <div className="ultimate-cta__button-border"></div>
-            <div className="ultimate-cta__button-pulse"></div>
-            <div className="ultimate-cta__button-strike"></div>
-            <div className="ultimate-cta__button-glow"></div>
           </button>
 
           {/* Tertiary CTA - Schedule Call */}

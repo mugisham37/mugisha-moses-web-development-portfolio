@@ -1,6 +1,6 @@
-/* Results Section Styles */
+/* Experience Section Styles */
 
-.results-section {
+.experience-section {
   position: relative;
   min-height: 100vh;
   padding: var(--theme-spacing-3xl) 0;
@@ -10,7 +10,7 @@
   transition: all var(--theme-transition-duration) ease;
 }
 
-.results-section--extreme-brutalist {
+.experience-section--extreme-brutalist {
   --section-bg: #000000;
   --section-text: #ffffff;
   --section-accent: #ffff00;
@@ -18,7 +18,7 @@
   --section-highlight: #00ffff;
 }
 
-.results-section--refined-brutalist {
+.experience-section--refined-brutalist {
   --section-bg: #1a1a1a;
   --section-text: #f5f5f5;
   --section-accent: #8b5cf6;
@@ -27,7 +27,7 @@
 }
 
 /* Container */
-.results-container {
+.experience-container {
   position: relative;
   max-width: 1400px;
   margin: 0 auto;
@@ -36,7 +36,7 @@
 }
 
 /* Terminal Success Line */
-.results-terminal {
+.experience-terminal {
   margin-bottom: var(--theme-spacing-2xl);
   font-family: var(--theme-font-code);
   font-size: var(--theme-text-sm);
@@ -80,8 +80,8 @@
   animation: blink 1s step-end infinite;
 }
 
-/* Achievement Stream */
-.achievement-stream {
+/* Experience Stream */
+.experience-stream {
   position: absolute;
   top: 0;
   right: var(--theme-spacing-lg);
@@ -91,7 +91,7 @@
   z-index: var(--theme-z-background);
 }
 
-.achievement-item {
+.experience-item {
   display: flex;
   align-items: center;
   gap: var(--theme-spacing-sm);
@@ -108,18 +108,18 @@
   animation: slideInRight 0.6s ease forwards;
 }
 
-.achievement-icon {
+.experience-icon {
   font-size: var(--theme-text-sm);
 }
 
-.achievement-text {
+.experience-text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 /* Section Header */
-.results-header {
+.experience-header {
   text-align: center;
   margin-bottom: var(--theme-spacing-3xl);
   opacity: 0;
@@ -167,7 +167,7 @@
   animation: glowPulse 3s ease-in-out infinite;
 }
 
-.results-title {
+.experience-title {
   font-family: var(--theme-font-primary);
   font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 900;
@@ -191,7 +191,7 @@
   animation: titleGlow 2s ease-in-out infinite alternate;
 }
 
-.results-subtitle {
+.experience-subtitle {
   font-size: var(--theme-text-lg);
   color: var(--section-text);
   max-width: 600px;
@@ -200,55 +200,55 @@
   opacity: 0.9;
 }
 
-/* Results Grid */
-.results-grid {
+/* Experience Grid */
+.experience-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--theme-spacing-2xl);
   margin-bottom: var(--theme-spacing-3xl);
 }
 
-.results-section-wrapper {
+.experience-section-wrapper {
   opacity: 0;
   transform: translateY(40px);
   animation: fadeInUp 0.8s ease forwards;
 }
 
-.results-section-wrapper:nth-child(1) {
+.experience-section-wrapper:nth-child(1) {
   animation-delay: 0.5s;
 }
 
-.results-section-wrapper:nth-child(2) {
+.experience-section-wrapper:nth-child(2) {
   animation-delay: 0.7s;
 }
 
-.results-section-wrapper--full {
+.experience-section-wrapper--full {
   grid-column: 1 / -1;
   animation-delay: 0.9s;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .achievement-stream {
+  .experience-stream {
     display: none;
   }
 
-  .results-grid {
+  .experience-grid {
     grid-template-columns: 1fr;
     gap: var(--theme-spacing-xl);
   }
 }
 
 @media (max-width: 768px) {
-  .results-section {
+  .experience-section {
     padding: var(--theme-spacing-2xl) 0;
   }
 
-  .results-container {
+  .experience-container {
     padding: 0 var(--theme-spacing-md);
   }
 
-  .results-title {
+  .experience-title {
     font-size: clamp(2rem, 6vw, 3rem);
   }
 
@@ -334,9 +334,9 @@
 }
 
 /* Visibility state */
-.results-section--visible .results-terminal,
-.results-section--visible .results-header,
-.results-section--visible .results-section-wrapper,
-.results-section--visible .results-cta {
+.experience-section--visible .experience-terminal,
+.experience-section--visible .experience-header,
+.experience-section--visible .experience-section-wrapper,
+.experience-section--visible .experience-cta {
   animation-play-state: running;
 }

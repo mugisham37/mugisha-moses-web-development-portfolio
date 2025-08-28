@@ -20,12 +20,6 @@ interface MenuItem {
 
 const mobileMenuItems: MenuItem[] = [
   {
-    id: "home",
-    label: "HOME",
-    href: "#hero",
-    description: "Back to top",
-  },
-  {
     id: "projects",
     label: "PROJECTS",
     href: "/projects",
@@ -37,13 +31,6 @@ const mobileMenuItems: MenuItem[] = [
     label: "EXPERIENCE",
     href: "#experience",
     description: "My journey",
-  },
-  {
-    id: "results",
-    label: "RESULTS",
-    href: "#results",
-    badge: "HOT",
-    description: "Success stories",
   },
   {
     id: "contact",

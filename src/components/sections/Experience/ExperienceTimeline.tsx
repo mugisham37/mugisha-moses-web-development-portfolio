@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import "./AchievementTimeline.css";
+import "./ExperienceTimeline.css";
 
 interface Experience {
   year: number;
@@ -139,7 +139,7 @@ const experiences: Experience[] = [
   },
 ];
 
-export const AchievementTimeline: React.FC<ExperienceTimelineProps> = ({
+export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({
   theme,
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -293,8 +293,8 @@ export const AchievementTimeline: React.FC<ExperienceTimelineProps> = ({
   return (
     <div
       ref={sectionRef}
-      className={`achievement-timeline achievement-timeline--${theme} ${
-        isVisible ? "achievement-timeline--visible" : ""
+      className={`experience-timeline experience-timeline--${theme} ${
+        isVisible ? "experience-timeline--visible" : ""
       }`}
     >
       {/* Timeline Header */}
@@ -387,15 +387,13 @@ export const AchievementTimeline: React.FC<ExperienceTimelineProps> = ({
           {experiences.map((experience, index) => (
             <div
               key={index}
-              className={`achievement-medallion ${
+              className={`experience-medallion ${
                 visibleExperiences.includes(index)
-                  ? "achievement-medallion--visible"
+                  ? "experience-medallion--visible"
                   : ""
               } ${
-                activeExperience === index
-                  ? "achievement-medallion--active"
-                  : ""
-              } ${experience.current ? "achievement-medallion--current" : ""}`}
+                activeExperience === index ? "experience-medallion--active" : ""
+              } ${experience.current ? "experience-medallion--current" : ""}`}
               style={{
                 left: `${(index / (experiences.length - 1)) * 100}%`,
                 animationDelay: `${index * 0.2}s`,
@@ -424,30 +422,30 @@ export const AchievementTimeline: React.FC<ExperienceTimelineProps> = ({
               </div>
 
               {/* Experience Details */}
-              <div className="achievement-details">
+              <div className="experience-details">
                 <div className="details-card">
                   <div className="card-header">
-                    <h4 className="achievement-title">{experience.title}</h4>
+                    <h4 className="experience-title">{experience.title}</h4>
                     <span
-                      className="achievement-category"
+                      className="experience-category"
                       style={{ color: getCategoryColor(experience.category) }}
                     >
                       {experience.category}
                     </span>
                   </div>
 
-                  <p className="achievement-description">
+                  <p className="experience-description">
                     {experience.description}
                   </p>
 
-                  <div className="achievement-impact">
+                  <div className="experience-impact">
                     <span className="impact-label">Growth:</span>
                     <span className="impact-text">{experience.impact}</span>
                   </div>
 
                   {/* Experience Metrics */}
                   {experience.metrics && (
-                    <div className="achievement-metrics">
+                    <div className="experience-metrics">
                       {experience.metrics.map((metric, metricIndex) => (
                         <div key={metricIndex} className="metric-item">
                           <span className="metric-value">{metric.value}</span>
@@ -459,7 +457,7 @@ export const AchievementTimeline: React.FC<ExperienceTimelineProps> = ({
 
                   {/* Technologies */}
                   {experience.technologies && (
-                    <div className="achievement-technologies">
+                    <div className="experience-technologies">
                       <span className="tech-label">Skills:</span>
                       <div className="tech-tags">
                         {experience.technologies.map((tech, techIndex) => (

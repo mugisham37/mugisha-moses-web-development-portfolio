@@ -23,11 +23,18 @@ export const NavigationLogo: React.FC<NavigationLogoProps> = ({
     .filter(Boolean)
     .join(" ");
 
+  const handleLogoClick = () => {
+    // Navigate to homepage
+    window.location.href = "/";
+  };
+
   return (
-    <div
+    <button
       className={logoClasses}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleLogoClick}
+      aria-label="Go to homepage"
     >
       {/* Main Logo Container */}
       <div className="navigation-logo__container">
@@ -67,6 +74,6 @@ export const NavigationLogo: React.FC<NavigationLogoProps> = ({
 
       {/* Terminal Cursor */}
       <div className="navigation-logo__cursor">_</div>
-    </div>
+    </button>
   );
 };

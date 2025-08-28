@@ -1,27 +1,27 @@
 "use client";
 
 import React from "react";
-import "./ResultsEffects.css";
+import "./ExperienceEffects.css";
 
-interface ResultsEffectsProps {
+interface ExperienceEffectsProps {
   theme: "extreme-brutalist" | "refined-brutalist";
   isVisible: boolean;
   className?: string;
 }
 
-export const ResultsEffects: React.FC<ResultsEffectsProps> = ({
+export const ExperienceEffects: React.FC<ExperienceEffectsProps> = ({
   theme,
   isVisible,
   className = "",
 }) => {
   return (
     <div
-      className={`results-effects results-effects--${theme} ${className} ${
-        isVisible ? "results-effects--visible" : ""
+      className={`experience-effects experience-effects--${theme} ${className} ${
+        isVisible ? "experience-effects--visible" : ""
       }`}
     >
       {/* Success Particles */}
-      <div className="results-effects__particles">
+      <div className="experience-effects__particles">
         {Array.from({ length: 20 }).map((_, index) => (
           <div
             key={index}
@@ -36,10 +36,10 @@ export const ResultsEffects: React.FC<ResultsEffectsProps> = ({
       </div>
 
       {/* Golden Grid */}
-      <div className="results-effects__grid" />
+      <div className="experience-effects__grid" />
 
       {/* Success Glow */}
-      <div className="results-effects__glow" />
+      <div className="experience-effects__glow" />
     </div>
   );
 };
