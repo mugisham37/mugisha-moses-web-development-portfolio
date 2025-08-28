@@ -52,7 +52,7 @@ export const FloatingContact: React.FC<FloatingContactProps> = ({
     setHasInteracted(true);
     setIsVisible(false);
     // Navigate to contact page
-    window.location.href = "/contact";
+    window.location.href = "http://localhost:3000/contact";
   };
 
   const handleDismiss = () => {
@@ -130,8 +130,8 @@ export const FloatingContact: React.FC<FloatingContactProps> = ({
                   className="floating-contact__cta"
                 >
                   {currentTheme === "extreme-brutalist"
-                    ? "BOOK SESSION"
-                    : "Get Started"}
+                    ? "GET STARTED"
+                    : "Contact Me"}
                 </BrutalButton>
               </div>
             </div>

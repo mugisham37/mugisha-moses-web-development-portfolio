@@ -18,6 +18,9 @@
 
 /* Experience Section Components */
 @import "../components/sections/Experience/Experience.css";
+
+/* Layout Components */
+@import "../styles/layout-components.css";
 @import "../components/sections/Experience/ExperienceEffects.css";
 @import "../components/sections/Experience/ExperienceTimeline.css";
 
