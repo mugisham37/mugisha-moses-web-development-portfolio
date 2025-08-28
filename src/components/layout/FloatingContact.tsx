@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useTheme } from "@/hooks/useTheme";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { BrutalButton } from "@/components/ui";
@@ -13,14 +14,24 @@ interface FloatingContactProps {
 export const FloatingContact: React.FC<FloatingContactProps> = ({
   className = "",
 }) => {
+  const pathname = usePathname();
   const { currentTheme, config } = useTheme();
   const { scrollProgress } = useScrollProgress();
   const [isVisible, setIsVisible] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [lastShowTime, setLastShowTime] = useState(0);
 
+  // Don't show the floating contact if we're already on the contact page
+  const isOnContactPage = pathname === "/contact";
+
   // Show floating contact based on scroll behavior and timing
   useEffect(() => {
+    // Don't show if we're on the contact page
+    if (isOnContactPage) {
+      setIsVisible(false);
+      return;
+    }
+
     const now = Date.now();
     const timeSinceLastShow = now - lastShowTime;
     const minInterval = 30000; // 30 seconds minimum between shows
@@ -29,6 +40,7 @@ export const FloatingContact: React.FC<FloatingContactProps> = ({
     // 1. User has scrolled past 25% but not at the very end
     // 2. Hasn't been shown recently
     // 3. User hasn't interacted with it yet (or it's been a while)
+    // 4. Not on the contact page
     const shouldShow =
       scrollProgress > 0.25 &&
       scrollProgress < 0.9 &&
@@ -46,7 +58,7 @@ export const FloatingContact: React.FC<FloatingContactProps> = ({
 
       return () => clearTimeout(hideTimer);
     }
-  }, [scrollProgress, lastShowTime, hasInteracted, isVisible]);
+  }, [scrollProgress, lastShowTime, hasInteracted, isVisible, isOnContactPage]);
 
   const handleContactClick = () => {
     setHasInteracted(true);

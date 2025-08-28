@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { ThemeType } from "@/types/theme";
 
 interface NavigationLogoProps {
@@ -23,17 +24,12 @@ export const NavigationLogo: React.FC<NavigationLogoProps> = ({
     .filter(Boolean)
     .join(" ");
 
-  const handleLogoClick = () => {
-    // Navigate to homepage
-    window.location.href = "/";
-  };
-
   return (
-    <button
+    <Link
+      href="/"
       className={logoClasses}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={handleLogoClick}
       aria-label="Go to homepage"
     >
       {/* Main Logo Container */}
@@ -74,6 +70,6 @@ export const NavigationLogo: React.FC<NavigationLogoProps> = ({
 
       {/* Terminal Cursor */}
       <div className="navigation-logo__cursor">_</div>
-    </button>
+    </Link>
   );
 };

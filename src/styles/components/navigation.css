@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: var(--z-fixed);
+  z-index: var(--theme-z-modal);
   background: var(--current-bg);
   border-bottom: var(--current-border-width) var(--current-border-style)
     var(--current-text);
@@ -72,7 +72,7 @@
   cursor: pointer;
   padding: 0.5rem;
   position: relative;
-  z-index: var(--z-modal);
+  z-index: var(--theme-z-tooltip);
 }
 
 .navigation__hamburger {
@@ -737,7 +737,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: var(--z-modal);
+  z-index: var(--theme-z-tooltip);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -19,6 +19,45 @@
   --theme-highlight-rgb: 0, 255, 255;
   --theme-success-rgb: 0, 255, 0;
 
+  /* Current variable mappings for navigation */
+  --current-bg: var(--theme-bg);
+  --current-text: var(--theme-text);
+  --current-accent: var(--theme-accent);
+  --current-highlight: var(--theme-highlight);
+  --current-success: var(--theme-success);
+  --current-secondary: var(--theme-secondary);
+  --current-border: var(--theme-border);
+  --current-border-width: var(--theme-border-width);
+  --current-border-style: var(--theme-border-style);
+  --current-border-radius: var(--theme-border-radius);
+  --current-font-code: var(--theme-font-code);
+  --current-font-weight-normal: 400;
+  --current-font-weight-bold: 700;
+  --current-text-xs: var(--theme-text-xs);
+  --current-text-sm: var(--theme-text-sm);
+  --current-text-lg: var(--theme-text-lg);
+  --current-text-xl: var(--theme-text-xl);
+  --current-space-2: 0.5rem;
+  --current-space-3: 0.75rem;
+  --current-space-4: 1rem;
+  --current-space-6: 1.5rem;
+  --current-space-8: 2rem;
+  --current-letter-spacing-wide: 0.05em;
+  --current-animation-duration: 0.3s;
+  --current-animation-easing: ease;
+  --current-shadow-brutal: 4px 4px 0 var(--theme-text);
+  --current-shadow-double: 8px 8px 0 var(--theme-text);
+  --current-shadow-text: 2px 2px 0 var(--theme-accent);
+  --current-shadow-triple:
+    4px 4px 0 var(--theme-accent), 8px 8px 0 var(--theme-text);
+  --current-shadow-elevated: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --theme-transition-duration: 0.3s;
+  --theme-transition-easing: ease;
+  --container-max-width: 1200px;
+  --container-padding: 1rem;
+  --nav-height: 80px;
+  --nav-height-mobile: 60px;
+
   /* Typography */
   --theme-font-primary: "Space Mono", monospace;
   --theme-font-code: "JetBrains Mono", monospace;

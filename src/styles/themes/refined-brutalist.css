@@ -19,6 +19,45 @@
   --theme-highlight-rgb: 6, 182, 212;
   --theme-success-rgb: 16, 185, 129;
 
+  /* Current variable mappings for navigation */
+  --current-bg: var(--theme-bg);
+  --current-text: var(--theme-text);
+  --current-accent: var(--theme-accent);
+  --current-highlight: var(--theme-highlight);
+  --current-success: var(--theme-success);
+  --current-secondary: var(--theme-secondary);
+  --current-border: var(--theme-border);
+  --current-border-width: 2px;
+  --current-border-style: solid;
+  --current-border-radius: 8px;
+  --current-font-code: var(--theme-font-code);
+  --current-font-weight-normal: 400;
+  --current-font-weight-bold: 700;
+  --current-text-xs: var(--theme-text-xs);
+  --current-text-sm: var(--theme-text-sm);
+  --current-text-lg: var(--theme-text-lg);
+  --current-text-xl: var(--theme-text-xl);
+  --current-space-2: 0.5rem;
+  --current-space-3: 0.75rem;
+  --current-space-4: 1rem;
+  --current-space-6: 1.5rem;
+  --current-space-8: 2rem;
+  --current-letter-spacing-wide: 0.05em;
+  --current-animation-duration: 0.3s;
+  --current-animation-easing: ease;
+  --current-shadow-brutal: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --current-shadow-double: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --current-shadow-text: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  --current-shadow-triple:
+    0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
+  --current-shadow-elevated: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --theme-transition-duration: 0.3s;
+  --theme-transition-easing: ease;
+  --container-max-width: 1200px;
+  --container-padding: 1rem;
+  --nav-height: 80px;
+  --nav-height-mobile: 60px;
+
   /* Typography */
   --theme-font-primary: "Inter", sans-serif;
   --theme-font-code: "JetBrains Mono", monospace;

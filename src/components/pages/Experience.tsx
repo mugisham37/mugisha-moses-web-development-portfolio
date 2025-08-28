@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { useTheme } from "@/hooks/useTheme";
+import { useThemeContext } from "@/contexts/ThemeContext";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { ExperienceTimeline } from "../sections/Experience/ExperienceTimeline";
 import { ExperienceEffects } from "../sections/Experience/ExperienceEffects";
@@ -12,7 +12,7 @@ interface ExperienceProps {
 }
 
 export const Experience: React.FC<ExperienceProps> = ({ className = "" }) => {
-  const { currentTheme } = useTheme();
+  const { currentTheme } = useThemeContext();
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [experienceStream, setExperienceStream] = useState<string[]>([]);

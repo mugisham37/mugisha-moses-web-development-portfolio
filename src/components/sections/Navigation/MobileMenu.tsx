@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ThemeType } from "@/types/theme";
 
 interface MobileMenuProps {
@@ -16,16 +16,20 @@ interface MenuItem {
   id: string;
   label: string;
   href: string;
-  badge?: string;
   description: string;
 }
 
 const mobileMenuItems: MenuItem[] = [
   {
+    id: "home",
+    label: "HOME",
+    href: "/",
+    description: "Back to home",
+  },
+  {
     id: "projects",
     label: "PROJECTS",
     href: "/projects",
-    badge: "NEW",
     description: "View my work",
   },
   {
@@ -51,7 +55,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   const [animationState, setAnimationState] = useState<
     "closed" | "opening" | "open" | "closing"
   >("closed");
-  const router = useRouter();
+  const pathname = usePathname();
 
   // Handle animation states
   useEffect(() => {
@@ -67,26 +71,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
       }
     }
   }, [isOpen, animationState]);
-
-  // Handle menu item click
-  const handleItemClick = (item: MenuItem) => {
-    // Check if it's a page navigation or section scroll
-    if (item.href.startsWith("/")) {
-      // Navigate to page using Next.js router
-      router.push(item.href);
-    } else {
-      // Smooth scroll to section
-      const element = document.querySelector(item.href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-
-    // Close menu after a short delay
-    setTimeout(() => {
-      onClose();
-    }, 300);
-  };
 
   // Handle backdrop click
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -152,28 +136,26 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 
         <nav className="mobile-menu__nav">
           <ul className="mobile-menu__list">
-            {mobileMenuItems.map((item, index) => (
-              <li
-                key={item.id}
-                className="mobile-menu__item"
-                style={{ "--item-index": index } as React.CSSProperties}
-              >
-                {item.href.startsWith("/") ? (
+            {mobileMenuItems.map((item, index) => {
+              const isActive = pathname === item.href;
+
+              return (
+                <li
+                  key={item.id}
+                  className={`mobile-menu__item ${isActive ? "mobile-menu__item--active" : ""}`}
+                  style={{ "--item-index": index } as React.CSSProperties}
+                >
                   <Link
                     href={item.href}
                     className="mobile-menu__link"
                     onClick={onClose}
+                    prefetch={true}
                   >
                     <div className="mobile-menu__link-content">
                       <div className="mobile-menu__link-main">
                         <span className="mobile-menu__link-text">
                           {item.label}
                         </span>
-                        {item.badge && (
-                          <span className="mobile-menu__badge">
-                            {item.badge}
-                          </span>
-                        )}
                       </div>
                       <span className="mobile-menu__link-description">
                         {item.description}
@@ -188,38 +170,9 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                     <div className="mobile-menu__link-shadow"></div>
                     <div className="mobile-menu__link-border"></div>
                   </Link>
-                ) : (
-                  <button
-                    className="mobile-menu__link"
-                    onClick={() => handleItemClick(item)}
-                  >
-                    <div className="mobile-menu__link-content">
-                      <div className="mobile-menu__link-main">
-                        <span className="mobile-menu__link-text">
-                          {item.label}
-                        </span>
-                        {item.badge && (
-                          <span className="mobile-menu__badge">
-                            {item.badge}
-                          </span>
-                        )}
-                      </div>
-                      <span className="mobile-menu__link-description">
-                        {item.description}
-                      </span>
-                    </div>
-
-                    <div className="mobile-menu__link-arrow">
-                      <span className="mobile-menu__arrow-line"></span>
-                      <span className="mobile-menu__arrow-head">&gt;</span>
-                    </div>
-
-                    <div className="mobile-menu__link-shadow"></div>
-                    <div className="mobile-menu__link-border"></div>
-                  </button>
-                )}
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -232,23 +185,18 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           </div>
 
           <div className="mobile-menu__cta">
-            <button
+            <Link
+              href="/contact"
               className="mobile-menu__cta-button"
-              onClick={() =>
-                handleItemClick({
-                  id: "contact",
-                  label: "CONTACT",
-                  href: "/contact",
-                  description: "Let's connect",
-                })
-              }
+              onClick={onClose}
+              prefetch={true}
             >
               <span className="mobile-menu__cta-text">HIRE ME</span>
               <div className="mobile-menu__cta-effects">
                 <div className="mobile-menu__cta-shadow"></div>
                 <div className="mobile-menu__cta-border"></div>
               </div>
-            </button>
+            </Link>
           </div>
         </div>
 
