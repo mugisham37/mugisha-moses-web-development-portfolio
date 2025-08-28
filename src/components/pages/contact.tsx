@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useThemeContext } from "@/contexts/ThemeContext";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
-interface NewsletterProps {
+interface ContactProps {
   className?: string;
 }
 
@@ -182,7 +182,7 @@ const timelineOptions = [
   { value: "flexible", label: "Flexible" },
 ];
 
-export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
+export const Contact: React.FC<ContactProps> = ({ className = "" }) => {
   const { currentTheme } = useThemeContext();
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -309,170 +309,166 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
     }
   };
 
-  const newsletterClasses = [
-    "newsletter",
-    `newsletter--${currentTheme}`,
-    isVisible ? "newsletter--visible" : "",
+  const contactClasses = [
+    "contact",
+    `contact--${currentTheme}`,
+    isVisible ? "contact--visible" : "",
     className,
   ]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <div ref={containerRef} className={newsletterClasses}>
+    <div ref={containerRef} className={contactClasses}>
       {/* Background Effects */}
-      <div className="newsletter__background">
-        <div className="newsletter__particles"></div>
-        <div className="newsletter__grid"></div>
-        <div className="newsletter__glow"></div>
-        <div className="newsletter__stripes"></div>
+      <div className="contact__background">
+        <div className="contact__particles"></div>
+        <div className="contact__grid"></div>
+        <div className="contact__glow"></div>
+        <div className="contact__stripes"></div>
       </div>
 
       {/* Shadow Layers */}
-      <div className="newsletter__shadow newsletter__shadow--1"></div>
-      <div className="newsletter__shadow newsletter__shadow--2"></div>
+      <div className="contact__shadow contact__shadow--1"></div>
+      <div className="contact__shadow contact__shadow--2"></div>
 
       {/* Border Effects */}
-      <div className="newsletter__border newsletter__border--main"></div>
-      <div className="newsletter__border newsletter__border--accent"></div>
+      <div className="contact__border contact__border--main"></div>
+      <div className="contact__border contact__border--accent"></div>
 
       {/* Main Container */}
-      <div className="newsletter__container">
+      <div className="contact__container">
         {/* Header Section */}
-        <div className="newsletter__header">
-          <div className="newsletter__title-container">
-            <h2 className="newsletter__title">
+        <div className="contact__header">
+          <div className="contact__title-container">
+            <h2 className="contact__title">
               LET&apos;S BUILD SOMETHING AMAZING
             </h2>
-            <div className="newsletter__subtitle">
+            <div className="contact__subtitle">
               Ready to turn your vision into reality? Let&apos;s discuss your
               project and create something extraordinary together.
             </div>
           </div>
 
           {/* Stats */}
-          <div className="newsletter__stats">
-            <div className="newsletter__stat">
-              <span className="newsletter__stat-number">50+</span>
-              <span className="newsletter__stat-label">Projects Delivered</span>
+          <div className="contact__stats">
+            <div className="contact__stat">
+              <span className="contact__stat-number">50+</span>
+              <span className="contact__stat-label">Projects Delivered</span>
             </div>
-            <div className="newsletter__stat">
-              <span className="newsletter__stat-number">2-4h</span>
-              <span className="newsletter__stat-label">Response Time</span>
+            <div className="contact__stat">
+              <span className="contact__stat-number">2-4h</span>
+              <span className="contact__stat-label">Response Time</span>
             </div>
-            <div className="newsletter__stat">
-              <span className="newsletter__stat-number">100%</span>
-              <span className="newsletter__stat-label">
-                Client Satisfaction
-              </span>
+            <div className="contact__stat">
+              <span className="contact__stat-number">100%</span>
+              <span className="contact__stat-label">Client Satisfaction</span>
             </div>
           </div>
         </div>
 
         {/* Content Grid */}
-        <div className="newsletter__content">
+        <div className="contact__content">
           {/* Left Column - Project Showcases */}
-          <div className="newsletter__preview-section">
-            <h3 className="newsletter__section-title">
+          <div className="contact__preview-section">
+            <h3 className="contact__section-title">
               Recent Project Success Stories
             </h3>
 
-            <div className="newsletter__preview-cards">
+            <div className="contact__preview-cards">
               {projectShowcases.map((project, index) => (
                 <div
                   key={project.id}
-                  className={`newsletter__preview-card ${
+                  className={`contact__preview-card ${
                     hoveredCard === project.id
-                      ? "newsletter__preview-card--hovered"
+                      ? "contact__preview-card--hovered"
                       : ""
                   }`}
                   onMouseEnter={() => setHoveredCard(project.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                   style={{ "--card-index": index } as React.CSSProperties}
                 >
-                  <div className="newsletter__preview-card-shadow"></div>
-                  <div className="newsletter__preview-card-border"></div>
+                  <div className="contact__preview-card-shadow"></div>
+                  <div className="contact__preview-card-border"></div>
 
-                  <div className="newsletter__preview-card-header">
-                    <span className="newsletter__preview-card-category">
+                  <div className="contact__preview-card-header">
+                    <span className="contact__preview-card-category">
                       {project.category}
                     </span>
-                    <span className="newsletter__preview-card-date">
+                    <span className="contact__preview-card-date">
                       {new Date(project.completedDate).toLocaleDateString()}
                     </span>
                   </div>
 
-                  <h4 className="newsletter__preview-card-title">
+                  <h4 className="contact__preview-card-title">
                     {project.title}
                   </h4>
 
-                  <p className="newsletter__preview-card-excerpt">
+                  <p className="contact__preview-card-excerpt">
                     {project.excerpt}
                   </p>
 
-                  <div className="newsletter__preview-card-meta">
-                    <span className="newsletter__preview-card-read-time">
+                  <div className="contact__preview-card-meta">
+                    <span className="contact__preview-card-read-time">
                       ⏱️ {project.duration}
                     </span>
-                    <div className="newsletter__preview-card-engagement">
+                    <div className="contact__preview-card-engagement">
                       <span>� {project.results.performance}</span>
                       <span>� {project.results.satisfaction}</span>
                       <span>� {project.results.delivery}</span>
                     </div>
                   </div>
 
-                  <div className="newsletter__preview-card-strike"></div>
-                  <div className="newsletter__preview-card-glow"></div>
+                  <div className="contact__preview-card-strike"></div>
+                  <div className="contact__preview-card-glow"></div>
                 </div>
               ))}
             </div>
 
             {/* Contact Methods */}
-            <div className="newsletter__methods-section">
-              <h4 className="newsletter__methods-title">
+            <div className="contact__methods-section">
+              <h4 className="contact__methods-title">
                 How Would You Like to Connect?
               </h4>
-              <div className="newsletter__methods">
+              <div className="contact__methods">
                 {contactMethods.map((method, index) => (
                   <div
                     key={method.id}
-                    className={`newsletter__method ${
+                    className={`contact__method ${
                       hoveredMethod === method.id
-                        ? "newsletter__method--hovered"
+                        ? "contact__method--hovered"
                         : ""
                     }`}
                     onMouseEnter={() => setHoveredMethod(method.id)}
                     onMouseLeave={() => setHoveredMethod(null)}
                     style={{ "--method-index": index } as React.CSSProperties}
                   >
-                    <div className="newsletter__method-shadow"></div>
-                    <div className="newsletter__method-border"></div>
+                    <div className="contact__method-shadow"></div>
+                    <div className="contact__method-border"></div>
 
-                    <div className="newsletter__method-content">
-                      <div className="newsletter__method-header">
-                        <span className="newsletter__method-icon">
+                    <div className="contact__method-content">
+                      <div className="contact__method-header">
+                        <span className="contact__method-icon">
                           {method.icon}
                         </span>
-                        <h5 className="newsletter__method-name">
-                          {method.name}
-                        </h5>
+                        <h5 className="contact__method-name">{method.name}</h5>
                       </div>
 
-                      <p className="newsletter__method-description">
+                      <p className="contact__method-description">
                         {method.description}
                       </p>
 
-                      <div className="newsletter__method-response">
+                      <div className="contact__method-response">
                         {method.response}
                       </div>
 
-                      <button className="newsletter__method-button">
+                      <button className="contact__method-button">
                         {method.action}
                       </button>
                     </div>
 
-                    <div className="newsletter__method-strike"></div>
-                    <div className="newsletter__method-glow"></div>
+                    <div className="contact__method-strike"></div>
+                    <div className="contact__method-glow"></div>
                   </div>
                 ))}
               </div>
@@ -480,53 +476,53 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="newsletter__signup-section">
-            <h3 className="newsletter__section-title">Start Your Project</h3>
+          <div className="contact__signup-section">
+            <h3 className="contact__section-title">Start Your Project</h3>
 
             {/* Service Benefits */}
-            <div className="newsletter__benefits">
+            <div className="contact__benefits">
               {serviceBenefits.map((benefit, index) => (
                 <div
                   key={benefit.id}
-                  className={`newsletter__benefit ${
+                  className={`contact__benefit ${
                     hoveredBenefit === benefit.id
-                      ? "newsletter__benefit--hovered"
+                      ? "contact__benefit--hovered"
                       : ""
                   }`}
                   onMouseEnter={() => setHoveredBenefit(benefit.id)}
                   onMouseLeave={() => setHoveredBenefit(null)}
                   style={{ "--benefit-index": index } as React.CSSProperties}
                 >
-                  <div className="newsletter__benefit-shadow"></div>
-                  <div className="newsletter__benefit-border"></div>
+                  <div className="contact__benefit-shadow"></div>
+                  <div className="contact__benefit-border"></div>
 
-                  <div className="newsletter__benefit-content">
-                    <span className="newsletter__benefit-icon">
+                  <div className="contact__benefit-content">
+                    <span className="contact__benefit-icon">
                       {benefit.icon}
                     </span>
-                    <div className="newsletter__benefit-text">
-                      <h5 className="newsletter__benefit-title">
+                    <div className="contact__benefit-text">
+                      <h5 className="contact__benefit-title">
                         {benefit.title}
                       </h5>
-                      <p className="newsletter__benefit-description">
+                      <p className="contact__benefit-description">
                         {benefit.description}
                       </p>
                     </div>
                   </div>
 
-                  <div className="newsletter__benefit-strike"></div>
-                  <div className="newsletter__benefit-glow"></div>
+                  <div className="contact__benefit-strike"></div>
+                  <div className="contact__benefit-glow"></div>
                 </div>
               ))}
             </div>
 
             {/* Contact Form */}
-            <form className="newsletter__form" onSubmit={handleSubmit}>
+            <form className="contact__form" onSubmit={handleSubmit}>
               {/* Basic Info Row */}
-              <div className="newsletter__form-row">
-                <div className="newsletter__form-group">
+              <div className="contact__form-row">
+                <div className="contact__form-group">
                   <label
-                    className="newsletter__form-label"
+                    className="contact__form-label"
                     htmlFor="newsletter-name"
                   >
                     Name *
@@ -534,8 +530,8 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
                   <input
                     id="newsletter-name"
                     type="text"
-                    className={`newsletter__form-input ${
-                      formErrors.name ? "newsletter__form-input--error" : ""
+                    className={`contact__form-input ${
+                      formErrors.name ? "contact__form-input--error" : ""
                     }`}
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
@@ -543,15 +539,15 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
                     disabled={isSubmitting}
                   />
                   {formErrors.name && (
-                    <span className="newsletter__form-error">
+                    <span className="contact__form-error">
                       {formErrors.name}
                     </span>
                   )}
                 </div>
 
-                <div className="newsletter__form-group">
+                <div className="contact__form-group">
                   <label
-                    className="newsletter__form-label"
+                    className="contact__form-label"
                     htmlFor="newsletter-email"
                   >
                     Email *
@@ -559,8 +555,8 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
                   <input
                     id="newsletter-email"
                     type="email"
-                    className={`newsletter__form-input ${
-                      formErrors.email ? "newsletter__form-input--error" : ""
+                    className={`contact__form-input ${
+                      formErrors.email ? "contact__form-input--error" : ""
                     }`}
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
@@ -568,7 +564,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
                     disabled={isSubmitting}
                   />
                   {formErrors.email && (
-                    <span className="newsletter__form-error">
+                    <span className="contact__form-error">
                       {formErrors.email}
                     </span>
                   )}
@@ -576,9 +572,9 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
               </div>
 
               {/* Company */}
-              <div className="newsletter__form-group">
+              <div className="contact__form-group">
                 <label
-                  className="newsletter__form-label"
+                  className="contact__form-label"
                   htmlFor="newsletter-company"
                 >
                   Company (Optional)
@@ -586,7 +582,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
                 <input
                   id="newsletter-company"
                   type="text"
-                  className="newsletter__form-input"
+                  className="contact__form-input"
                   value={formData.company}
                   onChange={(e) => handleInputChange("company", e.target.value)}
                   placeholder="Your company name"
@@ -595,17 +591,17 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
               </div>
 
               {/* Project Details Row */}
-              <div className="newsletter__form-row">
-                <div className="newsletter__form-group">
+              <div className="contact__form-row">
+                <div className="contact__form-group">
                   <label
-                    className="newsletter__form-label"
+                    className="contact__form-label"
                     htmlFor="newsletter-project-type"
                   >
                     Project Type
                   </label>
                   <select
                     id="newsletter-project-type"
-                    className="newsletter__form-select"
+                    className="contact__form-select"
                     value={formData.projectType}
                     onChange={(e) =>
                       handleInputChange("projectType", e.target.value)
@@ -621,16 +617,16 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
                   </select>
                 </div>
 
-                <div className="newsletter__form-group">
+                <div className="contact__form-group">
                   <label
-                    className="newsletter__form-label"
+                    className="contact__form-label"
                     htmlFor="newsletter-budget"
                   >
                     Budget Range
                   </label>
                   <select
                     id="newsletter-budget"
-                    className="newsletter__form-select"
+                    className="contact__form-select"
                     value={formData.budget}
                     onChange={(e) =>
                       handleInputChange("budget", e.target.value)
@@ -648,16 +644,16 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
               </div>
 
               {/* Timeline */}
-              <div className="newsletter__form-group">
+              <div className="contact__form-group">
                 <label
-                  className="newsletter__form-label"
+                  className="contact__form-label"
                   htmlFor="newsletter-timeline"
                 >
                   Timeline
                 </label>
                 <select
                   id="newsletter-timeline"
-                  className="newsletter__form-select"
+                  className="contact__form-select"
                   value={formData.timeline}
                   onChange={(e) =>
                     handleInputChange("timeline", e.target.value)
@@ -674,17 +670,17 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
               </div>
 
               {/* Message */}
-              <div className="newsletter__form-group">
+              <div className="contact__form-group">
                 <label
-                  className="newsletter__form-label"
+                  className="contact__form-label"
                   htmlFor="newsletter-message"
                 >
                   Project Details *
                 </label>
                 <textarea
                   id="newsletter-message"
-                  className={`newsletter__form-textarea ${
-                    formErrors.message ? "newsletter__form-input--error" : ""
+                  className={`contact__form-textarea ${
+                    formErrors.message ? "contact__form-input--error" : ""
                   }`}
                   value={formData.message}
                   onChange={(e) => handleInputChange("message", e.target.value)}
@@ -693,7 +689,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
                   disabled={isSubmitting}
                 />
                 {formErrors.message && (
-                  <span className="newsletter__form-error">
+                  <span className="contact__form-error">
                     {formErrors.message}
                   </span>
                 )}
@@ -702,58 +698,58 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className={`newsletter__submit-button ${
-                  isSubmitting ? "newsletter__submit-button--loading" : ""
+                className={`contact__submit-button ${
+                  isSubmitting ? "contact__submit-button--loading" : ""
                 } ${
                   submitStatus === "success"
-                    ? "newsletter__submit-button--success"
+                    ? "contact__submit-button--success"
                     : ""
                 } ${
                   submitStatus === "error"
-                    ? "newsletter__submit-button--error"
+                    ? "contact__submit-button--error"
                     : ""
                 }`}
                 disabled={isSubmitting || submitStatus === "success"}
               >
-                <div className="newsletter__submit-button-content">
+                <div className="contact__submit-button-content">
                   {isSubmitting ? (
                     <>
-                      <div className="newsletter__submit-button-spinner"></div>
+                      <div className="contact__submit-button-spinner"></div>
                       <span>SENDING MESSAGE...</span>
                     </>
                   ) : submitStatus === "success" ? (
                     <>
-                      <span className="newsletter__submit-button-icon">✓</span>
+                      <span className="contact__submit-button-icon">✓</span>
                       <span>MESSAGE SENT!</span>
                     </>
                   ) : submitStatus === "error" ? (
                     <>
-                      <span className="newsletter__submit-button-icon">✗</span>
+                      <span className="contact__submit-button-icon">✗</span>
                       <span>TRY AGAIN</span>
                     </>
                   ) : (
                     <>
                       <span>SEND MESSAGE</span>
-                      <div className="newsletter__submit-button-arrow">
-                        <span className="newsletter__arrow-line"></span>
-                        <span className="newsletter__arrow-head">&gt;</span>
+                      <div className="contact__submit-button-arrow">
+                        <span className="contact__arrow-line"></span>
+                        <span className="contact__arrow-head">&gt;</span>
                       </div>
                     </>
                   )}
                 </div>
 
                 {/* Button Effects */}
-                <div className="newsletter__submit-button-shadow"></div>
-                <div className="newsletter__submit-button-border"></div>
-                <div className="newsletter__submit-button-glow"></div>
-                <div className="newsletter__submit-button-shimmer"></div>
-                <div className="newsletter__submit-button-strike"></div>
+                <div className="contact__submit-button-shadow"></div>
+                <div className="contact__submit-button-border"></div>
+                <div className="contact__submit-button-glow"></div>
+                <div className="contact__submit-button-shimmer"></div>
+                <div className="contact__submit-button-strike"></div>
               </button>
 
               {/* Privacy Notice */}
-              <div className="newsletter__privacy-notice">
-                <span className="newsletter__privacy-icon">🔒</span>
-                <span className="newsletter__privacy-text">
+              <div className="contact__privacy-notice">
+                <span className="contact__privacy-icon">🔒</span>
+                <span className="contact__privacy-text">
                   Your information is secure and will never be shared. I&apos;ll
                   respond within 2-4 hours.
                 </span>
@@ -764,13 +760,13 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
 
         {/* Success Message */}
         {submitStatus === "success" && (
-          <div className="newsletter__success-message">
-            <div className="newsletter__success-content">
-              <span className="newsletter__success-icon">🚀</span>
-              <h4 className="newsletter__success-title">
+          <div className="contact__success-message">
+            <div className="contact__success-content">
+              <span className="contact__success-icon">🚀</span>
+              <h4 className="contact__success-title">
                 Message received! Let&apos;s build something amazing.
               </h4>
-              <p className="newsletter__success-text">
+              <p className="contact__success-text">
                 I&apos;ll review your project details and get back to you within
                 2-4 hours with next steps.
               </p>
@@ -779,13 +775,13 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className = "" }) => {
         )}
 
         {/* Main Strike Effect */}
-        <div className="newsletter__main-strike"></div>
+        <div className="contact__main-strike"></div>
       </div>
 
       {/* Scan Lines */}
-      <div className="newsletter__scan-lines">
-        <div className="newsletter__scan-line newsletter__scan-line--1"></div>
-        <div className="newsletter__scan-line newsletter__scan-line--2"></div>
+      <div className="contact__scan-lines">
+        <div className="contact__scan-line contact__scan-line--1"></div>
+        <div className="contact__scan-line contact__scan-line--2"></div>
       </div>
     </div>
   );

@@ -3,9 +3,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { ExperienceTimeline } from "./ExperienceTimeline";
-import { ExperienceEffects } from "./ExperienceEffects";
-import "./Experience.css";
+import { ExperienceTimeline } from "../sections/Experience/ExperienceTimeline";
+import { ExperienceEffects } from "../sections/Experience/ExperienceEffects";
+import "../sections/Experience/Experience.css";
 
 interface ExperienceProps {
   className?: string;

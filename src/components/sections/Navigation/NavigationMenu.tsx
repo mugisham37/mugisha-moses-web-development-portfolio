@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ThemeType } from "@/types/theme";
 
 interface NavigationMenuProps {
@@ -28,7 +30,7 @@ const menuItems: MenuItem[] = [
   {
     id: "experience",
     label: "EXPERIENCE",
-    href: "#experience",
+    href: "/experience",
     commitCount: 1337,
   },
   {
@@ -45,14 +47,15 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
 }) => {
   const [activeItem, setActiveItem] = useState("projects");
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleItemClick = (item: MenuItem) => {
     setActiveItem(item.id);
 
     // Check if it's a page navigation or section scroll
     if (item.href.startsWith("/")) {
-      // Navigate to page
-      window.location.href = item.href;
+      // Navigate to page using Next.js router
+      router.push(item.href);
     } else {
       // Smooth scroll to section
       const element = document.querySelector(item.href);
@@ -88,54 +91,72 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
 
           return (
             <li key={item.id} className={itemClasses}>
-              <button
-                className="navigation-menu__link"
-                onClick={() => handleItemClick(item)}
-                onMouseEnter={() => setHoveredItem(item.id)}
-                onMouseLeave={() => setHoveredItem(null)}
-                aria-current={isActive ? "page" : undefined}
-              >
-                {/* Main Text */}
-                <span className="navigation-menu__text">{item.label}</span>
-
-                {/* Badge */}
-                {item.badge && (
-                  <span className="navigation-menu__badge">{item.badge}</span>
-                )}
-
-                {/* Commit Counter */}
-                {item.commitCount && (
-                  <span className="navigation-menu__commit-count">
-                    [{item.commitCount}]
-                  </span>
-                )}
-
-                {/* Pulse Indicator */}
-                {item.hasIndicator && (
-                  <div className="navigation-menu__indicator">
-                    <div className="navigation-menu__pulse"></div>
+              {item.href.startsWith("/") ? (
+                <Link
+                  href={item.href}
+                  className="navigation-menu__link"
+                  onMouseEnter={() => setHoveredItem(item.id)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  <span className="navigation-menu__text">{item.label}</span>
+                  {item.badge && (
+                    <span className="navigation-menu__badge">{item.badge}</span>
+                  )}
+                  {item.commitCount && (
+                    <span className="navigation-menu__commit-count">
+                      [{item.commitCount}]
+                    </span>
+                  )}
+                  {item.hasIndicator && (
+                    <div className="navigation-menu__indicator">
+                      <div className="navigation-menu__pulse"></div>
+                    </div>
+                  )}
+                  <div className="navigation-menu__underline"></div>
+                  <div className="navigation-menu__glitch">
+                    <span className="navigation-menu__glitch-text">
+                      {item.label}
+                    </span>
                   </div>
-                )}
-
-                {/* Underline Animation */}
-                <div className="navigation-menu__underline"></div>
-
-                {/* Glitch Effect */}
-                <div className="navigation-menu__glitch">
-                  <span className="navigation-menu__glitch-text">
-                    {item.label}
-                  </span>
-                </div>
-
-                {/* Shadow Effects */}
-                <div className="navigation-menu__shadow"></div>
-              </button>
+                  <div className="navigation-menu__shadow"></div>
+                </Link>
+              ) : (
+                <button
+                  className="navigation-menu__link"
+                  onClick={() => handleItemClick(item)}
+                  onMouseEnter={() => setHoveredItem(item.id)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  <span className="navigation-menu__text">{item.label}</span>
+                  {item.badge && (
+                    <span className="navigation-menu__badge">{item.badge}</span>
+                  )}
+                  {item.commitCount && (
+                    <span className="navigation-menu__commit-count">
+                      [{item.commitCount}]
+                    </span>
+                  )}
+                  {item.hasIndicator && (
+                    <div className="navigation-menu__indicator">
+                      <div className="navigation-menu__pulse"></div>
+                    </div>
+                  )}
+                  <div className="navigation-menu__underline"></div>
+                  <div className="navigation-menu__glitch">
+                    <span className="navigation-menu__glitch-text">
+                      {item.label}
+                    </span>
+                  </div>
+                  <div className="navigation-menu__shadow"></div>
+                </button>
+              )}
             </li>
           );
         })}
       </ul>
 
-      {/* Terminal Indicator */}
       <div className="navigation-menu__terminal">
         <span className="navigation-menu__terminal-text">&gt; NAVIGATING_</span>
         <span className="navigation-menu__terminal-cursor">|</span>

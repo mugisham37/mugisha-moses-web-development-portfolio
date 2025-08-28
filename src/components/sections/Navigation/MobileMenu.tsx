@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ThemeType } from "@/types/theme";
 
 interface MobileMenuProps {
@@ -29,7 +31,7 @@ const mobileMenuItems: MenuItem[] = [
   {
     id: "experience",
     label: "EXPERIENCE",
-    href: "#experience",
+    href: "/experience",
     description: "My journey",
   },
   {
@@ -49,6 +51,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   const [animationState, setAnimationState] = useState<
     "closed" | "opening" | "open" | "closing"
   >("closed");
+  const router = useRouter();
 
   // Handle animation states
   useEffect(() => {
@@ -69,8 +72,8 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   const handleItemClick = (item: MenuItem) => {
     // Check if it's a page navigation or section scroll
     if (item.href.startsWith("/")) {
-      // Navigate to page
-      window.location.href = item.href;
+      // Navigate to page using Next.js router
+      router.push(item.href);
     } else {
       // Smooth scroll to section
       const element = document.querySelector(item.href);
@@ -125,12 +128,9 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
       aria-modal="true"
       aria-label="Mobile navigation menu"
     >
-      {/* Backdrop */}
       <div className="mobile-menu__backdrop"></div>
 
-      {/* Menu Container */}
       <div className="mobile-menu__container">
-        {/* Header */}
         <div className="mobile-menu__header">
           <div className="mobile-menu__logo">
             <span className="mobile-menu__logo-text">MUGISHA.DEV</span>
@@ -150,7 +150,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           </button>
         </div>
 
-        {/* Navigation Items */}
         <nav className="mobile-menu__nav">
           <ul className="mobile-menu__list">
             {mobileMenuItems.map((item, index) => (
@@ -159,39 +158,71 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                 className="mobile-menu__item"
                 style={{ "--item-index": index } as React.CSSProperties}
               >
-                <button
-                  className="mobile-menu__link"
-                  onClick={() => handleItemClick(item)}
-                >
-                  <div className="mobile-menu__link-content">
-                    <div className="mobile-menu__link-main">
-                      <span className="mobile-menu__link-text">
-                        {item.label}
+                {item.href.startsWith("/") ? (
+                  <Link
+                    href={item.href}
+                    className="mobile-menu__link"
+                    onClick={onClose}
+                  >
+                    <div className="mobile-menu__link-content">
+                      <div className="mobile-menu__link-main">
+                        <span className="mobile-menu__link-text">
+                          {item.label}
+                        </span>
+                        {item.badge && (
+                          <span className="mobile-menu__badge">
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                      <span className="mobile-menu__link-description">
+                        {item.description}
                       </span>
-                      {item.badge && (
-                        <span className="mobile-menu__badge">{item.badge}</span>
-                      )}
                     </div>
-                    <span className="mobile-menu__link-description">
-                      {item.description}
-                    </span>
-                  </div>
 
-                  <div className="mobile-menu__link-arrow">
-                    <span className="mobile-menu__arrow-line"></span>
-                    <span className="mobile-menu__arrow-head">&gt;</span>
-                  </div>
+                    <div className="mobile-menu__link-arrow">
+                      <span className="mobile-menu__arrow-line"></span>
+                      <span className="mobile-menu__arrow-head">&gt;</span>
+                    </div>
 
-                  {/* Hover Effects */}
-                  <div className="mobile-menu__link-shadow"></div>
-                  <div className="mobile-menu__link-border"></div>
-                </button>
+                    <div className="mobile-menu__link-shadow"></div>
+                    <div className="mobile-menu__link-border"></div>
+                  </Link>
+                ) : (
+                  <button
+                    className="mobile-menu__link"
+                    onClick={() => handleItemClick(item)}
+                  >
+                    <div className="mobile-menu__link-content">
+                      <div className="mobile-menu__link-main">
+                        <span className="mobile-menu__link-text">
+                          {item.label}
+                        </span>
+                        {item.badge && (
+                          <span className="mobile-menu__badge">
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                      <span className="mobile-menu__link-description">
+                        {item.description}
+                      </span>
+                    </div>
+
+                    <div className="mobile-menu__link-arrow">
+                      <span className="mobile-menu__arrow-line"></span>
+                      <span className="mobile-menu__arrow-head">&gt;</span>
+                    </div>
+
+                    <div className="mobile-menu__link-shadow"></div>
+                    <div className="mobile-menu__link-border"></div>
+                  </button>
+                )}
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* Footer */}
         <div className="mobile-menu__footer">
           <div className="mobile-menu__terminal">
             <span className="mobile-menu__terminal-text">
@@ -221,14 +252,12 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           </div>
         </div>
 
-        {/* Scan Lines Effect */}
         <div className="mobile-menu__scan-lines">
           <div className="mobile-menu__scan-line mobile-menu__scan-line--1"></div>
           <div className="mobile-menu__scan-line mobile-menu__scan-line--2"></div>
           <div className="mobile-menu__scan-line mobile-menu__scan-line--3"></div>
         </div>
 
-        {/* Grid Background */}
         <div className="mobile-menu__grid-bg"></div>
       </div>
     </div>

@@ -2,17 +2,17 @@
 
 import React from "react";
 import { Navigation } from "@/components/sections/Navigation";
-import { Resources } from "@/components/pages/projects";
+import { Experience } from "@/components/sections/Experience";
 import { FooterBottomOnly } from "@/components/sections/Footer";
 import { ThemeDetector } from "@/components/theme/ThemeDetector";
 
-export default function ProjectsPage() {
+export default function ContactPage() {
   return (
     <ThemeDetector>
       <Navigation />
       <main className="min-h-screen bg-current text-current">
         <div className="pt-20">
-          <Resources />
+          <Experience />
         </div>
       </main>
       <FooterBottomOnly />
