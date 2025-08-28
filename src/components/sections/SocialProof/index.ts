@@ -4,5 +4,5 @@ export { SocialProof } from "./SocialProof";
 export { ClientLogos } from "./ClientLogos";
 export { LinkedInRecommendations } from "./LinkedInRecommendations";
 // export { CommunityContributions } from './CommunityContributions';
-// export { SpeakingEvents } from './SpeakingEvents';
+export { SkillTree } from "./SkillTree";
 // export { Publications } from './Publications';

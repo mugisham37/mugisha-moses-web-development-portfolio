@@ -9,6 +9,10 @@
   --theme-success: #10b981;
   --theme-bg: #f5f5f5;
   --theme-text: #1a1a1a;
+  --theme-border: #1a1a1a;
+  --theme-muted: #6b7280;
+  --theme-warning: #f59e0b;
+  --theme-error: #ef4444;
 
   /* RGB values for alpha transparency */
   --theme-accent-rgb: 139, 92, 246;
@@ -19,12 +23,39 @@
   --theme-font-primary: "Inter", sans-serif;
   --theme-font-code: "JetBrains Mono", monospace;
 
+  /* Font sizes */
+  --theme-text-xs: 0.75rem;
+  --theme-text-sm: 0.875rem;
+  --theme-text-base: 1rem;
+  --theme-text-lg: 1.125rem;
+  --theme-text-xl: 1.25rem;
+  --theme-text-2xl: 1.5rem;
+  --theme-text-3xl: 1.875rem;
+  --theme-text-4xl: 2.25rem;
+  --theme-text-5xl: 3rem;
+  --theme-text-6xl: 3.75rem;
+  --theme-text-7xl: 4.5rem;
+  --theme-text-8xl: 6rem;
+  --theme-text-9xl: 8rem;
+
+  /* Line heights */
+  --theme-line-height-tight: 1.25;
+  --theme-line-height-normal: 1.5;
+  --theme-line-height-relaxed: 1.75;
+
   /* Borders */
   --theme-border-width: 2px;
   --theme-border-style: solid;
   --theme-border-radius: 8px;
 
   /* Shadows */
+  --theme-shadow-brutal: 4px 4px 0 var(--theme-accent);
+  --theme-shadow-double:
+    4px 4px 0 var(--theme-accent), 8px 8px 0 var(--theme-text);
+  --theme-shadow-triple:
+    4px 4px 0 var(--theme-accent), 8px 8px 0 var(--theme-highlight),
+    12px 12px 0 var(--theme-text);
+  --theme-shadow-inset: inset 2px 2px 0 var(--theme-accent);
   --theme-shadow-subtle: 4px 4px 12px rgba(0, 0, 0, 0.3);
   --theme-shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.2);
   --theme-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);

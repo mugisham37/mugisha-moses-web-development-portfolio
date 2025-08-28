@@ -63,7 +63,7 @@ export const GlitchEffect: React.FC<GlitchEffectProps> = ({
 
     if (theme === "extreme-brutalist") {
       // Aggressive glitch effects
-      glitchLayers.forEach((layer, index) => {
+      glitchLayers.forEach((layer) => {
         const element = layer as HTMLElement;
         const offsetX = (Math.random() - 0.5) * intensity * 15;
         const offsetY = (Math.random() - 0.5) * intensity * 8;
@@ -200,9 +200,12 @@ export const GlitchEffect: React.FC<GlitchEffectProps> = ({
     return () => {
       if (glitchTimeoutRef.current) {
         clearTimeout(glitchTimeoutRef.current);
+        glitchTimeoutRef.current = undefined;
       }
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
+      const currentAnimationFrame = animationRef.current;
+      if (currentAnimationFrame) {
+        cancelAnimationFrame(currentAnimationFrame);
+        animationRef.current = undefined;
       }
     };
   }, []);

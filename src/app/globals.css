@@ -1,47 +1,71 @@
-/* Import theme variables and animations first */
+/* Import essential theme and component styles */
+/* Theme System - Base Variables and Themes */
 @import "../styles/themes/theme-variables.css";
-@import "../styles/themes/theme-transitions.css";
 @import "../styles/themes/extreme-brutalist.css";
 @import "../styles/themes/refined-brutalist.css";
-@import "../styles/animations/brutalist-keyframes.css";
-@import "../styles/animations/hover-effects.css";
-@import "../styles/animations/loading-animations.css";
+@import "../styles/themes/theme-transitions.css";
+
+/* Component Styles - Core Components */
 @import "../styles/components/navigation.css";
 @import "../styles/components/hero.css";
 @import "../styles/components/hero-content.css";
+@import "../styles/components/hero-cta.css";
 @import "../styles/components/hero-metrics.css";
 @import "../styles/components/hero-visual.css";
-@import "../styles/components/hero-cta.css";
 @import "../styles/components/social-proof.css";
-@import "../styles/components/client-logos.css";
-@import "../styles/components/linkedin-recommendations.css";
-@import "../styles/components/community-contributions.css";
-@import "../styles/components/speaking-events.css";
-@import "../styles/components/resources.css";
-@import "../styles/components/skeleton.css";
 @import "../styles/components/footer.css";
 @import "../styles/components/footer-bottom.css";
-@import "../styles/components/ultimate-cta.css";
-@import "../styles/components/newsletter.css";
-@import "../styles/components/social-platforms.css";
+
+/* Results Section Components */
+@import "../components/sections/Results/Results.css";
+@import "../components/sections/Results/ResultsEffects.css";
+@import "../components/sections/Results/RevenueDashboard.css";
+@import "../components/sections/Results/ResultsCTA.css";
+@import "../components/sections/Results/ComparisonShowcase.css";
+@import "../components/sections/Results/AchievementTimeline.css";
+
+/* Component Styles - Brutalist UI Components */
 @import "../styles/components/brutal-button.css";
 @import "../styles/components/brutal-card.css";
+@import "../styles/components/brutal-form.css";
 @import "../styles/components/brutal-input.css";
 @import "../styles/components/brutal-textarea.css";
 @import "../styles/components/brutal-select.css";
 @import "../styles/components/brutal-checkbox.css";
 @import "../styles/components/brutal-radio.css";
-@import "../styles/components/brutal-form.css";
-@import "../styles/components/animated-text.css";
 @import "../styles/components/brutal-modal.css";
-@import "../styles/components/effects.css";
-@import "../styles/components/page-transition.css";
-@import "../styles/components/scroll-progress.css";
-@import "../styles/components/keyboard-navigation.css";
+
+/* Component Styles - Content Components */
+@import "../styles/components/animated-text.css";
+@import "../styles/components/client-logos.css";
+@import "../styles/components/community-contributions.css";
+@import "../styles/components/linkedin-recommendations.css";
+@import "../styles/components/social-platforms.css";
+@import "../styles/components/skill-tree.css";
+@import "../styles/components/resources.css";
+
+/* Component Styles - Interactive Components */
 @import "../styles/components/floating-contact.css";
+@import "../styles/components/newsletter.css";
+@import "../styles/components/ultimate-cta.css";
 @import "../styles/components/cookie-consent.css";
 @import "../styles/components/notification-system.css";
 
+/* Component Styles - Navigation and UX */
+@import "../styles/components/keyboard-navigation.css";
+@import "../styles/components/scroll-progress.css";
+@import "../styles/components/page-transition.css";
+@import "../styles/components/skeleton.css";
+
+/* Component Styles - Effects and Utilities */
+@import "../styles/components/effects.css";
+
+/* Animation System */
+@import "../styles/animations/brutalist-keyframes.css";
+@import "../styles/animations/hover-effects.css";
+@import "../styles/animations/loading-animations.css";
+
+/* Tailwind CSS - Last to allow component overrides */
 @import "../styles/tailwind.css";
 
 /* CSS Custom Properties for Theme System */
@@ -54,11 +78,39 @@
   --current-highlight: var(--theme-highlight);
   --current-success: var(--theme-success);
   --current-primary: var(--theme-primary);
+  --current-border: var(--theme-border);
+  --current-muted: var(--theme-muted);
+  --current-warning: var(--theme-warning);
+  --current-error: var(--theme-error);
 
   /* RGB values for alpha transparency */
   --current-accent-rgb: var(--theme-accent-rgb);
   --current-highlight-rgb: var(--theme-highlight-rgb);
   --current-success-rgb: var(--theme-success-rgb);
+
+  /* Current typography */
+  --current-font-primary: var(--theme-font-primary);
+  --current-font-code: var(--theme-font-code);
+
+  /* Current font sizes */
+  --current-text-xs: var(--theme-text-xs);
+  --current-text-sm: var(--theme-text-sm);
+  --current-text-base: var(--theme-text-base);
+  --current-text-lg: var(--theme-text-lg);
+  --current-text-xl: var(--theme-text-xl);
+  --current-text-2xl: var(--theme-text-2xl);
+  --current-text-3xl: var(--theme-text-3xl);
+  --current-text-4xl: var(--theme-text-4xl);
+  --current-text-5xl: var(--theme-text-5xl);
+  --current-text-6xl: var(--theme-text-6xl);
+  --current-text-7xl: var(--theme-text-7xl);
+  --current-text-8xl: var(--theme-text-8xl);
+  --current-text-9xl: var(--theme-text-9xl);
+
+  /* Current line heights */
+  --current-line-height-tight: var(--theme-line-height-tight);
+  --current-line-height-normal: var(--theme-line-height-normal);
+  --current-line-height-relaxed: var(--theme-line-height-relaxed);
 
   /* Current border system */
   --current-border-width: var(--theme-border-width);
@@ -69,13 +121,10 @@
   --current-shadow-brutal: var(--theme-shadow-brutal);
   --current-shadow-double: var(--theme-shadow-double);
   --current-shadow-triple: var(--theme-shadow-triple);
+  --current-shadow-inset: var(--theme-shadow-inset);
   --current-shadow-subtle: var(--theme-shadow-subtle);
   --current-shadow-elevated: var(--theme-shadow-elevated);
   --current-shadow-glow: var(--theme-shadow-glow);
-
-  /* Current typography */
-  --current-font-primary: var(--theme-font-primary);
-  --current-font-code: var(--theme-font-code);
 
   /* Current animation system */
   --current-animation-duration: var(--theme-animation-duration);

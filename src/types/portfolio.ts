@@ -26,6 +26,20 @@ export interface PortfolioData {
       name: string;
       level: "beginner" | "intermediate" | "advanced" | "expert";
     }>;
+    skillTree?: {
+      categories: string[];
+      nodes: Array<{
+        id: string;
+        name: string;
+        level: "beginner" | "intermediate" | "advanced" | "expert";
+        category: string;
+        icon: string;
+        description: string;
+        yearsExperience: number;
+        projects: number;
+        connections: string[];
+      }>;
+    };
   };
 
   experience: {

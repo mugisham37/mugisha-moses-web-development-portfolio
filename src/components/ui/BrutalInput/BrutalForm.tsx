@@ -76,7 +76,6 @@ export const BrutalForm = forwardRef<HTMLFormElement, BrutalFormProps>(
         ref={ref}
         className={finalClassName}
         onSubmit={handleSubmit}
-        aria-disabled={disabled || loading}
         {...props}
       >
         {children}

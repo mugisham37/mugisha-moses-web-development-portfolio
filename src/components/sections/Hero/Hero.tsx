@@ -3,6 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import { useThemeContext } from "@/contexts/ThemeContext";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { HeroContent } from "./HeroContent";
 
 interface HeroProps {
   children?: React.ReactNode;
@@ -76,7 +77,7 @@ export const Hero: React.FC<HeroProps> = ({ children, className = "" }) => {
 
       {/* Content Container */}
       <div className="hero__container">
-        <div className="hero__grid">{children}</div>
+        <div className="hero__grid">{children || <HeroContent />}</div>
       </div>
 
       {/* Performance Optimization Overlay */}

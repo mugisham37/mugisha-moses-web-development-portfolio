@@ -2,8 +2,8 @@
 
 import { useContext, useMemo, useCallback } from "react";
 import { ThemeContext } from "@/contexts/ThemeContext";
-import { ThemeType, ThemeConfig } from "@/types/theme";
-import { asyncAnalytics } from "@/utils/asyncAnalytics";
+import { ThemeType } from "@/types/theme";
+import { asyncAnalytics } from "../utils/asyncAnalytics";
 
 // Enhanced useTheme hook with additional utilities
 export const useTheme = () => {
@@ -143,7 +143,7 @@ export const useThemeTransitionUtils = () => {
     asyncAnalytics.trackEvent("theme_change", "user_interaction");
 
     setTheme(newTheme);
-  }, [currentTheme, setTheme, transitionProgress]);
+  }, [currentTheme, setTheme]);
 
   const getTransitionStyle = useCallback(
     (fromValue: string | number, toValue: string | number) => {
@@ -170,7 +170,7 @@ export const useThemeTransitionUtils = () => {
 
 // Hook for theme-aware responsive utilities
 export const useThemeResponsive = () => {
-  const { currentTheme, config } = useTheme();
+  const { currentTheme } = useTheme();
 
   return useMemo(
     () => ({

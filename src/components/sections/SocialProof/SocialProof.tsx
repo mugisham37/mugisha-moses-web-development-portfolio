@@ -6,7 +6,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { ClientLogos } from "./ClientLogos";
 import { LinkedInRecommendations } from "./LinkedInRecommendations";
 import { CommunityContributions } from "./CommunityContributions";
-import { SpeakingEvents } from "./SpeakingEvents";
+import { SkillTree } from "./SkillTree";
 
 interface SocialProofProps {
   className?: string;
@@ -89,8 +89,8 @@ export const SocialProof: React.FC<SocialProofProps> = ({ className = "" }) => {
           {/* Community Contributions */}
           <CommunityContributions />
 
-          {/* Speaking Events and Publications */}
-          <SpeakingEvents />
+          {/* Technical Skill Tree */}
+          <SkillTree />
         </div>
 
         {/* Trust Indicators */}

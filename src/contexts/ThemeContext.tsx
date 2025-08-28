@@ -133,6 +133,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       root.style.setProperty("--theme-success", config.colors.success);
       root.style.setProperty("--theme-bg", config.colors.bg);
       root.style.setProperty("--theme-text", config.colors.text);
+      root.style.setProperty("--theme-border", config.colors.border);
+      root.style.setProperty("--theme-muted", config.colors.muted);
+      root.style.setProperty("--theme-warning", config.colors.warning);
+      root.style.setProperty("--theme-error", config.colors.error);
 
       // Set RGB values for alpha transparency
       root.style.setProperty("--theme-accent-rgb", config.colors.accentRgb);
@@ -142,9 +146,23 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       );
       root.style.setProperty("--theme-success-rgb", config.colors.successRgb);
 
+      // Set typography
       root.style.setProperty("--theme-font-primary", config.typography.primary);
       root.style.setProperty("--theme-font-code", config.typography.code);
 
+      // Set font sizes
+      if (config.typography.sizes) {
+        Object.entries(config.typography.sizes).forEach(([key, value]) => {
+          root.style.setProperty(`--theme-text-${key}`, value);
+        });
+      }
+
+      // Set line heights
+      root.style.setProperty("--theme-line-height-tight", "1.25");
+      root.style.setProperty("--theme-line-height-normal", "1.5");
+      root.style.setProperty("--theme-line-height-relaxed", "1.75");
+
+      // Set border properties
       root.style.setProperty("--theme-border-width", config.borders.width);
       root.style.setProperty("--theme-border-style", config.borders.style);
       root.style.setProperty(
@@ -152,6 +170,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
         config.borders.radius || "0px"
       );
 
+      // Set animation properties
       root.style.setProperty(
         "--theme-animation-duration",
         config.animations.duration
@@ -161,34 +180,47 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
         config.animations.easing
       );
 
-      // Set shadow variables
-      if (config.shadows.brutal) {
-        root.style.setProperty("--theme-shadow-brutal", config.shadows.brutal);
-      }
-      if (config.shadows.subtle) {
-        root.style.setProperty("--theme-shadow-subtle", config.shadows.subtle);
-      }
-      if (config.shadows.double) {
-        root.style.setProperty("--theme-shadow-double", config.shadows.double);
-      }
-      if (config.shadows.triple) {
-        root.style.setProperty("--theme-shadow-triple", config.shadows.triple);
-      }
-      if (config.shadows.elevated) {
-        root.style.setProperty(
-          "--theme-shadow-elevated",
-          config.shadows.elevated
-        );
-      }
-      if (config.shadows.glow) {
-        root.style.setProperty("--theme-shadow-glow", config.shadows.glow);
-      }
+      // Set shadow variables with fallbacks
+      root.style.setProperty(
+        "--theme-shadow-brutal",
+        config.shadows.brutal || "8px 8px 0 var(--theme-text)"
+      );
+      root.style.setProperty(
+        "--theme-shadow-subtle",
+        config.shadows.subtle || "4px 4px 12px rgba(0, 0, 0, 0.3)"
+      );
+      root.style.setProperty(
+        "--theme-shadow-double",
+        config.shadows.double ||
+          "8px 8px 0 var(--theme-accent), 16px 16px 0 var(--theme-text)"
+      );
+      root.style.setProperty(
+        "--theme-shadow-triple",
+        config.shadows.triple ||
+          "8px 8px 0 var(--theme-accent), 16px 16px 0 var(--theme-secondary), 24px 24px 0 var(--theme-text)"
+      );
+      root.style.setProperty(
+        "--theme-shadow-elevated",
+        config.shadows.elevated || "0 10px 30px rgba(0, 0, 0, 0.2)"
+      );
+      root.style.setProperty(
+        "--theme-shadow-glow",
+        config.shadows.glow || "0 0 20px rgba(139, 92, 246, 0.3)"
+      );
+      root.style.setProperty(
+        "--theme-shadow-inset",
+        "inset 4px 4px 0 var(--theme-accent)"
+      );
 
-      // Add theme class to body
+      // Add theme class to body and document element
       document.body.className = document.body.className
         .replace(/theme-\w+/g, "")
         .trim();
       document.body.classList.add(`theme-${currentTheme}`);
+
+      // Also add theme class to document element for broader CSS access
+      root.className = root.className.replace(/theme-\w+/g, "").trim();
+      root.classList.add(`theme-${currentTheme}`);
     }
   }, [config, currentTheme]);
 

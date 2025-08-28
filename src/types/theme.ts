@@ -10,6 +10,10 @@ export interface ThemeColors {
   success: string;
   bg: string;
   text: string;
+  border: string;
+  muted: string;
+  warning: string;
+  error: string;
   // RGB values for alpha transparency
   accentRgb: string;
   highlightRgb: string;

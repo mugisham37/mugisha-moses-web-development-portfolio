@@ -9,6 +9,10 @@
   --theme-success: #00ff00;
   --theme-bg: #ffffff;
   --theme-text: #000000;
+  --theme-border: #000000;
+  --theme-muted: #666666;
+  --theme-warning: #ff6b00;
+  --theme-error: #ff0000;
 
   /* RGB values for alpha transparency */
   --theme-accent-rgb: 255, 255, 0;
@@ -30,6 +34,14 @@
   --theme-text-4xl: 2.25rem;
   --theme-text-5xl: 3rem;
   --theme-text-6xl: 3.75rem;
+  --theme-text-7xl: 4.5rem;
+  --theme-text-8xl: 6rem;
+  --theme-text-9xl: 8rem;
+
+  /* Line heights */
+  --theme-line-height-tight: 1.25;
+  --theme-line-height-normal: 1.5;
+  --theme-line-height-relaxed: 1.75;
 
   /* Borders */
   --theme-border-width: 8px;
@@ -37,13 +49,16 @@
   --theme-border-radius: 0px;
 
   /* Shadows */
-  --theme-shadow-brutal: 8px 8px 0;
-  --theme-shadow-subtle: 4px 4px 12px rgba(0, 0, 0, 0.3);
-  --theme-shadow-double: 8px 8px 0 #ffff00, 16px 16px 0 #ffffff;
+  --theme-shadow-brutal: 8px 8px 0 var(--theme-text);
+  --theme-shadow-double:
+    8px 8px 0 var(--theme-accent), 16px 16px 0 var(--theme-text);
   --theme-shadow-triple:
-    8px 8px 0 #ffff00, 16px 16px 0 #ffffff, 24px 24px 0 #000000;
+    8px 8px 0 var(--theme-accent), 16px 16px 0 var(--theme-secondary),
+    24px 24px 0 var(--theme-text);
+  --theme-shadow-inset: inset 4px 4px 0 var(--theme-accent);
+  --theme-shadow-subtle: 4px 4px 12px rgba(0, 0, 0, 0.3);
   --theme-shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.2);
-  --theme-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  --theme-shadow-glow: 0 0 20px rgba(255, 255, 0, 0.3);
 
   /* Animations */
   --theme-animation-duration: 0.3s;

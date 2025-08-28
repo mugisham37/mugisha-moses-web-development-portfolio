@@ -9,6 +9,7 @@ export { GlitchEffect } from "./GlitchEffect";
 export { CursorTrail } from "./CursorTrail";
 export { VisualEffectsLibrary } from "./VisualEffectsLibrary";
 export { EffectsShowcase } from "./EffectsShowcase";
+export { EffectPerformanceMonitor } from "./EffectPerformanceMonitor";
 
 // Effect types
 export type { EffectType } from "./VisualEffectsLibrary";
