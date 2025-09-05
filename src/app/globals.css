@@ -1,603 +1,124 @@
-/* Import essential theme and component styles */
-/* Theme System - Base Variables and Themes */
-@import "../styles/themes/theme-variables.css";
-@import "../styles/themes/extreme-brutalist.css";
-@import "../styles/themes/refined-brutalist.css";
-@import "../styles/themes/theme-transitions.css";
+@import "tailwindcss";
 
-/* Component Styles - Core Components */
-@import "../styles/components/navigation.css";
-@import "../styles/components/hero.css";
-@import "../styles/components/hero-content.css";
-@import "../styles/components/hero-cta.css";
-@import "../styles/components/hero-metrics.css";
-@import "../styles/components/hero-visual.css";
-@import "../styles/components/social-proof.css";
-@import "../styles/components/footer.css";
-@import "../styles/components/footer-bottom.css";
+@custom-variant dark (&:is(.dark *));
 
-/* Experience Section Components */
-@import "../components/sections/Experience/Experience.css";
-
-/* Layout Components */
-@import "../styles/layout-components.css";
-@import "../components/sections/Experience/ExperienceEffects.css";
-@import "../components/sections/Experience/ExperienceTimeline.css";
-
-/* Component Styles - Brutalist UI Components */
-@import "../styles/components/brutal-button.css";
-@import "../styles/components/brutal-card.css";
-@import "../styles/components/brutal-form.css";
-@import "../styles/components/brutal-input.css";
-@import "../styles/components/brutal-textarea.css";
-@import "../styles/components/brutal-select.css";
-@import "../styles/components/brutal-checkbox.css";
-@import "../styles/components/brutal-radio.css";
-@import "../styles/components/brutal-modal.css";
-
-/* Component Styles - Content Components */
-@import "../styles/components/animated-text.css";
-@import "../styles/components/client-logos.css";
-@import "../styles/components/community-contributions.css";
-@import "../styles/components/linkedin-recommendations.css";
-@import "../styles/components/social-platforms.css";
-@import "../styles/components/skill-tree.css";
-@import "../styles/components/resources.css";
-
-/* Component Styles - Interactive Components */
-@import "../styles/components/floating-contact.css";
-@import "../styles/components/contact.css";
-@import "../styles/components/ultimate-cta.css";
-@import "../styles/components/cookie-consent.css";
-@import "../styles/components/notification-system.css";
-
-/* Component Styles - Navigation and UX */
-@import "../styles/components/keyboard-navigation.css";
-@import "../styles/components/scroll-progress.css";
-@import "../styles/components/page-transition.css";
-@import "../styles/components/skeleton.css";
-
-/* Component Styles - Effects and Utilities */
-@import "../styles/components/effects.css";
-
-/* Animation System */
-@import "../styles/animations/brutalist-keyframes.css";
-@import "../styles/animations/hover-effects.css";
-@import "../styles/animations/loading-animations.css";
-
-/* Accessibility utilities */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Tailwind CSS - Last to allow component overrides */
-@import "../styles/tailwind.css";
-
-/* CSS Custom Properties for Theme System */
 :root {
-  /* Current theme variables - dynamically updated by theme system */
-  --current-bg: var(--theme-bg);
-  --current-text: var(--theme-text);
-  --current-accent: var(--theme-accent);
-  --current-secondary: var(--theme-secondary);
-  --current-highlight: var(--theme-highlight);
-  --current-success: var(--theme-success);
-  --current-primary: var(--theme-primary);
-  --current-border: var(--theme-border);
-  --current-muted: var(--theme-muted);
-  --current-warning: var(--theme-warning);
-  --current-error: var(--theme-error);
-
-  /* RGB values for alpha transparency */
-  --current-accent-rgb: var(--theme-accent-rgb);
-  --current-highlight-rgb: var(--theme-highlight-rgb);
-  --current-success-rgb: var(--theme-success-rgb);
-
-  /* Current typography */
-  --current-font-primary: var(--theme-font-primary);
-  --current-font-code: var(--theme-font-code);
-
-  /* Current font sizes */
-  --current-text-xs: var(--theme-text-xs);
-  --current-text-sm: var(--theme-text-sm);
-  --current-text-base: var(--theme-text-base);
-  --current-text-lg: var(--theme-text-lg);
-  --current-text-xl: var(--theme-text-xl);
-  --current-text-2xl: var(--theme-text-2xl);
-  --current-text-3xl: var(--theme-text-3xl);
-  --current-text-4xl: var(--theme-text-4xl);
-  --current-text-5xl: var(--theme-text-5xl);
-  --current-text-6xl: var(--theme-text-6xl);
-  --current-text-7xl: var(--theme-text-7xl);
-  --current-text-8xl: var(--theme-text-8xl);
-  --current-text-9xl: var(--theme-text-9xl);
-
-  /* Current line heights */
-  --current-line-height-tight: var(--theme-line-height-tight);
-  --current-line-height-normal: var(--theme-line-height-normal);
-  --current-line-height-relaxed: var(--theme-line-height-relaxed);
-
-  /* Current border system */
-  --current-border-width: var(--theme-border-width);
-  --current-border-style: var(--theme-border-style);
-  --current-border-radius: var(--theme-border-radius);
-
-  /* Current shadow system */
-  --current-shadow-brutal: var(--theme-shadow-brutal);
-  --current-shadow-double: var(--theme-shadow-double);
-  --current-shadow-triple: var(--theme-shadow-triple);
-  --current-shadow-inset: var(--theme-shadow-inset);
-  --current-shadow-subtle: var(--theme-shadow-subtle);
-  --current-shadow-elevated: var(--theme-shadow-elevated);
-  --current-shadow-glow: var(--theme-shadow-glow);
-
-  /* Current animation system */
-  --current-animation-duration: var(--theme-animation-duration);
-  --current-animation-easing: var(--theme-animation-easing);
-
-  /* Theme transition */
-  --theme-transition-duration: 600ms;
-  --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* Layout and spacing */
-  --container-max-width: 1200px;
-  --container-padding: 2rem;
-  --section-spacing: 8rem;
-  --component-spacing: 4rem;
-
-  /* Z-index system */
-  --z-dropdown: 1000;
-  --z-sticky: 1020;
-  --z-fixed: 1030;
-  --z-modal-backdrop: 1040;
-  --z-modal: 1050;
-  --z-popover: 1060;
-  --z-tooltip: 1070;
-  --z-toast: 1080;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
-/* ===== BASE STYLES ===== */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
 }
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--current-font-primary);
-  font-size: var(--current-text-base);
-  line-height: var(--current-line-height-normal);
-  color: var(--current-text);
-  background: var(--current-bg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: all var(--theme-transition-duration)
-    var(--theme-transition-easing);
-}
-
-/* ===== TYPOGRAPHY UTILITIES ===== */
-
-.font-primary {
-  font-family: var(--current-font-primary);
-}
-
-.font-code {
-  font-family: var(--current-font-code);
-}
-
-.font-space-mono {
-  font-family: var(--extreme-font-primary);
-}
-
-.font-jetbrains-mono {
-  font-family: var(--current-font-code);
-}
-
-.font-inter {
-  font-family: var(--refined-font-primary);
-}
-
-/* Text Sizes */
-.text-xs {
-  font-size: var(--current-text-xs);
-}
-.text-sm {
-  font-size: var(--current-text-sm);
-}
-.text-base {
-  font-size: var(--current-text-base);
-}
-.text-lg {
-  font-size: var(--current-text-lg);
-}
-.text-xl {
-  font-size: var(--current-text-xl);
-}
-.text-2xl {
-  font-size: var(--current-text-2xl);
-}
-.text-3xl {
-  font-size: var(--current-text-3xl);
-}
-.text-4xl {
-  font-size: var(--current-text-4xl);
-}
-.text-5xl {
-  font-size: var(--current-text-5xl);
-}
-.text-6xl {
-  font-size: var(--current-text-6xl);
-}
-.text-7xl {
-  font-size: var(--current-text-7xl);
-}
-.text-8xl {
-  font-size: var(--current-text-8xl);
-}
-.text-9xl {
-  font-size: var(--current-text-9xl);
-}
-
-/* ===== BRUTALIST COMPONENT BASE STYLES ===== */
-
-.brutal-border {
-  border: var(--current-border-width) var(--current-border-style)
-    var(--current-border);
-  border-radius: var(--current-border-radius);
-}
-
-.brutal-shadow {
-  box-shadow: var(--current-shadow-brutal);
-}
-
-.brutal-shadow-double {
-  box-shadow: var(--current-shadow-double);
-}
-
-.brutal-shadow-triple {
-  box-shadow: var(--current-shadow-triple);
-}
-
-.brutal-shadow-inset {
-  box-shadow: var(--current-shadow-inset);
-}
-
-/* ===== COLOR UTILITIES ===== */
-
-.bg-current {
-  background: var(--current-bg);
-}
-.bg-accent {
-  background: var(--current-accent);
-}
-.bg-secondary {
-  background: var(--current-secondary);
-}
-.bg-highlight {
-  background: var(--current-highlight);
-}
-.bg-success {
-  background: var(--current-success);
-}
-.bg-warning {
-  background: var(--current-warning);
-}
-.bg-error {
-  background: var(--current-error);
-}
-
-.text-current {
-  color: var(--current-text);
-}
-.text-accent {
-  color: var(--current-accent);
-}
-.text-secondary {
-  color: var(--current-secondary);
-}
-.text-highlight {
-  color: var(--current-highlight);
-}
-.text-success {
-  color: var(--current-success);
-}
-.text-warning {
-  color: var(--current-warning);
-}
-.text-error {
-  color: var(--current-error);
-}
-.text-muted {
-  color: var(--current-muted);
-}
-
-.border-current {
-  border-color: var(--current-border);
-}
-.border-accent {
-  border-color: var(--current-accent);
-}
-.border-text {
-  border-color: var(--current-text);
-}
-
-/* ===== SPACING UTILITIES ===== */
-
-.container {
-  max-width: var(--container-max-width);
-  margin: 0 auto;
-  padding: 0 var(--container-padding);
-}
-
-.section-spacing {
-  padding: var(--section-spacing) 0;
-}
-
-.component-spacing {
-  margin-bottom: var(--component-spacing);
-}
-
-/* ===== LAYOUT UTILITIES ===== */
-
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.flex-start {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.flex-end {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.grid-center {
-  display: grid;
-  place-items: center;
-}
-
-/* ===== INTERACTION UTILITIES ===== */
-
-.cursor-pointer {
-  cursor: pointer;
-}
-.cursor-not-allowed {
-  cursor: not-allowed;
-}
-.pointer-events-none {
-  pointer-events: none;
-}
-.select-none {
-  user-select: none;
-}
-
-/* ===== VISIBILITY UTILITIES ===== */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.hidden {
-  display: none;
-}
-.visible {
-  visibility: visible;
-}
-.invisible {
-  visibility: hidden;
-}
-
-/* ===== ANIMATION UTILITY CLASSES ===== */
-
-.animate-brutal-glitch {
-  animation: brutalGlitch var(--current-animation-duration)
-    var(--current-animation-easing);
-}
-
-.animate-brutal-pulse {
-  animation: brutalPulse 2s ease-in-out infinite;
-}
-
-.animate-smooth-transition {
-  animation: smoothTransition var(--current-animation-duration)
-    var(--current-animation-easing);
-}
-
-.animate-typewriter {
-  animation: typewriter 3s steps(40, end);
-}
-
-.animate-fade-in {
-  animation: fadeIn var(--current-animation-duration)
-    var(--current-animation-easing);
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp var(--current-animation-duration)
-    var(--current-animation-easing);
-}
-
-.animate-slide-in-left {
-  animation: slideInFromLeft var(--current-animation-duration)
-    var(--current-animation-easing);
-}
-
-.animate-slide-in-right {
-  animation: slideInFromRight var(--current-animation-duration)
-    var(--current-animation-easing);
-}
-
-.animate-scale-in {
-  animation: scaleIn var(--current-animation-duration)
-    var(--current-animation-easing);
-}
-
-/* ===== RESPONSIVE DESIGN ===== */
-
-@media (max-width: 1024px) {
-  :root {
-    --container-padding: 1.5rem;
-    --section-spacing: 6rem;
-    --component-spacing: 3rem;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --container-padding: 1rem;
-    --section-spacing: 4rem;
-    --component-spacing: 2rem;
-  }
-
-  .brutal-border {
-    border-width: 4px;
-  }
-
-  .brutal-shadow {
-    box-shadow: 4px 4px 0 var(--current-accent);
-  }
-
-  .brutal-shadow-double {
-    box-shadow:
-      4px 4px 0 var(--current-accent),
-      8px 8px 0 var(--current-text);
-  }
-
-  /* Hide complex animations on mobile for performance */
-  .animate-brutal-glitch,
-  .animate-brutal-pulse {
-    animation: none;
-  }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --container-padding: 0.75rem;
-    --section-spacing: 3rem;
-    --component-spacing: 1.5rem;
-  }
-
-  .text-5xl {
-    font-size: var(--current-text-4xl);
-  }
-  .text-6xl {
-    font-size: var(--current-text-5xl);
-  }
-  .text-7xl {
-    font-size: var(--current-text-6xl);
-  }
-  .text-8xl {
-    font-size: var(--current-text-7xl);
-  }
-  .text-9xl {
-    font-size: var(--current-text-8xl);
-  }
-}
-
-/* ===== ACCESSIBILITY ===== */
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-/* High Contrast Mode */
-@media (prefers-contrast: high) {
-  :root {
-    --current-border-width: 3px;
-  }
-
-  .brutal-border {
-    border-width: 3px;
-  }
-}
-
-/* Focus Styles */
-:focus-visible {
-  outline: 2px solid var(--current-accent);
-  outline-offset: 2px;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--current-accent);
-  outline-offset: 2px;
-}
-
-/* ===== PRINT STYLES ===== */
-
-@media print {
-  *,
-  *::before,
-  *::after {
-    background: transparent !important;
-    color: black !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
   body {
-    font-size: 12pt;
-    line-height: 1.5;
+    @apply bg-background text-foreground;
   }
-
-  .brutal-border {
-    border: 1px solid black;
-  }
-
-  .brutal-shadow,
-  .brutal-shadow-double,
-  .brutal-shadow-triple {
-    box-shadow: none;
+  html {
+    scroll-behavior: smooth;
   }
 }
