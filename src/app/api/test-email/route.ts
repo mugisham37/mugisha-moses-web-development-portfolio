@@ -1,10 +1,22 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend only when needed to avoid build-time errors
+let resend: Resend;
 
 export async function POST() {
   try {
+    // Initialize Resend only when needed to avoid build-time errors
+    if (!resend) {
+      const apiKey = process.env.RESEND_API_KEY;
+      if (!apiKey) {
+        return NextResponse.json(
+          { error: "Email service not configured" },
+          { status: 503 }
+        );
+      }
+      resend = new Resend(apiKey);
+    }
     // Send a simple test email
     const { data, error } = await resend.emails.send({
       from: "Test <onboarding@resend.dev>", // Using Resend's default domain for testing

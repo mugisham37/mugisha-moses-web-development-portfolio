@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend only when needed to avoid build-time errors
+let resend: Resend;
 
 interface OnboardingEmailData {
   name: string;
@@ -19,6 +20,18 @@ interface OnboardingEmailData {
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize Resend only when needed to avoid build-time errors
+    if (!resend) {
+      const apiKey = process.env.RESEND_API_KEY;
+      if (!apiKey) {
+        return NextResponse.json(
+          { error: "Email service not configured" },
+          { status: 503 }
+        );
+      }
+      resend = new Resend(apiKey);
+    }
+
     const formData: OnboardingEmailData = await request.json();
 
     // Validate required fields
