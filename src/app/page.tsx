@@ -1,65 +1,179 @@
-import Image from "next/image";
+import { Metadata } from 'next';
+import HeroSection from '@/components/Landing/HeroSection';
+import InfoSection from '@/components/Landing/InfoSection';
+import ProjectsSection from '@/components/Landing/ProjectsSection';
+import AboutSection from '@/components/Landing/AboutSection';
+
+export const metadata: Metadata = {
+  title: 'JARCOS',
+  description: 'JARCOS is a design practice led by João Ferreira, a Brazilian multidisciplinary designer with over 14 years of experience in branding and digital design.',
+  openGraph: {
+    type: 'website',
+    title: 'JARCOS',
+    description: 'JARCOS is a design practice led by João Ferreira, a Brazilian multidisciplinary designer with over 14 years of experience in branding and digital design.',
+    images: [
+      {
+        url: 'https://framerusercontent.com/images/KzbPKaxMBB9pggMU52SND3kyRtE.png',
+        width: 1200,
+        height: 630,
+        alt: 'JARCOS Design Practice'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'JARCOS',
+    description: 'JARCOS is a design practice led by João Ferreira, a Brazilian multidisciplinary designer with over 14 years of experience in branding and digital design.',
+    images: ['https://framerusercontent.com/images/KzbPKaxMBB9pggMU52SND3kyRtE.png']
+  },
+  robots: 'max-image-preview:large',
+  alternates: {
+    canonical: 'https://jarcos.work/'
+  }
+};
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div id="main" 
+         data-framer-hydrate-v2='{"routeId":"fZ1F6lARf","localeId":"default","breakpoints":[{"hash":"psciyp","mediaQuery":"(min-width: 1920px)"},{"hash":"r5jr8i","mediaQuery":"(min-width: 1200px) and (max-width: 1919.98px)"},{"hash":"uo4cln","mediaQuery":"(min-width: 810px) and (max-width: 1199.98px)"},{"hash":"yzu0cc","mediaQuery":"(max-width: 809.98px)"}]}'
+         data-framer-ssr-released-at="2025-12-17T18:12:03.442Z" 
+         data-framer-page-optimized-at="2025-12-20T02:02:56.359Z"
+         data-framer-generated-page="">
+      
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          html body {
+            background: var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0));
+          }
+          html {
+            font-size: 75%;
+          }
+          @media (min-width: 1920px) {
+            html {
+              font-size: 100%;
+            }
+          }
+          @media (min-width: 810px) and (max-width: 1199.98px) {
+            html {
+              font-size: 87.5%;
+            }
+          }
+          @media (max-width: 809.98px) {
+            html {
+              font-size: 87.5%;
+            }
+          }
+        `
+      }} />
+      
+      <div data-framer-root="" 
+           className="framer-YRYrN framer-liW5Z framer-oOooP framer-r5jr8i"
+           data-framer-cursor="9zdtuk" 
+           style={{minHeight: '100vh', width: 'auto'}}>
+        
+        {/* Sticky Navigation */}
+        <div className="framer-1xgw1dx" data-framer-name="sticky-nav"
+             style={{
+               willChange: 'transform, opacity, filter',
+               zIndex: 8,
+               opacity: 0,
+               filter: 'blur(10px)',
+               transform: 'translateX(-50%) translateY(55px) scale(0.9)'
+             }}>
+          <div className="framer-1fgo7cv-container" id="button">
+            <div style={{display: 'inline-flex'}}>
+              <div style={{
+                position: 'relative',
+                display: 'inline-flex',
+                backgroundColor: '#fff',
+                borderRadius: '8px',
+                gap: '8px',
+                padding: '5px'
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  backgroundColor: 'rgb(255, 255, 255)',
+                  borderRadius: '4px',
+                  transition: '300ms ease-in-out',
+                  zIndex: 1,
+                  left: '67px',
+                  width: '49px',
+                  height: '37px'
+                }}></div>
+                <a href="/work" style={{
+                  position: 'relative',
+                  padding: '10px 12px',
+                  fontFamily: '"Inter Display", "Inter Display Placeholder", sans-serif',
+                  fontWeight: 600,
+                  letterSpacing: 0,
+                  fontStyle: 'normal',
+                  borderRadius: '8px',
+                  color: '#000',
+                  textDecoration: 'none',
+                  zIndex: 10,
+                  filter: 'invert(1)',
+                  mixBlendMode: 'difference',
+                  cursor: 'pointer'
+                }}>Work</a>
+                <a href="/grid" style={{
+                  position: 'relative',
+                  padding: '10px 12px',
+                  fontFamily: '"Inter Display", "Inter Display Placeholder", sans-serif',
+                  fontWeight: 600,
+                  letterSpacing: 0,
+                  fontStyle: 'normal',
+                  borderRadius: '8px',
+                  color: '#000',
+                  textDecoration: 'none',
+                  zIndex: 10,
+                  filter: 'invert(1)',
+                  mixBlendMode: 'difference',
+                  cursor: 'pointer'
+                }}>Grid</a>
+                <a href="/contacts" style={{
+                  position: 'relative',
+                  padding: '10px 12px',
+                  fontFamily: '"Inter Display", "Inter Display Placeholder", sans-serif',
+                  fontWeight: 600,
+                  letterSpacing: 0,
+                  fontStyle: 'normal',
+                  borderRadius: '8px',
+                  color: '#000',
+                  textDecoration: 'none',
+                  zIndex: 10,
+                  filter: 'invert(1)',
+                  mixBlendMode: 'difference',
+                  cursor: 'pointer'
+                }}>Inquiries</a>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Hero Section */}
+        <HeroSection />
+
+        {/* Hold Hero Spacer */}
+        <div className="framer-16bc6t6 hidden-yzu0cc" data-framer-name="hold-hero" id="hold-hero"></div>
+
+        {/* Info Section */}
+        <InfoSection />
+
+        {/* Projects Section */}
+        <ProjectsSection />
+
+        {/* About Section */}
+        <AboutSection />
+
+        {/* Footer Spacer */}
+        <div className="framer-13z09h7 hidden-yzu0cc" data-framer-name="s5-footer" id="s5"></div>
+        
+        <div className="framer-n468d9-container">
+          <div style={{display: 'none'}} aria-hidden="true"></div>
         </div>
-      </main>
+      </div>
+      
+      <div id="overlay"></div>
     </div>
   );
 }
