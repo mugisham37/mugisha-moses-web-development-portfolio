@@ -1,4 +1,4 @@
-data-framer-font-css {
+[data-framer-font-css] {
     @font-face {
         font-family: "Inter Display";
         src: url("https://framerusercontent.com/assets/gazZKZuUEtvr9ULhdA4SprP0AZ0.woff2");
@@ -72,9 +72,9 @@ data-framer-font-css {
     }
 }
 
-data-framer-css-ssr-minified {
+[data-framer-css-ssr-minified] {
 
-    data-framer-components="framer-lib-cursors-host framer-YRYrN PropertyOverrides framer-tOaPC">html,
+    [data-framer-components="framer-lib-cursors-host framer-YRYrN PropertyOverrides framer-tOaPC"] html,
     body,
     #main {
         box-sizing: border-box;
@@ -2535,7 +2535,6 @@ framer-6jWyo framer-n0ccwk framer-v-n0ccwk framer-bmpgw8 __framer-badge {
 
 img {
     -webkit-user-drag: none;
-    user-drag: none;
     -webkit-user-select: none;
     user-select: none;
     pointer-events: auto;
