@@ -35,7 +35,7 @@ This implementation plan provides direct copy-paste operations for migrating 4 H
   - Extract legacy headEnd CSS (lines 2573-2737) directly to globals.css
   - _Requirements: 3.1, 3.2_
 
-- [ ] 4. Extract Editor Bar CSS from index.html to globals.css
+- [x] 4. Extract Editor Bar CSS from index.html to globals.css
   - Use PowerShell: `Get-Content "html/index.html" | Select-Object -Skip 2742 -First 110 | Add-Content "app/globals.css"`
   - Extract editor bar styles (lines 2743-2852) directly to globals.css
   - _Requirements: 3.1, 3.2_
