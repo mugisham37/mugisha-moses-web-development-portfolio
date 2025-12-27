@@ -30,7 +30,7 @@ This implementation plan provides direct copy-paste operations for migrating 4 H
   - Extract primary CSS styles (lines 119-2569) directly to globals.css
   - _Requirements: 3.1, 3.2_
 
-- [ ] 3. Extract Legacy CSS from index.html to globals.css
+- [x] 3. Extract Legacy CSS from index.html to globals.css
   - Use PowerShell: `Get-Content "html/index.html" | Select-Object -Skip 2572 -First 165 | Add-Content "app/globals.css"`
   - Extract legacy headEnd CSS (lines 2573-2737) directly to globals.css
   - _Requirements: 3.1, 3.2_
