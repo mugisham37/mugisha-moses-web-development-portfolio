@@ -50,7 +50,7 @@ This implementation plan provides direct copy-paste operations for migrating 4 H
   - Extract any unique CSS styles from Grid.html (lines 119-2569) directly to globals.css
   - _Requirements: 3.1, 3.2_
 
-- [ ] 7. Extract Additional CSS from work.html to globals.css
+- [x] 7. Extract Additional CSS from work.html to globals.css
   - Use PowerShell: `Get-Content "html/work.html" | Select-Object -Skip 118 -First 2451 | Add-Content "app/globals.css"`
   - Extract any unique CSS styles from work.html (lines 119-2569) directly to globals.css
   - _Requirements: 3.1, 3.2_
