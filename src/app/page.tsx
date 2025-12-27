@@ -143,9 +143,9 @@ export default function Home() {
 
         {/* Footer Spacer */}
         <div className="framer-13z09h7 hidden-yzu0cc" data-framer-name="s5-footer" id="s5"></div>
-            <div className="framer-n468d9-container">
-                <div style={{display: "none"}} aria-hidden="true"></div>
-            </div>
+        <div className="framer-n468d9-container">
+            <div style={{display: "none"}} aria-hidden="true"></div>
+        </div>
         </div>
         <div id="overlay"></div>
     </div>
