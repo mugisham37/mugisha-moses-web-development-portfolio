@@ -6,7 +6,7 @@ const InfoSection: React.FC = () => {
       <div className="framer-qxq1st" data-framer-name="row-info" id="s2-info">
         <div className="framer-8mbx8q" data-framer-name="4-col">
           <div className="framer-1ekems" data-framer-component-type="RichTextContainer"
-            style={{transform: 'none'}}>
+            style={{ transform: 'none' }}>
             <p style={{
               '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
               '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -22,10 +22,10 @@ const InfoSection: React.FC = () => {
         </div>
         <div className="framer-1seucdc" data-framer-name="2-col">
           <div className="framer-1oz8lyb" data-framer-name="title" id="button-1"
-            style={{opacity: 1, transform: 'none'}}>
+            style={{ opacity: 1, transform: 'none' }}>
             <div className="framer-vptafx" data-framer-name="design-practice">
               <div className="framer-1quc3o2" data-framer-component-type="RichTextContainer"
-                style={{transform: 'none'}}>
+                style={{ transform: 'none' }}>
                 <p style={{
                   '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                   '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -80,7 +80,7 @@ const InfoSection: React.FC = () => {
                       } as React.CSSProperties}>
                       Pop up a message</p>
                   </div>
-                  <div className="framer-1ymkzqr" data-framer-name="arrow-right" style={{opacity: 1}}>
+                  <div className="framer-1ymkzqr" data-framer-name="arrow-right" style={{ opacity: 1 }}>
                     <div data-framer-component-type="SVG" data-framer-name="arrow-hover"
                       className="framer-fykggv" aria-hidden="true"
                       style={{
@@ -89,8 +89,8 @@ const InfoSection: React.FC = () => {
                         opacity: 1
                       }}>
                       <div className="svgContainer"
-                        style={{width: '100%', height: '100%', aspectRatio: 'inherit'}}>
-                        <svg style={{width: '100%', height: '100%'}} preserveAspectRatio="none"
+                        style={{ width: '100%', height: '100%', aspectRatio: 'inherit' }}>
+                        <svg style={{ width: '100%', height: '100%' }} preserveAspectRatio="none"
                           width="100%" height="100%">
                           <use href="#svg1547463893_535"></use>
                         </svg>
@@ -104,8 +104,8 @@ const InfoSection: React.FC = () => {
                         opacity: 1
                       }}>
                       <div className="svgContainer"
-                        style={{width: '100%', height: '100%', aspectRatio: 'inherit'}}>
-                        <svg style={{width: '100%', height: '100%'}} preserveAspectRatio="none"
+                        style={{ width: '100%', height: '100%', aspectRatio: 'inherit' }}>
+                        <svg style={{ width: '100%', height: '100%' }} preserveAspectRatio="none"
                           width="100%" height="100%">
                           <use href="#svg1547463893_535"></use>
                         </svg>
@@ -121,7 +121,7 @@ const InfoSection: React.FC = () => {
       <div className="framer-62gy0t" data-border="true" data-framer-name="row-info" id="s2-info-1">
         <div className="framer-1awxzz1" data-framer-name="4-col">
           <div className="framer-97fn1k" data-framer-component-type="RichTextContainer"
-            style={{transform: 'none'}}>
+            style={{ transform: 'none' }}>
             <p style={{
               '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
               '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -137,7 +137,7 @@ const InfoSection: React.FC = () => {
         </div>
         <div className="framer-1l8fhux" data-framer-name="2-col">
           <div className="framer-10o3rza" data-framer-component-type="RichTextContainer"
-            style={{transform: 'none'}}>
+            style={{ transform: 'none' }}>
             <p style={{
               '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
               '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -155,7 +155,7 @@ const InfoSection: React.FC = () => {
         </div>
         <div className="framer-gnotgp" data-framer-name="2-col">
           <div className="framer-hxft3u" data-framer-component-type="RichTextContainer"
-            style={{transform: 'none'}}>
+            style={{ transform: 'none' }}>
             <p style={{
               '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
               '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -185,7 +185,7 @@ const InfoSection: React.FC = () => {
       <div className="framer-mmm78e" data-border="true" data-framer-name="row-info">
         <div className="framer-1fc7mey" data-framer-name="4-col">
           <div className="framer-1fowp4e" data-framer-component-type="RichTextContainer"
-            style={{transform: 'none'}}>
+            style={{ transform: 'none' }}>
             <p style={{
               '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
               '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -201,7 +201,7 @@ const InfoSection: React.FC = () => {
         </div>
         <div className="framer-tvqiwf" data-framer-name="2-col">
           <div className="framer-s2wtdb" data-framer-component-type="RichTextContainer"
-            style={{transform: 'none'}}>
+            style={{ transform: 'none' }}>
             <p style={{
               '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
               '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -230,7 +230,7 @@ const InfoSection: React.FC = () => {
         </div>
         <div className="framer-fa6cz8" data-framer-name="2-col">
           <div className="framer-yd7hpu" data-framer-component-type="RichTextContainer"
-            style={{transform: 'none'}}>
+            style={{ transform: 'none' }}>
             <p style={{
               '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
               '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -292,7 +292,7 @@ const InfoSection: React.FC = () => {
       <div className="framer-dcj9fq" data-border="true" data-framer-name="row-info">
         <div className="framer-1iq4eye" data-framer-name="4-col">
           <div className="framer-1fmu3xk" data-framer-component-type="RichTextContainer"
-            style={{transform: 'none'}}>
+            style={{ transform: 'none' }}>
             <p style={{
               '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
               '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -309,7 +309,7 @@ const InfoSection: React.FC = () => {
         <div className="framer-k1lrvk" data-framer-name="2-col">
           <div className="framer-1ujdlt0" data-framer-name="Koto">
             <div className="framer-rs76fj" data-framer-component-type="RichTextContainer"
-              style={{transform: 'none'}}>
+              style={{ transform: 'none' }}>
               <p style={{
                 '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                 '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -328,7 +328,7 @@ const InfoSection: React.FC = () => {
           </div>
           <div className="framer-1j922of" data-framer-name="Futurebrand">
             <div className="framer-1yvn0td" data-framer-component-type="RichTextContainer"
-              style={{transform: 'none'}}>
+              style={{ transform: 'none' }}>
               <p style={{
                 '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                 '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -348,7 +348,7 @@ const InfoSection: React.FC = () => {
           </div>
           <div className="framer-68ltk4" data-framer-name="Metalab">
             <div className="framer-hf2m3h" data-framer-component-type="RichTextContainer"
-              style={{transform: 'none'}}>
+              style={{ transform: 'none' }}>
               <p style={{
                 '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                 '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -367,7 +367,7 @@ const InfoSection: React.FC = () => {
           </div>
           <div className="framer-nzasuv" data-framer-name="SB">
             <div className="framer-arda1g" data-framer-component-type="RichTextContainer"
-              style={{transform: 'none'}}>
+              style={{ transform: 'none' }}>
               <p style={{
                 '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                 '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -387,7 +387,7 @@ const InfoSection: React.FC = () => {
           </div>
           <div className="framer-qgfgnm" data-framer-name="Konpo">
             <div className="framer-qaxcm7" data-framer-component-type="RichTextContainer"
-              style={{transform: 'none'}}>
+              style={{ transform: 'none' }}>
               <p style={{
                 '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                 '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -409,7 +409,7 @@ const InfoSection: React.FC = () => {
         <div className="framer-1qfwstm" data-framer-name="2-col">
           <div className="framer-15kxvps" data-framer-name="Plau">
             <div className="framer-1v2zaem" data-framer-component-type="RichTextContainer"
-              style={{transform: 'none'}}>
+              style={{ transform: 'none' }}>
               <p style={{
                 '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                 '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -428,7 +428,7 @@ const InfoSection: React.FC = () => {
           </div>
           <div className="framer-hf93qx" data-framer-name="iN">
             <div className="framer-1n9rcid" data-framer-component-type="RichTextContainer"
-              style={{transform: 'none'}}>
+              style={{ transform: 'none' }}>
               <p style={{
                 '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                 '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -447,7 +447,7 @@ const InfoSection: React.FC = () => {
           </div>
           <div className="framer-1jombca" data-framer-name="Môre">
             <div className="framer-1elpv3w" data-framer-component-type="RichTextContainer"
-              style={{transform: 'none'}}>
+              style={{ transform: 'none' }}>
               <p style={{
                 '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                 '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
@@ -467,7 +467,7 @@ const InfoSection: React.FC = () => {
           </div>
           <div className="framer-7jv35p" data-framer-name="Asia">
             <div className="framer-11uxukk" data-framer-component-type="RichTextContainer"
-              style={{transform: 'none'}}>
+              style={{ transform: 'none' }}>
               <p style={{
                 '--font-selector': 'RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk',
                 '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
