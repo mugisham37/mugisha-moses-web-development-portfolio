@@ -223,34 +223,56 @@ app/
 4. **Media Queries**: Preserve responsive breakpoints and media queries
 5. **CSS Variables**: Maintain all CSS custom properties and tokens
 
-### Component Identification
+### Component Architecture
 
-Based on analysis of the HTML files, the following components will be extracted:
+The migration will create the following Next.js project structure with specific components:
 
-1. **Navigation Component** (appears in all files around lines 2920-2950)
-   - Sticky navigation with Work, Grid, Inquiries links
-   - Animated background and hover effects
-   - Responsive behavior
+#### Core Pages (app directory)
+1. **app/page.tsx** - Home page (from index.html)
+2. **app/grid/page.tsx** - Grid page (from Grid.html)  
+3. **app/work/page.tsx** - Work page (from work.html)
+4. **app/contact/page.tsx** - Contact page (from inqueries.html)
+5. **app/layout.tsx** - Root layout with shared navigation
+6. **app/globals.css** - Consolidated CSS from all HTML files
 
-2. **Hero Section** (index.html lines ~2950-3200)
-   - Animated text with character-by-character reveals
-   - SVG graphics and circular elements
-   - Responsive typography
+#### Reusable Components (app/components directory)
+1. **Navigation.tsx** - Shared navigation component
+   - Location: Lines 2920-2950 in all HTML files
+   - Features: Sticky navigation, animated background, responsive behavior
+   - Usage: Imported in layout.tsx for all pages
 
-3. **Project Grid** (Grid.html main content section)
-   - Grid layout for project showcase
-   - Image galleries and project cards
-   - Hover animations and transitions
+2. **HeroSection.tsx** - Home page hero component
+   - Location: index.html lines 2950-3200
+   - Features: Animated text reveals, SVG graphics, responsive typography
+   - Usage: Used only in app/page.tsx
 
-4. **Work Showcase** (work.html main content section)
-   - Individual project presentations
-   - Case study layouts
-   - Interactive elements
+3. **ProjectGrid.tsx** - Grid layout component
+   - Location: Grid.html main content section (lines 3046-3160)
+   - Features: Project showcase grid, image galleries, hover animations
+   - Usage: Used in app/grid/page.tsx
 
-5. **Contact Form** (inqueries.html main content section)
-   - Contact form with validation
-   - Contact information display
-   - Interactive form elements
+4. **ProjectShowcase.tsx** - Individual project display component
+   - Location: work.html project sections (lines 3046-3379)
+   - Features: Case study layouts, project presentations, interactive elements
+   - Usage: Used in app/work/page.tsx (multiple instances)
+
+5. **ContactForm.tsx** - Contact form component
+   - Location: inqueries.html main content (lines 2946-2979)
+   - Features: Form validation, contact information display, interactive elements
+   - Usage: Used in app/contact/page.tsx
+
+#### CSS Organization
+- **app/globals.css** will contain:
+  - Font declarations (@font-face rules from lines 40-118 in all files)
+  - Global styles and CSS reset (lines 119-2569)
+  - Component-specific styles (lines 2570-2852)
+  - Framer Motion animation styles
+  - Media queries and responsive breakpoints
+
+#### Asset Management
+- All external assets (Framer CDN images, fonts) will be preserved with original URLs
+- No local asset migration required - all references maintained as external URLs
+- Google Analytics and tracking scripts preserved in layout.tsx
 
 ## Correctness Properties
 
