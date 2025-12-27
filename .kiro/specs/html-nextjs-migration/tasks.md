@@ -40,7 +40,7 @@ This implementation plan provides direct copy-paste operations for migrating 4 H
   - Extract editor bar styles (lines 2743-2852) directly to globals.css
   - _Requirements: 3.1, 3.2_
 
-- [-] 5. Extract Fade Animation CSS from index.html to globals.css
+- [x] 5. Extract Fade Animation CSS from index.html to globals.css
   - Use PowerShell: `Get-Content "html/index.html" | Select-Object -Skip 2854 -First 24 | Add-Content "app/globals.css"`
   - Extract fade animation styles (lines 2855-2878) directly to globals.css
   - _Requirements: 3.1, 3.2_
