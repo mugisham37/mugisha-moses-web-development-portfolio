@@ -1,5 +1,4 @@
-import { Metadata } from 'next'
-import { ContactSection } from '../../components/Contacts'
+import ContactSection from "@/src/components/Contacts/ContactSection"
 
 const ContactsPage = () => {
   return (

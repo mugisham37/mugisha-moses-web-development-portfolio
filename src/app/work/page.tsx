@@ -1,5 +1,3 @@
-import React from 'react'
-import { Metadata } from 'next'
 import ProjectsShowcase from '../../components/Work/ProjectsShowcase'
 import JarcosFooter from '../../components/Work/JarcosFooter'
 import AboutSection from '../../components/Work/AboutSection'

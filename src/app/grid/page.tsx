@@ -1,5 +1,3 @@
-import React from 'react'
-import { Metadata } from 'next'
 import { MasonryGallery, GridFooter } from '../../components/Grid'
 
 const GridPage = () => {
