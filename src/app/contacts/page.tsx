@@ -11,6 +11,7 @@ declare module 'react' {
 
 const page = () => {
   return (
+    <>
     <div id="main"
         data-framer-hydrate-v2="{&quot;routeId&quot;:&quot;fZ1F6lARf&quot;,&quot;localeId&quot;:&quot;default&quot;,&quot;breakpoints&quot;:[{&quot;hash&quot;:&quot;psciyp&quot;,&quot;mediaQuery&quot;:&quot;(min-width: 1920px)&quot;},{&quot;hash&quot;:&quot;r5jr8i&quot;,&quot;mediaQuery&quot;:&quot;(min-width: 1200px) and (max-width: 1919.98px)&quot;},{&quot;hash&quot;:&quot;uo4cln&quot;,&quot;mediaQuery&quot;:&quot;(min-width: 810px) and (max-width: 1199.98px)&quot;},{&quot;hash&quot;:&quot;yzu0cc&quot;,&quot;mediaQuery&quot;:&quot;(max-width: 809.98px)&quot;}]}"
         data-framer-ssr-released-at="2025-12-17T18:12:03.442Z" data-framer-page-optimized-at="2025-12-20T02:02:56.359Z"
@@ -393,6 +394,10 @@ const page = () => {
         </div>
         <div id="overlay"></div>
     </div>
+    <div aria-live="assertive" aria-atomic="true" style={{position: 'absolute', transform: 'scale(0)'}}>Inquiries - JARCOS
+    </div>
+    </>
+    
   )
 }
 
