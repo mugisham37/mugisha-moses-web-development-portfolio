@@ -3,77 +3,797 @@ import { CSSProperties } from 'react'
 
 const AboutSection = () => {
   return (
-    <div className="framer-1d8phis" data-framer-name="s4-compact" id="s4">
-      <div className="framer-12i1nlb" data-border="true" data-framer-name="row-info">
-        <div className="framer-1oolcpw" data-framer-name="4-col">
-          <div className="framer-1yn2g10" data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-            <p className="framer-text" style={{
-              '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
-              '--framer-font-size': 'calc(var(--framer-root-font-size, 1rem) * 2)',
-              '--framer-font-weight': '600',
-              '--framer-letter-spacing': '-0.01em',
-              '--framer-line-height': '1.3em',
-              '--framer-text-color': 'var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))'
-            } as CSSProperties}>
-              JARCOS is a design practice led by João Ferreira, a Brazilian multidisciplinary designer with over 14 years of experience in branding and digital design.
-            </p>
-          </div>
-        </div>
-        
-        <div className="framer-bqrfly" data-framer-name="2-col">
-          <div className="framer-10t8ycb" data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-            <p className="framer-text" style={{
-              '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
-              '--framer-font-size': 'calc(var(--framer-root-font-size, 1rem) * 1)',
-              '--framer-font-weight': '600',
-              '--framer-letter-spacing': '-0.01em',
-              '--framer-line-height': '1.3em',
-              '--framer-text-color': 'var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))'
-            } as CSSProperties}>
-              Started in 2012, JARCOS is both a personal experiment and a collaborative platform, shaped by João&apos;s perspective on design and extended through trusted partners.
-            </p>
-            
-            <p className="framer-text" style={{
-              '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
-              '--framer-font-size': 'calc(var(--framer-root-font-size, 1rem) * 1)',
-              '--framer-font-weight': '600',
-              '--framer-letter-spacing': '-0.02em',
-              '--framer-line-height': '1.3em',
-              '--framer-text-color': 'var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))'
-            } as CSSProperties}>
-              <br className="framer-text trailing-break" />
-            </p>
-            
-            <p className="framer-text" style={{
-              '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
-              '--framer-font-size': 'calc(var(--framer-root-font-size, 1rem) * 1)',
-              '--framer-font-weight': '600',
-              '--framer-letter-spacing': '-0.01em',
-              '--framer-line-height': '1.3em',
-              '--framer-text-color': 'var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))'
-            } as CSSProperties}>
-              The practice focuses on brand identities and digital experiences, built through strategy, storytelling, and craft, in collaboration with global studios and clients across finance, technology, and consumer sectors.
-            </p>
-          </div>
-          
-          <div className="framer-1gqrpkf" data-framer-name="read-full-bio">
-            <div className="framer-u8adtt" data-framer-name="Read full bio" data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-              <p className="framer-text" style={{
-                '--framer-font-family': '"Inter Display", "Inter Display Placeholder", sans-serif',
-                '--framer-font-size': 'calc(var(--framer-root-font-size, 1rem) * 1)',
-                '--framer-font-weight': '600',
-                '--framer-letter-spacing': '-0.01em',
-                '--framer-line-height': '1.3em',
-                '--framer-text-color': 'var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))'
-              } as CSSProperties}>
-                <a className="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS" href="./contact?ref=land-book.com">
-                  Read full bio
-                </a>
-              </p>
+    <div id="main"
+        data-framer-hydrate-v2="{&quot;routeId&quot;:&quot;fZ1F6lARf&quot;,&quot;localeId&quot;:&quot;default&quot;,&quot;breakpoints&quot;:[{&quot;hash&quot;:&quot;psciyp&quot;,&quot;mediaQuery&quot;:&quot;(min-width: 1920px)&quot;},{&quot;hash&quot;:&quot;r5jr8i&quot;,&quot;mediaQuery&quot;:&quot;(min-width: 1200px) and (max-width: 1919.98px)&quot;},{&quot;hash&quot;:&quot;uo4cln&quot;,&quot;mediaQuery&quot;:&quot;(min-width: 810px) and (max-width: 1199.98px)&quot;},{&quot;hash&quot;:&quot;yzu0cc&quot;,&quot;mediaQuery&quot;:&quot;(max-width: 809.98px)&quot;}]}"
+        data-framer-ssr-released-at="2025-12-17T18:12:03.442Z" data-framer-page-optimized-at="2025-12-20T02:02:56.359Z"
+        data-framer-generated-page=""><!--$--><!--$--><!--/$--><!--/$-->
+        <style data-framer-html-style="">
+            html body {
+                background: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));
+            }
+
+            html {
+                font-size: 75%;
+            }
+
+            @media (min-width: 1920px) {
+                html {
+                    font-size: 100%;
+                }
+            }
+
+            @media (min-width: 810px) and (max-width: 1199.98px) {
+                html {
+                    font-size: 87.5%;
+                }
+            }
+
+            @media (max-width: 809.98px) {
+                html {
+                    font-size: 87.5%;
+                }
+            }
+        </style>
+        <div data-framer-root="" class="framer-YIYT2 framer-JQeFT framer-oOooP framer-1uj7sxa"
+            data-framer-cursor="9zdtuk" style="min-height: 100vh; width: auto;">
+            <div class="framer-1e4pmy4 hidden-hmzege" data-framer-name="sticky-nav"
+                style="will-change: transform, opacity, filter; z-index: 8; opacity: 0; filter: blur(10px); transform: translateX(-50%) translateY(55px) scale(0.9);">
+                <div class="framer-34p5vs-container" id="button">
+                    <div style="display: inline-flex;">
+                        <div
+                            style="position: relative; display: inline-flex; background-color: rgb(255, 255, 255); border-radius: 8px; gap: 8px; padding: 5px;">
+                            <div
+                                style="position: absolute; background-color: rgb(255, 255, 255); border-radius: 4px; transition: 300ms ease-in-out; z-index: 1; left: 68px; width: 54px; height: 37px;">
+                            </div><a href="/"
+                                style="position: relative; padding: 10px 12px; font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; font-weight: 600; letter-spacing: 0px; font-style: normal; border-radius: 8px; color: rgb(0, 0, 0); text-decoration: none; z-index: 10; filter: invert(1); mix-blend-mode: difference; cursor: pointer;">Index</a><a
+                                href="/work"
+                                style="position: relative; padding: 10px 12px; font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; font-weight: 600; letter-spacing: 0px; font-style: normal; border-radius: 8px; color: rgb(0, 0, 0); text-decoration: none; z-index: 10; filter: invert(1); mix-blend-mode: difference; cursor: pointer;">Work</a><a
+                                href="/grid"
+                                style="position: relative; padding: 10px 12px; font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; font-weight: 600; letter-spacing: 0px; font-style: normal; border-radius: 8px; color: rgb(0, 0, 0); text-decoration: none; z-index: 10; filter: invert(1); mix-blend-mode: difference; cursor: pointer;">Grid</a><a
+                                href="/contact"
+                                style="position: relative; padding: 10px 12px; font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; font-weight: 600; letter-spacing: 0px; font-style: normal; border-radius: 8px; color: rgb(0, 0, 0); text-decoration: none; z-index: 10; filter: invert(1); mix-blend-mode: difference; cursor: pointer;">Inquiries</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="framer-1w59p3y" data-framer-name="nav">
+                <div class="framer-15vn1xs hidden-hmzege" data-framer-appear-id="15vn1xs" data-framer-name="logo"
+                    style="opacity: 1; transform: none; will-change: transform;">
+                    <div class="framer-ugtsco-container" id="logo-nav"><a href="/?ref=land-book.com" title=""
+                            target="_self"
+                            style="display: flex; place-content: center; place-items: center; width: 100%; height: 100%; padding: 0px;"><img
+                                src="https://framerusercontent.com/images/D2ewTLV8miOQ39l8w4yRHAeWc.svg?width=76&amp;height=16"
+                                alt=""
+                                style="max-width: 100%; max-height: 100%; border-radius: 0px; -webkit-user-drag: none; user-select: none;">
+                            <div style="position: absolute; inset: 0px; pointer-events: none; border-radius: 0px;">
+                            </div>
+                        </a></div>
+                </div>
+                <div class="framer-1wm4ula" data-framer-name="nav" style="position: relative;">
+                    <div class="framer-6nkh4f" data-framer-appear-id="6nkh4f" data-framer-name="index"
+                        style="opacity: 1; transform: none; will-change: transform; transition: 0.5s cubic-bezier(0.38, 0.1, 0, 0.99);">
+                        <div class="framer-119v8t8" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0));">
+                                <a class="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
+                                    href="./?ref=land-book.com">Index</a></p>
+                        </div>
+                    </div>
+                    <div class="framer-c4fwkg" data-framer-appear-id="c4fwkg" data-framer-name="work"
+                        style="opacity: 1; transform: none; will-change: transform; transition: 0.5s cubic-bezier(0.38, 0.1, 0, 0.99);">
+                        <div class="framer-l99p59" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0));">
+                                <a class="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
+                                    href="./work?ref=land-book.com" data-framer-page-link-current="true">Work</a></p>
+                        </div>
+                    </div>
+                    <div class="framer-1h2qlj4" data-framer-appear-id="1h2qlj4" data-framer-name="grid"
+                        style="opacity: 1; transform: none; will-change: transform; transition: 0.5s cubic-bezier(0.38, 0.1, 0, 0.99);">
+                        <div class="framer-1fstsqd" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0));">
+                                <a class="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
+                                    href="./grid?ref=land-book.com">Grid</a></p>
+                        </div>
+                    </div>
+                    <div class="framer-5w3g3d" data-framer-appear-id="5w3g3d" data-framer-name="inquiries"
+                        style="opacity: 1; transform: none; will-change: transform; transition: 0.5s cubic-bezier(0.38, 0.1, 0, 0.99);">
+                        <div class="framer-1k9w78o" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0));">
+                                <a class="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
+                                    href="./contact?ref=land-book.com">Inquiries</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-h35keu hidden-hmzege" data-framer-appear-id="h35keu" data-framer-name="gru"
+                    style="opacity: 1; transform: none; will-change: transform;">
+                    <div class="framer-p0q7fd" data-framer-cursor="egh7w7" data-framer-name="gru-clock">
+                        <div class="framer-a25ieo" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                Guarulhos</p>
+                        </div>
+                        <div class="framer-z5rmmj-container">
+                            <div
+                                style="font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; font-size: calc(var(--framer-root-font-size, 1rem) * 1); font-style: normal; font-weight: 600; letter-spacing: 0em; line-height: 1em; color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                08:14</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="framer-hyxyn2" data-framer-name="s3" id="s3">
+                <div class="framer-t3xmok" data-framer-name="project-[zf]">
+                    <div class="framer-1a29lv4" data-framer-name="container-project">
+                        <div class="framer-1ab3nea-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-x5r1hs1dik"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1920 / 1280;">
+                                <style>
+                                    [data-scope="jar-gal-x5r1hs1dik"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-x5r1hs1dik"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-x5r1hs1dik"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    src="https://framerusercontent.com/images/HzAzxkH4eLPKnMGRGvXgoTheMls.gif?width=1920&amp;height=1280"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-1kg5onx" data-framer-name="information">
+                        <div class="framer-1q1n4q2" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-kpeajo" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                    Zellerfeld</p>
+                            </div>
+                        </div>
+                        <div class="framer-epvq2j" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-ypqqna" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Identity System, Website Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-iyye73" data-framer-name="project-[landsight]">
+                    <div class="framer-c8ry8r" data-framer-name="container-project">
+                        <div class="framer-182moc-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-dm3entf2vpv"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1440 / 960;">
+                                <style>
+                                    [data-scope="jar-gal-dm3entf2vpv"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-dm3entf2vpv"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-dm3entf2vpv"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    src="https://framerusercontent.com/images/BckpD4YbhZzRj02ZBsSMJ0H21w.jpg?width=1440&amp;height=960"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-rhy297" data-framer-name="information">
+                        <div class="framer-11v4kmo" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-bk2fod" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                    Landsight</p>
+                            </div>
+                        </div>
+                        <div class="framer-19a7by1" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-1s23oz9" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Visual Identity, Website Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-fusrbp" data-framer-name="project-[opus]">
+                    <div class="framer-s6qyoc" data-framer-name="container-project">
+                        <div class="framer-1wolyrk-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-2vdd0wj6bld"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1920 / 1280;">
+                                <style>
+                                    [data-scope="jar-gal-2vdd0wj6bld"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-2vdd0wj6bld"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-2vdd0wj6bld"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    src="https://framerusercontent.com/assets/ysqndmq8l2pf2UOITUfSfc.mp4"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-n2n695" data-framer-name="information">
+                        <div class="framer-1fj0z1" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-15krzne" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                    Opus</p>
+                            </div>
+                        </div>
+                        <div class="framer-1e58jku" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-oe4mwl" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Art Direction, Website Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-24fxuc" data-framer-name="project-[oglobo]">
+                    <div class="framer-1th2odc" data-framer-name="container-project">
+                        <div class="framer-ak5t6z-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-h653kegafac"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 2116 / 1440;">
+                                <style>
+                                    [data-scope="jar-gal-h653kegafac"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-h653kegafac"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-h653kegafac"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    src="https://framerusercontent.com/assets/MIWHSQoRBoqNgaecfmWPd7ApKeI.mp4"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-19y5goo" data-framer-name="information">
+                        <div class="framer-1gn7yqi" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-tmowpx" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                    O Globo</p>
+                            </div>
+                        </div>
+                        <div class="framer-e55nod" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-ab7715" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Identity System</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-w33xek" data-framer-name="project-[mzt]">
+                    <div class="framer-17gk783" data-framer-name="container-project">
+                        <div class="framer-10cy0ie-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-xtfco4obzc"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1560 / 1040;">
+                                <style>
+                                    [data-scope="jar-gal-xtfco4obzc"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-xtfco4obzc"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-xtfco4obzc"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    src="https://framerusercontent.com/assets/F8AfNRmAcOz9HnOgrBjm3LciY.mp4"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-djs3q8" data-framer-name="information">
+                        <div class="framer-fyz4d0" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-ty2e3h" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0));">
+                                    MissionZero</p>
+                            </div>
+                        </div>
+                        <div class="framer-731fk4" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-1meh1b3" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Art Direction, Visual Identity and Digital</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-w35mnh" data-framer-name="project-[avenue]">
+                    <div class="framer-1xx4dr1" data-framer-name="container-project">
+                        <div class="framer-w6th0o-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-anpsfutghhn"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1440 / 960;">
+                                <style>
+                                    [data-scope="jar-gal-anpsfutghhn"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-anpsfutghhn"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-anpsfutghhn"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    src="https://framerusercontent.com/images/C7jjX8MN4fI624oAyIKryXwoBy0.jpg?width=1440&amp;height=960"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-dc398o" data-framer-name="information">
+                        <div class="framer-1wnw7xh" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-1v5jn0j" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                    Avenue</p>
+                            </div>
+                        </div>
+                        <div class="framer-1mkhlt4" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-11wceye" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Art Direction, Visual Identity</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-11ky1wb" data-framer-name="project-[mt]">
+                    <div class="framer-1nmk9tb" data-framer-name="container-project">
+                        <div class="framer-c1nssd-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-bi51xzdqcz"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1560 / 1040;">
+                                <style>
+                                    [data-scope="jar-gal-bi51xzdqcz"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-bi51xzdqcz"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-bi51xzdqcz"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    src="https://framerusercontent.com/images/WEWx4cwXJP2uANPlrfIWO38TME.jpg?width=1560&amp;height=1040"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-1gh0rh5" data-framer-name="information">
+                        <div class="framer-x4nn4l" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-1oqoag3" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                    Metragem</p>
+                            </div>
+                        </div>
+                        <div class="framer-nfkikt" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-11kut72" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Visual Identity</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-1tesf71" data-framer-name="project-[lerian]">
+                    <div class="framer-1cu3my0" data-framer-name="container-project">
+                        <div class="framer-18bqszv-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-9gw7yrlkcag"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1920 / 1280;">
+                                <style>
+                                    [data-scope="jar-gal-9gw7yrlkcag"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-9gw7yrlkcag"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-9gw7yrlkcag"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    src="https://framerusercontent.com/assets/uvwyqIIBIj0XLgXS78x0oJrfU.mp4"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-ql1fpf" data-framer-name="information">
+                        <div class="framer-1n6cczw" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-8uzujo" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                    Lerian</p>
+                            </div>
+                        </div>
+                        <div class="framer-beal20" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-ofclib" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Identity System</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-fjirbq" data-framer-name="project-[def]">
+                    <div class="framer-hyrll4" data-framer-name="container-project">
+                        <div class="framer-83dlan-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-h696ehlfu0p"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1920 / 1280;">
+                                <style>
+                                    [data-scope="jar-gal-h696ehlfu0p"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-h696ehlfu0p"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-h696ehlfu0p"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    src="https://framerusercontent.com/assets/7aM0HvMdtt88uwxjJiCAgyKCE.mp4"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-1tkrhcw" data-framer-name="information">
+                        <div class="framer-id0767" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-1cu9s9k" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                    DEF</p>
+                            </div>
+                        </div>
+                        <div class="framer-rd80yi" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-1f6z61r" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Art Direction, Website Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-19almft" data-framer-name="project-[certisign]">
+                    <div class="framer-16lbz2p" data-framer-name="container-project">
+                        <div class="framer-sd9bax-container" data-code-component-plugin-id="84d4c1"
+                            data-framer-cursor="zxmnps">
+                            <div data-scope="jar-gal-a7rso6uyp0q"
+                                style="width: 100%; position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1920 / 1280;">
+                                <style>
+                                    [data-scope="jar-gal-a7rso6uyp0q"] {
+                                        --clip: 0%
+                                    }
+
+                                    [data-scope="jar-gal-a7rso6uyp0q"] .media {
+                                        clip-path: inset(var(--clip) var(--clip) var(--clip) var(--clip));
+                                        transition:
+                                            opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                                            clip-path 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                                        will-change: opacity, clip-path;
+                                    }
+
+                                    [data-scope="jar-gal-a7rso6uyp0q"]:hover {
+                                        --clip: 0.7%
+                                    }
+                                </style><img class="media" alt=""
+                                    src="https://framerusercontent.com/images/ltihpzq55Iy28lDv8DTdXPjqyrk.jpg?width=1920&amp;height=1280"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 1; pointer-events: none; user-select: none;"><video
+                                    class="media" loop="" playsinline="" preload="auto" disablepictureinpicture=""
+                                    controlslist="nodownload nofullscreen noremoteplayback"
+                                    style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; user-select: none;"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="framer-ctv4pf" data-framer-name="information">
+                        <div class="framer-2g5cel" data-framer-name="4-col" style="opacity: 1; transform: none;">
+                            <div class="framer-1ftn12y" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                    Certisign</p>
+                            </div>
+                        </div>
+                        <div class="framer-sn166g" data-framer-name="1-col" style="opacity: 1; transform: none;">
+                            <div class="framer-1felunn" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    Art Direction, Visual Identity</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="framer-aucz9e" data-framer-name="jarcologo" id="jarcofooter">
+                <div class="framer-1e8tzw3-container" data-framer-name="jarcologo" id="jarcofooter-1" name="jarcologo"
+                    style="transform: translateX(-50%);">
+                    <div
+                        style="display: flex; place-content: center; place-items: center; width: 100%; height: 100%; padding: 0px;">
+                        <img src="https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?width=2800&amp;height=553"
+                            srcset="https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?scale-down-to=512&amp;width=2800&amp;height=553 512w,https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?scale-down-to=1024&amp;width=2800&amp;height=553 1024w,https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?scale-down-to=2048&amp;width=2800&amp;height=553 2048w,https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?width=2800&amp;height=553 2800w"
+                            alt=""
+                            style="max-width: 100%; max-height: 100%; border-radius: 0px; -webkit-user-drag: none; user-select: none;">
+                        <div style="position: absolute; inset: 0px; pointer-events: none; border-radius: 0px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="framer-1d8phis" data-framer-name="s4-compact" id="s4">
+                <div class="framer-12i1nlb" data-border="true" data-framer-name="row-info">
+                    <div class="framer-1oolcpw" data-framer-name="4-col">
+                        <div class="framer-1yn2g10" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 2); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                JARCOS is a design practice led by João Ferreira, a Brazilian multidisciplinary designer
+                                with over 14 years of experience in branding and digital design.</p>
+                        </div>
+                    </div>
+                    <div class="framer-bqrfly" data-framer-name="2-col">
+                        <div class="framer-10t8ycb" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                Started in 2012, JARCOS is both a personal experiment and a collaborative platform,
+                                shaped by João’s perspective on design and extended through trusted partners.</p>
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.02em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                <br class="framer-text trailing-break"></p>
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                The practice focuses on brand identities and digital experiences, built through
+                                strategy, storytelling, and craft, in collaboration with global studios and clients
+                                across finance, technology, and consumer sectors.</p>
+                        </div>
+                        <div class="framer-1gqrpkf" data-framer-name="read-full-bio">
+                            <div class="framer-u8adtt" data-framer-name="Read full bio"
+                                data-framer-component-type="RichTextContainer" style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    <a class="framer-text framer-styles-preset-107zmfp" data-styles-preset="lYmM3ANLp"
+                                        href="./bio?ref=land-book.com">Read full bio</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-adveio" data-border="true" data-framer-name="row-info">
+                    <div class="framer-4dnwx1" data-framer-name="4-col">
+                        <div class="framer-13h2p4b" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                Quick links</p>
+                        </div>
+                    </div>
+                    <div class="framer-kdhait" data-framer-name="2-col" style="position: relative;">
+                        <div class="framer-1i1umim" data-framer-name="linkedin">
+                            <div class="framer-1cn4x3k" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    <a class="framer-text framer-styles-preset-107zmfp" data-styles-preset="lYmM3ANLp"
+                                        href="https://linkedin.com/in/jarcoswork" target="_blank"
+                                        rel="noopener">Linkedin</a></p>
+                            </div>
+                        </div>
+                        <div class="framer-a1p0h5" data-framer-name="instagram">
+                            <div class="framer-1nkhhtc" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    <a class="framer-text framer-styles-preset-107zmfp" data-styles-preset="lYmM3ANLp"
+                                        href="https://www.instagram.com/_jarcos/" target="_blank"
+                                        rel="noopener">Instagram</a></p>
+                            </div>
+                        </div>
+                        <div class="framer-1dpgzu6" data-framer-name="savee">
+                            <div class="framer-1xg7yny" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    <a class="framer-text framer-styles-preset-107zmfp" data-styles-preset="lYmM3ANLp"
+                                        href="https://savee.com/jarcoswork" target="_blank" rel="noopener">Savee</a></p>
+                            </div>
+                        </div>
+                        <div class="framer-1yeb8iw" data-framer-name="email">
+                            <div class="framer-11suyqg" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    <a class="framer-text framer-styles-preset-107zmfp" data-styles-preset="lYmM3ANLp"
+                                        href="mailto:hi@jarcos.work" target="_blank" rel="noopener">Email</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="framer-p7d3ld" data-border="true" data-framer-name="row-info">
+                    <div class="framer-1nujtfc hidden-hmzege" data-framer-name="4-col">
+                        <div class="framer-tz4ys5" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-alignment: left; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                © 2026</p>
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-alignment: left; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                <a class="framer-text framer-styles-preset-107zmfp" data-styles-preset="lYmM3ANLp"
+                                    href="https://www.framer.com/" target="_blank" rel="noopener">Powered by Framer</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="framer-1tvpf8i" data-framer-name="2-col">
+                        <div class="framer-kkuw2o" data-framer-component-type="RichTextContainer"
+                            style="transform: none;">
+                            <p class="framer-text"
+                                style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255));">
+                                This is a small selection of my work.</p>
+                        </div>
+                        <div class="framer-1vrd6f9" data-framer-name="2-col">
+                            <div class="framer-4k9dd4" data-framer-component-type="RichTextContainer"
+                                style="transform: none;">
+                                <p class="framer-text"
+                                    style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 1); --framer-font-weight: 600; --framer-letter-spacing: -0.01em; --framer-line-height: 1.3em; --framer-text-color: var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128));">
+                                    <a class="framer-text framer-styles-preset-107zmfp" data-styles-preset="lYmM3ANLp"
+                                        href="mailto:hi@jarcos.work?subject=Request%20for%20Full%20Portfolio&amp;body=Hi%20Jo%C3%A3o%2C%0A%0ACould%20you%20please%20share%20your%20full%20portfolio%3F%0A%0AThank%20you!"
+                                        target="_blank" rel="noopener">A full portfolio upon request</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="framer-yfj2v0 hidden-hmzege" data-framer-name="footer" id="s5"></div>
+            <div class="framer-xg28um-container" data-code-component-plugin-id="84d4c1"></div>
         </div>
-      </div>
+        <div id="overlay"></div>
+        <div class="framer-gaMCG framer-xid29k framer-pointer-events-none framer-v-1flp90q"
+            data-framer-name="informative"
+            style="position: fixed; top: 0px; left: 0px; z-index: 13; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) translateX(833.6px) translateY(175px);">
+            <div class="framer-1v7kpj" data-framer-name="circle"
+                style="background-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255)); border-radius: 1000px; transform: none; transform-origin: 50% 50% 0px; opacity: 1;">
+                <div data-framer-component-type="SVG" data-framer-name="arrow-default" parentsize="0"
+                    _constraints="[object Object]" rotation="0" shadows="" class="framer-boiu92" aria-hidden="true"
+                    style="image-rendering: pixelated; flex-shrink: 0; background-size: 100% 100%; background-image: url(&quot;data:image/svg+xml,&lt;svg xmlns=\&quot;http://www.w3.org/2000/svg\&quot; xmlns:xlink=\&quot;http://www.w3.org/1999/xlink\&quot; viewBox=\&quot;0 0 8.766 8.213\&quot; overflow=\&quot;visible\&quot;&gt;&lt;path d=\&quot;M 4.658 8.213 L 3.803 7.358 L 5.262 5.905 C 5.66 5.506 6.112 5.09 6.539 4.692 C 6.188 4.71 5.819 4.727 5.473 4.727 L 0 4.727 L 0 3.486 L 5.473 3.486 C 5.818 3.486 6.188 3.503 6.533 3.521 C 6.105 3.123 5.66 2.712 5.262 2.314 L 3.802 0.861 L 4.658 0 L 8.766 4.106 Z\&quot; fill=\&quot;rgb(0,0,0)\&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&quot;); transform: none; transform-origin: 50% 50% 0px; opacity: 1;">
+                </div>
+                <div data-framer-component-type="SVG" data-framer-name="arrow-repeat" parentsize="0"
+                    _constraints="[object Object]" rotation="0" shadows="" class="framer-1dr2151" aria-hidden="true"
+                    style="image-rendering: pixelated; flex-shrink: 0; background-size: 100% 100%; background-image: url(&quot;data:image/svg+xml,&lt;svg xmlns=\&quot;http://www.w3.org/2000/svg\&quot; xmlns:xlink=\&quot;http://www.w3.org/1999/xlink\&quot; viewBox=\&quot;0 0 8.766 8.213\&quot; overflow=\&quot;visible\&quot;&gt;&lt;path d=\&quot;M 4.658 8.213 L 3.803 7.358 L 5.262 5.905 C 5.66 5.506 6.112 5.09 6.539 4.692 C 6.188 4.71 5.819 4.727 5.473 4.727 L 0 4.727 L 0 3.486 L 5.473 3.486 C 5.818 3.486 6.188 3.503 6.533 3.521 C 6.105 3.123 5.66 2.712 5.262 2.314 L 3.802 0.861 L 4.658 0 L 8.766 4.106 Z\&quot; fill=\&quot;rgb(0,0,0)\&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&quot;); transform: none; transform-origin: 50% 50% 0px; opacity: 1;">
+                </div>
+            </div>
+            <div class="framer-sp3dp2" data-framer-name="button"
+                style="background-color: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255)); filter: blur(0px); border-radius: 4px; opacity: 1; will-change: transform; transform: none; transform-origin: 50% 50% 0px;">
+                <div class="framer-1n3trcx" data-framer-name="click-default"
+                    data-framer-component-type="RichTextContainer"
+                    style="--extracted-r6o4lv: var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255)); --framer-link-text-color: rgb(0, 153, 255); --framer-link-text-decoration: underline; opacity: 1; transform: translate(-50%, -50%); will-change: transform; transform-origin: 50% 50% 0px;">
+                    <p class="framer-text"
+                        style="--font-selector: RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk; --framer-font-family: &quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif; --framer-font-size: calc(var(--framer-root-font-size, 1rem) * 0.9); --framer-font-weight: 600; --framer-letter-spacing: -0.02em; --framer-line-height: 1em; --framer-text-color: var(--extracted-r6o4lv, var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255)));">
+                        Go on, press it</p>
+                </div>
+            </div>
+        </div>
     </div>
   )
 }
