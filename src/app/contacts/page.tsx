@@ -1,11 +1,9 @@
-import ContactSection from "@/src/components/Contacts/ContactSection"
+import React from 'react'
 
-const ContactsPage = () => {
+const page = () => {
   return (
-    <div className="framer-1gbk15u" data-framer-name="contact">
-      <ContactSection />
-    </div>
+    <div>page</div>
   )
 }
 
-export default ContactsPage
+export default page
