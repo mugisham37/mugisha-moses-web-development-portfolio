@@ -1,9 +1,144 @@
 /* eslint-disable @next/next/no-img-element */
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect } from 'react'
 
 const GridPage = () => {
+  useEffect(() => {
+    // Initialize nested link functionality
+    function initNestedLinks() { 
+      function createLink(href: string, rel: string, target: string) { 
+        const link = document.createElement("a"); 
+        link.href = href; 
+        link.target = target; 
+        link.rel = rel; 
+        document.body.appendChild(link); 
+        link.click(); 
+        link.remove() 
+      } 
+      function handleClick(event: Event) { 
+        const target = event.currentTarget as HTMLElement;
+        if (target.dataset.hydrated) { 
+          target.removeEventListener("click", handleClick); 
+          return 
+        } 
+        event.preventDefault(); 
+        event.stopPropagation(); 
+        const href = target.getAttribute("href"); 
+        if (!href) return; 
+        const mouseEvent = event as MouseEvent;
+        if (/Mac|iPod|iPhone|iPad/u.test(navigator.userAgent) ? mouseEvent.metaKey : mouseEvent.ctrlKey) return createLink(href, "", "_blank"); 
+        const rel = target.getAttribute("rel") ?? ""; 
+        const linkTarget = target.getAttribute("target") ?? ""; 
+        createLink(href, rel, linkTarget) 
+      } 
+      function handleAuxClick(event: Event) { 
+        const target = event.currentTarget as HTMLElement;
+        if (target.dataset.hydrated) { 
+          target.removeEventListener("auxclick", handleAuxClick); 
+          return 
+        } 
+        event.preventDefault(); 
+        event.stopPropagation(); 
+        const href = target.getAttribute("href"); 
+        if (href) createLink(href, "", "_blank") 
+      } 
+      function handleKeyDown(event: KeyboardEvent) { 
+        const target = event.currentTarget as HTMLElement;
+        if (target.dataset.hydrated) { 
+          target.removeEventListener("keydown", handleKeyDown); 
+          return 
+        } 
+        if (event.key !== "Enter") return; 
+        event.preventDefault(); 
+        event.stopPropagation(); 
+        const href = target.getAttribute("href"); 
+        if (!href) return; 
+        const rel = target.getAttribute("rel") ?? ""; 
+        const linkTarget = target.getAttribute("target") ?? ""; 
+        createLink(href, rel, linkTarget) 
+      } 
+      document.querySelectorAll("[data-nested-link]").forEach(element => { 
+        if (element instanceof HTMLElement) {
+          element.addEventListener("click", handleClick); 
+          element.addEventListener("auxclick", handleAuxClick); 
+          element.addEventListener("keydown", handleKeyDown);
+        }
+      }) 
+    }
+    initNestedLinks();
+
+    // Initialize framer breakpoints functionality
+    function initFramerBreakpoints() { 
+      for (const element of document.querySelectorAll("[data-framer-original-sizes]")) { 
+        const sizes = element.getAttribute("data-framer-original-sizes"); 
+        if (sizes === "") {
+          element.removeAttribute("sizes");
+        } else if (sizes) {
+          element.setAttribute("sizes", sizes);
+        }
+        element.removeAttribute("data-framer-original-sizes") 
+      } 
+    } 
+    function setupFrameBreakpoints() { 
+      (window as Window & { __framer_onRewriteBreakpoints?: () => void }).__framer_onRewriteBreakpoints = initFramerBreakpoints 
+    }
+    setupFrameBreakpoints();
+
+    // Initialize parameter preservation
+    (function initParameterPreservation() {
+      const FRAMER_VARIANT = "framer_variant"; 
+      function updateUrl(searchParams: string, url: string) { 
+        const hashIndex = url.indexOf("#");
+        const baseUrl = hashIndex === -1 ? url : url.substring(0, hashIndex);
+        const hash = hashIndex === -1 ? "" : url.substring(hashIndex);
+        const queryIndex = baseUrl.indexOf("?");
+        const path = queryIndex === -1 ? baseUrl : baseUrl.substring(0, queryIndex);
+        const existingQuery = queryIndex === -1 ? "" : baseUrl.substring(queryIndex);
+        const existingParams = new URLSearchParams(existingQuery);
+        const newParams = new URLSearchParams(searchParams); 
+        for (const [key, value] of newParams) {
+          if (!existingParams.has(key) && key !== FRAMER_VARIANT) {
+            existingParams.append(key, value);
+          }
+        }
+        const queryString = existingParams.toString(); 
+        return queryString === "" ? baseUrl + hash : path + "?" + queryString + hash 
+      } 
+      const internalLinks = 'div#main a[href^="#"],div#main a[href^="/"],div#main a[href^="."]';
+      const preserveParamsLinks = "div#main a[data-framer-preserve-params]";
+      const hasPreserveInternalParams = document.currentScript?.hasAttribute("data-preserve-internal-params"); 
+      if (window.location.search && !navigator.webdriver && !/bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(navigator.userAgent)) { 
+        const selector = hasPreserveInternalParams ? `${internalLinks},${preserveParamsLinks}` : preserveParamsLinks;
+        const links = document.querySelectorAll(selector); 
+        for (const link of links) { 
+          const updatedHref = updateUrl(window.location.search, (link as HTMLAnchorElement).href); 
+          link.setAttribute("href", updatedHref) 
+        } 
+      }
+    })();
+
+    // Set process environment
+    if (typeof document !== "undefined") {
+      const globalWindow = window as Window & { 
+        process?: { 
+          env?: Record<string, string> 
+        } 
+      };
+      globalWindow.process = { 
+        ...globalWindow.process, 
+        env: { 
+          ...globalWindow.process?.env, 
+          NODE_ENV: "production" 
+        } 
+      };
+    }
+  }, []);
+
   return (
+    <>
     <div id="main"
       data-framer-hydrate-v2='{"routeId":"fZ1F6lARf","localeId":"default","breakpoints":[{"hash":"psciyp","mediaQuery":"(min-width: 1920px)"},{"hash":"r5jr8i","mediaQuery":"(min-width: 1200px) and (max-width: 1919.98px)"},{"hash":"uo4cln","mediaQuery":"(min-width: 810px) and (max-width: 1199.98px)"},{"hash":"yzu0cc","mediaQuery":"(max-width: 809.98px)"}]}'
       data-framer-ssr-released-at="2025-12-17T18:12:03.442Z" data-framer-page-optimized-at="2025-12-20T02:02:56.359Z"
@@ -579,6 +714,8 @@ const GridPage = () => {
       </div>
       <div id="overlay"></div>
     </div>
+    </>
+    
   )
 }
 
