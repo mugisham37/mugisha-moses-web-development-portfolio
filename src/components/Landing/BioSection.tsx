@@ -2,7 +2,7 @@ import React from 'react'
 
 const BioSection = () => {
   return (
-    <div class="framer-1og42ly" data-framer-name="s4" id="s4">
+    <div className="framer-1og42ly" data-framer-name="s4" id="s4">
                 <div class="framer-10t4omg" data-border="true" data-framer-name="row-info">
                     <div class="framer-1ccomqt" data-framer-name="4-col">
                         <div class="framer-1a97b64" data-framer-component-type="RichTextContainer"
