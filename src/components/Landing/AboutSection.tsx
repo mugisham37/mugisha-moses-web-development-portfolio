@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 const AboutSection = () => {
   return (
@@ -7,7 +8,7 @@ const AboutSection = () => {
                     <div className="framer-hca1ac hidden-yzu0cc" data-framer-appear-id="hca1ac" data-framer-name="intro"
                         style={{opacity: 1, transform: "none", willChange: "transform"}}>
                         <div data-framer-component-type="SVG" data-framer-name="circulo" 
-                            data-constraints="[object Object]" rotation="0" shadows="" className="framer-1e0xilk"
+                            data-constraints="[object Object]" data-rotation="0" data-shadows="" className="framer-1e0xilk"
                             aria-hidden="true" style={{imageRendering: "pixelated", flexShrink: 0}}>
                             <div className="svgContainer" style={{width: "100%", height: "100%", aspectRatio: "inherit"}}><svg
                                     style={{width: "100%", height: "100%"}} preserveAspectRatio="none" width="100%"
@@ -320,44 +321,104 @@ const AboutSection = () => {
                     <div>
                         <div className="images" style={{willChange: "transform"}}>
                             <figure className="image"
-                                style={{transform: "translate3d(calc(-50% + 110.264px), calc(-50% + 110px), 0px)"}}><img
+                                style={{transform: "translate3d(calc(-50% + 110.264px), calc(-50% + 110px), 0px)"}}>
+                                <Image
                                     src="https://framerusercontent.com/images/OpNqpYorhUG8pWySgell0PpV8c.jpg?width=380&amp;height=475"
-                                    alt="Image 1" /></figure>
+                                    alt="Image 1"
+                                    width={380}
+                                    height={475}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
                             <figure className="image"
-                                style={{transform: "translate3d(calc(-50% + 367.064px), calc(-50% - 146px), 0px)"}}><img
+                                style={{transform: "translate3d(calc(-50% + 367.064px), calc(-50% - 146px), 0px)"}}>
+                                <Image
                                     src="https://framerusercontent.com/images/VmUoJMkPIG4aThqkM8TVAeZUsU.jpg?lossless=1&amp;width=295&amp;height=403"
-                                    alt="Image 2" /></figure>
+                                    alt="Image 2"
+                                    width={295}
+                                    height={403}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
                             <figure className="image"
-                                style={{transform: "translate3d(calc(-50% + 578px), calc(-50% + 65.2px), 0px)"}}><img
+                                style={{transform: "translate3d(calc(-50% + 578px), calc(-50% + 65.2px), 0px)"}}>
+                                <Image
                                     src="https://framerusercontent.com/images/uQu6DQzkXrhpmInHT5GCbbPDvDc.jpg?lossless=1&amp;width=380&amp;height=380"
-                                    alt="Image 3" /></figure>
+                                    alt="Image 3"
+                                    width={380}
+                                    height={380}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
                             <figure className="image"
-                                style={{transform: "translate3d(calc(-50% + 506px), calc(-50% + 137px), 0px)"}}><img
+                                style={{transform: "translate3d(calc(-50% + 506px), calc(-50% + 137px), 0px)"}}>
+                                <Image
                                     src="https://framerusercontent.com/images/n2leqDcB18H2WDrxBAfkpCCI6Gs.jpg?lossless=1&amp;width=300&amp;height=421"
-                                    alt="Image 4" /></figure>
+                                    alt="Image 4"
+                                    width={300}
+                                    height={421}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
                             <figure className="image"
-                                style={{transform: "translate3d(calc(-50% + 182.8px), calc(-50% - 185.5px), 0px)"}}><img
+                                style={{transform: "translate3d(calc(-50% + 182.8px), calc(-50% - 185.5px), 0px)"}}>
+                                <Image
                                     src="https://framerusercontent.com/images/I3XMOBBeojE5XVPkj7IUvMPN60.jpg?width=305&amp;height=324"
-                                    alt="Image 5" /></figure>
+                                    alt="Image 5"
+                                    width={305}
+                                    height={324}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
                             <figure className="image"
-                                style={{transform: "translate3d(calc(-50% - 190.8px), calc(-50% + 187.5px), 0px)"}}><img
+                                style={{transform: "translate3d(calc(-50% - 190.8px), calc(-50% + 187.5px), 0px)"}}>
+                                <Image
                                     src="https://framerusercontent.com/images/LYVOwGXgtAy4X1fvMZbu6xnFQ.jpg?width=480&amp;height=320"
-                                    alt="Image 6" /></figure>
+                                    alt="Image 6"
+                                    width={480}
+                                    height={320}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
                             <figure className="image"
-                                style={{transform: "translate3d(calc(-50% - 594px), calc(-50% - 215px), 0px)"}}><img
+                                style={{transform: "translate3d(calc(-50% - 594px), calc(-50% - 215px), 0px)"}}>
+                                <Image
                                     src="https://framerusercontent.com/images/hHUVx4ZLoO0tVwe5jDYuhl6fg.jpg?width=310&amp;height=265"
-                                    alt="Image 7" /></figure>
+                                    alt="Image 7"
+                                    width={310}
+                                    height={265}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
                             <figure className="image"
-                                style={{transform: "translate3d(calc(-50% - 628.5px), calc(-50% - 119.3px), 0px)"}}><img
+                                style={{transform: "translate3d(calc(-50% - 628.5px), calc(-50% - 119.3px), 0px)"}}>
+                                <Image
                                     src="https://framerusercontent.com/images/6dsaHUt8MvA8pTbPOBlsWNX2wk.jpg?width=279&amp;height=386"
-                                    alt="Image 8" /></figure>
+                                    alt="Image 8"
+                                    width={279}
+                                    height={386}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
                             <figure className="image active"
-                                style={{transform: "translate3d(calc(-50% - 148.881px), calc(-50% + 103.1px), 0px)"}}><img
+                                style={{transform: "translate3d(calc(-50% - 148.881px), calc(-50% + 103.1px), 0px)"}}>
+                                <Image
                                     src="https://framerusercontent.com/images/3QKKIBuyN0eUdK5kVK3zg6sCPUQ.jpg?width=380&amp;height=380"
-                                    alt="Image 9" /></figure>
-                            <figure className="image "><img
+                                    alt="Image 9"
+                                    width={380}
+                                    height={380}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
+                            <figure className="image ">
+                                <Image
                                     src="https://framerusercontent.com/images/crS8PMxJNSQdNXiyjPcSw3GaGI.jpg?width=312&amp;height=427"
-                                    alt="Image 10" /></figure>
+                                    alt="Image 10"
+                                    width={312}
+                                    height={427}
+                                    style={{width: "auto", height: "auto", maxWidth: "90vw", maxHeight: "90vh", objectFit: "contain"}}
+                                />
+                            </figure>
                         </div>
                         <div className="images-clones"></div>
                     </div>
@@ -402,10 +463,14 @@ const AboutSection = () => {
                 <div className="framer-1n06ufa-container" data-framer-name="jarcologo" id="jarcofooter"
                     style={{willChange: "transform", opacity: 0, transform: "translateX(-50%)"}}>
                     <div style={{display: "flex", placeContent: "center", placeItems: "center", width: "100%", height: "100%", padding: "0"}}>
-                        <img style={{maxWidth: "100%", maxHeight: "100%", borderRadius: "0", WebkitUserDrag: "none", userSelect: "none"}}
+                        <Image 
+                            style={{maxWidth: "100%", maxHeight: "100%", borderRadius: "0", userSelect: "none"}}
                             src="https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?width=2800&amp;height=553"
-                            srcSet="https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?scale-down-to=512&amp;width=2800&amp;height=553 512w,https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?scale-down-to=1024&amp;width=2800&amp;height=553 1024w,https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?scale-down-to=2048&amp;width=2800&amp;height=553 2048w,https://framerusercontent.com/images/oiWH6A3MxmoQr7WHIVDAhm2w5oM.svg?width=2800&amp;height=553 2800w"
-                            alt="" />
+                            alt=""
+                            width={2800}
+                            height={553}
+                            sizes="(max-width: 512px) 512px, (max-width: 1024px) 1024px, (max-width: 2048px) 2048px, 2800px"
+                        />
                         <div style={{position: "absolute", inset: "0", pointerEvents: "none", borderRadius: "0"}}></div>
                     </div>
                 </div>
