@@ -1,4 +1,6 @@
 import React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 
 const page = () => {
   return (
@@ -40,15 +42,16 @@ const page = () => {
                 <div className="framer-g3cvab" data-framer-name="nav">
                     <div className="framer-1aioayl hidden-120xsh4" data-framer-appear-id="1aioayl" data-framer-name="logo"
                         style={{opacity: 1, transform: 'none', willChange: 'transform'}}>
-                        <div className="framer-1ofzk1z-container" id="logo-nav"><a href="/?ref=land-book.com" title=""
-                                target="_self"
-                                style={{display: 'flex', placeContent: 'center', placeItems: 'center', width: '100%', height: '100%', padding: '0px'}}><img
+                        <div className="framer-1ofzk1z-container" id="logo-nav"><Link href="/?ref=land-book.com" title=""
+                                style={{display: 'flex', placeContent: 'center', placeItems: 'center', width: '100%', height: '100%', padding: '0px'}}><Image
                                     src="https://framerusercontent.com/images/D2ewTLV8miOQ39l8w4yRHAeWc.svg?width=76&amp;height=16"
                                     alt=""
-                                    style={{maxWidth: '100%', maxHeight: '100%', borderRadius: '0px', WebkitUserDrag: 'none', userSelect: 'none'}} />
+                                    width={76}
+                                    height={16}
+                                    style={{maxWidth: '100%', maxHeight: '100%', borderRadius: '0px', WebkitUserDrag: 'none', userSelect: 'none'} as React.CSSProperties} />
                                 <div style={{position: 'absolute', inset: '0px', pointerEvents: 'none', borderRadius: '0px'}}>
                                 </div>
-                            </a></div>
+                            </Link></div>
                     </div>
                     <div className="framer-19bbbnz" data-framer-name="nav" style={{position: 'relative'}}>
                         <div className="framer-1115hq4" data-framer-appear-id="1115hq4" data-framer-name="index"
@@ -56,9 +59,9 @@ const page = () => {
                             <div className="framer-iie8j1" data-framer-component-type="RichTextContainer"
                                 style={{transform: 'none'}}>
                                 <p className="framer-text"
-                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))"}}>
-                                    <a className="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
-                                        href="./?ref=land-book.com">Index</a></p>
+                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))"} as React.CSSProperties}>
+                                    <Link className="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
+                                        href="/?ref=land-book.com">Index</Link></p>
                             </div>
                         </div>
                         <div className="framer-7hpm39" data-framer-appear-id="7hpm39" data-framer-name="work"
@@ -66,9 +69,9 @@ const page = () => {
                             <div className="framer-1ijw6xt" data-framer-component-type="RichTextContainer"
                                 style={{transform: 'none'}}>
                                 <p className="framer-text"
-                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))"}}>
-                                    <a className="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
-                                        href="./work?ref=land-book.com">Work</a></p>
+                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))"} as React.CSSProperties}>
+                                    <Link className="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
+                                        href="/work?ref=land-book.com">Work</Link></p>
                             </div>
                         </div>
                         <div className="framer-9aspnm" data-framer-appear-id="9aspnm" data-framer-name="grid"
@@ -76,9 +79,9 @@ const page = () => {
                             <div className="framer-13p1gpc" data-framer-component-type="RichTextContainer"
                                 style={{transform: 'none'}}>
                                 <p className="framer-text"
-                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))"}}>
-                                    <a className="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
-                                        href="./grid?ref=land-book.com">Grid</a></p>
+                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))"} as React.CSSProperties}>
+                                    <Link className="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
+                                        href="/grid?ref=land-book.com">Grid</Link></p>
                             </div>
                         </div>
                         <div className="framer-oqacpj" data-framer-appear-id="oqacpj" data-framer-name="inquiries"
@@ -86,10 +89,10 @@ const page = () => {
                             <div className="framer-40nqxq" data-framer-component-type="RichTextContainer"
                                 style={{transform: 'none'}}>
                                 <p className="framer-text"
-                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))"}}>
-                                    <a className="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
-                                        href="./contact?ref=land-book.com"
-                                        data-framer-page-link-current="true">Inquiries</a></p>
+                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))"} as React.CSSProperties}>
+                                    <Link className="framer-text framer-styles-preset-2iafg6" data-styles-preset="pHGd88_IS"
+                                        href="/contacts?ref=land-book.com"
+                                        data-framer-page-link-current="true">Inquiries</Link></p>
                             </div>
                         </div>
                     </div>
@@ -99,7 +102,7 @@ const page = () => {
                             <div className="framer-1qc9snx" data-framer-component-type="RichTextContainer"
                                 style={{transform: 'none'}}>
                                 <p className="framer-text"
-                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"}}>
+                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"} as React.CSSProperties}>
                                     Guarulhos</p>
                             </div>
                             <div className="framer-1f8jasp-container">
@@ -119,7 +122,7 @@ const page = () => {
                                         <div className="framer-1z0cglv" data-framer-component-type="RichTextContainer"
                                             style={{transform: 'none'}}>
                                             <p className="framer-text"
-                                                style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"}}>
+                                                style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"} as React.CSSProperties}>
                                                 Quick links</p>
                                         </div>
                                         <div className="framer-1uqgnsw" data-framer-name="2-col"
@@ -129,7 +132,7 @@ const page = () => {
                                                     data-framer-component-type="RichTextContainer"
                                                     style={{transform: 'none'}}>
                                                     <p className="framer-text"
-                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"}}>
+                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"} as React.CSSProperties}>
                                                         <a className="framer-text framer-styles-preset-107zmfp"
                                                             data-styles-preset="lYmM3ANLp"
                                                             href="https://savee.com/jarcoswork" target="_blank"
@@ -141,7 +144,7 @@ const page = () => {
                                                     data-framer-component-type="RichTextContainer"
                                                     style={{transform: 'none'}}>
                                                     <p className="framer-text"
-                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"}}>
+                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"} as React.CSSProperties}>
                                                         <a className="framer-text framer-styles-preset-107zmfp"
                                                             data-styles-preset="lYmM3ANLp"
                                                             href="https://savee.com/jarcoswork" target="_blank"
@@ -153,7 +156,7 @@ const page = () => {
                                                     data-framer-component-type="RichTextContainer"
                                                     style={{transform: 'none'}}>
                                                     <p className="framer-text"
-                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"}}>
+                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"} as React.CSSProperties}>
                                                         <a className="framer-text framer-styles-preset-107zmfp"
                                                             data-styles-preset="lYmM3ANLp"
                                                             href="https://savee.com/jarcoswork" target="_blank"
@@ -165,7 +168,7 @@ const page = () => {
                                                     data-framer-component-type="RichTextContainer"
                                                     style={{transform: 'none'}}>
                                                     <p className="framer-text"
-                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"}}>
+                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"} as React.CSSProperties}>
                                                         <a className="framer-text framer-styles-preset-107zmfp"
                                                             data-styles-preset="lYmM3ANLp"
                                                             href="https://savee.com/jarcoswork" target="_blank"
@@ -178,7 +181,7 @@ const page = () => {
                                         <div className="framer-siud76" data-framer-component-type="RichTextContainer"
                                             style={{transform: 'none'}}>
                                             <p className="framer-text"
-                                                style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"}}>
+                                                style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"} as React.CSSProperties}>
                                                 Info</p>
                                         </div>
                                         <div className="framer-dg0v0w" data-framer-name="2-col" style={{position: 'relative'}}>
@@ -187,7 +190,7 @@ const page = () => {
                                                     data-framer-component-type="RichTextContainer"
                                                     style={{transform: 'none'}}>
                                                     <p className="framer-text"
-                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"}}>
+                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"} as React.CSSProperties}>
                                                         <a className="framer-text framer-styles-preset-107zmfp"
                                                             data-styles-preset="lYmM3ANLp" href="mailto:hi@jarcos.work"
                                                             target="_blank" rel="noopener">hi@jarcos.work</a></p>
@@ -198,7 +201,7 @@ const page = () => {
                                                     data-framer-component-type="RichTextContainer"
                                                     style={{transform: 'none'}}>
                                                     <p className="framer-text"
-                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"}}>
+                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"} as React.CSSProperties}>
                                                         <a className="framer-text framer-styles-preset-107zmfp"
                                                             data-styles-preset="lYmM3ANLp"
                                                             href="https://wa.me/5511948742029" target="_blank"
@@ -210,7 +213,7 @@ const page = () => {
                                                     data-framer-component-type="RichTextContainer"
                                                     style={{transform: 'none'}}>
                                                     <p className="framer-text"
-                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"}}>
+                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"} as React.CSSProperties}>
                                                         Brasil</p>
                                                 </div>
                                             </div>
@@ -226,13 +229,13 @@ const page = () => {
                                 <div className="framer-4h3v81" data-framer-component-type="RichTextContainer"
                                     style={{transform: 'none'}}>
                                     <p className="framer-text"
-                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"}}>
+                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-line-height": "1.3em", "--framer-text-color": "var(--token-ca6856c1-9c1c-4bdc-8dc5-6eb703253edf, rgb(128, 128, 128))"} as React.CSSProperties}>
                                         <span className="framer-text"
-                                            style={{"--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"}}>Drop
+                                            style={{"--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"} as React.CSSProperties}>Drop
                                             me a line</span><span className="framer-text"
-                                            style={{"--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"}}><br
-                                                className="framer-text" /></span><br className="framer-text" />Whether it's a
-                                        project, a collaboration, or just a question - don't be shy. I'm an introvert
+                                            style={{"--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"} as React.CSSProperties}><br
+                                                className="framer-text" /></span><br className="framer-text" />Whether it&apos;s a
+                                        project, a collaboration, or just a question - don&apos;t be shy. I&apos;m an introvert
                                         too, so I get it.</p>
                                 </div>
                             </div>
@@ -242,7 +245,7 @@ const page = () => {
                                             <div className="framer-139tdbv" data-framer-component-type="RichTextContainer"
                                                 style={{transform: 'none'}}>
                                                 <p className="framer-text"
-                                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"}}>
+                                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"} as React.CSSProperties}>
                                                     Name</p>
                                             </div>
                                             <div
@@ -253,7 +256,7 @@ const page = () => {
                                             <div className="framer-1clrhke" data-framer-component-type="RichTextContainer"
                                                 style={{transform: 'none'}}>
                                                 <p className="framer-text"
-                                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"}}>
+                                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"} as React.CSSProperties}>
                                                     And your email so I can get back to you?</p>
                                             </div>
                                             <div
@@ -265,7 +268,7 @@ const page = () => {
                                             <div className="framer-4u9chn" data-framer-component-type="RichTextContainer"
                                                 style={{transform: 'none'}}>
                                                 <p className="framer-text"
-                                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"}}>
+                                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"} as React.CSSProperties}>
                                                     How did you hear of me?</p>
                                             </div>
                                             <div
@@ -277,7 +280,7 @@ const page = () => {
                                             <div className="framer-j0o7qy" data-framer-component-type="RichTextContainer"
                                                 style={{transform: 'none'}}>
                                                 <p className="framer-text"
-                                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"}}>
+                                                    style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-letter-spacing": "-0.01em", "--framer-text-color": "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))"} as React.CSSProperties}>
                                                     Briefly, tell me about your project</p>
                                             </div>
                                             <div className="framer-form-text-input framer-form-input-wrapper framer-wonap7">
@@ -287,81 +290,79 @@ const page = () => {
                                     <div className="framer-6sebq0" id="button-1">
                                         <div className="framer-1c6yq4q-container" data-framer-cursor="bg41hh"><button
                                                 type="submit" className="framer-jL7A5 framer-14totus framer-v-14totus"
-                                                data-framer-name="Default" data-reset="button" tabIndex="0"
-                                                style={{"--border-bottom-width": "0px", "--border-color": "rgba(0, 0, 0, 0)", "--border-left-width": "0px", "--border-right-width": "0px", "--border-style": "solid", "--border-top-width": "0px", backgroundColor: "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))", borderBottomLeftRadius: "100px", borderBottomRightRadius: "100px", borderTopLeftRadius: "100px", borderTopRightRadius: "100px"}}>
+                                                data-framer-name="Default" data-reset="button" tabIndex={0}
+                                                style={{"--border-bottom-width": "0px", "--border-color": "rgba(0, 0, 0, 0)", "--border-left-width": "0px", "--border-right-width": "0px", "--border-style": "solid", "--border-top-width": "0px", backgroundColor: "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))", borderBottomLeftRadius: "100px", borderBottomRightRadius: "100px", borderTopLeftRadius: "100px", borderTopRightRadius: "100px"} as React.CSSProperties}>
                                                 <div className="framer-7jl4bu" data-framer-name="hover-fill"
                                                     style={{backgroundColor: "var(--token-64b44c9e-f906-49a8-a483-76d5dcfb3f62, rgb(255, 255, 255))", filter: "blur(10px)", opacity: 1}}>
                                                 </div>
                                                 <div className="framer-1eccll2"
                                                     data-framer-component-type="RichTextContainer"
-                                                    style={{"--extracted-r6o4lv": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", filter: "blur(2px)", opacity: 0, transform: "translateY(-50%)"}}>
+                                                    style={{"--extracted-r6o4lv": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", filter: "blur(2px)", opacity: 0, transform: "translateY(-50%)"} as React.CSSProperties}>
                                                     <p className="framer-text"
-                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0)))"}}>
-                                                        Sent! I'll follow up with you soon</p>
+                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0)))"} as React.CSSProperties}>
+                                                        Sent! I&apos;ll follow up with you soon</p>
                                                 </div>
                                                 <div className="framer-rcjigl"
                                                     data-framer-component-type="RichTextContainer"
-                                                    style={{"--extracted-r6o4lv": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", opacity: 1, transform: "translateY(-50%)"}}>
+                                                    style={{"--extracted-r6o4lv": "var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", opacity: 1, transform: "translateY(-50%)"} as React.CSSProperties}>
                                                     <p className="framer-text"
-                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0)))"}}>
+                                                        style={{"--font-selector": "RlI7SW50ZXJEaXNwbGF5LVNlbWlCb2xk", "--framer-font-family": '"Inter Display", "Inter Display Placeholder", sans-serif', "--framer-font-size": "calc(var(--framer-root-font-size, 1rem) * 1)", "--framer-font-weight": "600", "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5758eb25-99c7-4121-a1bc-2d5bdc7fa748, rgb(0, 0, 0)))"} as React.CSSProperties}>
                                                         Send message</p>
                                                 </div>
                                                 <div className="framer-pfvpuo" data-framer-name="arrow-right"
                                                     style={{transform: "translateY(-50%)", opacity: 1}}>
                                                     <div data-framer-component-type="SVG" data-framer-name="arrow-hover"
-                                                        parentsize="0" _constraints="[object Object]" rotation="0"
-                                                        shadows="" className="framer-xwy19m" aria-hidden="true"
+                                                        {...{"parentsize": "0", "_constraints": "[object Object]", "rotation": "0", "shadows": ""}} className="framer-xwy19m" aria-hidden="true"
                                                         style={{imageRendering: "pixelated", flexShrink: 0, backgroundSize: "100% 100%", backgroundImage: 'url("data:image/svg+xml,<svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" viewBox=\\"0 0 8.766 8.213\\" overflow=\\"visible\\"><path d=\\"M 4.658 8.213 L 3.803 7.358 L 5.262 5.905 C 5.66 5.506 6.112 5.09 6.539 4.692 C 6.188 4.71 5.819 4.727 5.473 4.727 L 0 4.727 L 0 3.486 L 5.473 3.486 C 5.818 3.486 6.188 3.503 6.533 3.521 C 6.105 3.123 5.66 2.712 5.262 2.314 L 3.802 0.861 L 4.658 0 L 8.766 4.106 Z\\" fill=\\"rgb(0,0,0)\\"></path></svg>")', opacity: 1}}>
                                                     </div>
                                                     <div data-framer-component-type="SVG"
-                                                        data-framer-name="arrow-default" parentsize="0"
-                                                        _constraints="[object Object]" rotation="0" shadows=""
+                                                        data-framer-name="arrow-default" {...{"parentsize": "0", "_constraints": "[object Object]", "rotation": "0", "shadows": ""}}
                                                         className="framer-1d0kro7" aria-hidden="true"
                                                         style={{imageRendering: "pixelated", flexShrink: 0, backgroundSize: "100% 100%", backgroundImage: 'url("data:image/svg+xml,<svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" viewBox=\\"0 0 8.766 8.213\\" overflow=\\"visible\\"><path d=\\"M 4.658 8.213 L 3.803 7.358 L 5.262 5.905 C 5.66 5.506 6.112 5.09 6.539 4.692 C 6.188 4.71 5.819 4.727 5.473 4.727 L 0 4.727 L 0 3.486 L 5.473 3.486 C 5.818 3.486 6.188 3.503 6.533 3.521 C 6.105 3.123 5.66 2.712 5.262 2.314 L 3.802 0.861 L 4.658 0 L 8.766 4.106 Z\\" fill=\\"rgb(0,0,0)\\"></path></svg>")', opacity: 1}}>
                                                     </div>
                                                 </div>
                                             </button></div>
-                                    </div><input type="text" name="website" tabIndex="-1" autoComplete="one-time-code"
+                                    </div><input type="text" name="website" tabIndex={-1} autoComplete="one-time-code"
                                         aria-hidden="true" data-1p-ignore="true" data-lpignore="true"
                                         data-form-type="other" data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text"
-                                        name="company" tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        name="company" tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text"
-                                        name="message" tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        name="message" tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text"
-                                        name="subject" tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        name="subject" tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text" name="title"
-                                        tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text"
-                                        name="description" tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        name="description" tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text"
-                                        name="feedback" tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        name="feedback" tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text" name="notes"
-                                        tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text"
-                                        name="details" tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        name="details" tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text"
-                                        name="remarks" tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        name="remarks" tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value=""
                                         style={{position: "absolute", transform: "scale(0)"}} /><input type="text"
-                                        name="comments" tabIndex="-1" autoComplete="one-time-code" aria-hidden="true"
+                                        name="comments" tabIndex={-1} autoComplete="one-time-code" aria-hidden="true"
                                         data-1p-ignore="true" data-lpignore="true" data-form-type="other"
                                         data-bwignore="true" value="" style={{position: "absolute", transform: "scale(0)"}} />
                                 </form>
@@ -374,4 +375,8 @@ const page = () => {
         </div>
         <div id="overlay"></div>
     </div>
-    <script dangerouslySetInnerHTML
+    </>
+  )
+}
+
+export default page
