@@ -3,7 +3,14 @@ const page = () => {
   return (
     <div data-framer-root="" className="framer-dWn3f framer-72rtr7"
       style={{ minHeight: "100vh", width: "auto", display: "contents" }}>
-      <div className="framer-1lw7frw-container">
+      <div className="framer-1lw7frw-container" style={{
+        order: 1,
+        flex: "none",
+        width: "100%",
+        height: "98vh",
+        position: "relative",
+        marginBottom: "20px"
+      } as React.CSSProperties}>
         <div className="framer-vm656 framer-ot9dfq framer-v-z0mcsa" data-framer-name="Phone"
           style={{ width: "100%", opacity: 1 }}>
           <div className="framer-1jf8nol-container" data-framer-name="Image Reel"

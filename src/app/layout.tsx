@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./page-fix.css";
 import Script from "next/script";
 import Footer from "../components/footer";
 import Navbar from '../components/navbar'
@@ -66,7 +65,13 @@ export default function RootLayout({
           data-framer-generated-page="">
           {/* $*/}
           <div className="framer-DpqqR framer-10mb1y6" data-layout-template="true"
-            style={{ minHeight: "100vh", width: "auto" }}>
+            style={{ 
+              minHeight: "100vh", 
+              width: "auto",
+              overflow: "visible",
+              height: "auto",
+              alignItems: "flex-start"
+            }}>
             <div className="ssr-variant hidden-hfs46s hidden-10mb1y6">
               <main className="framer-966u9a" data-framer-name="Left section" data-hide-scrollbars="true">
                 <div className="framer-agc1gp" data-framer-name="Container">

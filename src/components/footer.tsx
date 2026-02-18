@@ -2,8 +2,18 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <div className="ssr-variant hidden-hfs46s hidden-10mb1y6">
-            <div className="framer-1uflfkc-container">
+        <div className="ssr-variant hidden-hfs46s hidden-10mb1y6" style={{ 
+            display: "block", 
+            position: "relative", 
+            width: "100%", 
+            order: 1002,
+            flex: "none"
+        } as React.CSSProperties}>
+            <div className="framer-1uflfkc-container" style={{
+                position: "relative",
+                width: "100%",
+                order: 1002
+            } as React.CSSProperties}>
                 <footer className="framer-ikq6M framer-M4SXU framer-E4PKR framer-3Wby5 framer-x3qah6 framer-v-1wtjzwr"
                     data-framer-name="Footer Small" style={{ "width": "100%", "opacity": "1" } as React.CSSProperties}>
                     <div className="framer-1lu5t8w" data-border="true" data-framer-name="Contact"
