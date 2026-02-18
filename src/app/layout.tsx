@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
 import Footer from "../components/footer";
-import Navbar from '../components/navbar'
-import Bio from '../components/bio'
-import Main from '../components/main'
 
 export const metadata: Metadata = {
   title: "Imagen Website Template",
@@ -39,9 +36,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  sidebar,
+  content,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+  sidebar: React.ReactNode;
+  content: React.ReactNode;
+}>){
   return (
     <html lang="en">
       <head>
@@ -72,16 +73,8 @@ export default function RootLayout({
               height: "auto",
               alignItems: "flex-start"
             }}>
-            <div className="ssr-variant hidden-hfs46s hidden-10mb1y6">
-              <main className="framer-966u9a" data-framer-name="Left section" data-hide-scrollbars="true">
-                <div className="framer-agc1gp" data-framer-name="Container">
-                  <Navbar />
-                  <Bio />
-                  <Main />
-                </div>
-              </main>
-            </div>
-            {children}
+            {sidebar}
+            {content}
             <div id="overlay"></div>
             <div className="framer-c5x4tb"></div>
             <Footer />

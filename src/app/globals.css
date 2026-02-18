@@ -3788,29 +3788,32 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   gap: 0;
   width: 100%;
   height: min-content;
-  padding: 0 0 0 358px;
-  display: flex;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 358px 1fr;
+  grid-template-areas: "sidebar content";
   position: relative;
-  overflow: hidden
+  overflow: visible
 }
 
 .framer-DpqqR .framer-966u9a {
-  height: calc(min(var(--framer-viewport-height, 100vh), 100%)*1);
-  position: var(--framer-canvas-fixed-position, fixed);
+  grid-area: sidebar;
+  height: 100vh;
+  position: sticky;
   left: 0;
-  top: calc(min(var(--framer-viewport-height, 100%), 100%)*.5);
+  top: 0;
   z-index: 1;
   flex-flow: row;
   flex: none;
-  order: -1000;
   place-content: flex-start;
   align-items: flex-start;
   gap: 12px;
-  width: min-content;
+  width: 358px;
   padding: 12px 6px 0 12px;
   display: flex;
-  overflow: auto;
-  transform: translateY(-50%)
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: none
 }
 
 .framer-DpqqR .framer-agc1gp {
@@ -3827,6 +3830,13 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   position: sticky;
   top: 0;
   overflow: visible
+}
+
+/* Content area styling */
+.framer-DpqqR > div[data-framer-root] {
+  grid-area: content;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .framer-DpqqR .framer-zp3z1x-container,
@@ -3911,23 +3921,24 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   .framer-DpqqR.framer-10mb1y6 {
     align-content: center;
     align-items: center;
-    padding: 0
+    padding: 0;
+    grid-template-columns: 300px 1fr;
   }
 
   .framer-DpqqR .framer-966u9a {
-    height: min-content;
+    height: 100vh;
     left: unset;
-    max-width: 810px;
-    top: unset;
-    transform: unset;
-    width: 100%;
+    max-width: 300px;
+    top: 0;
+    transform: none;
+    width: 300px;
     padding: 12px 12px 0;
-    position: relative
+    position: sticky;
   }
 
   .framer-DpqqR .framer-agc1gp {
     flex: 1 0 0;
-    width: 1px
+    width: 100%;
   }
 
   .framer-DpqqR .framer-zp3z1x-container,
@@ -3937,7 +3948,7 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
 
   .framer-DpqqR .framer-1v25llz-container,
   .framer-DpqqR .framer-1uflfkc-container {
-    max-width: 810px
+    max-width: 100%;
   }
 }
 
@@ -3945,24 +3956,28 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   .framer-DpqqR.framer-10mb1y6 {
     align-content: center;
     align-items: center;
-    padding: 0
+    padding: 0;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "sidebar"
+      "content";
   }
 
   .framer-DpqqR .framer-966u9a {
-    height: min-content;
+    height: auto;
     left: unset;
     top: unset;
-    transform: unset;
+    transform: none;
     width: 100%;
     padding: 12px 12px 0;
-    position: relative
+    position: relative;
   }
 
   .framer-DpqqR .framer-agc1gp {
     top: unset;
     flex: 1 0 0;
-    width: 1px;
-    position: relative
+    width: 100%;
+    position: relative;
   }
 
   .framer-DpqqR .framer-zp3z1x-container,

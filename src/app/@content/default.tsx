@@ -1,5 +1,7 @@
 import React from 'react'
-const page = () => {
+
+// Default content fallback - shows home content
+const DefaultContent = () => {
   return (
     <div data-framer-root="" className="framer-dWn3f framer-72rtr7"
       style={{ minHeight: "100vh", width: "auto", display: "contents" }}>
@@ -50,4 +52,4 @@ const page = () => {
   )
 }
 
-export default page
+export default DefaultContent

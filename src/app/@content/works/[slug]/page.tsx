@@ -1,6 +1,7 @@
 import React from 'react'
 
-const page = () => {
+// Work detail content - shows the work details
+const WorkDetailContent = () => {
     return (
         <div data-framer-root="" className="framer-zGXrh framer-3Wby5 framer-LHxgI framer-kppm2p"
             style={{ minHeight: '100vh', width: 'auto', display: 'contents' }}>
@@ -148,4 +149,4 @@ const page = () => {
     )
 }
 
-export default page
+export default WorkDetailContent
