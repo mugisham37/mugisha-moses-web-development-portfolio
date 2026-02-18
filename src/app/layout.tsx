@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
-import Footer from "../components/footer";
 
 export const metadata: Metadata = {
   title: "Imagen Website Template",
@@ -76,8 +75,6 @@ export default function RootLayout({
             {sidebar}
             {content}
             <div id="overlay"></div>
-            <div className="framer-c5x4tb"></div>
-            <Footer />
           </div>
           <div id="template-overlay"></div>
           {/* /$*/}

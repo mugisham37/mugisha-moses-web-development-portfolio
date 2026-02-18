@@ -15,7 +15,7 @@ const navbar = () => {
                                 data-styles-preset="oFmnpzi_h"
                                 style={{ '--framer-text-color': 'var(--extracted-r6o4lv, var(--token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad, rgb(133, 133, 133)))' } as React.CSSProperties}>
                                 <a className="framer-text framer-styles-preset-1wicq5s"
-                                    data-styles-preset="ro7OPezbn" href="./"
+                                    data-styles-preset="ro7OPezbn" href="/"
                                     data-framer-page-link-current="true">Home</a></p>
                         </div>
                         <div className="framer-1ru0n5c" data-framer-name="Text"
@@ -25,7 +25,7 @@ const navbar = () => {
                                 data-styles-preset="oFmnpzi_h"
                                 style={{ '--framer-text-color': 'var(--extracted-r6o4lv, var(--token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad, rgb(133, 133, 133)))' } as React.CSSProperties}>
                                 <a className="framer-text framer-styles-preset-1wicq5s"
-                                    data-styles-preset="ro7OPezbn" href="./about-me">About me</a></p>
+                                    data-styles-preset="ro7OPezbn" href="/about-me">About me</a></p>
                         </div>
                     </div>
                     <div className="framer-1te8jbc-container" style={{ opacity: 1 }}>
@@ -59,7 +59,7 @@ const navbar = () => {
                             data-framer-name="Primary"
                             style={{ backgroundColor: 'var(--token-1b643c06-7077-4640-a4e0-f80d2586db4b, rgba(255, 255, 255, 0))', height: '100%', borderRadius: '10px', opacity: 1 }}>
                             <a className="framer-15bg04t framer-lqpu31" data-framer-name="Button"
-                                href="./contact"
+                                href="/contact"
                                 style={{ backgroundColor: 'var(--token-41b4cf43-af77-4c56-83e3-6ebd53762080, rgb(39, 39, 42))', borderRadius: '8px', boxShadow: 'rgba(107, 100, 100, 0.1) 0px 1px 3px 0px', opacity: 1 }}>
                                 <div className="framer-kn4tkw" data-framer-name="Text"
                                     data-framer-component-type="RichTextContainer"

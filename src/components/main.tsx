@@ -58,7 +58,7 @@ const main = () => {
                             style={{ width: "100%", borderRadius: "14px", opacity: "1" }}><a
                                 className="framer-3jgq1s framer-irm3n9" data-border="true"
                                 data-framer-name="Card/Project"
-                                href="./works/bookease-copy#work-details"
+                                href="/works/bookease-copy#work-details"
                                 style={{ "--border-bottom-width": "1px", "--border-color": "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))", "--border-left-width": "1px", "--border-right-width": "1px", "--border-style": "solid", "--border-top-width": "1px", backgroundColor: "var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247))", borderRadius: "11.5px", opacity: "1" }}>
                                 <div className="framer-q9yaf3" data-framer-name="Container"
                                     style={{ opacity: "1" }}>
@@ -100,7 +100,7 @@ const main = () => {
                             data-framer-name="Mobile" data-highlight="true" tabIndex={0}
                             style={{ width: "100%", borderRadius: "14px", opacity: "1" }}><a
                                 className="framer-3jgq1s framer-irm3n9" data-border="true"
-                                data-framer-name="Card/Project" href="./works/produli#work-details"
+                                data-framer-name="Card/Project" href="/works/produli#work-details"
                                 style={{ "--border-bottom-width": "1px", "--border-color": "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))", "--border-left-width": "1px", "--border-right-width": "1px", "--border-style": "solid", "--border-top-width": "1px", backgroundColor: "var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247))", borderRadius: "11.5px", opacity: "1" }}>
                                 <div className="framer-q9yaf3" data-framer-name="Container"
                                     style={{ opacity: "1" }}>
@@ -141,7 +141,7 @@ const main = () => {
                             data-framer-name="Mobile" data-highlight="true" tabIndex={0}
                             style={{ width: "100%", borderRadius: "14px", opacity: "1" }}><a
                                 className="framer-3jgq1s framer-irm3n9" data-border="true"
-                                data-framer-name="Card/Project" href="./works/travelease#work-details"
+                                data-framer-name="Card/Project" href="/works/travelease#work-details"
                                 style={{ "--border-bottom-width": "1px", "--border-color": "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))", "--border-left-width": "1px", "--border-right-width": "1px", "--border-style": "solid", "--border-top-width": "1px", backgroundColor: "var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247))", borderRadius: "11.5px", opacity: "1" }}>
                                 <div className="framer-q9yaf3" data-framer-name="Container"
                                     style={{ opacity: "1" }}>
@@ -182,7 +182,7 @@ const main = () => {
                             data-framer-name="Mobile" data-highlight="true" tabIndex={0}
                             style={{ width: "100%", borderRadius: "14px", opacity: "1" }}><a
                                 className="framer-3jgq1s framer-irm3n9" data-border="true"
-                                data-framer-name="Card/Project" href="./works/edukids#work-details"
+                                data-framer-name="Card/Project" href="/works/edukids#work-details"
                                 style={{ "--border-bottom-width": "1px", "--border-color": "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))", "--border-left-width": "1px", "--border-right-width": "1px", "--border-style": "solid", "--border-top-width": "1px", backgroundColor: "var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247))", borderRadius: "11.5px", opacity: "1" }}>
                                 <div className="framer-q9yaf3" data-framer-name="Container"
                                     style={{ opacity: "1" }}>
@@ -224,7 +224,7 @@ const main = () => {
                             data-framer-name="Mobile" data-highlight="true" tabIndex={0}
                             style={{ width: "100%", borderRadius: "14px", opacity: "1" }}><a
                                 className="framer-3jgq1s framer-irm3n9" data-border="true"
-                                data-framer-name="Card/Project" href="./works/fitbod#work-details"
+                                data-framer-name="Card/Project" href="/works/fitbod#work-details"
                                 style={{ "--border-bottom-width": "1px", "--border-color": "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))", "--border-left-width": "1px", "--border-right-width": "1px", "--border-style": "solid", "--border-top-width": "1px", backgroundColor: "var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247))", borderRadius: "11.5px", opacity: "1" }}>
                                 <div className="framer-q9yaf3" data-framer-name="Container"
                                     style={{ opacity: "1" }}>
@@ -265,7 +265,7 @@ const main = () => {
                             data-framer-name="Mobile" data-highlight="true" tabIndex={0}
                             style={{ width: "100%", borderRadius: "14px", opacity: "1" }}><a
                                 className="framer-3jgq1s framer-irm3n9" data-border="true"
-                                data-framer-name="Card/Project" href="./works/photomingle#work-details"
+                                data-framer-name="Card/Project" href="/works/photomingle#work-details"
                                 style={{ "--border-bottom-width": "1px", "--border-color": "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))", "--border-left-width": "1px", "--border-right-width": "1px", "--border-style": "solid", "--border-top-width": "1px", backgroundColor: "var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247))", borderRadius: "11.5px", opacity: "1" }}>
                                 <div className="framer-q9yaf3" data-framer-name="Container"
                                     style={{ opacity: "1" }}>
@@ -308,7 +308,7 @@ const main = () => {
                             style={{ width: "100%", borderRadius: "14px", opacity: "1" }}><a
                                 className="framer-3jgq1s framer-irm3n9" data-border="true"
                                 data-framer-name="Card/Project"
-                                href="./works/bookease-branding#work-details"
+                                href="/works/bookease-branding#work-details"
                                 style={{ "--border-bottom-width": "1px", "--border-color": "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))", "--border-left-width": "1px", "--border-right-width": "1px", "--border-style": "solid", "--border-top-width": "1px", backgroundColor: "var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247))", borderRadius: "11.5px", opacity: "1" }}>
                                 <div className="framer-q9yaf3" data-framer-name="Container"
                                     style={{ opacity: "1" }}>

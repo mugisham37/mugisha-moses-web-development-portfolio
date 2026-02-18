@@ -2,20 +2,12 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <div className="ssr-variant hidden-hfs46s hidden-10mb1y6" style={{ 
-            display: "block", 
-            position: "relative", 
-            width: "100%", 
-            order: 1002,
+        <div className="footer-container" style={{
+            width: "100%",
             flex: "none"
         } as React.CSSProperties}>
-            <div className="framer-1uflfkc-container" style={{
-                position: "relative",
-                width: "100%",
-                order: 1002
-            } as React.CSSProperties}>
-                <footer className="framer-ikq6M framer-M4SXU framer-E4PKR framer-3Wby5 framer-x3qah6 framer-v-1wtjzwr"
-                    data-framer-name="Footer Small" style={{ "width": "100%", "opacity": "1" } as React.CSSProperties}>
+            <footer className="framer-ikq6M framer-M4SXU framer-E4PKR framer-3Wby5 framer-x3qah6 framer-v-1wtjzwr"
+                data-framer-name="Footer Small" style={{ "width": "100%", "opacity": "1" } as React.CSSProperties}>
                     <div className="framer-1lu5t8w" data-border="true" data-framer-name="Contact"
                         style={{ "--border-bottom-width": "1px", "--border-color": "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))", "--border-left-width": "1px", "--border-right-width": "1px", "--border-style": "solid", "--border-top-width": "1px", "backgroundColor": "var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247))", "borderRadius": "12px", "opacity": "1" } as React.CSSProperties}>
                         <div className="framer-5hxk0b" data-framer-name="Text" style={{ "opacity": "1" } as React.CSSProperties}>
@@ -139,7 +131,6 @@ const Footer = () => {
                         </div>
                     </div>
                 </footer>
-            </div>
         </div>
     )
 }

@@ -1,11 +1,16 @@
 import React from 'react'
+import ContentWrapper from '../../../../components/content-wrapper'
 
 // Work detail content - shows the work details
 const WorkDetailContent = () => {
     return (
-        <div data-framer-root="" className="framer-zGXrh framer-3Wby5 framer-LHxgI framer-kppm2p"
-            style={{ minHeight: '100vh', width: 'auto', display: 'contents' }}>
-            <div className="framer-1t8nqcy" data-framer-name="CMS Works" id="work-details">
+        <ContentWrapper>
+            <div className="framer-1t8nqcy" data-framer-name="CMS Works" id="work-details" style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                width: '100%'
+            } as React.CSSProperties}>
                 <div className="framer-1wc3uth-container">
                     <div className="framer-fjKKW framer-eleakm framer-v-eleakm" data-border="true"
                         data-framer-name="Variant 1"
@@ -145,7 +150,7 @@ const WorkDetailContent = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </ContentWrapper>
     )
 }
 

@@ -1,54 +1,96 @@
 import React from 'react'
+import ContentWrapper from '../../../components/content-wrapper'
+import Link from 'next/link'
 
-// Works page content - placeholder or default work view
+// Works data
+const works = [
+  {
+    id: 'bookease-copy',
+    title: 'BookEase App',
+    description: 'Intuitive platform for seamless online book shopping.',
+    image: 'https://framerusercontent.com/images/I3WJm2mv67qLCa3IapaovJh6EmU.webp'
+  },
+  {
+    id: 'produli',
+    title: 'Produli',
+    description: 'IoT-enabled kitchen chopping board.',
+    image: 'https://framerusercontent.com/images/ORiNmQF0Pu1sP6MUbOKf4J4f2UA.png'
+  },
+  {
+    id: 'travelease',
+    title: 'TravelEase',
+    description: 'A rebranded travel agency site aimed at millennials.',
+    image: 'https://framerusercontent.com/images/5Ut9ib9l2kwjn6ThlsPt54yiA.png'
+  },
+  {
+    id: 'edukids',
+    title: 'EduKids',
+    description: 'Educational platform offering interactive learning for kids.',
+    image: 'https://framerusercontent.com/images/pybLPiPdzHp1iq9ezjjFGw9IJQ.png'
+  },
+  {
+    id: 'fitbod',
+    title: 'FitBod',
+    description: 'Web-based fitness tracking and meal planning.',
+    image: 'https://framerusercontent.com/images/wIVnZ13oYsjU5mC3b5BAMDYPBY.png'
+  },
+  {
+    id: 'photomingle',
+    title: 'PhotoMingle',
+    description: 'Social media platform focused on photography enthusiasts.',
+    image: 'https://framerusercontent.com/images/dynunyDW5G2prn1TjiYIiuAU.png'
+  },
+  {
+    id: 'bookease-branding',
+    title: 'BookEase Branding',
+    description: 'Comprehensive branding and identity design.',
+    image: 'https://framerusercontent.com/images/I3WJm2mv67qLCa3IapaovJh6EmU.webp'
+  }
+]
+
+// Works page content - displays grid of work cards
 const WorksContent = () => {
   return (
-    <div data-framer-root="" className="framer-dWn3f framer-72rtr7"
-      style={{ minHeight: "100vh", width: "auto", display: "contents" }}>
-      <div className="framer-1lw7frw-container" style={{
-        order: 1,
-        flex: "none",
-        width: "100%",
-        height: "98vh",
-        position: "relative",
-        marginBottom: "20px"
-      } as React.CSSProperties}>
-        <div className="framer-vm656 framer-ot9dfq framer-v-z0mcsa" data-framer-name="Phone"
-          style={{ width: "100%", opacity: 1 }}>
-          <div className="framer-1jf8nol-container" data-framer-name="Image Reel"
-            style={{ opacity: 1 }}>
-            <div className="framer-6mNN4 framer-rdxack framer-v-1vqm357"
-              data-border="true" data-framer-name="Variant 3" data-highlight="true"
-              style={{
-                borderBottomWidth: "1px",
-                borderColor: "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))",
-                borderLeftWidth: "1px",
-                borderRightWidth: "1px",
-                borderStyle: "solid",
-                borderTopWidth: "1px",
-                height: "100%",
-                width: "100%",
-                borderRadius: "12px",
-                opacity: 1
-              } as React.CSSProperties}>
-              <div data-framer-background-image-wrapper="true"
-                style={{ position: "absolute", borderRadius: "inherit", inset: "0px" }}>
-                <img
-                  decoding="auto"
-                  width="3000"
-                  height="2250"
-                  sizes="max(100vw - 24px, 1px)"
-                  srcSet="https://framerusercontent.com/images/QGV2cD8cSjC0XmEcXpVU2RZo.png?scale-down-to=512 512w,https://framerusercontent.com/images/QGV2cD8cSjC0XmEcXpVU2RZo.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/QGV2cD8cSjC0XmEcXpVU2RZo.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/QGV2cD8cSjC0XmEcXpVU2RZo.png 3000w"
-                  src="https://framerusercontent.com/images/QGV2cD8cSjC0XmEcXpVU2RZo.png?scale-down-to=2048"
-                  alt=""
-                  style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", objectPosition: "center center", objectFit: "cover" }}
-                />
-              </div>
+    <ContentWrapper>
+      <div className="works-grid-container">
+        <div className="works-grid">
+          {works.map((work) => (
+            <div key={work.id} className="work-card-container">
+              <Link
+                href={`/works/${work.id}#work-details`}
+                className="work-card"
+                data-border="true"
+              >
+                <div className="work-card-content">
+                  <div className="work-card-photo">
+                    <div className="work-card-image-wrapper">
+                      <img
+                        decoding="auto"
+                        sizes="64px"
+                        src={work.image}
+                        alt={work.title}
+                      />
+                    </div>
+                  </div>
+                  <div className="work-card-info">
+                    <div className="work-card-title">
+                      <h2 className="framer-text framer-styles-preset-1y43b4w">
+                        {work.title}
+                      </h2>
+                    </div>
+                    <div className="work-card-description">
+                      <p className="framer-text framer-styles-preset-13sghr">
+                        {work.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </div>
-          </div>
+          ))}
         </div>
       </div>
-    </div>
+    </ContentWrapper>
   )
 }
 
