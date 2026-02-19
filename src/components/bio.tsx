@@ -11,8 +11,8 @@ const bio = () => {
                         <div data-framer-background-image-wrapper="true"
                             style={{ position: 'absolute', borderRadius: 'inherit', inset: '0px' }}><img
                                 decoding="auto" width="287" height="218"
-                                src="https://framerusercontent.com/images/8LEZz69tHF0AY7FdwCJklqtioQ0.png"
-                                alt=""
+                                src="/Moses.png"
+                                alt="Moses Mugisha"
                                 style={{ display: 'block', width: '100%', height: '100%', borderRadius: 'inherit', objectPosition: 'center center', objectFit: 'cover' }} />
                         </div>
                     </div>
@@ -22,7 +22,7 @@ const bio = () => {
                                 data-framer-component-type="RichTextContainer"
                                 style={{ transform: 'none', opacity: 1 }}>
                                 <p className="framer-text framer-styles-preset-1pt2aqn"
-                                    data-styles-preset="lYOLFlQp7">James Anderson</p>
+                                    data-styles-preset="lYOLFlQp7">Moses Mugisha</p>
                             </div>
                             <div className="framer-6r9v0b" data-framer-name="Title"
                                 data-framer-component-type="RichTextContainer"
@@ -30,7 +30,7 @@ const bio = () => {
                                 <p className="framer-text framer-styles-preset-13sghr"
                                     data-styles-preset="oFmnpzi_h"
                                     style={{ '--framer-text-color': 'var(--extracted-r6o4lv, var(--token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad, rgb(133, 133, 133)))' } as React.CSSProperties}>
-                                    Product Designer</p>
+                                    Full-Stack Software Engineer</p>
                             </div>
                         </div>
                     </div>
@@ -40,8 +40,7 @@ const bio = () => {
                     style={{ '--extracted-r6o4lv': 'var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(113, 113, 122))', transform: 'none', opacity: 1 } as React.CSSProperties}>
                     <p className="framer-text framer-styles-preset-f949vx" data-styles-preset="hpASjuyu0"
                         style={{ '--framer-text-alignment': 'center', '--framer-text-color': 'var(--extracted-r6o4lv, var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(113, 113, 122)))' } as React.CSSProperties}>
-                        Specializing in no-code web design, base in Lima, Peru with over X years of
-                        experience.</p>
+                        Full-stack Software Engineer with 3+ years of experience building scalable web applications using Next.js, NestJS, and PostgreSQL. Based in Kigali, Rwanda.</p>
                 </div>
             </div>
         </div>

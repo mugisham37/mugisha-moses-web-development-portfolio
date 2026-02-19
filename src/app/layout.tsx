@@ -4,8 +4,8 @@ import Script from "next/script";
 import ThemeWrapper from "../components/theme-wrapper";
 
 export const metadata: Metadata = {
-  title: "Imagen Website Template",
-  description: "The ultimate web template designed for UI/UX, product designers, photographers, and creatives. Elevate your portfolio with stunning visuals, showcase your design expertise, and present your impactful case studies and outcomes like never before.",
+  title: "Moses Mugisha | Full-Stack Software Engineer",
+  description: "Full-stack Software Engineer with 3+ years of experience building scalable, data-driven, and cloud-native web applications using Next.js, NestJS, and PostgreSQL. Skilled in TypeScript, React, Docker, and Kubernetes.",
   generator: "Framer 62e4d63",
   robots: "max-image-preview:large",
   icons: {
@@ -16,15 +16,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Imagen Website Template",
-    description: "The ultimate web template designed for UI/UX, product designers, photographers, and creatives. Elevate your portfolio with stunning visuals, showcase your design expertise, and present your impactful case studies and outcomes like never before.",
+    title: "Moses Mugisha | Full-Stack Software Engineer",
+    description: "Full-stack Software Engineer with 3+ years of experience building scalable, data-driven, and cloud-native web applications using Next.js, NestJS, and PostgreSQL.",
     images: ["https://framerusercontent.com/assets/rgrLNiio26kbWFOTMwdno6GuI.png"],
     url: "https://imagen-temlis.framer.website/"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Imagen Website Template",
-    description: "The ultimate web template designed for UI/UX, product designers, photographers, and creatives. Elevate your portfolio with stunning visuals, showcase your design expertise, and present your impactful case studies and outcomes like never before.",
+    title: "Moses Mugisha | Full-Stack Software Engineer",
+    description: "Full-stack Software Engineer with 3+ years of experience building scalable, data-driven, and cloud-native web applications using Next.js, NestJS, and PostgreSQL.",
     images: ["https://framerusercontent.com/assets/rgrLNiio26kbWFOTMwdno6GuI.png"]
   },
   other: {

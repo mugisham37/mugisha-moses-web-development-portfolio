@@ -11,7 +11,6 @@ const DefaultContent = () => {
           order: 1,
           flex: "none",
           width: "100%",
-          height: "98vh",
           position: "relative",
           marginBottom: "20px"
         } as React.CSSProperties}>

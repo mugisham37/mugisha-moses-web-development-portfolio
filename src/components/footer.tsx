@@ -22,14 +22,14 @@ const Footer = () => {
                                 <p className="framer-text framer-styles-preset-13sghr" data-styles-preset="oFmnpzi_h"
                                     style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(113, 113, 122)))" } as React.CSSProperties}>
                                     <a className="framer-text framer-styles-preset-1wicq5s"
-                                        data-styles-preset="ro7OPezbn" href="mailto:example@example.com"
-                                        target="_blank" rel="noopener">hello@aldairgallardo.com</a></p>
+                                        data-styles-preset="ro7OPezbn" href="mailto:mugisham505@gmail.com"
+                                        target="_blank" rel="noopener">mugisham505@gmail.com</a></p>
                             </div>
                         </div>
                         <div className="framer-1t177bx" data-framer-name="Social Media Column" style={{ "opacity": "1" } as React.CSSProperties}>
                             <div className="framer-1xdyvll-container" style={{ "opacity": "1" } as React.CSSProperties}><a
                                 className="framer-hjnqN framer-12r1jn2 framer-v-12r1jn2 framer-1yuywft"
-                                data-framer-name="Variant 1" href="https://twitter.com" target="_blank"
+                                data-framer-name="Variant 1" href="https://github.com/mugisham37" target="_blank"
                                 rel="noopener" style={{ "height": "100%", "borderRadius": "14px", "opacity": "1" } as React.CSSProperties}>
                                 <div className="framer-1pru9e6" style={{ "opacity": "1" } as React.CSSProperties}>
                                     <div className="framer-9wbe8q" data-border="true"
@@ -52,7 +52,7 @@ const Footer = () => {
                             </a></div>
                             <div className="framer-p8l2ew-container" style={{ "opacity": "1" } as React.CSSProperties}><a
                                 className="framer-hjnqN framer-12r1jn2 framer-v-12r1jn2 framer-1yuywft"
-                                data-framer-name="Variant 1" href="https://Instagram.com" target="_blank"
+                                data-framer-name="Variant 1" href="https://www.instagram.com/mgshmoses" target="_blank"
                                 rel="noopener" style={{ "height": "100%", "borderRadius": "14px", "opacity": "1" } as React.CSSProperties}>
                                 <div className="framer-1pru9e6" style={{ "opacity": "1" } as React.CSSProperties}>
                                     <div className="framer-9wbe8q" data-border="true"
@@ -75,7 +75,7 @@ const Footer = () => {
                             </a></div>
                             <div className="framer-e7zgmv-container" style={{ "opacity": "1" } as React.CSSProperties}><a
                                 className="framer-hjnqN framer-12r1jn2 framer-v-12r1jn2 framer-1yuywft"
-                                data-framer-name="Variant 1" href="https://linkedin.com" target="_blank"
+                                data-framer-name="Variant 1" href="https://www.linkedin.com/in/mugisha-moses" target="_blank"
                                 rel="noopener" style={{ "height": "100%", "borderRadius": "14px", "opacity": "1" } as React.CSSProperties}>
                                 <div className="framer-1pru9e6" style={{ "opacity": "1" } as React.CSSProperties}>
                                     <div className="framer-9wbe8q" data-border="true"
@@ -127,7 +127,7 @@ const Footer = () => {
                             style={{ "--extracted-r6o4lv": "var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(113, 113, 122))", "transform": "none", "opacity": "1" } as React.CSSProperties}>
                             <p className="framer-text framer-styles-preset-13sghr" data-styles-preset="oFmnpzi_h"
                                 style={{ "--framer-text-alignment": "left", "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(113, 113, 122)))" } as React.CSSProperties}>
-                                © 2025 | Constructed by Temlis</p>
+                                © 2025 Moses Mugisha | Full-Stack Software Engineer</p>
                         </div>
                     </div>
                 </footer>

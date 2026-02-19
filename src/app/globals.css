@@ -3853,7 +3853,7 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  height: auto;
+  height: 100vh;
   max-height: 100vh;
   width: 100%;
   padding: 12px;
@@ -3867,7 +3867,7 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
 }
 
 .content-main {
-  flex: 0 0 auto;
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -5703,7 +5703,7 @@ img.work-detail-item {
 .framer-dWn3f .framer-1lw7frw-container {
   flex: none;
   width: 100%;
-  height: 98vh;
+  height: auto;
   position: relative
 }
 
@@ -6053,6 +6053,26 @@ img.work-detail-item {
 
   .framer-ikq6M.framer-v-1wtjzwr .framer-blpivt>* {
     margin: 2px 0
+  }
+}
+
+/* Big screens: Align footer content to the left */
+@media (min-width: 1200px) {
+  .framer-ikq6M .framer-1lu5t8w {
+    place-content: center flex-start;
+    justify-content: flex-start;
+  }
+  
+  .framer-ikq6M .framer-1t177bx {
+    flex: none;
+    place-content: center flex-start;
+    justify-content: flex-start;
+    width: auto;
+  }
+  
+  .framer-ikq6M .framer-blpivt {
+    place-content: center flex-start;
+    justify-content: flex-start;
   }
 }
 
