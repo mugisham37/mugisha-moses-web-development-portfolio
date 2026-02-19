@@ -2,16 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme variables - must be outside @layer to have proper specificity */
+/* Light theme (default) */
+:root {
+  --token-88b568e1-e6f8-4980-bc8c-36e51a98442d: rgb(255, 255, 255); /* background */
+  --token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd: rgb(245, 245, 247); /* card background */
+  --token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185: rgb(233, 233, 236); /* border */
+  --token-818a283b-450e-452c-a8af-6b81d42f4181: rgb(0, 0, 0); /* heading text */
+  --token-7a188dfa-68d3-41d9-8d6c-67b23199941d: rgb(113, 113, 122); /* body text */
+  --token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad: rgb(133, 133, 133); /* muted text */
+  --token-41b4cf43-af77-4c56-83e3-6ebd53762080: rgb(39, 39, 42); /* button bg - DARK */
+  --token-eea27fed-e360-4e51-8e28-fa8a2ed2144a: rgb(250, 250, 250); /* button text - LIGHT */
+  --token-1fc170f9-f857-4cb9-bd35-3840f169c14f: rgb(255, 255, 255); /* white */
+  --token-1b643c06-7077-4640-a4e0-f80d2586db4b: rgba(255, 255, 255, 0); /* transparent */
+  --token-2037d619-47c6-4002-a87b-e89b77495348: rgb(244, 244, 245);
+  --token-5a1b11a5-3f4c-438a-b04e-88c2b30bb3ec: rgb(233, 233, 236);
+  --token-c9366ada-f2fd-4f0c-a395-6b15a6e12cae: rgb(212, 212, 216);
+  --token-63298db1-2d90-406e-b4b3-5750f8736650: rgb(161, 161, 170);
+  --token-40191fc3-d26b-4a5d-b4a1-bce603ea9408: rgb(1, 88, 255);
+  --token-3e0f9c63-4a37-4d9e-9661-e7903293dba5: rgba(0, 0, 0, 0.08);
+}
+
+/* Dark theme */
+:root[data-theme="dark"],
+body[data-theme="dark"] {
+  --token-88b568e1-e6f8-4980-bc8c-36e51a98442d: rgb(22, 22, 22); /* background */
+  --token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd: rgb(28, 28, 28); /* card background */
+  --token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185: rgb(36, 36, 36); /* border */
+  --token-818a283b-450e-452c-a8af-6b81d42f4181: rgb(246, 246, 246); /* heading text */
+  --token-7a188dfa-68d3-41d9-8d6c-67b23199941d: rgb(133, 133, 133); /* body text */
+  --token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad: rgb(133, 133, 133); /* muted text */
+  --token-41b4cf43-af77-4c56-83e3-6ebd53762080: rgb(57, 57, 57); /* button bg - LIGHTER */
+  --token-eea27fed-e360-4e51-8e28-fa8a2ed2144a: rgb(250, 250, 250); /* button text - LIGHT */
+  --token-1fc170f9-f857-4cb9-bd35-3840f169c14f: rgb(44, 44, 44); /* white -> dark */
+  --token-1b643c06-7077-4640-a4e0-f80d2586db4b: rgb(28, 28, 28); /* transparent */
+  --token-2037d619-47c6-4002-a87b-e89b77495348: rgb(28, 28, 28);
+  --token-5a1b11a5-3f4c-438a-b04e-88c2b30bb3ec: rgb(36, 36, 36);
+  --token-c9366ada-f2fd-4f0c-a395-6b15a6e12cae: rgb(36, 36, 36);
+  --token-63298db1-2d90-406e-b4b3-5750f8736650: rgb(133, 133, 133);
+  --token-40191fc3-d26b-4a5d-b4a1-bce603ea9408: rgb(1, 88, 255);
+  --token-3e0f9c63-4a37-4d9e-9661-e7903293dba5: rgba(0, 0, 0, 0.08);
+}
+
+/* Smooth transitions for theme changes */
+html {
+  transition: background-color 0.3s ease;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--token-88b568e1-e6f8-4980-bc8c-36e51a98442d);
+}
+
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
 /* Wrap existing custom styles in @layer to control specificity */
 @layer components {
-  :root body {
-    background: var(--token-88b568e1-e6f8-4980-bc8c-36e51a98442d, rgb(255, 255, 255));
-  }
-
-  html body {
-    background: var(--token-88b568e1-e6f8-4980-bc8c-36e51a98442d, rgb(255, 255, 255));
-  }
-}
 
 /* cyrillic-ext */
 @font-face {
@@ -2622,53 +2670,7 @@
   }
 }
 
-@layer base {
-  body {
-    --token-1fc170f9-f857-4cb9-bd35-3840f169c14f: #fff;
-    --token-818a283b-450e-452c-a8af-6b81d42f4181: #000;
-    --token-88b568e1-e6f8-4980-bc8c-36e51a98442d: #fff;
-    --token-1b643c06-7077-4640-a4e0-f80d2586db4b: #fff0;
-    --token-eea27fed-e360-4e51-8e28-fa8a2ed2144a: #fafafa;
-    --token-2037d619-47c6-4002-a87b-e89b77495348: #f4f4f5;
-    --token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd: #f5f5f7;
-    --token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185: #efeff2;
-    --token-5a1b11a5-3f4c-438a-b04e-88c2b30bb3ec: #e9e9ec;
-    --token-c9366ada-f2fd-4f0c-a395-6b15a6e12cae: #d4d4d8;
-    --token-63298db1-2d90-406e-b4b3-5750f8736650: #a1a1aa;
-    --token-7a188dfa-68d3-41d9-8d6c-67b23199941d: #71717a;
-    --token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad: #858585;
-    --token-41b4cf43-af77-4c56-83e3-6ebd53762080: #27272a;
-    --token-40191fc3-d26b-4a5d-b4a1-bce603ea9408: #0158ff;
-    --token-3e0f9c63-4a37-4d9e-9661-e7903293dba5: #00000014;
-    
-    /* Tailwind-compatible theme variables */
-    --background: var(--token-88b568e1-e6f8-4980-bc8c-36e51a98442d);
-    --foreground: var(--token-818a283b-450e-452c-a8af-6b81d42f4181);
-    --primary: var(--token-40191fc3-d26b-4a5d-b4a1-bce603ea9408);
-    --muted: var(--token-eea27fed-e360-4e51-8e28-fa8a2ed2144a);
-    --border: var(--token-c9366ada-f2fd-4f0c-a395-6b15a6e12cae);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    body {
-      --token-1fc170f9-f857-4cb9-bd35-3840f169c14f: #2c2c2c;
-      --token-818a283b-450e-452c-a8af-6b81d42f4181: #f6f6f6;
-      --token-88b568e1-e6f8-4980-bc8c-36e51a98442d: #161616;
-      --token-1b643c06-7077-4640-a4e0-f80d2586db4b: #1c1c1c;
-      --token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd: #1c1c1c;
-      --token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185: #242424;
-      --token-5a1b11a5-3f4c-438a-b04e-88c2b30bb3ec: #242424;
-      --token-c9366ada-f2fd-4f0c-a395-6b15a6e12cae: #242424;
-      --token-7a188dfa-68d3-41d9-8d6c-67b23199941d: #858585;
-      --token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad: #858585;
-      --token-41b4cf43-af77-4c56-83e3-6ebd53762080: #393939;
-      
-      /* Update Tailwind-compatible theme variables for dark mode */
-      --background: var(--token-88b568e1-e6f8-4980-bc8c-36e51a98442d);
-      --foreground: var(--token-818a283b-450e-452c-a8af-6b81d42f4181);
-    }
-  }
-}
+/* Removed old @layer base theme definitions - now using data-theme attribute at the top of the file */
 
 @layer utilities {
   @supports (z-index:calc(infinity)) {
@@ -6679,47 +6681,7 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   }
 }
 
-
-body[toggle-theme="light"] {
-  --token-1fc170f9-f857-4cb9-bd35-3840f169c14f: #fff;
-  --token-818a283b-450e-452c-a8af-6b81d42f4181: #000;
-  --token-88b568e1-e6f8-4980-bc8c-36e51a98442d: #fff;
-  --token-1b643c06-7077-4640-a4e0-f80d2586db4b: #fff0;
-  --token-eea27fed-e360-4e51-8e28-fa8a2ed2144a: #fafafa;
-  --token-2037d619-47c6-4002-a87b-e89b77495348: #f4f4f5;
-  --token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd: #f5f5f7;
-  --token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185: #efeff2;
-  --token-5a1b11a5-3f4c-438a-b04e-88c2b30bb3ec: #e9e9ec;
-  --token-c9366ada-f2fd-4f0c-a395-6b15a6e12cae: #d4d4d8;
-  --token-63298db1-2d90-406e-b4b3-5750f8736650: #a1a1aa;
-  --token-7a188dfa-68d3-41d9-8d6c-67b23199941d: #71717a;
-  --token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad: #858585;
-  --token-41b4cf43-af77-4c56-83e3-6ebd53762080: #27272a;
-  --token-40191fc3-d26b-4a5d-b4a1-bce603ea9408: #0158ff;
-  --token-3e0f9c63-4a37-4d9e-9661-e7903293dba5: #00000014;
-}
-
-body[toggle-theme="dark"] {
-  --token-1fc170f9-f857-4cb9-bd35-3840f169c14f: #2c2c2c;
-  --token-818a283b-450e-452c-a8af-6b81d42f4181: #f6f6f6;
-  --token-88b568e1-e6f8-4980-bc8c-36e51a98442d: #161616;
-  --token-1b643c06-7077-4640-a4e0-f80d2586db4b: #1c1c1c;
-  --token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd: #1c1c1c;
-  --token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185: #242424;
-  --token-5a1b11a5-3f4c-438a-b04e-88c2b30bb3ec: #242424;
-  --token-c9366ada-f2fd-4f0c-a395-6b15a6e12cae: #242424;
-  --token-7a188dfa-68d3-41d9-8d6c-67b23199941d: #858585;
-  --token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad: #858585;
-  --token-41b4cf43-af77-4c56-83e3-6ebd53762080: #393939;
-}
-
-html[toggle-theme="light"] {
-  color-scheme: light;
-}
-
-html[toggle-theme="dark"] {
-  color-scheme: dark;
-}
+/* Removed old toggle-theme system - now using data-theme attribute at the top of the file */
 
 /* Contact form styling */
 .contact-form-wrapper {
@@ -6745,23 +6707,29 @@ html[toggle-theme="dark"] {
 .contact-form .framer-form-input {
   width: 100%;
   padding: 12px 16px;
-  background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(239, 239, 242);
+  background-color: var(--token-88b568e1-e6f8-4980-bc8c-36e51a98442d);
+  border: 1px solid var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185);
   border-radius: 10px;
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0); /* Always dark text for readability */
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.3s ease;
 }
 
 .contact-form .framer-form-input:focus {
-  border-color: rgb(51, 51, 51);
+  border-color: var(--token-818a283b-450e-452c-a8af-6b81d42f4181);
 }
 
 .contact-form .framer-form-input::placeholder {
-  color: rgb(133, 133, 133);
+  color: var(--token-4769c37a-e483-4cd7-ac6b-55da2c10d7ad);
+}
+
+/* Dark mode: keep input text dark but make placeholder lighter */
+:root[data-theme="dark"] .contact-form .framer-form-input::placeholder,
+body[data-theme="dark"] .contact-form .framer-form-input::placeholder {
+  color: rgb(200, 200, 200); /* Lighter placeholder in dark mode */
 }
 
 .contact-form textarea.framer-form-input {
@@ -6777,22 +6745,22 @@ html[toggle-theme="dark"] {
 .contact-form button[type="submit"] {
   width: 100%;
   padding: 14px 24px;
-  background-color: rgb(51, 51, 51);
-  color: rgb(250, 250, 250);
+  background-color: var(--token-41b4cf43-af77-4c56-83e3-6ebd53762080);
+  color: var(--token-eea27fed-e360-4e51-8e28-fa8a2ed2144a);
   border: none;
   border-radius: 10px;
   font-family: 'Manrope', sans-serif;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .contact-form button[type="submit"]:hover {
-  background-color: rgb(34, 34, 34);
+  opacity: 0.9;
 }
 
 .contact-form .framer-1xipqm2 {
@@ -7122,3 +7090,5 @@ html[toggle-theme="dark"] {
     font-size: 13px;
   }
 }
+
+} /* End of @layer components */

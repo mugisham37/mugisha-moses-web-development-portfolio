@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
+import ThemeWrapper from "../components/theme-wrapper";
 
 export const metadata: Metadata = {
   title: "Imagen Website Template",
@@ -52,33 +53,35 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <Script
-          async
-          src="https://events.framer.com/script?v=2"
-          data-fid="3e9c2d90335cfd678dc10a2bdc4617446706d51c62bf8e5d60a5ff03e38c208d"
-          data-no-nt=""
-        />
-        <div id="main"
-          data-framer-hydrate-v2='{"routeId":"augiA20Il","localeId":"default","breakpoints":[{"hash":"72rtr7","mediaQuery":"(min-width: 1200px)"},{"hash":"ih24pf","mediaQuery":"(min-width: 810px) and (max-width: 1199px)"},{"hash":"3ud5uq","mediaQuery":"(max-width: 809px)"},{"hash":"10mb1y6","mediaQuery":"(min-width: 1200px)"},{"hash":"hfs46s","mediaQuery":"(min-width: 810px) and (max-width: 1199.98px)"},{"hash":"182i2eb","mediaQuery":"(max-width: 809.98px)"}]}'
-          data-framer-ssr-released-at="2025-10-10T00:35:35.953Z"
-          data-framer-page-optimized-at="2025-10-10T17:52:44.432Z"
-          data-framer-generated-page="">
-          {/* $*/}
-          <div className="framer-DpqqR framer-10mb1y6" data-layout-template="true"
-            style={{ 
-              minHeight: "100vh", 
-              width: "auto",
-              overflow: "visible",
-              height: "auto",
-              alignItems: "flex-start"
-            }}>
-            {sidebar}
-            {content}
-            <div id="overlay"></div>
+        <ThemeWrapper>
+          <Script
+            async
+            src="https://events.framer.com/script?v=2"
+            data-fid="3e9c2d90335cfd678dc10a2bdc4617446706d51c62bf8e5d60a5ff03e38c208d"
+            data-no-nt=""
+          />
+          <div id="main"
+            data-framer-hydrate-v2='{"routeId":"augiA20Il","localeId":"default","breakpoints":[{"hash":"72rtr7","mediaQuery":"(min-width: 1200px)"},{"hash":"ih24pf","mediaQuery":"(min-width: 810px) and (max-width: 1199px)"},{"hash":"3ud5uq","mediaQuery":"(max-width: 809px)"},{"hash":"10mb1y6","mediaQuery":"(min-width: 1200px)"},{"hash":"hfs46s","mediaQuery":"(min-width: 810px) and (max-width: 1199.98px)"},{"hash":"182i2eb","mediaQuery":"(max-width: 809.98px)"}]}'
+            data-framer-ssr-released-at="2025-10-10T00:35:35.953Z"
+            data-framer-page-optimized-at="2025-10-10T17:52:44.432Z"
+            data-framer-generated-page="">
+            {/* $*/}
+            <div className="framer-DpqqR framer-10mb1y6" data-layout-template="true"
+              style={{ 
+                minHeight: "100vh", 
+                width: "auto",
+                overflow: "visible",
+                height: "auto",
+                alignItems: "flex-start"
+              }}>
+              {sidebar}
+              {content}
+              <div id="overlay"></div>
+            </div>
+            <div id="template-overlay"></div>
+            {/* /$*/}
           </div>
-          <div id="template-overlay"></div>
-          {/* /$*/}
-        </div>
+        </ThemeWrapper>
       </body>
     </html>
   );
