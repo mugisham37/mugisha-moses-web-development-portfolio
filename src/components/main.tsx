@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { getProductsData, getUIUXData, get3DData, type WorkDetail } from '../app/@content/works/data'
 
 // Extend CSSProperties to allow CSS custom properties
 declare module 'react' {
@@ -9,98 +10,14 @@ declare module 'react' {
     }
 }
 
-// Define types for data items
-type ProjectItem = {
-    id: string
-    title: string
-    description: string
-    image: string
-    href: string
-    external?: boolean
-}
-
-// Projects data - Software Engineering Projects
-const projectsData: ProjectItem[] = [
-    {
-        id: 'elev8-rwanda',
-        title: 'Elev8 Rwanda',
-        description: 'Multilingual enterprise website with Next.js 14, Sanity CMS, supporting 5,000+ monthly visitors.',
-        image: 'https://framerusercontent.com/images/I3WJm2mv67qLCa3IapaovJh6EmU.webp',
-        href: 'https://elev8rwanda.com',
-        external: true
-    },
-    {
-        id: 'velocity',
-        title: 'Velocity Platform',
-        description: 'Microservices-based business management platform with Next.js 15, NestJS, serving 10,000+ users.',
-        image: 'https://framerusercontent.com/images/ORiNmQF0Pu1sP6MUbOKf4J4f2UA.png',
-        href: 'https://github.com/mugisham37',
-        external: true
-    },
-    {
-        id: 'drive-master',
-        title: 'Drive Master',
-        description: 'Adaptive learning platform with 11+ microservices built across Go, Node.js, and Python.',
-        image: 'https://framerusercontent.com/images/5Ut9ib9l2kwjn6ThlsPt54yiA.png',
-        href: 'https://github.com/mugisham37',
-        external: true
-    }
-]
-
-// UI/UX Design data
-const uiuxData: ProjectItem[] = [
-    {
-        id: 'elev8-design',
-        title: 'Elev8 Rwanda Design',
-        description: 'Complete UI/UX design system with 50+ reusable components using Radix UI and Tailwind CSS.',
-        image: 'https://framerusercontent.com/images/pybLPiPdzHp1iq9ezjjFGw9IJQ.png',
-        href: '#'
-    },
-    {
-        id: 'velocity-ui',
-        title: 'Velocity UI System',
-        description: 'Enterprise-grade design system for business management platform with dark/light themes.',
-        image: 'https://framerusercontent.com/images/wIVnZ13oYsjU5mC3b5BAMDYPBY.png',
-        href: '#'
-    },
-    {
-        id: 'mobile-app-design',
-        title: 'Mobile App Designs',
-        description: 'Flutter and React Native mobile app interfaces with offline-first architecture.',
-        image: 'https://framerusercontent.com/images/dynunyDW5G2prn1TjiYIiuAU.png',
-        href: '#'
-    }
-]
-
-// 3D Design data
-const threeDData: ProjectItem[] = [
-    {
-        id: '3d-product-viz',
-        title: '3D Product Visualization',
-        description: 'Interactive 3D product models and visualizations for web applications.',
-        image: 'https://framerusercontent.com/images/Sj0j2YIYMlYSLbL2SDJbiSHsOA.png',
-        href: '#'
-    },
-    {
-        id: '3d-web-experiences',
-        title: '3D Web Experiences',
-        description: 'Immersive 3D web experiences using Three.js and WebGL.',
-        image: 'https://framerusercontent.com/images/Tt8d7Q7HY2xW5dFcOWvjHtuR4TI.png',
-        href: '#'
-    },
-    {
-        id: '3d-animations',
-        title: '3D Animations',
-        description: 'Motion graphics and 3D animations for digital products.',
-        image: 'https://framerusercontent.com/images/kcpvlBzvZMsIW9f7c75hd3tlLw.png',
-        href: '#'
-    }
-]
-
 const MainUnified = () => {
     const [activeTab, setActiveTab] = useState<'products' | 'uiux' | '3d'>('products')
     
-    const currentData = activeTab === 'products' ? projectsData : activeTab === 'uiux' ? uiuxData : threeDData
+    // Get data from centralized data.ts based on active tab
+    const currentData: WorkDetail[] = 
+        activeTab === 'products' ? getProductsData() : 
+        activeTab === 'uiux' ? getUIUXData() : 
+        get3DData()
 
     return (
         <div className="framer-ejtc8w-container">
@@ -271,8 +188,7 @@ const MainUnified = () => {
                                     className="framer-3jgq1s framer-irm3n9" 
                                     data-border="true"
                                     data-framer-name="Card/Project"
-                                    href={item.href}
-                                    {...(item.external ? { target: "_blank", rel: "noopener" } : {})}
+                                    href={`/works/${item.id}`}
                                     style={{ 
                                         "--border-bottom-width": "1px", 
                                         "--border-color": "var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))", 
@@ -310,7 +226,7 @@ const MainUnified = () => {
                                                 <img 
                                                     decoding="auto" 
                                                     sizes="64px"
-                                                    src={item.image}
+                                                    src={item.thumbnailImage}
                                                     alt={item.title}
                                                     style={{ 
                                                         display: "block", 
