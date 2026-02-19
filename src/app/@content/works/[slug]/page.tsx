@@ -7,32 +7,28 @@ const WorkDetailContent = () => {
         <ContentWrapper>
             <div className="work-detail-container" id="work-details">
                 {/* Row 1: Full-width hero image */}
-                <div className="work-detail-item work-hero-image">
-                    <div className="work-image-card" data-border="true">
-                        <img 
-                            decoding="auto"
-                            width="2400" 
-                            height="1600" 
-                            sizes="calc(100vw - 24px)"
-                            srcSet="https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=512 512w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png 4500w"
-                            src="https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png" 
-                            alt="BookEase App Hero"
-                        />
-                    </div>
-                </div>
+                <img 
+                    className="work-detail-item work-hero-image"
+                    data-border="true"
+                    decoding="auto"
+                    width="2400" 
+                    height="1600" 
+                    sizes="calc(100vw - 24px)"
+                    srcSet="https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=512 512w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png 4500w"
+                    src="https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png" 
+                    alt="BookEase App Hero"
+                />
 
                 {/* Row 2: Image (left) + About Card (right) */}
-                <div className="work-detail-item work-secondary-image">
-                    <div className="work-image-card" data-border="true">
-                        <img 
-                            decoding="auto"
-                            sizes="calc(100vw - 24px)"
-                            srcSet="https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=512 512w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png 4500w"
-                            src="https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png"
-                            alt="BookEase App Screenshot"
-                        />
-                    </div>
-                </div>
+                <img 
+                    className="work-detail-item work-secondary-image"
+                    data-border="true"
+                    decoding="auto"
+                    sizes="calc(100vw - 24px)"
+                    srcSet="https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=512 512w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png 4500w"
+                    src="https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png"
+                    alt="BookEase App Screenshot"
+                />
 
                 <div className="work-detail-item work-about-card">
                     <div className="work-text-card" data-border="true">
@@ -55,18 +51,16 @@ const WorkDetailContent = () => {
                 </div>
 
                 {/* Row 3: Image (left) + Two stacked text cards (right) */}
-                <div className="work-detail-item work-process-image">
-                    <div className="work-image-card" data-border="true">
-                        <img 
-                            decoding="auto"
-                            loading="lazy" 
-                            sizes="calc(100vw - 24px)"
-                            srcSet="https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=512 512w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png 4500w"
-                            src="https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png" 
-                            alt="BookEase Process"
-                        />
-                    </div>
-                </div>
+                <img 
+                    className="work-detail-item work-process-image"
+                    data-border="true"
+                    decoding="auto"
+                    loading="lazy" 
+                    sizes="calc(100vw - 24px)"
+                    srcSet="https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=512 512w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png 4500w"
+                    src="https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png" 
+                    alt="BookEase Process"
+                />
 
                 <div className="work-detail-item work-problem-card">
                     <div className="work-text-card" data-border="true">
@@ -107,20 +101,18 @@ const WorkDetailContent = () => {
                 </div>
 
                 {/* Row 4: Full-width closing image */}
-                <div className="work-detail-item work-closing-image">
-                    <div className="work-image-card" data-border="true">
-                        <img 
-                            decoding="auto"
-                            loading="lazy" 
-                            width="2400" 
-                            height="1600" 
-                            sizes="calc(100vw - 24px)"
-                            srcSet="https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=512 512w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png 4500w"
-                            src="https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png" 
-                            alt="BookEase Final"
-                        />
-                    </div>
-                </div>
+                <img 
+                    className="work-detail-item work-closing-image"
+                    data-border="true"
+                    decoding="auto"
+                    loading="lazy" 
+                    width="2400" 
+                    height="1600" 
+                    sizes="calc(100vw - 24px)"
+                    srcSet="https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=512 512w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png 4500w"
+                    src="https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png" 
+                    alt="BookEase Final"
+                />
             </div>
         </ContentWrapper>
     )
