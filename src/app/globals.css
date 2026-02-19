@@ -3856,13 +3856,14 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   height: auto;
   max-height: 100vh;
   width: 100%;
-  padding: 12px 12px 12px 0;
+  padding: 12px;
   gap: 12px;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: var(--token-88b568e1-e6f8-4980-bc8c-36e51a98442d, #fff);
   position: relative;
   z-index: auto;
+  box-sizing: border-box;
 }
 
 .content-main {
@@ -3870,8 +3871,10 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 100%;
   min-height: 0;
   gap: 12px;
+  box-sizing: border-box;
 }
 
 .framer-DpqqR .framer-zp3z1x-container,
@@ -4184,12 +4187,272 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   overflow: hidden;
 }
 
-/* Work detail page containers */
+/* ============================================
+   WORK DETAIL PAGE - BENTO GRID LAYOUT
+   ============================================ */
+
+/* Main container for work detail page */
+.work-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Base styles for all work detail items */
+.work-detail-item {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Image card styling */
+.work-image-card {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.work-image-card[data-border="true"] {
+  border: 1px solid var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(233, 233, 236));
+}
+
+.work-image-card img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Text card styling - matches sidebar cards */
+.work-text-card {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: auto;
+  border-radius: 12px;
+  background-color: var(--token-d2d4a269-93e6-4d8d-a89e-585bfbef9cfd, rgb(245, 245, 247));
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.work-text-card[data-border="true"] {
+  border: 1px solid var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(233, 233, 236));
+}
+
+.work-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.work-text-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Text styling - matches original HTML exactly */
+.work-text-section h2,
+.work-text-section h3 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3em;
+  letter-spacing: 0em;
+  color: var(--token-818a283b-450e-452c-a8af-6b81d42f4181, rgb(0, 0, 0));
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.work-text-section p {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+  letter-spacing: 0em;
+  color: var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(113, 113, 122));
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Framer text presets - ensure they override */
+.work-text-section .framer-text.framer-styles-preset-1y43b4w {
+  color: var(--token-818a283b-450e-452c-a8af-6b81d42f4181, rgb(0, 0, 0));
+}
+
+.work-text-section .framer-text.framer-styles-preset-f949vx {
+  color: var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(113, 113, 122));
+}
+
+.work-text-section p + p {
+  margin-top: 12px;
+}
+
+/* Mobile-first: Vertical stack */
+/* Order for small screens: Image → Text → Image → Image → Text → Text → Image */
+.work-hero-image { order: 1; }
+.work-about-card { order: 2; }
+.work-secondary-image { order: 3; }
+.work-process-image { order: 4; }
+.work-problem-card { order: 5; }
+.work-solution-card { order: 6; }
+.work-closing-image { order: 7; }
+
+/* Hero and closing images - full viewport height on mobile */
+.work-hero-image .work-image-card,
+.work-closing-image .work-image-card {
+  min-height: 60vh;
+}
+
+/* Tablet and up: Start transitioning to grid */
+@media (min-width: 810px) {
+  .work-image-card {
+    min-height: 500px;
+  }
+  
+  .work-hero-image .work-image-card,
+  .work-closing-image .work-image-card {
+    min-height: 70vh;
+  }
+  
+  .work-text-card {
+    padding: 32px;
+  }
+}
+
+/* Large screens: Bento grid layout with 70/30 split */
+@media (min-width: 1200px) {
+  .work-detail-container {
+    display: grid;
+    grid-template-columns: 2.33fr 1fr; /* 70% / 30% split */
+    grid-auto-rows: auto;
+    gap: 12px;
+    max-width: 100%;
+  }
+  
+  /* Row 1: Full-width hero image - FULL VIEWPORT HEIGHT */
+  .work-hero-image {
+    grid-column: 1 / -1;
+    order: 1;
+    max-width: 100%;
+  }
+  
+  .work-hero-image .work-image-card {
+    min-height: calc(100vh - 24px); /* Full viewport minus padding */
+    max-height: calc(100vh - 24px);
+  }
+  
+  /* Row 2: Image left (70%), About card right (30%) */
+  .work-secondary-image {
+    grid-column: 1 / 2;
+    order: 2;
+  }
+  
+  .work-about-card {
+    grid-column: 2 / 3;
+    order: 3;
+  }
+  
+  .work-secondary-image .work-image-card {
+    min-height: 600px;
+    height: auto;
+  }
+  
+  .work-about-card .work-text-card {
+    min-height: 600px;
+    height: 100%;
+  }
+  
+  /* Row 3: Image left (70%), Two stacked cards right (30%) */
+  .work-process-image {
+    grid-column: 1 / 2;
+    grid-row: span 2;
+    order: 4;
+  }
+  
+  .work-problem-card {
+    grid-column: 2 / 3;
+    order: 5;
+  }
+  
+  .work-solution-card {
+    grid-column: 2 / 3;
+    order: 6;
+  }
+  
+  .work-process-image .work-image-card {
+    min-height: 100%;
+    height: 100%;
+  }
+  
+  .work-problem-card .work-text-card,
+  .work-solution-card .work-text-card {
+    min-height: auto;
+    height: auto;
+  }
+  
+  /* Row 4: Full-width closing image - FULL VIEWPORT HEIGHT */
+  .work-closing-image {
+    grid-column: 1 / -1;
+    order: 7;
+    max-width: 100%;
+  }
+  
+  .work-closing-image .work-image-card {
+    min-height: calc(100vh - 24px);
+    max-height: calc(100vh - 24px);
+  }
+}
+
+/* Extra large screens: Optimize spacing */
+@media (min-width: 1400px) {
+  .work-detail-container {
+    grid-template-columns: 2.5fr 1fr; /* 71.4% / 28.6% split */
+  }
+  
+  .work-text-card {
+    padding: 40px;
+  }
+  
+  .work-secondary-image .work-image-card {
+    min-height: 700px;
+  }
+  
+  .work-about-card .work-text-card {
+    min-height: 700px;
+  }
+}
+
+/* Legacy class support for old structure */
 .framer-1t8nqcy {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 100%;
+  max-width: 100%;
   position: relative;
 }
 
@@ -4198,9 +4461,9 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
 .framer-1wbwvhz-container,
 .framer-xwxyaq-container {
   width: 100%;
+  max-width: 100%;
   height: auto;
   min-height: 400px;
-  aspect-ratio: 3/2;
   position: relative;
   overflow: hidden;
 }
@@ -4211,6 +4474,7 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   flex-direction: column;
   gap: 12px;
   width: 100%;
+  max-width: 100%;
 }
 
 .framer-1e95z10 {
@@ -4218,6 +4482,7 @@ NavigationContainer [data-framer-component-type=NavigationContainer]>*,
   flex-direction: column;
   gap: 12px;
   width: 100%;
+  max-width: 100%;
 }
 
 /* Ensure footer stays below content */

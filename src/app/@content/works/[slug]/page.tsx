@@ -1,152 +1,124 @@
 import React from 'react'
 import ContentWrapper from '../../../../components/content-wrapper'
 
-// Work detail content - shows the work details
+// Work detail content - shows the work details in bento grid layout
 const WorkDetailContent = () => {
     return (
         <ContentWrapper>
-            <div className="framer-1t8nqcy" data-framer-name="CMS Works" id="work-details" style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-                width: '100%'
-            } as React.CSSProperties}>
-                <div className="framer-1wc3uth-container">
-                    <div className="framer-fjKKW framer-eleakm framer-v-eleakm" data-border="true"
-                        data-framer-name="Variant 1"
-                        style={{ '--border-bottom-width': '1px', '--border-color': 'var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))', '--border-left-width': '1px', '--border-right-width': '1px', '--border-style': 'solid', '--border-top-width': '1px', height: '100%', width: '100%', borderRadius: '12px', opacity: 1 } as React.CSSProperties}>
-                        <div data-framer-background-image-wrapper="true"
-                            style={{ position: 'absolute', borderRadius: 'inherit', inset: '0px' }}><img decoding="auto"
-                                width="2400" height="1600" sizes="calc(100vw - 24px)"
-                                srcSet="https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=512 512w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png 4500w"
-                                src="https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png" alt=""
-                                style={{ display: 'block', width: '100%', height: '100%', borderRadius: 'inherit', objectPosition: 'center center', objectFit: 'cover' }} />
-                        </div>
+            <div className="work-detail-container" id="work-details">
+                {/* Row 1: Full-width hero image */}
+                <div className="work-detail-item work-hero-image">
+                    <div className="work-image-card" data-border="true">
+                        <img 
+                            decoding="auto"
+                            width="2400" 
+                            height="1600" 
+                            sizes="calc(100vw - 24px)"
+                            srcSet="https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=512 512w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png 4500w"
+                            src="https://framerusercontent.com/images/UZ8HPu9E0O3VGGn5CUdNDsmxUo.png" 
+                            alt="BookEase App Hero"
+                        />
                     </div>
                 </div>
-                <div className="framer-1ir8b62" data-framer-name="Details">
-                    <div className="framer-fn5xza-container">
-                        <div className="framer-xxSTh framer-mpt5n framer-v-mpt5n" data-border="true"
-                            data-framer-name="Variant 1"
-                            style={{ '--border-bottom-width': '1px', '--border-color': 'var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))', '--border-left-width': '1px', '--border-right-width': '1px', '--border-style': 'solid', '--border-top-width': '1px', height: '100%', width: '100%', borderRadius: '12px', opacity: 1 } as React.CSSProperties}>
-                            <div data-framer-background-image-wrapper="true"
-                                style={{ position: 'absolute', borderRadius: 'inherit', inset: '0px' }}><img decoding="auto"
-                                    sizes="calc(100vw - 24px)"
-                                    srcSet="https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=512 512w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png 4500w"
-                                    src="https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png"
-                                    alt=""
-                                    style={{ display: 'block', width: '100%', height: '100%', borderRadius: 'inherit', objectPosition: 'center center', objectFit: 'cover' }} />
-                            </div>
-                        </div>
+
+                {/* Row 2: Image (left) + About Card (right) */}
+                <div className="work-detail-item work-secondary-image">
+                    <div className="work-image-card" data-border="true">
+                        <img 
+                            decoding="auto"
+                            sizes="calc(100vw - 24px)"
+                            srcSet="https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=512 512w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png 4500w"
+                            src="https://framerusercontent.com/images/BaSowD2KRqIEjDHY1cnvGdqu6JQ.png"
+                            alt="BookEase App Screenshot"
+                        />
                     </div>
-                    <div className="framer-1aeyhi2" data-border="true" data-framer-name="About">
-                        <div className="framer-ujjq65" data-framer-name="Text">
-                            <div className="framer-jbx9az" data-framer-name="Container">
-                                <div className="framer-nw5fxf" data-framer-name="Text"
-                                    data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-                                    <p className="framer-text framer-styles-preset-1y43b4w"
-                                        data-styles-preset="SbUeepJXi"
-                                        style={{ '--framer-text-color': 'var(--token-818a283b-450e-452c-a8af-6b81d42f4181, rgb(0, 0, 0))' } as React.CSSProperties}>
-                                        BookEase App</p>
-                                </div>
-                                <div className="framer-vhtyr3" data-framer-name="Description"
-                                    data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-                                    <p className="framer-text framer-styles-preset-f949vx">BookEase offers a
-                                        comprehensive collection of books across genres and languages, aimed at
-                                        making book buying a satisfying and simple experience.</p>
-                                </div>
+                </div>
+
+                <div className="work-detail-item work-about-card">
+                    <div className="work-text-card" data-border="true">
+                        <div className="work-text-content">
+                            <div className="work-text-section">
+                                <h2 className="framer-text framer-styles-preset-1y43b4w">BookEase App</h2>
+                                <p className="framer-text framer-styles-preset-f949vx">
+                                    BookEase offers a comprehensive collection of books across genres and languages, 
+                                    aimed at making book buying a satisfying and simple experience.
+                                </p>
                             </div>
-                            <div className="framer-1m8ib14" data-framer-name="Container">
-                                <div className="framer-1n9w3is" data-framer-name="Title"
-                                    data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-                                    <p className="framer-text framer-styles-preset-1y43b4w"
-                                        data-styles-preset="SbUeepJXi"
-                                        style={{ '--framer-text-color': 'var(--token-818a283b-450e-452c-a8af-6b81d42f4181, rgb(0, 0, 0))' } as React.CSSProperties}>
-                                        About</p>
-                                </div>
-                                <div className="framer-1omrs7c" data-framer-name="Name"
-                                    data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-                                    <p className="framer-text framer-styles-preset-f949vx">Client: BookStores Inc.</p>
-                                    <p className="framer-text framer-styles-preset-f949vx">Contribution: UX Design, Web
-                                        Development</p>
-                                    <p className="framer-text framer-styles-preset-f949vx">Year: 2022</p>
-                                </div>
+                            <div className="work-text-section">
+                                <h3 className="framer-text framer-styles-preset-1y43b4w">About</h3>
+                                <p className="framer-text framer-styles-preset-f949vx">Client: BookStores Inc.</p>
+                                <p className="framer-text framer-styles-preset-f949vx">Contribution: UX Design, Web Development</p>
+                                <p className="framer-text framer-styles-preset-f949vx">Year: 2022</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="framer-1vlfmmb" data-framer-name="Process">
-                    <div className="framer-1wbwvhz-container">
-                        <div className="framer-pcoe4 framer-ch8psn framer-v-ch8psn" data-border="true"
-                            data-framer-name="Variant 1"
-                            style={{ '--border-bottom-width': '1px', '--border-color': 'var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))', '--border-left-width': '1px', '--border-right-width': '1px', '--border-style': 'solid', '--border-top-width': '1px', height: '100%', width: '100%', borderRadius: '12px', opacity: 1 } as React.CSSProperties}>
-                            <div data-framer-background-image-wrapper="true"
-                                style={{ position: 'absolute', borderRadius: 'inherit', inset: '0px' }}><img decoding="auto"
-                                    loading="lazy" sizes="calc(100vw - 24px)"
-                                    srcSet="https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=512 512w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png 4500w"
-                                    src="https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png" alt=""
-                                    style={{ display: 'block', width: '100%', height: '100%', borderRadius: 'inherit', objectPosition: 'center center', objectFit: 'cover' }} />
-                            </div>
-                        </div>
+
+                {/* Row 3: Image (left) + Two stacked text cards (right) */}
+                <div className="work-detail-item work-process-image">
+                    <div className="work-image-card" data-border="true">
+                        <img 
+                            decoding="auto"
+                            loading="lazy" 
+                            sizes="calc(100vw - 24px)"
+                            srcSet="https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=512 512w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png 4500w"
+                            src="https://framerusercontent.com/images/r6PdJFY8RXPxuiUBjBtUQ29E.png" 
+                            alt="BookEase Process"
+                        />
                     </div>
-                    <div className="framer-1e95z10" data-framer-name="Details">
-                        <div className="framer-cqgbx" data-border="true" data-framer-name="Problem">
-                            <div className="framer-93ycad" data-framer-name="Text">
-                                <div className="framer-12xu2ad" data-framer-name="Text"
-                                    data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-                                    <p className="framer-text framer-styles-preset-1y43b4w"
-                                        data-styles-preset="SbUeepJXi"
-                                        style={{ '--framer-text-color': 'var(--token-818a283b-450e-452c-a8af-6b81d42f4181, rgb(0, 0, 0))' } as React.CSSProperties}>
-                                        The Problems to Solve</p>
-                                </div>
-                                <div className="framer-14osiy0" data-framer-name="Text"
-                                    data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-                                    <p className="framer-text framer-styles-preset-f949vx">BookEase underwent a complete
-                                        UX redesign, focusing on streamlined user paths and search efficiency.
-                                        Advanced search algorithms were implemented to guide users to the most
-                                        relevant categories, and an intelligent recommendation engine was developed.
-                                    </p>
-                                    <p className="framer-text framer-styles-preset-f949vx">The checkout process was also
-                                        streamlined through a multi-step design, reducing load time and effectively
-                                        decreasing cart abandonment rates.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="framer-160kwc" data-border="true" data-framer-name="Solution">
-                            <div className="framer-114nuhl" data-framer-name="Text">
-                                <div className="framer-1sdziyz" data-framer-name="Text"
-                                    data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-                                    <p className="framer-text framer-styles-preset-1y43b4w"
-                                        data-styles-preset="SbUeepJXi"
-                                        style={{ '--framer-text-color': 'var(--token-818a283b-450e-452c-a8af-6b81d42f4181, rgb(0, 0, 0))' } as React.CSSProperties}>
-                                        Our Solution</p>
-                                </div>
-                                <div className="framer-1oosfxg" data-framer-name="Text"
-                                    data-framer-component-type="RichTextContainer" style={{ transform: 'none' }}>
-                                    <p className="framer-text framer-styles-preset-f949vx">BookEase underwent a complete
-                                        UX redesign, focusing on streamlined user paths and search efficiency.
-                                        Advanced search algorithms were implemented to guide users to the most
-                                        relevant categories, and an intelligent recommendation engine was developed.
-                                    </p>
-                                    <p className="framer-text framer-styles-preset-f949vx">The checkout process was also
-                                        streamlined through a multi-step design, reducing load time and effectively
-                                        decreasing cart abandonment rates.</p>
-                                </div>
+                </div>
+
+                <div className="work-detail-item work-problem-card">
+                    <div className="work-text-card" data-border="true">
+                        <div className="work-text-content">
+                            <div className="work-text-section">
+                                <h3 className="framer-text framer-styles-preset-1y43b4w">The Problems to Solve</h3>
+                                <p className="framer-text framer-styles-preset-f949vx">
+                                    BookEase underwent a complete UX redesign, focusing on streamlined user paths and search efficiency. 
+                                    Advanced search algorithms were implemented to guide users to the most relevant categories, 
+                                    and an intelligent recommendation engine was developed.
+                                </p>
+                                <p className="framer-text framer-styles-preset-f949vx">
+                                    The checkout process was also streamlined through a multi-step design, reducing load time 
+                                    and effectively decreasing cart abandonment rates.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="framer-xwxyaq-container">
-                    <div className="framer-HMYy6 framer-1f7hq8k framer-v-1f7hq8k" data-border="true"
-                        data-framer-name="Variant 1"
-                        style={{ '--border-bottom-width': '1px', '--border-color': 'var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(239, 239, 242))', '--border-left-width': '1px', '--border-right-width': '1px', '--border-style': 'solid', '--border-top-width': '1px', height: '100%', width: '100%', borderRadius: '12px', opacity: 1 } as React.CSSProperties}>
-                        <div data-framer-background-image-wrapper="true"
-                            style={{ position: 'absolute', borderRadius: 'inherit', inset: '0px' }}><img decoding="auto"
-                                loading="lazy" width="2400" height="1600" sizes="calc(100vw - 24px)"
-                                srcSet="https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=512 512w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png 4500w"
-                                src="https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png" alt=""
-                                style={{ display: 'block', width: '100%', height: '100%', borderRadius: 'inherit', objectPosition: 'center center', objectFit: 'cover' }} />
+
+                <div className="work-detail-item work-solution-card">
+                    <div className="work-text-card" data-border="true">
+                        <div className="work-text-content">
+                            <div className="work-text-section">
+                                <h3 className="framer-text framer-styles-preset-1y43b4w">Our Solution</h3>
+                                <p className="framer-text framer-styles-preset-f949vx">
+                                    BookEase underwent a complete UX redesign, focusing on streamlined user paths and search efficiency. 
+                                    Advanced search algorithms were implemented to guide users to the most relevant categories, 
+                                    and an intelligent recommendation engine was developed.
+                                </p>
+                                <p className="framer-text framer-styles-preset-f949vx">
+                                    The checkout process was also streamlined through a multi-step design, reducing load time 
+                                    and effectively decreasing cart abandonment rates.
+                                </p>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                {/* Row 4: Full-width closing image */}
+                <div className="work-detail-item work-closing-image">
+                    <div className="work-image-card" data-border="true">
+                        <img 
+                            decoding="auto"
+                            loading="lazy" 
+                            width="2400" 
+                            height="1600" 
+                            sizes="calc(100vw - 24px)"
+                            srcSet="https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=512 512w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=1024 1024w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=2048 2048w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png?scale-down-to=4096 4096w,https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png 4500w"
+                            src="https://framerusercontent.com/images/7m5fte7zY1VS3dIAuYwhuTpuo.png" 
+                            alt="BookEase Final"
+                        />
                     </div>
                 </div>
             </div>
