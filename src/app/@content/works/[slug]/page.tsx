@@ -29,18 +29,35 @@ const WorkDetailContent = async ({ params }: WorkDetailContentProps) => {
     return (
         <ContentWrapper>
             <div className="work-detail-container" id="work-details">
-                {/* Row 1: Full-width hero image */}
-                <img 
-                    className="work-detail-item work-hero-image"
-                    data-border="true"
-                    decoding="auto"
-                    width={work.heroImage.width} 
-                    height={work.heroImage.height} 
-                    sizes={work.heroImage.sizes}
-                    srcSet={work.heroImage.srcSet}
-                    src={work.heroImage.src} 
-                    alt={work.heroImage.alt}
-                />
+                {/* Row 1: Full-width hero image with external link button */}
+                <div className="work-detail-item work-hero-image-wrapper">
+                    <img 
+                        className="work-detail-item work-hero-image"
+                        data-border="true"
+                        decoding="auto"
+                        width={work.heroImage.width} 
+                        height={work.heroImage.height} 
+                        sizes={work.heroImage.sizes}
+                        srcSet={work.heroImage.srcSet}
+                        src={work.heroImage.src} 
+                        alt={work.heroImage.alt}
+                    />
+                    {work.externalLink && (
+                        <a 
+                            href={work.externalLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="work-external-link-button"
+                            aria-label="Visit live site"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    )}
+                </div>
 
                 {/* Row 2: Image (left) + About Card (right) */}
                 <img 
@@ -61,6 +78,21 @@ const WorkDetailContent = async ({ params }: WorkDetailContentProps) => {
                                 <p className="framer-text framer-styles-preset-f949vx">
                                     {work.fullDescription}
                                 </p>
+                                {work.externalLink && (
+                                    <a 
+                                        href={work.externalLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="work-external-link-text"
+                                    >
+                                        Visit Live Site
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                    </a>
+                                )}
                             </div>
                             <div className="work-text-section">
                                 <h3 className="framer-text framer-styles-preset-1y43b4w">About</h3>
@@ -109,24 +141,56 @@ const WorkDetailContent = async ({ params }: WorkDetailContentProps) => {
                                         {paragraph}
                                     </p>
                                 ))}
+                                {work.externalLink && (
+                                    <a 
+                                        href={work.externalLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="work-external-link-text"
+                                    >
+                                        Visit Live Site
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                    </a>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Row 4: Full-width closing image */}
-                <img 
-                    className="work-detail-item work-closing-image"
-                    data-border="true"
-                    decoding="auto"
-                    loading="lazy" 
-                    width={work.closingImage.width} 
-                    height={work.closingImage.height} 
-                    sizes={work.closingImage.sizes}
-                    srcSet={work.closingImage.srcSet}
-                    src={work.closingImage.src} 
-                    alt={work.closingImage.alt}
-                />
+                {/* Row 4: Full-width closing image with external link button */}
+                <div className="work-detail-item work-closing-image-wrapper">
+                    <img 
+                        className="work-detail-item work-closing-image"
+                        data-border="true"
+                        decoding="auto"
+                        loading="lazy" 
+                        width={work.closingImage.width} 
+                        height={work.closingImage.height} 
+                        sizes={work.closingImage.sizes}
+                        srcSet={work.closingImage.srcSet}
+                        src={work.closingImage.src} 
+                        alt={work.closingImage.alt}
+                    />
+                    {work.externalLink && (
+                        <a 
+                            href={work.externalLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="work-external-link-button"
+                            aria-label="Visit live site"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    )}
+                </div>
             </div>
         </ContentWrapper>
     )

@@ -4304,14 +4304,127 @@ img.work-detail-item {
   margin-top: 12px;
 }
 
+/* External Link Styles */
+/* Image wrapper for positioning button */
+.work-hero-image-wrapper,
+.work-closing-image-wrapper {
+  position: relative;
+  width: 100%;
+  order: inherit;
+}
+
+.work-hero-image-wrapper { order: 1; }
+.work-closing-image-wrapper { order: 7; }
+
+/* External link button on images - top right corner */
+.work-external-link-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(233, 233, 236));
+  border-radius: 8px;
+  color: var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(113, 113, 122));
+  transition: all 0.2s ease;
+  cursor: pointer;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.work-external-link-button:hover {
+  background: rgba(255, 255, 255, 1);
+  color: var(--token-0e4f4be5-eb0d-4ec0-9f80-ebf1d5042f85, rgb(9, 9, 11));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.work-external-link-button:active {
+  transform: translateY(0);
+}
+
+/* Dark mode support for button */
+[data-theme="dark"] .work-external-link-button {
+  background: rgba(39, 39, 42, 0.95);
+  border-color: var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(39, 39, 42));
+  color: var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(161, 161, 170));
+}
+
+[data-theme="dark"] .work-external-link-button:hover {
+  background: rgba(39, 39, 42, 1);
+  color: var(--token-0e4f4be5-eb0d-4ec0-9f80-ebf1d5042f85, rgb(250, 250, 250));
+}
+
+/* External link text button below descriptions */
+.work-external-link-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px 20px;
+  background: var(--token-0e4f4be5-eb0d-4ec0-9f80-ebf1d5042f85, rgb(9, 9, 11));
+  color: var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(250, 250, 250));
+  border: 1px solid var(--token-0e4f4be5-eb0d-4ec0-9f80-ebf1d5042f85, rgb(9, 9, 11));
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.work-external-link-text:hover {
+  background: var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(39, 39, 42));
+  border-color: var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(39, 39, 42));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.work-external-link-text:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.work-external-link-text svg {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.work-external-link-text:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* Dark mode support for text link */
+[data-theme="dark"] .work-external-link-text {
+  background: var(--token-0e4f4be5-eb0d-4ec0-9f80-ebf1d5042f85, rgb(39, 39, 42));
+  color: var(--token-b2fd3f17-d233-4f1a-96da-ff9eb89f2185, rgb(250, 250, 250));
+  border-color: var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(63, 63, 70));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .work-external-link-text:hover {
+  background: var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(63, 63, 70));
+  border-color: var(--token-7a188dfa-68d3-41d9-8d6c-67b23199941d, rgb(82, 82, 91));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
 /* Mobile-first: Vertical stack */
 /* Order for small screens: Image → Text → Image → Image → Text → Text → Image */
+.work-hero-image-wrapper,
 .work-hero-image { order: 1; }
 .work-about-card { order: 2; }
 .work-secondary-image { order: 3; }
 .work-process-image { order: 4; }
 .work-problem-card { order: 5; }
 .work-solution-card { order: 6; }
+.work-closing-image-wrapper,
 .work-closing-image { order: 7; }
 
 /* Tablet and up: Maintain natural image heights */
@@ -4332,6 +4445,7 @@ img.work-detail-item {
   }
   
   /* Row 1: Full-width hero image */
+  .work-hero-image-wrapper,
   .work-hero-image {
     grid-column: 1 / -1;
     order: 1;
@@ -4376,6 +4490,7 @@ img.work-detail-item {
   }
   
   /* Row 4: Full-width closing image */
+  .work-closing-image-wrapper,
   .work-closing-image {
     grid-column: 1 / -1;
     order: 7;
